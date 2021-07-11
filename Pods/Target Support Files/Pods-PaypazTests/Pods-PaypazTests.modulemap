@@ -1,0 +1,6 @@
+framework module Pods_PaypazTests {
+  umbrella header "Pods-PaypazTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

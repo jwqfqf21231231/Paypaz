@@ -1,0 +1,46 @@
+//
+//  MyEventsListVC.swift
+//  Paypaz
+//
+//  Created by iOSDeveloper on 27/04/21.
+//  Copyright © 2021 iOSDeveloper. All rights reserved.
+//
+
+import UIKit
+
+class MyEventsListVC : CustomViewController {
+    
+    var events = [Event]()
+    private let dataSource = MyEventsListDataModel()
+    @IBOutlet weak var tableView_Events : UITableView! {
+        didSet {
+            tableView_Events.dataSource = self
+            tableView_Events.delegate   = self
+        }
+    }
+    
+    
+    //MARK:- --- View Life Cycle ----
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        dataSource.delegate = self
+        dataSource.getMyEvents()
+        // Do any additional setup after loading the view.
+    }
+    // MARK: - --- Action ----
+    @IBAction func btn_back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btn_P_Logo(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+//        for vc in self.navigationController?.viewControllers ?? [] {
+//            if let home = vc as? HomeVC {
+//                self.navigationController?.popToViewController(home, animated: true)
+//                break
+//            }
+//        }
+    }
+}
+
