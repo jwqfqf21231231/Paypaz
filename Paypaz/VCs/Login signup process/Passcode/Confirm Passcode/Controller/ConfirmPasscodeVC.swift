@@ -98,7 +98,7 @@ class ConfirmPasscodeVC: CustomViewController {
                 self.view.makeToast("Enter the Same Passcode", duration: 3, position: .center)
             }
         }
-       
+        
     }
 }
 extension ConfirmPasscodeVC : ConfirmPasscodeDataModelDelegate
@@ -108,15 +108,8 @@ extension ConfirmPasscodeVC : ConfirmPasscodeDataModelDelegate
         print("ConfirmPasscodeModelData = ",data)
         if data.success == 1
         {
-            if UserDefaults.standard.getPin() != nil 
-            {
-                _ = self.pushToVC("SideDrawerBaseVC")
-            }
-            else
-            {
-                if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC{
-                    createVc.isCreatingPin = true
-                }
+            if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC{
+                createVc.isCreatingPin = true
             }
         }
         else

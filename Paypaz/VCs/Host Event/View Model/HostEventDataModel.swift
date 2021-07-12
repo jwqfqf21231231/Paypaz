@@ -16,6 +16,7 @@ protocol HostEventDataModelDelegate:class {
 }
 class HostEventDataModel: NSObject
 {
+    var isEdit : Bool?
     weak var delegate: HostEventDataModelDelegate?
     let sharedInstance = Connection()
     var typeId = ""
@@ -32,9 +33,17 @@ class HostEventDataModel: NSObject
     var memberID = ""
     var products = ""
     var eventImg : UIImage?
+    var url = ""
     func addEvent()
     {
-        let url =  APIList().getUrlString(url: .HOSTEVENT)
+        if isEdit ?? false
+        {
+           url = APIList().getUrlString(url: .UPDATEEVENT)
+        }
+        else
+        {
+            url =  APIList().getUrlString(url: .HOSTEVENT)
+        }
         let parameter : [String:String] = [
             "typeID" : typeId,
             "name" : name,
@@ -85,5 +94,4 @@ class HostEventDataModel: NSObject
                                         self.delegate?.didFailDataUpdateWithError3(error: error)
                                     })
     }
-
 }

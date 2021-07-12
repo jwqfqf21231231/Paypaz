@@ -116,12 +116,19 @@ class CreatePinVC : CustomViewController {
         }
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-        if self.isCreatingPin ?? false {
-            UserDefaults.standard.setPin(value: typedPin)
-            dataSource.createPin()
-        } else {
-            self.navigationController?.popViewController(animated: true)
-            self.delegate?.isClickedButton()
+        if (txt_Field_1.text == "" || txt_Field_2.text == "" || txt_Field_3.text == "" || txt_Field_4.text == "")
+        {
+            self.showAlert(withMsg: "Please Enter OTP", withOKbtn: true)
+        }
+        else
+        {
+            if self.isCreatingPin ?? false {
+                UserDefaults.standard.setPin(value: typedPin)
+                dataSource.createPin()
+            } else {
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.isClickedButton()
+            }
         }
     }
 }
@@ -133,7 +140,7 @@ extension CreatePinVC : CreatePinDataModelDelegate
         if data.success == 1
         {
             _ = self.pushToVC("CreditDebitCardVC")
-           
+            
         }
         else
         {

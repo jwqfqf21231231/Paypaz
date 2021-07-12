@@ -35,6 +35,8 @@ class HostEventVC : CustomViewController {
     var btn_Title:String?
     var fieldTag:Int?
     
+    
+    
     //MARK:- ----
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_EventPic : UIImageView!
@@ -54,6 +56,7 @@ class HostEventVC : CustomViewController {
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var view_addNewBtn           : UIView!
+    @IBOutlet weak var btn_CreateEvent : UIButton!
     @IBOutlet weak var btn_clickToAdd           : RoundButton!
     @IBOutlet weak var tableView_Products       : UITableView!{
         didSet{
@@ -97,17 +100,19 @@ class HostEventVC : CustomViewController {
         dataSource.delegate = self
         self.view_addNewBtn.isHidden = true
         self.tableView_ProductsHeight.constant = 0.0
-        
+        dataSource.isEdit = self.isEdit
     }
     private func setTitle()
     {
         if isEdit ?? false
         {
             lbl_Title.text = "Edit Event"
+            btn_CreateEvent.setTitle("Update Event", for: .normal)
         }
         else
         {
             lbl_Title.text = "Host Event"
+            btn_CreateEvent.setTitle("Create Event", for: .normal)
         }
     }
     @objc func onSwitchValueChange(swtch:UISwitch)
@@ -190,7 +195,7 @@ class HostEventVC : CustomViewController {
         toolBar.sizeToFit()
         //bar button item
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        toolBar.setItems([doneBtn], animated: true)
+        toolBar.setItems([doneBtn], animated: false)
         return toolBar
     }
     @objc func callDatePicker(field:UITextField)
@@ -204,7 +209,6 @@ class HostEventVC : CustomViewController {
             txt_StartDate.inputView = picker
             txt_StartDate.inputAccessoryView = createToolBar()
         case 1:
-            
             picker.datePickerMode = .date
             txt_EndDate.inputView = picker
             txt_EndDate.inputAccessoryView = createToolBar()
@@ -269,7 +273,7 @@ class HostEventVC : CustomViewController {
         self.btn_bankAcc.setImage(UIImage(named: "green_account"), for: .normal)
     }
     @IBAction func btn_addNewProduct(_ sender:UIButton) {
-        if let addProduct = self.presentPopUpVC("AddProductVC", animated: true) as? AddProductVC {
+        if let addProduct = self.presentPopUpVC("AddProductVC", animated: false) as? AddProductVC {
             addProduct.delegate = self
             
             addProduct.callback = { item in
@@ -278,8 +282,16 @@ class HostEventVC : CustomViewController {
                 self.btn_clickToAdd.isHidden = true
                 self.view_addNewBtn.isHidden = false
                 DispatchQueue.main.async {
-                    self.tableView_ProductsHeight.constant = CGFloat(self.productArr.count * 60)
-                    self.tableView_Products.reloadData()
+                    if self.isEdit ?? false
+                    {
+                        self.dataSource2.eventID = self.eventID
+                        self.dataSource2.getProducts()
+                    }
+                    else
+                    {
+                        self.tableView_ProductsHeight.constant = CGFloat(self.productArr.count * 60)
+                        self.tableView_Products.reloadData()
+                    }
                 }
             }
             
@@ -287,39 +299,7 @@ class HostEventVC : CustomViewController {
         }
     }
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
-        if(img_EventPic.image == nil)
-        {
-            showAlert(withMsg: "Give Event Image", withOKbtn: true)
-        }
-        else if(txt_EventName.text == "")
-        {
-            showAlert(withMsg: "Enter Event Name", withOKbtn: true)
-        }
-        else if(selectedEventId == "")
-        {
-            showAlert(withMsg: "Select Event Type", withOKbtn: true)
-        }
-        else if(txt_Price.text == "")
-        {
-            showAlert(withMsg: "Enter Price", withOKbtn: true)
-        }
-        else if(startDate == "")
-        {
-            showAlert(withMsg: "Enter Start Date", withOKbtn: true)
-        }
-        else if(endDate == "")
-        {
-            showAlert(withMsg: "Enter End Date", withOKbtn: true)
-        }
-        else if(startTime == "")
-        {
-            showAlert(withMsg: "Enter Start Time", withOKbtn: true)
-        }
-        else if(endTime == "")
-        {
-            showAlert(withMsg: "Enter End Time", withOKbtn: true)
-        }
-        else
+        if isEdit ?? false
         {
             Connection.svprogressHudShow(title: "Please wait", view: self)
             dataSource.eventImg = img_EventPic.image
@@ -334,7 +314,22 @@ class HostEventVC : CustomViewController {
             dataSource.paymentType = paymentType
             dataSource.isPublic = isPublicStatus
             dataSource.isInviteMember = isInviteMemberStatus
-            var products:String = ""
+            var products = ""
+            for i in 0..<self.products.count
+            {
+                if(i == self.products.count-1 && productIDArr.count == 0)
+                {
+                    products += self.products[i].id
+                }
+                else if(i == self.products.count-1 && productIDArr.count != 0)
+                {
+                    products += self.products[i].id+","
+                }
+                else
+                {
+                    products += self.products[i].id+","
+                }
+            }
             for i in 0..<productIDArr.count
             {
                 if(i == productIDArr.count-1)
@@ -348,7 +343,74 @@ class HostEventVC : CustomViewController {
             }
             dataSource.products = products
             dataSource.addEvent()
+            
         }
+        else
+        {
+            if(img_EventPic.image == nil)
+            {
+                showAlert(withMsg: "Give Event Image", withOKbtn: true)
+            }
+            else if(txt_EventName.text == "")
+            {
+                showAlert(withMsg: "Enter Event Name", withOKbtn: true)
+            }
+            else if(selectedEventId == "")
+            {
+                showAlert(withMsg: "Select Event Type", withOKbtn: true)
+            }
+            else if(txt_Price.text == "")
+            {
+                showAlert(withMsg: "Enter Price", withOKbtn: true)
+            }
+            else if(startDate == "")
+            {
+                showAlert(withMsg: "Enter Start Date", withOKbtn: true)
+            }
+            else if(endDate == "")
+            {
+                showAlert(withMsg: "Enter End Date", withOKbtn: true)
+            }
+            else if(startTime == "")
+            {
+                showAlert(withMsg: "Enter Start Time", withOKbtn: true)
+            }
+            else if(endTime == "")
+            {
+                showAlert(withMsg: "Enter End Time", withOKbtn: true)
+            }
+            else
+            {
+                Connection.svprogressHudShow(title: "Please wait", view: self)
+                dataSource.eventImg = img_EventPic.image
+                dataSource.name = txt_EventName.text ?? ""
+                dataSource.typeId = selectedEventId ?? ""
+                dataSource.price = txt_Price.text ?? ""
+                dataSource.location = "Ongole, Andhra Pradesh"
+                dataSource.startDate = startDate
+                dataSource.endDate = endDate
+                dataSource.startTime = startTime
+                dataSource.endTime = endTime
+                dataSource.paymentType = paymentType
+                dataSource.isPublic = isPublicStatus
+                dataSource.isInviteMember = isInviteMemberStatus
+                var products:String = ""
+                for i in 0..<productIDArr.count
+                {
+                    if(i == productIDArr.count-1)
+                    {
+                        products += "\(productIDArr[i])"
+                    }
+                    else
+                    {
+                        products += "\(productIDArr[i]),"
+                    }
+                }
+                dataSource.products = products
+                dataSource.addEvent()
+            }
+        }
+        
     }
 }
 
@@ -360,12 +422,17 @@ extension HostEventVC : HostEventDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            
-            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                popup.selectedPopupType = .eventCreatedSuccess
-                popup.delegate = self
+            if isEdit ?? false
+            {
+                self.navigationController?.popViewController(animated: false)
             }
-            
+            else
+            {
+                if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                    popup.selectedPopupType = .eventCreatedSuccess
+                    popup.delegate = self
+                }
+            }
         }
         else
         {
@@ -396,17 +463,42 @@ extension HostEventVC : MyPostedEventDataModelDelegate
         {
             DispatchQueue.main.async {
                 self.txt_EventName.text = data.data?.name
-                self.btn_Price.setTitle(data.data?.price, for: .normal)
-                self.btn_Price.setTitleColor(.black, for: .normal)
+                self.btn_Price.setTitle("", for: .normal)
+                self.txt_Price.text = data.data?.price
+                self.btn_EventTitle.setTitleColor(.black, for: .normal)
+                switch data.data?.typeID
+                {
+                case "1" : self.btn_EventTitle.setTitle("Sports & Fitness", for: .normal)
+                    self.selectedEventId = "1"
+                case "2" : self.btn_EventTitle.setTitle("Music", for: .normal)
+                    self.selectedEventId = "2"
+                case "3" : self.btn_EventTitle.setTitle("Festival", for: .normal)
+                    self.selectedEventId = "3"
+                case "4" : self.btn_EventTitle.setTitle("Charity & Causes", for: .normal)
+                    self.selectedEventId = "4"
+                case "5" : self.btn_EventTitle.setTitle("Seminar", for: .normal)
+                    self.selectedEventId = "5"
+                case "6" : self.btn_EventTitle.setTitle("Neighbour", for: .normal)
+                    self.selectedEventId = "6"
+                case "7" : self.btn_EventTitle.setTitle("Education", for: .normal)
+                    self.selectedEventId = "7"
+                default : self.btn_EventTitle.setTitle("Other", for: .normal)
+                    self.selectedEventId = "8"
+                }
+                self.startDate = data.data?.startDate ?? ""
+                self.endDate = data.data?.endDate ?? ""
+                self.startTime = data.data?.startTime ?? ""
+                self.endTime = data.data?.endTime ?? ""
+
                 self.btn_ChooseLocation.setTitle(data.data?.location, for: .normal)
                 self.btn_ChooseLocation.setTitleColor(.black, for: .normal)
-                self.btn_StartDate.setTitle(data.data?.startDate, for: .normal)
+                self.btn_StartDate.setTitle(self.startDate, for: .normal)
                 self.btn_StartDate.setTitleColor(.black, for: .normal)
-                self.btn_EndDate.setTitle(data.data?.endDate, for: .normal)
+                self.btn_EndDate.setTitle(self.endDate, for: .normal)
                 self.btn_EndDate.setTitleColor(.black, for: .normal)
-                self.btn_StartTime.setTitle(data.data?.startTime, for: .normal)
+                self.btn_StartTime.setTitle(self.startTime, for: .normal)
                 self.btn_StartTime.setTitleColor(.black, for: .normal)
-                self.btn_EndTime.setTitle(data.data?.endTime, for: .normal)
+                self.btn_EndTime.setTitle(self.endTime, for: .normal)
                 self.btn_EndTime.setTitleColor(.black, for: .normal)
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
@@ -417,7 +509,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.isInviteMemberStatus == "1" ? self.isInviteMember.setOn(true, animated: false) : self.isInviteMember.setOn(false, animated: false)
                 self.paymentType = data.data?.paymentType ?? ""
                 self.paymentType == "0" ? (self.btn_Paypaz.border_Color = UIColor(named:"GreenColor")) : (self.btn_bankAcc.border_Color = UIColor(named: "GreenColor"))
-                 
+                
             }
         }
         else
@@ -449,6 +541,7 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             products = data.data
+            
             self.tableView_ProductsHeight.constant = CGFloat((self.products.count) * 60)
             DispatchQueue.main.async {
                 self.btn_clickToAdd.isHidden = true

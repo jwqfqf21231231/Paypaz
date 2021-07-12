@@ -186,5 +186,11 @@ extension String
         return emailTest.evaluate(with: self)
         
     }
+    func isEnteringContact() -> Bool
+    {
+        let contactRegEx = "[0-9]"
+        let contactTest = NSPredicate(format:"SELF MATCHES %@", contactRegEx)
+        return contactTest.evaluate(with: self)
+    }
 }
 

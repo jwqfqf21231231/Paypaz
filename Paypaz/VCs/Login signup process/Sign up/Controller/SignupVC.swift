@@ -68,6 +68,7 @@ class SignupVC : CustomViewController {
         else if password == ""{
             self.showAlert(withMsg: "please enter password", withOKbtn: true)
         }
+        
         else if confPassword == ""{
             self.showAlert(withMsg: "Please enter confirm password", withOKbtn: true)
         }

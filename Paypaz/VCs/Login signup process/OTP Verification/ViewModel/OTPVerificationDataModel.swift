@@ -128,7 +128,7 @@ class OTPVerificationDataModel: NSObject
         parameter = [
             "emailORphone":email
         ]
-        
+        print("OTP sent to \(email)")
         sharedInstance.requestPOST(url!, params: parameter, headers: nil,
                                    success:
                                     {

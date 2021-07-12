@@ -193,42 +193,42 @@ class Connection
     }
     
     func uploadImage(_ url: String,imgData:Data, params :[String:String]?,headers : [String : String]?, success:@escaping (Data) -> Void, failure:@escaping (Error) -> Void)
-        {
+    {
+        
+        
+        //Optional for extra parameter
+        Alamofire.upload(multipartFormData: { multipartFormData in multipartFormData.append(imgData, withName: "image",fileName: "image.jpg", mimeType: "image/jpg")
+            for (key, value) in params! { multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key) } //Optional for extraparameters
             
-            
-            //Optional for extra parameter
-            Alamofire.upload(multipartFormData: { multipartFormData in multipartFormData.append(imgData, withName: "image",fileName: "image.jpg", mimeType: "image/jpg")
-                for (key, value) in params! { multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key) } //Optional for extraparameters
-                
-            },
-            to:url,method:.post, headers: headers) {
-                (result) in switch result { case .success(let upload, _, _): upload.uploadProgress(closure: { (progress) in
-                                                                                                    print("url",url)
-                                                                                                    print("parameters",params!)
-                                                                                                    print("Upload Progress: \(progress.fractionCompleted)") })
-                    upload.response(completionHandler: { (dataRes) in
-                        print(dataRes)
-                    })
-                    upload.responseJSON { response in
-                        //print("UPLOAD SUCCESS",response.result.value!)
-                        
-                        switch response.result
-                        {
-                        case .success:
-                            if let data = response.data
-                            {
-                                success(data)
-                            }
-                        case .failure(let error):
-                            failure(error)
-                        }
-                    }
+        },
+        to:url,method:.post, headers: headers) {
+            (result) in switch result { case .success(let upload, _, _): upload.uploadProgress(closure: { (progress) in
+                                                                                                print("url",url)
+                                                                                                print("parameters",params!)
+                                                                                                print("Upload Progress: \(progress.fractionCompleted)") })
+                upload.response(completionHandler: { (dataRes) in
+                    print(dataRes)
+                })
+                upload.responseJSON { response in
+                    //print("UPLOAD SUCCESS",response.result.value!)
                     
-                case .failure(let encodingError):
-                    print(encodingError)
-                    failure(encodingError)
-                } }
-        }
+                    switch response.result
+                    {
+                    case .success:
+                        if let data = response.data
+                        {
+                            success(data)
+                        }
+                    case .failure(let error):
+                        failure(error)
+                    }
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+                failure(encodingError)
+            } }
+    }
     
     func uploadProImage(_ url: String,imgData:Data, params :[String:String]?,headers : [String : String]?, success:@escaping (Data) -> Void, failure:@escaping (Error) -> Void)
     {

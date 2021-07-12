@@ -63,6 +63,7 @@ class CreateProfileVC  : CustomViewController {
         dataSource.delegate = self
         self.hideKeyboardWhenTappedAround()
         self.setDelegate()
+     
     }
     
     private func setDelegate() {
@@ -124,7 +125,7 @@ class CreateProfileVC  : CustomViewController {
         }
     }
     @IBAction func btn_Skip(_ sender:UIButton) {
-        _ = self.pushToVC("PasscodeVC")
+        _ = self.pushToVC("CreatePasscodeVC")
     }
 }
 extension CreateProfileVC : CreateProfileDataModelDelegate

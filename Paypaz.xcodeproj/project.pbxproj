@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040E5AB6269C0CEF00254FB7 /* CreditDebitCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */; };
+		040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */; };
+		0431B71F269C6BD00082EAB3 /* ContactUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* ContactUsModel.swift */; };
+		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
 		0AD485829E4F7A0568A05ACF /* Pods_Paypaz_PaypazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */; };
 		0C00BFDA268EE03E00BC3267 /* UserDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */; };
 		0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */; };
@@ -182,6 +186,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardModel.swift; sourceTree = "<group>"; };
+		040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardDataModel.swift; sourceTree = "<group>"; };
+		0431B71E269C6BD00082EAB3 /* ContactUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsModel.swift; sourceTree = "<group>"; };
+		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
 		076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaypazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsDataModel.swift; sourceTree = "<group>"; };
 		0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
@@ -379,6 +387,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040E5AB4269C0CCB00254FB7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		040E5ABD269C0CF300254FB7 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		040E5AC6269C0D1200254FB7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				445433DC262D685300443AE1 /* CreditDebitCardVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0431B71B269C6B950082EAB3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0431B71C269C6B970082EAB3 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		0431B71D269C6B9A0082EAB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0431B71E269C6BD00082EAB3 /* ContactUsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0C00BFC8268EDDA500BC3267 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,7 +1004,9 @@
 		445433DB262D683600443AE1 /* Credit Debit CardVC */ = {
 			isa = PBXGroup;
 			children = (
-				445433DC262D685300443AE1 /* CreditDebitCardVC.swift */,
+				040E5AB4269C0CCB00254FB7 /* Model */,
+				040E5ABD269C0CF300254FB7 /* View Model */,
+				040E5AC6269C0D1200254FB7 /* Controller */,
 			);
 			path = "Credit Debit CardVC";
 			sourceTree = "<group>";
@@ -1241,6 +1298,9 @@
 		44DBD003262FF8A600255F9A /* Contact Us */ = {
 			isa = PBXGroup;
 			children = (
+				0431B71D269C6B9A0082EAB3 /* Model */,
+				0431B71C269C6B970082EAB3 /* View Model */,
+				0431B71B269C6B950082EAB3 /* Controller */,
 				44DBD004262FF8B600255F9A /* ContactUsVC.swift */,
 			);
 			path = "Contact Us";
@@ -1647,6 +1707,7 @@
 				44509ED826316152000B19F3 /* NotificationListV+Extensions.swift in Sources */,
 				445433E6262DA4C100443AE1 /* SideDrawerListVC.swift in Sources */,
 				44509EDD26316310000B19F3 /* WalletVC+Extensions.swift in Sources */,
+				0431B71F269C6BD00082EAB3 /* ContactUsModel.swift in Sources */,
 				0C8EC6172697298500D51F60 /* ProductDetailsModel.swift in Sources */,
 				44E5592C2632EC1500193305 /* ContactListVC.swift in Sources */,
 				44509EE0263178F8000B19F3 /* EventVC.swift in Sources */,
@@ -1694,7 +1755,9 @@
 				0CEC000F2695C6D60023116D /* PasscodeOTPDataModel.swift in Sources */,
 				44C8F29E261F1BD2000F03DB /* AppDelegate.swift in Sources */,
 				444E0F4E2641645D00EEECC6 /* ProductDetailVC.swift in Sources */,
+				040E5AB6269C0CEF00254FB7 /* CreditDebitCardModel.swift in Sources */,
 				0CECCE0726934DD200611D62 /* ChooseEventTypeVC+Extensions.swift in Sources */,
+				0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */,
 				44C8F2A0261F1BD2000F03DB /* SceneDelegate.swift in Sources */,
 				0C5B97F7268DA72B00CBAC41 /* ResendOTPModel.swift in Sources */,
 				445C77A42637E57D00AD4DF3 /* FavouritesEventsListVC.swift in Sources */,
@@ -1719,6 +1782,7 @@
 				44E5EFA4262DB76300FEE2C0 /* ViewAllProductsVC+Extensions.swift in Sources */,
 				44E5591B26327F7300193305 /* AddBankAccountVC.swift in Sources */,
 				445C779F2637CEF900AD4DF3 /* DeleteEventPopupVC.swift in Sources */,
+				040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */,
 				44835B23263BE9F200EBE620 /* ScanQRCodeVC.swift in Sources */,
 				44F7666B263A90E0007F78CB /* BuyEventTblCell.swift in Sources */,
 				44E559202632AAA800193305 /* PayAmountVC.swift in Sources */,
