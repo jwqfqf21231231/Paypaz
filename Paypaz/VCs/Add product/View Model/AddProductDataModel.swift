@@ -14,14 +14,20 @@ protocol AddProductDataModelDelegate:class {
     func didFailDataUpdateWithError(error:Error)
     
 }
+protocol EditProductDataModelDelegate:class {
+    func didRecieveDataUpdate2(data:AddProductModel)
+    func didFailDataUpdateWithError2(error:Error)}
 class AddProductDataModel: NSObject
 {
-    weak var delegate: AddProductDataModelDelegate?
+    weak var delegate : AddProductDataModelDelegate?
+    weak var delegate2 : EditProductDataModelDelegate?
     let sharedInstance = Connection()
     var productName = ""
     var productPrice = ""
     var productPic : UIImage?
     var productDescription = ""
+    
+    var productID = ""
     
     func addProduct()
     {
@@ -55,5 +61,38 @@ class AddProductDataModel: NSObject
                                             
                                         })
                                    
+    }
+    func editProduct()
+    {
+        let url =  APIList().getUrlString(url: .ADDPRODUCT)
+        let parameter : [String:String] = [
+            "name" : productName,
+            "description" : productDescription,
+            "price" : productPrice,
+            "productID" : productID
+        ]
+        sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: nil,success:
+                                        {
+                                            (JSON) in
+                                            let  result :Data? = JSON
+                                            if result != nil
+                                            {
+                                                do
+                                                {
+                                                    let response = try JSONDecoder().decode(AddProductModel.self, from: result!)
+                                                    self.delegate?.didRecieveDataUpdate(data: response)
+                                                }
+                                                catch let error as NSError
+                                                {
+                                                    self.delegate?.didFailDataUpdateWithError(error: error)
+                                                }
+                                            }
+                                        },
+                                       failure:
+                                        {
+                                            (error) in
+                                            self.delegate?.didFailDataUpdateWithError(error: error)
+                                            
+                                        })
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol ContactUsDataModelDelegate:class {
-    func didRecieveDataUpdate(data:ContactUsModel)
+    func didRecieveDataUpdate(data:SuccessModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -42,7 +42,7 @@ class ContactUsDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(ContactUsModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(SuccessModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

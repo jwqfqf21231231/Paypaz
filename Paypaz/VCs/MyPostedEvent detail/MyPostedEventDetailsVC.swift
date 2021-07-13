@@ -43,8 +43,8 @@ class MyPostedEventDetailsVC : CustomViewController {
         self.btn_edit.alpha = 0.0
         dataSource.delegate = self
         dataSource.delegate2 = self
-        getEvent()
-        getProducts()
+        self.getEvent()
+        self.getProducts()
     }
     private func getEvent()
     {

@@ -15,12 +15,15 @@ typealias DataCallback = ([String:Any]) -> Void
 class AddProductVC : CustomViewController {
     var callback : DataCallback?
     //var createdProductData : ((_ productImage:UIImage,_ price:String,_ name:String,_ description:String) -> Void)?
+    var isEdit : Bool?
+    var productID = ""
     var pickedImage : UIImage?
     var fontCamera  = false
     var images      = [String:Any]()
     weak var delegate : AddProductDelegate?
     private let dataSource = AddProductDataModel()
     
+    @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var txt_ProductName : RoundTextField!
     @IBOutlet weak var txt_ProductPrice : RoundTextField!
@@ -28,10 +31,32 @@ class AddProductVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTitle()
+        if isEdit ?? false
+        {
+            Connection.svprogressHudShow(title: "Please Wait", view: self)
+            dataSource.productID = self.productID
+            dataSource.editProduct()
+        }
+        else
+        {
+            
+        }
         setDelegates()
         dataSource.delegate = self
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         self.view.backgroundColor = UIColor.clear
+    }
+    private func setTitle()
+    {
+        if isEdit ?? false
+        {
+            lbl_Title.text = "Edit Product"
+        }
+        else
+        {
+            lbl_Title.text = "Add Product"
+        }
     }
     private func setDelegates()
     {
@@ -109,6 +134,35 @@ extension AddProductVC : AddProductDataModelDelegate
     }
     
     func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension AddProductVC : EditProductDataModelDelegate
+{
+    func didRecieveDataUpdate2(data: AddProductModel)
+    {
+        print("EditProductModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.navigationController?.popViewController(animated: false)
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError2(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

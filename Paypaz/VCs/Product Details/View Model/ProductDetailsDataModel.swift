@@ -13,9 +13,15 @@ protocol ProductDetailsDataModelDelegate:class {
     func didRecieveDataUpdate(data:ProductDetailsModel)
     func didFailDataUpdateWithError2(error:Error)
 }
+protocol DeleteProductDataModelDelegate:class {
+    func didRecieveDataUpdate(data:SuccessModel)
+    func didFailDataUpdateWithError3(error:Error)
+    
+}
 class ProductDetailsDataModel: NSObject
 {
-    weak var delegate: ProductDetailsDataModelDelegate?
+    weak var delegate : ProductDetailsDataModelDelegate?
+    weak var delegate2 : DeleteProductDataModelDelegate?
     let sharedInstance = Connection()
     var productID = ""
     func getProductDetails()
@@ -51,6 +57,39 @@ class ProductDetailsDataModel: NSObject
                                     {
                                         (error) in
                                         self.delegate?.didFailDataUpdateWithError2(error: error)
+                                    })
+    }
+    func deleteProduct()
+    {
+        var url =  APIList().getUrlString(url: .DELETEPRODUCT)
+        url = url + "\(productID)"
+        sharedInstance.requestDELETE(url, params: nil, headers: nil,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(SuccessModel.self, from: result!)
+                                                self.delegate2?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.delegate2?.didFailDataUpdateWithError3(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No response from server")
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.delegate2?.didFailDataUpdateWithError3(error: error)
+                                        
                                     })
     }
 }

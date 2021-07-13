@@ -62,7 +62,7 @@ class ContactUsVC : CustomViewController {
 }
 extension ContactUsVC : ContactUsDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ContactUsModel)
+    func didRecieveDataUpdate(data: SuccessModel)
     {
         print("ContactUsModelData = ",data)
         Connection.svprogressHudDismiss(view: self)

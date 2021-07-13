@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		040E5AB6269C0CEF00254FB7 /* CreditDebitCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */; };
 		040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */; };
-		0431B71F269C6BD00082EAB3 /* ContactUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* ContactUsModel.swift */; };
+		0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* SuccessModel.swift */; };
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
+		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		0AD485829E4F7A0568A05ACF /* Pods_Paypaz_PaypazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */; };
 		0C00BFDA268EE03E00BC3267 /* UserDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */; };
 		0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */; };
@@ -188,8 +189,9 @@
 /* Begin PBXFileReference section */
 		040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardModel.swift; sourceTree = "<group>"; };
 		040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardDataModel.swift; sourceTree = "<group>"; };
-		0431B71E269C6BD00082EAB3 /* ContactUsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsModel.swift; sourceTree = "<group>"; };
+		0431B71E269C6BD00082EAB3 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
+		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaypazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsDataModel.swift; sourceTree = "<group>"; };
 		0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
@@ -430,7 +432,7 @@
 		0431B71D269C6B9A0082EAB3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0431B71E269C6BD00082EAB3 /* ContactUsModel.swift */,
+				0431B71E269C6BD00082EAB3 /* SuccessModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -624,6 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				0C8EC6162697298500D51F60 /* ProductDetailsModel.swift */,
+				04B2C026269DA56400140052 /* UpdateProductModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1671,6 +1674,7 @@
 				445433DA262D60B400443AE1 /* CreatePinVC.swift in Sources */,
 				44DBD005262FF8B600255F9A /* ContactUsVC.swift in Sources */,
 				44C8F2D8261F2623000F03DB /* Inspectables.swift in Sources */,
+				04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */,
 				44F76674263AB85A007F78CB /* AddMoneyPopupVC.swift in Sources */,
 				44E5592E2632ED4200193305 /* ContactListVC+Extensions.swift in Sources */,
 				44509EE326317F30000B19F3 /* HostEventVC+Extensions.swift in Sources */,
@@ -1707,7 +1711,7 @@
 				44509ED826316152000B19F3 /* NotificationListV+Extensions.swift in Sources */,
 				445433E6262DA4C100443AE1 /* SideDrawerListVC.swift in Sources */,
 				44509EDD26316310000B19F3 /* WalletVC+Extensions.swift in Sources */,
-				0431B71F269C6BD00082EAB3 /* ContactUsModel.swift in Sources */,
+				0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */,
 				0C8EC6172697298500D51F60 /* ProductDetailsModel.swift in Sources */,
 				44E5592C2632EC1500193305 /* ContactListVC.swift in Sources */,
 				44509EE0263178F8000B19F3 /* EventVC.swift in Sources */,

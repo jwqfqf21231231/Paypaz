@@ -1,5 +1,5 @@
 //
-//  ContactUsModel.swift
+//  SuccessModel.swift
 //  Paypaz
 //
 //  Created by mac on 12/07/21.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-// MARK: - ContactUsModel
-struct ContactUsModel: Codable {
+// MARK: - SuccessModel
+struct SuccessModel: Codable {
     let success: Int?
     let message: String?
 }

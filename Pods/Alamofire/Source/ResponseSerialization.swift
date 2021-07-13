@@ -195,7 +195,6 @@ extension DownloadRequest {
                     error: self.downloadDelegate.error,
                     timeline: self.timeline
                 )
-
                 downloadResponse.add(self.delegate.metrics)
 
                 completionHandler(downloadResponse)

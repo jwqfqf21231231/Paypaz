@@ -118,9 +118,9 @@ class Connection
         
         if Connectivity.isConnectedToInternet()
         {
-            if headers == nil
+            if headers == nil && params == nil
             {
-                Alamofire.request(url, method: .delete, parameters: params!, encoding: URLEncoding.httpBody, headers: nil).responseJSON
+                Alamofire.request(url, method: .delete, parameters: nil, encoding: URLEncoding.httpBody, headers: nil).responseJSON
                 {
                     (responseObject) -> Void in
                     
@@ -141,7 +141,6 @@ class Connection
             }
             else
             {
-                
                 print("Headers = ",headers!)
                 
                 Alamofire.request(url, method: .delete, parameters: params ?? [:], encoding: URLEncoding.httpBody, headers: headers ?? [:]).responseJSON

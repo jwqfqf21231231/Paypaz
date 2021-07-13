@@ -43,6 +43,20 @@ class ProductDetailVC : CustomViewController {
     @IBAction func btn_back (_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func btn_Edit(_ sender:UIButton)
+    {
+        if let vc = self.pushToVC("AddProductVC") as? AddProductVC
+        {
+            vc.isEdit = true
+            vc.productID = self.productID
+        }
+    }
+    @IBAction func btn_Delete(_ sender:UIButton)
+    {
+        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        dataSource.deleteProduct()
+    }
 }
 extension ProductDetailVC : ProductDetailsDataModelDelegate
 {
@@ -97,6 +111,36 @@ extension ProductDetailVC : MyPostedEventDataModelDelegate
     }
     
     func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension ProductDetailVC : DeleteProductDataModelDelegate
+{
+    func didRecieveDataUpdate(data: SuccessModel)
+    {
+        print("DeleteProductModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.navigationController?.popViewController(animated: false)
+            self.view.makeToast("Product Deleted Successfully", duration: 3, position: .center)
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
