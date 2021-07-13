@@ -110,7 +110,66 @@ class Connection
         }
     }
     
-    
+    func requestDELETE(_ url: String, params : Parameters?, headers : HTTPHeaders?, success:@escaping (Data) -> Void, failure:@escaping (Error) -> Void)
+    {
+        
+        print("URL = ",url)
+        print("Parameter = ",params ?? [:])
+        
+        if Connectivity.isConnectedToInternet()
+        {
+            if headers == nil
+            {
+                Alamofire.request(url, method: .delete, parameters: params!, encoding: URLEncoding.httpBody, headers: nil).responseJSON
+                {
+                    (responseObject) -> Void in
+                    
+                    print("Response = ",responseObject)
+                    
+                    switch responseObject.result
+                    {
+                    case .success:
+                        if let data = responseObject.data
+                        {
+                            success(data)
+                        }
+                    case .failure(let error):
+                        failure(error)
+                        print(error)
+                    }
+                }
+            }
+            else
+            {
+                
+                print("Headers = ",headers!)
+                
+                Alamofire.request(url, method: .delete, parameters: params ?? [:], encoding: URLEncoding.httpBody, headers: headers ?? [:]).responseJSON
+                {
+                    (responseObject) -> Void in
+                    
+                    print("Response = ",responseObject)
+                    
+                    switch responseObject.result
+                    {
+                    case .success:
+                        if let data = responseObject.data
+                        {
+                            success(data)
+                        }
+                    case .failure(let error):
+                        failure(error)
+                    }
+                }
+            }
+            
+        }
+        else
+        {
+            let error = NSError(domain: "", code: 4, userInfo: [NSLocalizedDescriptionKey : "Check Internet Connection"])
+            failure(error)
+        }
+    }
     func requestGET(_ url: String, params : Parameters?,headers : [String : String]?, success:@escaping (Data) -> Void, failure:@escaping (Error) -> Void)
     {
         

@@ -3,4 +3,54 @@
    uuid = "F1C1889C-77BD-4DA8-8A9E-B721D9BD493D"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56C1551D-CA82-4AA5-8A4A-7421021684ED"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Paypaz/VCs/Host Event/Controller/HostEventVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "onSwitchValueChange(swtch:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "56C1551D-CA82-4AA5-8A4A-7421021684ED - f5f4492f2cc3e11a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Paypaz.HostEventVC.onSwitchValueChange(swtch: __C.UISwitch) -&gt; ()"
+                  moduleName = "Paypaz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macosx/Downloads/Paypaz-main/Paypaz/VCs/Host%20Event/Controller/HostEventVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "87">
+               </Location>
+               <Location
+                  uuid = "56C1551D-CA82-4AA5-8A4A-7421021684ED - f5f4492f2cc3e11a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Paypaz.HostEventVC.onSwitchValueChange(swtch: __C.UISwitch) -&gt; ()"
+                  moduleName = "Paypaz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macosx/Downloads/Paypaz-main/Paypaz/VCs/Host%20Event/Controller/HostEventVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "153">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -22,15 +22,22 @@ class AddProductVC : CustomViewController {
     private let dataSource = AddProductDataModel()
     
     @IBOutlet weak var img_ProductPic : UIImageView!
-    @IBOutlet weak var txt_ProductName : UITextField!
-    @IBOutlet weak var txt_ProductPrice : UITextField!
-    @IBOutlet weak var txt_Description : UITextView!
+    @IBOutlet weak var txt_ProductName : RoundTextField!
+    @IBOutlet weak var txt_ProductPrice : RoundTextField!
+    @IBOutlet weak var txt_Description : RoundTextView!
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
         dataSource.delegate = self
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         self.view.backgroundColor = UIColor.clear
+    }
+    private func setDelegates()
+    {
+        self.txt_ProductName.delegate = self
+        self.txt_ProductPrice.delegate = self
+        self.txt_Description.delegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

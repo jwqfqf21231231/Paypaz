@@ -17,17 +17,47 @@ class ContactUsVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
+        self.txt_Message.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         dataSource.delegate = self
     }
-
+    private func setDelegates()
+    {
+        
+        txt_Email.delegate = self
+        txt_Subject.delegate = self
+        txt_Message.delegate = self
+        
+    }
     //MARK:- --- Action ----
     @IBAction func btn_Back(_ sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_Submit(_ sender:UIButton)
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
-        dataSource.contactAdmin()
+        let email = txt_Email.text?.trimmingCharacters(in: .whitespaces)
+        if email == ""{
+            self.showAlert(withMsg: "Please enter your email id", withOKbtn: true)
+        }
+        else if !(email!.isValidEmail()){
+            self.showAlert(withMsg: "Please Enter Valid Email Id", withOKbtn: true)
+        }
+        else if txt_Subject.text == ""
+        {
+            self.showAlert(withMsg: "Please Enter Subject", withOKbtn: true)
+        }
+        else if txt_Message.text == ""
+        {
+            self.showAlert(withMsg: "Please Enter Message", withOKbtn: true)
+        }
+        else
+        {
+            Connection.svprogressHudShow(title: "Please Wait", view: self)
+            dataSource.email = txt_Email.text ?? ""
+            dataSource.subject = txt_Subject.text ?? ""
+            dataSource.message = txt_Message.text
+            dataSource.contactAdmin()
+        }
     }
 }
 extension ContactUsVC : ContactUsDataModelDelegate

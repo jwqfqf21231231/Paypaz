@@ -414,6 +414,7 @@
 		0431B71B269C6B950082EAB3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				44DBD004262FF8B600255F9A /* ContactUsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1301,7 +1302,6 @@
 				0431B71D269C6B9A0082EAB3 /* Model */,
 				0431B71C269C6B970082EAB3 /* View Model */,
 				0431B71B269C6B950082EAB3 /* Controller */,
-				44DBD004262FF8B600255F9A /* ContactUsVC.swift */,
 			);
 			path = "Contact Us";
 			sourceTree = "<group>";
