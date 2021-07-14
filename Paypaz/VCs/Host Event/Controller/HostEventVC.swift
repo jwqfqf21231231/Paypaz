@@ -13,7 +13,15 @@ class HostEventVC : CustomViewController {
     var isEdit : Bool? //The value for isEdit comes from MyEventsListVC+Extensions (60th line)
     var eventID = ""
     private let dataSource2 = MyPostedEventDataModel()
-    var products = [MyProducts]()
+    var products = [MyProducts](){
+        didSet{
+            for i in 0..<self.products.count
+            {
+                self.productIDArr.append(self.products[i].id)
+                self.productArr.append(["image" : products[i].image,"price" : products[i].price,"name" : products[i].name,"description" : products[i].datumDescription,"fromServer" : true])
+            }
+        }
+    }
     
     var pickedImage : UIImage?
     var fontCamera  = false
@@ -23,7 +31,21 @@ class HostEventVC : CustomViewController {
     var endDate = ""
     var startTime = ""
     var endTime = ""
-    var paymentType = ""
+    var paymentType : String?{
+        didSet{
+            if paymentType == "0"
+            {
+                self.btn_Paypaz.border_Color   = UIColor(named: "GreenColor")
+                self.btn_bankAcc.border_Color  = UIColor.lightGray
+                self.btn_Paypaz.setImage(UIImage(named: "pay"), for: .normal)
+                self.btn_bankAcc.setImage(UIImage(named: "surface_icons"), for: .normal)
+            }
+            else
+            {
+                
+            }
+        }
+    }
     var isPublicStatus = ""
     var isInviteMemberStatus = ""
     var productIDArr = [String]()
@@ -88,6 +110,7 @@ class HostEventVC : CustomViewController {
             dataSource2.eventID = self.eventID
             dataSource2.getEvent()
             dataSource2.getProducts()
+            
         }
         self.txt_StartDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
         self.txt_EndDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
@@ -119,7 +142,7 @@ class HostEventVC : CustomViewController {
     {
         switch swtch.tag{
         case 0:
-            if(swtch.isOn == true)
+            if(swtch.isOn)
             {
                 self.isPublicStatus = "1"
             }
@@ -128,7 +151,7 @@ class HostEventVC : CustomViewController {
                 self.isPublicStatus = "0"
             }
         default:
-            if(swtch.isOn == true)
+            if(swtch.isOn)
             {
                 self.tableView_Members.isHidden = false
                 self.isInviteMemberStatus = "1"
@@ -276,30 +299,54 @@ class HostEventVC : CustomViewController {
         if let addProduct = self.presentPopUpVC("AddProductVC", animated: false) as? AddProductVC {
             addProduct.delegate = self
             
-            addProduct.callback = { item in
-                self.productArr.append(["image" : item["productImage"]!,"price" : item["productPrice"]!,"name" : item["productName"]!,"description" : item["productDescription"]!])
+            addProduct.callback = { [self] item in
+                self.productArr.append(["image" : item["productImage"]!,"price" : item["productPrice"]!,"name" : item["productName"]!,"description" : item["productDescription"]!,"fromServer" : false])
+                
                 self.productIDArr.append(item["productID"] as! String)
                 self.btn_clickToAdd.isHidden = true
                 self.view_addNewBtn.isHidden = false
                 DispatchQueue.main.async {
-                    if self.isEdit ?? false
-                    {
-                        self.dataSource2.eventID = self.eventID
-                        self.dataSource2.getProducts()
-                    }
-                    else
-                    {
-                        self.tableView_ProductsHeight.constant = CGFloat(self.productArr.count * 60)
-                        self.tableView_Products.reloadData()
-                    }
+                    self.tableView_ProductsHeight.constant = CGFloat(self.productIDArr.count * 60)
+                    self.tableView_Products.reloadData()
                 }
             }
-            
-            
         }
     }
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
-        if isEdit ?? false
+        
+        if(img_EventPic.image == nil)
+        {
+            showAlert(withMsg: "Give Event Image", withOKbtn: true)
+        }
+        else if(txt_EventName.text == "")
+        {
+            showAlert(withMsg: "Enter Event Name", withOKbtn: true)
+        }
+        else if(selectedEventId == "")
+        {
+            showAlert(withMsg: "Select Event Type", withOKbtn: true)
+        }
+        else if(txt_Price.text == "")
+        {
+            showAlert(withMsg: "Enter Price", withOKbtn: true)
+        }
+        else if(startDate == "")
+        {
+            showAlert(withMsg: "Enter Start Date", withOKbtn: true)
+        }
+        else if(endDate == "")
+        {
+            showAlert(withMsg: "Enter End Date", withOKbtn: true)
+        }
+        else if(startTime == "")
+        {
+            showAlert(withMsg: "Enter Start Time", withOKbtn: true)
+        }
+        else if(endTime == "")
+        {
+            showAlert(withMsg: "Enter End Time", withOKbtn: true)
+        }
+        else
         {
             Connection.svprogressHudShow(title: "Please wait", view: self)
             dataSource.eventImg = img_EventPic.image
@@ -311,25 +358,11 @@ class HostEventVC : CustomViewController {
             dataSource.endDate = endDate
             dataSource.startTime = startTime
             dataSource.endTime = endTime
-            dataSource.paymentType = paymentType
+            dataSource.paymentType = paymentType ?? ""
             dataSource.isPublic = isPublicStatus
             dataSource.isInviteMember = isInviteMemberStatus
-            var products = ""
-            for i in 0..<self.products.count
-            {
-                if(i == self.products.count-1 && productIDArr.count == 0)
-                {
-                    products += self.products[i].id
-                }
-                else if(i == self.products.count-1 && productIDArr.count != 0)
-                {
-                    products += self.products[i].id+","
-                }
-                else
-                {
-                    products += self.products[i].id+","
-                }
-            }
+            dataSource.eventID = self.eventID
+            var products:String = ""
             for i in 0..<productIDArr.count
             {
                 if(i == productIDArr.count-1)
@@ -342,75 +375,15 @@ class HostEventVC : CustomViewController {
                 }
             }
             dataSource.products = products
-            dataSource.addEvent()
-            
-        }
-        else
-        {
-            if(img_EventPic.image == nil)
+            if isEdit ?? false
             {
-                showAlert(withMsg: "Give Event Image", withOKbtn: true)
-            }
-            else if(txt_EventName.text == "")
-            {
-                showAlert(withMsg: "Enter Event Name", withOKbtn: true)
-            }
-            else if(selectedEventId == "")
-            {
-                showAlert(withMsg: "Select Event Type", withOKbtn: true)
-            }
-            else if(txt_Price.text == "")
-            {
-                showAlert(withMsg: "Enter Price", withOKbtn: true)
-            }
-            else if(startDate == "")
-            {
-                showAlert(withMsg: "Enter Start Date", withOKbtn: true)
-            }
-            else if(endDate == "")
-            {
-                showAlert(withMsg: "Enter End Date", withOKbtn: true)
-            }
-            else if(startTime == "")
-            {
-                showAlert(withMsg: "Enter Start Time", withOKbtn: true)
-            }
-            else if(endTime == "")
-            {
-                showAlert(withMsg: "Enter End Time", withOKbtn: true)
+                dataSource.updateEvent()
             }
             else
             {
-                Connection.svprogressHudShow(title: "Please wait", view: self)
-                dataSource.eventImg = img_EventPic.image
-                dataSource.name = txt_EventName.text ?? ""
-                dataSource.typeId = selectedEventId ?? ""
-                dataSource.price = txt_Price.text ?? ""
-                dataSource.location = "Ongole, Andhra Pradesh"
-                dataSource.startDate = startDate
-                dataSource.endDate = endDate
-                dataSource.startTime = startTime
-                dataSource.endTime = endTime
-                dataSource.paymentType = paymentType
-                dataSource.isPublic = isPublicStatus
-                dataSource.isInviteMember = isInviteMemberStatus
-                var products:String = ""
-                for i in 0..<productIDArr.count
-                {
-                    if(i == productIDArr.count-1)
-                    {
-                        products += "\(productIDArr[i])"
-                    }
-                    else
-                    {
-                        products += "\(productIDArr[i]),"
-                    }
-                }
-                dataSource.products = products
                 dataSource.addEvent()
             }
         }
-        
     }
 }
 
@@ -489,7 +462,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.endDate = data.data?.endDate ?? ""
                 self.startTime = data.data?.startTime ?? ""
                 self.endTime = data.data?.endTime ?? ""
-
+                
                 self.btn_ChooseLocation.setTitle(data.data?.location, for: .normal)
                 self.btn_ChooseLocation.setTitleColor(.black, for: .normal)
                 self.btn_StartDate.setTitle(self.startDate, for: .normal)
@@ -507,9 +480,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.isPublicStatus == "1" ? self.isPublic.setOn(true, animated: false) : self.isPublic.setOn(false, animated: false)
                 self.isInviteMemberStatus = data.data?.isinviteMember ?? ""
                 self.isInviteMemberStatus == "1" ? self.isInviteMember.setOn(true, animated: false) : self.isInviteMember.setOn(false, animated: false)
-                self.paymentType = data.data?.paymentType ?? ""
-                self.paymentType == "0" ? (self.btn_Paypaz.border_Color = UIColor(named:"GreenColor")) : (self.btn_bankAcc.border_Color = UIColor(named: "GreenColor"))
-                
+                self.paymentType = data.data?.paymentType ?? "
             }
         }
         else
@@ -541,15 +512,10 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             products = data.data
-            for i in 0..<products.count
-            {
-                productIDArr.append(products[i].id)
-            }
-            self.tableView_ProductsHeight.constant = CGFloat((self.products.count) * 60)
+            self.tableView_ProductsHeight.constant = CGFloat((self.productIDArr.count) * 60)
             DispatchQueue.main.async {
                 self.btn_clickToAdd.isHidden = true
                 self.view_addNewBtn.isHidden = false
-                
                 self.tableView_Products.reloadData()
             }
         }

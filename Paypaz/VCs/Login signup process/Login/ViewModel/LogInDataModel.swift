@@ -20,8 +20,6 @@ class LogInDataModel: NSObject
     let sharedInstance = Connection()
     var email = ""
     var password = ""
-    var latitude = ""
-    var longitude = ""
     
     func requestLogIn()
     {
@@ -36,8 +34,8 @@ class LogInDataModel: NSObject
         let parameter : Parameters = [
             "emailORphone":email ,
             "password":password,
-            "latitude":latitude,
-            "longitude":longitude,
+            "latitude":UserDefaults.standard.getLatitude(),
+            "longitude":UserDefaults.standard.getLongitude(),
             "deviceType":"iOS",
             "deviceToken":deviceToken
         ]

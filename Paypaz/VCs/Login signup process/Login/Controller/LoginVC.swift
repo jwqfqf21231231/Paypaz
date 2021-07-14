@@ -14,8 +14,6 @@ class LoginVC : CustomViewController {
     private let dataSource = LogInDataModel()
     @IBOutlet weak var txt_email    : RoundTextField!
     @IBOutlet weak var txt_Password : RoundTextField!
-    var latitude:String = ""
-    var longitude:String = ""
    // var location:CLLocation?
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
@@ -35,8 +33,6 @@ class LoginVC : CustomViewController {
             if lat != nil && long != nil{
                 UserDefaults.standard.setLatitude(value: "\(lat ?? 0.0)")
                 UserDefaults.standard.setLongitude(value: "\(long ?? 0.0)")
-                self.latitude = "\(lat ?? 0.0)"
-                self.longitude = "\(long ?? 0.0)"
                 //self.location  = CLLocation.init(latitude: lat ?? 0.0, longitude: long ?? 0.0)
                 UserDefaults.standard.synchronize()
 //                if AppSettings.hasLogInApp{
@@ -68,8 +64,6 @@ class LoginVC : CustomViewController {
             Connection.svprogressHudShow(title: "Please Wait", view: self)
             dataSource.email = email!
             dataSource.password = password!
-            dataSource.latitude = latitude
-            dataSource.longitude = longitude
             dataSource.requestLogIn()
         }
     }

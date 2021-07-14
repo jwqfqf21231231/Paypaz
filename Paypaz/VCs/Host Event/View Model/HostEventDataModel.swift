@@ -33,18 +33,15 @@ class HostEventDataModel: NSObject
     var memberID = ""
     var products = ""
     var eventImg : UIImage?
+    var eventID = ""
+    
     var url = ""
+    var parameter = [String:String]()
     func addEvent()
     {
-        if isEdit ?? false
-        {
-           url = APIList().getUrlString(url: .UPDATEEVENT)
-        }
-        else
-        {
-            url =  APIList().getUrlString(url: .HOSTEVENT)
-        }
-        let parameter : [String:String] = [
+        
+        url =  APIList().getUrlString(url: .HOSTEVENT)
+        parameter = [
             "typeID" : typeId,
             "name" : name,
             "location" : location,
@@ -53,20 +50,72 @@ class HostEventDataModel: NSObject
             "endDate" : endDate,
             "startTime" : startTime,
             "endTime" : endTime,
-            "isPublic" : isPublic,
-            "isInviteMember" : isInviteMember,
+            "ispublic" : isPublic,
+            "isinviteMember" : isInviteMember,
             "paymentType" : paymentType,
             "memberID" : memberID,
             "products" : products,
             "latitude" : UserDefaults.standard.getLatitude(),
             "longitude" : UserDefaults.standard.getLatitude()
         ]
+        
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
         ]
         sharedInstance.uploadImage(url, imgData: eventImg!.jpegData(compressionQuality: 0.25)!,
-                                      params: parameter,
-                                      headers: header,
+                                   params: parameter,
+                                   headers: header,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(HostEventModel.self, from: result!)
+                                                self.delegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.delegate?.didFailDataUpdateWithError3(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No response from server")
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.delegate?.didFailDataUpdateWithError3(error: error)
+                                    })
+    }
+    func updateEvent()
+    {
+        url = APIList().getUrlString(url: .UPDATEEVENT)
+        parameter = [
+            "typeID" : typeId,
+            "name" : name,
+            "location" : location,
+            "price" : price,
+            "startDate" : startDate,
+            "endDate" : endDate,
+            "startTime" : startTime,
+            "endTime" : endTime,
+            "ispublic" : isPublic,
+            "isinviteMember" : isInviteMember,
+            "paymentType" : paymentType,
+            "memberID" : memberID,
+            "products" : products,
+            "latitude" : UserDefaults.standard.getLatitude(),
+            "longitude" : UserDefaults.standard.getLatitude(),
+            "eventID" : eventID
+        ]
+        sharedInstance.uploadImage(url, imgData: eventImg!.jpegData(compressionQuality: 0.25)!,
+                                   params: parameter,
+                                   headers: nil,
                                    success:
                                     {
                                         (JSON) in

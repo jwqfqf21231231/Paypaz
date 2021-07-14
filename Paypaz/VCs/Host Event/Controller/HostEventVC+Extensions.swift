@@ -13,14 +13,7 @@ extension HostEventVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 10 {
-            if isEdit ?? false
-            {
-                return products.count
-            }
-            else
-            {
-                return productArr.count
-            }
+            return productIDArr.count
         }
         return 2
     }
@@ -29,20 +22,18 @@ extension HostEventVC : UITableViewDataSource {
         
         if tableView.tag == 10 {
             guard  let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableCell") as? ProductTableCell else { return ProductTableCell() }
-            if self.isEdit ?? false
+            if (productArr[indexPath.row]["fromServer"] as? Bool ?? false)
             {
                 cell.img_Product.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
-                cell.img_Product.sd_setImage(with: URL(string: url+(products[indexPath.row].image)), placeholderImage: UIImage(named: "profile_c"))
-                cell.lbl_ProductName.text = self.products[indexPath.row].name
-                cell.lbl_Description.text = self.products[indexPath.row].datumDescription
+                cell.img_Product.sd_setImage(with: URL(string: url+(productArr[indexPath.row]["image"] as! String)))
             }
             else
             {
                 cell.img_Product.image = productArr[indexPath.row]["image"] as? UIImage
-                cell.lbl_ProductName.text = productArr[indexPath.row]["name"] as? String
-                cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
             }
+            cell.lbl_ProductName.text = productArr[indexPath.row]["name"] as? String
+            cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
             
             return cell
             
@@ -64,12 +55,12 @@ extension HostEventVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //_ = self.pushToVC("HomeEventDetailVC")
     }
-
+    
 }
 
 //MARK:-
 extension HostEventVC : PopupDelegate {
-
+    
     func isClickedButton() {
         self.navigationController?.popViewController(animated: false)
         self.delegate?.isClickedButton()
@@ -78,7 +69,7 @@ extension HostEventVC : PopupDelegate {
 }
 //MARK:-
 extension HostEventVC : AddProductDelegate {
-
+    
     func isAddedProduct() {
         self.tableView_ProductsHeight.constant = self.tableView_Products.contentSize.height
         self.view.layoutIfNeeded()

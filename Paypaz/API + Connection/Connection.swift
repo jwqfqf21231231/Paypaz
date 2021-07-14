@@ -249,7 +249,6 @@ class Connection
         }
         
     }
-    
     func uploadImage(_ url: String,imgData:Data, params :[String:String]?,headers : [String : String]?, success:@escaping (Data) -> Void, failure:@escaping (Error) -> Void)
     {
         
