@@ -541,7 +541,10 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             products = data.data
-            
+            for i in 0..<products.count
+            {
+                productIDArr.append(products[i].id)
+            }
             self.tableView_ProductsHeight.constant = CGFloat((self.products.count) * 60)
             DispatchQueue.main.async {
                 self.btn_clickToAdd.isHidden = true

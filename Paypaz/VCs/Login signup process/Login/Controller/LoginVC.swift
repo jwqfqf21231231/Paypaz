@@ -103,6 +103,8 @@ extension LoginVC : LogInDataModelDelegate
         {
             UserDefaults.standard.setLoggedIn(value: true)
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
+            UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
+            UserDefaults.standard.setEmail(value: data.data?.emailORphone ?? "")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeVC") as! PasscodeVC
             self.navigationController?.pushViewController(viewController, animated: false)
         }
