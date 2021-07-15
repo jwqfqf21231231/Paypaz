@@ -42,7 +42,10 @@ class HostEventVC : CustomViewController {
             }
             else
             {
-                
+                self.btn_bankAcc.border_Color = UIColor(named: "GreenColor")
+                self.btn_Paypaz.border_Color  = UIColor.lightGray
+                self.btn_Paypaz.setImage(UIImage(named: "paypaz_green"), for: .normal)
+                self.btn_bankAcc.setImage(UIImage(named: "green_account"), for: .normal)
             }
         }
     }
@@ -480,7 +483,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.isPublicStatus == "1" ? self.isPublic.setOn(true, animated: false) : self.isPublic.setOn(false, animated: false)
                 self.isInviteMemberStatus = data.data?.isinviteMember ?? ""
                 self.isInviteMemberStatus == "1" ? self.isInviteMember.setOn(true, animated: false) : self.isInviteMember.setOn(false, animated: false)
-                self.paymentType = data.data?.paymentType ?? "
+                self.paymentType = data.data?.paymentType ?? " "
             }
         }
         else

@@ -73,7 +73,7 @@ class CreateProfileVC  : CustomViewController {
         self.txt_DOB.delegate       = self
         self.txt_City.delegate      = self
         self.txt_State.delegate     = self
-        //self.txtView_Address.delegate = 
+        self.txtView_Address.delegate = self
     }
     
     // MARK: - --- Action ----
