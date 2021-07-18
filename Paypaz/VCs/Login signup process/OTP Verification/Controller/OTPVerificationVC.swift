@@ -178,7 +178,7 @@ extension OTPVerificationVC : PopupDelegate {
 }
 extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
 {
-    func didRecieveDataUpdate(data: ForgotPasswordOTPModel) {
+    func didRecieveDataUpdate(data: ResendOTPModel) {
         print("ForgotPasswordOTPModelData = ",data)
         
         Connection.svprogressHudDismiss(view: self)
@@ -211,7 +211,7 @@ extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
 
 extension OTPVerificationVC : OTPVerificationDataModelDelegate
 {
-    func didRecieveDataUpdate(data: OTPVerificationModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
         print("OTPModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
@@ -245,7 +245,7 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
 
 extension OTPVerificationVC : ResendOTPModelDelegate
 {
-    func didRecieveDataUpdate(data: ResendOTPModel)
+    func didRecieveDataUpdate2(data: ResendOTPModel)
     {
         print("ResendOTPModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
@@ -274,7 +274,7 @@ extension OTPVerificationVC : ResendOTPModelDelegate
 }
 extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
 {
-    func didRecieveDataUpdate2(data: ForgotPasswordOTPModel)
+    func didRecieveDataUpdate3(data: ResendOTPModel)
     {
         print("ForgotPasscodeOTPModelData = ",data)
         Connection.svprogressHudDismiss(view: self)

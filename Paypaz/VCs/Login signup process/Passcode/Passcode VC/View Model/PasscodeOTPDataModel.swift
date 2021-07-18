@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol PasscodeDataModelDelegate:class {
-    func didRecieveDataUpdate(data:PasscodeModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -50,7 +50,7 @@ class PasscodeDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(PasscodeModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

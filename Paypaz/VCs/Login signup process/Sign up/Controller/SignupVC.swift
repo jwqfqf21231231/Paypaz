@@ -63,7 +63,7 @@ class SignupVC : CustomViewController {
             self.showAlert(withMsg: "Please enter your email id", withOKbtn: true)
         }
 //        else if !(email!.isValidEmail()){
-//            self.showAlertError(titleStr: "Alert", messageStr: "Please enter valid email id")
+//            self.showAlert(withMsg: "Please Enter valid Email ID", withOKbtn: true)
 //        }
         else if password == ""{
             self.showAlert(withMsg: "please enter password", withOKbtn: true)

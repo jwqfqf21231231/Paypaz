@@ -103,7 +103,7 @@ class ConfirmPasscodeVC: CustomViewController {
 }
 extension ConfirmPasscodeVC : ConfirmPasscodeDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ConfirmPasscodeModel)
+    func didRecieveDataUpdate(data: ResendOTPModel)
     {
         print("ConfirmPasscodeModelData = ",data)
         if data.success == 1

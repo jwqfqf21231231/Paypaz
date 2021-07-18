@@ -16,7 +16,7 @@ class SplashVC : CustomViewController {
         if UserDefaults.standard.isLoggedIn() == true
         {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-                        _ = self?.pushToVC("PasscodeVC", animated: false)
+                        _ = self?.pushToVC("LoginVC", animated: false)
                     }
         }
         else

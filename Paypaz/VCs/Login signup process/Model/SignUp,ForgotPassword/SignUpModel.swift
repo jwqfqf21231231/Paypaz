@@ -12,10 +12,11 @@ import Foundation
 struct SignUpModel: Codable {
     let success: Int?
     let messages: String?
+    let message:String?
     let data: DataClass?
 }
 
 // MARK: - DataClass
 struct DataClass: Codable {
-    let emailORphone, password, otp: String?
+    let emailORphone, password, token, otp: String?
 }

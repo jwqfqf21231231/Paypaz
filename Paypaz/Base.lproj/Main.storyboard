@@ -17,11 +17,11 @@
         <array key="Segoe UI Bold.ttf">
             <string>SegoeUI-Bold</string>
         </array>
-        <array key="Segoe UI Semibold.ttf">
-            <string>SegoeUI-Semibold</string>
-        </array>
         <array key="Segoe UI.ttf">
             <string>SegoeUI</string>
+        </array>
+        <array key="seguisb.ttf">
+            <string>SegoeUI-Semibold</string>
         </array>
     </customFonts>
     <scenes>
@@ -532,7 +532,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFw-1L-AkS" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="-30" width="414" height="800.5"/>
+                                        <rect key="frame" x="0.0" y="-30" width="414" height="786"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-shape_blue" translatesAutoresizingMaskIntoConstraints="NO" id="AcX-Fa-PLO">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="359"/>
@@ -541,14 +541,14 @@
                                                 <rect key="frame" x="136" y="187" width="142" height="142"/>
                                             </imageView>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D80-DZ-Ewt">
-                                                <rect key="frame" x="52" y="359" width="310.5" height="35"/>
+                                                <rect key="frame" x="52" y="359" width="310.5" height="30.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="26"/>
                                                 <color key="textColor" name="BlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email/ Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UM0-cO-kEt" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="52" y="444.5" width="310.5" height="52"/>
+                                                <rect key="frame" x="52" y="437.5" width="310.5" height="52"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" name="BlueColor"/>
                                                 <constraints>
@@ -570,7 +570,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-ev-76h" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="52" y="512.5" width="310.5" height="51.5"/>
+                                                <rect key="frame" x="52" y="505.5" width="310.5" height="51.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" name="BlueColor"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -589,7 +589,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5y-1X-iQ1">
-                                                <rect key="frame" x="144.5" y="641" width="125" height="33"/>
+                                                <rect key="frame" x="141.5" y="634" width="131" height="31"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="8" maxY="8"/>
@@ -601,7 +601,7 @@
                                                 </connections>
                                             </button>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPD-3a-rIv" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="52" y="584" width="310.5" height="52"/>
+                                                <rect key="frame" x="52" y="577" width="310.5" height="52"/>
                                                 <color key="backgroundColor" name="GreenColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                                 <state key="normal" title="Login">
@@ -617,10 +617,10 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugm-Ik-9kJ" userLabel="Register View">
-                                                <rect key="frame" x="92" y="732.5" width="230" height="38"/>
+                                                <rect key="frame" x="89.5" y="721" width="235.5" height="35"/>
                                                 <subviews>
                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSp-0B-d2h">
-                                                        <rect key="frame" x="166" y="0.0" width="64" height="38"/>
+                                                        <rect key="frame" x="172.5" y="0.0" width="63" height="35"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                                         <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="8" maxY="8"/>
@@ -632,7 +632,7 @@
                                                         </connections>
                                                     </button>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-sj-Ix5">
-                                                        <rect key="frame" x="0.0" y="8" width="164" height="21.5"/>
+                                                        <rect key="frame" x="0.0" y="8" width="170.5" height="19"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                         <color key="textColor" red="0.49019607843137253" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -649,35 +649,35 @@
                                                 </constraints>
                                             </view>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login To Start the app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrO-aP-gaS">
-                                                <rect key="frame" x="52" y="396" width="310.5" height="21.5"/>
+                                                <rect key="frame" x="52" y="391.5" width="310.5" height="19"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" red="0.49019607843137253" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="poN-AA-V8k" userLabel="Line View">
-                                                <rect key="frame" x="65.5" y="698" width="124" height="1"/>
+                                                <rect key="frame" x="65.5" y="688" width="124" height="1"/>
                                                 <color key="backgroundColor" red="0.49019607840000001" green="0.49019607840000001" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="mYY-wB-xhJ"/>
                                                 </constraints>
                                             </view>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-q5-K2U">
-                                                <rect key="frame" x="199.5" y="686" width="15" height="21.5"/>
+                                                <rect key="frame" x="199.5" y="677" width="15" height="19"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" name="BlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ImM-HQ-QfJ" userLabel="Line View 2">
-                                                <rect key="frame" x="224.5" y="698" width="124" height="1"/>
+                                                <rect key="frame" x="224.5" y="688" width="124" height="1"/>
                                                 <color key="backgroundColor" red="0.49019607840000001" green="0.49019607840000001" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="yTm-dd-xeu"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U08-LK-lRR">
-                                                <rect key="frame" x="325" y="512.5" width="37.5" height="51.5"/>
+                                                <rect key="frame" x="325" y="505.5" width="37.5" height="51.5"/>
                                                 <state key="normal" image="Icon feather-eye-off"/>
                                                 <connections>
                                                     <action selector="btn_Eye:" destination="m5m-3U-9NG" eventType="touchUpInside" id="xJ0-5Z-vTf"/>
@@ -2178,16 +2178,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsQ-hn-EiS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flv-nO-4Mk">
-                                        <rect key="frame" x="180.5" y="49" width="53" height="24.5"/>
+                                        <rect key="frame" x="180.5" y="49" width="53" height="28"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-FL-XKA">
-                                        <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
+                                        <rect key="frame" x="0.0" y="38" width="49.5" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="j2y-FL-XKA" secondAttribute="height" multiplier="1:1" id="zKy-l0-RaW"/>
                                         </constraints>
@@ -2206,19 +2206,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXL-YE-yUw" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                <rect key="frame" x="31" y="116" width="352" height="109"/>
+                                <rect key="frame" x="31" y="118" width="352" height="109"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="host_event-1" translatesAutoresizingMaskIntoConstraints="NO" id="S23-NY-Qov">
                                         <rect key="frame" x="8" y="20" width="70.5" height="69"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host Event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liu-2G-ub2">
-                                        <rect key="frame" x="86.5" y="20" width="257.5" height="21"/>
+                                        <rect key="frame" x="86.5" y="20" width="257.5" height="24"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consur adipiscing elit." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luy-V2-hNr">
-                                        <rect key="frame" x="86.5" y="41" width="257.5" height="48"/>
+                                        <rect key="frame" x="86.5" y="44" width="257.5" height="45"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2254,19 +2254,19 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAX-3P-H82" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                <rect key="frame" x="31" y="245" width="352" height="109"/>
+                                <rect key="frame" x="31" y="247" width="352" height="109"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="buy_event" translatesAutoresizingMaskIntoConstraints="NO" id="IrD-ND-1EU">
                                         <rect key="frame" x="8" y="20" width="70.5" height="69"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYF-vY-njU">
-                                        <rect key="frame" x="86.5" y="20" width="257.5" height="21"/>
+                                        <rect key="frame" x="86.5" y="20" width="257.5" height="24"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consur adipiscing elit." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PG1-mh-tJ2">
-                                        <rect key="frame" x="86.5" y="41" width="257.5" height="48"/>
+                                        <rect key="frame" x="86.5" y="44" width="257.5" height="45"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3790,16 +3790,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jup-G5-DIp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit/Debit card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqw-1K-MaC">
-                                        <rect key="frame" x="126.5" y="49" width="161.5" height="24.5"/>
+                                        <rect key="frame" x="124.5" y="49" width="165" height="28"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mo-yY-ekg">
-                                        <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
+                                        <rect key="frame" x="0.0" y="38" width="49.5" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="9mo-yY-ekg" secondAttribute="height" multiplier="1:1" id="Ufn-vw-Sqs"/>
                                         </constraints>
@@ -3818,16 +3818,16 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcH-db-fxj">
-                                <rect key="frame" x="0.0" y="96" width="414" height="766"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="764"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-jE-VMA" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="615"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="614.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="credit_card" translatesAutoresizingMaskIntoConstraints="NO" id="ahd-5h-TiT">
                                                 <rect key="frame" x="162.5" y="62" width="89" height="89"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iax-4a-STp" customClass="RightImageButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="20.5" y="181" width="373" height="53.5"/>
+                                                <rect key="frame" x="20.5" y="181" width="373" height="53"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Iax-4a-STp" secondAttribute="height" multiplier="7:1" id="OC9-bg-gVd"/>
                                                 </constraints>
@@ -3851,12 +3851,15 @@
                                                         <real key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="btn_SelectBank:" destination="goZ-Qt-oBj" eventType="touchUpInside" id="GaG-I5-0dL"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJl-wu-kLn" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="20.5" y="254.5" width="373" height="53"/>
+                                                <rect key="frame" x="20.5" y="254" width="373" height="53.5"/>
                                                 <subviews>
                                                     <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ymz-4j-zMI" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="53.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -3867,7 +3870,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa" translatesAutoresizingMaskIntoConstraints="NO" id="nbW-BI-RmR">
-                                                        <rect key="frame" x="323" y="0.0" width="42" height="53"/>
+                                                        <rect key="frame" x="323" y="0.0" width="42" height="53.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3893,7 +3896,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="08W-lR-W2H" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="20.5" y="327.5" width="168" height="53.5"/>
+                                                <rect key="frame" x="20.5" y="327.5" width="168" height="53"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -3910,7 +3913,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Exp.date *" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIQ-Ct-fT1" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="225.5" y="327.5" width="168" height="53.5"/>
+                                                <rect key="frame" x="225.5" y="327.5" width="168" height="53"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -3927,7 +3930,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card holder name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D2N-j9-brQ" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="20.5" y="401" width="373" height="53"/>
+                                                <rect key="frame" x="20.5" y="400.5" width="373" height="53.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -3944,7 +3947,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWm-b0-5ng" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="20.5" y="474" width="373" height="48"/>
+                                                <rect key="frame" x="20.5" y="474" width="373" height="47.5"/>
                                                 <color key="backgroundColor" name="GreenColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                                 <state key="normal" title="Verify Card">
@@ -3960,7 +3963,7 @@
                                                 </connections>
                                             </button>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQp-nE-ihL" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="20.5" y="542" width="373" height="48"/>
+                                                <rect key="frame" x="20.5" y="541.5" width="373" height="48"/>
                                                 <color key="backgroundColor" red="0.90980392156862744" green="0.93333333333333335" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                                 <state key="normal" title="Skip &gt;&gt;">
@@ -4040,6 +4043,10 @@
                     </view>
                     <connections>
                         <outlet property="btn_Skip" destination="oQp-nE-ihL" id="Eci-M1-Xod"/>
+                        <outlet property="txt_cardHolderName" destination="D2N-j9-brQ" id="VxN-cz-SDJ"/>
+                        <outlet property="txt_cardNumber" destination="ymz-4j-zMI" id="sbR-JN-HnD"/>
+                        <outlet property="txt_cvv" destination="08W-lR-W2H" id="UKG-3d-w2z"/>
+                        <outlet property="txt_expDate" destination="qIQ-Ct-fT1" id="8fB-8g-q3p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3BD-qX-ska" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -7389,22 +7396,22 @@ More</string>
                                                                     <rect key="frame" x="82.5" y="10" width="290.5" height="74"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name 1" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfC-zC-nNd">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="290.5" height="16.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="290.5" height="18"/>
                                                                             <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                                                             <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpT-ZN-s5a" userLabel="Price">
-                                                                            <rect key="frame" x="0.0" y="19.5" width="290.5" height="21.5"/>
+                                                                            <rect key="frame" x="0.0" y="21" width="290.5" height="20"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUB-7N-hjy">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="21.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
                                                                                     <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                                     <color key="textColor" red="0.4549019608" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$56" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8p2-qy-lcR">
-                                                                                    <rect key="frame" x="42" y="0.0" width="25.5" height="21.5"/>
+                                                                                    <rect key="frame" x="39" y="0.0" width="25.5" height="20"/>
                                                                                     <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="15"/>
                                                                                     <color key="textColor" name="GreenColor"/>
                                                                                     <nil key="highlightedColor"/>
@@ -7425,7 +7432,7 @@ More</string>
                                                                             <rect key="frame" x="0.0" y="44" width="290.5" height="30"/>
                                                                             <subviews>
                                                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbO-mg-zBB" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="58" height="30"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="59" height="30"/>
                                                                                     <color key="backgroundColor" name="LightBluish"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="30" id="yEr-FT-00a"/>
@@ -7736,7 +7743,7 @@ More</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvd-rV-6C0" customClass="RoundView" customModule="Paypaz" customModuleProvider="target">
-                                <rect key="frame" x="20.5" y="407.5" width="373" height="381.5"/>
+                                <rect key="frame" x="20.5" y="420.5" width="373" height="368.5"/>
                                 <subviews>
                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter By" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5K-TR-i9j">
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="53.5"/>
@@ -7749,18 +7756,18 @@ More</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 m" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLl-h2-0hF">
-                                        <rect key="frame" x="164" y="76.5" width="45.5" height="23"/>
+                                        <rect key="frame" x="162.5" y="76.5" width="48" height="20"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                         <color key="textColor" name="GreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y3L-L4-YAz">
-                                        <rect key="frame" x="16.5" y="104.5" width="340" height="31"/>
+                                        <rect key="frame" x="16.5" y="101.5" width="340" height="31"/>
                                         <color key="tintColor" name="GreenColor"/>
                                         <color key="thumbTintColor" name="GreenColor"/>
                                     </slider>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afx-Ll-jnG">
-                                        <rect key="frame" x="18.5" y="183.5" width="336" height="39"/>
+                                        <rect key="frame" x="18.5" y="177.5" width="336" height="37"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -7770,39 +7777,39 @@ More</string>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOe-a2-vVu">
-                                        <rect key="frame" x="18.5" y="61.5" width="336" height="23"/>
+                                        <rect key="frame" x="18.5" y="61.5" width="336" height="20"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXN-ru-a05" userLabel="Line View">
-                                        <rect key="frame" x="0.0" y="149.5" width="373" height="1"/>
+                                        <rect key="frame" x="0.0" y="146.5" width="373" height="1"/>
                                         <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Zvo-aW-BNZ"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tku-q8-CyZ">
-                                        <rect key="frame" x="18.5" y="158.5" width="336" height="23"/>
+                                        <rect key="frame" x="18.5" y="155.5" width="336" height="20"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-qm-BNr" userLabel="Line View2">
-                                        <rect key="frame" x="0.0" y="230.5" width="373" height="1"/>
+                                        <rect key="frame" x="0.0" y="222.5" width="373" height="1"/>
                                         <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="4Ff-SX-Ybl"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-UW-fMz">
-                                        <rect key="frame" x="18.5" y="239.5" width="336" height="23"/>
+                                        <rect key="frame" x="18.5" y="231.5" width="336" height="20"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDk-0t-lEl">
-                                        <rect key="frame" x="18.5" y="264.5" width="336" height="39"/>
+                                        <rect key="frame" x="18.5" y="253.5" width="336" height="37"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -7812,7 +7819,7 @@ More</string>
                                         </state>
                                     </button>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2o-kA-ldE" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="18.5" y="318.5" width="336" height="48"/>
+                                        <rect key="frame" x="18.5" y="305.5" width="336" height="48"/>
                                         <color key="backgroundColor" name="GreenColor"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="10"/>
@@ -9402,16 +9409,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qf-Ij-Ljs">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Cart" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xta-pC-yDL">
-                                        <rect key="frame" x="169.5" y="49" width="75" height="24.5"/>
+                                        <rect key="frame" x="169" y="49" width="76" height="28"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWy-sb-EeS">
-                                        <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
+                                        <rect key="frame" x="0.0" y="38" width="49.5" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="KWy-sb-EeS" secondAttribute="height" multiplier="1:1" id="udY-b4-zb3"/>
                                         </constraints>
@@ -9429,13 +9436,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vlq-QY-P1b">
-                                <rect key="frame" x="-1" y="96" width="416" height="766"/>
+                                <rect key="frame" x="-1" y="98" width="416" height="764"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2z-uv-Yln" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="416" height="623"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="416" height="646.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT0-1z-NGB" userLabel="View1">
-                                                <rect key="frame" x="21" y="20" width="374" height="358.5"/>
+                                                <rect key="frame" x="21" y="20" width="374" height="371.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_img" translatesAutoresizingMaskIntoConstraints="NO" id="end-Gv-14K" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
                                                         <rect key="frame" x="8" y="8" width="91" height="91"/>
@@ -9449,7 +9456,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW0-6g-KBR">
-                                                        <rect key="frame" x="107" y="3" width="207" height="24.5"/>
+                                                        <rect key="frame" x="107" y="3" width="207" height="28"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                                         <color key="textColor" name="BlueColor"/>
                                                         <nil key="highlightedColor"/>
@@ -9465,7 +9472,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ri-0Q-FEa">
-                                                        <rect key="frame" x="107" y="35.5" width="207" height="17"/>
+                                                        <rect key="frame" x="107" y="39" width="207" height="19"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="imageEdgeInsets" minX="-9" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -9474,26 +9481,26 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                         </state>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="HyY-8i-gfT">
-                                                        <rect key="frame" x="107" y="60.5" width="14" height="20.5"/>
+                                                        <rect key="frame" x="107" y="66" width="14" height="20.5"/>
                                                         <color key="tintColor" name="GreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="14" id="kW4-1z-ufF"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110 the embers ,san Francisco" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lz-4E-kja">
-                                                        <rect key="frame" x="126" y="60.5" width="233" height="16.5"/>
+                                                        <rect key="frame" x="126" y="66" width="233" height="19"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$66" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8x-U3-pYc">
-                                                        <rect key="frame" x="107" y="85" width="27" height="19"/>
+                                                        <rect key="frame" x="107" y="93" width="26" height="21.5"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                         <color key="textColor" red="0.93725490196078431" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZH-yj-Yhb">
-                                                        <rect key="frame" x="275" y="80.5" width="84" height="28"/>
+                                                        <rect key="frame" x="275" y="89.5" width="84" height="28"/>
                                                         <subviews>
                                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lms-9p-drq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
@@ -9527,13 +9534,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                         </constraints>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Added Products" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu5-ag-clg">
-                                                        <rect key="frame" x="25" y="124" width="334" height="16.5"/>
+                                                        <rect key="frame" x="25" y="134.5" width="334" height="19"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                                         <color key="textColor" name="GreenColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZO-n4-cXh" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="126.5" width="12" height="12"/>
+                                                        <rect key="frame" x="8" y="138" width="12" height="12"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="12" id="AvL-FH-uH3"/>
@@ -9557,14 +9564,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPa-fw-i7C">
-                                                        <rect key="frame" x="13.5" y="138.5" width="1" height="152"/>
+                                                        <rect key="frame" x="13.5" y="150" width="1" height="153.5"/>
                                                         <color key="backgroundColor" name="GreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="1" id="VSG-Zg-szv"/>
                                                         </constraints>
                                                     </view>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-vr-rsE">
-                                                        <rect key="frame" x="25" y="150.5" width="349" height="200"/>
+                                                        <rect key="frame" x="25" y="163.5" width="349" height="200"/>
                                                         <color key="backgroundColor" name="LightBluish"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="200" id="6U0-Jb-vXQ"/>
@@ -9605,22 +9612,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                                     <rect key="frame" x="95.5" y="8" width="192.5" height="69"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwE-es-2hg">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="192.5" height="16.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="192.5" height="19"/>
                                                                                             <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                                                                             <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7z-H4-Xvh" userLabel="Price">
-                                                                                            <rect key="frame" x="0.0" y="18.5" width="192.5" height="23.5"/>
+                                                                                            <rect key="frame" x="0.0" y="21" width="192.5" height="21"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ho-be-Xib">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="23.5"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="37" height="21"/>
                                                                                                     <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                                                     <color key="textColor" red="0.4549019608" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$56" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Js-35-fAF">
-                                                                                                    <rect key="frame" x="42" y="0.0" width="25.5" height="23.5"/>
+                                                                                                    <rect key="frame" x="39" y="0.0" width="25.5" height="21"/>
                                                                                                     <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="15"/>
                                                                                                     <color key="textColor" red="0.93725490199999995" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                     <nil key="highlightedColor"/>
@@ -9756,7 +9763,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBg-77-QoV" userLabel="View2">
-                                                <rect key="frame" x="21" y="378.5" width="374" height="50"/>
+                                                <rect key="frame" x="21" y="391.5" width="374" height="53"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNZ-of-gR7" userLabel="Line View 1">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
@@ -9766,13 +9773,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Summary" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MC-BP-pvM">
-                                                        <rect key="frame" x="15" y="9" width="344" height="20"/>
+                                                        <rect key="frame" x="15" y="9" width="344" height="23"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                                         <color key="textColor" name="BlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaW-Yq-2rX" userLabel="Line View 2">
-                                                        <rect key="frame" x="0.0" y="49" width="374" height="1"/>
+                                                        <rect key="frame" x="0.0" y="52" width="374" height="1"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="8u9-af-3lN"/>
@@ -9794,46 +9801,46 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8T-8Y-XMQ" userLabel="View3">
-                                                <rect key="frame" x="21" y="428.5" width="374" height="194.5"/>
+                                                <rect key="frame" x="21" y="444.5" width="374" height="202"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIe-CO-WOn">
-                                                        <rect key="frame" x="15" y="20" width="76.5" height="17.5"/>
+                                                        <rect key="frame" x="15" y="20" width="75" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" name="BlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$8034" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkl-tF-uNp">
-                                                        <rect key="frame" x="324" y="20" width="42" height="17.5"/>
+                                                        <rect key="frame" x="325.5" y="20" width="40.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" red="0.4549019608" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Price1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wuw-Ot-tPA">
-                                                        <rect key="frame" x="15" y="49.5" width="100" height="17.5"/>
+                                                        <rect key="frame" x="15" y="52" width="97" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" name="BlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0k-eH-c6I">
-                                                        <rect key="frame" x="340.5" y="49.5" width="25.5" height="17.5"/>
+                                                        <rect key="frame" x="341.5" y="52" width="24.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" red="0.4549019608" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BjT-KP-4MH">
-                                                        <rect key="frame" x="15" y="79" width="70" height="17.5"/>
+                                                        <rect key="frame" x="15" y="84" width="70.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" name="BlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$8050" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laC-Tc-0JN">
-                                                        <rect key="frame" x="324" y="79" width="42" height="17.5"/>
+                                                        <rect key="frame" x="325.5" y="84" width="40.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" red="0.93725490199999995" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s22-YN-6ce" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="18.5" y="121.5" width="337" height="48"/>
+                                                        <rect key="frame" x="18.5" y="129" width="337" height="48"/>
                                                         <color key="backgroundColor" name="GreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="s22-YN-6ce" secondAttribute="height" multiplier="7:1" id="dkL-09-Goz"/>
@@ -10155,7 +10162,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeA-Rj-X4d">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="311.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="319.5"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sa3-GQ-8j1">
                                         <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
@@ -10181,19 +10188,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jenney Taylor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2t-Ig-O31">
-                                        <rect key="frame" x="83" y="236" width="248" height="21"/>
+                                        <rect key="frame" x="83" y="236" width="248" height="24"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOB: 03-jan-1994" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdx-Uq-zpr">
-                                        <rect key="frame" x="83" y="259" width="248" height="16.5"/>
+                                        <rect key="frame" x="83" y="262" width="248" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mohali, India" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNO-aq-o0C">
-                                        <rect key="frame" x="83" y="277.5" width="248" height="19"/>
+                                        <rect key="frame" x="83" y="283" width="248" height="21.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" name="GreenColor"/>
                                         <nil key="highlightedColor"/>
@@ -10219,13 +10226,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View All posted Event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZq-Uw-d0I">
-                                <rect key="frame" x="20.5" y="326.5" width="373" height="21"/>
+                                <rect key="frame" x="20.5" y="334.5" width="373" height="24"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cG-J6-GZd">
-                                <rect key="frame" x="321.5" y="318.5" width="72" height="37"/>
+                                <rect key="frame" x="318.5" y="327" width="75" height="39"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="10"/>
                                 <state key="normal" title="View All &gt;">
@@ -10233,7 +10240,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-FV-w2u">
-                                <rect key="frame" x="31" y="357.5" width="352" height="514.5"/>
+                                <rect key="frame" x="31" y="368.5" width="352" height="503.5"/>
                                 <color key="backgroundColor" name="LightBluish"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrawerCell" rowHeight="175" id="csY-TG-5Rq" customClass="DrawerCell" customModule="Paypaz" customModuleProvider="target">
@@ -10282,7 +10289,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                     <rect key="frame" x="0.0" y="35.5" width="248" height="31"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23-Jun-2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9F5-8a-lSR">
-                                                                            <rect key="frame" x="15" y="0.0" width="80.5" height="31"/>
+                                                                            <rect key="frame" x="15" y="0.0" width="77.5" height="31"/>
                                                                             <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -10305,7 +10312,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                     <rect key="frame" x="0.0" y="70.5" width="248" height="31.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110 the embers ,san Francisco" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBF-QM-yQv">
-                                                                            <rect key="frame" x="15" y="0.0" width="193" height="31.5"/>
+                                                                            <rect key="frame" x="15" y="0.0" width="185.5" height="31.5"/>
                                                                             <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -11805,7 +11812,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GYs-IL-q3v">
-                                <rect key="frame" x="20.5" y="108" width="373" height="754"/>
+                                <rect key="frame" x="20.5" y="106" width="373" height="756"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEventsCell" rowHeight="175" id="eQj-bk-qsq" customClass="MyEventsCell" customModule="Paypaz" customModuleProvider="target">
@@ -11833,16 +11840,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             <rect key="frame" x="101.5" y="0.0" width="241.5" height="141"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eR-0t-1BR">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="241.5" height="15.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="241.5" height="13.5"/>
                                                                     <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                                                     <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Q9-1B-YAp" userLabel="Date">
-                                                                    <rect key="frame" x="0.0" y="17.5" width="241.5" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="15.5" width="241.5" height="41"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23-Jun-2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfe-bj-PmT">
-                                                                            <rect key="frame" x="15" y="2" width="77.5" height="19"/>
+                                                                            <rect key="frame" x="15" y="2" width="80.5" height="16.5"/>
                                                                             <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -11862,10 +11869,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7RA-xY-v7a" userLabel="Location">
-                                                                    <rect key="frame" x="0.0" y="59.5" width="241.5" height="40.5"/>
+                                                                    <rect key="frame" x="0.0" y="58.5" width="241.5" height="40.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110 the embers ,san Francisco" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4V-Fy-8mP">
-                                                                            <rect key="frame" x="15" y="0.0" width="185.5" height="40.5"/>
+                                                                            <rect key="frame" x="15" y="0.0" width="193" height="40.5"/>
                                                                             <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -11889,16 +11896,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdL-2t-Ba7" userLabel="Location">
-                                                                    <rect key="frame" x="0.0" y="102" width="241.5" height="39"/>
+                                                                    <rect key="frame" x="0.0" y="101" width="241.5" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People Invited" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jV-Fg-g0L">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="81.5" height="39"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="83" height="40"/>
                                                                             <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                                             <color key="textColor" name="BlueColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_b" translatesAutoresizingMaskIntoConstraints="NO" id="ESh-dG-RLR" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                                            <rect key="frame" x="161.5" y="7" width="25" height="25"/>
+                                                                            <rect key="frame" x="161.5" y="7.5" width="25" height="25"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="50"/>
@@ -11906,7 +11913,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_b" translatesAutoresizingMaskIntoConstraints="NO" id="xiQ-pp-CbB" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                                            <rect key="frame" x="174" y="7" width="25" height="25"/>
+                                                                            <rect key="frame" x="174" y="7.5" width="25" height="25"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="50"/>
@@ -11914,7 +11921,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_b" translatesAutoresizingMaskIntoConstraints="NO" id="vcR-3i-Ial" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                                            <rect key="frame" x="186.5" y="7" width="25" height="25"/>
+                                                                            <rect key="frame" x="186.5" y="7.5" width="25" height="25"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="50"/>
@@ -11922,7 +11929,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_b" translatesAutoresizingMaskIntoConstraints="NO" id="ikG-2e-NUr" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                                            <rect key="frame" x="199" y="7" width="25" height="25"/>
+                                                                            <rect key="frame" x="199" y="7.5" width="25" height="25"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="50"/>
@@ -11930,7 +11937,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                             </userDefinedRuntimeAttributes>
                                                                         </imageView>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_a" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-mD-gn5" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                                            <rect key="frame" x="211.5" y="7" width="25" height="25"/>
+                                                                            <rect key="frame" x="211.5" y="7.5" width="25" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="rjq-mD-gn5" secondAttribute="height" multiplier="1:1" id="RDG-Po-e7h"/>
                                                                                 <constraint firstAttribute="width" constant="25" id="mi1-Fw-CRP"/>
@@ -12020,16 +12027,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVx-wW-nIu">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourites Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDr-oD-zgE">
-                                        <rect key="frame" x="125" y="49" width="164.5" height="28"/>
+                                        <rect key="frame" x="123.5" y="49" width="167" height="24.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDG-JY-ooT">
-                                        <rect key="frame" x="0.0" y="38" width="49.5" height="50"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bDG-JY-ooT" secondAttribute="height" multiplier="1:1" id="MxL-rh-G5A"/>
                                         </constraints>
@@ -13974,19 +13981,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKi-H9-mXu" customClass="RoundView" customModule="Paypaz" customModuleProvider="target">
-                                <rect key="frame" x="31" y="278.5" width="352" height="349"/>
+                                <rect key="frame" x="31" y="282" width="352" height="342"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="salary_tick" translatesAutoresizingMaskIntoConstraints="NO" id="lmK-JL-Vrw">
                                         <rect key="frame" x="142.5" y="41" width="67" height="70"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Money Added Succesfully" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYK-tW-zGw">
-                                        <rect key="frame" x="35" y="131" width="282" height="28"/>
+                                        <rect key="frame" x="35" y="131" width="282" height="24.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" name="GreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CvZ-fv-Wsy">
-                                        <rect key="frame" x="35" y="217" width="282" height="35"/>
+                                        <rect key="frame" x="35" y="210" width="282" height="35"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Transaction Done On ">
                                                 <attributes>
@@ -14013,7 +14020,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A45-UH-WeG" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="277" width="282" height="47"/>
+                                        <rect key="frame" x="35" y="270" width="282" height="47"/>
                                         <color key="backgroundColor" name="GreenColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="A45-UH-WeG" secondAttribute="height" multiplier="6:1" id="uth-O2-nfN"/>
@@ -14032,11 +14039,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke9-e9-crw">
-                                        <rect key="frame" x="0.0" y="163.5" width="352" height="49"/>
+                                        <rect key="frame" x="0.0" y="158.5" width="352" height="49"/>
                                         <color key="backgroundColor" red="0.0" green="0.32156862745098036" blue="0.53333333333333333" alpha="0.02" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100.00" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62q-7A-f29">
-                                        <rect key="frame" x="35" y="174" width="282" height="28"/>
+                                        <rect key="frame" x="35" y="170.5" width="282" height="24.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
@@ -16783,13 +16790,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhP-cM-god" userLabel="Permission View">
-                                <rect key="frame" x="0.0" y="181.5" width="414" height="714.5"/>
+                                <rect key="frame" x="0.0" y="178" width="414" height="718"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMm-5G-fdH" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="155.5" y="132" width="103.5" height="103.5"/>
+                                        <rect key="frame" x="155.5" y="135" width="103.5" height="103.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="access_contact" translatesAutoresizingMaskIntoConstraints="NO" id="aen-d4-HJB">
-                                                <rect key="frame" x="31" y="28" width="41" height="47"/>
+                                                <rect key="frame" x="31" y="28.5" width="41" height="47"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                         </subviews>
@@ -16822,19 +16829,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow Us To Access Contact" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZW-A2-Cd5">
-                                        <rect key="frame" x="31" y="245.5" width="352" height="24"/>
+                                        <rect key="frame" x="31" y="248.5" width="352" height="21"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duis ullamcorper finibus velit, ut hendrerit neque semper a. Cras et vehicula dui." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-pa-LiU">
-                                        <rect key="frame" x="31" y="284.5" width="352" height="37.5"/>
+                                        <rect key="frame" x="31" y="284.5" width="352" height="33"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6j-9s-hAa" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="31" y="347" width="352" height="50"/>
+                                        <rect key="frame" x="31" y="342.5" width="352" height="50.5"/>
                                         <color key="backgroundColor" name="GreenColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="i6j-9s-hAa" secondAttribute="height" multiplier="7:1" id="xtU-A4-9aU"/>
@@ -16870,16 +16877,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8D-kI-MLJ" userLabel="Top View">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="181.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="178"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-tU-jCu">
-                                        <rect key="frame" x="165.5" y="49" width="83" height="28"/>
+                                        <rect key="frame" x="164.5" y="49" width="85.5" height="24.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ss2-yy-Lpx">
-                                        <rect key="frame" x="0.0" y="38" width="49.5" height="50"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ss2-yy-Lpx" secondAttribute="height" multiplier="1:1" id="bTt-uv-zOv"/>
                                         </constraints>
@@ -16889,7 +16896,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </connections>
                                     </button>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GFG-uR-hpe" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="344.5" y="107" width="49.5" height="49.5"/>
+                                        <rect key="frame" x="344.5" y="103.5" width="49.5" height="49.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="qr-code-scan"/>
                                         <userDefinedRuntimeAttributes>
@@ -16902,7 +16909,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </connections>
                                     </button>
                                     <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Contacts" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-0c-aBO" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="107" width="309.5" height="49.5"/>
+                                        <rect key="frame" x="20" y="103.5" width="309.5" height="49.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -16931,16 +16938,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="te3-Ra-MoS" userLabel="Contacts View">
-                                <rect key="frame" x="0.0" y="181.5" width="414" height="680.5"/>
+                                <rect key="frame" x="0.0" y="178" width="414" height="684"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose From Contact List" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2iJ-vr-5yA">
-                                        <rect key="frame" x="20.5" y="10" width="373" height="28"/>
+                                        <rect key="frame" x="20.5" y="10" width="373" height="24.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-FM-jIo">
-                                        <rect key="frame" x="20.5" y="53" width="373" height="612.5"/>
+                                        <rect key="frame" x="20.5" y="49.5" width="373" height="619.5"/>
                                         <color key="backgroundColor" name="LightBluish"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DrawerCell" rowHeight="82" id="2hL-Es-AWL" customClass="DrawerCell" customModule="Paypaz" customModuleProvider="target">
@@ -16954,13 +16961,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             <rect key="frame" x="9.5" y="2" width="354" height="78"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 9323848308" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXn-6h-lbS">
-                                                                    <rect key="frame" x="69" y="40.5" width="277" height="19"/>
+                                                                    <rect key="frame" x="69" y="40.5" width="277" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rihana G" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgV-1W-ZXz">
-                                                                    <rect key="frame" x="69" y="17.5" width="277" height="21.5"/>
+                                                                    <rect key="frame" x="69" y="20" width="277" height="19"/>
                                                                     <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -17054,740 +17061,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <point key="canvasLocation" x="7918.6956521739139" y="843.70535714285711"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="00H-aj-YPk">
-            <size key="intrinsicContentSize" width="101.5" height="19"/>
-        </designable>
-        <designable name="07G-qO-pL7">
-            <size key="intrinsicContentSize" width="314" height="151"/>
-        </designable>
-        <designable name="08W-lR-W2H">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="0Cn-aS-NgF">
-            <size key="intrinsicContentSize" width="113.5" height="20.5"/>
-        </designable>
-        <designable name="0DF-Na-0DX">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="0Fy-m4-fgJ">
-            <size key="intrinsicContentSize" width="5" height="18"/>
-        </designable>
-        <designable name="0th-ej-Sll">
-            <size key="intrinsicContentSize" width="60.5" height="21"/>
-        </designable>
-        <designable name="25X-DP-OVI">
-            <size key="intrinsicContentSize" width="44" height="37"/>
-        </designable>
-        <designable name="2YQ-od-XHK">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="2xY-gw-xRi">
-            <size key="intrinsicContentSize" width="54" height="37"/>
-        </designable>
-        <designable name="2yl-U1-sXo">
-            <size key="intrinsicContentSize" width="73" height="31"/>
-        </designable>
-        <designable name="3Od-oe-c4r">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="3a7-2H-fxw">
-            <size key="intrinsicContentSize" width="6.5" height="22"/>
-        </designable>
-        <designable name="3fv-d5-gox">
-            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
-        </designable>
-        <designable name="3lH-po-9LW">
-            <size key="intrinsicContentSize" width="19.5" height="22"/>
-        </designable>
-        <designable name="3nD-DT-UfB">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="3qR-sh-StZ">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="3qy-fZ-nvl">
-            <size key="intrinsicContentSize" width="31" height="35"/>
-        </designable>
-        <designable name="4S7-2X-maS">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="4fq-Rn-LPC">
-            <size key="intrinsicContentSize" width="195" height="45"/>
-        </designable>
-        <designable name="5Rs-xa-YhR">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="5aP-5T-Sp7">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="5dm-Px-VJZ">
-            <size key="intrinsicContentSize" width="68" height="35"/>
-        </designable>
-        <designable name="5g4-0l-g5a">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="5lr-EC-8xy">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="5nQ-71-0dz">
-            <size key="intrinsicContentSize" width="72" height="37"/>
-        </designable>
-        <designable name="5tv-Jf-VuY">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="753-20-z1r">
-            <size key="intrinsicContentSize" width="124" height="18"/>
-        </designable>
-        <designable name="7AJ-0g-qts">
-            <size key="intrinsicContentSize" width="12" height="22"/>
-        </designable>
-        <designable name="7M1-B0-Kt7">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="7Oy-Yb-Ner">
-            <size key="intrinsicContentSize" width="19" height="22"/>
-        </designable>
-        <designable name="7u0-DG-DKS">
-            <size key="intrinsicContentSize" width="5" height="18"/>
-        </designable>
-        <designable name="85K-HY-JAP">
-            <size key="intrinsicContentSize" width="314" height="151"/>
-        </designable>
-        <designable name="8UC-4m-Qa8">
-            <size key="intrinsicContentSize" width="12" height="22"/>
-        </designable>
-        <designable name="91Z-Jk-ttb">
-            <size key="intrinsicContentSize" width="40" height="33"/>
-        </designable>
-        <designable name="944-ob-XCv">
-            <size key="intrinsicContentSize" width="22.5" height="22"/>
-        </designable>
-        <designable name="9Cn-YS-CR6">
-            <size key="intrinsicContentSize" width="106" height="18"/>
-        </designable>
-        <designable name="9Wz-hh-1az">
-            <size key="intrinsicContentSize" width="67" height="31"/>
-        </designable>
-        <designable name="A45-UH-WeG">
-            <size key="intrinsicContentSize" width="75" height="36"/>
-        </designable>
-        <designable name="AhN-TK-0r2">
-            <size key="intrinsicContentSize" width="30" height="33"/>
-        </designable>
-        <designable name="AhU-XN-9Sj">
-            <size key="intrinsicContentSize" width="40" height="33"/>
-        </designable>
-        <designable name="AjC-5q-dLR">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="B4P-o4-jdU">
-            <size key="intrinsicContentSize" width="79" height="39"/>
-        </designable>
-        <designable name="B4T-Ht-y63">
-            <size key="intrinsicContentSize" width="109" height="17"/>
-        </designable>
-        <designable name="BAG-dI-XRI">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="BIV-V1-3hK">
-            <size key="intrinsicContentSize" width="234" height="45"/>
-        </designable>
-        <designable name="BtS-t2-zXm">
-            <size key="intrinsicContentSize" width="70" height="28"/>
-        </designable>
-        <designable name="CG4-o0-0hh">
-            <size key="intrinsicContentSize" width="73" height="19"/>
-        </designable>
-        <designable name="Cfd-jj-JPb">
-            <size key="intrinsicContentSize" width="38" height="33"/>
-        </designable>
-        <designable name="ChU-BV-Y2B">
-            <size key="intrinsicContentSize" width="99" height="20.5"/>
-        </designable>
-        <designable name="D2N-j9-brQ">
-            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
-        </designable>
-        <designable name="DNq-4y-XGo">
-            <size key="intrinsicContentSize" width="30" height="29"/>
-        </designable>
-        <designable name="Dbi-fV-7cn">
-            <size key="intrinsicContentSize" width="174" height="18.5"/>
-        </designable>
-        <designable name="EGy-EL-Ur9">
-            <size key="intrinsicContentSize" width="8" height="22"/>
-        </designable>
-        <designable name="ESh-dG-RLR">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="EbO-mg-zBB">
-            <size key="intrinsicContentSize" width="58" height="37"/>
-        </designable>
-        <designable name="EwY-TY-U38">
-            <size key="intrinsicContentSize" width="129" height="41"/>
-        </designable>
-        <designable name="FWJ-io-eRc">
-            <size key="intrinsicContentSize" width="37" height="31"/>
-        </designable>
-        <designable name="FWm-b0-5ng">
-            <size key="intrinsicContentSize" width="89" height="33"/>
-        </designable>
-        <designable name="Fa5-EM-N1e">
-            <size key="intrinsicContentSize" width="124" height="18"/>
-        </designable>
-        <designable name="Fi5-VT-cfP">
-            <size key="intrinsicContentSize" width="23" height="23"/>
-        </designable>
-        <designable name="Fpx-gm-Qic">
-            <size key="intrinsicContentSize" width="89" height="19"/>
-        </designable>
-        <designable name="G6T-DK-5zp">
-            <size key="intrinsicContentSize" width="73.5" height="19"/>
-        </designable>
-        <designable name="G7o-rb-msU">
-            <size key="intrinsicContentSize" width="24.5" height="23.5"/>
-        </designable>
-        <designable name="GAF-qs-dEq">
-            <size key="intrinsicContentSize" width="119.5" height="20.5"/>
-        </designable>
-        <designable name="GFG-uR-hpe">
-            <size key="intrinsicContentSize" width="26" height="26"/>
-        </designable>
-        <designable name="GK7-Sc-5Pv">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="GL5-Ft-hXY">
-            <size key="intrinsicContentSize" width="160" height="20.5"/>
-        </designable>
-        <designable name="GVY-pa-cKi">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="Gsd-be-YsA">
-            <size key="intrinsicContentSize" width="314" height="151"/>
-        </designable>
-        <designable name="GwC-Nt-n9o">
-            <size key="intrinsicContentSize" width="37" height="19"/>
-        </designable>
-        <designable name="HP9-zc-Q82">
-            <size key="intrinsicContentSize" width="45" height="21"/>
-        </designable>
-        <designable name="Hwi-FF-ExJ">
-            <size key="intrinsicContentSize" width="45" height="20.5"/>
-        </designable>
-        <designable name="IEx-yP-U8f">
-            <size key="intrinsicContentSize" width="62" height="33"/>
-        </designable>
-        <designable name="IHm-s9-sBf">
-            <size key="intrinsicContentSize" width="91.5" height="19"/>
-        </designable>
-        <designable name="IPE-53-icx">
-            <size key="intrinsicContentSize" width="94.5" height="18"/>
-        </designable>
-        <designable name="IXf-Yg-soo">
-            <size key="intrinsicContentSize" width="113.5" height="20.5"/>
-        </designable>
-        <designable name="Iax-4a-STp">
-            <size key="intrinsicContentSize" width="86" height="31"/>
-        </designable>
-        <designable name="Igd-tu-I8M">
-            <size key="intrinsicContentSize" width="15.5" height="22"/>
-        </designable>
-        <designable name="In3-nH-Trh">
-            <size key="intrinsicContentSize" width="53" height="19"/>
-        </designable>
-        <designable name="Ix1-tt-MD8">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="K2o-kA-ldE">
-            <size key="intrinsicContentSize" width="53" height="42"/>
-        </designable>
-        <designable name="L3q-lN-qV7">
-            <size key="intrinsicContentSize" width="167" height="40"/>
-        </designable>
-        <designable name="L9m-6H-7dB">
-            <size key="intrinsicContentSize" width="87.5" height="20.5"/>
-        </designable>
-        <designable name="LaX-4u-GAB">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="M8x-hI-Rhr">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="MQF-QX-fOh">
-            <size key="intrinsicContentSize" width="73" height="33"/>
-        </designable>
-        <designable name="MXM-cG-JoE">
-            <size key="intrinsicContentSize" width="10.5" height="22"/>
-        </designable>
-        <designable name="MxX-XX-h9Q">
-            <size key="intrinsicContentSize" width="19.5" height="22"/>
-        </designable>
-        <designable name="NnG-Vo-jrN">
-            <size key="intrinsicContentSize" width="75" height="29"/>
-        </designable>
-        <designable name="OpU-L9-w2P">
-            <size key="intrinsicContentSize" width="80" height="30"/>
-        </designable>
-        <designable name="PT0-8K-ush">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="PWF-ev-76h">
-            <size key="intrinsicContentSize" width="100" height="20"/>
-        </designable>
-        <designable name="PdY-hb-vt1">
-            <size key="intrinsicContentSize" width="99" height="20.5"/>
-        </designable>
-        <designable name="Qs7-kY-P0c">
-            <size key="intrinsicContentSize" width="44" height="14"/>
-        </designable>
-        <designable name="Qvt-l6-DTK">
-            <size key="intrinsicContentSize" width="160" height="20.5"/>
-        </designable>
-        <designable name="RO0-2z-QJk">
-            <size key="intrinsicContentSize" width="97" height="20.5"/>
-        </designable>
-        <designable name="RgO-hL-0j3">
-            <size key="intrinsicContentSize" width="50" height="24"/>
-        </designable>
-        <designable name="RgW-Eb-2XX">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="Rsl-E4-G3e">
-            <size key="intrinsicContentSize" width="113.5" height="20.5"/>
-        </designable>
-        <designable name="S0e-RG-Apu">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="S3F-Jz-tRH">
-            <size key="intrinsicContentSize" width="180" height="45"/>
-        </designable>
-        <designable name="SUr-wk-XSE">
-            <size key="intrinsicContentSize" width="17.5" height="22"/>
-        </designable>
-        <designable name="Ssp-l4-uti">
-            <size key="intrinsicContentSize" width="108" height="19"/>
-        </designable>
-        <designable name="Tmo-ga-d7P">
-            <size key="intrinsicContentSize" width="164" height="20.5"/>
-        </designable>
-        <designable name="ToT-Vm-OgK">
-            <size key="intrinsicContentSize" width="140" height="39"/>
-        </designable>
-        <designable name="Tqg-ln-5a1">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="UM0-cO-kEt">
-            <size key="intrinsicContentSize" width="92" height="21.5"/>
-        </designable>
-        <designable name="UZJ-PZ-c6s">
-            <size key="intrinsicContentSize" width="71" height="19"/>
-        </designable>
-        <designable name="Ubf-DV-Kv8">
-            <size key="intrinsicContentSize" width="160" height="20.5"/>
-        </designable>
-        <designable name="UgG-Sc-qif">
-            <size key="intrinsicContentSize" width="94" height="33"/>
-        </designable>
-        <designable name="Unb-Oa-plN">
-            <size key="intrinsicContentSize" width="23" height="23"/>
-        </designable>
-        <designable name="V3B-qL-eGO">
-            <size key="intrinsicContentSize" width="97" height="31"/>
-        </designable>
-        <designable name="VCn-sX-EZg">
-            <size key="intrinsicContentSize" width="70" height="28"/>
-        </designable>
-        <designable name="VDv-cx-Zx0">
-            <size key="intrinsicContentSize" width="137.5" height="20.5"/>
-        </designable>
-        <designable name="VHR-71-7eW">
-            <size key="intrinsicContentSize" width="164" height="20.5"/>
-        </designable>
-        <designable name="VmD-iT-TBN">
-            <size key="intrinsicContentSize" width="5" height="18"/>
-        </designable>
-        <designable name="W0P-aU-Fry">
-            <size key="intrinsicContentSize" width="44.5" height="45"/>
-        </designable>
-        <designable name="W3L-5w-BOT">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="W7l-Y4-678">
-            <size key="intrinsicContentSize" width="114" height="40"/>
-        </designable>
-        <designable name="XMx-yr-GRe">
-            <size key="intrinsicContentSize" width="5" height="18"/>
-        </designable>
-        <designable name="XMz-dM-1kp">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="XaP-aE-6Ed">
-            <size key="intrinsicContentSize" width="51" height="51"/>
-        </designable>
-        <designable name="Xjj-lr-VF8">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="Y9c-0l-izg">
-            <size key="intrinsicContentSize" width="60" height="39"/>
-        </designable>
-        <designable name="Yhj-eQ-Vj7">
-            <size key="intrinsicContentSize" width="122" height="31"/>
-        </designable>
-        <designable name="Yup-Wt-y4G">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="ZAo-p4-vzy">
-            <size key="intrinsicContentSize" width="16" height="22"/>
-        </designable>
-        <designable name="ZDw-po-QBO">
-            <size key="intrinsicContentSize" width="73.5" height="19"/>
-        </designable>
-        <designable name="ZLT-R1-0MK">
-            <size key="intrinsicContentSize" width="20" height="22"/>
-        </designable>
-        <designable name="ZS2-MP-22s">
-            <size key="intrinsicContentSize" width="75" height="19"/>
-        </designable>
-        <designable name="ZbE-0P-Xsg">
-            <size key="intrinsicContentSize" width="66" height="19"/>
-        </designable>
-        <designable name="Zlt-ez-pxj">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="Zp5-UB-mpr">
-            <size key="intrinsicContentSize" width="73" height="21"/>
-        </designable>
-        <designable name="aFZ-tx-ssT">
-            <size key="intrinsicContentSize" width="74" height="31"/>
-        </designable>
-        <designable name="aKX-YA-aTX">
-            <size key="intrinsicContentSize" width="73" height="19"/>
-        </designable>
-        <designable name="aPL-F0-2hD">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="agd-8S-od0">
-            <size key="intrinsicContentSize" width="88" height="37"/>
-        </designable>
-        <designable name="bjz-pc-3W1">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="bod-mb-t2Q">
-            <size key="intrinsicContentSize" width="88" height="37"/>
-        </designable>
-        <designable name="cTp-rP-2xJ">
-            <size key="intrinsicContentSize" width="51" height="51"/>
-        </designable>
-        <designable name="cbn-vB-7WA">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="cpB-XD-pQr">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="cwB-xj-Ke6">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="d0j-lB-0K8">
-            <size key="intrinsicContentSize" width="101" height="18"/>
-        </designable>
-        <designable name="d74-Z8-kqo">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="dGu-n1-DtV">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="dPD-3a-rIv">
-            <size key="intrinsicContentSize" width="46" height="36"/>
-        </designable>
-        <designable name="dRb-RQ-MXY">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="dam-TY-f2Q">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="dfr-jO-6Mb">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="dqJ-3G-9FN">
-            <size key="intrinsicContentSize" width="135" height="34"/>
-        </designable>
-        <designable name="eDQ-51-YuB">
-            <size key="intrinsicContentSize" width="19.5" height="22"/>
-        </designable>
-        <designable name="eJb-AE-DQv">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="eNQ-jO-rDp">
-            <size key="intrinsicContentSize" width="99" height="20.5"/>
-        </designable>
-        <designable name="eiU-hr-JsU">
-            <size key="intrinsicContentSize" width="51.5" height="19"/>
-        </designable>
-        <designable name="end-Gv-14K">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="f1P-nS-Mka">
-            <size key="intrinsicContentSize" width="26" height="26"/>
-        </designable>
-        <designable name="f5I-Yq-Dql">
-            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
-        </designable>
-        <designable name="fYO-u4-cz3">
-            <size key="intrinsicContentSize" width="97" height="31"/>
-        </designable>
-        <designable name="fqL-ze-DgO">
-            <size key="intrinsicContentSize" width="70" height="28"/>
-        </designable>
-        <designable name="fvW-lS-REL">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="fxm-a5-tks">
-            <size key="intrinsicContentSize" width="63" height="33"/>
-        </designable>
-        <designable name="gHk-M8-OAb">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="gNw-0B-g2e">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="gPV-nM-B87">
-            <size key="intrinsicContentSize" width="50" height="31"/>
-        </designable>
-        <designable name="gT4-3F-Lxy">
-            <size key="intrinsicContentSize" width="124" height="33"/>
-        </designable>
-        <designable name="gVy-dZ-htT">
-            <size key="intrinsicContentSize" width="128" height="17"/>
-        </designable>
-        <designable name="gzq-wn-TH2">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="h8J-0c-aBO">
-            <size key="intrinsicContentSize" width="113" height="23"/>
-        </designable>
-        <designable name="hGE-c8-yhm">
-            <size key="intrinsicContentSize" width="34" height="31"/>
-        </designable>
-        <designable name="hUx-nW-ean">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="hfd-bG-BXx">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="hmO-q3-xvu">
-            <size key="intrinsicContentSize" width="73" height="33"/>
-        </designable>
-        <designable name="i6j-9s-hAa">
-            <size key="intrinsicContentSize" width="130" height="36"/>
-        </designable>
-        <designable name="iWh-95-o2M">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="ihF-Ax-eBT">
-            <size key="intrinsicContentSize" width="69" height="69"/>
-        </designable>
-        <designable name="ik1-V1-hyA">
-            <size key="intrinsicContentSize" width="122" height="20.5"/>
-        </designable>
-        <designable name="ikG-2e-NUr">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="im7-d4-92j">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="jOI-eH-caB">
-            <size key="intrinsicContentSize" width="30" height="33"/>
-        </designable>
-        <designable name="jT6-2O-sco">
-            <size key="intrinsicContentSize" width="18" height="22"/>
-        </designable>
-        <designable name="jUW-9U-8cw">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="jVJ-S6-efN">
-            <size key="intrinsicContentSize" width="86" height="19"/>
-        </designable>
-        <designable name="k3X-8d-VYV">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="k8V-KS-cuY">
-            <size key="intrinsicContentSize" width="65.5" height="19"/>
-        </designable>
-        <designable name="kOu-kg-Wrn">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="kkl-cM-3Wx">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="lWP-jc-trc">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="lf2-gC-xrj">
-            <size key="intrinsicContentSize" width="43" height="33"/>
-        </designable>
-        <designable name="lkj-Be-jOl">
-            <size key="intrinsicContentSize" width="27" height="20.5"/>
-        </designable>
-        <designable name="lmg-iG-Yau">
-            <size key="intrinsicContentSize" width="16" height="22"/>
-        </designable>
-        <designable name="mbg-V7-ri1">
-            <size key="intrinsicContentSize" width="97" height="20.5"/>
-        </designable>
-        <designable name="mbw-m7-jAD">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="mtY-6r-sEH">
-            <size key="intrinsicContentSize" width="23" height="23"/>
-        </designable>
-        <designable name="mv6-Hg-jyF">
-            <size key="intrinsicContentSize" width="79" height="29"/>
-        </designable>
-        <designable name="n44-ys-Ikd">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="n6o-Ap-VEe">
-            <size key="intrinsicContentSize" width="68" height="31"/>
-        </designable>
-        <designable name="nGS-MB-46o">
-            <size key="intrinsicContentSize" width="16.5" height="22"/>
-        </designable>
-        <designable name="nPp-AV-8Yc">
-            <size key="intrinsicContentSize" width="74" height="20.5"/>
-        </designable>
-        <designable name="ng3-d0-D0O">
-            <size key="intrinsicContentSize" width="30" height="33"/>
-        </designable>
-        <designable name="nuf-WM-KIi">
-            <size key="intrinsicContentSize" width="24.5" height="22"/>
-        </designable>
-        <designable name="o1H-li-HRc">
-            <size key="intrinsicContentSize" width="75" height="19"/>
-        </designable>
-        <designable name="oA6-Vk-ldr">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="oQp-nE-ihL">
-            <size key="intrinsicContentSize" width="63" height="33"/>
-        </designable>
-        <designable name="oZO-n4-cXh">
-            <size key="intrinsicContentSize" width="-1" height="39"/>
-        </designable>
-        <designable name="obH-Oy-AGW">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="oo3-fQ-7h8">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="oom-70-0is">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="pHE-zz-F9b">
-            <size key="intrinsicContentSize" width="10.5" height="22"/>
-        </designable>
-        <designable name="pHi-HV-m2w">
-            <size key="intrinsicContentSize" width="95" height="30"/>
-        </designable>
-        <designable name="pYe-36-Hey">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="pbx-AE-UEZ">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="psQ-Ap-uR0">
-            <size key="intrinsicContentSize" width="91.5" height="19"/>
-        </designable>
-        <designable name="pzu-56-OMv">
-            <size key="intrinsicContentSize" width="15.5" height="22"/>
-        </designable>
-        <designable name="q9D-gA-CT5">
-            <size key="intrinsicContentSize" width="98" height="35"/>
-        </designable>
-        <designable name="qIQ-Ct-fT1">
-            <size key="intrinsicContentSize" width="74" height="20.5"/>
-        </designable>
-        <designable name="qwu-fk-ELM">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="rGS-s1-xlj">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="rjq-mD-gn5">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="rxj-Ig-glw">
-            <size key="intrinsicContentSize" width="7.5" height="22"/>
-        </designable>
-        <designable name="s22-YN-6ce">
-            <size key="intrinsicContentSize" width="87" height="33"/>
-        </designable>
-        <designable name="sN3-c7-KLR">
-            <size key="intrinsicContentSize" width="27.5" height="30"/>
-        </designable>
-        <designable name="sU9-QG-tUv">
-            <size key="intrinsicContentSize" width="15.5" height="22"/>
-        </designable>
-        <designable name="t1S-hq-k4R">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="tGu-5Y-kjo">
-            <size key="intrinsicContentSize" width="314" height="151"/>
-        </designable>
-        <designable name="tRq-wz-uzi">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="urM-6k-2o3">
-            <size key="intrinsicContentSize" width="178.5" height="60.5"/>
-        </designable>
-        <designable name="utb-Ji-rM8">
-            <size key="intrinsicContentSize" width="74" height="20.5"/>
-        </designable>
-        <designable name="v2Y-uH-mXu">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="v2o-WO-Jt1">
-            <size key="intrinsicContentSize" width="97" height="31"/>
-        </designable>
-        <designable name="vA6-rQ-nm8">
-            <size key="intrinsicContentSize" width="58" height="33"/>
-        </designable>
-        <designable name="vJt-sh-qcC">
-            <size key="intrinsicContentSize" width="59.5" height="19"/>
-        </designable>
-        <designable name="vcR-3i-Ial">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="vl7-J0-1aE">
-            <size key="intrinsicContentSize" width="58" height="42"/>
-        </designable>
-        <designable name="vxQ-0I-lS7">
-            <size key="intrinsicContentSize" width="43" height="33"/>
-        </designable>
-        <designable name="xiQ-pp-CbB">
-            <size key="intrinsicContentSize" width="41" height="41"/>
-        </designable>
-        <designable name="xon-m6-h9n">
-            <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="xqX-hJ-dOc">
-            <size key="intrinsicContentSize" width="79" height="29"/>
-        </designable>
-        <designable name="ySH-4x-8N3">
-            <size key="intrinsicContentSize" width="110" height="20.5"/>
-        </designable>
-        <designable name="ym6-Am-5DG">
-            <size key="intrinsicContentSize" width="105" height="19"/>
-        </designable>
-        <designable name="ymz-4j-zMI">
-            <size key="intrinsicContentSize" width="97" height="20.5"/>
-        </designable>
-        <designable name="z0g-KC-26d">
-            <size key="intrinsicContentSize" width="5" height="19"/>
-        </designable>
-        <designable name="zp2-Lk-rm3">
-            <size key="intrinsicContentSize" width="249.5" height="18"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Accept" width="16.5" height="18.5"/>
         <image name="Credit card-rafiki" width="165" height="128.5"/>

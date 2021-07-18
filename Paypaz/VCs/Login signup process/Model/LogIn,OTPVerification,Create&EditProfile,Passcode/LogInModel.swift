@@ -1,23 +1,22 @@
 //
-//  PasscodeOTPModel.swift
+//  LogInModel.swift
 //  Paypaz
 //
-//  Created by MACOSX on 07/07/21.
+//  Created by MACOSX on 29/06/21.
 //  Copyright © 2021 iOSDeveloper. All rights reserved.
 //
 
-
 import Foundation
-
-// MARK: - PasscodeModel
-struct PasscodeModel: Codable {
+// MARK: - LogInModel
+struct LogInModel: Codable {
     let success: Int?
     let message: String?
-    let data: PasscodeData?
+    let messages: String?
+    let data: DataClass2?
 }
 
 // MARK: - DataClass
-struct PasscodeData: Codable {
+struct DataClass2: Codable {
     let id, firstName, lastName, emailORphone: String?
     let email, phoneNumber, password, userProfile: String?
     let otp, passcode, dob, address: String?

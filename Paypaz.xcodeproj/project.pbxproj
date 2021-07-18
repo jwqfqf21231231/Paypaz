@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040E5AB6269C0CEF00254FB7 /* CreditDebitCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */; };
 		040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */; };
 		0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* SuccessModel.swift */; };
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
@@ -18,14 +17,12 @@
 		0C120A3A2690211E00FD806A /* ChooseEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C120A392690211E00FD806A /* ChooseEventCell.swift */; };
 		0C2234192693F12B0014B06A /* ChooseEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2234182693F12B0014B06A /* ChooseEventModel.swift */; };
 		0C2234252693F14A0014B06A /* ChooseEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2234242693F14A0014B06A /* ChooseEventDataModel.swift */; };
-		0C34FB922698279000BAE79B /* CreatePinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34FB912698279000BAE79B /* CreatePinModel.swift */; };
 		0C34FB97269827D000BAE79B /* CreatePinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C34FB96269827D000BAE79B /* CreatePinDataModel.swift */; };
 		0C388AFC268F1CB8008AED6F /* CreatePasscodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C388AFB268F1CB8008AED6F /* CreatePasscodeVC.swift */; };
 		0C388B0D268F4591008AED6F /* AddProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C388B0C268F4591008AED6F /* AddProductModel.swift */; };
 		0C388B19268F4962008AED6F /* HostEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C388B18268F4962008AED6F /* HostEventModel.swift */; };
 		0C388B1E268F4970008AED6F /* HostEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C388B1D268F4970008AED6F /* HostEventDataModel.swift */; };
 		0C388B29268F4F90008AED6F /* AddProductDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C388B28268F4F90008AED6F /* AddProductDataModel.swift */; };
-		0C3DAA9E269821E400CCE2DC /* ConfirmPasscodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3DAA9D269821E400CCE2DC /* ConfirmPasscodeModel.swift */; };
 		0C3DAAA62698220900CCE2DC /* ConfirmPasscodeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3DAAA52698220900CCE2DC /* ConfirmPasscodeDataModel.swift */; };
 		0C5B97F7268DA72B00CBAC41 /* ResendOTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B97F6268DA72B00CBAC41 /* ResendOTPModel.swift */; };
 		0C5B97FF268DE09000CBAC41 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B97FE268DE09000CBAC41 /* ImagePickerController.swift */; };
@@ -38,16 +35,12 @@
 		0C9F29D2268AE17800CE6178 /* SignUpDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F29D1268AE17800CE6178 /* SignUpDataModel.swift */; };
 		0C9F29E7268AE2BE00CE6178 /* APIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F29E5268AE2BD00CE6178 /* APIList.swift */; };
 		0C9F29E8268AE2BE00CE6178 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F29E6268AE2BE00CE6178 /* Connection.swift */; };
-		0C9F29F0268AE83300CE6178 /* OTPVerificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F29EF268AE83300CE6178 /* OTPVerificationModel.swift */; };
 		0C9F29F8268AEA9100CE6178 /* OTPVerificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9F29F7268AEA9100CE6178 /* OTPVerificationDataModel.swift */; };
 		0CAAF3B6268B4AFE00C51C9F /* Constants+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */; };
-		0CB39D1A268B30A30002E585 /* CreateProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB39D19268B30A30002E585 /* CreateProfileModel.swift */; };
 		0CB39D1F268B3F950002E585 /* CreateProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB39D1E268B3F950002E585 /* CreateProfileDataModel.swift */; };
-		0CD9A4B9268C2768009DA000 /* ForgotPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD9A4B8268C2768009DA000 /* ForgotPasswordModel.swift */; };
 		0CD9A4C1268C27A5009DA000 /* ForgotPasswordDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD9A4C0268C27A5009DA000 /* ForgotPasswordDataModel.swift */; };
 		0CD9A4CC268C426B009DA000 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD9A4CB268C426B009DA000 /* ChangePasswordModel.swift */; };
 		0CD9A4D1268C427F009DA000 /* ChangePasswordDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD9A4D0268C427F009DA000 /* ChangePasswordDataModel.swift */; };
-		0CD9A4DC268C6E06009DA000 /* ForgotPasswordOTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD9A4DB268C6E06009DA000 /* ForgotPasswordOTPModel.swift */; };
 		0CD9A4F0268C9F2D009DA000 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD9A4EF268C9F2D009DA000 /* LocationManager.swift */; };
 		0CDC3DB2268B1EFF00061DF5 /* LogInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3DB1268B1EFF00061DF5 /* LogInModel.swift */; };
 		0CDC3DBA268B1F0D00061DF5 /* LogInDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDC3DB9268B1F0D00061DF5 /* LogInDataModel.swift */; };
@@ -56,12 +49,12 @@
 		0CE747972696E6DB00D1121B /* MyPostedEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE747962696E6DB00D1121B /* MyPostedEventModel.swift */; };
 		0CE7479C2696E75600D1121B /* MyPostedEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7479B2696E75600D1121B /* MyPostedEventDataModel.swift */; };
 		0CEC00022695B7C10023116D /* ContactsPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC00012695B7C10023116D /* ContactsPermission.swift */; };
-		0CEC000A2695C6660023116D /* PasscodeOTPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC00092695C6660023116D /* PasscodeOTPModel.swift */; };
 		0CEC000F2695C6D60023116D /* PasscodeOTPDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC000E2695C6D60023116D /* PasscodeOTPDataModel.swift */; };
 		0CECCDEB269328CC00611D62 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CECCDEA269328CC00611D62 /* ProductCell.swift */; };
 		0CECCDF12693321000611D62 /* ConfirmPasscodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CECCDF02693321000611D62 /* ConfirmPasscodeVC.swift */; };
 		0CECCE0226934D7E00611D62 /* ChooseEventTypeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CECCE0126934D7E00611D62 /* ChooseEventTypeVC.swift */; };
 		0CECCE0726934DD200611D62 /* ChooseEventTypeVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CECCE0626934DD200611D62 /* ChooseEventTypeVC+Extensions.swift */; };
+		0CED86A726A455EB00F4D68E /* BankInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED86A626A455EB00F4D68E /* BankInfoModel.swift */; };
 		444E0F4E2641645D00EEECC6 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444E0F4D2641645D00EEECC6 /* ProductDetailVC.swift */; };
 		44509ECF26313135000B19F3 /* InvitedPeopleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509ECE26313135000B19F3 /* InvitedPeopleVC.swift */; };
 		44509ED126313194000B19F3 /* InvitedPeopleVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509ED026313194000B19F3 /* InvitedPeopleVC+Extensions.swift */; };
@@ -187,7 +180,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardModel.swift; sourceTree = "<group>"; };
 		040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardDataModel.swift; sourceTree = "<group>"; };
 		0431B71E269C6BD00082EAB3 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
@@ -198,14 +190,12 @@
 		0C120A392690211E00FD806A /* ChooseEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEventCell.swift; sourceTree = "<group>"; };
 		0C2234182693F12B0014B06A /* ChooseEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEventModel.swift; sourceTree = "<group>"; };
 		0C2234242693F14A0014B06A /* ChooseEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEventDataModel.swift; sourceTree = "<group>"; };
-		0C34FB912698279000BAE79B /* CreatePinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinModel.swift; sourceTree = "<group>"; };
 		0C34FB96269827D000BAE79B /* CreatePinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePinDataModel.swift; sourceTree = "<group>"; };
 		0C388AFB268F1CB8008AED6F /* CreatePasscodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasscodeVC.swift; sourceTree = "<group>"; };
 		0C388B0C268F4591008AED6F /* AddProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductModel.swift; sourceTree = "<group>"; };
 		0C388B18268F4962008AED6F /* HostEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEventModel.swift; sourceTree = "<group>"; };
 		0C388B1D268F4970008AED6F /* HostEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEventDataModel.swift; sourceTree = "<group>"; };
 		0C388B28268F4F90008AED6F /* AddProductDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductDataModel.swift; sourceTree = "<group>"; };
-		0C3DAA9D269821E400CCE2DC /* ConfirmPasscodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPasscodeModel.swift; sourceTree = "<group>"; };
 		0C3DAAA52698220900CCE2DC /* ConfirmPasscodeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPasscodeDataModel.swift; sourceTree = "<group>"; };
 		0C5B97F6268DA72B00CBAC41 /* ResendOTPModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPModel.swift; sourceTree = "<group>"; };
 		0C5B97FE268DE09000CBAC41 /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
@@ -218,16 +208,12 @@
 		0C9F29D1268AE17800CE6178 /* SignUpDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpDataModel.swift; sourceTree = "<group>"; };
 		0C9F29E5268AE2BD00CE6178 /* APIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIList.swift; sourceTree = "<group>"; };
 		0C9F29E6268AE2BE00CE6178 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		0C9F29EF268AE83300CE6178 /* OTPVerificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationModel.swift; sourceTree = "<group>"; };
 		0C9F29F7268AEA9100CE6178 /* OTPVerificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationDataModel.swift; sourceTree = "<group>"; };
 		0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+UserDefaults.swift"; sourceTree = "<group>"; };
-		0CB39D19268B30A30002E585 /* CreateProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileModel.swift; sourceTree = "<group>"; };
 		0CB39D1E268B3F950002E585 /* CreateProfileDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileDataModel.swift; sourceTree = "<group>"; };
-		0CD9A4B8268C2768009DA000 /* ForgotPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModel.swift; sourceTree = "<group>"; };
 		0CD9A4C0268C27A5009DA000 /* ForgotPasswordDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordDataModel.swift; sourceTree = "<group>"; };
 		0CD9A4CB268C426B009DA000 /* ChangePasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordModel.swift; sourceTree = "<group>"; };
 		0CD9A4D0268C427F009DA000 /* ChangePasswordDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordDataModel.swift; sourceTree = "<group>"; };
-		0CD9A4DB268C6E06009DA000 /* ForgotPasswordOTPModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordOTPModel.swift; sourceTree = "<group>"; };
 		0CD9A4EF268C9F2D009DA000 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0CDC3DB1268B1EFF00061DF5 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
 		0CDC3DB9268B1F0D00061DF5 /* LogInDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInDataModel.swift; sourceTree = "<group>"; };
@@ -236,12 +222,12 @@
 		0CE747962696E6DB00D1121B /* MyPostedEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedEventModel.swift; sourceTree = "<group>"; };
 		0CE7479B2696E75600D1121B /* MyPostedEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedEventDataModel.swift; sourceTree = "<group>"; };
 		0CEC00012695B7C10023116D /* ContactsPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPermission.swift; sourceTree = "<group>"; };
-		0CEC00092695C6660023116D /* PasscodeOTPModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeOTPModel.swift; sourceTree = "<group>"; };
 		0CEC000E2695C6D60023116D /* PasscodeOTPDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeOTPDataModel.swift; sourceTree = "<group>"; };
 		0CECCDEA269328CC00611D62 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		0CECCDF02693321000611D62 /* ConfirmPasscodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPasscodeVC.swift; sourceTree = "<group>"; };
 		0CECCE0126934D7E00611D62 /* ChooseEventTypeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEventTypeVC.swift; sourceTree = "<group>"; };
 		0CECCE0626934DD200611D62 /* ChooseEventTypeVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseEventTypeVC+Extensions.swift"; sourceTree = "<group>"; };
+		0CED86A626A455EB00F4D68E /* BankInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInfoModel.swift; sourceTree = "<group>"; };
 		16A138E302E75F927C2292F3 /* Pods-Paypaz-PaypazUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paypaz-PaypazUITests.release.xcconfig"; path = "Target Support Files/Pods-Paypaz-PaypazUITests/Pods-Paypaz-PaypazUITests.release.xcconfig"; sourceTree = "<group>"; };
 		444E0F4D2641645D00EEECC6 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		44509ECE26313135000B19F3 /* InvitedPeopleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitedPeopleVC.swift; sourceTree = "<group>"; };
@@ -389,14 +375,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		040E5AB4269C0CCB00254FB7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				040E5AB5269C0CEF00254FB7 /* CreditDebitCardModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		040E5ABD269C0CF300254FB7 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,14 +474,6 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
-		0C34FB902698265800BAE79B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0C34FB912698279000BAE79B /* CreatePinModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		0C388AF6268F1B9C008AED6F /* Create Passcode */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,12 +565,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		0C3DAA9C269821A600CCE2DC /* Model */ = {
+		0C49B1FB26A4551600B06B8C /* Bank */ = {
 			isa = PBXGroup;
 			children = (
-				0C3DAA9D269821E400CCE2DC /* ConfirmPasscodeModel.swift */,
+				0CED86A626A455EB00F4D68E /* BankInfoModel.swift */,
 			);
-			path = Model;
+			path = Bank;
 			sourceTree = "<group>";
 		};
 		0C7DF801268D65C90049E411 /* API + Connection */ = {
@@ -610,6 +580,18 @@
 				0C9F29E6268AE2BE00CE6178 /* Connection.swift */,
 			);
 			path = "API + Connection";
+			sourceTree = "<group>";
+		};
+		0C8E7C8626A29DB6004CA469 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0CDC3DAD268B1EB600061DF5 /* LogIn,OTPVerification,Create&EditProfile,Passcode */,
+				0C9F29CA268AE16500CE6178 /* SignUp,ForgotPassword */,
+				0C9F29EC268AE7E400CE6178 /* ResendOTP, ForgotPasswordOTP,ConfirmPasscode,CreatePin */,
+				0CEC00062695C6010023116D /* ForgotPasscodeModel */,
+				0C49B1FB26A4551600B06B8C /* Bank */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0C8EC6132697285400D51F60 /* Product Details */ = {
@@ -639,12 +621,12 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
-		0C9F29CA268AE16500CE6178 /* Model */ = {
+		0C9F29CA268AE16500CE6178 /* SignUp,ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
 				0C9F29CB268AE16500CE6178 /* SignUpModel.swift */,
 			);
-			path = Model;
+			path = "SignUp,ForgotPassword";
 			sourceTree = "<group>";
 		};
 		0C9F29D0268AE17800CE6178 /* ViewModel */ = {
@@ -663,14 +645,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		0C9F29EC268AE7E400CE6178 /* Model */ = {
+		0C9F29EC268AE7E400CE6178 /* ResendOTP, ForgotPasswordOTP,ConfirmPasscode,CreatePin */ = {
 			isa = PBXGroup;
 			children = (
 				0C5B97F6268DA72B00CBAC41 /* ResendOTPModel.swift */,
-				0C9F29EF268AE83300CE6178 /* OTPVerificationModel.swift */,
-				0CD9A4DB268C6E06009DA000 /* ForgotPasswordOTPModel.swift */,
 			);
-			path = Model;
+			path = "ResendOTP, ForgotPasswordOTP,ConfirmPasscode,CreatePin";
 			sourceTree = "<group>";
 		};
 		0C9F29ED268AE7EA00CE6178 /* ViewModel */ = {
@@ -689,14 +669,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		0CB39D23268B3F9C0002E585 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0CB39D19268B30A30002E585 /* CreateProfileModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		0CB39D24268B3FA10002E585 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,14 +683,6 @@
 				0CB39D1E268B3F950002E585 /* CreateProfileDataModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0CD9A4C5268C27B4009DA000 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0CD9A4B8268C2768009DA000 /* ForgotPasswordModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0CD9A4C6268C27B9009DA000 /* ViewModel */ = {
@@ -761,12 +725,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		0CDC3DAD268B1EB600061DF5 /* Model */ = {
+		0CDC3DAD268B1EB600061DF5 /* LogIn,OTPVerification,Create&EditProfile,Passcode */ = {
 			isa = PBXGroup;
 			children = (
 				0CDC3DB1268B1EFF00061DF5 /* LogInModel.swift */,
 			);
-			path = Model;
+			path = "LogIn,OTPVerification,Create&EditProfile,Passcode";
 			sourceTree = "<group>";
 		};
 		0CDC3DAF268B1ED500061DF5 /* ViewModel */ = {
@@ -818,13 +782,12 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
-		0CEC00062695C6010023116D /* Model */ = {
+		0CEC00062695C6010023116D /* ForgotPasscodeModel */ = {
 			isa = PBXGroup;
 			children = (
-				0CEC00092695C6660023116D /* PasscodeOTPModel.swift */,
 				0C929D342698339B007FA077 /* ForgotPasscodeModel.swift */,
 			);
-			path = Model;
+			path = ForgotPasscodeModel;
 			sourceTree = "<group>";
 		};
 		0CEC00072695C6090023116D /* View Model */ = {
@@ -846,7 +809,6 @@
 		0CECCDEF269331CB00611D62 /* Confirm Passcode */ = {
 			isa = PBXGroup;
 			children = (
-				0C3DAA9C269821A600CCE2DC /* Model */,
 				0C3DAA9B2698219A00CCE2DC /* ViewModel */,
 				0C3DAA9A2698219300CCE2DC /* Controller */,
 			);
@@ -940,7 +902,6 @@
 		445433C6262D569B00443AE1 /* Sign up */ = {
 			isa = PBXGroup;
 			children = (
-				0C9F29CA268AE16500CE6178 /* Model */,
 				0C9F29D0268AE17800CE6178 /* ViewModel */,
 				0C9F29D6268AE1A600CE6178 /* Controller */,
 			);
@@ -950,7 +911,6 @@
 		445433C9262D56B900443AE1 /* Forgot Pwd */ = {
 			isa = PBXGroup;
 			children = (
-				0CD9A4C5268C27B4009DA000 /* Model */,
 				0CD9A4C6268C27B9009DA000 /* ViewModel */,
 				0CD9A4C7268C27BF009DA000 /* Controller */,
 			);
@@ -960,7 +920,6 @@
 		445433CC262D56DF00443AE1 /* OTP Verification */ = {
 			isa = PBXGroup;
 			children = (
-				0C9F29EC268AE7E400CE6178 /* Model */,
 				0C9F29ED268AE7EA00CE6178 /* ViewModel */,
 				0C9F29EE268AE7FB00CE6178 /* Controller */,
 			);
@@ -978,7 +937,6 @@
 		445433D2262D5FF000443AE1 /* Create Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0CB39D23268B3F9C0002E585 /* Model */,
 				0CB39D25268B3FA70002E585 /* ViewModel */,
 				0CB39D24268B3FA10002E585 /* Controller */,
 			);
@@ -988,7 +946,6 @@
 		445433D5262D602B00443AE1 /* Passcode VC */ = {
 			isa = PBXGroup;
 			children = (
-				0CEC00062695C6010023116D /* Model */,
 				0CEC00072695C6090023116D /* View Model */,
 				0CEC00082695C6110023116D /* Controller */,
 			);
@@ -998,7 +955,6 @@
 		445433D8262D609C00443AE1 /* Create PIN */ = {
 			isa = PBXGroup;
 			children = (
-				0C34FB902698265800BAE79B /* Model */,
 				0C34FB8F2698264E00BAE79B /* View Model */,
 				0C34FB8E2698264300BAE79B /* Controller */,
 			);
@@ -1008,7 +964,6 @@
 		445433DB262D683600443AE1 /* Credit Debit CardVC */ = {
 			isa = PBXGroup;
 			children = (
-				040E5AB4269C0CCB00254FB7 /* Model */,
 				040E5ABD269C0CF300254FB7 /* View Model */,
 				040E5AC6269C0D1200254FB7 /* Controller */,
 			);
@@ -1018,6 +973,7 @@
 		445433DE262D68A700443AE1 /* Login signup process */ = {
 			isa = PBXGroup;
 			children = (
+				0C8E7C8626A29DB6004CA469 /* Model */,
 				44C8F2E4261F2837000F03DB /* Login */,
 				445433C6262D569B00443AE1 /* Sign up */,
 				445433C9262D56B900443AE1 /* Forgot Pwd */,
@@ -1282,7 +1238,6 @@
 		44C8F2E4261F2837000F03DB /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				0CDC3DAD268B1EB600061DF5 /* Model */,
 				0CDC3DAF268B1ED500061DF5 /* ViewModel */,
 				0CDC3DB0268B1EDC00061DF5 /* Controller */,
 			);
@@ -1697,7 +1652,6 @@
 				44835B1F263BCA1B00EBE620 /* TransactionDetailVC.swift in Sources */,
 				44509EE526318048000B19F3 /* MemberCell.swift in Sources */,
 				44509ECF26313135000B19F3 /* InvitedPeopleVC.swift in Sources */,
-				0CEC000A2695C6660023116D /* PasscodeOTPModel.swift in Sources */,
 				44E559292632E8EA00193305 /* QRCodeScannerVC.swift in Sources */,
 				44E5EF9F262DB26900FEE2C0 /* MyTicketsVC+Extensions.swift in Sources */,
 				44F76669263A9082007F78CB /* BuyEventVC+Extensions.swift in Sources */,
@@ -1731,12 +1685,9 @@
 				44E559272632E80C00193305 /* QRScannerView.swift in Sources */,
 				0CECCDEB269328CC00611D62 /* ProductCell.swift in Sources */,
 				445433D4262D600200443AE1 /* CreateProfileVC.swift in Sources */,
-				0CB39D1A268B30A30002E585 /* CreateProfileModel.swift in Sources */,
-				0CD9A4DC268C6E06009DA000 /* ForgotPasswordOTPModel.swift in Sources */,
 				44F76676263ABF64007F78CB /* AddCardDetailsVC.swift in Sources */,
 				44C8F2E6261F2847000F03DB /* LoginVC.swift in Sources */,
 				44F76670263A9538007F78CB /* ProductListVC+Extensions.swift in Sources */,
-				0C34FB922698279000BAE79B /* CreatePinModel.swift in Sources */,
 				0C388B29268F4F90008AED6F /* AddProductDataModel.swift in Sources */,
 				44509ED52631612A000B19F3 /* NotificationsListVC.swift in Sources */,
 				0C388AFC268F1CB8008AED6F /* CreatePasscodeVC.swift in Sources */,
@@ -1759,7 +1710,6 @@
 				0CEC000F2695C6D60023116D /* PasscodeOTPDataModel.swift in Sources */,
 				44C8F29E261F1BD2000F03DB /* AppDelegate.swift in Sources */,
 				444E0F4E2641645D00EEECC6 /* ProductDetailVC.swift in Sources */,
-				040E5AB6269C0CEF00254FB7 /* CreditDebitCardModel.swift in Sources */,
 				0CECCE0726934DD200611D62 /* ChooseEventTypeVC+Extensions.swift in Sources */,
 				0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */,
 				44C8F2A0261F1BD2000F03DB /* SceneDelegate.swift in Sources */,
@@ -1770,12 +1720,10 @@
 				445C77AB2637F62300AD4DF3 /* InvitesListVC+Extensions.swift in Sources */,
 				44E5591D26327F8900193305 /* BankSavedSuccessPopupVC.swift in Sources */,
 				445C779D2637CDB500AD4DF3 /* MyEventsListVC+Extensions.swift in Sources */,
-				0C9F29F0268AE83300CE6178 /* OTPVerificationModel.swift in Sources */,
 				0CDC3DB2268B1EFF00061DF5 /* LogInModel.swift in Sources */,
 				0CDC3DBA268B1F0D00061DF5 /* LogInDataModel.swift in Sources */,
 				44C8F2D6261F1ECF000F03DB /* WelcomeVC.swift in Sources */,
 				0CEC00022695B7C10023116D /* ContactsPermission.swift in Sources */,
-				0CD9A4B9268C2768009DA000 /* ForgotPasswordModel.swift in Sources */,
 				0CECCE0226934D7E00611D62 /* ChooseEventTypeVC.swift in Sources */,
 				445C77A62637E5AF00AD4DF3 /* FavouritesEventsListVC+Extensions.swift in Sources */,
 				445433C8262D56B600443AE1 /* SignupVC.swift in Sources */,
@@ -1797,6 +1745,7 @@
 				0C2234192693F12B0014B06A /* ChooseEventModel.swift in Sources */,
 				0C9F29D2268AE17800CE6178 /* SignUpDataModel.swift in Sources */,
 				44DBD00A263011BF00255F9A /* EventDetailVC+Extensions.swift in Sources */,
+				0CED86A726A455EB00F4D68E /* BankInfoModel.swift in Sources */,
 				4488D7A1262961E1006416DF /* HostEventVC.swift in Sources */,
 				44C8F2D0261F1CA9000F03DB /* SplashVC.swift in Sources */,
 				44E559232632C81000193305 /* MyCartVC.swift in Sources */,
@@ -1815,7 +1764,6 @@
 				44835B1C263BB18F00EBE620 /* SendToBankVC.swift in Sources */,
 				44A5648A262F058000FCF3D5 /* MyTicketDetailVC+Extensions.swift in Sources */,
 				0C34FB97269827D000BAE79B /* CreatePinDataModel.swift in Sources */,
-				0C3DAA9E269821E400CCE2DC /* ConfirmPasscodeModel.swift in Sources */,
 				0CD9A4F0268C9F2D009DA000 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

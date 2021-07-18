@@ -114,7 +114,7 @@ class PasscodeVC : CustomViewController {
 extension PasscodeVC : PasscodeDataModelDelegate
 {
     
-    func didRecieveDataUpdate(data: PasscodeModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
         print("PasscodeModelData = ",data)
         Connection.svprogressHudDismiss(view: self)

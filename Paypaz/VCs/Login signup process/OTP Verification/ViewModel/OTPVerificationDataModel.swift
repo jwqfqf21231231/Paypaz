@@ -9,19 +9,19 @@
 import Foundation
 import Alamofire
 protocol OTPVerificationDataModelDelegate:class {
-    func didRecieveDataUpdate(data:OTPVerificationModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
 }
 protocol ForgotPasswordOTPModelDelegate:class {
-    func didRecieveDataUpdate(data:ForgotPasswordOTPModel)
+    func didRecieveDataUpdate(data:ResendOTPModel)
     func didFailDataUpdateWithError1(error:Error)
 }
 protocol ResendOTPModelDelegate:class {
-    func didRecieveDataUpdate(data:ResendOTPModel)
+    func didRecieveDataUpdate2(data:ResendOTPModel)
     func didFailDataUpdateWithError2(error:Error)
 }
 protocol ForgotPasscodeVerifyOTPModelDelegate:class {
-    func didRecieveDataUpdate2(data:ForgotPasswordOTPModel)
+    func didRecieveDataUpdate3(data:ResendOTPModel)
     func didFailDataUpdateWithError3(error:Error)
 }
 class OTPVerificationDataModel: NSObject
@@ -61,7 +61,7 @@ class OTPVerificationDataModel: NSObject
                                             {
                                                 do
                                                 {
-                                                    let response = try JSONDecoder().decode(ForgotPasswordOTPModel.self, from: result!)
+                                                    let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
                                                     self.delegate1?.didRecieveDataUpdate(data: response)
                                                 }
                                                 catch let error as NSError
@@ -105,7 +105,7 @@ class OTPVerificationDataModel: NSObject
                                             {
                                                 do
                                                 {
-                                                    let response = try JSONDecoder().decode(OTPVerificationModel.self, from: result!)
+                                                    let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                     
                                                     self.delegate?.didRecieveDataUpdate(data: response)
                                                 }
@@ -140,7 +140,7 @@ class OTPVerificationDataModel: NSObject
                                             {
                                                 let response = try
                                                     JSONDecoder().decode(ResendOTPModel.self, from: result!)
-                                                self.delegate2?.didRecieveDataUpdate(data: response)
+                                                self.delegate2?.didRecieveDataUpdate2(data: response)
                                             }
                                             catch let error as NSError
                                             {
@@ -173,8 +173,8 @@ class OTPVerificationDataModel: NSObject
                                             do
                                             {
                                                 let response = try
-                                                    JSONDecoder().decode(ForgotPasswordOTPModel.self, from: result!)
-                                                self.delegate3?.didRecieveDataUpdate2(data: response)
+                                                    JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                self.delegate3?.didRecieveDataUpdate3(data: response)
                                             }
                                             catch let error as NSError
                                             {

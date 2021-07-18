@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol ForgotPasswordDataModelDelegate:class {
-    func didRecieveDataUpdate(data:ForgotPasswordModel)
+    func didRecieveDataUpdate(data:SignUpModel)
     func didFailDataUpdateWithError(error:Error)
 }
 
@@ -35,7 +35,7 @@ class ForgotPasswordDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(ForgotPasswordModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(SignUpModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

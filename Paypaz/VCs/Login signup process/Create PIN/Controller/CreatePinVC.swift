@@ -134,7 +134,7 @@ class CreatePinVC : CustomViewController {
 }
 extension CreatePinVC : CreatePinDataModelDelegate
 {
-    func didRecieveDataUpdate(data: CreatePinModel)
+    func didRecieveDataUpdate(data: ResendOTPModel)
     {
         print("CreatePinModelData = ",data)
         if data.success == 1

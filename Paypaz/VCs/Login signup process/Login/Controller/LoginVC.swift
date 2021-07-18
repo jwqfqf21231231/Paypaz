@@ -95,7 +95,7 @@ extension LoginVC : LogInDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            UserDefaults.standard.setLoggedIn(value: true)
+            //UserDefaults.standard.setLoggedIn(value: true)
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             UserDefaults.standard.setEmail(value: data.data?.emailORphone ?? "")

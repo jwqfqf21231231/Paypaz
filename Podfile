@@ -22,4 +22,5 @@ target 'Paypaz' do
   pod 'SVProgressHUD'
   pod 'IQKeyboardManagerSwift'
   pod 'LGSideMenuController'
+  pod 'DropDown'
 end

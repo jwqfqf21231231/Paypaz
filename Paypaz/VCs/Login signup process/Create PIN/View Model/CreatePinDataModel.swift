@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol CreatePinDataModelDelegate:class {
-    func didRecieveDataUpdate(data:CreatePinModel)
+    func didRecieveDataUpdate(data:ResendOTPModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -37,7 +37,7 @@ class CreatePinDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(CreatePinModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

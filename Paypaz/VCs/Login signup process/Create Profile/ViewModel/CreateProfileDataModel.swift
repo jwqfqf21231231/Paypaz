@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol CreateProfileDataModelDelegate:class {
-    func didRecieveDataUpdate(data:CreateProfileModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError1(error:Error)
 }
 
@@ -56,7 +56,7 @@ class CreateProfileDataModel: NSObject
                                             {
                                                 do
                                                 {
-                                                    let response = try JSONDecoder().decode(CreateProfileModel.self, from: result!)
+                                                    let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                     self.delegate?.didRecieveDataUpdate(data: response)
                                                 }
                                                 catch let error as NSError
@@ -89,7 +89,7 @@ class CreateProfileDataModel: NSObject
                                                 {
                                                     do
                                                     {
-                                                        let response = try  JSONDecoder().decode(CreateProfileModel.self, from: result!)
+                                                        let response = try  JSONDecoder().decode(LogInModel.self, from: result!)
                                                         self.delegate?.didRecieveDataUpdate(data: response)
                                                     }
                                                     catch let error as NSError

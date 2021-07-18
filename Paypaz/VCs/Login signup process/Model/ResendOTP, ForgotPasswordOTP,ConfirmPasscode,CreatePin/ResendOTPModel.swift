@@ -11,5 +11,5 @@ import Foundation
 // MARK: - ResendOTPModel
 struct ResendOTPModel: Codable {
     let success: Int?
-    let messages, data: String?
+    let messages, message, otp, data: String?
 }

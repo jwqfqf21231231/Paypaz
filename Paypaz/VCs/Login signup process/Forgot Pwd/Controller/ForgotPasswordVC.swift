@@ -44,7 +44,7 @@ class ForgotPasswordVC : CustomViewController {
 }
 extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ForgotPasswordModel)
+    func didRecieveDataUpdate(data: SignUpModel)
     {
         print("ForgotPasswordModelData = ",data)
         Connection.svprogressHudDismiss(view: self)

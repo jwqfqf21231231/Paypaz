@@ -184,7 +184,7 @@ extension EditProfileVC : UserDetailsDataModelDelegate
 
 extension EditProfileVC : CreateProfileDataModelDelegate
 {
-    func didRecieveDataUpdate(data: CreateProfileModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
