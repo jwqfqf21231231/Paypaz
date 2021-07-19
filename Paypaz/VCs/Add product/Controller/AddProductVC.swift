@@ -31,6 +31,7 @@ class AddProductVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         setTitle()
         if isEdit ?? false
         {

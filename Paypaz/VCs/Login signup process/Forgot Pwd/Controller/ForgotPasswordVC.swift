@@ -52,6 +52,7 @@ extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
         {
             //UserDefaults.standard.setBearerToken(value: data.data?.token ?? "")
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
+            vc.email = txt_email.text ?? ""
             vc.doForgotPassword = true
             vc.verifyOTP = data.data?.otp ?? ""
             self.navigationController?.pushViewController(vc, animated: false)

@@ -10,6 +10,7 @@
 		040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */; };
 		0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* SuccessModel.swift */; };
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
+		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		0AD485829E4F7A0568A05ACF /* Pods_Paypaz_PaypazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */; };
 		0C00BFDA268EE03E00BC3267 /* UserDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */; };
@@ -183,6 +184,7 @@
 		040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardDataModel.swift; sourceTree = "<group>"; };
 		0431B71E269C6BD00082EAB3 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
+		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaypazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsDataModel.swift; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 			isa = PBXGroup;
 			children = (
 				0CE7478C2696D47E00D1121B /* MyEventsListDataModel.swift */,
+				045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -1375,6 +1378,7 @@
 				44C8F297261F1BD2000F03DB /* Frameworks */,
 				44C8F298261F1BD2000F03DB /* Resources */,
 				DAA4C5EBE12AA9170C6A552D /* [CP] Embed Pods Frameworks */,
+				605593BBC5F233F6C9A2AE88 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1413,6 +1417,7 @@
 				44C8F2B8261F1BD5000F03DB /* Frameworks */,
 				44C8F2B9261F1BD5000F03DB /* Resources */,
 				A27B37E80AC92AAC75D8BE6E /* [CP] Embed Pods Frameworks */,
+				FEEE70A8060321168CD494A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1544,6 +1549,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		605593BBC5F233F6C9A2AE88 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paypaz/Pods-Paypaz-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paypaz/Pods-Paypaz-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paypaz/Pods-Paypaz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9BE1A3309CFEDBCB146D902C /* [CP] Build Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1618,6 +1640,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paypaz/Pods-Paypaz-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FEEE70A8060321168CD494A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paypaz-PaypazUITests/Pods-Paypaz-PaypazUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paypaz-PaypazUITests/Pods-Paypaz-PaypazUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paypaz-PaypazUITests/Pods-Paypaz-PaypazUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1671,6 +1710,7 @@
 				44509EE0263178F8000B19F3 /* EventVC.swift in Sources */,
 				44A1BFFD26564A0C0047F7B4 /* OtherUserProfileVC+Extensions.swift in Sources */,
 				0C388B1E268F4970008AED6F /* HostEventDataModel.swift in Sources */,
+				045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */,
 				0C9F29F8268AEA9100CE6178 /* OTPVerificationDataModel.swift in Sources */,
 				44596F39266A5B1500401884 /* EventReportsHistoryVC.swift in Sources */,
 				44E5EFA2262DB74000FEE2C0 /* ViewAllProductsVC.swift in Sources */,

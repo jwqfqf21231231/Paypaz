@@ -105,7 +105,7 @@ class PasscodeVC : CustomViewController {
             }
             else
             {
-                self.view.makeToast("Incorrect Passcode", duration: 3, position: .center)
+                self.view.makeToast("Incorrect Passcode", duration: 3, position: .bottom)
             }
         }
        

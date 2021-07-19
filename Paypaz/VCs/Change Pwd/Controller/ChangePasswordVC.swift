@@ -141,12 +141,12 @@ extension ChangePasswordVC : ChangePasswordDataModelDelegate
             if self.hideOldPassword ?? false {
                 for vc in self.navigationController?.viewControllers ?? [] {
                     if let login = vc as? LoginVC {
-                        self.navigationController?.popToViewController(login, animated: true)
+                        self.navigationController?.popToViewController(login, animated: false)
                     }
                 }
             }
             else {
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: false)
             }
         }
         else

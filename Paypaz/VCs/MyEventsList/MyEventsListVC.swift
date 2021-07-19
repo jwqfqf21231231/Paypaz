@@ -28,6 +28,12 @@ class MyEventsListVC : CustomViewController {
         dataSource.getMyEvents()
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        dataSource.delegate = self
+        dataSource.getMyEvents()
+    }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)

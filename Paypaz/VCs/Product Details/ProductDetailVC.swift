@@ -132,7 +132,7 @@ extension ProductDetailVC : DeleteProductDataModelDelegate
         if data.success == 1
         {
             self.navigationController?.popViewController(animated: false)
-            self.view.makeToast("Product Deleted Successfully", duration: 3, position: .center)
+            self.view.makeToast("Product Deleted Successfully", duration: 3, position: .bottom)
         }
         else
         {

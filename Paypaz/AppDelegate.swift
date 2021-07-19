@@ -10,6 +10,8 @@ import UIKit
 import Network
 import IQKeyboardManagerSwift
 import UserNotifications
+import GooglePlaces
+import GoogleMaps
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -22,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         print(path)
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Setting The google api key
+        GMSPlacesClient.provideAPIKey("AIzaSyA5S2wr0I-x6Yp3HibMdjcAdIlZ9Gz0Cw0")
+        GMSServices.provideAPIKey("AIzaSyD-X6F-HVtLHmYXeFNWz2z0Fi6ICqrW6_4")
+        
         // ------->>IQKeyboard manager
         IQKeyboardManager.shared.enable            = true
         IQKeyboardManager.shared.enableAutoToolbar = true

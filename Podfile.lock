@@ -1,42 +1,64 @@
 PODS:
   - Alamofire (4.8.2)
+  - CocoaLumberjack (3.7.2):
+    - CocoaLumberjack/Core (= 3.7.2)
+  - CocoaLumberjack/Core (3.7.2)
   - DropDown (2.3.13)
+  - GoogleMaps (5.1.0):
+    - GoogleMaps/Maps (= 5.1.0)
+  - GoogleMaps/Base (5.1.0)
+  - GoogleMaps/Maps (5.1.0):
+    - GoogleMaps/Base
+  - GooglePlaces (5.0.0)
   - IQKeyboardManagerSwift (6.5.5)
   - LGSideMenuController (3.1.1)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
+  - SVGKit (3.0.0):
+    - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (= 4.8.2)
   - DropDown
+  - GoogleMaps
+  - GooglePlaces
   - IQKeyboardManagerSwift
   - LGSideMenuController
   - SDWebImage
+  - SVGKit
   - SVProgressHUD
   - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CocoaLumberjack
     - DropDown
+    - GoogleMaps
+    - GooglePlaces
     - IQKeyboardManagerSwift
     - LGSideMenuController
     - SDWebImage
+    - SVGKit
     - SVProgressHUD
     - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  GoogleMaps: 086ae1dab659eaa7339bdb30fc88e2f44e7c597c
+  GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   LGSideMenuController: 04c679441ea9a9ba5df6a48a5b43b340a1d5caaa
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 29671dbbf302c5a6e433128398641212f5f45b09
+PODFILE CHECKSUM: d5fd5e17915c2ea9e5bcc7a327eef26ecac27844
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.8.4

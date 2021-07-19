@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import GooglePlaces
 class HostEventVC : CustomViewController {
     
     var isEdit : Bool? //The value for isEdit comes from MyEventsListVC+Extensions (60th line)
@@ -27,6 +28,7 @@ class HostEventVC : CustomViewController {
     var fontCamera  = false
     var images      = [String:Any]()
     var picker:UIDatePicker!
+    var location = ""
     var startDate = ""
     var endDate = ""
     var startTime = ""
@@ -181,7 +183,7 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: picker.date)
             self.startDate = dateString
-            self.btn_StartDate.setTitleColor(.black, for: .normal)
+            //self.btn_StartDate.setTitleColor(.black, for: .normal)
             self.btn_StartDate.setTitle(dateString, for: .normal)
             self.view.endEditing(true)
         case 1:
@@ -190,7 +192,7 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: picker.date)
             self.endDate = dateString
-            self.btn_EndDate.setTitleColor(.black, for: .normal)
+            //self.btn_EndDate.setTitleColor(.black, for: .normal)
             self.btn_EndDate.setTitle(dateString, for: .normal)
             self.view.endEditing(true)
         case 2:
@@ -199,7 +201,7 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateFormat = "hh:mm a"
             let dateString = dateFormatter.string(from:picker.date)
             self.startTime = dateString
-            self.btn_StartTime.setTitleColor(.black, for: .normal)
+            //self.btn_StartTime.setTitleColor(.black, for: .normal)
             self.btn_StartTime.setTitle(dateString, for: .normal)
             self.view.endEditing(true)
         default:
@@ -208,7 +210,7 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateFormat = "hh:mm a"
             let dateString = dateFormatter.string(from:picker.date)
             self.endTime = dateString
-            self.btn_EndTime.setTitleColor(.black, for: .normal)
+            //self.btn_EndTime.setTitleColor(.black, for: .normal)
             self.btn_EndTime.setTitle(dateString, for: .normal)
             self.view.endEditing(true)
         }
@@ -259,7 +261,23 @@ class HostEventVC : CustomViewController {
     }
     //MARK:- ---- Action ---
     
-    
+    @IBAction func btn_ChooseLocation(_ sender:UIButton)
+    {
+        self.view.endEditing(true)
+        let placePicker = GMSAutocompleteViewController()
+        if #available(iOS 13.0, *) {
+            placePicker.primaryTextColor = UIColor.label
+            placePicker.secondaryTextColor = UIColor.secondaryLabel
+            placePicker.tableCellSeparatorColor = UIColor.separator
+            placePicker.tableCellBackgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        placePicker.modalPresentationStyle = .fullScreen
+        placePicker.delegate = self
+        self.present(placePicker, animated: true, completion: nil)
+    }
     
     @IBAction func btn_AddPic(_ sender:UIButton)
     {
@@ -275,7 +293,7 @@ class HostEventVC : CustomViewController {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChooseEventTypeVC") as? ChooseEventTypeVC
         vc?.selectedEventData = { [weak self] (eventName,selectedID) in
             guard let self = self else {return}
-            self.btn_EventTitle.setTitleColor(.black, for: .normal)
+            self.btn_EventTitle.setTitleColor(UIColor(red: 116/255, green: 110/255, blue: 110/255, alpha: 1), for: .normal)
             self.btn_EventTitle.setTitle(eventName, for: .normal)
             self.selectedEventId = selectedID
         }
@@ -333,6 +351,10 @@ class HostEventVC : CustomViewController {
         {
             showAlert(withMsg: "Enter Price", withOKbtn: true)
         }
+        else if(location == "")
+        {
+            showAlert(withMsg: "Add Location", withOKbtn: true)
+        }
         else if(startDate == "")
         {
             showAlert(withMsg: "Enter Start Date", withOKbtn: true)
@@ -356,7 +378,7 @@ class HostEventVC : CustomViewController {
             dataSource.name = txt_EventName.text ?? ""
             dataSource.typeId = selectedEventId ?? ""
             dataSource.price = txt_Price.text ?? ""
-            dataSource.location = "Ongole, Andhra Pradesh"
+            dataSource.location = self.location
             dataSource.startDate = startDate
             dataSource.endDate = endDate
             dataSource.startTime = startTime
@@ -389,7 +411,47 @@ class HostEventVC : CustomViewController {
         }
     }
 }
-
+extension HostEventVC: GMSAutocompleteViewControllerDelegate{
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        print("Place name: \(place.name ?? "")")
+        print("Place address: \(place.formattedAddress ?? "")")
+        //print("Place attributions: \(place.attributions!)")
+        self.location = place.name ?? ""
+        self.btn_ChooseLocation.setTitle(place.name ?? "", for: .normal)
+       // let loc1 = (place.name ?? "")
+        //let loc2 = (place.formattedAddress ?? "")
+        //self.location_txt.text = loc1
+        //print(self.location_txt.text)
+       // let lat = place.coordinate.latitude
+        // self.event_latitude = lat
+        //  print("Place Latitude: \(self.event_latitude)")
+        //let long = place.coordinate.longitude
+        // self.event_longitude = long
+        // print("Place Longitude: \(self.event_longitude)")
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
 extension HostEventVC : HostEventDataModelDelegate
 {
     func didRecieveDataUpdate(data: HostEventModel)

@@ -23,4 +23,7 @@ target 'Paypaz' do
   pod 'IQKeyboardManagerSwift'
   pod 'LGSideMenuController'
   pod 'DropDown'
+  pod 'SVGKit'
+  pod 'GooglePlaces'
+  pod 'GoogleMaps'
 end

@@ -20,7 +20,7 @@ class OTPVerificationVC : CustomViewController {
     @IBOutlet weak var txt_Field_3 : UITextField!
     @IBOutlet weak var txt_Field_4 : UITextField!
     
-    var email = ""
+    var email = UserDefaults.standard.getEmail()
     var password = ""
     var verifyOTP = ""
     //To Save Typed OTP Characters
@@ -45,6 +45,7 @@ class OTPVerificationVC : CustomViewController {
         if doForgotPasscode ?? false
         {
             lbl_Title.text = "Passcode OTP Verification"
+            
         }
         else
         {
@@ -140,7 +141,7 @@ class OTPVerificationVC : CustomViewController {
                 }
                 else
                 {
-                    self.view.makeToast("Please check your OTP and enter again", duration: 3, position: .center)
+                    self.view.makeToast("Please check your OTP and enter again", duration: 3, position: .bottom)
                 }
                 
             }
@@ -153,7 +154,7 @@ class OTPVerificationVC : CustomViewController {
                 }
                 else
                 {
-                    self.view.makeToast("Please check your OTP and enter again", duration: 3, position: .center)
+                    self.view.makeToast("Please check your OTP and enter again", duration: 3, position: .bottom)
                 }
                 
             }
@@ -251,7 +252,7 @@ extension OTPVerificationVC : ResendOTPModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.view.makeToast("OTP Sent Successfully", duration: 3, position: .center)
+            self.view.makeToast("OTP Sent Successfully", duration: 3, position: .bottom)
         }
         else
         {
