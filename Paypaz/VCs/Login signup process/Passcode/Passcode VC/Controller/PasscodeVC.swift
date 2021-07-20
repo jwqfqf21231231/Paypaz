@@ -94,7 +94,7 @@ class PasscodeVC : CustomViewController {
     @IBAction func btn_Submit(_ sender:UIButton) {
         if self.isNavigatedFromPaymentVC ?? false {
             self.navigationController?.popViewController(animated: true)
-            self.delegate?.isClickedButton()
+            //self.delegate?.isClickedButton()
         } else {
             let savedPasscode = UserDefaults.standard.getPasscode()
             print(savedPasscode)

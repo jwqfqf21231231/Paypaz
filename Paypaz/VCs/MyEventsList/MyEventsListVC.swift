@@ -11,7 +11,7 @@ import UIKit
 class MyEventsListVC : CustomViewController {
     
     var events = [Event]()
-    private let dataSource = MyEventsListDataModel()
+    let dataSource = MyEventsListDataModel()
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
             tableView_Events.dataSource = self
@@ -30,9 +30,11 @@ class MyEventsListVC : CustomViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
-        dataSource.delegate = self
-        dataSource.getMyEvents()
+        print("View will Appear Executed")
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        print("View did Appear Executed")
     }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {

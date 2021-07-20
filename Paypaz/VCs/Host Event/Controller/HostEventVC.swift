@@ -293,7 +293,6 @@ class HostEventVC : CustomViewController {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChooseEventTypeVC") as? ChooseEventTypeVC
         vc?.selectedEventData = { [weak self] (eventName,selectedID) in
             guard let self = self else {return}
-            self.btn_EventTitle.setTitleColor(UIColor(red: 116/255, green: 110/255, blue: 110/255, alpha: 1), for: .normal)
             self.btn_EventTitle.setTitle(eventName, for: .normal)
             self.selectedEventId = selectedID
         }
@@ -466,6 +465,7 @@ extension HostEventVC : HostEventDataModelDelegate
             }
             else
             {
+                eventID = data.data?.id ?? ""
                 if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
                     popup.selectedPopupType = .eventCreatedSuccess
                     popup.delegate = self
@@ -529,15 +529,10 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.endTime = data.data?.endTime ?? ""
                 
                 self.btn_ChooseLocation.setTitle(data.data?.location, for: .normal)
-                self.btn_ChooseLocation.setTitleColor(.black, for: .normal)
                 self.btn_StartDate.setTitle(self.startDate, for: .normal)
-                self.btn_StartDate.setTitleColor(.black, for: .normal)
                 self.btn_EndDate.setTitle(self.endDate, for: .normal)
-                self.btn_EndDate.setTitleColor(.black, for: .normal)
                 self.btn_StartTime.setTitle(self.startTime, for: .normal)
-                self.btn_StartTime.setTitleColor(.black, for: .normal)
                 self.btn_EndTime.setTitle(self.endTime, for: .normal)
-                self.btn_EndTime.setTitleColor(.black, for: .normal)
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
                 self.img_EventPic.sd_setImage(with: URL(string: url+(data.data?.image ?? "")), placeholderImage: UIImage(named: "profile_c"))
@@ -599,7 +594,8 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+            self.view.makeToast("No Products Data", duration: 3, position: .bottom)
+          //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

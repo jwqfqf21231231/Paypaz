@@ -62,8 +62,9 @@ extension HostEventVC : UITableViewDelegate {
 extension HostEventVC : PopupDelegate {
     
     func isClickedButton() {
-        self.navigationController?.popViewController(animated: false)
-        self.delegate?.isClickedButton()
+      self.navigationController?.popViewController(animated: false)
+        self.delegate?.passEventID?(eventID: self.eventID)
+        
         
     }
 }

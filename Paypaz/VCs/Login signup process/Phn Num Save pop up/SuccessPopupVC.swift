@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol PopupDelegate : class {
+@objc protocol PopupDelegate : class {
     func isClickedButton()
+    @objc optional func passEventID(eventID : String)
 }
 
 enum PopupType {

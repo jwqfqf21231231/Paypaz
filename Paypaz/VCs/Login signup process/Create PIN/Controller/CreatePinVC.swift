@@ -127,7 +127,7 @@ class CreatePinVC : CustomViewController {
                 dataSource.createPin()
             } else {
                 self.navigationController?.popViewController(animated: true)
-                self.delegate?.isClickedButton()
+               // self.delegate?.isClickedButton()
             }
         }
     }

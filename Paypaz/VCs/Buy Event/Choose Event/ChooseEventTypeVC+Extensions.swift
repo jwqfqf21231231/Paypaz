@@ -43,7 +43,9 @@ extension ChooseEventTypeVC:UICollectionViewDataSource
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChooseEventCell", for: indexPath) as? ChooseEventCell
         else { return ChooseEventCell() }
         let url =  APIList().getUrlString(url: .EVENTIMAGE)
-        cell.img_EventPic.downloadedsvg(from: URL(string: url+(filteredEventData[indexPath.row].icon ?? ""))!, contentMode: .scaleAspectFit)
+        cell.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        cell.img_EventPic.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].icon ?? "")), placeholderImage: UIImage(named: "sports_fitness"))
+        //cell.img_EventPic.downloadedsvg(from: URL(string: url+(filteredEventData[indexPath.row].icon ?? ""))!, contentMode: .scaleAspectFit)
       
         cell.lbl_EventName.text = filteredEventData[indexPath.row].name ?? ""
         return cell

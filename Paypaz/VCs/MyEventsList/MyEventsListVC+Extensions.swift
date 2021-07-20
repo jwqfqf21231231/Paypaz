@@ -48,7 +48,8 @@ extension MyEventsListVC : UITableViewDelegate {
 
 extension MyEventsListVC : PopupDelegate {
     func isClickedButton() {
-        
+        //Connection.svprogressHudShow(title: "Please Wait", view: self)
+        dataSource.getMyEvents()
     }
 }
 

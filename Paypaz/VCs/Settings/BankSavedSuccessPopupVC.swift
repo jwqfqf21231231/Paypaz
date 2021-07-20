@@ -23,7 +23,7 @@ class BankSavedSuccessPopupVC : CustomViewController {
    // MARK: - --- Action ----
     @IBAction func btn_Continue(_ sender:UIButton) {
         self.dismiss(animated: false) { [weak self] in
-             self?.delegate?.isClickedButton()
+            //self?.delegate?.isClickedButton()
         }
        
     }

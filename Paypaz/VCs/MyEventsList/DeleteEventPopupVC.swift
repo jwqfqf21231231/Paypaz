@@ -49,10 +49,9 @@ extension DeleteEventPopupVC : DeleteEventDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.dismiss(animated: false, completion: nil)
-//            self.dismiss(animated: false) {[weak self] in
-//                self?.delegate?.isClickedButton()
-//            }
+            self.dismiss(animated: false) {[weak self] in
+                self?.delegate?.isClickedButton()
+            }
         }
         else
         {

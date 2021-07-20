@@ -10,6 +10,8 @@ import UIKit
 
 class EventVC : CustomViewController {
     
+    
+    weak var delegate : PopupDelegate?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +42,12 @@ class EventVC : CustomViewController {
 }
 //MARK:-
 extension EventVC : PopupDelegate {
-
+    
     func isClickedButton() {
-        _ = self.pushToVC("MyPostedEventDetailsVC")
-        
+    }
+    func passEventID(eventID: String) {
+        if let vc = self.pushToVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC{
+            vc.eventID = eventID
+        }
     }
 }

@@ -75,7 +75,8 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+            self.view.makeToast("No Products Data", duration: 3, position: .bottom)
+            //self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }
