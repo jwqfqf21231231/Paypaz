@@ -14,6 +14,7 @@ class ProductDetailVC : CustomViewController {
     var eventID = ""
     private let dataSource = ProductDetailsDataModel()
     private let dataSource2 = MyPostedEventDataModel()
+    weak var delegate : PopupDelegate?
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var lbl_ProductName : UILabel!
     @IBOutlet weak var lbl_ProductPrice : UILabel!
@@ -21,6 +22,7 @@ class ProductDetailVC : CustomViewController {
     @IBOutlet weak var lbl_EventName : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.delegate2 = self
         dataSource.delegate = self
         dataSource2.delegate = self
         getProductDetails()
@@ -132,7 +134,7 @@ extension ProductDetailVC : DeleteProductDataModelDelegate
         if data.success == 1
         {
             self.navigationController?.popViewController(animated: false)
-            self.view.makeToast("Product Deleted Successfully", duration: 3, position: .bottom)
+            self.delegate?.isClickedButton()
         }
         else
         {

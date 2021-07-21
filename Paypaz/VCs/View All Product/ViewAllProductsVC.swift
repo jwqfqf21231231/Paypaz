@@ -14,6 +14,7 @@ class ViewAllProductsVC : CustomViewController {
     var eventID = ""
     var products = [MyProducts]()
     private let dataSource = MyPostedEventDataModel()
+    weak var delegate : PopupDelegate?
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
             tableView_Products.dataSource = self
@@ -28,7 +29,7 @@ class ViewAllProductsVC : CustomViewController {
         getAllProducts()
         // Do any additional setup after loading the view.
     }
-    private func getAllProducts()
+    func getAllProducts()
     {
         Connection.svprogressHudShow(title: "Please Wait", view: self)
         dataSource.eventID = eventID

@@ -10,7 +10,6 @@ import UIKit
 
 class ProductListVC : CustomViewController {
     
-    weak var delegate : PopupDelegate?
     
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
@@ -19,7 +18,7 @@ class ProductListVC : CustomViewController {
         }
     }
     @IBOutlet weak var tableView_height : NSLayoutConstraint!
-    
+    weak var delegate : PopupDelegate?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()

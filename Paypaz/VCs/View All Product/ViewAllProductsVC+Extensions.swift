@@ -44,6 +44,7 @@ extension ViewAllProductsVC : UITableViewDelegate {
         {
             vc.productID = self.products[indexPath.row].id
             vc.eventID = self.eventID
+            vc.delegate = self
         }
     }
 }
@@ -75,9 +76,14 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
-            self.view.makeToast("No Products Data", duration: 3, position: .bottom)
+            self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
             //self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }
-
+extension ViewAllProductsVC : PopupDelegate
+{
+    func isClickedButton() {
+        getAllProducts()
+    }
+}

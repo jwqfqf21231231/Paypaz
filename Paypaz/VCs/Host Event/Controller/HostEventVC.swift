@@ -65,6 +65,7 @@ class HostEventVC : CustomViewController {
     
     
     //MARK:- ----
+    @IBOutlet weak var view_Dashed : UIView!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var txt_EventName : UITextField!
@@ -283,6 +284,7 @@ class HostEventVC : CustomViewController {
     {
         ImagePickerController.init().pickImage(self, isCamraFront:fontCamera) { (img) in
             self.img_EventPic.image = img
+            self.view_Dashed.isHidden = true
             self.pickedImage = img
             self.images["identity_img"] = img
         }
@@ -503,7 +505,6 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.txt_EventName.text = data.data?.name
                 self.btn_Price.setTitle("", for: .normal)
                 self.txt_Price.text = data.data?.price
-                self.btn_EventTitle.setTitleColor(.black, for: .normal)
                 switch data.data?.typeID
                 {
                 case "1" : self.btn_EventTitle.setTitle("Sports & Fitness", for: .normal)

@@ -22,7 +22,7 @@ class AddProductVC : CustomViewController {
     var images      = [String:Any]()
     weak var delegate : AddProductDelegate?
     private let dataSource = AddProductDataModel()
-    
+    @IBOutlet weak var view_DashedView : UIView!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var txt_ProductName : RoundTextField!
@@ -79,10 +79,11 @@ class AddProductVC : CustomViewController {
     @IBAction func btn_AddPic(_ sender:UIButton)
     {
         ImagePickerController.init().pickImage(self, isCamraFront:fontCamera) { (img) in
-                    self.img_ProductPic.image = img
-                    self.pickedImage = img
-                    self.images["identity_img"] = img
-                }
+            self.img_ProductPic.image = img
+            self.view_DashedView.isHidden = true
+            self.pickedImage = img
+            self.images["identity_img"] = img
+        }
     }
     @IBAction func btn_Done(_ sender:UIButton) {
         if(img_ProductPic.image == nil)
@@ -109,11 +110,11 @@ class AddProductVC : CustomViewController {
             dataSource.productPrice = txt_ProductPrice.text ?? ""
             dataSource.productDescription = txt_Description.text ?? ""
             dataSource.addProduct()
-    //        self.dismiss(animated: true) { [weak self] in
-    //            self?.delegate?.isAddedProduct()
-    //        }
+            //        self.dismiss(animated: true) { [weak self] in
+            //            self?.delegate?.isAddedProduct()
+            //        }
         }
-  
+        
     }
 }
 extension AddProductVC : AddProductDataModelDelegate

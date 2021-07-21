@@ -58,9 +58,9 @@ class MyPostedEventDetailsVC : CustomViewController {
         dataSource.getProducts()
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.getProducts()
         if self.isEditHidden ?? false {
             self.btn_edit.alpha = 0.0
         } else {

@@ -23,17 +23,16 @@ class MyEventsListVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("View Did load Executed")
         Connection.svprogressHudShow(title: "Please Wait", view: self)
         dataSource.delegate = self
         dataSource.getMyEvents()
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
         print("View will Appear Executed")
     }
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
         print("View did Appear Executed")
     }
     // MARK: - --- Action ----

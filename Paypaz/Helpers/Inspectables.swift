@@ -283,7 +283,7 @@ class RoundImage : UIImageView {
         }
     }
 }
-//MARK:- --- UIView ----
+//MARK:- Dashed View
 @IBDesignable
 class DashedView : UIView {
     

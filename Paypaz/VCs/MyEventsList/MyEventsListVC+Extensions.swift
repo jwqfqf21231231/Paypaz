@@ -74,7 +74,7 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
 {
     func didRecieveDataUpdate(data: MyEventsListModel)
     {
-        print("MyEventsListModelData = ",data)
+        //print("MyEventsListModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
