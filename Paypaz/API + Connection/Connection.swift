@@ -30,9 +30,9 @@ class Connection
     
     
     
-    class func svprogressHudShow(title:String,view:UIViewController) -> Void
+    class func svprogressHudShow(view:UIViewController) -> Void
     {
-        SVProgressHUD.show(withStatus: title);
+        SVProgressHUD.show()
         SVProgressHUD.setDefaultAnimationType(SVProgressHUDAnimationType.native)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
         view.view.isUserInteractionEnabled = false;

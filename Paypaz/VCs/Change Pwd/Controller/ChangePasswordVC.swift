@@ -99,7 +99,7 @@ class ChangePasswordVC : CustomViewController {
             }
             else
             {
-                Connection.svprogressHudShow(title: "Please Wait", view: self)
+                Connection.svprogressHudShow(view: self)
                 dataSource.newPassword = newPassword!
                 dataSource.hideOldPassword = true
                 dataSource.requestPasswordChange()
@@ -121,7 +121,7 @@ class ChangePasswordVC : CustomViewController {
             }
             else
             {
-                Connection.svprogressHudShow(title: "Please Wait", view: self)
+                Connection.svprogressHudShow(view: self)
                 dataSource.oldPassword = oldPassword!
                 dataSource.newPassword = newPassword!
                 dataSource.requestPasswordChange()

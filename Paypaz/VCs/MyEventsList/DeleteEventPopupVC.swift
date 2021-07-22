@@ -28,7 +28,7 @@ class DeleteEventPopupVC : CustomViewController {
 
    // MARK: - --- Action ----
     @IBAction func btn_Yes(_ sender:UIButton) {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.deleteEvent() 
     }

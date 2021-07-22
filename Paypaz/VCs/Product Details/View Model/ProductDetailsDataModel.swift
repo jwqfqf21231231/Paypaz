@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol ProductDetailsDataModelDelegate:class {
-    func didRecieveDataUpdate(data:ProductDetailsModel)
+    func didRecieveDataUpdate2(data:ProductDetailsModel)
     func didFailDataUpdateWithError2(error:Error)
 }
 protocol DeleteProductDataModelDelegate:class {
@@ -41,7 +41,7 @@ class ProductDetailsDataModel: NSObject
                                             do
                                             {
                                                 let response = try JSONDecoder().decode(ProductDetailsModel.self, from: result!)
-                                                self.delegate?.didRecieveDataUpdate(data: response)
+                                                self.delegate?.didRecieveDataUpdate2(data: response)
                                             }
                                             catch let error as NSError
                                             {

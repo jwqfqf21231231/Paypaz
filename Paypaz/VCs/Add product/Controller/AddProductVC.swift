@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 import IQKeyboardManagerSwift
 protocol AddProductDelegate : class {
     func isAddedProduct()
@@ -22,6 +23,7 @@ class AddProductVC : CustomViewController {
     var images      = [String:Any]()
     weak var delegate : AddProductDelegate?
     private let dataSource = AddProductDataModel()
+    private let dataSource1 = ProductDetailsDataModel()
     @IBOutlet weak var view_DashedView : UIView!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_ProductPic : UIImageView!
@@ -31,20 +33,12 @@ class AddProductVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.delegate = self
+        dataSource.delegate2 = self
+        dataSource1.delegate = self
         self.hideKeyboardWhenTappedAround()
         setTitle()
-        if isEdit ?? false
-        {
-            Connection.svprogressHudShow(title: "Please Wait", view: self)
-            dataSource.productID = self.productID
-            dataSource.editProduct()
-        }
-        else
-        {
-            
-        }
         setDelegates()
-        dataSource.delegate = self
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         self.view.backgroundColor = UIColor.clear
     }
@@ -53,6 +47,9 @@ class AddProductVC : CustomViewController {
         if isEdit ?? false
         {
             lbl_Title.text = "Edit Product"
+            Connection.svprogressHudShow(view: self)
+            dataSource1.productID = self.productID
+            dataSource1.getProductDetails()
         }
         else
         {
@@ -104,17 +101,64 @@ class AddProductVC : CustomViewController {
         }
         else
         {
-            Connection.svprogressHudShow(title: "Please Wait", view: self)
-            dataSource.productPic = pickedImage
+            Connection.svprogressHudShow(view: self)
+            dataSource.productPic = img_ProductPic.image
             dataSource.productName = txt_ProductName.text ?? ""
             dataSource.productPrice = txt_ProductPrice.text ?? ""
             dataSource.productDescription = txt_Description.text ?? ""
-            dataSource.addProduct()
+            if isEdit ?? false
+            {
+                dataSource.productID = self.productID
+                dataSource.editProduct()
+            }
+            else
+            {
+                dataSource.addProduct()
+            }
             //        self.dismiss(animated: true) { [weak self] in
             //            self?.delegate?.isAddedProduct()
             //        }
         }
         
+    }
+}
+extension AddProductVC : ProductDetailsDataModelDelegate
+{
+    func didRecieveDataUpdate2(data: ProductDetailsModel)
+    {
+        print("ProductInfoModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
+            let imageString = data.data?.image ?? ""
+            self.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            self.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "ticket_img"))
+            self.view_DashedView.isHidden = true
+            self.txt_ProductName.text = data.data?.name
+            self.txt_ProductPrice.text = data.data?.price
+            self.txt_Description.text = data.data?.dataDescription
+//            guard let callback = self.callback else { return }
+//            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? ""])
+//            self.dismiss(animated: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError2(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
     }
 }
 extension AddProductVC : AddProductDataModelDelegate
@@ -150,13 +194,14 @@ extension AddProductVC : AddProductDataModelDelegate
 }
 extension AddProductVC : EditProductDataModelDelegate
 {
-    func didRecieveDataUpdate2(data: AddProductModel)
+    func didRecieveDataUpdate3(data: AddProductModel)
     {
         print("EditProductModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
             self.navigationController?.popViewController(animated: false)
+            self.delegate?.isAddedProduct()
         }
         else
         {
@@ -164,7 +209,7 @@ extension AddProductVC : EditProductDataModelDelegate
         }
     }
     
-    func didFailDataUpdateWithError2(error: Error)
+    func didFailDataUpdateWithError3(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

@@ -7,141 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2B0E3411-3D0B-436D-836D-3BFE1A9D0E7D"
+            uuid = "DF889EA7-4137-4BC4-8733-327EB9988D28"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/Product Details/ProductDetailVC.swift"
+            filePath = "Paypaz/VCs/Add product/View Model/AddProductDataModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "didRecieveDataUpdate(data:)"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "editProduct()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A2A757F6-0356-4E65-9D92-51E66DEC190F"
+            uuid = "31A8968B-0355-4249-8EF4-79F61B4DDDE6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/View All Product/ViewAllProductsVC+Extensions.swift"
+            filePath = "Paypaz/VCs/Login signup process/Credit Debit CardVC/View Model/CreditDebitCardDataModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "didRecieveDataUpdate(data:)"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "createCard()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/View All Product/ViewAllProductsVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "ViewAllProductsVC"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52 - 933f208fd124031a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Paypaz.ViewAllProductsVC.products.getter : Swift.Array&lt;Paypaz.MyProducts&gt;"
-                  moduleName = "Paypaz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Documents/Ajay%20Github/Paypaz/Paypaz/VCs/View%20All%20Product/ViewAllProductsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "122">
-               </Location>
-               <Location
-                  uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52 - d1ad3c3154be6316"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Paypaz.ViewAllProductsVC.products.setter : Swift.Array&lt;Paypaz.MyProducts&gt;"
-                  moduleName = "Paypaz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Documents/Ajay%20Github/Paypaz/Paypaz/VCs/View%20All%20Product/ViewAllProductsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "148">
-               </Location>
-               <Location
-                  uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52 - e5a815880a9aa4e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Paypaz.ViewAllProductsVC.products.modify : Swift.Array&lt;Paypaz.MyProducts&gt;"
-                  moduleName = "Paypaz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Documents/Ajay%20Github/Paypaz/Paypaz/VCs/View%20All%20Product/ViewAllProductsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "18">
-               </Location>
-               <Location
-                  uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52 - 22d37bfdaee51616"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Paypaz.ViewAllProductsVC.products.modify : Swift.Array&lt;Paypaz.MyProducts&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Paypaz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Documents/Ajay%20Github/Paypaz/Paypaz/VCs/View%20All%20Product/ViewAllProductsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52 - 72c3c6d023e2236f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Paypaz.ViewAllProductsVC.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Paypaz.ViewAllProductsVC"
-                  moduleName = "Paypaz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Documents/Ajay%20Github/Paypaz/Paypaz/VCs/View%20All%20Product/ViewAllProductsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "438">
-               </Location>
-               <Location
-                  uuid = "0F091CC2-77BF-47AF-9345-D43735DC6B52 - 24d8952eb15792b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Paypaz.ViewAllProductsVC.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Paypaz.ViewAllProductsVC&gt;"
-                  moduleName = "Paypaz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Documents/Ajay%20Github/Paypaz/Paypaz/VCs/View%20All%20Product/ViewAllProductsVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "379">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

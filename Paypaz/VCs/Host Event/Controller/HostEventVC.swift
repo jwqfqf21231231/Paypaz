@@ -110,7 +110,7 @@ class HostEventVC : CustomViewController {
         setTitle()
         if self.eventID != ""
         {
-            Connection.svprogressHudShow(title: "Please Wait", view: self)
+            Connection.svprogressHudShow(view: self)
             dataSource2.delegate = self
             dataSource2.delegate2 = self
             dataSource2.eventID = self.eventID
@@ -374,7 +374,7 @@ class HostEventVC : CustomViewController {
         }
         else
         {
-            Connection.svprogressHudShow(title: "Please wait", view: self)
+            Connection.svprogressHudShow(view: self)
             dataSource.eventImg = img_EventPic.image
             dataSource.name = txt_EventName.text ?? ""
             dataSource.typeId = selectedEventId ?? ""
@@ -537,6 +537,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
                 self.img_EventPic.sd_setImage(with: URL(string: url+(data.data?.image ?? "")), placeholderImage: UIImage(named: "profile_c"))
+                self.view_Dashed.isHidden = true
                 self.isPublicStatus = data.data?.ispublic ?? ""
                 self.isPublicStatus == "1" ? self.isPublic.setOn(true, animated: false) : self.isPublic.setOn(false, animated: false)
                 self.isInviteMemberStatus = data.data?.isinviteMember ?? ""

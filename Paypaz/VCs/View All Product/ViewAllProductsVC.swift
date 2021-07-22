@@ -31,7 +31,7 @@ class ViewAllProductsVC : CustomViewController {
     }
     func getAllProducts()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.eventID = eventID
         dataSource.getProducts()
     }

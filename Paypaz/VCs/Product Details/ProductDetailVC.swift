@@ -31,19 +31,20 @@ class ProductDetailVC : CustomViewController {
     }
     private func getProductDetails()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.productID = self.productID
         dataSource.getProductDetails()
     }
     private func getEventName()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource2.eventID = eventID
         dataSource2.getEvent()
     }
     //MARK:- --- Action ---
     @IBAction func btn_back (_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
+        self.delegate?.isClickedButton()
     }
     
     @IBAction func btn_Edit(_ sender:UIButton)
@@ -52,17 +53,25 @@ class ProductDetailVC : CustomViewController {
         {
             vc.isEdit = true
             vc.productID = self.productID
+            vc.delegate = self
         }
     }
     @IBAction func btn_Delete(_ sender:UIButton)
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.deleteProduct()
+    }
+}
+extension ProductDetailVC : AddProductDelegate
+{
+    func isAddedProduct() {
+        Connection.svprogressHudShow(view: self)
+        dataSource.getProductDetails()
     }
 }
 extension ProductDetailVC : ProductDetailsDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ProductDetailsModel)
+    func didRecieveDataUpdate2(data: ProductDetailsModel)
     {
         print("ProductDetailsModelData = ",data)
         Connection.svprogressHudDismiss(view: self)

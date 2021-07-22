@@ -69,7 +69,7 @@ class EditProfileVC: CustomViewController {
     
     private func getUserDetails()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource1.getUserDetails()
         
     }
@@ -112,7 +112,7 @@ class EditProfileVC: CustomViewController {
         }
         else
         {
-            Connection.svprogressHudShow(title: "Please Wait", view: self)
+            Connection.svprogressHudShow(view: self)
             dataSource.firstName = txt_firstName.text!
             dataSource.lastName = txt_lastName.text!
             dataSource.city = txt_City.text!

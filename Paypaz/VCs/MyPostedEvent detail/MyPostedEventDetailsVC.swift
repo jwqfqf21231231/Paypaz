@@ -48,13 +48,13 @@ class MyPostedEventDetailsVC : CustomViewController {
     }
     private func getEvent()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.getEvent()
     }
     private func getProducts()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.getProducts()
         
     }

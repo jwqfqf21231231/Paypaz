@@ -88,7 +88,7 @@ class PasscodeVC : CustomViewController {
         }
      // MARK:- --- Action ----
     @IBAction func btn_ForgotPasscode(_ sender:UIButton) {
-        Connection.svprogressHudShow(title: "Please wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.getOTP()
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
@@ -100,7 +100,7 @@ class PasscodeVC : CustomViewController {
             print(savedPasscode)
             if(typedPasscode == savedPasscode)
             {
-                Connection.svprogressHudShow(title: "Please Wait", view: self)
+                Connection.svprogressHudShow(view: self)
                 dataSource.validatePasscode()
             }
             else

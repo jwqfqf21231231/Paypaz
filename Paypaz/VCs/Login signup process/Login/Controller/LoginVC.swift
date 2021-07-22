@@ -61,7 +61,7 @@ class LoginVC : CustomViewController {
         }
         else
         {
-            Connection.svprogressHudShow(title: "Please Wait", view: self)
+            Connection.svprogressHudShow(view: self)
             dataSource.email = email!
             dataSource.password = password!
             dataSource.requestLogIn()

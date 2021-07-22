@@ -84,6 +84,7 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
 extension ViewAllProductsVC : PopupDelegate
 {
     func isClickedButton() {
+        Connection.svprogressHudShow(view: self)
         getAllProducts()
     }
 }

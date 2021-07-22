@@ -25,7 +25,7 @@ class CreateCardDataModel: NSObject
     weak var delegate1 : BankInfoDataModelDelegate?
     let sharedInstance = Connection()
     
-    var bankName = ""
+    var bankID = ""
     var cardNumber = ""
     var expDate = ""
     var cardHolderName = ""
@@ -68,7 +68,7 @@ class CreateCardDataModel: NSObject
         let url =  APIList().getUrlString(url: .CREATECARD)
         
         let parameter : Parameters = [
-            "bankName" : bankName,
+            "bankName" : bankID,
             "cardNumber" : cardNumber,
             "expDate" : expDate,
             "cardHolderName" : cardHolderName,

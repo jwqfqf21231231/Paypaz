@@ -41,7 +41,7 @@ class ChooseEventTypeVC: CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.delegate = self
         dataSource.getEventTypes()
         // Do any additional setup after loading the view.

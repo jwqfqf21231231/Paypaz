@@ -24,7 +24,7 @@ class MyEventsListVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("View Did load Executed")
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.delegate = self
         dataSource.getMyEvents()
         // Do any additional setup after loading the view.

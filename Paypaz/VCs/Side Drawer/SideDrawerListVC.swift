@@ -41,7 +41,7 @@ class SideDrawerListVC : CustomViewController {
   
     private func getUserDetails()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.getUserDetails()
         
     }

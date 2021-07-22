@@ -52,7 +52,7 @@ class ContactUsVC : CustomViewController {
         }
         else
         {
-            Connection.svprogressHudShow(title: "Please Wait", view: self)
+            Connection.svprogressHudShow(view: self)
             dataSource.email = txt_Email.text ?? ""
             dataSource.subject = txt_Subject.text ?? ""
             dataSource.message = txt_Message.text

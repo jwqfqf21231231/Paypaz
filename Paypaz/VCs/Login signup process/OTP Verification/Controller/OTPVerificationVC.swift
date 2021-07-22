@@ -120,7 +120,7 @@ class OTPVerificationVC : CustomViewController {
     // MARK:- --- Action ----
     @IBAction func btn_Resend(_ sender:UIButton) {
         dataSource.email = email
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.resendOTP()
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
@@ -136,7 +136,7 @@ class OTPVerificationVC : CustomViewController {
                 {
                     dataSource.otp = verifyOTP
                     dataSource.doForgotPassword = true
-                    Connection.svprogressHudShow(title: "Please wait", view: self)
+                    Connection.svprogressHudShow(view: self)
                     dataSource.verifyOTP()
                 }
                 else
@@ -149,7 +149,7 @@ class OTPVerificationVC : CustomViewController {
                 if passcodeOTP == otpString
                 {
                     dataSource.passcodeOTP = passcodeOTP
-                    Connection.svprogressHudShow(title: "Please wait", view: self)
+                    Connection.svprogressHudShow(view: self)
                     dataSource.forgotPasscodeOTPVerify()
                 }
                 else
@@ -164,7 +164,7 @@ class OTPVerificationVC : CustomViewController {
                 dataSource.password = password
                 dataSource.otp = verifyOTP
                 dataSource.userTypedOTP = otpString
-                Connection.svprogressHudShow(title: "Please Wait", view: self)
+                Connection.svprogressHudShow(view: self)
                 dataSource.verifyOTP()
             }
         }

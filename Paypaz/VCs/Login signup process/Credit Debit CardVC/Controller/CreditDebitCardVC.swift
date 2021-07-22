@@ -12,6 +12,7 @@ class CreditDebitCardVC : CustomViewController {
     
     //Drop Down
     var banks = [String]()
+    var bankID_Names = [String:String]()
     var selected:String?
     
     //Date Picker
@@ -39,7 +40,7 @@ class CreditDebitCardVC : CustomViewController {
     }
     private func getBankInfo()
     {
-        Connection.svprogressHudShow(title: "Please Wait", view: self)
+        Connection.svprogressHudShow(view: self)
         dataSource.getBanks()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +90,7 @@ class CreditDebitCardVC : CustomViewController {
     {
         isClicked = true
         sender.addDropDown(forDataSource: banks) { [weak self](item) in
-            self?.selected = item
+            self?.selected = self?.bankID_Names[item]
             if let btn = self?.view.viewWithTag(101) as? UIButton{
                 btn.setTitleColor(UIColor.black, for: .normal)
                 btn.setTitle(item, for: .normal)
@@ -126,8 +127,8 @@ class CreditDebitCardVC : CustomViewController {
             }
             else
             {
-                Connection.svprogressHudShow(title: "Please Wait", view: self)
-                dataSource.bankName = selected ?? ""
+                Connection.svprogressHudShow(view: self)
+                dataSource.bankID = selected ?? ""
                 dataSource.cardNumber = txt_cardNumber.text ?? ""
                 dataSource.expDate = txt_expDate.text ?? ""
                 dataSource.cardHolderName = txt_cardHolderName.text ?? ""
@@ -154,6 +155,7 @@ extension CreditDebitCardVC : BankInfoDataModelDelegate
             for i in 0..<banks.count
             {
                 self.banks.append(banks[i].bankName ?? "")
+                self.bankID_Names[banks[i].bankName ?? ""] = banks[i].id ?? ""
             }
         }
         else

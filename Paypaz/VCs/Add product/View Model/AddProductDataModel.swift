@@ -15,8 +15,8 @@ protocol AddProductDataModelDelegate:class {
     
 }
 protocol EditProductDataModelDelegate:class {
-    func didRecieveDataUpdate2(data:AddProductModel)
-    func didFailDataUpdateWithError2(error:Error)}
+    func didRecieveDataUpdate3(data:AddProductModel)
+    func didFailDataUpdateWithError3(error:Error)}
 class AddProductDataModel: NSObject
 {
     weak var delegate : AddProductDataModelDelegate?
@@ -64,7 +64,7 @@ class AddProductDataModel: NSObject
     }
     func editProduct()
     {
-        let url =  APIList().getUrlString(url: .ADDPRODUCT)
+        let url =  APIList().getUrlString(url: .UPDATEPRODUCT)
         let parameter : [String:String] = [
             "name" : productName,
             "description" : productDescription,
@@ -80,18 +80,18 @@ class AddProductDataModel: NSObject
                                                 do
                                                 {
                                                     let response = try JSONDecoder().decode(AddProductModel.self, from: result!)
-                                                    self.delegate?.didRecieveDataUpdate(data: response)
+                                                    self.delegate2?.didRecieveDataUpdate3(data: response)
                                                 }
                                                 catch let error as NSError
                                                 {
-                                                    self.delegate?.didFailDataUpdateWithError(error: error)
+                                                    self.delegate2?.didFailDataUpdateWithError3(error: error)
                                                 }
                                             }
                                         },
                                        failure:
                                         {
                                             (error) in
-                                            self.delegate?.didFailDataUpdateWithError(error: error)
+                                            self.delegate2?.didFailDataUpdateWithError3(error: error)
                                             
                                         })
     }
