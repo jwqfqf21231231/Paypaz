@@ -7,36 +7,44 @@
 //
 
 import UIKit
-
-class CreditDebitCardVC : CustomViewController {
+import CCValidator
+import CreditCardValidator
+class CreditDebitCardVC : CardViewController {
     
     //Drop Down
     var banks = [String]()
     var bankID_Names = [String:String]()
     var selected:String?
+    var isClicked : Bool?
     
     //Date Picker
-    var datePicker:UIDatePicker!
-    
+    var picker = MonthYearPickerView()
     
     var isAddingNewCard : Bool?
-    var isClicked : Bool?
     private let dataSource = CreateCardDataModel()
     @IBOutlet weak var txt_cardNumber : RoundTextField!
     @IBOutlet weak var txt_expDate : RoundTextField!
     @IBOutlet weak var txt_cardHolderName : RoundTextField!
     @IBOutlet weak var txt_cvv : RoundTextField!
+    @IBOutlet weak var img_CardImage : UIImageView!
     @IBOutlet weak var btn_Skip : RoundButton!
     
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
         self.hideKeyboardWhenTappedAround()
         dataSource.delegate = self
         dataSource.delegate1 = self
         self.getBankInfo()
-        txt_expDate.addTarget(self, action: #selector(giveExpDate), for: .editingDidBegin)
         // Do any additional setup after loading the view.
+    }
+    private func setDelegates()
+    {
+        txt_expDate.delegate = self
+        txt_cvv.delegate = self
+        txt_cardNumber.delegate = self
+        txt_cardHolderName.delegate = self
     }
     private func getBankInfo()
     {
@@ -50,41 +58,7 @@ class CreditDebitCardVC : CustomViewController {
             self.btn_Skip.alpha = 0.0
         }
     }
-    @objc func donePressed()
-    {
-        let dateFormatter=DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
-        dateFormatter.dateFormat = "MM/yyyy"
-        self.txt_expDate.text=dateFormatter.string(from: datePicker.date)
-        self.view.endEditing(true)
-    }
-    
-    func createToolBar()->UIToolbar
-    {
-        //tool bar
-        let toolBar=UIToolbar()
-        toolBar.sizeToFit()
-        //bar button item
-        let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        toolBar.setItems([doneBtn], animated: true)
-        return toolBar
-    }
-    func createDatePicker()
-    {
-        datePicker=UIDatePicker()
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.datePickerMode = .date
-        txt_expDate.inputView=datePicker
-        txt_expDate.inputAccessoryView=createToolBar()
-    }
-    @objc func giveExpDate()
-    {
-        createDatePicker()
-    }
-    
-    
-    
+   
     // MARK: - --- Action ----
     @IBAction func btn_SelectBank(_ sender:UIButton)
     {
@@ -105,36 +79,39 @@ class CreditDebitCardVC : CustomViewController {
         if isAddingNewCard ?? false {
             self.navigationController?.popViewController(animated: true)
         } else {
+            guard !(txt_cardHolderName.text?.isEmpty)! && !(txt_cardHolderName.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
+                self.showAlert(withMsg: "Please enter holder name.", withOKbtn: true)
+                return
+            }
+            guard !(txt_cardNumber.text?.isEmpty)! && !(txt_cardNumber.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
+                self.showAlert(withMsg: "Please enter card number.", withOKbtn: true)
+                return
+            }
+            guard !((txt_cardNumber.text?.count)! < 15) else {
+                self.showAlert(withMsg: "Please enter card number at least 16 charecters", withOKbtn: true)
+                return
+            }
+            guard !(txt_expDate.text?.isEmpty)! && !(txt_expDate.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
+                self.showAlert(withMsg: "Please enter expiry date.", withOKbtn: true)
+                return
+            }
+            guard !(txt_cvv.text?.isEmpty)! && !(txt_cvv.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
+                self.showAlert(withMsg: "Please enter cvv number.", withOKbtn: true)
+                return
+            }
             if isClicked == false
             {
                 self.showAlert(withMsg: "Please select Bank", withOKbtn: true)
+                return
             }
-            else if txt_cardNumber == nil
-            {
-                self.showAlert(withMsg: "Please Enter Card Number", withOKbtn: true)
-            }
-            else if txt_expDate == nil
-            {
-                self.showAlert(withMsg: "Please Enter Exp Date", withOKbtn: true)
-            }
-            else if txt_cardHolderName == nil
-            {
-                self.showAlert(withMsg: "Please Enter Card Holder Name", withOKbtn: true)
-            }
-            else if txt_cvv == nil
-            {
-                self.showAlert(withMsg: "Please Enter CVV", withOKbtn: true)
-            }
-            else
-            {
-                Connection.svprogressHudShow(view: self)
-                dataSource.bankID = selected ?? ""
-                dataSource.cardNumber = txt_cardNumber.text ?? ""
-                dataSource.expDate = txt_expDate.text ?? ""
-                dataSource.cardHolderName = txt_cardHolderName.text ?? ""
-                dataSource.cvv = txt_cvv.text ?? ""
-                dataSource.createCard()
-            }
+            
+            Connection.svprogressHudShow(view: self)
+            dataSource.bankID = selected ?? ""
+            dataSource.cardNumber = txt_cardNumber.text ?? ""
+            dataSource.expDate = txt_expDate.text ?? ""
+            dataSource.cardHolderName = txt_cardHolderName.text ?? ""
+            dataSource.cvv = txt_cvv.text ?? ""
+            dataSource.createCard()
         }
     }
     
@@ -207,3 +184,105 @@ extension CreditDebitCardVC : CreateCardDataModelDelegate
         }
     }
 }
+extension CreditDebitCardVC : UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let enteredCharString = "\(textField.text ?? "")\(string )"
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+        if textField == txt_cardNumber{
+            let maxLegnth = 19
+            if (enteredCharString.trimmingCharacters(in: .whitespaces).count == 5){
+                txt_cardNumber.insertText(" ")
+            }else if (enteredCharString.trimmingCharacters(in: .whitespaces).count == 10){
+                txt_cardNumber.insertText(" ")
+            }else if (enteredCharString.trimmingCharacters(in: .whitespaces).count == 15){
+                txt_cardNumber.insertText(" ")
+            }
+            
+            
+            return newString.length <= maxLegnth
+            
+        }else if textField == txt_cardHolderName{
+            let maxLegnth = 40
+            if (textField.text?.last == " " && string == " ") || (enteredCharString.trimmingCharacters(in: .whitespaces).count == 0){
+                return false
+            } else {
+                return newString.length <= maxLegnth
+            }
+        }else if textField == txt_cvv{
+            let maxLegnth = 3
+            if (textField.text?.last == " " && string == " ") || (enteredCharString.trimmingCharacters(in: .whitespaces).count == 0){
+                return false
+            } else {
+                return newString.length <= maxLegnth
+            }
+        }
+        
+        return true
+    }
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let field = textField as? RoundTextField {
+            field.border_Color = UIColor(named: "SkyblueColor")//UIColor.red
+            if textField == txt_expDate{
+                txt_expDate.inputView = picker
+            }
+            
+        }
+        //  textField.layer.borderColor = UIColor.red.cgColor
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        if let field = textField as? RoundTextField {
+            if textField == txt_expDate{
+                picker.onDateSelected = { (month: Int, year: Int) in
+                    self.txt_expDate.text = "\(String(format: "%02d", month))/\(String(year))" }
+            }else if textField == txt_cardNumber{
+                
+                // MARK:- CARD NAME & CARD VALIDATER CHECK
+                let card_type = CreditCardValidator(txt_cardNumber.text ?? "")
+                let card_validater = CCValidator.validate(creditCardNumber: txt_cardNumber.text!)
+                if  card_validater == true{
+                    if let type = card_type.type{
+                        print("Card Name : \(type)") // Visa, Mastercard, Amex etc.
+                        let card_Name = type
+                        switch card_Name {
+                        case .visa:
+                            self.img_CardImage.image = UIImage(named: "visa")
+                        case .masterCard:
+                            self.img_CardImage.image = UIImage(named: "master")
+                        case .maestro:
+                            self.img_CardImage.image = UIImage(named: "maestro")
+                        case .jcb:
+                            self.img_CardImage.image = UIImage(named: "jcb")
+                        case .amex:
+                            self.img_CardImage.image = UIImage(named: "Amex")
+                        case .dinersClub:
+                            self.img_CardImage.image = UIImage(named: "Dinnar")
+                        case .discover:
+                            self.img_CardImage.image = UIImage(named: "Discover")
+                        case .unionPay:
+                            self.img_CardImage.image = UIImage(named: "union")
+                        case .mir:
+                            self.img_CardImage.image = UIImage(named: "mir")
+                        default:
+                            self.img_CardImage.image = UIImage(named: "visa")
+                        }
+                    }
+                }else{
+                    txt_cardNumber.text! = ""
+                    let a = "Card is not valid"
+                    self.showAlert(withMsg: a, withOKbtn: true)
+                }
+            }
+            field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
+            
+            
+        }
+    }
+}
+

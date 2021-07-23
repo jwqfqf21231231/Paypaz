@@ -25,4 +25,6 @@ target 'Paypaz' do
   pod 'DropDown'
   pod 'GooglePlaces'
   pod 'GoogleMaps'
+  pod 'CreditCardValidator'
+  pod 'CCValidator'
 end

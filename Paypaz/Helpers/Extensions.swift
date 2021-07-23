@@ -114,7 +114,7 @@ class CustomViewController : UIViewController {
 }
 //MARK:- ----------------------------
 //MARK:- ---- Text field delegate ---
-extension UIViewController : UITextFieldDelegate{
+extension CustomViewController : UITextFieldDelegate{
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
@@ -148,7 +148,7 @@ extension UIViewController : UITextFieldDelegate{
         }
     }
 }
-extension UIViewController : UITextViewDelegate{
+extension CustomViewController : UITextViewDelegate{
     public func textViewDidBeginEditing(_ textView: UITextView) {
         if let view = textView as? RoundTextView{
             view.border_Color = UIColor(named: "SkyblueColor")
@@ -185,13 +185,6 @@ extension String
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: self)
-        
-    }
-    func isEnteringContact() -> Bool
-    {
-        let contactRegEx = "[0-9]"
-        let contactTest = NSPredicate(format:"SELF MATCHES %@", contactRegEx)
-        return contactTest.evaluate(with: self)
     }
 }
 extension UIButton{
