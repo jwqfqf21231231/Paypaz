@@ -41,13 +41,17 @@ enum urlString:String
     case UPDATEEVENT = "user/event/update"
     case DELETEEVENT = "user/event/delete/"
     case EVENTTYPES = "home/event/types"
-    case ADDPRODUCT = "user/product/add"
     case MYEVENTSLIST = "user/events"
     case PARTICULAREVENTINFO = "home/event/detail"
+    case GETEVENTACCTOTYPES = "home/type/events"
+    case ADDFAV = "user/event/favourite/add"
+
+    case ADDPRODUCT = "user/product/add"
     case MYPRODUCTS = "user/event/products"
     case PARTICULARPRODUCTINFO = "home/product/detail"
     case UPDATEPRODUCT = "user/product/update"
     case DELETEPRODUCT = "user/product/delete/"
+    
     case CONTACTUS = "user/contactus"
     
     case USERIMAGE = "uploads/users/"

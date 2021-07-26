@@ -19,7 +19,10 @@ extension ChooseEventTypeVC:UICollectionViewDelegate,UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if doBuyEvent ?? false
         {
-            _ = pushToVC("BuyEventVC")
+            if let vc = pushToVC("BuyEventVC") as? BuyEventVC
+            {
+                vc.typeID = eventData[indexPath.row].id ?? ""
+            }
         }
         else
         {

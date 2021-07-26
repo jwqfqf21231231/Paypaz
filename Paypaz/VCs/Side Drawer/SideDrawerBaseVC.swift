@@ -13,7 +13,6 @@ class SideDrawerBaseVC : LGSideMenuController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.sideMenuController?.leftViewPresentationStyle = .scaleFromBig
     }
     

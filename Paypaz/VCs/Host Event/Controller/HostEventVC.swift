@@ -182,6 +182,7 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
             dateFormatter.dateFormat = "yyyy-MM-dd"
+            
             let dateString = dateFormatter.string(from: picker.date)
             self.startDate = dateString
             //self.btn_StartDate.setTitleColor(.black, for: .normal)
@@ -235,20 +236,72 @@ class HostEventVC : CustomViewController {
         switch field.tag  {
         case 0:
             picker.datePickerMode = .date
+            picker.minimumDate = Date()
             txt_StartDate.inputView = picker
             txt_StartDate.inputAccessoryView = createToolBar()
         case 1:
-            picker.datePickerMode = .date
-            txt_EndDate.inputView = picker
-            txt_EndDate.inputAccessoryView = createToolBar()
+            if startDate == ""
+            {
+                self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
+                txt_EndDate.resignFirstResponder()
+                break
+            }
+            else
+            {
+                picker.datePickerMode = .date
+                txt_EndDate.inputView = picker
+                txt_EndDate.inputAccessoryView = createToolBar()
+            }
         case 2:
-            picker.datePickerMode = .time
-            txt_StartTime.inputView = picker
-            txt_StartTime.inputAccessoryView = createToolBar()
+            if startDate == ""
+            {
+                self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
+                txt_StartTime.resignFirstResponder()
+                break
+            }
+            if endDate == ""
+            {
+                self.view.makeToast("First Enter End Date", duration: 1, position: .center)
+                txt_StartTime.resignFirstResponder()
+                break
+            }
+            if startDate == "" && endDate == ""
+            {
+                self.view.makeToast("First Enter Start Date and End Date", duration: 1, position: .center)
+                txt_StartTime.resignFirstResponder()
+                break
+            }
+            else
+            {
+                picker.datePickerMode = .time
+                txt_StartTime.inputView = picker
+                txt_StartTime.inputAccessoryView = createToolBar()
+            }
         default:
-            picker.datePickerMode = .time
-            txt_EndTime.inputView = picker
-            txt_EndTime.inputAccessoryView = createToolBar()
+            if startDate == ""
+            {
+                self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
+                txt_EndTime.resignFirstResponder()
+                break
+            }
+            if startDate == "" && endDate == ""
+            {
+                self.view.makeToast("First Enter Start Date and End Date", duration: 1, position: .center)
+                txt_EndTime.resignFirstResponder()
+                break
+            }
+            if startTime == ""
+            {
+                self.view.makeToast("First Enter Start Time", duration: 1, position: .center)
+                txt_EndTime.resignFirstResponder()
+                break
+            }
+            else
+            {
+                picker.datePickerMode = .time
+                txt_EndTime.inputView = picker
+                txt_EndTime.inputAccessoryView = createToolBar()
+            }
         }
         
     }

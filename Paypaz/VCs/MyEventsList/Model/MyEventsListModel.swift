@@ -22,4 +22,5 @@ struct Event: Codable {
     let image, startDate, endDate, startTime: String?
     let endTime, ispublic, isinviteMember, paymentType: String?
     let memberID, status, createdDate, updatedDate: String?
+    let firstName, lastName, userLatitude, userLongitude: String?
 }

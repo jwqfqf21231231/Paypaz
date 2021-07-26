@@ -7,25 +7,38 @@
 //
 
 import UIKit
-
+import SDWebImage
 extension BuyEventVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return filteredEventData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BuyEventTblCell")  as? BuyEventTblCell
             else { return BuyEventTblCell() }
         
-        
        // self.addTapGestureOnImg(cell.img_event)
-        
+        cell.img_event.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
+        cell.img_event.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "event_img"))
+        cell.txt_eventName.text = filteredEventData[indexPath.row].name
+        cell.txt_personName.text = (filteredEventData[indexPath.row].firstName ?? "")+" "+(filteredEventData[indexPath.row].lastName ?? "")
+        cell.txt_eventPrice.text = filteredEventData[indexPath.row].price
         cell.btn_addToCart.addTarget(self, action: #selector(self.clicked_btn_addToCart(_:)), for: .touchUpInside)
         cell.btn_Buy.addTarget(self, action: #selector(self.clicked_btn_Buy(_:)), for: .touchUpInside)
+        cell.btn_fav.addTarget(self, action: #selector(self.clicked_btn_Fav(_:)), for: .touchUpInside)
+        cell.btn_fav.tag = Int(filteredEventData[indexPath.row].id ?? "") ?? 0
         return cell
     }
-    
+    @objc func clicked_btn_Fav(_ sender: UIButton)
+    {
+        dataSource.delegate1 = self
+        sender.setImage(UIImage(named: "red"), for: .normal)
+        Connection.svprogressHudShow(view: self)
+        dataSource.eventID = "\(sender.tag)"
+        dataSource.favEvent()
+    }
     private func addTapGestureOnImg(_ img:RoundImage) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.clicked_img_Event(_:)))
         img.addGestureRecognizer(tap)

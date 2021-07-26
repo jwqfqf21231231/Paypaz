@@ -14,6 +14,7 @@
 		0437245926AA86C900840D15 /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245826AA86C900840D15 /* CardExtension.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
+		04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */; };
 		0AD485829E4F7A0568A05ACF /* Pods_Paypaz_PaypazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */; };
 		0C00BFDA268EE03E00BC3267 /* UserDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */; };
 		0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */; };
@@ -190,6 +191,7 @@
 		0437245826AA86C900840D15 /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
+		04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyEventDataModel.swift; sourceTree = "<group>"; };
 		076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaypazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsDataModel.swift; sourceTree = "<group>"; };
 		0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
@@ -419,6 +421,24 @@
 				0431B71E269C6BD00082EAB3 /* SuccessModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		04D66CC026AED1B0003E976E /* Buy Event */ = {
+			isa = PBXGroup;
+			children = (
+				04D66CC126AED1C5003E976E /* View Model */,
+				44F76666263A902A007F78CB /* BuyEventVC.swift */,
+				44F76668263A9082007F78CB /* BuyEventVC+Extensions.swift */,
+			);
+			path = "Buy Event";
+			sourceTree = "<group>";
+		};
+		04D66CC126AED1C5003E976E /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 		0C00BFC8268EDDA500BC3267 /* ViewModel */ = {
@@ -1344,9 +1364,8 @@
 		44F76665263A9015007F78CB /* Buy Event */ = {
 			isa = PBXGroup;
 			children = (
+				04D66CC026AED1B0003E976E /* Buy Event */,
 				0C2234162693F0F10014B06A /* Choose Event */,
-				44F76666263A902A007F78CB /* BuyEventVC.swift */,
-				44F76668263A9082007F78CB /* BuyEventVC+Extensions.swift */,
 				44F76671263AB645007F78CB /* FilterVC.swift */,
 			);
 			path = "Buy Event";
@@ -1734,6 +1753,7 @@
 				445433D4262D600200443AE1 /* CreateProfileVC.swift in Sources */,
 				44F76676263ABF64007F78CB /* AddCardDetailsVC.swift in Sources */,
 				44C8F2E6261F2847000F03DB /* LoginVC.swift in Sources */,
+				04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */,
 				44F76670263A9538007F78CB /* ProductListVC+Extensions.swift in Sources */,
 				0C388B29268F4F90008AED6F /* AddProductDataModel.swift in Sources */,
 				44509ED52631612A000B19F3 /* NotificationsListVC.swift in Sources */,
