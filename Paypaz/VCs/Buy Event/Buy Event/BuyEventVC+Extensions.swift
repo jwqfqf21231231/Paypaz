@@ -59,7 +59,9 @@ extension BuyEventVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        _ = self.pushToVC("EventDetailVC")
+        if let vc = self.pushToVC("EventDetailVC") as? EventDetailVC{
+            vc.eventID = filteredEventData[indexPath.row].id ?? ""
+        }
     }
 }
 

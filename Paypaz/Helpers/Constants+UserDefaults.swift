@@ -89,6 +89,18 @@ extension UserDefaults
         }
         return string(forKey: UserDefaultsKeys.email.rawValue) ?? ""
     }
+    func setNotificationStatus(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.notificationStatus.rawValue)
+    }
+    func getNotificationStatus() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.notificationStatus.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.notificationStatus.rawValue) ?? ""
+    }
 }
 
 
@@ -102,5 +114,6 @@ enum UserDefaultsKeys : String
     case passcode
     case pin
     case email
+    case notificationStatus
 }
 
