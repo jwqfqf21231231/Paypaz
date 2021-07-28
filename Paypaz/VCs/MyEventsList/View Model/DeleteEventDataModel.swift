@@ -19,6 +19,7 @@ class DeleteEventDataModel: NSObject
     weak var delegate: DeleteEventDataModelDelegate?
     let sharedInstance = Connection()
     var eventID = ""
+    
     func deleteEvent()
     {
         

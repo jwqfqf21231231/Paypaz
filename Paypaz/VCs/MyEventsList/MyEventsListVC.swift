@@ -23,18 +23,12 @@ class MyEventsListVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("View Did load Executed")
         Connection.svprogressHudShow(view: self)
         dataSource.delegate = self
         dataSource.getMyEvents()
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        print("View will Appear Executed")
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        print("View did Appear Executed")
-    }
+    
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)

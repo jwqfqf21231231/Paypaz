@@ -49,6 +49,7 @@ extension MyEventsListVC : UITableViewDelegate {
 extension MyEventsListVC : PopupDelegate {
     func isClickedButton() {
         //Connection.svprogressHudShow(view: self)
+        
         dataSource.getMyEvents()
     }
 }
@@ -85,6 +86,10 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         }
         else
         {
+            self.events = []
+            DispatchQueue.main.async {
+                self.tableView_Events.reloadData()
+            }
             self.view.makeToast(data.message ?? "", duration: 3, position: .center)
            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }

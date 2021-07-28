@@ -137,6 +137,10 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
+            self.products = []
+            DispatchQueue.main.async {
+                self.collectionView_Products.reloadData()
+            }
             self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
             // self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
