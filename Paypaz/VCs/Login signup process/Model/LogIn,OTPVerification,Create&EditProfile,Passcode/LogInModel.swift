@@ -32,3 +32,6 @@ struct DataClass2: Codable {
         case status, createdDate, updatedDate, token
     }
 }
+struct CityCodable:Codable {
+    var id, name :String?
+}

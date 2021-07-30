@@ -11,6 +11,7 @@ PODS:
   - GooglePlaces (5.0.0)
   - IQKeyboardManagerSwift (6.5.5)
   - LGSideMenuController (3.1.1)
+  - libPhoneNumber-iOS (0.9.15)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - GooglePlaces
   - IQKeyboardManagerSwift
   - LGSideMenuController
+  - libPhoneNumber-iOS
   - SDWebImage
   - SVProgressHUD
   - Toast-Swift (~> 5.0.1)
@@ -40,6 +42,7 @@ SPEC REPOS:
     - GooglePlaces
     - IQKeyboardManagerSwift
     - LGSideMenuController
+    - libPhoneNumber-iOS
     - SDWebImage
     - SVProgressHUD
     - Toast-Swift
@@ -53,10 +56,11 @@ SPEC CHECKSUMS:
   GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   LGSideMenuController: 04c679441ea9a9ba5df6a48a5b43b340a1d5caaa
+  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: c4af51aabf68bf111e91cbcd08e94dffd3747d90
+PODFILE CHECKSUM: 172015dcde0432a86e8c529b5c9ea353e4cc6d40
 
 COCOAPODS: 1.8.4

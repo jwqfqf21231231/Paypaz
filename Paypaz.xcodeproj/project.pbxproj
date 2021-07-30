@@ -17,6 +17,8 @@
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E28A26B0345100333E94 /* NotificationDataModel.swift */; };
+		04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7D72B26B3C77300747777 /* CountryListTable.swift */; };
+		04C7D73226B3D59800747777 /* CountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C7D73126B3D59800747777 /* CountryCodes.json */; };
 		04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */; };
 		0AD485829E4F7A0568A05ACF /* Pods_Paypaz_PaypazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */; };
 		0C00BFDA268EE03E00BC3267 /* UserDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */; };
@@ -197,6 +199,8 @@
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		04B5E28A26B0345100333E94 /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
+		04C7D72B26B3C77300747777 /* CountryListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTable.swift; sourceTree = "<group>"; };
+		04C7D73126B3D59800747777 /* CountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
 		04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyEventDataModel.swift; sourceTree = "<group>"; };
 		076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaypazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsDataModel.swift; sourceTree = "<group>"; };
@@ -443,6 +447,14 @@
 				04B5E28A26B0345100333E94 /* NotificationDataModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		04C7D73026B3D59800747777 /* JsonFile */ = {
+			isa = PBXGroup;
+			children = (
+				04C7D73126B3D59800747777 /* CountryCodes.json */,
+			);
+			path = JsonFile;
 			sourceTree = "<group>";
 		};
 		04D66CC026AED1B0003E976E /* Buy Event */ = {
@@ -1033,6 +1045,7 @@
 				0C388AF7268F1BBC008AED6F /* Passcode */,
 				445433D8262D609C00443AE1 /* Create PIN */,
 				445433DB262D683600443AE1 /* Credit Debit CardVC */,
+				04C7D72B26B3C77300747777 /* CountryListTable.swift */,
 			);
 			path = "Login signup process";
 			sourceTree = "<group>";
@@ -1186,6 +1199,7 @@
 		44C8F29C261F1BD2000F03DB /* Paypaz */ = {
 			isa = PBXGroup;
 			children = (
+				04C7D73026B3D59800747777 /* JsonFile */,
 				0C7DF801268D65C90049E411 /* API + Connection */,
 				44C8F2D9261F26C1000F03DB /* Font */,
 				44C8F2CD261F1C09000F03DB /* Helpers */,
@@ -1532,6 +1546,7 @@
 				44C8F2E2261F26DB000F03DB /* Segoe UI.ttf in Resources */,
 				44C8F2E0261F26DB000F03DB /* seguisb.ttf in Resources */,
 				44C8F2AA261F1BD4000F03DB /* LaunchScreen.storyboard in Resources */,
+				04C7D73226B3D59800747777 /* CountryCodes.json in Resources */,
 				44C8F2A7261F1BD4000F03DB /* Assets.xcassets in Resources */,
 				44C8F2E3261F26DB000F03DB /* Segoe UI Italic.ttf in Resources */,
 				44C8F2A5261F1BD2000F03DB /* Main.storyboard in Resources */,
@@ -1731,6 +1746,7 @@
 				445433E1262D68D200443AE1 /* HomeVC.swift in Sources */,
 				445433D7262D603C00443AE1 /* PasscodeVC.swift in Sources */,
 				445433E3262DA31F00443AE1 /* SideDrawerBaseVC.swift in Sources */,
+				04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */,
 				0CE7478D2696D47E00D1121B /* MyEventsListDataModel.swift in Sources */,
 				0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */,
 				445433DD262D685300443AE1 /* CreditDebitCardVC.swift in Sources */,

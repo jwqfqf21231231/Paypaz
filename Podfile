@@ -27,4 +27,5 @@ target 'Paypaz' do
   pod 'GoogleMaps'
   pod 'CreditCardValidator'
   pod 'CCValidator'
+  pod 'libPhoneNumber-iOS'
 end

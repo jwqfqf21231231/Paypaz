@@ -211,3 +211,72 @@ extension UIButton{
         selectTypeDropDown.show()
     }
 }
+extension UIViewController
+{
+    //MARK:-
+    //Hide keyboard on tap outside
+    func hideKeyboardWhenTappedOutside() {
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(hideSystemKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideSystemKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func showAlertPopup(withMsg message:String, withOKbtn okbutton:Bool){
+        //NOTE:- Indicator is also an alert, so when indicator will hide, then show this alert
+        // to avoid 'already presenting view controller' warning
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let attrString = NSAttributedString(string: Constants.appName, attributes: [NSAttributedString.Key.foregroundColor : UIColor(named: "BlueColor") ?? UIColor.blue])
+            let alertCon = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            alertCon.setValue(attrString, forKey: "attributedTitle")
+            
+            alertCon.view.tintColor = UIColor.darkGray
+            self.present(alertCon, animated: true, completion: nil)
+            
+            if okbutton {
+                //Show ok button
+                let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertCon.addAction(OKAction)
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {[weak self] in
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+        
+        
+    }
+    func getDataFormFile() -> ([CountiesWithPhoneModel],String)
+    {
+        var country_code = [CountiesWithPhoneModel]()
+        if let jsonFile = Bundle.main.path(forResource: "CountryCodes", ofType: "json")  {
+            let url = URL.init(fileURLWithPath: jsonFile)
+            do{
+                let data  = try Data.init(contentsOf: url)
+                let jsonData = try JSONSerialization.jsonObject(with: data, options: .init(rawValue: 0))
+                if let json = jsonData as? [[String:String]]
+                {
+                    for list in json{
+                        let data = CountiesWithPhoneModel.init(dial_code: (list["dial_code"] as? String ?? ""), countryName: (list["name"] as? String ?? ""), code: (list["code"] as? String ?? ""))
+                        country_code.append(data)
+                    }
+                    return (country_code,"")
+                }
+            }
+            catch
+            {
+                print(error.localizedDescription)
+            }
+        }
+        return ([],"error")
+    }
+    struct CountiesWithPhoneModel {
+        var dial_code :String?
+        var countryName : String?
+        var code :String?
+    }
+}
