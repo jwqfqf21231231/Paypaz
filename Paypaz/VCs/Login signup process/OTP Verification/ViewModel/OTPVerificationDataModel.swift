@@ -79,24 +79,28 @@ class OTPVerificationDataModel: NSObject
         }
         else
         {
-            var deviceToken = String()
-            if UserDefaults.standard.value(forKey: "DeviceToken") != nil{
-                deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as! String
-            }else{
-                deviceToken = ""
-            }
+//            var deviceToken = String()
+//            if UserDefaults.standard.value(forKey: "DeviceToken") != nil{
+//                deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as! String
+//            }else{
+//                deviceToken = ""
+//            }
             url =  APIList().getUrlString(url: .VERIFYOTP)
             parameter = [
-                "emailORphone":email,
-                "password":password,
-                "deviceToken":deviceToken,
-                "deviceType":"iOS",
-                "verify":userTypedOTP,
-                "latitude":UserDefaults.standard.getLatitude(),
-                "longitude":UserDefaults.standard.getLongitude(),
-                "otp":otp
+//                "emailORphone":email,
+//                "password":password,
+//                "deviceToken":deviceToken,
+//                "deviceType":"iOS",
+//                "verify":userTypedOTP,
+//                "latitude":UserDefaults.standard.getLatitude(),
+//                "longitude":UserDefaults.standard.getLongitude(),
+//                "otp":otp
+                "otp" : userTypedOTP
             ]
-            sharedInstance.requestPOST(url!, params: parameter, headers: nil,
+            headers = [
+                "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+            ]
+            sharedInstance.requestPOST(url!, params: parameter, headers: headers,
                                        success:
                                         {
                                             (JSON) in

@@ -101,6 +101,30 @@ extension UserDefaults
         }
         return string(forKey: UserDefaultsKeys.notificationStatus.rawValue) ?? ""
     }
+    func setPhoneCode(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.phoneCode.rawValue)
+    }
+    func getPhoneCode() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.phoneCode.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.phoneCode.rawValue) ?? ""
+    }
+    func setCountryCode(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.countryCode.rawValue)
+    }
+    func getCountryCode() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.countryCode.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.countryCode.rawValue) ?? ""
+    }
 }
 
 
@@ -115,5 +139,7 @@ enum UserDefaultsKeys : String
     case pin
     case email
     case notificationStatus
+    case phoneCode
+    case countryCode
 }
 

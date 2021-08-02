@@ -75,6 +75,8 @@ class LoginVC : UIViewController {
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2
+            UserDefaults.standard.setPhoneCode(value : dial_code)
+            UserDefaults.standard.setCountryCode(value: code)
             self.updatePlaceholder(code)
             print(self.country_code)
             print(self.phone_code)
@@ -104,10 +106,10 @@ class LoginVC : UIViewController {
     @IBAction func btn_Login(_ sender:UIButton) {
         let email = txt_email.text?.trimmingCharacters(in: .whitespaces)
         let password = txt_Password.text?.trimmingCharacters(in: .whitespaces)
-        if email == ""{
-            self.showAlertPopup(withMsg: "Please enter your email id", withOKbtn: true)
+        if email == "" && txt_PhoneNo.text == ""{
+            self.showAlertPopup(withMsg: "Please enter either email id or phoneNo", withOKbtn: true)
         }
-        else if !(email!.isValidEmail()){
+        else if email != "" && !(email!.isValidEmail()){
             self.showAlertPopup(withMsg: "Please enter valid email id", withOKbtn: true)
         }
         else if password == ""{
@@ -115,8 +117,15 @@ class LoginVC : UIViewController {
         }
         else
         {
+            if email != ""
+            {
+                dataSource.email = email!
+            }
+            else if txt_PhoneNo.text != ""
+            {
+                dataSource.email = txt_PhoneNo.text ?? ""
+            }
             Connection.svprogressHudShow(view: self)
-            dataSource.email = email!
             dataSource.password = password!
             dataSource.requestLogIn()
         }
@@ -183,50 +192,47 @@ extension LoginVC : UITextFieldDelegate
         return textField.resignFirstResponder()
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let field = textField as? RoundTextField {
-            
-            if field.tag == 1{
+            if textField.tag == 1{
                 self.formatter?.clear()
             }
-        }
+
     }
     
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        if string == ""{
-            if self.textStr.count > 0{
-                self.textStr.removeLast()
+        if textField.tag == 1{
+            if string == ""{
+                if self.textStr.count > 0{
+                    self.textStr.removeLast()
+                }
             }
+            else{
+                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                    self.textStr = self.textStr + string
+                }
+            }
+            if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                didEditText(textStr)
+            }
+            return false
         }
         else{
-            
-            if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                self.textStr = self.textStr + string
-            }
-            
-        }
-        if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-            didEditText(textStr)
             return true
-        }
-        else
-        {
-            return false
         }
     }
     @objc private func didEditText(_ string:String) {
-        var cleanedPhoneNumber = clean(string: "\(String(describing:phone_code)) \(string)")
+        var cleanedPhoneNumber = clean(string: "\(String(describing:self.phone_code)) \(string)")
         if let validPhoneNumber = getValidNumber(phoneNumber: cleanedPhoneNumber) {
             nbPhoneNumber = validPhoneNumber
             cleanedPhoneNumber = "+\(validPhoneNumber.countryCode.stringValue)\(validPhoneNumber.nationalNumber.stringValue)"
             if let inputString = formatter?.inputString(cleanedPhoneNumber) {
-                phoneNo = remove(dialCode: phone_code, in: inputString)
+                txt_PhoneNo.text = remove(dialCode:self.phone_code, in: inputString)
             }
         } else {
             nbPhoneNumber = nil
             if let inputString = formatter?.inputString(cleanedPhoneNumber) {
-                phoneNo = remove(dialCode: country_code, in: inputString)
+                txt_PhoneNo.text = remove(dialCode: country_code, in: inputString)
             }
         }
     }
@@ -237,7 +243,7 @@ extension LoginVC : UITextFieldDelegate
     }
     private func getValidNumber(phoneNumber: String) -> NBPhoneNumber? {
         do {
-            let parsedPhoneNumber: NBPhoneNumber = try phoneUtil.parse(phoneNumber, defaultRegion: phone_code)
+            let parsedPhoneNumber: NBPhoneNumber = try phoneUtil.parse(phoneNumber, defaultRegion:self.phone_code)
             let isValid = phoneUtil.isValidNumber(parsedPhoneNumber)
             return isValid ? parsedPhoneNumber : nil
         } catch _ {

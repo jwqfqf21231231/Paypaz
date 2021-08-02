@@ -34,9 +34,10 @@ class LogInDataModel: NSObject
         let parameter : Parameters = [
             "emailORphone":email ,
             "password":password,
+            "phoneCode":UserDefaults.standard.getPhoneCode(),
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude(),
-            "deviceType":"iOS",
+            "deviceType":"ios",
             "deviceToken":deviceToken
         ]
         sharedInstance.requestPOST(url, params: parameter, headers: nil,

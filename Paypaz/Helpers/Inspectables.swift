@@ -451,3 +451,12 @@ class RoundTextView : IQTextView {
         }
     }
 }
+
+extension UITextField{
+    func isEmptyOrWhitespace() -> Bool {
+            if(self.text!.isEmpty) {
+                return true
+            }
+            return (self.text!.trimmingCharacters(in: NSCharacterSet.whitespaces) == "")
+        }
+}
