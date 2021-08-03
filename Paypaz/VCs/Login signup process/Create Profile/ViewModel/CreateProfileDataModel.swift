@@ -19,10 +19,10 @@ class CreateProfileDataModel: NSObject
     weak var delegate: CreateProfileDataModelDelegate?
     let sharedInstance = Connection()
     var email = ""
+    var phoneNumber = ""
     var password = ""
     var firstName = ""
     var lastName = ""
-    var phoneNumber = ""
     var dateOfBirth = ""
     var address = ""
     var city = ""
@@ -36,7 +36,6 @@ class CreateProfileDataModel: NSObject
         let parameter : [String:String] = [
             "firstName":firstName,
             "lastName":lastName,
-            "phoneNumber":phoneNumber,
             "DOB":dateOfBirth,
             "address":address,
             "city":city,

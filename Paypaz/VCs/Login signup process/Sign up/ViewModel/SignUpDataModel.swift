@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol SignUpDataModelDelegate:class {
-    func didRecieveDataUpdate(data:SignUpModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -50,7 +50,7 @@ class SignUpDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(SignUpModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

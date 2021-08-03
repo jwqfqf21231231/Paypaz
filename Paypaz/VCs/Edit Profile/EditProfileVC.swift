@@ -62,7 +62,7 @@ class EditProfileVC: CustomViewController {
         createDatePicker()
         dataSource.delegate = self
         dataSource1.delegate = self
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedArround()
         self.setDelegate()
         self.getUserDetails()
     }

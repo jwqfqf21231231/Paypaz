@@ -55,34 +55,34 @@ class AddBankAccountVC : CardViewController {
         
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-        let email = txt_EmailID.text?.trimmingCharacters(in: .whitespaces) ?? ""
         guard !(txt_AccountNumber.text?.isEmpty)! && !(txt_AccountNumber.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-            self.showAlert(withMsg: "Please enter card name.", withOKbtn: true)
+            
+            showAlert(withMsg: "Please enter card name.", withOKbtn: true)
             return
         }
         guard !(txt_RoutingNumber.text?.isEmpty)! && !(txt_RoutingNumber.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-            self.showAlert(withMsg: "Please enter routing number.", withOKbtn: true)
+            showAlert(withMsg: "Please enter routing number.", withOKbtn: true)
             return
         }
         guard !((txt_AccountNumber.text?.count)! < 11) else {
-            self.showAlert(withMsg: "Please enter card number at least 11 charecters", withOKbtn: true)
+            showAlert(withMsg: "Please enter card number at least 11 charecters", withOKbtn: true)
             return
         }
         guard !(txt_EmailID.text?.isEmpty)! && !(txt_EmailID.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-            self.showAlert(withMsg: "Please enter your Email.", withOKbtn: true)
+            showAlert(withMsg: "Please enter your Email.", withOKbtn: true)
             return
         }
-        guard !(email.isValidEmail()) else {
-            self.showAlert(withMsg: "Please enter valid Email.", withOKbtn: true)
+        guard !(txt_EmailID.text?.trim().count == 0) else {
+            showAlert(withMsg: "Please enter valid Email.", withOKbtn: true)
             return
         }
         guard !(txt_PhoneNo.text?.isEmpty)! && !(txt_PhoneNo.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-            self.showAlert(withMsg: "Please enter your Phone number.", withOKbtn: true)
+            showAlert(withMsg: "Please enter your Phone number.", withOKbtn: true)
             return
         }
         if isClicked == false
         {
-            self.showAlert(withMsg: "Please select Bank", withOKbtn: true)
+            showAlert(withMsg: "Please select Bank", withOKbtn: true)
             return
         }
         Connection.svprogressHudShow(view: self)

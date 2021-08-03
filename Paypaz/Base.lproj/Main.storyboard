@@ -1260,7 +1260,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmX-ln-ZrE" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="-44" width="414" height="620.5"/>
+                                        <rect key="frame" x="0.0" y="-44" width="414" height="717"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-shape_blue" translatesAutoresizingMaskIntoConstraints="NO" id="xnY-Z4-IUB">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="359"/>
@@ -1275,8 +1275,82 @@
                                                 <color key="textColor" name="BlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Your Passsword" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVD-pw-H5v">
+                                                <rect key="frame" x="41.5" y="391.5" width="331" height="19"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <color key="textColor" red="0.49019607840000001" green="0.49019607840000001" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NH1-5U-oa2" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
+                                                <rect key="frame" x="41.5" y="437.5" width="103.5" height="47.5"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                                                <inset key="titleEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="+1" image="united-states">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="9"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="border_Width">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="border_Color">
+                                                        <color key="value" red="0.59602665899999996" green="0.59611278769999998" blue="0.59599953890000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="selectPhoneNoCode" destination="9cK-x7-x8R" eventType="touchUpInside" id="5F5-K5-ZxZ"/>
+                                                </connections>
+                                            </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country-dropdown" translatesAutoresizingMaskIntoConstraints="NO" id="JQx-0d-zXq">
+                                                <rect key="frame" x="128" y="454.5" width="9" height="13"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="9" id="Sli-hq-KAM"/>
+                                                    <constraint firstAttribute="height" constant="13" id="aO8-th-bTe"/>
+                                                </constraints>
+                                            </imageView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qa1-4N-bO8" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
+                                                <rect key="frame" x="165.5" y="437.5" width="207" height="47.5"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
+                                                        <real key="value" value="9"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="border_Width">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="border_Color">
+                                                        <color key="value" red="0.59602665899999996" green="0.59611278769999998" blue="0.59599953890000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7K-8O-TPT" userLabel="firstView">
+                                                <rect key="frame" x="53" y="511" width="136.5" height="1"/>
+                                                <color key="backgroundColor" red="0.56073522570000001" green="0.56081676479999998" blue="0.56070959570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="jIj-wk-6gf"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoK-Ri-sAO">
+                                                <rect key="frame" x="199.5" y="500" width="15" height="19"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <color key="textColor" name="BlueColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZ8-sU-9Uq" userLabel="secondView">
+                                                <rect key="frame" x="224.5" y="511" width="136.5" height="1"/>
+                                                <color key="backgroundColor" red="0.5921054482" green="0.59219104050000004" blue="0.59207838769999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="ATL-LF-tkM"/>
+                                                </constraints>
+                                            </view>
                                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email/ Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IHm-s9-sBf" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="41.5" y="437.5" width="331" height="47.5"/>
+                                                <rect key="frame" x="41.5" y="534" width="331" height="47"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" name="BlueColor"/>
                                                 <constraints>
@@ -1298,7 +1372,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d74-Z8-kqo" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="41.5" y="505" width="331" height="46.5"/>
+                                                <rect key="frame" x="41.5" y="601" width="331" height="47"/>
                                                 <color key="backgroundColor" name="GreenColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                                 <state key="normal" title="Submit">
@@ -1313,15 +1387,8 @@
                                                     <action selector="btn_Submit:" destination="9cK-x7-x8R" eventType="touchUpInside" id="tNK-I5-HmV"/>
                                                 </connections>
                                             </button>
-                                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Your Passsword" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVD-pw-H5v">
-                                                <rect key="frame" x="41.5" y="391.5" width="331" height="19"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
-                                                <color key="textColor" red="0.49019607840000001" green="0.49019607840000001" blue="0.49019607840000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhO-bB-5Hm">
-                                                <rect key="frame" x="137" y="559.5" width="140" height="36"/>
+                                                <rect key="frame" x="137" y="656" width="140" height="36"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="tintColor" name="BlueColor"/>
@@ -1339,25 +1406,43 @@
                                         <constraints>
                                             <constraint firstItem="gzP-fX-gJn" firstAttribute="centerX" secondItem="xnY-Z4-IUB" secondAttribute="centerX" id="24O-ne-CGD"/>
                                             <constraint firstItem="gzP-fX-gJn" firstAttribute="bottom" secondItem="xnY-Z4-IUB" secondAttribute="bottom" id="4hU-H4-0ub"/>
+                                            <constraint firstItem="Qa1-4N-bO8" firstAttribute="top" secondItem="tVD-pw-H5v" secondAttribute="bottom" constant="27" id="70H-Mp-02M"/>
+                                            <constraint firstItem="NH1-5U-oa2" firstAttribute="top" secondItem="tVD-pw-H5v" secondAttribute="bottom" constant="27" id="7m7-ee-LIQ"/>
                                             <constraint firstItem="tVD-pw-H5v" firstAttribute="width" secondItem="8Sa-YD-zxb" secondAttribute="width" id="9Cb-yB-3QN"/>
+                                            <constraint firstItem="NH1-5U-oa2" firstAttribute="leading" secondItem="tVD-pw-H5v" secondAttribute="leading" id="9ct-qr-vqW"/>
+                                            <constraint firstItem="Qa1-4N-bO8" firstAttribute="width" secondItem="bmX-ln-ZrE" secondAttribute="width" multiplier="0.5" id="Aa5-Il-zda"/>
                                             <constraint firstItem="d74-Z8-kqo" firstAttribute="width" secondItem="IHm-s9-sBf" secondAttribute="width" id="B2R-gI-9wY"/>
                                             <constraint firstItem="IHm-s9-sBf" firstAttribute="width" secondItem="8Sa-YD-zxb" secondAttribute="width" id="Bah-W7-LIc"/>
+                                            <constraint firstItem="aoK-Ri-sAO" firstAttribute="leading" secondItem="W7K-8O-TPT" secondAttribute="trailing" constant="10" id="DZN-V9-YV3"/>
+                                            <constraint firstItem="JQx-0d-zXq" firstAttribute="centerY" secondItem="NH1-5U-oa2" secondAttribute="centerY" id="FYl-jK-MnG"/>
                                             <constraint firstItem="d74-Z8-kqo" firstAttribute="height" secondItem="IHm-s9-sBf" secondAttribute="height" multiplier="0.990654" id="Fe5-09-gZZ"/>
+                                            <constraint firstItem="NH1-5U-oa2" firstAttribute="width" secondItem="bmX-ln-ZrE" secondAttribute="width" multiplier="0.25" id="GpR-nG-c5m"/>
+                                            <constraint firstItem="JQx-0d-zXq" firstAttribute="trailing" secondItem="NH1-5U-oa2" secondAttribute="trailing" constant="-8" id="K5c-Yc-iGY"/>
                                             <constraint firstAttribute="trailing" secondItem="xnY-Z4-IUB" secondAttribute="trailing" id="M5q-2O-0Eg"/>
-                                            <constraint firstItem="IHm-s9-sBf" firstAttribute="top" secondItem="tVD-pw-H5v" secondAttribute="bottom" constant="27" id="McO-20-Q5D"/>
+                                            <constraint firstItem="Qa1-4N-bO8" firstAttribute="height" secondItem="IHm-s9-sBf" secondAttribute="height" id="OBN-PW-f32"/>
+                                            <constraint firstItem="W7K-8O-TPT" firstAttribute="width" secondItem="bmX-ln-ZrE" secondAttribute="width" multiplier="0.33" id="PaB-i3-qfA"/>
+                                            <constraint firstItem="W7K-8O-TPT" firstAttribute="centerY" secondItem="aoK-Ri-sAO" secondAttribute="centerY" constant="2" id="T82-fJ-j3Q"/>
                                             <constraint firstAttribute="bottom" secondItem="FhO-bB-5Hm" secondAttribute="bottom" constant="25" id="UNB-Vt-yUv"/>
                                             <constraint firstItem="8Sa-YD-zxb" firstAttribute="width" secondItem="bmX-ln-ZrE" secondAttribute="width" multiplier="0.8" id="Vyc-3j-IHj"/>
                                             <constraint firstItem="tVD-pw-H5v" firstAttribute="centerX" secondItem="8Sa-YD-zxb" secondAttribute="centerX" id="XMo-Wq-HbB"/>
+                                            <constraint firstItem="aoK-Ri-sAO" firstAttribute="trailing" secondItem="yZ8-sU-9Uq" secondAttribute="leading" constant="-10" id="YhK-Bo-ERq"/>
                                             <constraint firstItem="xnY-Z4-IUB" firstAttribute="top" secondItem="bmX-ln-ZrE" secondAttribute="top" id="YlG-1g-8FK"/>
                                             <constraint firstItem="IHm-s9-sBf" firstAttribute="centerX" secondItem="8Sa-YD-zxb" secondAttribute="centerX" id="aDV-UA-BJ6"/>
                                             <constraint firstItem="8Sa-YD-zxb" firstAttribute="centerX" secondItem="bmX-ln-ZrE" secondAttribute="centerX" id="dJc-ID-Qa5"/>
+                                            <constraint firstItem="aoK-Ri-sAO" firstAttribute="centerX" secondItem="bmX-ln-ZrE" secondAttribute="centerX" id="eyN-dg-BhT"/>
                                             <constraint firstItem="8Sa-YD-zxb" firstAttribute="top" secondItem="xnY-Z4-IUB" secondAttribute="bottom" id="gL6-bm-PHn"/>
                                             <constraint firstItem="xnY-Z4-IUB" firstAttribute="leading" secondItem="bmX-ln-ZrE" secondAttribute="leading" id="hhR-rB-MT6"/>
                                             <constraint firstItem="FhO-bB-5Hm" firstAttribute="centerX" secondItem="d74-Z8-kqo" secondAttribute="centerX" id="iVp-a3-Snn"/>
                                             <constraint firstItem="d74-Z8-kqo" firstAttribute="top" secondItem="IHm-s9-sBf" secondAttribute="bottom" constant="20" id="jQf-eP-wQG"/>
                                             <constraint firstItem="d74-Z8-kqo" firstAttribute="centerX" secondItem="IHm-s9-sBf" secondAttribute="centerX" id="kYo-eA-cuP"/>
+                                            <constraint firstItem="yZ8-sU-9Uq" firstAttribute="centerY" secondItem="aoK-Ri-sAO" secondAttribute="centerY" constant="2" id="q9s-az-QwT"/>
                                             <constraint firstItem="tVD-pw-H5v" firstAttribute="top" secondItem="8Sa-YD-zxb" secondAttribute="bottom" constant="2" id="rSL-Qq-a38"/>
+                                            <constraint firstItem="NH1-5U-oa2" firstAttribute="height" secondItem="Qa1-4N-bO8" secondAttribute="height" id="rik-C8-ODu"/>
+                                            <constraint firstItem="IHm-s9-sBf" firstAttribute="top" secondItem="aoK-Ri-sAO" secondAttribute="bottom" constant="15" id="rwH-NZ-SDo"/>
                                             <constraint firstItem="FhO-bB-5Hm" firstAttribute="top" secondItem="d74-Z8-kqo" secondAttribute="bottom" constant="8" id="uWR-OD-HiJ"/>
+                                            <constraint firstItem="Qa1-4N-bO8" firstAttribute="trailing" secondItem="tVD-pw-H5v" secondAttribute="trailing" id="ulH-jA-Oyc"/>
+                                            <constraint firstItem="yZ8-sU-9Uq" firstAttribute="width" secondItem="W7K-8O-TPT" secondAttribute="width" id="v7v-sn-WDh"/>
+                                            <constraint firstItem="aoK-Ri-sAO" firstAttribute="top" secondItem="Qa1-4N-bO8" secondAttribute="bottom" constant="15" id="vbv-cv-7Yw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1384,6 +1469,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="pE7-lb-9O2"/>
                     <connections>
+                        <outlet property="code_btn" destination="NH1-5U-oa2" id="Zvf-FI-gMx"/>
+                        <outlet property="txt_PhoneNo" destination="Qa1-4N-bO8" id="Yhv-gv-c31"/>
                         <outlet property="txt_email" destination="IHm-s9-sBf" id="CQ9-kK-Efj"/>
                     </connections>
                 </viewController>
@@ -5961,7 +6048,7 @@ More</string>
                                 <rect key="frame" x="0.0" y="116.5" width="414" height="745.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbe-GQ-NYz" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="746.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_c" translatesAutoresizingMaskIntoConstraints="NO" id="3qR-sh-StZ" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
                                                 <rect key="frame" x="145" y="15" width="124" height="124"/>
@@ -5988,7 +6075,7 @@ More</string>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vti-kX-jH7">
-                                                <rect key="frame" x="31" y="164" width="352" height="361.5"/>
+                                                <rect key="frame" x="31" y="164" width="352" height="299.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G6T-DK-5zp" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="352" height="50.5"/>
@@ -6027,25 +6114,8 @@ More</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="00H-aj-YPk" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="124.5" width="352" height="50.5"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="border_Width">
-                                                                <real key="value" value="1"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="border_Color">
-                                                                <color key="value" red="0.93333333333333335" green="0.95294117647058818" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
-                                                                <real key="value" value="10"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </textField>
                                                     <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date Of birth" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jVJ-S6-efN" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="187" width="352" height="50"/>
+                                                        <rect key="frame" x="0.0" y="124.5" width="352" height="50.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -6062,7 +6132,7 @@ More</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZbE-0P-Xsg" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="249" width="352" height="50.5"/>
+                                                        <rect key="frame" x="0.0" y="187" width="352" height="50"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -6079,7 +6149,7 @@ More</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o1H-li-HRc" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="311.5" width="352" height="50"/>
+                                                        <rect key="frame" x="0.0" y="249" width="352" height="50.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -6098,7 +6168,7 @@ More</string>
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3QL-jr-N71" customClass="RoundTextView" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="31" y="537.5" width="352" height="100.5"/>
+                                                <rect key="frame" x="31" y="475.5" width="352" height="100.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
@@ -6120,7 +6190,7 @@ More</string>
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AhU-XN-9Sj" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="31" y="668" width="352" height="50.5"/>
+                                                <rect key="frame" x="31" y="606" width="352" height="50"/>
                                                 <color key="backgroundColor" name="GreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="AhU-XN-9Sj" secondAttribute="height" multiplier="7:1" id="azi-5B-3Ir"/>
@@ -6139,7 +6209,7 @@ More</string>
                                                 </connections>
                                             </button>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxm-a5-tks" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="31" y="738.5" width="352" height="50"/>
+                                                <rect key="frame" x="31" y="676" width="352" height="50.5"/>
                                                 <color key="backgroundColor" red="0.90980392160000001" green="0.93333333330000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                                 <state key="normal" title="Skip &gt;&gt;">
@@ -6209,7 +6279,6 @@ More</string>
                         <outlet property="txtView_Address" destination="3QL-jr-N71" id="A5j-MW-rFM"/>
                         <outlet property="txt_City" destination="ZbE-0P-Xsg" id="9zV-E5-1DK"/>
                         <outlet property="txt_DOB" destination="jVJ-S6-efN" id="I7N-pu-OVX"/>
-                        <outlet property="txt_PhnNum" destination="00H-aj-YPk" id="jiQ-QQ-GEo"/>
                         <outlet property="txt_State" destination="o1H-li-HRc" id="KHR-Yl-bX0"/>
                         <outlet property="txt_firstName" destination="G6T-DK-5zp" id="cnw-ye-3wI"/>
                         <outlet property="txt_lastName" destination="CG4-o0-0hh" id="ep1-Zl-g8V"/>
@@ -8785,10 +8854,10 @@ More</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EqP-JK-StD" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="270" y="57" width="96" height="34"/>
+                                                <rect key="frame" x="270" y="62.5" width="96" height="23.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price : $56" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWc-LV-Ogz">
-                                                        <rect key="frame" x="7.5" y="3" width="81.5" height="28.5"/>
+                                                        <rect key="frame" x="7.5" y="1.5" width="81.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                                         <color key="textColor" red="0.98431372549999996" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -18022,26 +18091,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         </scene>
     </scenes>
     <designables>
-        <designable name="00H-aj-YPk">
-            <size key="intrinsicContentSize" width="126.5" height="19"/>
-        </designable>
         <designable name="07G-qO-pL7">
             <size key="intrinsicContentSize" width="314" height="151"/>
         </designable>
         <designable name="08W-lR-W2H">
-            <size key="intrinsicContentSize" width="66.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
         <designable name="0Cn-aS-NgF">
-            <size key="intrinsicContentSize" width="138.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="113.5" height="20.5"/>
         </designable>
         <designable name="0DF-Na-0DX">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="0Fy-m4-fgJ">
-            <size key="intrinsicContentSize" width="30" height="18"/>
-        </designable>
-        <designable name="0Kk-lj-VLD">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="5" height="18"/>
         </designable>
         <designable name="0th-ej-Sll">
             <size key="intrinsicContentSize" width="60.5" height="21"/>
@@ -18051,12 +18114,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         </designable>
         <designable name="2Ff-Qi-PFJ">
             <size key="intrinsicContentSize" width="79" height="29"/>
-        </designable>
-        <designable name="2H9-xL-yeT">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="2Y9-aQ-A8X">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="2YQ-od-XHK">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18070,20 +18127,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="2yl-U1-sXo">
             <size key="intrinsicContentSize" width="73" height="31"/>
         </designable>
-        <designable name="34q-5D-0Mk">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="3Od-oe-c4r">
-            <size key="intrinsicContentSize" width="30" height="19"/>
-        </designable>
-        <designable name="3QL-jr-N71">
-            <size key="intrinsicContentSize" width="-1" height="33.5"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="3a7-2H-fxw">
             <size key="intrinsicContentSize" width="6.5" height="22"/>
         </designable>
         <designable name="3fv-d5-gox">
-            <size key="intrinsicContentSize" width="153.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
         </designable>
         <designable name="3lH-po-9LW">
             <size key="intrinsicContentSize" width="19.5" height="22"/>
@@ -18103,11 +18154,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="4fq-Rn-LPC">
             <size key="intrinsicContentSize" width="195" height="45"/>
         </designable>
-        <designable name="4w0-Hc-1e6">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="5Rs-xa-YhR">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="5aP-5T-Sp7">
             <size key="intrinsicContentSize" width="60" height="60"/>
@@ -18116,7 +18164,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="68" height="35"/>
         </designable>
         <designable name="5g4-0l-g5a">
-            <size key="intrinsicContentSize" width="66.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
         <designable name="5lr-EC-8xy">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18130,11 +18178,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="6WA-Wa-nda">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
-        <designable name="6cS-E3-SAi">
-            <size key="intrinsicContentSize" width="-1" height="35"/>
-        </designable>
         <designable name="753-20-z1r">
-            <size key="intrinsicContentSize" width="149" height="18"/>
+            <size key="intrinsicContentSize" width="124" height="18"/>
         </designable>
         <designable name="7AJ-0g-qts">
             <size key="intrinsicContentSize" width="12" height="22"/>
@@ -18145,11 +18190,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="7Oy-Yb-Ner">
             <size key="intrinsicContentSize" width="19" height="22"/>
         </designable>
-        <designable name="7eq-Ah-NCW">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="7u0-DG-DKS">
-            <size key="intrinsicContentSize" width="30" height="18"/>
+            <size key="intrinsicContentSize" width="5" height="18"/>
         </designable>
         <designable name="85K-HY-JAP">
             <size key="intrinsicContentSize" width="314" height="151"/>
@@ -18164,19 +18206,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="22.5" height="22"/>
         </designable>
         <designable name="9Cn-YS-CR6">
-            <size key="intrinsicContentSize" width="131" height="18"/>
+            <size key="intrinsicContentSize" width="106" height="18"/>
         </designable>
         <designable name="9Wz-hh-1az">
             <size key="intrinsicContentSize" width="67" height="31"/>
         </designable>
-        <designable name="9ks-ef-Usk">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="A45-UH-WeG">
             <size key="intrinsicContentSize" width="73" height="33"/>
-        </designable>
-        <designable name="AMh-qe-XPZ">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="AhN-TK-0r2">
             <size key="intrinsicContentSize" width="30" height="33"/>
@@ -18199,50 +18235,38 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="BIV-V1-3hK">
             <size key="intrinsicContentSize" width="234" height="45"/>
         </designable>
-        <designable name="BbL-rh-F5Y">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="Bca-el-axJ">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="BtS-t2-zXm">
             <size key="intrinsicContentSize" width="70" height="28"/>
         </designable>
         <designable name="CG4-o0-0hh">
-            <size key="intrinsicContentSize" width="98" height="19"/>
+            <size key="intrinsicContentSize" width="73" height="19"/>
         </designable>
         <designable name="Cfd-jj-JPb">
             <size key="intrinsicContentSize" width="38" height="33"/>
         </designable>
         <designable name="ChU-BV-Y2B">
-            <size key="intrinsicContentSize" width="124" height="20.5"/>
+            <size key="intrinsicContentSize" width="99" height="20.5"/>
         </designable>
         <designable name="D2N-j9-brQ">
-            <size key="intrinsicContentSize" width="153.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
         </designable>
         <designable name="DNq-4y-XGo">
             <size key="intrinsicContentSize" width="30" height="29"/>
         </designable>
-        <designable name="DP5-Wy-EOg">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="Dbi-fV-7cn">
-            <size key="intrinsicContentSize" width="199" height="18.5"/>
+            <size key="intrinsicContentSize" width="174" height="18.5"/>
         </designable>
         <designable name="EGy-EL-Ur9">
             <size key="intrinsicContentSize" width="8" height="22"/>
         </designable>
         <designable name="EME-Yk-bFb">
-            <size key="intrinsicContentSize" width="84.5" height="34"/>
+            <size key="intrinsicContentSize" width="73.5" height="34"/>
         </designable>
         <designable name="ESh-dG-RLR">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="EbO-mg-zBB">
             <size key="intrinsicContentSize" width="58" height="37"/>
-        </designable>
-        <designable name="EqP-JK-StD">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="EwY-TY-U38">
             <size key="intrinsicContentSize" width="129" height="41"/>
@@ -18254,22 +18278,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="89" height="33"/>
         </designable>
         <designable name="Fa5-EM-N1e">
-            <size key="intrinsicContentSize" width="149" height="18"/>
+            <size key="intrinsicContentSize" width="124" height="18"/>
         </designable>
         <designable name="Fi5-VT-cfP">
             <size key="intrinsicContentSize" width="23" height="23"/>
         </designable>
         <designable name="Fpx-gm-Qic">
-            <size key="intrinsicContentSize" width="114" height="19"/>
+            <size key="intrinsicContentSize" width="89" height="19"/>
         </designable>
         <designable name="G6T-DK-5zp">
-            <size key="intrinsicContentSize" width="98.5" height="19"/>
+            <size key="intrinsicContentSize" width="73.5" height="19"/>
         </designable>
         <designable name="G7o-rb-msU">
             <size key="intrinsicContentSize" width="24.5" height="23.5"/>
         </designable>
         <designable name="GAF-qs-dEq">
-            <size key="intrinsicContentSize" width="152.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="119.5" height="20.5"/>
         </designable>
         <designable name="GFG-uR-hpe">
             <size key="intrinsicContentSize" width="26" height="26"/>
@@ -18278,40 +18302,34 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="58" height="33"/>
         </designable>
         <designable name="GL5-Ft-hXY">
-            <size key="intrinsicContentSize" width="185" height="20.5"/>
+            <size key="intrinsicContentSize" width="160" height="20.5"/>
         </designable>
         <designable name="GVY-pa-cKi">
-            <size key="intrinsicContentSize" width="30" height="19"/>
-        </designable>
-        <designable name="Gn3-cL-6NP">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="Gsd-be-YsA">
             <size key="intrinsicContentSize" width="314" height="151"/>
         </designable>
         <designable name="GwC-Nt-n9o">
-            <size key="intrinsicContentSize" width="62" height="19"/>
+            <size key="intrinsicContentSize" width="37" height="19"/>
         </designable>
         <designable name="HP9-zc-Q82">
             <size key="intrinsicContentSize" width="45" height="21"/>
         </designable>
         <designable name="Hwi-FF-ExJ">
-            <size key="intrinsicContentSize" width="81" height="18"/>
-        </designable>
-        <designable name="Hwp-2N-JAt">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="48" height="18"/>
         </designable>
         <designable name="IEx-yP-U8f">
             <size key="intrinsicContentSize" width="62" height="33"/>
         </designable>
         <designable name="IHm-s9-sBf">
-            <size key="intrinsicContentSize" width="116.5" height="19"/>
+            <size key="intrinsicContentSize" width="91.5" height="19"/>
         </designable>
         <designable name="IPE-53-icx">
-            <size key="intrinsicContentSize" width="119.5" height="18"/>
+            <size key="intrinsicContentSize" width="94.5" height="18"/>
         </designable>
         <designable name="IXf-Yg-soo">
-            <size key="intrinsicContentSize" width="138.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="113.5" height="20.5"/>
         </designable>
         <designable name="Iax-4a-STp">
             <size key="intrinsicContentSize" width="86" height="31"/>
@@ -18332,19 +18350,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="167" height="40"/>
         </designable>
         <designable name="L9m-6H-7dB">
-            <size key="intrinsicContentSize" width="112.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="87.5" height="20.5"/>
         </designable>
         <designable name="LaX-4u-GAB">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
-        <designable name="LfB-Ck-uD9">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="M8x-hI-Rhr">
-            <size key="intrinsicContentSize" width="30" height="19"/>
-        </designable>
-        <designable name="MFb-wO-XmH">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="MQF-QX-fOh">
             <size key="intrinsicContentSize" width="73" height="33"/>
@@ -18354,6 +18366,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         </designable>
         <designable name="MxX-XX-h9Q">
             <size key="intrinsicContentSize" width="19.5" height="22"/>
+        </designable>
+        <designable name="NH1-5U-oa2">
+            <size key="intrinsicContentSize" width="42.5" height="21"/>
         </designable>
         <designable name="NOs-4c-gl4">
             <size key="intrinsicContentSize" width="22.5" height="22"/>
@@ -18365,58 +18380,40 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="80" height="30"/>
         </designable>
         <designable name="PT0-8K-ush">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="PWF-ev-76h">
-            <size key="intrinsicContentSize" width="131" height="18"/>
+            <size key="intrinsicContentSize" width="106" height="18"/>
         </designable>
         <designable name="PdY-hb-vt1">
-            <size key="intrinsicContentSize" width="124" height="20.5"/>
+            <size key="intrinsicContentSize" width="99" height="20.5"/>
         </designable>
-        <designable name="Px8-7E-cua">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="Pz9-e9-qhW">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="QMZ-GY-j1Q">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+        <designable name="Qa1-4N-bO8">
+            <size key="intrinsicContentSize" width="33" height="34"/>
         </designable>
         <designable name="Qs7-kY-P0c">
             <size key="intrinsicContentSize" width="44" height="14"/>
         </designable>
         <designable name="Qvt-l6-DTK">
-            <size key="intrinsicContentSize" width="185" height="20.5"/>
+            <size key="intrinsicContentSize" width="160" height="20.5"/>
         </designable>
         <designable name="RO0-2z-QJk">
-            <size key="intrinsicContentSize" width="122" height="20.5"/>
+            <size key="intrinsicContentSize" width="97" height="20.5"/>
         </designable>
         <designable name="RgO-hL-0j3">
             <size key="intrinsicContentSize" width="50" height="24"/>
         </designable>
         <designable name="RgW-Eb-2XX">
-            <size key="intrinsicContentSize" width="30" height="19"/>
-        </designable>
-        <designable name="RjS-sn-3Th">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="Rsl-E4-G3e">
-            <size key="intrinsicContentSize" width="138.5" height="20.5"/>
-        </designable>
-        <designable name="RyT-l4-plj">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="113.5" height="20.5"/>
         </designable>
         <designable name="S0e-RG-Apu">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="S3F-Jz-tRH">
             <size key="intrinsicContentSize" width="180" height="45"/>
-        </designable>
-        <designable name="SAX-3P-H82">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="SQ2-qP-985">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="SUr-wk-XSE">
             <size key="intrinsicContentSize" width="17.5" height="22"/>
@@ -18427,14 +18424,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="Ssp-l4-uti">
             <size key="intrinsicContentSize" width="108" height="19"/>
         </designable>
-        <designable name="TXF-bP-sup">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="TYu-BY-uj7">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="Tmo-ga-d7P">
-            <size key="intrinsicContentSize" width="189" height="20.5"/>
+            <size key="intrinsicContentSize" width="164" height="20.5"/>
         </designable>
         <designable name="ToT-Vm-OgK">
             <size key="intrinsicContentSize" width="140" height="39"/>
@@ -18443,13 +18434,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="UM0-cO-kEt">
-            <size key="intrinsicContentSize" width="62" height="19"/>
+            <size key="intrinsicContentSize" width="37" height="19"/>
         </designable>
         <designable name="UZJ-PZ-c6s">
-            <size key="intrinsicContentSize" width="96" height="19"/>
+            <size key="intrinsicContentSize" width="71" height="19"/>
         </designable>
         <designable name="Ubf-DV-Kv8">
-            <size key="intrinsicContentSize" width="185" height="20.5"/>
+            <size key="intrinsicContentSize" width="160" height="20.5"/>
         </designable>
         <designable name="UgG-Sc-qif">
             <size key="intrinsicContentSize" width="94" height="33"/>
@@ -18464,16 +18455,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="70" height="28"/>
         </designable>
         <designable name="VDv-cx-Zx0">
-            <size key="intrinsicContentSize" width="162.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="137.5" height="20.5"/>
         </designable>
         <designable name="VHR-71-7eW">
-            <size key="intrinsicContentSize" width="189" height="20.5"/>
-        </designable>
-        <designable name="VXL-YE-yUw">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="164" height="20.5"/>
         </designable>
         <designable name="VmD-iT-TBN">
-            <size key="intrinsicContentSize" width="30" height="18"/>
+            <size key="intrinsicContentSize" width="5" height="18"/>
         </designable>
         <designable name="W0P-aU-Fry">
             <size key="intrinsicContentSize" width="44.5" height="45"/>
@@ -18485,10 +18473,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="114" height="40"/>
         </designable>
         <designable name="XMx-yr-GRe">
-            <size key="intrinsicContentSize" width="30" height="18"/>
+            <size key="intrinsicContentSize" width="5" height="18"/>
         </designable>
         <designable name="XMz-dM-1kp">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="XaP-aE-6Ed">
             <size key="intrinsicContentSize" width="51" height="51"/>
@@ -18496,17 +18484,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="Xjj-lr-VF8">
             <size key="intrinsicContentSize" width="58" height="33"/>
         </designable>
-        <designable name="Y8a-mZ-JlS">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="Y9c-0l-izg">
             <size key="intrinsicContentSize" width="60" height="39"/>
         </designable>
         <designable name="Yhj-eQ-Vj7">
             <size key="intrinsicContentSize" width="122" height="31"/>
-        </designable>
-        <designable name="Ykz-Uz-60p">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="Yup-Wt-y4G">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18515,19 +18497,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="ZDw-po-QBO">
-            <size key="intrinsicContentSize" width="98.5" height="19"/>
+            <size key="intrinsicContentSize" width="73.5" height="19"/>
         </designable>
         <designable name="ZLT-R1-0MK">
             <size key="intrinsicContentSize" width="20" height="22"/>
         </designable>
         <designable name="ZS2-MP-22s">
-            <size key="intrinsicContentSize" width="100" height="19"/>
+            <size key="intrinsicContentSize" width="75" height="19"/>
         </designable>
         <designable name="Zaz-2P-LFj">
             <size key="intrinsicContentSize" width="19.5" height="22"/>
         </designable>
         <designable name="ZbE-0P-Xsg">
-            <size key="intrinsicContentSize" width="91" height="19"/>
+            <size key="intrinsicContentSize" width="66" height="19"/>
         </designable>
         <designable name="Zlt-ez-pxj">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18539,19 +18521,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="74" height="31"/>
         </designable>
         <designable name="aKX-YA-aTX">
-            <size key="intrinsicContentSize" width="98" height="19"/>
+            <size key="intrinsicContentSize" width="73" height="19"/>
         </designable>
         <designable name="aPL-F0-2hD">
-            <size key="intrinsicContentSize" width="30" height="19"/>
-        </designable>
-        <designable name="aa2-LN-LwH">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="agd-8S-od0">
             <size key="intrinsicContentSize" width="88" height="37"/>
-        </designable>
-        <designable name="bMm-5G-fdH">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="bjz-pc-3W1">
             <size key="intrinsicContentSize" width="30" height="34"/>
@@ -18572,7 +18548,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="d0j-lB-0K8">
-            <size key="intrinsicContentSize" width="126" height="18"/>
+            <size key="intrinsicContentSize" width="101" height="18"/>
         </designable>
         <designable name="d74-Z8-kqo">
             <size key="intrinsicContentSize" width="58" height="33"/>
@@ -18589,9 +18565,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="dam-TY-f2Q">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
-        <designable name="ddt-6M-rgQ">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="dfr-jO-6Mb">
             <size key="intrinsicContentSize" width="60" height="60"/>
         </designable>
@@ -18605,10 +18578,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="eNQ-jO-rDp">
-            <size key="intrinsicContentSize" width="124" height="20.5"/>
+            <size key="intrinsicContentSize" width="99" height="20.5"/>
         </designable>
         <designable name="eiU-hr-JsU">
-            <size key="intrinsicContentSize" width="76.5" height="19"/>
+            <size key="intrinsicContentSize" width="51.5" height="19"/>
         </designable>
         <designable name="end-Gv-14K">
             <size key="intrinsicContentSize" width="60" height="60"/>
@@ -18617,13 +18590,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="26" height="26"/>
         </designable>
         <designable name="f5I-Yq-Dql">
-            <size key="intrinsicContentSize" width="153.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="128.5" height="20.5"/>
         </designable>
         <designable name="fYO-u4-cz3">
             <size key="intrinsicContentSize" width="97" height="31"/>
-        </designable>
-        <designable name="fmh-yE-OoP">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="fqL-ze-DgO">
             <size key="intrinsicContentSize" width="70" height="28"/>
@@ -18634,14 +18604,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="fxm-a5-tks">
             <size key="intrinsicContentSize" width="63" height="33"/>
         </designable>
-        <designable name="gFo-oQ-cDZ">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="gHk-M8-OAb">
             <size key="intrinsicContentSize" width="58" height="33"/>
         </designable>
         <designable name="gNw-0B-g2e">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="gPV-nM-B87">
             <size key="intrinsicContentSize" width="50" height="31"/>
@@ -18652,14 +18619,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="gVy-dZ-htT">
             <size key="intrinsicContentSize" width="128" height="17"/>
         </designable>
-        <designable name="ger-Xt-PTz">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="gzq-wn-TH2">
             <size key="intrinsicContentSize" width="60" height="60"/>
         </designable>
         <designable name="h8J-0c-aBO">
-            <size key="intrinsicContentSize" width="152.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="119.5" height="20.5"/>
         </designable>
         <designable name="hGE-c8-yhm">
             <size key="intrinsicContentSize" width="34" height="31"/>
@@ -18668,28 +18632,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="hfd-bG-BXx">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="hmO-q3-xvu">
             <size key="intrinsicContentSize" width="73" height="33"/>
         </designable>
-        <designable name="hs7-EN-XIn">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="i6j-9s-hAa">
             <size key="intrinsicContentSize" width="131" height="33"/>
         </designable>
-        <designable name="i8h-gc-CkB">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="iWh-95-o2M">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="ihF-Ax-eBT">
             <size key="intrinsicContentSize" width="69" height="69"/>
         </designable>
         <designable name="ik1-V1-hyA">
-            <size key="intrinsicContentSize" width="147" height="20.5"/>
+            <size key="intrinsicContentSize" width="122" height="20.5"/>
         </designable>
         <designable name="ikG-2e-NUr">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18704,10 +18662,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="18" height="22"/>
         </designable>
         <designable name="jUW-9U-8cw">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="jVJ-S6-efN">
-            <size key="intrinsicContentSize" width="111" height="19"/>
+            <size key="intrinsicContentSize" width="86" height="19"/>
         </designable>
         <designable name="k3X-8d-VYV">
             <size key="intrinsicContentSize" width="58" height="33"/>
@@ -18719,7 +18677,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="kkl-cM-3Wx">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="lWP-jc-trc">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18728,25 +18686,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="43" height="33"/>
         </designable>
         <designable name="lkj-Be-jOl">
-            <size key="intrinsicContentSize" width="52" height="20.5"/>
+            <size key="intrinsicContentSize" width="27" height="20.5"/>
         </designable>
         <designable name="lmg-iG-Yau">
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
-        <designable name="luI-ib-wmK">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="mGX-q7-iih">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="mbg-V7-ri1">
-            <size key="intrinsicContentSize" width="122" height="20.5"/>
+            <size key="intrinsicContentSize" width="97" height="20.5"/>
         </designable>
         <designable name="mbw-m7-jAD">
             <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="mge-uv-2sZ">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="mtY-6r-sEH">
             <size key="intrinsicContentSize" width="23" height="23"/>
@@ -18764,7 +18713,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="16.5" height="22"/>
         </designable>
         <designable name="nPp-AV-8Yc">
-            <size key="intrinsicContentSize" width="99" height="20.5"/>
+            <size key="intrinsicContentSize" width="74" height="20.5"/>
         </designable>
         <designable name="ng3-d0-D0O">
             <size key="intrinsicContentSize" width="30" height="33"/>
@@ -18773,19 +18722,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="24.5" height="22"/>
         </designable>
         <designable name="o1H-li-HRc">
-            <size key="intrinsicContentSize" width="100" height="19"/>
+            <size key="intrinsicContentSize" width="75" height="19"/>
         </designable>
         <designable name="oA6-Vk-ldr">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
-        <designable name="oD2-Bt-61J">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="oQp-nE-ihL">
             <size key="intrinsicContentSize" width="63" height="33"/>
-        </designable>
-        <designable name="oZ1-4f-QDt">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="oZO-n4-cXh">
             <size key="intrinsicContentSize" width="-1" height="39"/>
@@ -18793,14 +18736,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="obH-Oy-AGW">
             <size key="intrinsicContentSize" width="60" height="60"/>
         </designable>
-        <designable name="olx-f1-CXe">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="oo3-fQ-7h8">
             <size key="intrinsicContentSize" width="60" height="60"/>
         </designable>
         <designable name="oom-70-0is">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="pHE-zz-F9b">
             <size key="intrinsicContentSize" width="10.5" height="22"/>
@@ -18809,13 +18749,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="95" height="30"/>
         </designable>
         <designable name="pYe-36-Hey">
-            <size key="intrinsicContentSize" width="30" height="19"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="pbx-AE-UEZ">
-            <size key="intrinsicContentSize" width="66.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
         <designable name="psQ-Ap-uR0">
-            <size key="intrinsicContentSize" width="62" height="19"/>
+            <size key="intrinsicContentSize" width="37" height="19"/>
         </designable>
         <designable name="pzu-56-OMv">
             <size key="intrinsicContentSize" width="15.5" height="22"/>
@@ -18824,19 +18764,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="98" height="35"/>
         </designable>
         <designable name="qIQ-Ct-fT1">
-            <size key="intrinsicContentSize" width="99" height="20.5"/>
+            <size key="intrinsicContentSize" width="74" height="20.5"/>
         </designable>
         <designable name="qOo-sx-MV4">
             <size key="intrinsicContentSize" width="60" height="60"/>
         </designable>
         <designable name="qtc-Bd-mIP">
-            <size key="intrinsicContentSize" width="82.5" height="34"/>
+            <size key="intrinsicContentSize" width="71.5" height="34"/>
         </designable>
         <designable name="qwu-fk-ELM">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
         <designable name="rEl-lx-yo8">
-            <size key="intrinsicContentSize" width="39" height="18"/>
+            <size key="intrinsicContentSize" width="31" height="18"/>
         </designable>
         <designable name="rGS-s1-xlj">
             <size key="intrinsicContentSize" width="58" height="33"/>
@@ -18868,20 +18808,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="tRq-wz-uzi">
             <size key="intrinsicContentSize" width="41" height="41"/>
         </designable>
-        <designable name="tWB-7x-kVs">
-            <size key="intrinsicContentSize" width="-1" height="33.5"/>
-        </designable>
-        <designable name="tuZ-d1-7qb">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
-        <designable name="uJl-wu-kLn">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="urM-6k-2o3">
             <size key="intrinsicContentSize" width="178.5" height="60.5"/>
         </designable>
         <designable name="utb-Ji-rM8">
-            <size key="intrinsicContentSize" width="99" height="20.5"/>
+            <size key="intrinsicContentSize" width="74" height="20.5"/>
         </designable>
         <designable name="v2Y-uH-mXu">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18896,7 +18827,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
             <size key="intrinsicContentSize" width="59.5" height="19"/>
         </designable>
         <designable name="vV3-Pq-FaL">
-            <size key="intrinsicContentSize" width="39" height="18"/>
+            <size key="intrinsicContentSize" width="31" height="18"/>
         </designable>
         <designable name="vcR-3i-Ial">
             <size key="intrinsicContentSize" width="41" height="41"/>
@@ -18906,9 +18837,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         </designable>
         <designable name="vxQ-0I-lS7">
             <size key="intrinsicContentSize" width="43" height="33"/>
-        </designable>
-        <designable name="w3S-Sr-zkD">
-            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="wA5-fY-aFz">
             <size key="intrinsicContentSize" width="124" height="33"/>
@@ -18922,26 +18850,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
         <designable name="xqX-hJ-dOc">
             <size key="intrinsicContentSize" width="79" height="29"/>
         </designable>
-        <designable name="xxc-8d-SlY">
-            <size key="intrinsicContentSize" width="30" height="34"/>
-        </designable>
         <designable name="ySH-4x-8N3">
-            <size key="intrinsicContentSize" width="135" height="20.5"/>
+            <size key="intrinsicContentSize" width="110" height="20.5"/>
         </designable>
         <designable name="ym6-Am-5DG">
-            <size key="intrinsicContentSize" width="130" height="19"/>
+            <size key="intrinsicContentSize" width="105" height="19"/>
         </designable>
         <designable name="ymz-4j-zMI">
-            <size key="intrinsicContentSize" width="122" height="20.5"/>
+            <size key="intrinsicContentSize" width="97" height="20.5"/>
         </designable>
         <designable name="z0g-KC-26d">
-            <size key="intrinsicContentSize" width="30" height="19"/>
-        </designable>
-        <designable name="zUr-Ij-kVI">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="5" height="19"/>
         </designable>
         <designable name="zp2-Lk-rm3">
-            <size key="intrinsicContentSize" width="282.5" height="18"/>
+            <size key="intrinsicContentSize" width="249.5" height="18"/>
         </designable>
     </designables>
     <resources>

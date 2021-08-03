@@ -20,7 +20,6 @@ class CreateProfileVC  : CustomViewController {
     @IBOutlet weak var img_Profile : UIImageView!
     @IBOutlet weak var txt_firstName : RoundTextField!
     @IBOutlet weak var txt_lastName  : RoundTextField!
-    @IBOutlet weak var txt_PhnNum    : RoundTextField!
     @IBOutlet weak var txt_DOB       : RoundTextField!
     @IBOutlet weak var txt_City      : RoundTextField!
     @IBOutlet weak var txt_State     : RoundTextField!
@@ -61,7 +60,7 @@ class CreateProfileVC  : CustomViewController {
         self.txtView_Address.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         createDatePicker()
         dataSource.delegate = self
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedArround()
         self.setDelegate()
      
     }
@@ -69,7 +68,6 @@ class CreateProfileVC  : CustomViewController {
     private func setDelegate() {
         self.txt_firstName.delegate = self
         self.txt_lastName.delegate  = self
-        self.txt_PhnNum.delegate    = self
         self.txt_DOB.delegate       = self
         self.txt_City.delegate      = self
         self.txt_State.delegate     = self
@@ -85,9 +83,6 @@ class CreateProfileVC  : CustomViewController {
         }
         else if txt_lastName.text == ""{
             self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
-        }
-        else if txt_PhnNum.text == ""{
-            self.showAlert(withMsg: "Please enter Phone Number", withOKbtn: true)
         }
         else if txt_DOB.text == ""{
             self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
@@ -110,7 +105,6 @@ class CreateProfileVC  : CustomViewController {
             dataSource.city = txt_City.text!
             dataSource.address = txtView_Address.text!
             dataSource.dateOfBirth = txt_DOB.text!
-            dataSource.phoneNumber = txt_PhnNum.text!
             dataSource.state = txt_State.text!
             dataSource.profilePic = pickedImage
             dataSource.uploadProImg()

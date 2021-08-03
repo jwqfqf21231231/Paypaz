@@ -22,7 +22,7 @@ class CreatePasscodeVC: CustomViewController {
     @IBOutlet weak var txt_Field_4 : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
+    hideKeyboardWhenTappedArround()
         self.setDelegates()
         self.actionToTextFields()
         // Do any additional setup after loading the view.

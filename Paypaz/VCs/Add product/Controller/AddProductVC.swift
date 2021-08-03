@@ -36,7 +36,7 @@ class AddProductVC : CustomViewController {
         dataSource.delegate = self
         dataSource.delegate2 = self
         dataSource1.delegate = self
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedArround()
         setTitle()
         setDelegates()
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)

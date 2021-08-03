@@ -44,7 +44,7 @@ extension SideDrawerListVC : UITableViewDelegate {
         case 7:
             _ = self.pushToChildVC("EventReportsHistoryVC")
         case 8:
-            UserDefaults.standard.setLoggedIn(value: false)
+            Helper.clearUserDataAndSignOut()
             _ = self.pushToChildVC("LoginVC")
             #warning("--->>Change this during functionality in case of logout")
         default:

@@ -79,22 +79,8 @@ class OTPVerificationDataModel: NSObject
         }
         else
         {
-//            var deviceToken = String()
-//            if UserDefaults.standard.value(forKey: "DeviceToken") != nil{
-//                deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as! String
-//            }else{
-//                deviceToken = ""
-//            }
             url =  APIList().getUrlString(url: .VERIFYOTP)
             parameter = [
-//                "emailORphone":email,
-//                "password":password,
-//                "deviceToken":deviceToken,
-//                "deviceType":"iOS",
-//                "verify":userTypedOTP,
-//                "latitude":UserDefaults.standard.getLatitude(),
-//                "longitude":UserDefaults.standard.getLongitude(),
-//                "otp":otp
                 "otp" : userTypedOTP
             ]
             headers = [
@@ -129,11 +115,10 @@ class OTPVerificationDataModel: NSObject
     func resendOTP()
     {
         url = APIList().getUrlString(url: .RESENDOTP)
-        parameter = [
-            "emailORphone":email
+        headers = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
         ]
-        print("OTP sent to \(email)")
-        sharedInstance.requestPOST(url!, params: parameter, headers: nil,
+        sharedInstance.requestPOST(url!, params: nil, headers: headers,
                                    success:
                                     {
                                         (JSON) in

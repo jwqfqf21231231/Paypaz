@@ -26,7 +26,7 @@ class CreatePinVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-        self.hideKeyboardWhenTappedAround()
+       hideKeyboardWhenTappedArround()
         self.setDelegates()
         self.actionToTextFields()
     }

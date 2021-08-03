@@ -20,25 +20,23 @@ class OTPVerificationVC : CustomViewController {
     @IBOutlet weak var txt_Field_3 : UITextField!
     @IBOutlet weak var txt_Field_4 : UITextField!
     
-    var email = UserDefaults.standard.getEmail()
-    var password = ""
+    var email = ""
+    var phoneNumber = ""
+    //OTP which we get after signing up
     var verifyOTP = ""
     //To Save Typed OTP Characters
     var otpString = ""
     //OTP sent by PasscodeVC
     var passcodeOTP = ""
+    
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         self.changeTitle()
-        self.hideKeyboardWhenTappedAround()
+       hideKeyboardWhenTappedArround()
         self.setDelegates()
         self.actionToTextFields()
         self.setLabel()
-        dataSource.delegate = self
-        dataSource.delegate1 = self
-        dataSource.delegate2 = self
-        dataSource.delegate3 = self
     }
     private func changeTitle()
     {
@@ -55,7 +53,7 @@ class OTPVerificationVC : CustomViewController {
     private func setLabel()
     {
         let attributedText = NSMutableAttributedString(string: "Enter OTP Code sent to", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)])
-        attributedText.append(NSAttributedString(string: " \(email)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor(red: 0/255, green: 82/255, blue: 136/255, alpha: 1)]))
+        attributedText.append(NSAttributedString(string: " \(phoneNumber)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor(red: 0/255, green: 82/255, blue: 136/255, alpha: 1)]))
         lbl_Notify.numberOfLines=0
         lbl_Notify.attributedText = attributedText
         lbl_Notify.textAlignment = .center
@@ -66,6 +64,10 @@ class OTPVerificationVC : CustomViewController {
         self.txt_Field_2.delegate  = self
         self.txt_Field_3.delegate  = self
         self.txt_Field_4.delegate  = self
+        dataSource.delegate = self
+        dataSource.delegate1 = self
+        dataSource.delegate2 = self
+        dataSource.delegate3 = self
     }
     
     private func actionToTextFields(){
@@ -119,7 +121,6 @@ class OTPVerificationVC : CustomViewController {
     }
     // MARK:- --- Action ----
     @IBAction func btn_Resend(_ sender:UIButton) {
-        dataSource.email = email
         Connection.svprogressHudShow(view: self)
         dataSource.resendOTP()
     }
@@ -148,8 +149,8 @@ class OTPVerificationVC : CustomViewController {
             if self.doForgotPasscode ?? false{
                 if passcodeOTP == otpString
                 {
-                    dataSource.passcodeOTP = passcodeOTP
                     Connection.svprogressHudShow(view: self)
+                    dataSource.passcodeOTP = passcodeOTP
                     dataSource.forgotPasscodeOTPVerify()
                 }
                 else
@@ -160,11 +161,9 @@ class OTPVerificationVC : CustomViewController {
             }
             else
             {
-                dataSource.email = email
-                dataSource.password = password
+                Connection.svprogressHudShow(view: self)
                 dataSource.otp = verifyOTP
                 dataSource.userTypedOTP = otpString
-                Connection.svprogressHudShow(view: self)
                 dataSource.verifyOTP()
             }
         }

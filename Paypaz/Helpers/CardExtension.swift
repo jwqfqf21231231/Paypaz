@@ -74,7 +74,7 @@ class CardViewController : UIViewController {
         
     }
     
-    func showAlert(withMsg message:String, withOKbtn okbutton:Bool){
+    func showAlertPopup(withMsg message:String, withOKbtn okbutton:Bool){
         //NOTE:- Indicator is also an alert, so when indicator will hide, then show this alert
         // to avoid 'already presenting view controller' warning
         
@@ -96,8 +96,6 @@ class CardViewController : UIViewController {
                 }
             }
         }
-        
-        
     }
     //MARK:-
     //Hide keyboard on tap outside

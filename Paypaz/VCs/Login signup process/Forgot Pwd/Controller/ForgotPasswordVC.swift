@@ -7,40 +7,182 @@
 //
 
 import UIKit
+import libPhoneNumber_iOS
 
-class ForgotPasswordVC : CustomViewController {
+class ForgotPasswordVC : UIViewController {
     
     private let dataSource = ForgotPasswordDataModel()
     @IBOutlet weak var txt_email    : RoundTextField!
+    @IBOutlet weak var txt_PhoneNo : RoundTextField!
+    @IBOutlet weak var code_btn : UIButton!
+    
+    
+    //Country Code and Phone Code
+    var country_code = "US"
+    var phone_code = "+1"
+    var textStr = ""
+    var phoneNo = ""
+    
+    private var nbPhoneNumber: NBPhoneNumber?
+    private var formatter: NBAsYouTypeFormatter?
+    private lazy var phoneUtil: NBPhoneNumberUtil = NBPhoneNumberUtil()
     
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
         self.txt_email.delegate = self
+        updatePlaceholder(country_code)
     }
     
     // MARK: - --- Action ----
     @IBAction func btn_Submit(_ sender:UIButton) {
-        let email = txt_email.text?.trimmingCharacters(in: .whitespaces)
-        if email == ""{
-            self.showAlert(withMsg: "Please enter your email id", withOKbtn: true)
-        }
-        else if !(email!.isValidEmail()){
-            self.showAlert(withMsg: "Please enter valid email id", withOKbtn: true)
-        }
-        else
+        if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
-            dataSource.email = email!
+            if txt_PhoneNo.text?.trim().count == 0
+            {
+                dataSource.email = txt_email.text ?? ""
+            }
+            else
+            {
+                dataSource.email = txt_PhoneNo.text ?? ""
+            }
             dataSource.requestForPassword()
         }
     }
-    
+    func validateFields() -> Bool
+    {
+        if txt_PhoneNo.text?.trim().count == 0 && txt_email.text?.trim().count == 0 {
+            view.makeToast("Please enter either Email or Phone Number")
+        }
+        else if txt_email.text?.trim().count != 0 && Helper.isEmailValid(email: txt_email.text!) == false
+        {
+            view.makeToast("Please enter valid Email ID ")
+        }
+        
+        else
+        {
+            return true
+        }
+        return false
+    }
+    @IBAction func selectPhoneNoCode()
+    {
+        guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }
+        listVC.countryID = {[weak self] (dial_code,name,code) in
+            guard  let self = self else {
+                return
+            }
+            self.country_code = code
+            self.phone_code = dial_code
+            self.code_btn.setTitle(dial_code, for: .normal)
+            self.code_btn.setImage(UIImage.init(named: code), for: .normal)
+            self.code_btn.imageView?.contentMode = .scaleAspectFill
+            self.code_btn.imageView?.layer.cornerRadius = 2
+            UserDefaults.standard.setPhoneCode(value: dial_code)
+            UserDefaults.standard.setCountryCode(value: code)
+            self.updatePlaceholder(code)
+            print(self.country_code)
+            print(self.phone_code)
+        }
+        self.present(listVC, animated: true, completion: nil)
+        
+    }
+    func updatePlaceholder(_ code:String) {
+        do {
+            formatter = NBAsYouTypeFormatter(regionCode: code)
+            let example = try phoneUtil.getExampleNumber(code)
+            let phoneNumber = "+\(example.countryCode.stringValue)\(example.nationalNumber.stringValue)"
+            if let inputString = formatter?.inputString(phoneNumber) {
+                txt_PhoneNo.placeholder = remove(dialCode: "+\(example.countryCode.stringValue)", in: inputString)
+            } else {
+                
+            }
+        } catch _ {
+            
+        }
+    }
+    private func remove(dialCode: String, in phoneNumber: String) -> String {
+        return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of:phone_code, with: "")
+    }
     @IBAction func btn_backToLogin(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: false)
     }
     
+}
+extension ForgotPasswordVC : UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let field = textField as? RoundTextField
+        {
+            field.border_Color = UIColor(named: "SkyblueColor")
+            if field.tag == 1{
+                self.formatter?.clear()
+            }
+        }
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let field = textField as? RoundTextField
+        {
+            field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
+        }
+    }
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if textField.tag == 1{
+            if string == ""{
+                if self.textStr.count > 0{
+                    self.textStr.removeLast()
+                }
+            }
+            else{
+                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                    self.textStr = self.textStr + string
+                }
+            }
+            if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                didEditText(textStr)
+            }
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    @objc private func didEditText(_ string:String) {
+        var cleanedPhoneNumber = clean(string: "\(String(describing:self.phone_code)) \(string)")
+        if let validPhoneNumber = getValidNumber(phoneNumber: cleanedPhoneNumber) {
+            nbPhoneNumber = validPhoneNumber
+            cleanedPhoneNumber = "+\(validPhoneNumber.countryCode.stringValue)\(validPhoneNumber.nationalNumber.stringValue)"
+            if let inputString = formatter?.inputString(cleanedPhoneNumber) {
+                txt_PhoneNo.text = remove(dialCode:self.phone_code, in: inputString)
+            }
+        } else {
+            nbPhoneNumber = nil
+            if let inputString = formatter?.inputString(cleanedPhoneNumber) {
+                txt_PhoneNo.text = remove(dialCode: country_code, in: inputString)
+            }
+        }
+    }
+    private func clean(string: String) -> String {
+        var allowedCharactersSet = CharacterSet.decimalDigits
+        allowedCharactersSet.insert("+")
+        return string.components(separatedBy: allowedCharactersSet.inverted).joined(separator: "")
+    }
+    private func getValidNumber(phoneNumber: String) -> NBPhoneNumber? {
+        do {
+            let parsedPhoneNumber: NBPhoneNumber = try phoneUtil.parse(phoneNumber, defaultRegion:self.phone_code)
+            let isValid = phoneUtil.isValidNumber(parsedPhoneNumber)
+            return isValid ? parsedPhoneNumber : nil
+        } catch _ {
+            return nil
+        }
+    }
 }
 extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
 {
@@ -50,9 +192,9 @@ extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            //UserDefaults.standard.setBearerToken(value: data.data?.token ?? "")
+            UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
-            vc.email = txt_email.text ?? ""
+             vc.email = txt_email.text ?? ""
             vc.doForgotPassword = true
             vc.verifyOTP = data.data?.otp ?? ""
             self.navigationController?.pushViewController(vc, animated: false)

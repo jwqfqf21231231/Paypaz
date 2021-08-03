@@ -13,7 +13,7 @@ import libPhoneNumber_iOS
 class LoginVC : UIViewController {
     
     private let dataSource = LogInDataModel()
-    @IBOutlet weak var txt_PhoneNo : UITextField!
+    @IBOutlet weak var txt_PhoneNo : RoundTextField!
     @IBOutlet weak var txt_email    : RoundTextField!
     @IBOutlet weak var txt_Password : RoundTextField!
     @IBOutlet weak var code_btn : UIButton!
@@ -23,6 +23,7 @@ class LoginVC : UIViewController {
     var phone_code = "+1"
     var textStr = ""
     var phoneNo = ""
+    var status = false
     
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -33,7 +34,7 @@ class LoginVC : UIViewController {
         super.viewDidLoad()
         
         dataSource.delegate = self
-        self.hideKeyboardWhenTappedOutside()
+        hideKeyboardWhenTappedArround()
         self.setDelegate()
         self.getLocation()
         updatePlaceholder(country_code)
@@ -57,8 +58,8 @@ class LoginVC : UIViewController {
     }
     private func setDelegate(){
         self.txt_PhoneNo.delegate = self
-        //        self.txt_email.delegate    = self
-        //        self.txt_Password.delegate = self
+        self.txt_email.delegate    = self
+        self.txt_Password.delegate = self
     }
     
     // MARK: - --- Action ----
@@ -104,31 +105,42 @@ class LoginVC : UIViewController {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of: phone_code, with: "")
     }
     @IBAction func btn_Login(_ sender:UIButton) {
-        let email = txt_email.text?.trimmingCharacters(in: .whitespaces)
-        let password = txt_Password.text?.trimmingCharacters(in: .whitespaces)
-        if email == "" && txt_PhoneNo.text == ""{
-            self.showAlertPopup(withMsg: "Please enter either email id or phoneNo", withOKbtn: true)
-        }
-        else if email != "" && !(email!.isValidEmail()){
-            self.showAlertPopup(withMsg: "Please enter valid email id", withOKbtn: true)
-        }
-        else if password == ""{
-            self.showAlertPopup(withMsg: "please enter password", withOKbtn: true)
-        }
-        else
+        if validateFields() == true
         {
-            if email != ""
-            {
-                dataSource.email = email!
-            }
-            else if txt_PhoneNo.text != ""
+            Connection.svprogressHudShow(view: self)
+            if txt_email.text?.trim().count == 0
             {
                 dataSource.email = txt_PhoneNo.text ?? ""
             }
-            Connection.svprogressHudShow(view: self)
-            dataSource.password = password!
+            else
+            {
+                dataSource.email = txt_email.text ?? ""
+            }
+            dataSource.password = txt_Password.text ?? ""
             dataSource.requestLogIn()
         }
+    }
+    func validateFields() -> Bool
+    {
+        view.endEditing(true)
+        if txt_email.text?.trim().count == 0 && txt_PhoneNo.text?.trim().count == 0
+        {
+            view.makeToast("Please enter either email id or phoneNo")
+        }
+        else if txt_email.text?.trim().count != 0 && Helper.isEmailValid(email: txt_email.text!) == false
+        {
+            view.makeToast("Please enter valid email.")
+        }
+        else if txt_Password.text?.trim().count == 0
+        {
+            view.makeToast("Please enter password.")
+        }
+        else
+        {
+            return true
+        }
+        
+        return false
     }
     @IBAction func btn_Eye(_ sender:UIButton)
     {
@@ -156,11 +168,11 @@ extension LoginVC : LogInDataModelDelegate
 {
     func didRecieveDataUpdate(data: LogInModel)
     {
-        print("LogInModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
             //UserDefaults.standard.setLoggedIn(value: true)
+        
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             UserDefaults.standard.setEmail(value: data.data?.emailORphone ?? "")
@@ -169,7 +181,7 @@ extension LoginVC : LogInDataModelDelegate
         }
         else
         {
-            self.showAlertPopup(withMsg: data.message ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -178,48 +190,62 @@ extension LoginVC : LogInDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {
-            self.showAlertPopup(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
         }
         else
         {
-            self.showAlertPopup(withMsg: error.localizedDescription, withOKbtn: true)
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }
 extension LoginVC : UITextFieldDelegate
 {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         return textField.resignFirstResponder()
+        
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-            if textField.tag == 1{
+        if let field = textField as? RoundTextField
+        {
+            field.border_Color = UIColor(named: "SkyblueColor")
+            if field.tag == 1{
                 self.formatter?.clear()
             }
-
+        }
     }
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let field = textField as? RoundTextField
+        {
+            field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
+        }
+    }
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        if textField.tag == 1{
-            if string == ""{
-                if self.textStr.count > 0{
-                    self.textStr.removeLast()
+        if let field = textField as? RoundTextField
+        {
+            if field.tag == 1{
+                if string == ""{
+                    if self.textStr.count > 0{
+                        self.textStr.removeLast()
+                    }
                 }
+                else{
+                    if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                        self.textStr = self.textStr + string
+                    }
+                }
+                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                    didEditText(textStr)
+                }
+                return false
             }
             else{
-                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                    self.textStr = self.textStr + string
-                }
+                return true
             }
-            if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                didEditText(textStr)
-            }
-            return false
         }
-        else{
-            return true
-        }
+        return true
     }
     @objc private func didEditText(_ string:String) {
         var cleanedPhoneNumber = clean(string: "\(String(describing:self.phone_code)) \(string)")

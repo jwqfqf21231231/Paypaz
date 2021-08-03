@@ -9,84 +9,84 @@
 import UIKit
 
 class PasscodeVC : CustomViewController {
-
+    
     weak var delegate : PopupDelegate?
     var typedPasscode = ""
     var otp = ""
     private let dataSource = PasscodeDataModel()
-     // MARK:- ---
-        @IBOutlet weak var txt_Field_1 : UITextField!
-        @IBOutlet weak var txt_Field_2 : UITextField!
-        @IBOutlet weak var txt_Field_3 : UITextField!
-        @IBOutlet weak var txt_Field_4 : UITextField!
-        
-        var isNavigatedFromPaymentVC : Bool?
+    // MARK:- ---
+    @IBOutlet weak var txt_Field_1 : UITextField!
+    @IBOutlet weak var txt_Field_2 : UITextField!
+    @IBOutlet weak var txt_Field_3 : UITextField!
+    @IBOutlet weak var txt_Field_4 : UITextField!
     
-        // MARK:- --- View Life Cycle ----
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            dataSource.delegate = self
-            dataSource.delegate2 = self
-            self.hideKeyboardWhenTappedAround()
-            self.setDelegates()
-            self.actionToTextFields()
-        }
-        
-        private func setDelegates(){
-            self.txt_Field_1.delegate  = self
-            self.txt_Field_2.delegate  = self
-            self.txt_Field_3.delegate  = self
-            self.txt_Field_4.delegate  = self
-        }
-        private func actionToTextFields(){
-            txt_Field_1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-            txt_Field_2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-            txt_Field_3.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-            txt_Field_4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        }
-        @objc func textFieldDidChange(textField: UITextField){
-            let text = textField.text
-            if  text?.count == 1 {
-                switch textField {
-                case txt_Field_1:
-                    typedPasscode += textField.text!
-                    txt_Field_2.becomeFirstResponder()
-                case txt_Field_2:
-                    typedPasscode += textField.text!
-                    txt_Field_3.becomeFirstResponder()
-                case txt_Field_3:
-                    typedPasscode += textField.text!
-                    txt_Field_4.becomeFirstResponder()
-                case txt_Field_4:
-                    typedPasscode += textField.text!
-                    txt_Field_4.resignFirstResponder()
-                default:
-                    break
-                }
-            }
-            if  text?.count == 0 {
-                switch textField{
-                case txt_Field_1:
-                    typedPasscode.removeLast()
-                    txt_Field_1.becomeFirstResponder()
-                case txt_Field_2:
-                    typedPasscode.removeLast()
-                    txt_Field_1.becomeFirstResponder()
-                case txt_Field_3:
-                    typedPasscode.removeLast()
-                    txt_Field_2.becomeFirstResponder()
-                case txt_Field_4:
-                    typedPasscode.removeLast()
-                    txt_Field_3.becomeFirstResponder()
-                default:
-                    break
-                }
-            }
-            else {
-
+    var isNavigatedFromPaymentVC : Bool?
+    
+    // MARK:- --- View Life Cycle ----
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataSource.delegate = self
+        dataSource.delegate2 = self
+        hideKeyboardWhenTappedArround()
+        self.setDelegates()
+        self.actionToTextFields()
+    }
+    
+    private func setDelegates(){
+        self.txt_Field_1.delegate  = self
+        self.txt_Field_2.delegate  = self
+        self.txt_Field_3.delegate  = self
+        self.txt_Field_4.delegate  = self
+    }
+    private func actionToTextFields(){
+        txt_Field_1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
+        txt_Field_2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
+        txt_Field_3.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
+        txt_Field_4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
+    }
+    @objc func textFieldDidChange(textField: UITextField){
+        let text = textField.text
+        if  text?.count == 1 {
+            switch textField {
+            case txt_Field_1:
+                typedPasscode += textField.text!
+                txt_Field_2.becomeFirstResponder()
+            case txt_Field_2:
+                typedPasscode += textField.text!
+                txt_Field_3.becomeFirstResponder()
+            case txt_Field_3:
+                typedPasscode += textField.text!
+                txt_Field_4.becomeFirstResponder()
+            case txt_Field_4:
+                typedPasscode += textField.text!
+                txt_Field_4.resignFirstResponder()
+            default:
+                break
             }
         }
-     // MARK:- --- Action ----
+        if  text?.count == 0 {
+            switch textField{
+            case txt_Field_1:
+                typedPasscode.removeLast()
+                txt_Field_1.becomeFirstResponder()
+            case txt_Field_2:
+                typedPasscode.removeLast()
+                txt_Field_1.becomeFirstResponder()
+            case txt_Field_3:
+                typedPasscode.removeLast()
+                txt_Field_2.becomeFirstResponder()
+            case txt_Field_4:
+                typedPasscode.removeLast()
+                txt_Field_3.becomeFirstResponder()
+            default:
+                break
+            }
+        }
+        else {
+            
+        }
+    }
+    // MARK:- --- Action ----
     @IBAction func btn_ForgotPasscode(_ sender:UIButton) {
         Connection.svprogressHudShow(view: self)
         dataSource.getOTP()
@@ -108,7 +108,7 @@ class PasscodeVC : CustomViewController {
                 self.view.makeToast("Incorrect Passcode", duration: 3, position: .bottom)
             }
         }
-       
+        
     }
 }
 extension PasscodeVC : PasscodeDataModelDelegate
@@ -124,7 +124,7 @@ extension PasscodeVC : PasscodeDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -133,11 +133,11 @@ extension PasscodeVC : PasscodeDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+            showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
         }
         else
         {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+            showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }
@@ -157,7 +157,7 @@ extension PasscodeVC : ForgotPasscodeDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -166,11 +166,11 @@ extension PasscodeVC : ForgotPasscodeDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+            showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
         }
         else
         {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+            showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

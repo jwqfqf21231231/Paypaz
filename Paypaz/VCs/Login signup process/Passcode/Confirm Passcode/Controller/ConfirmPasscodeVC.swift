@@ -21,7 +21,7 @@ class ConfirmPasscodeVC: CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         self.setDelegates()
         self.actionToTextFields()
         // Do any additional setup after loading the view.

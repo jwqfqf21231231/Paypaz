@@ -13,15 +13,15 @@ import libPhoneNumber_iOS
 class SignupVC : UIViewController {
     
     private let dataSource = SignUpDataModel()
-    var isChecked : Bool = false
+    var isChecked = false
     //var location:CLLocation?
     
-    @IBOutlet weak var txt_PhoneNo : UITextField!
+    @IBOutlet weak var txt_PhoneNo : RoundTextField!
     @IBOutlet weak var txt_email    : RoundTextField!
     @IBOutlet weak var txt_Password : RoundTextField!
     @IBOutlet weak var txt_ConfirmPassword : RoundTextField!
     @IBOutlet weak var code_btn : UIButton!
-
+    
     
     //Country Code and Phone Code
     var country_code = "US"
@@ -38,7 +38,7 @@ class SignupVC : UIViewController {
         super.viewDidLoad()
         dataSource.delegate = self
         // Do any additional setup after loading the view.
-        self.hideKeyboardWhenTappedOutside()
+        hideKeyboardWhenTappedArround()
         self.setDelegate()
         self.getLocation()
         updatePlaceholder(country_code)
@@ -53,17 +53,17 @@ class SignupVC : UIViewController {
                 UserDefaults.standard.setLongitude(value: "\(long ?? 0.0)")
                 //self.location  = CLLocation.init(latitude: lat ?? 0.0, longitude: long ?? 0.0)
                 UserDefaults.standard.synchronize()
-//                if AppSettings.hasLogInApp{
-//                    CurrentLocationAPI()
-//                }
+                //                if AppSettings.hasLogInApp{
+                //                    CurrentLocationAPI()
+                //                }
             }
         }
     }
     private func setDelegate(){
         self.txt_PhoneNo.delegate = self
-//        self.txt_email.delegate    = self
-//        self.txt_Password.delegate = self
-//        self.txt_ConfirmPassword.delegate = self
+        self.txt_email.delegate    = self
+        self.txt_Password.delegate = self
+        self.txt_ConfirmPassword.delegate = self
     }
     
     
@@ -77,9 +77,6 @@ class SignupVC : UIViewController {
             }
             self.country_code = code
             self.phone_code = dial_code
-            
-            
-            
             self.code_btn.setTitle(dial_code, for: .normal)
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
@@ -115,42 +112,50 @@ class SignupVC : UIViewController {
     }
     
     @IBAction func btn_Signup(_ sender:UIButton) {
-        let email = txt_email.text?.trimmingCharacters(in: .whitespaces)
-        let password = txt_Password.text?.trimmingCharacters(in: .whitespaces)
-        let confPassword = txt_ConfirmPassword.text?.trimmingCharacters(in: .whitespaces)
-        if email == ""{
-            self.showAlertPopup(withMsg: "Please enter your email id", withOKbtn: true)
-        }
-        else if !(email!.isValidEmail()){
-            self.showAlertPopup(withMsg: "Please Enter valid Email ID", withOKbtn: true)
-        }
-        else if txt_PhoneNo.text == ""
-        {
-            self.showAlertPopup(withMsg: "Please enter your mobile No", withOKbtn: true)
-        }
-        else if password == ""{
-            self.showAlertPopup(withMsg: "please enter password", withOKbtn: true)
-        }
-        
-        else if confPassword == ""{
-            self.showAlertPopup(withMsg: "Please enter confirm password", withOKbtn: true)
-        }
-        else if password != confPassword
-        {
-            self.showAlertPopup(withMsg: "Password and confirm Password must match", withOKbtn: true)
-        }
-        else if isChecked == false
-        {
-            self.showAlertPopup(withMsg: "Please agree Terms and Conditions", withOKbtn: true)
-        }
-        else
+        if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
             dataSource.phoneNumber = txt_PhoneNo.text ?? ""
-            dataSource.email = email!
-            dataSource.password = password!
+            dataSource.email = txt_email.text ?? ""
+            dataSource.password = txt_Password.text ?? ""
             dataSource.requestSignUp()
         }
+        
+    }
+    func validateFields() -> Bool
+    {
+        if txt_PhoneNo.text == ""
+        {
+            view.makeToast("Please enter your mobile No")
+        }
+        else if Helper.isEmailValid(email: txt_email.text!) == false{
+            view.makeToast("Please Enter valid Email ID")
+        }
+        else if txt_Password.text?.trim().count == 0
+        {
+            view.makeToast("please enter password")
+        }
+        else if Helper.validatePassword(passwordString: (txt_Password.text!.trim())) == false
+        {
+            view.makeToast("Password must be a minimum of 8 characters and include a capital letter, numerical digit and special character.")
+        }
+        else if txt_ConfirmPassword.text?.trim().count == 0
+        {
+            view.makeToast("Please enter confirm password")
+        }
+        else if txt_Password.text?.trim().count != txt_ConfirmPassword.text?.trim().count
+        {
+            view.makeToast("Password and confirm Password must match")
+        }
+        else if isChecked == false
+        {
+            view.makeToast("Please agree Terms and Conditions")
+        }
+        else
+        {
+            return true
+        }
+        return false
     }
     @IBAction func btn_Eye(_ sender:UIButton)
     {
@@ -191,29 +196,29 @@ class SignupVC : UIViewController {
     }
     @IBAction func btn_Terms_Conditions(_ sender:UIButton)
     {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "TermsPoliciesVC") as! SignupVC
-        self.navigationController?.pushViewController(vc, animated: false)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "TermsPoliciesVC") as? TermsPoliciesVC {
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        else{ return }
     }
     
 }
 extension SignupVC : SignUpDataModelDelegate
 {
-    func didRecieveDataUpdate(data: SignUpModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
-        print("SignUpModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
             UserDefaults.standard.setEmail(value: txt_email.text ?? "")
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
-            viewController.email = data.data?.emailORphone ?? ""
-            viewController.password = data.data?.password ?? ""
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
+            viewController.phoneNumber = data.data?.phoneNumber ?? ""
             viewController.verifyOTP = data.data?.otp ?? ""
             self.navigationController?.pushViewController(viewController, animated: false)
         }
         else
         {
-            self.showAlertPopup(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -222,11 +227,11 @@ extension SignupVC : SignUpDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {
-            self.showAlertPopup(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
         }
         else
         {
-            self.showAlertPopup(withMsg: error.localizedDescription, withOKbtn: true)
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }
@@ -236,11 +241,20 @@ extension SignupVC : UITextFieldDelegate
         return textField.resignFirstResponder()
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-            if textField.tag == 1{
+        if let field = textField as? RoundTextField
+        {
+            field.border_Color = UIColor(named: "SkyblueColor")
+            if field.tag == 1{
                 self.formatter?.clear()
             }
+        }
     }
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let field = textField as? RoundTextField
+        {
+            field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
+        }
+    }
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {

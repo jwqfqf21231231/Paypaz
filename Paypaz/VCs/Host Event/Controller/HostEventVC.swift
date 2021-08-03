@@ -125,7 +125,7 @@ class HostEventVC : CustomViewController {
         self.txt_Price.addTarget(self, action: #selector(givePrice), for: .editingDidBegin)
         self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedArround()
         dataSource.delegate = self
         self.view_addNewBtn.isHidden = true
         self.tableView_ProductsHeight.constant = 0.0

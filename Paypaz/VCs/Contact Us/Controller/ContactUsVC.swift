@@ -39,14 +39,14 @@ class ContactUsVC : CustomViewController {
         if email == ""{
             self.showAlert(withMsg: "Please enter your email id", withOKbtn: true)
         }
-        else if !(email!.isValidEmail()){
+        else if txt_Email.text?.trim().count == 0{
             self.showAlert(withMsg: "Please Enter Valid Email Id", withOKbtn: true)
         }
-        else if txt_Subject.text == ""
+        else if txt_Subject.text?.trim().count == 0
         {
             self.showAlert(withMsg: "Please Enter Subject", withOKbtn: true)
         }
-        else if txt_Message.text == ""
+        else if txt_Message.text.trim().count == 0
         {
             self.showAlert(withMsg: "Please Enter Message", withOKbtn: true)
         }
