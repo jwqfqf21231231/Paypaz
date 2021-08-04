@@ -36,7 +36,6 @@ class OTPVerificationVC : CustomViewController {
        hideKeyboardWhenTappedArround()
         self.setDelegates()
         self.actionToTextFields()
-        self.setLabel()
     }
     private func changeTitle()
     {
@@ -48,17 +47,9 @@ class OTPVerificationVC : CustomViewController {
         else
         {
             lbl_Title.text = "OTP Verification"
+            lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
         }
     }
-    private func setLabel()
-    {
-        let attributedText = NSMutableAttributedString(string: "Enter OTP Code sent to", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16),NSAttributedString.Key.foregroundColor: UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)])
-        attributedText.append(NSAttributedString(string: " \(phoneNumber)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor(red: 0/255, green: 82/255, blue: 136/255, alpha: 1)]))
-        lbl_Notify.numberOfLines=0
-        lbl_Notify.attributedText = attributedText
-        lbl_Notify.textAlignment = .center
-    }
-    
     private func setDelegates(){
         self.txt_Field_1.delegate  = self
         self.txt_Field_2.delegate  = self
@@ -173,7 +164,10 @@ class OTPVerificationVC : CustomViewController {
 //MARK:- ---- Extension ----
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
-        _ = self.pushToVC("CreateProfileVC")
+        if let vc = self.pushToVC("CreateProfileVC") as? CreateProfileVC
+        {
+            vc.isUpdate = "1"
+        }
     }
 }
 extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
@@ -190,7 +184,7 @@ extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     func didFailDataUpdateWithError1(error: Error)
@@ -255,7 +249,7 @@ extension OTPVerificationVC : ResendOTPModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -287,7 +281,7 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

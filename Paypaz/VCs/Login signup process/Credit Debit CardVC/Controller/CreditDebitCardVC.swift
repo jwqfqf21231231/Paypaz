@@ -167,7 +167,7 @@ extension CreditDebitCardVC : CreateCardDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

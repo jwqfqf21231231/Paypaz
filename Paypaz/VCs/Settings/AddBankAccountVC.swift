@@ -109,7 +109,7 @@ extension AddBankAccountVC : AddBankAccountDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

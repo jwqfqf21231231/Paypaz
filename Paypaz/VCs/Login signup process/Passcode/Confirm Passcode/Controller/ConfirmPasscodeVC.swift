@@ -21,7 +21,7 @@ class ConfirmPasscodeVC: CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-//        self.hideKeyboardWhenTappedAround()
+        //        self.hideKeyboardWhenTappedAround()
         self.setDelegates()
         self.actionToTextFields()
         // Do any additional setup after loading the view.
@@ -108,17 +108,9 @@ extension ConfirmPasscodeVC : ConfirmPasscodeDataModelDelegate
         print("ConfirmPasscodeModelData = ",data)
         if data.success == 1
         {
-            if UserDefaults.standard.getPin() == ""
-            {
-                if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC{
-                    createVc.isCreatingPin = true
-                }
+            if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC{
+                createVc.isCreatingPin = true
             }
-            else
-            {
-                _ = self.pushToVC("SideDrawerBaseVC")
-            }
-            
         }
         else
         {

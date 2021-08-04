@@ -19,12 +19,13 @@ class LoginVC : UIViewController {
     @IBOutlet weak var code_btn : UIButton!
     
     //Country Code and Phone Code
-    var country_code = "US"
-    var phone_code = "+1"
+    var country_code = "IN"
+    var phone_code = "+91"
     var textStr = ""
     var phoneNo = ""
     var status = false
     
+    var placeHolderText = ""
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
     private lazy var phoneUtil: NBPhoneNumberUtil = NBPhoneNumberUtil()
@@ -38,7 +39,6 @@ class LoginVC : UIViewController {
         self.setDelegate()
         self.getLocation()
         updatePlaceholder(country_code)
-        
     }
     //  MARK:- Getting Current Location
     private func getLocation()
@@ -76,16 +76,15 @@ class LoginVC : UIViewController {
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2
-            UserDefaults.standard.setPhoneCode(value : dial_code)
-            UserDefaults.standard.setCountryCode(value: code)
             self.updatePlaceholder(code)
-            print(self.country_code)
-            print(self.phone_code)
+            self.txt_PhoneNo.text?.removeAll()
+            self.textStr.removeAll()
         }
         self.present(listVC, animated: true, completion: nil)
-        
     }
     func updatePlaceholder(_ code:String) {
+        UserDefaults.standard.setPhoneCode(value: phone_code)
+        UserDefaults.standard.setCountryCode(value: country_code)
         do {
             formatter = NBAsYouTypeFormatter(regionCode: code)
             let example = try phoneUtil.getExampleNumber(code)
@@ -99,6 +98,7 @@ class LoginVC : UIViewController {
         } catch _ {
             
         }
+        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
         
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {
@@ -125,21 +125,24 @@ class LoginVC : UIViewController {
         view.endEditing(true)
         if txt_email.text?.trim().count == 0 && txt_PhoneNo.text?.trim().count == 0
         {
-            view.makeToast("Please enter either email id or phoneNo")
+            view.makeToast("Please Enter Either Email ID or Phone Number")
+        }
+        else if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        {
+            view.makeToast("Please Enter Valid Phone Number")
         }
         else if txt_email.text?.trim().count != 0 && Helper.isEmailValid(email: txt_email.text!) == false
         {
-            view.makeToast("Please enter valid email.")
+            view.makeToast("Please Enter Valid Email ID")
         }
         else if txt_Password.text?.trim().count == 0
         {
-            view.makeToast("Please enter password.")
+            view.makeToast("Please Enter Password")
         }
         else
         {
             return true
         }
-        
         return false
     }
     @IBAction func btn_Eye(_ sender:UIButton)
@@ -175,7 +178,7 @@ extension LoginVC : LogInDataModelDelegate
         
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
-            UserDefaults.standard.setEmail(value: data.data?.emailORphone ?? "")
+            UserDefaults.standard.setEmail(value: data.data?.email ?? "")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeVC") as! PasscodeVC
             self.navigationController?.pushViewController(viewController, animated: false)
         }
@@ -229,15 +232,14 @@ extension LoginVC : UITextFieldDelegate
                 if string == ""{
                     if self.textStr.count > 0{
                         self.textStr.removeLast()
+                        didEditText(textStr)
                     }
                 }
                 else{
-                    if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                    if self.textStr.count < placeHolderText.count {
                         self.textStr = self.textStr + string
+                        didEditText(textStr)
                     }
-                }
-                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                    didEditText(textStr)
                 }
                 return false
             }

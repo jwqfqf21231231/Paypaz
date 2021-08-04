@@ -27,6 +27,7 @@ class CreateProfileDataModel: NSObject
     var address = ""
     var city = ""
     var state = ""
+    var isUpdate = ""
     var profilePic : UIImage?
     
     func uploadProImg(){
@@ -39,7 +40,8 @@ class CreateProfileDataModel: NSObject
             "DOB":dateOfBirth,
             "address":address,
             "city":city,
-            "state":state
+            "state":state,
+            "isUpdate":isUpdate
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"

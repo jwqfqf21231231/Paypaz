@@ -41,7 +41,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
     
     //MARK:- --- Delegate ----
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("...getting location....")
         if let location = locations.first?.coordinate{
             lastLocation = location
             self.gotLocationOfUser?(location.latitude,location.longitude)

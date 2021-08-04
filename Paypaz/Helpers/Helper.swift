@@ -37,10 +37,6 @@ class Helper : NSObject
         userDefaults.removeObject(forKey: "countryCode")
         userDefaults.removeObject(forKey: "isLoggedIn")
         userDefaults.removeObject(forKey: "notificationStatus")
-        
-       // userDefaults.removeObject(forKey: "passcode")
-       // userDefaults.removeObject(forKey: "pin")
-        userDefaults.synchronize()
     }
     
 }
@@ -131,6 +127,9 @@ extension String
     {
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    func stringByRemovingAll(characters: [Character]) -> String {
+           return String(self.filter({ !characters.contains($0) }))
+       }
    
 }
 extension UIButton{

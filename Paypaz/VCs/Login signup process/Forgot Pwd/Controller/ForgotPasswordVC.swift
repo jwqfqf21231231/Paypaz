@@ -18,10 +18,11 @@ class ForgotPasswordVC : UIViewController {
     
     
     //Country Code and Phone Code
-    var country_code = "US"
-    var phone_code = "+1"
+    var country_code = "IN"
+    var phone_code = "+91"
     var textStr = ""
     var phoneNo = ""
+    var placeHolderText = ""
     
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -53,14 +54,18 @@ class ForgotPasswordVC : UIViewController {
     }
     func validateFields() -> Bool
     {
+        view.endEditing(true)
         if txt_PhoneNo.text?.trim().count == 0 && txt_email.text?.trim().count == 0 {
-            view.makeToast("Please enter either Email or Phone Number")
+            view.makeToast("Please Enter Either Email or Phone Number")
+        }
+        else if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        {
+            view.makeToast("Please Enter Valid Phone Number")
         }
         else if txt_email.text?.trim().count != 0 && Helper.isEmailValid(email: txt_email.text!) == false
         {
-            view.makeToast("Please enter valid Email ID ")
+            view.makeToast("Please Enter Valid Email ID ")
         }
-        
         else
         {
             return true
@@ -80,16 +85,16 @@ class ForgotPasswordVC : UIViewController {
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2
-            UserDefaults.standard.setPhoneCode(value: dial_code)
-            UserDefaults.standard.setCountryCode(value: code)
             self.updatePlaceholder(code)
-            print(self.country_code)
-            print(self.phone_code)
+            self.textStr.removeAll()
+            self.txt_PhoneNo.text?.removeAll()
         }
         self.present(listVC, animated: true, completion: nil)
         
     }
     func updatePlaceholder(_ code:String) {
+        UserDefaults.standard.setPhoneCode(value: phone_code)
+        UserDefaults.standard.setCountryCode(value: country_code)
         do {
             formatter = NBAsYouTypeFormatter(regionCode: code)
             let example = try phoneUtil.getExampleNumber(code)
@@ -102,6 +107,7 @@ class ForgotPasswordVC : UIViewController {
         } catch _ {
             
         }
+        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of:phone_code, with: "")
@@ -134,25 +140,29 @@ extension ForgotPasswordVC : UITextFieldDelegate
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        if textField.tag == 1{
-            if string == ""{
-                if self.textStr.count > 0{
-                    self.textStr.removeLast()
+        if let field = textField as? RoundTextField
+        {
+            if field.tag == 1{
+                if string == ""{
+                    if self.textStr.count > 0{
+                        self.textStr.removeLast()
+                        didEditText(textStr)
+                    }
                 }
+                else{
+                    if self.textStr.count < placeHolderText.count{
+                        self.textStr = self.textStr + string
+                        didEditText(textStr)
+
+                    }
+                }
+                return false
             }
             else{
-                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                    self.textStr = self.textStr + string
-                }
+                return true
             }
-            if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                didEditText(textStr)
-            }
-            return false
         }
-        else{
-            return true
-        }
+        return true
     }
     @objc private func didEditText(_ string:String) {
         var cleanedPhoneNumber = clean(string: "\(String(describing:self.phone_code)) \(string)")

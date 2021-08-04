@@ -24,10 +24,11 @@ class SignupVC : UIViewController {
     
     
     //Country Code and Phone Code
-    var country_code = "US"
-    var phone_code = "+1"
+    var country_code = "IN"
+    var phone_code = "+91"
     var textStr = ""
     var phoneNo = ""
+    var placeHolderText = ""
     
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -81,16 +82,16 @@ class SignupVC : UIViewController {
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2
-            UserDefaults.standard.setPhoneCode(value: dial_code)
-            UserDefaults.standard.setCountryCode(value: code)
             self.updatePlaceholder(code)
-            print(self.country_code)
-            print(self.phone_code)
+            self.txt_PhoneNo.text?.removeAll()
+            self.textStr.removeAll()
         }
         self.present(listVC, animated: true, completion: nil)
         
     }
     func updatePlaceholder(_ code:String) {
+        UserDefaults.standard.setPhoneCode(value: phone_code)
+        UserDefaults.standard.setCountryCode(value: country_code)
         do {
             formatter = NBAsYouTypeFormatter(regionCode: code)
             let example = try phoneUtil.getExampleNumber(code)
@@ -103,6 +104,7 @@ class SignupVC : UIViewController {
         } catch _ {
             
         }
+        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of:phone_code, with: "")
@@ -124,9 +126,14 @@ class SignupVC : UIViewController {
     }
     func validateFields() -> Bool
     {
-        if txt_PhoneNo.text == ""
+        view.endEditing(true)
+        if txt_PhoneNo.text?.trim().count == 0
         {
-            view.makeToast("Please enter your mobile No")
+            view.makeToast("Please Enter Your Mobile No")
+        }
+        else if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        {
+            view.makeToast("Please Enter Valid Phone Number")
         }
         else if Helper.isEmailValid(email: txt_email.text!) == false{
             view.makeToast("Please Enter valid Email ID")
@@ -143,7 +150,7 @@ class SignupVC : UIViewController {
         {
             view.makeToast("Please enter confirm password")
         }
-        else if txt_Password.text?.trim().count != txt_ConfirmPassword.text?.trim().count
+        else if txt_Password.text != txt_ConfirmPassword.text
         {
             view.makeToast("Password and confirm Password must match")
         }
@@ -210,6 +217,7 @@ extension SignupVC : SignUpDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             UserDefaults.standard.setEmail(value: txt_email.text ?? "")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
             viewController.phoneNumber = data.data?.phoneNumber ?? ""
@@ -262,21 +270,18 @@ extension SignupVC : UITextFieldDelegate
             if string == ""{
                 if self.textStr.count > 0{
                     self.textStr.removeLast()
+                    didEditText(textStr)
                 }
             }
             else{
-                if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
+                if self.textStr.count < placeHolderText.count {
                     self.textStr = self.textStr + string
+                    didEditText(textStr)
                 }
-            }
-            if self.textStr.count < txt_PhoneNo.placeholder?.count ?? 0{
-                didEditText(textStr)
             }
             return false
         }
-        else{
-            return true
-        }
+        return true
     }
     @objc private func didEditText(_ string:String) {
         var cleanedPhoneNumber = clean(string: "\(String(describing:self.phone_code)) \(string)")
