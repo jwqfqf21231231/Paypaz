@@ -124,6 +124,7 @@ class CreatePinVC : CustomViewController {
         {
             if self.isCreatingPin ?? false {
                 UserDefaults.standard.setPin(value: typedPin)
+                dataSource.pincode = typedPin
                 dataSource.createPin()
             } else {
                 self.navigationController?.popViewController(animated: true)
@@ -134,11 +135,11 @@ class CreatePinVC : CustomViewController {
 }
 extension CreatePinVC : CreatePinDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ResendOTPModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
-        print("CreatePinModelData = ",data)
         if data.success == 1
         {
+            UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
             _ = self.pushToVC("CreditDebitCardVC")
             
         }

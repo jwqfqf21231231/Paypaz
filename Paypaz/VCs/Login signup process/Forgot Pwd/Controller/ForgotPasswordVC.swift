@@ -198,15 +198,21 @@ extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
 {
     func didRecieveDataUpdate(data: SignUpModel)
     {
-        print("ForgotPasswordModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
-             vc.email = txt_email.text ?? ""
+            if txt_PhoneNo.text?.trim().count == 0
+            {
+                vc.email = txt_email.text ?? ""
+            }
+            else
+            {
+                vc.phoneNumber = txt_PhoneNo.text ?? ""
+            }
             vc.doForgotPassword = true
-            vc.verifyOTP = data.data?.otp ?? ""
+            vc.verifyOTP = "1234"
             self.navigationController?.pushViewController(vc, animated: false)
         }
         else

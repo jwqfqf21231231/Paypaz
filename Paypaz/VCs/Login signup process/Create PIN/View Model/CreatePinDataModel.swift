@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol CreatePinDataModelDelegate:class {
-    func didRecieveDataUpdate(data:ResendOTPModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -18,12 +18,13 @@ class CreatePinDataModel: NSObject
 {
     weak var delegate: CreatePinDataModelDelegate?
     let sharedInstance = Connection()
+    var pincode = ""
     func createPin()
     {
         let url =  APIList().getUrlString(url: .CREATEPIN)
     
         let parameter : Parameters = [
-            "pincode" : UserDefaults.standard.getPin()
+            "pincode" : pincode
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
@@ -37,7 +38,7 @@ class CreatePinDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

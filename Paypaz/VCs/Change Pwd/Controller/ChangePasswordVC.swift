@@ -81,49 +81,46 @@ class ChangePasswordVC : CustomViewController {
         }
     }
     @IBAction func btn_Done(_ sender:UIButton) {
-        let oldPassword = txt_OldPwd.text?.trimmingCharacters(in: .whitespaces)
-        let newPassword = txt_NewPassword.text?.trimmingCharacters(in: .whitespaces)
-        let confPassword = txt_ConfirmPassword.text?.trimmingCharacters(in: .whitespaces)
         
         if self.hideOldPassword ?? false {
             
-            if newPassword == ""{
-                self.showAlert(withMsg: "please enter new password", withOKbtn: true)
+            if txt_NewPassword.text?.trim().count == 0{
+                view.makeToast("please enter new password")
             }
-            else if confPassword == ""{
-                self.showAlert(withMsg: "please enter confirm password", withOKbtn: true)
+            else if txt_ConfirmPassword.text?.trim().count == 0{
+                view.makeToast("please enter confirm password")
             }
-            else if newPassword != confPassword
+            else if txt_NewPassword.text?.trim() != txt_ConfirmPassword.text?.trim()
             {
-                self.showAlert(withMsg: "Password and confirm Password must match", withOKbtn: true)
+                view.makeToast("Password and confirm Password must match")
             }
             else
             {
                 Connection.svprogressHudShow(view: self)
-                dataSource.newPassword = newPassword!
+                dataSource.newPassword = txt_NewPassword.text!
                 dataSource.hideOldPassword = true
                 dataSource.requestPasswordChange()
             }
         }
         else {
-            if oldPassword == ""{
-                self.showAlert(withMsg: "please enter old password", withOKbtn: true)
+            if txt_OldPwd.text?.trim().count == 0{
+                view.makeToast("please enter old password")
             }
-            else if newPassword == ""{
-                self.showAlert(withMsg: "please enter new password", withOKbtn: true)
+            else if txt_NewPassword.text?.trim().count == 0{
+                view.makeToast("please enter new password")
             }
-            else if confPassword == ""{
-                self.showAlert(withMsg: "please enter confirm password", withOKbtn: true)
+            else if txt_ConfirmPassword.text?.trim().count == 0{
+                view.makeToast("please enter confirm password")
             }
-            else if newPassword != confPassword
+            else if txt_NewPassword.text?.trim() != txt_ConfirmPassword.text?.trim()
             {
-                self.showAlert(withMsg: "Password and confirm Password must match", withOKbtn: true)
+                view.makeToast("Password and confirm Password must match")
             }
             else
             {
                 Connection.svprogressHudShow(view: self)
-                dataSource.oldPassword = oldPassword!
-                dataSource.newPassword = newPassword!
+                dataSource.oldPassword = txt_OldPwd.text!
+                dataSource.newPassword = txt_NewPassword.text!
                 dataSource.requestPasswordChange()
             }
         }
@@ -142,11 +139,13 @@ extension ChangePasswordVC : ChangePasswordDataModelDelegate
                 for vc in self.navigationController?.viewControllers ?? [] {
                     if let login = vc as? LoginVC {
                         self.navigationController?.popToViewController(login, animated: false)
+                        view.makeToast(data.message)
                     }
                 }
             }
             else {
                 self.navigationController?.popViewController(animated: false)
+                view.makeToast(data.message)
             }
         }
         else

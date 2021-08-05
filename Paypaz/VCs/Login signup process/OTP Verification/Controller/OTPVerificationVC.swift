@@ -42,6 +42,14 @@ class OTPVerificationVC : CustomViewController {
         if doForgotPasscode ?? false
         {
             lbl_Title.text = "Passcode OTP Verification"
+            if email != ""
+            {
+                lbl_Notify.text = email
+            }
+            else
+            {
+                lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
+            }
             
         }
         else
@@ -211,6 +219,8 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            UserDefaults.standard.set(data.data?.isVerify, forKey: "isVerify")
+            UserDefaults.standard.setUserID(value: data.data?.id ?? "")
             UserDefaults.standard.setLoggedIn(value: true)
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
@@ -241,11 +251,10 @@ extension OTPVerificationVC : ResendOTPModelDelegate
 {
     func didRecieveDataUpdate2(data: ResendOTPModel)
     {
-        print("ResendOTPModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.view.makeToast("OTP Sent Successfully", duration: 3, position: .bottom)
+            self.view.makeToast(data.message, duration: 3, position: .bottom)
         }
         else
         {
@@ -270,7 +279,6 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
 {
     func didRecieveDataUpdate3(data: ResendOTPModel)
     {
-        print("ForgotPasscodeOTPModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {

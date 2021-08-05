@@ -89,6 +89,18 @@ extension UserDefaults
         }
         return string(forKey: UserDefaultsKeys.email.rawValue) ?? ""
     }
+    func setPhoneNo(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.phoneNo.rawValue)
+    }
+    func getPhoneNo() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.phoneNo.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.phoneNo.rawValue) ?? ""
+    }
     func setNotificationStatus(value:String)
     {
         set(value,forKey: UserDefaultsKeys.notificationStatus.rawValue)
@@ -125,11 +137,24 @@ extension UserDefaults
         }
         return string(forKey: UserDefaultsKeys.countryCode.rawValue) ?? ""
     }
+    func setUserID(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.userID.rawValue)
+    }
+    func getUserID() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.userID.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.userID.rawValue) ?? ""
+    }
 }
 
 
 enum UserDefaultsKeys : String
 {
+    case userID
     case isLoggedIn
     case registerToken
     case loginToken
@@ -138,6 +163,7 @@ enum UserDefaultsKeys : String
     case passcode
     case pin
     case email
+    case phoneNo
     case notificationStatus
     case phoneCode
     case countryCode

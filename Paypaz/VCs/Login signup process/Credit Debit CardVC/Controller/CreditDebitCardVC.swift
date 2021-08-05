@@ -58,7 +58,7 @@ class CreditDebitCardVC : CardViewController {
             self.btn_Skip.alpha = 0.0
         }
     }
-   
+    
     // MARK: - --- Action ----
     @IBAction func btn_SelectBank(_ sender:UIButton)
     {
@@ -78,43 +78,54 @@ class CreditDebitCardVC : CardViewController {
     @IBAction func btn_VerifyCard(_ sender:UIButton) {
         if isAddingNewCard ?? false {
             self.navigationController?.popViewController(animated: true)
-        } else {
-            guard !(txt_cardHolderName.text?.isEmpty)! && !(txt_cardHolderName.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-                self.showAlert(withMsg: "Please enter holder name.", withOKbtn: true)
-                return
-            }
-            guard !(txt_cardNumber.text?.isEmpty)! && !(txt_cardNumber.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-                self.showAlert(withMsg: "Please enter card number.", withOKbtn: true)
-                return
-            }
-            guard !((txt_cardNumber.text?.count)! < 15) else {
-                self.showAlert(withMsg: "Please enter card number at least 16 charecters", withOKbtn: true)
-                return
-            }
-            guard !(txt_expDate.text?.isEmpty)! && !(txt_expDate.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-                self.showAlert(withMsg: "Please enter expiry date.", withOKbtn: true)
-                return
-            }
-            guard !(txt_cvv.text?.isEmpty)! && !(txt_cvv.text?.trimmingCharacters(in: .whitespaces).isEmpty)!  else {
-                self.showAlert(withMsg: "Please enter cvv number.", withOKbtn: true)
-                return
-            }
-            if isClicked == false
+        }
+        else
+        {
+            if validateFields() == true
             {
-                self.showAlert(withMsg: "Please select Bank", withOKbtn: true)
-                return
+                Connection.svprogressHudShow(view: self)
+                dataSource.bankID = selected ?? ""
+                dataSource.cardNumber = txt_cardNumber.text ?? ""
+                dataSource.expDate = txt_expDate.text ?? ""
+                dataSource.cardHolderName = txt_cardHolderName.text ?? ""
+                dataSource.cvv = txt_cvv.text ?? ""
+                dataSource.createCard()
             }
-            
-            Connection.svprogressHudShow(view: self)
-            dataSource.bankID = selected ?? ""
-            dataSource.cardNumber = txt_cardNumber.text ?? ""
-            dataSource.expDate = txt_expDate.text ?? ""
-            dataSource.cardHolderName = txt_cardHolderName.text ?? ""
-            dataSource.cvv = txt_cvv.text ?? ""
-            dataSource.createCard()
         }
     }
-    
+    func validateFields() -> Bool
+    {
+        if txt_cardHolderName.text?.trim().count == 0
+        {
+            view.makeToast("Please enter holder name")
+        }
+        else if txt_cardNumber.text?.trim().count == 0
+        {
+            view.makeToast("Please enter card number")
+        }
+        else if (txt_cardNumber.text?.removingWhitespaceAndNewlines().count)! < 15
+        {
+            view.makeToast("Enter card number with 15 charecters")
+        }
+        else if txt_expDate.text?.trim().count == 0
+        {
+            view.makeToast("Please enter expiry date")
+        }
+        else if txt_cvv.text?.trim().count == 0
+        {
+            view.makeToast("Please enter cvv number")
+        }
+        else if isClicked == false
+        {
+            view.makeToast("Please select Bank")
+        }
+        else
+        {
+            return true
+        }
+        return false
+        
+    }
     @IBAction func btn_Skip(_ sender:UIButton) {
         _ = self.pushToVC("SideDrawerBaseVC")
     }
@@ -124,7 +135,6 @@ extension CreditDebitCardVC : BankInfoDataModelDelegate
 {
     func didRecieveDataUpdate(data: BankInfoModel)
     {
-        print("BankInfoModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
@@ -156,14 +166,13 @@ extension CreditDebitCardVC : BankInfoDataModelDelegate
 }
 extension CreditDebitCardVC : CreateCardDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ResendOTPModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
-        print("CreateCardModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            UserDefaults.standard.setValue(data.data?.isVerifyCard, forKey: "isVerifyCard")
             _ = self.pushToVC("SideDrawerBaseVC")
-            
         }
         else
         {
@@ -195,11 +204,11 @@ extension CreditDebitCardVC : UITextFieldDelegate{
         let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
         if textField == txt_cardNumber{
             let maxLegnth = 19
-            if (enteredCharString.trimmingCharacters(in: .whitespaces).count == 5){
+            if (enteredCharString.trim().count == 5){
                 txt_cardNumber.insertText(" ")
-            }else if (enteredCharString.trimmingCharacters(in: .whitespaces).count == 10){
+            }else if (enteredCharString.trim().count == 10){
                 txt_cardNumber.insertText(" ")
-            }else if (enteredCharString.trimmingCharacters(in: .whitespaces).count == 15){
+            }else if (enteredCharString.trim().count == 15){
                 txt_cardNumber.insertText(" ")
             }
             
@@ -208,14 +217,14 @@ extension CreditDebitCardVC : UITextFieldDelegate{
             
         }else if textField == txt_cardHolderName{
             let maxLegnth = 40
-            if (textField.text?.last == " " && string == " ") || (enteredCharString.trimmingCharacters(in: .whitespaces).count == 0){
+            if (textField.text?.last == " " && string == " ") || (enteredCharString.trim().count == 0){
                 return false
             } else {
                 return newString.length <= maxLegnth
             }
         }else if textField == txt_cvv{
             let maxLegnth = 3
-            if (textField.text?.last == " " && string == " ") || (enteredCharString.trimmingCharacters(in: .whitespaces).count == 0){
+            if (textField.text?.last == " " && string == " ") || (enteredCharString.trim().count == 0){
                 return false
             } else {
                 return newString.length <= maxLegnth

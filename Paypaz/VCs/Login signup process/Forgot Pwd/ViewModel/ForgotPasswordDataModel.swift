@@ -19,13 +19,25 @@ class ForgotPasswordDataModel: NSObject
     weak var delegate: ForgotPasswordDataModelDelegate?
     let sharedInstance = Connection()
     var email = ""
-    
+    var phoneCode = ""
+    var parameter : Parameters = [:]
     func requestForPassword()
     {
         let url =  APIList().getUrlString(url: .FORGOTPASSWORD)
-        let parameter : Parameters = [
+        if phoneCode == ""
+        {
+            parameter = [
             "emailORphone":email
-        ]
+            ]
+        }
+        else
+        {
+            parameter = [
+                "emailORphone":email,
+                "phoneCode":phoneCode
+            ]
+        }
+      
         sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:
                                     {

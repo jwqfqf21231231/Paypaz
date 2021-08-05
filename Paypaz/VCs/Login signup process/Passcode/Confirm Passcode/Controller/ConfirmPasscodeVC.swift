@@ -11,6 +11,7 @@ import Toast_Swift
 class ConfirmPasscodeVC: CustomViewController {
     
     weak var delegate : PopupDelegate?
+    var createdPasscode = ""
     var typedPasscode = ""
     private let dataSource = ConfirmPasscodeDataModel()
     // MARK:- ---
@@ -87,10 +88,10 @@ class ConfirmPasscodeVC: CustomViewController {
         }
         else
         {
-            let savedPasscode = UserDefaults.standard.getPasscode()
-            print(savedPasscode)
-            if(savedPasscode == typedPasscode)
+            Connection.svprogressHudShow(view: self)
+            if(createdPasscode == typedPasscode)
             {
+                dataSource.passcode = typedPasscode
                 dataSource.createPasscode()
             }
             else
@@ -103,11 +104,13 @@ class ConfirmPasscodeVC: CustomViewController {
 }
 extension ConfirmPasscodeVC : ConfirmPasscodeDataModelDelegate
 {
-    func didRecieveDataUpdate(data: ResendOTPModel)
+    func didRecieveDataUpdate(data: LogInModel)
     {
         print("ConfirmPasscodeModelData = ",data)
         if data.success == 1
         {
+            UserDefaults.standard.set(data.data?.isPasscode, forKey: "isPasscode")
+            UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC{
                 createVc.isCreatingPin = true
             }

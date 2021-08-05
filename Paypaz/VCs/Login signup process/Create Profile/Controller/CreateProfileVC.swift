@@ -40,7 +40,10 @@ class CreateProfileVC  : CustomViewController {
     func createDatePicker()
     {
         datePicker=UIDatePicker()
-        datePicker.preferredDatePickerStyle = .wheels
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels        } else {
+            // Fallback on earlier versions
+        }
         datePicker.datePickerMode = .date
         txt_DOB.inputView=datePicker
         txt_DOB.inputAccessoryView=createToolBar()
@@ -63,7 +66,7 @@ class CreateProfileVC  : CustomViewController {
         dataSource.delegate = self
         hideKeyboardWhenTappedArround()
         self.setDelegate()
-     
+        
     }
     
     private func setDelegate() {
@@ -78,27 +81,7 @@ class CreateProfileVC  : CustomViewController {
     // MARK: - --- Action ----
     
     @IBAction func btn_Save(_ sender:UIButton) {
-        
-        if txt_firstName.text == ""{
-            self.showAlert(withMsg: "Please enter your first name", withOKbtn: true)
-        }
-        else if txt_lastName.text == ""{
-            self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
-        }
-        else if txt_DOB.text == ""{
-            self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
-        }
-        else if txt_City.text == ""{
-            self.showAlert(withMsg: "Please enter City", withOKbtn: true)
-        }
-        else if txt_State.text == ""{
-            self.showAlert(withMsg: "Please enter State", withOKbtn: true)
-        }
-        else if txtView_Address.text == ""
-        {
-            self.showAlert(withMsg: "Please enter Address", withOKbtn: true)
-        }
-        else
+        if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
             dataSource.firstName = txt_firstName.text!
@@ -111,6 +94,33 @@ class CreateProfileVC  : CustomViewController {
             dataSource.isUpdate = isUpdate
             dataSource.uploadProImg()
         }
+    }
+    func validateFields() -> Bool
+    {
+        if txt_firstName.text?.trim().count == 0{
+            self.showAlert(withMsg: "Please enter your first name", withOKbtn: true)
+        }
+        else if txt_lastName.text?.trim().count == 0{
+            self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
+        }
+        else if txt_DOB.text?.trim().count == 0{
+            self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
+        }
+        else if txt_City.text?.trim().count == 0{
+            self.showAlert(withMsg: "Please enter City", withOKbtn: true)
+        }
+        else if txt_State.text?.trim().count == 0{
+            self.showAlert(withMsg: "Please enter State", withOKbtn: true)
+        }
+        else if txtView_Address.text.trim().count == 0
+        {
+            self.showAlert(withMsg: "Please enter Address", withOKbtn: true)
+        }
+        else
+        {
+            return true
+        }
+        return false
     }
     @IBAction func btn_ChangePic(_ sender:UIButton)
     {
@@ -129,6 +139,7 @@ extension CreateProfileVC : CreateProfileDataModelDelegate
     func didRecieveDataUpdate(data: LogInModel)
     {
         Connection.svprogressHudDismiss(view: self)
+        UserDefaults.standard.set(data.data?.isProfile, forKey: "isProfile")
         if data.success == 1
         {
             _ = self.pushToVC("CreatePasscodeVC")

@@ -99,8 +99,10 @@ class CreatePasscodeVC: CustomViewController {
         }
         else
         {
-            UserDefaults.standard.setPasscode(value: typedPasscode)
-            _ = self.pushToVC("ConfirmPasscodeVC")
+            if let vc = self.pushToVC("ConfirmPasscodeVC") as? ConfirmPasscodeVC
+            {
+                vc.createdPasscode = typedPasscode
+            }
         }
     }
     

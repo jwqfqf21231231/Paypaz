@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol ConfirmPasscodeDataModelDelegate:class {
-    func didRecieveDataUpdate(data:ResendOTPModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -18,12 +18,13 @@ class ConfirmPasscodeDataModel: NSObject
 {
     weak var delegate: ConfirmPasscodeDataModelDelegate?
     let sharedInstance = Connection()
+    var passcode = ""
     func createPasscode()
     {
         let url =  APIList().getUrlString(url: .CREATEPASSCODE)
     
         let parameter : Parameters = [
-            "passcode" : UserDefaults.standard.getPasscode()
+            "passcode" : passcode
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
@@ -37,7 +38,7 @@ class ConfirmPasscodeDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

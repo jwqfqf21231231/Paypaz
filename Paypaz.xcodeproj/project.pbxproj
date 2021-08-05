@@ -1237,6 +1237,7 @@
 		44C8F2CD261F1C09000F03DB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */,
 				0437245826AA86C900840D15 /* CardExtension.swift */,
 				44C8F2D1261F1DEF000F03DB /* Extensions.swift */,
 				0C5B97FE268DE09000CBAC41 /* ImagePickerController.swift */,
@@ -1245,7 +1246,6 @@
 				44C8F2D7261F2623000F03DB /* Inspectables.swift */,
 				44E559262632E80C00193305 /* QRScannerView.swift */,
 				445C77AE263813F300AD4DF3 /* CircularProgressView.swift */,
-				0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */,
 				0437245326AA81C600840D15 /* MonthYearPickerView.swift */,
 				04FD51A626B8FBC200F4CCA2 /* Helper.swift */,
 			);
@@ -2058,7 +2058,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6N43GY3295;
 				INFOPLIST_FILE = Paypaz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2080,7 +2080,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6N43GY3295;
 				INFOPLIST_FILE = Paypaz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

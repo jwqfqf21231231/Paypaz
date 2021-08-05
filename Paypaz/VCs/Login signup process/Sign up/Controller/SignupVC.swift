@@ -219,6 +219,9 @@ extension SignupVC : SignUpDataModelDelegate
         {
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             UserDefaults.standard.setEmail(value: txt_email.text ?? "")
+            UserDefaults.standard.setPhoneNo(value: txt_PhoneNo.text ?? "")
+            UserDefaults.standard.setPhoneCode(value: data.data?.phoneCode ?? "")
+            UserDefaults.standard.setCountryCode(value: data.data?.countryCode ?? "")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
             viewController.phoneNumber = data.data?.phoneNumber ?? ""
             viewController.verifyOTP = data.data?.otp ?? ""

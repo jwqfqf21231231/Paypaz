@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol CreateCardDataModelDelegate:class {
-    func didRecieveDataUpdate(data:ResendOTPModel)
+    func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
@@ -99,7 +99,7 @@ class CreateCardDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError

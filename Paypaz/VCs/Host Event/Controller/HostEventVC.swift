@@ -231,7 +231,13 @@ class HostEventVC : CustomViewController {
     @objc func callDatePicker(field:UITextField)
     {
         picker=UIDatePicker()
-        picker.preferredDatePickerStyle = .wheels
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
         fieldTag = field.tag
         switch field.tag  {
         case 0:

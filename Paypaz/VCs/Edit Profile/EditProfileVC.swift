@@ -41,7 +41,12 @@ class EditProfileVC: CustomViewController {
     func createDatePicker()
     {
         datePicker=UIDatePicker()
-        datePicker.preferredDatePickerStyle = .wheels
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+       
         datePicker.datePickerMode = .date
         txt_DOB.inputView=datePicker
         txt_DOB.inputAccessoryView=createToolBar()
