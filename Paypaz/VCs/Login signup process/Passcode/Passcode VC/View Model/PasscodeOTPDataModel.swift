@@ -24,24 +24,19 @@ class PasscodeDataModel: NSObject
     weak var delegate : PasscodeDataModelDelegate?
     weak var delegate2 : ForgotPasscodeDataModelDelegate?
     let sharedInstance = Connection()
+    var passcode = ""
     func validatePasscode()
     {
         let url =  APIList().getUrlString(url: .PASSCODE)
-        var deviceToken = String()
-        if UserDefaults.standard.value(forKey: "DeviceToken") != nil{
-            deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as! String
-        }else{
-            deviceToken = ""
-        }
         let parameter : Parameters = [
-            "emailORphone":UserDefaults.standard.getEmail() ,
-            "passcode":UserDefaults.standard.getPasscode(),
-            "deviceToken":deviceToken,
-            "deviceType":"iOS",
+            "passcode":passcode,
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude()
         ]
-        sharedInstance.requestPOST(url, params: parameter, headers: nil,
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: header,
                                    success:
                                     {
                                         (JSON) in

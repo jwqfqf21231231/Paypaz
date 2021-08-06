@@ -24,17 +24,17 @@ class ForgotPasswordDataModel: NSObject
     func requestForPassword()
     {
         let url =  APIList().getUrlString(url: .FORGOTPASSWORD)
-        if phoneCode == ""
+        if phoneCode != ""
         {
             parameter = [
-            "emailORphone":email
+                "emailORphone":email,
+                "phoneCode":phoneCode
             ]
         }
         else
         {
             parameter = [
-                "emailORphone":email,
-                "phoneCode":phoneCode
+            "emailORphone":email
             ]
         }
       

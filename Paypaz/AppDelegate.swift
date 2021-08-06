@@ -23,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         print(path)
-        //window = UIWindow(frame: UIScreen.main.bounds)
-        
+        if #available(iOS 13.0, *) {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        }
         // Setting The google api key
         GMSPlacesClient.provideAPIKey("AIzaSyA5S2wr0I-x6Yp3HibMdjcAdIlZ9Gz0Cw0")
         GMSServices.provideAPIKey("AIzaSyD-X6F-HVtLHmYXeFNWz2z0Fi6ICqrW6_4")

@@ -22,12 +22,10 @@ class OTPVerificationVC : CustomViewController {
     
     var email = ""
     var phoneNumber = ""
-    //OTP which we get after signing up
-    var verifyOTP = ""
+    
     //To Save Typed OTP Characters
     var otpString = ""
-    //OTP sent by PasscodeVC
-    var passcodeOTP = ""
+  
     
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
@@ -42,6 +40,11 @@ class OTPVerificationVC : CustomViewController {
         if doForgotPasscode ?? false
         {
             lbl_Title.text = "Passcode OTP Verification"
+            lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + "\(UserDefaults.standard.getPhoneNo())"
+        }
+        else if  doForgotPassword ?? false
+        {
+            lbl_Title.text = "Password OTP Verification"
             if email != ""
             {
                 lbl_Notify.text = email
@@ -50,12 +53,11 @@ class OTPVerificationVC : CustomViewController {
             {
                 lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
             }
-            
         }
         else
         {
             lbl_Title.text = "OTP Verification"
-            lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
+            lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + UserDefaults.standard.getPhoneNo()
         }
     }
     private func setDelegates(){
@@ -132,37 +134,22 @@ class OTPVerificationVC : CustomViewController {
         {
             if self.doForgotPassword ?? false
             {
-                if verifyOTP == otpString
-                {
-                    dataSource.otp = verifyOTP
+                    dataSource.otp = otpString
                     dataSource.doForgotPassword = true
                     Connection.svprogressHudShow(view: self)
                     dataSource.verifyOTP()
-                }
-                else
-                {
-                    self.view.makeToast("Please check your OTP and enter again", duration: 3, position: .bottom)
-                }
-                
             }
-            if self.doForgotPasscode ?? false{
-                if passcodeOTP == otpString
-                {
+            else if self.doForgotPasscode ?? false{
+            
                     Connection.svprogressHudShow(view: self)
-                    dataSource.passcodeOTP = passcodeOTP
+                    dataSource.otp = otpString
                     dataSource.forgotPasscodeOTPVerify()
-                }
-                else
-                {
-                    self.view.makeToast("Please check your OTP and enter again", duration: 3, position: .bottom)
-                }
-                
+            
             }
             else
             {
                 Connection.svprogressHudShow(view: self)
-                dataSource.otp = verifyOTP
-                dataSource.userTypedOTP = otpString
+                dataSource.otp = otpString
                 dataSource.verifyOTP()
             }
         }
@@ -172,6 +159,7 @@ class OTPVerificationVC : CustomViewController {
 //MARK:- ---- Extension ----
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
+        UserDefaults.standard.setLoggedIn(value: true)
         if let vc = self.pushToVC("CreateProfileVC") as? CreateProfileVC
         {
             vc.isUpdate = "1"
@@ -229,7 +217,7 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

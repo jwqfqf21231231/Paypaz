@@ -31,11 +31,15 @@ class ForgotPasswordVC : UIViewController {
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.delegate = self
-        self.txt_email.delegate = self
+       setDelegates()
         updatePlaceholder(country_code)
     }
-    
+    func setDelegates()
+    {
+        dataSource.delegate = self
+        self.txt_email.delegate = self
+        self.txt_PhoneNo.delegate = self
+    }
     // MARK: - --- Action ----
     @IBAction func btn_Submit(_ sender:UIButton) {
         if validateFields() == true
@@ -48,6 +52,7 @@ class ForgotPasswordVC : UIViewController {
             else
             {
                 dataSource.email = txt_PhoneNo.text ?? ""
+                dataSource.phoneCode = UserDefaults.standard.getPhoneCode()
             }
             dataSource.requestForPassword()
         }
@@ -212,7 +217,6 @@ extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
                 vc.phoneNumber = txt_PhoneNo.text ?? ""
             }
             vc.doForgotPassword = true
-            vc.verifyOTP = "1234"
             self.navigationController?.pushViewController(vc, animated: false)
         }
         else

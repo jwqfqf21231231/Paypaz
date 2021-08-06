@@ -24,7 +24,7 @@ class LoginVC : UIViewController {
     var textStr = ""
     var phoneNo = ""
     var status = false
-    
+    var userAccepted : Bool?
     var placeHolderText = ""
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -33,28 +33,10 @@ class LoginVC : UIViewController {
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         dataSource.delegate = self
         hideKeyboardWhenTappedArround()
         self.setDelegate()
-        self.getLocation()
         updatePlaceholder(country_code)
-    }
-    //  MARK:- Getting Current Location
-    private func getLocation()
-    {
-        let instance = LocationManager.shared
-        instance.getUserLocation { (lat, long) in
-            if lat != nil && long != nil{
-                UserDefaults.standard.setLatitude(value: "\(lat ?? 0.0)")
-                UserDefaults.standard.setLongitude(value: "\(long ?? 0.0)")
-                //self.location  = CLLocation.init(latitude: lat ?? 0.0, longitude: long ?? 0.0)
-                UserDefaults.standard.synchronize()
-                //                if AppSettings.hasLogInApp{
-                //                    CurrentLocationAPI()
-                //                }
-            }
-        }
     }
     private func setDelegate(){
         self.txt_PhoneNo.delegate = self
@@ -163,6 +145,7 @@ class LoginVC : UIViewController {
     }
     
     @IBAction func btn_ForgotPwd(_ sender:UIButton) {
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordVC") as! ForgotPasswordVC
         self.navigationController?.pushViewController(vc, animated: false)
     }
@@ -174,8 +157,7 @@ extension LoginVC : LogInDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            //UserDefaults.standard.setLoggedIn(value: true)
-        
+            UserDefaults.standard.setLoggedIn(value: true)
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")

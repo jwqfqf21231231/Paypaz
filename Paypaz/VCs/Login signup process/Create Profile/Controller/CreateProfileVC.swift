@@ -16,6 +16,7 @@ class CreateProfileVC  : CustomViewController {
     var fontCamera  = false
     var images      = [String:Any]()
     var isUpdate = ""
+    var picSelected = false
     let sharedInstance = Connection()
     
     @IBOutlet weak var img_Profile : UIImageView!
@@ -97,7 +98,11 @@ class CreateProfileVC  : CustomViewController {
     }
     func validateFields() -> Bool
     {
-        if txt_firstName.text?.trim().count == 0{
+        if picSelected == false
+        {
+            self.showAlert(withMsg: "Please add your image", withOKbtn: true)
+        }
+        else if txt_firstName.text?.trim().count == 0{
             self.showAlert(withMsg: "Please enter your first name", withOKbtn: true)
         }
         else if txt_lastName.text?.trim().count == 0{
@@ -128,6 +133,7 @@ class CreateProfileVC  : CustomViewController {
             self.img_Profile.image = img
             self.pickedImage = img
             self.images["identity_img"] = img
+            self.picSelected = true
         }
     }
     @IBAction func btn_Skip(_ sender:UIButton) {

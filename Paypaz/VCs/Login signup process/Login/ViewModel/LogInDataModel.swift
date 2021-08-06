@@ -20,7 +20,7 @@ class LogInDataModel: NSObject
     let sharedInstance = Connection()
     var email = ""
     var password = ""
-    
+    var parameter : Parameters = [:]
     func requestLogIn()
     {
         

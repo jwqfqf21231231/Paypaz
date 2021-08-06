@@ -39,9 +39,6 @@ class OTPVerificationDataModel: NSObject
     var password = ""
     var otp = ""
     var userTypedOTP = ""
-    //To verify for ForgotPasscodeOTP
-    var passcodeOTP = ""
-    
     func verifyOTP()
     {
         if self.doForgotPassword ?? false {
@@ -81,7 +78,7 @@ class OTPVerificationDataModel: NSObject
         {
             url =  APIList().getUrlString(url: .VERIFYOTP)
             parameter = [
-                "otp" : userTypedOTP
+                "otp" : otp
             ]
             headers = [
                 "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
@@ -147,7 +144,7 @@ class OTPVerificationDataModel: NSObject
     {
         url = APIList().getUrlString(url: .FORGOTPASSWORDOTP)
         parameter = [
-            "otp" : passcodeOTP
+            "otp" : otp
         ]
         headers = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"

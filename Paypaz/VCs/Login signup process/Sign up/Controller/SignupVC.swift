@@ -14,7 +14,6 @@ class SignupVC : UIViewController {
     
     private let dataSource = SignUpDataModel()
     var isChecked = false
-    //var location:CLLocation?
     
     @IBOutlet weak var txt_PhoneNo : RoundTextField!
     @IBOutlet weak var txt_email    : RoundTextField!
@@ -38,27 +37,9 @@ class SignupVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-        // Do any additional setup after loading the view.
         hideKeyboardWhenTappedArround()
         self.setDelegate()
-        self.getLocation()
         updatePlaceholder(country_code)
-    }
-    private func getLocation()
-    {
-        //        MARK:- Getting Current Location
-        let instance = LocationManager.shared
-        instance.getUserLocation { (lat, long) in
-            if lat != nil && long != nil{
-                UserDefaults.standard.setLatitude(value: "\(lat ?? 0.0)")
-                UserDefaults.standard.setLongitude(value: "\(long ?? 0.0)")
-                //self.location  = CLLocation.init(latitude: lat ?? 0.0, longitude: long ?? 0.0)
-                UserDefaults.standard.synchronize()
-                //                if AppSettings.hasLogInApp{
-                //                    CurrentLocationAPI()
-                //                }
-            }
-        }
     }
     private func setDelegate(){
         self.txt_PhoneNo.delegate = self
@@ -220,11 +201,9 @@ extension SignupVC : SignUpDataModelDelegate
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             UserDefaults.standard.setEmail(value: txt_email.text ?? "")
             UserDefaults.standard.setPhoneNo(value: txt_PhoneNo.text ?? "")
-            UserDefaults.standard.setPhoneCode(value: data.data?.phoneCode ?? "")
+            UserDefaults.standard.setPhoneCode(value: "+\(data.data?.phoneCode ?? "")")
             UserDefaults.standard.setCountryCode(value: data.data?.countryCode ?? "")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
-            viewController.phoneNumber = data.data?.phoneNumber ?? ""
-            viewController.verifyOTP = data.data?.otp ?? ""
             self.navigationController?.pushViewController(viewController, animated: false)
         }
         else

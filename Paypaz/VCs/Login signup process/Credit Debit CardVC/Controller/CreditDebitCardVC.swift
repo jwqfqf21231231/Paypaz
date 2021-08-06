@@ -16,10 +16,10 @@ class CreditDebitCardVC : CardViewController {
     var bankID_Names = [String:String]()
     var selected:String?
     var isClicked : Bool?
-    
+    var fromSettings : Bool?
     //Date Picker
     var picker = MonthYearPickerView()
-    
+    var fromPin : Bool?
     var isAddingNewCard : Bool?
     private let dataSource = CreateCardDataModel()
     @IBOutlet weak var txt_cardNumber : RoundTextField!
@@ -73,7 +73,14 @@ class CreditDebitCardVC : CardViewController {
         }
     }
     @IBAction func btn_back(_ sender:UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if fromPin ?? false
+        {
+            self.showAlert(withMsg: "You have already entered Pin", withOKbtn: true)
+        }
+        else
+        {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     @IBAction func btn_VerifyCard(_ sender:UIButton) {
         if isAddingNewCard ?? false {
@@ -172,7 +179,14 @@ extension CreditDebitCardVC : CreateCardDataModelDelegate
         if data.success == 1
         {
             UserDefaults.standard.setValue(data.data?.isVerifyCard, forKey: "isVerifyCard")
-            _ = self.pushToVC("SideDrawerBaseVC")
+            if fromSettings ?? false
+            {
+                self.navigationController?.popViewController(animated: false)
+            }
+            else
+            {
+                _ = self.pushToVC("SideDrawerBaseVC")
+            }
         }
         else
         {
@@ -288,7 +302,7 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                     self.showAlert(withMsg: a, withOKbtn: true)
                 }
             }
-            field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
+            field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
             
             
         }

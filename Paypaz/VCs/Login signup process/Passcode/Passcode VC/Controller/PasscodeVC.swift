@@ -96,17 +96,9 @@ class PasscodeVC : CustomViewController {
             self.navigationController?.popViewController(animated: true)
             //self.delegate?.isClickedButton()
         } else {
-            let savedPasscode = UserDefaults.standard.getPasscode()
-            print(savedPasscode)
-            if(typedPasscode == savedPasscode)
-            {
-                Connection.svprogressHudShow(view: self)
-                dataSource.validatePasscode()
-            }
-            else
-            {
-                self.view.makeToast("Incorrect Passcode", duration: 3, position: .bottom)
-            }
+            Connection.svprogressHudShow(view: self)
+            dataSource.passcode = typedPasscode
+            dataSource.validatePasscode()
         }
         
     }
@@ -116,7 +108,6 @@ extension PasscodeVC : PasscodeDataModelDelegate
     
     func didRecieveDataUpdate(data: LogInModel)
     {
-        print("PasscodeModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
@@ -124,7 +115,7 @@ extension PasscodeVC : PasscodeDataModelDelegate
         }
         else
         {
-            showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            view.makeToast(data.message)
         }
     }
     
@@ -146,13 +137,11 @@ extension PasscodeVC : ForgotPasscodeDataModelDelegate
     
     func didRecieveDataUpdate(data: ForgotPasscodeModel)
     {
-        print("ForgotPasscodeModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
             if let OTPVerificationVC = self.pushToVC("OTPVerificationVC") as? OTPVerificationVC{
                 OTPVerificationVC.doForgotPasscode = true
-                OTPVerificationVC.passcodeOTP = "\(data.otp ?? 0)"
             }
         }
         else

@@ -60,6 +60,7 @@ class SettingsVC : CustomViewController {
     }
     @IBAction func btn_AddCardDetails(_ sender:UIButton) {
         if let cardVC = self.pushToVC("CreditDebitCardVC") as? CreditDebitCardVC {
+            cardVC.fromSettings = true
             cardVC.isAddingNewCard = false
         }
     }
