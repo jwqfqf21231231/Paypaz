@@ -28,7 +28,7 @@ class SplashVC : CustomViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             if UserDefaults.standard.isLoggedIn() == true
             {
-                if UserDefaults.standard.value(forKey: "isVerify") as? String == "1" && UserDefaults.standard.value(forKey: "isPasscode") as? String == "1" && UserDefaults.standard.value(forKey: "isPin") as? String == "1"
+                if UserDefaults.standard.value(forKey: "isVerify") as? String == "1" && UserDefaults.standard.value(forKey: "isPasscode") as? String == "1" && UserDefaults.standard.value(forKey: "isPin") as? String == "1" && UserDefaults.standard.value(forKey: "isVerifyCard") as? String == "1"
                 {
                     if UserDefaults.standard.isLoggedIn() == true
                     {
@@ -62,6 +62,13 @@ class SplashVC : CustomViewController {
                         if let vc = self?.pushToVC("CreatePinVC") as? CreatePinVC
                         {
                             vc.isCreatingPin = true
+                        }
+                    }
+                    else if UserDefaults.standard.value(forKey: "isVerifyCard") as? String != "1"
+                    {
+                        if let vc = self?.pushToVC("CreditDebitCardVC") as? CreditDebitCardVC
+                        {
+                            vc.fromPin = true
                         }
                     }
                 }

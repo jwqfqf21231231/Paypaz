@@ -65,8 +65,6 @@ class LoginVC : UIViewController {
         self.present(listVC, animated: true, completion: nil)
     }
     func updatePlaceholder(_ code:String) {
-        UserDefaults.standard.setPhoneCode(value: phone_code)
-        UserDefaults.standard.setCountryCode(value: country_code)
         do {
             formatter = NBAsYouTypeFormatter(regionCode: code)
             let example = try phoneUtil.getExampleNumber(code)
@@ -87,12 +85,14 @@ class LoginVC : UIViewController {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of: phone_code, with: "")
     }
     @IBAction func btn_Login(_ sender:UIButton) {
+        UserDefaults.standard.setPhoneCode(value: phone_code)
+        UserDefaults.standard.setCountryCode(value: country_code)
         if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
             if txt_email.text?.trim().count == 0
             {
-                dataSource.email = txt_PhoneNo.text ?? ""
+                dataSource.email = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
             }
             else
             {
@@ -161,6 +161,12 @@ extension LoginVC : LogInDataModelDelegate
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")
+            UserDefaults.standard.setValue(data.data?.isNotification, forKey: "isNotification")
+            UserDefaults.standard.setValue(data.data?.isPasscode, forKey: "isPasscode")
+            UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
+            UserDefaults.standard.setValue(data.data?.isProfile, forKey: "isProfile")
+            UserDefaults.standard.setValue(data.data?.isVerify, forKey: "isVerify")
+            UserDefaults.standard.setValue(data.data?.isVerifyCard, forKey: "isVerifyCard")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeVC") as! PasscodeVC
             self.navigationController?.pushViewController(viewController, animated: false)
         }

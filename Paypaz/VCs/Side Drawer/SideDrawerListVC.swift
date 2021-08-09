@@ -78,7 +78,6 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
 {
     func didRecieveDataUpdate(data: UserDetailsModel)
     {
-        print("UserDetailsModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {

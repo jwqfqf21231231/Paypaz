@@ -98,7 +98,7 @@ class SignupVC : UIViewController {
         if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
-            dataSource.phoneNumber = txt_PhoneNo.text ?? ""
+            dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
             dataSource.email = txt_email.text ?? ""
             dataSource.password = txt_Password.text ?? ""
             dataSource.requestSignUp()
@@ -199,8 +199,8 @@ extension SignupVC : SignUpDataModelDelegate
         if data.success == 1
         {
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
-            UserDefaults.standard.setEmail(value: txt_email.text ?? "")
-            UserDefaults.standard.setPhoneNo(value: txt_PhoneNo.text ?? "")
+            UserDefaults.standard.setEmail(value: data.data?.email ?? "")
+            UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
             UserDefaults.standard.setPhoneCode(value: "+\(data.data?.phoneCode ?? "")")
             UserDefaults.standard.setCountryCode(value: data.data?.countryCode ?? "")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
