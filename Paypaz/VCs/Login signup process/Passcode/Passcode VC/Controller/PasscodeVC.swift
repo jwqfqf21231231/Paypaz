@@ -13,78 +13,28 @@ class PasscodeVC : CustomViewController {
     weak var delegate : PopupDelegate?
     var typedPasscode = ""
     var otp = ""
+    var hasEntered = false
     private let dataSource = PasscodeDataModel()
-    // MARK:- ---
-    @IBOutlet weak var txt_Field_1 : UITextField!
-    @IBOutlet weak var txt_Field_2 : UITextField!
-    @IBOutlet weak var txt_Field_3 : UITextField!
-    @IBOutlet weak var txt_Field_4 : UITextField!
-    
+    @IBOutlet weak var otpView: VPMOTPView!
     var isNavigatedFromPaymentVC : Bool?
     
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
+        hideKeyboardWhenTappedArround()
+        otpView.otpFieldsCount = 4
+        otpView.otpFieldDefaultBackgroundColor = UIColor.white
+        otpView.shouldRequireCursor = false
+        otpView.shouldAllowIntermediateEditing = false
+        otpView.otpFieldEntrySecureType = true
+        otpView.initializeUI()
+    }
+    func setDelegates()
+    {
+        otpView.delegate = self
         dataSource.delegate = self
         dataSource.delegate2 = self
-        hideKeyboardWhenTappedArround()
-        self.setDelegates()
-        self.actionToTextFields()
-    }
-    
-    private func setDelegates(){
-        self.txt_Field_1.delegate  = self
-        self.txt_Field_2.delegate  = self
-        self.txt_Field_3.delegate  = self
-        self.txt_Field_4.delegate  = self
-    }
-    private func actionToTextFields(){
-        txt_Field_1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_3.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-    }
-    @objc func textFieldDidChange(textField: UITextField){
-        let text = textField.text
-        if  text?.count == 1 {
-            switch textField {
-            case txt_Field_1:
-                typedPasscode += textField.text!
-                txt_Field_2.becomeFirstResponder()
-            case txt_Field_2:
-                typedPasscode += textField.text!
-                txt_Field_3.becomeFirstResponder()
-            case txt_Field_3:
-                typedPasscode += textField.text!
-                txt_Field_4.becomeFirstResponder()
-            case txt_Field_4:
-                typedPasscode += textField.text!
-                txt_Field_4.resignFirstResponder()
-            default:
-                break
-            }
-        }
-        if  text?.count == 0 {
-            switch textField{
-            case txt_Field_1:
-                typedPasscode.removeLast()
-                txt_Field_1.becomeFirstResponder()
-            case txt_Field_2:
-                typedPasscode.removeLast()
-                txt_Field_1.becomeFirstResponder()
-            case txt_Field_3:
-                typedPasscode.removeLast()
-                txt_Field_2.becomeFirstResponder()
-            case txt_Field_4:
-                typedPasscode.removeLast()
-                txt_Field_3.becomeFirstResponder()
-            default:
-                break
-            }
-        }
-        else {
-            
-        }
     }
     // MARK:- --- Action ----
     @IBAction func btn_ForgotPasscode(_ sender:UIButton) {
@@ -101,6 +51,27 @@ class PasscodeVC : CustomViewController {
             dataSource.validatePasscode()
         }
         
+    }
+}
+extension PasscodeVC: VPMOTPViewDelegate {
+    func hasEnteredAllOTP(hasEntered: Bool) -> Bool {
+        print("Has entered all OTP? \(hasEntered)")
+        self.hasEntered = hasEntered
+        return hasEntered
+    }
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+        if hasEntered && index < 3
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+    func enteredOTP(otpString: String) {
+        print("OTPString: \(otpString)")
+        self.typedPasscode = otpString
     }
 }
 extension PasscodeVC : PasscodeDataModelDelegate
@@ -140,7 +111,7 @@ extension PasscodeVC : ForgotPasscodeDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let OTPVerificationVC = self.pushToVC("OTPVerificationVC") as? OTPVerificationVC{
+            if let OTPVerificationVC = self.pushToVC("OTPVerificationVC",animated:false) as? OTPVerificationVC{
                 OTPVerificationVC.doForgotPasscode = true
             }
         }

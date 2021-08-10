@@ -13,12 +13,9 @@ class CreatePinVC : CustomViewController {
     var isCreatingPin : Bool?
     weak var delegate : PopupDelegate?
     var typedPin = ""
+    var hasEntered = false
     private let dataSource = CreatePinDataModel()
-    // MARK:- ---
-    @IBOutlet weak var txt_Field_1 : UITextField!
-    @IBOutlet weak var txt_Field_2 : UITextField!
-    @IBOutlet weak var txt_Field_3 : UITextField!
-    @IBOutlet weak var txt_Field_4 : UITextField!
+    @IBOutlet weak var otpView: VPMOTPView!
     @IBOutlet weak var lbl_title   : UILabel!
     
     
@@ -26,111 +23,80 @@ class CreatePinVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-       hideKeyboardWhenTappedArround()
-        self.setDelegates()
-        self.actionToTextFields()
+        hideKeyboardWhenTappedArround()
+        otpView.otpFieldsCount = 4
+        otpView.otpFieldDefaultBackgroundColor = UIColor.white
+        otpView.delegate = self
+        otpView.shouldRequireCursor = false
+        otpView.shouldAllowIntermediateEditing = false
+        otpView.initializeUI()
+        otpView.otpFieldEntrySecureType = true
+        otpView.changeStateOfTextField()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if self.isCreatingPin ?? false {
             self.lbl_title.text = "Create PIN"
         } else {
             self.lbl_title.text = "Enter PIN"
         }
     }
-    private func setDelegates(){
-        self.txt_Field_1.delegate  = self
-        self.txt_Field_2.delegate  = self
-        self.txt_Field_3.delegate  = self
-        self.txt_Field_4.delegate  = self
-    }
-    private func actionToTextFields(){
-        txt_Field_1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_3.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-    }
-    @objc func textFieldDidChange(textField: UITextField){
-        let text = textField.text
-        if  text?.count == 1 {
-            switch textField {
-            case txt_Field_1:
-                typedPin += textField.text!
-                txt_Field_2.becomeFirstResponder()
-            case txt_Field_2:
-                typedPin += textField.text!
-                txt_Field_3.becomeFirstResponder()
-            case txt_Field_3:
-                typedPin += textField.text!
-                txt_Field_4.becomeFirstResponder()
-            case txt_Field_4:
-                typedPin += textField.text!
-                txt_Field_4.resignFirstResponder()
-            default:
-                break
-            }
-        }
-        if  text?.count == 0 {
-            switch textField{
-            case txt_Field_1:
-                typedPin.removeLast()
-                txt_Field_1.becomeFirstResponder()
-            case txt_Field_2:
-                typedPin.removeLast()
-                txt_Field_1.becomeFirstResponder()
-            case txt_Field_3:
-                typedPin.removeLast()
-                txt_Field_2.becomeFirstResponder()
-            case txt_Field_4:
-                typedPin.removeLast()
-                txt_Field_3.becomeFirstResponder()
-            default:
-                break
-            }
-        }
-        else {
-            
-        }
-    }
+    
     // MARK:- --- Action ----
     @IBAction func btn_show(_ sender:UIButton) {
-        if self.txt_Field_1.isSecureTextEntry == true
-        {
-            sender.setImage(UIImage(named: "show_eye"), for: .normal)
-            sender.setTitle("Show", for: .normal)
-            self.txt_Field_1.isSecureTextEntry = false
-            self.txt_Field_2.isSecureTextEntry = false
-            self.txt_Field_3.isSecureTextEntry = false
-            self.txt_Field_4.isSecureTextEntry = false
+        otpView.otpFieldEntrySecureType = !otpView.otpFieldEntrySecureType
+        otpView.changeStateOfTextField()
+        if sender.isSelected == true{
+            sender.isSelected = false
+        }else{
+            sender.isSelected = true
+            
         }
-        else
-        {
-            sender.setImage(UIImage(named: "password"), for: .normal)
-            sender.setTitle("Hide", for: .normal)
-            self.txt_Field_1.isSecureTextEntry = true
-            self.txt_Field_2.isSecureTextEntry = true
-            self.txt_Field_3.isSecureTextEntry = true
-            self.txt_Field_4.isSecureTextEntry = true
-        }
+       
+       // if otpView.otpFieldEntrySecureType
+//        {
+//            sender.setImage(UIImage(named: "show_eye"), for: .normal)
+//            sender.setTitle("Show", for: .normal)
+//        }
+//        else
+//        {
+//            sender.setImage(UIImage(named: "password"), for: .normal)
+//            sender.setTitle("Hide", for: .normal)
+//        }
+//        otpView.otpFieldEntrySecureType = !otpView.otpFieldEntrySecureType
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-        if (txt_Field_1.text == "" || txt_Field_2.text == "" || txt_Field_3.text == "" || txt_Field_4.text == "")
+        
+        if self.isCreatingPin ?? false {
+            UserDefaults.standard.setPin(value: typedPin)
+            dataSource.pincode = typedPin
+            dataSource.createPin()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+            // self.delegate?.isClickedButton()
+        }
+    }
+}
+extension CreatePinVC: VPMOTPViewDelegate {
+    func hasEnteredAllOTP(hasEntered: Bool) -> Bool {
+        print("Has entered all OTP? \(hasEntered)")
+        self.hasEntered = hasEntered
+        return hasEntered
+    }
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+        if hasEntered && index < 3
         {
-            self.showAlert(withMsg: "Please Enter OTP", withOKbtn: true)
+            return false
         }
         else
         {
-            if self.isCreatingPin ?? false {
-                UserDefaults.standard.setPin(value: typedPin)
-                dataSource.pincode = typedPin
-                dataSource.createPin()
-            } else {
-                self.navigationController?.popViewController(animated: true)
-               // self.delegate?.isClickedButton()
-            }
+            return true
         }
+    }
+    func enteredOTP(otpString: String) {
+        print("OTPString: \(otpString)")
+        self.typedPin = otpString
     }
 }
 extension CreatePinVC : CreatePinDataModelDelegate
@@ -144,7 +110,6 @@ extension CreatePinVC : CreatePinDataModelDelegate
             {
                 vc.fromPin = true
             }
-            
         }
         else
         {

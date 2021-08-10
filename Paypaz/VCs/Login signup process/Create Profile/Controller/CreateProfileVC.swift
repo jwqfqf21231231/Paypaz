@@ -136,9 +136,6 @@ class CreateProfileVC  : CustomViewController {
             self.picSelected = true
         }
     }
-    @IBAction func btn_Skip(_ sender:UIButton) {
-        _ = self.pushToVC("CreatePasscodeVC")
-    }
 }
 extension CreateProfileVC : CreateProfileDataModelDelegate
 {
@@ -148,7 +145,7 @@ extension CreateProfileVC : CreateProfileDataModelDelegate
         UserDefaults.standard.set(data.data?.isProfile, forKey: "isProfile")
         if data.success == 1
         {
-            _ = self.pushToVC("CreatePasscodeVC")
+            _ = self.pushToVC("CreatePasscodeVC",animated: false)
         }
         else
         {

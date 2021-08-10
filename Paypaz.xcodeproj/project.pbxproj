@@ -14,6 +14,9 @@
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
 		0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245326AA81C600840D15 /* MonthYearPickerView.swift */; };
 		0437245926AA86C900840D15 /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245826AA86C900840D15 /* CardExtension.swift */; };
+		0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */; };
+		0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */; };
+		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E28A26B0345100333E94 /* NotificationDataModel.swift */; };
@@ -197,6 +200,9 @@
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
 		0437245326AA81C600840D15 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
 		0437245826AA86C900840D15 /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
+		0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
+		0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
+		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		04B5E28A26B0345100333E94 /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
@@ -441,6 +447,23 @@
 				0431B71E269C6BD00082EAB3 /* SuccessModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0453C0FD26C2459C00F9B72D /* Library Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0453C0FE26C2459C00F9B72D /* OTPClass */,
+			);
+			path = "Library Classes";
+			sourceTree = "<group>";
+		};
+		0453C0FE26C2459C00F9B72D /* OTPClass */ = {
+			isa = PBXGroup;
+			children = (
+				0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */,
+				0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */,
+			);
+			path = OTPClass;
 			sourceTree = "<group>";
 		};
 		04B5E29226B0345D00333E94 /* View Model */ = {
@@ -959,6 +982,7 @@
 				44E5591826327B7A00193305 /* TermsPoliciesVC.swift */,
 				44E5591A26327F7300193305 /* AddBankAccountVC.swift */,
 				44E5591C26327F8900193305 /* BankSavedSuccessPopupVC.swift */,
+				0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1204,6 +1228,7 @@
 				04C7D73026B3D59800747777 /* JsonFile */,
 				0C7DF801268D65C90049E411 /* API + Connection */,
 				44C8F2D9261F26C1000F03DB /* Font */,
+				0453C0FD26C2459C00F9B72D /* Library Classes */,
 				44C8F2CD261F1C09000F03DB /* Helpers */,
 				44C8F29D261F1BD2000F03DB /* AppDelegate.swift */,
 				44C8F29F261F1BD2000F03DB /* SceneDelegate.swift */,
@@ -1754,6 +1779,7 @@
 				0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */,
 				445433DD262D685300443AE1 /* CreditDebitCardVC.swift in Sources */,
 				0C9F29CC268AE16600CE6178 /* SignUpModel.swift in Sources */,
+				0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */,
 				445433CE262D56F500443AE1 /* OTPVerificationVC.swift in Sources */,
 				0CE747882696D3A400D1121B /* MyEventsListModel.swift in Sources */,
 				0CE7479C2696E75600D1121B /* MyPostedEventDataModel.swift in Sources */,
@@ -1871,6 +1897,8 @@
 				44DBD008263011B200255F9A /* EventDetailVC.swift in Sources */,
 				0C120A3A2690211E00FD806A /* ChooseEventCell.swift in Sources */,
 				44E5591926327B7A00193305 /* TermsPoliciesVC.swift in Sources */,
+				0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */,
+				0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */,
 				445433E8262DA4D200443AE1 /* SideDrawerListVC+Extensions.swift in Sources */,
 				44C8F2D2261F1DEF000F03DB /* Extensions.swift in Sources */,
 				0C9F29E7268AE2BE00CE6178 /* APIList.swift in Sources */,

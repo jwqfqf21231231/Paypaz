@@ -19,7 +19,6 @@ class CreateProfileDataModel: NSObject
     weak var delegate: CreateProfileDataModelDelegate?
     let sharedInstance = Connection()
     var email = ""
-    var phoneNumber = ""
     var password = ""
     var firstName = ""
     var lastName = ""
@@ -38,9 +37,9 @@ class CreateProfileDataModel: NSObject
             "firstName":firstName,
             "lastName":lastName,
             "DOB":dateOfBirth,
-            "address":address,
             "city":city,
             "state":state,
+            "address":address,
             "isUpdate":isUpdate
         ]
         let header : HTTPHeaders = [

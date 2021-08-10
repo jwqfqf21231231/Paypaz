@@ -15,25 +15,35 @@ class OTPVerificationVC : CustomViewController {
     // MARK:- ---
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var lbl_Notify : UILabel!
-    @IBOutlet weak var txt_Field_1 : UITextField!
-    @IBOutlet weak var txt_Field_2 : UITextField!
-    @IBOutlet weak var txt_Field_3 : UITextField!
-    @IBOutlet weak var txt_Field_4 : UITextField!
+    @IBOutlet weak var otpView: VPMOTPView!
     
     var email = ""
     var phoneNumber = ""
-    
+    var hasEntered = false
     //To Save Typed OTP Characters
     var otpString = ""
-  
+    
     
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         self.changeTitle()
-       hideKeyboardWhenTappedArround()
-        self.setDelegates()
-        self.actionToTextFields()
+        hideKeyboardWhenTappedArround()
+        setDelegates()
+        otpView.otpFieldsCount = 4
+        otpView.otpFieldDefaultBackgroundColor = UIColor.white
+        otpView.shouldRequireCursor = false
+        otpView.shouldAllowIntermediateEditing = false
+        otpView.initializeUI()
+    }
+    func setDelegates()
+    {
+        dataSource.delegate = self
+        dataSource.delegate1 = self
+        dataSource.delegate2 = self
+        dataSource.delegate3 = self
+        otpView.delegate = self
+
     }
     private func changeTitle()
     {
@@ -60,103 +70,58 @@ class OTPVerificationVC : CustomViewController {
             lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + UserDefaults.standard.getPhoneNo()
         }
     }
-    private func setDelegates(){
-        self.txt_Field_1.delegate  = self
-        self.txt_Field_2.delegate  = self
-        self.txt_Field_3.delegate  = self
-        self.txt_Field_4.delegate  = self
-        dataSource.delegate = self
-        dataSource.delegate1 = self
-        dataSource.delegate2 = self
-        dataSource.delegate3 = self
-    }
     
-    private func actionToTextFields(){
-        txt_Field_1.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_2.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_3.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-        txt_Field_4.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: .editingChanged)
-    }
-    
-    @objc func textFieldDidChange(textField: UITextField){
-        let text = textField.text
-        if  text?.count == 1 {
-            switch textField {
-            case txt_Field_1:
-                otpString += textField.text!
-                txt_Field_2.becomeFirstResponder()
-            case txt_Field_2:
-                otpString += textField.text!
-                txt_Field_3.becomeFirstResponder()
-            case txt_Field_3:
-                otpString += textField.text!
-                txt_Field_4.becomeFirstResponder()
-            case txt_Field_4:
-                otpString += textField.text!
-                txt_Field_4.resignFirstResponder()
-            default:
-                break
-            }
-        }
-        if  text?.count == 0 {
-            switch textField{
-            case txt_Field_1:
-                otpString.removeLast()
-                txt_Field_1.becomeFirstResponder()
-            case txt_Field_2:
-                otpString.removeLast()
-                txt_Field_1.becomeFirstResponder()
-            case txt_Field_3:
-                otpString.removeLast()
-                txt_Field_2.becomeFirstResponder()
-            case txt_Field_4:
-                otpString.removeLast()
-                txt_Field_3.becomeFirstResponder()
-            default:
-                break
-            }
-        }
-        else {
-            
-        }
-    }
     // MARK:- --- Action ----
     @IBAction func btn_Resend(_ sender:UIButton) {
         Connection.svprogressHudShow(view: self)
         dataSource.resendOTP()
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-        if(txt_Field_1.text?.isEmpty == true || txt_Field_2.text?.isEmpty == true || txt_Field_3.text?.isEmpty == true || txt_Field_4.text?.isEmpty == true)
+        
+        if self.doForgotPassword ?? false
         {
-            self.showAlert(withMsg: "Please enter OTP", withOKbtn: true)
+            dataSource.otp = otpString
+            dataSource.doForgotPassword = true
+            Connection.svprogressHudShow(view: self)
+            dataSource.verifyOTP()
+        }
+        else if self.doForgotPasscode ?? false{
+            
+            Connection.svprogressHudShow(view: self)
+            dataSource.otp = otpString
+            dataSource.forgotPasscodeOTPVerify()
         }
         else
         {
-            if self.doForgotPassword ?? false
-            {
-                    dataSource.otp = otpString
-                    dataSource.doForgotPassword = true
-                    Connection.svprogressHudShow(view: self)
-                    dataSource.verifyOTP()
-            }
-            else if self.doForgotPasscode ?? false{
-            
-                    Connection.svprogressHudShow(view: self)
-                    dataSource.otp = otpString
-                    dataSource.forgotPasscodeOTPVerify()
-            
-            }
-            else
-            {
-                Connection.svprogressHudShow(view: self)
-                dataSource.otp = otpString
-                dataSource.verifyOTP()
-            }
+            Connection.svprogressHudShow(view: self)
+            dataSource.otp = otpString
+            dataSource.verifyOTP()
         }
     }
 }
 
 //MARK:- ---- Extension ----
+extension OTPVerificationVC: VPMOTPViewDelegate {
+    func hasEnteredAllOTP(hasEntered: Bool) -> Bool {
+        print("Has entered all OTP? \(hasEntered)")
+        self.hasEntered = hasEntered
+        return hasEntered
+    }
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+        if hasEntered && index < 3
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+    func enteredOTP(otpString: String) {
+        print("OTPString: \(otpString)")
+        self.otpString = otpString
+    }
+}
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
         UserDefaults.standard.setLoggedIn(value: true)
@@ -169,8 +134,6 @@ extension OTPVerificationVC : PopupDelegate {
 extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
 {
     func didRecieveDataUpdate(data: ResendOTPModel) {
-        print("ForgotPasswordOTPModelData = ",data)
-        
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
@@ -180,12 +143,11 @@ extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            view.makeToast(data.message ?? "")
         }
     }
     func didFailDataUpdateWithError1(error: Error)
     {
-        
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {
@@ -203,7 +165,6 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
 {
     func didRecieveDataUpdate(data: LogInModel)
     {
-        print("OTPModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
@@ -217,7 +178,7 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            view.makeToast(data.message ?? "")
         }
     }
     
@@ -246,7 +207,7 @@ extension OTPVerificationVC : ResendOTPModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            view.makeToast(data.message ?? "")
         }
     }
     
@@ -277,7 +238,7 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            view.makeToast(data.message ?? "")
         }
     }
     

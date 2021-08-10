@@ -22,7 +22,6 @@ class EditProfileVC: CustomViewController {
     @IBOutlet weak var img_Profile : UIImageView!
     @IBOutlet weak var txt_firstName : RoundTextField!
     @IBOutlet weak var txt_lastName  : RoundTextField!
-    @IBOutlet weak var txt_PhnNum    : RoundTextField!
     @IBOutlet weak var txt_DOB       : RoundTextField!
     @IBOutlet weak var txt_City      : RoundTextField!
     @IBOutlet weak var txt_State     : RoundTextField!
@@ -81,7 +80,6 @@ class EditProfileVC: CustomViewController {
     private func setDelegate() {
         self.txt_firstName.delegate = self
         self.txt_lastName.delegate  = self
-        self.txt_PhnNum.delegate    = self
         self.txt_DOB.delegate       = self
         self.txt_City.delegate      = self
         self.txt_State.delegate     = self
@@ -95,10 +93,7 @@ class EditProfileVC: CustomViewController {
         else if txt_lastName.text == ""{
             self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
         }
-        else if txt_PhnNum.text == ""{
-            self.showAlert(withMsg: "Please enter Phone Number", withOKbtn: true)
-            _ = self.pushToVC("OTPVerificationVC")
-        }
+        
         else if txt_DOB.text == ""{
             self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
             _ = self.pushToVC("OTPVerificationVC")
@@ -123,9 +118,9 @@ class EditProfileVC: CustomViewController {
             dataSource.city = txt_City.text!
             dataSource.address = txtView_Address.text!
             dataSource.dateOfBirth = txt_DOB.text!
-            dataSource.phoneNumber = txt_PhnNum.text!
             dataSource.state = txt_State.text!
             dataSource.profilePic = pickedImage
+            dataSource.isUpdate = "0"
             dataSource.uploadProImg()
         }
     }
@@ -156,7 +151,6 @@ extension EditProfileVC : UserDetailsDataModelDelegate
             DispatchQueue.main.async {
                 self.txt_firstName.text = data.data?.firstName
                 self.txt_lastName.text = data.data?.lastName
-                self.txt_PhnNum.text = data.data?.phoneNumber
                 self.txt_DOB.text = data.data?.dob
                 self.txt_City.text = data.data?.city
                 self.txt_State.text = data.data?.state

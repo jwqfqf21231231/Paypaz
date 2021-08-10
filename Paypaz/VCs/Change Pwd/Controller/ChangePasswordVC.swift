@@ -15,6 +15,8 @@ class ChangePasswordVC : CustomViewController {
     @IBOutlet weak var txt_NewPassword : RoundTextField!
     @IBOutlet weak var txt_ConfirmPassword : RoundTextField!
     @IBOutlet weak var lbl_title  : UILabel!
+    @IBOutlet weak var txt_oldPwdHeight : NSLayoutConstraint!
+    @IBOutlet weak var txt_NewPwdTop : NSLayoutConstraint!
     
     var hideOldPassword : Bool?
     
@@ -32,12 +34,14 @@ class ChangePasswordVC : CustomViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.txt_OldPwd.isHidden = self.hideOldPassword ?? false
-        self.btn_OldPwdEye.isHidden = self.hideOldPassword ?? false
+       
         if self.hideOldPassword ?? false {
             self.lbl_title.text = "Reset Password"
+            txt_oldPwdHeight.constant = 0
+            txt_OldPwd.layoutIfNeeded()
         }
-       
+        self.txt_OldPwd.isHidden = self.hideOldPassword ?? false
+        self.btn_OldPwdEye.isHidden = self.hideOldPassword ?? false
     }
 
     //MARK:- --- Action ----

@@ -29,10 +29,12 @@ class Helper : NSObject
     class func clearUserDataAndSignOut()
     {
         let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: "userID")
         userDefaults.removeObject(forKey: "registerToken")
         userDefaults.removeObject(forKey: "latitude")
         userDefaults.removeObject(forKey: "longitude")
         userDefaults.removeObject(forKey: "email")
+        userDefaults.removeObject(forKey: "phoneNo")
         userDefaults.removeObject(forKey: "phoneCode")
         userDefaults.removeObject(forKey: "countryCode")
         userDefaults.removeObject(forKey: "isLoggedIn")
@@ -162,4 +164,8 @@ extension UIButton{
         }
         selectTypeDropDown.show()
     }
+}
+extension UIColor
+{
+    static let boarderColor = UIColor(red: 125 / 255, green: 125 / 255, blue: 125/255, alpha: 1)
 }

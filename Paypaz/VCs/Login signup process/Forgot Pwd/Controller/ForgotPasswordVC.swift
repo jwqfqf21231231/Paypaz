@@ -214,7 +214,7 @@ extension ForgotPasswordVC : ForgotPasswordDataModelDelegate
             }
             else
             {
-                vc.phoneNumber = txt_PhoneNo.text ?? ""
+                vc.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
             }
             vc.doForgotPassword = true
             self.navigationController?.pushViewController(vc, animated: false)

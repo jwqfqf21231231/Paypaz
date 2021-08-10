@@ -87,7 +87,7 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
                 self.img_ProfilePic.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
                 let fullName = (data.data?.firstName ?? "")+" "+(data.data?.lastName ?? "")
                 self.lbl_ProfileName.text = fullName
-                self.lbl_PhoneNo.text = data.data?.phoneNumber
+                self.lbl_PhoneNo.text = UserDefaults.standard.getPhoneCode() + " " + (data.data?.phoneNumber ?? "")
             }
         }
         else

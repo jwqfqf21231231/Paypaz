@@ -73,6 +73,10 @@ class SettingsVC : CustomViewController {
     @IBAction func btn_ChangePassword(_ sender:UIButton) {
         _ = self.pushToVC("ChangePasswordVC")
     }
+    @IBAction func btn_ChangePhoneNumber(_ sender:UIButton)
+    {
+        _ = self.pushToVC("ChangePhoneNumber")
+    }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
