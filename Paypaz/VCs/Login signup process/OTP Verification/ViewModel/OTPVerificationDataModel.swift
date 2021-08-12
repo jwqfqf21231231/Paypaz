@@ -13,7 +13,7 @@ protocol OTPVerificationDataModelDelegate:class {
     func didFailDataUpdateWithError(error:Error)
 }
 protocol ForgotPasswordOTPModelDelegate:class {
-    func didRecieveDataUpdate(data:ResendOTPModel)
+    func didRecieveDataUpdate1(data:ResendOTPModel)
     func didFailDataUpdateWithError1(error:Error)
 }
 protocol ResendOTPModelDelegate:class {
@@ -24,6 +24,11 @@ protocol ForgotPasscodeVerifyOTPModelDelegate:class {
     func didRecieveDataUpdate3(data:ResendOTPModel)
     func didFailDataUpdateWithError3(error:Error)
 }
+protocol VerifyChangePasswordModelDelegate:class {
+    func didRecieveDataUpdate4(data:LogInModel)
+    func didFailDataUpdateWithError4(error:Error)
+}
+
 class OTPVerificationDataModel: NSObject
 {
     var doForgotPassword : Bool?
@@ -31,11 +36,13 @@ class OTPVerificationDataModel: NSObject
     weak var delegate1 : ForgotPasswordOTPModelDelegate?
     weak var delegate2 : ResendOTPModelDelegate?
     weak var delegate3 : ForgotPasscodeVerifyOTPModelDelegate?
+    weak var delegate4 : VerifyChangePasswordModelDelegate?
     let sharedInstance = Connection()
     var url:String?
     var parameter : Parameters = [:]
     var headers : HTTPHeaders = [:]
     var email = ""
+    var phoneNumber = ""
     var password = ""
     var otp = ""
     var userTypedOTP = ""
@@ -59,7 +66,7 @@ class OTPVerificationDataModel: NSObject
                                                 do
                                                 {
                                                     let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
-                                                    self.delegate1?.didRecieveDataUpdate(data: response)
+                                                    self.delegate1?.didRecieveDataUpdate1(data: response)
                                                 }
                                                 catch let error as NSError
                                                 {
@@ -172,6 +179,43 @@ class OTPVerificationDataModel: NSObject
                                     {
                                         (error) in
                                         self.delegate3?.didFailDataUpdateWithError3(error: error)
+                                    })
+    }
+    func doVerifyPhoneNumber()
+    {
+        url = APIList().getUrlString(url: .VERIFYCHANGEDPHONENUMBER)
+        parameter = [
+            "phoneNumber" : phoneNumber,
+            "phoneCode" : UserDefaults.standard.getPhoneCode(),
+            "countryCode" : UserDefaults.standard.getCountryCode(),
+            "otp" : otp
+        ]
+        headers = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestPOST(url!, params: parameter, headers: headers,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        let result : Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try
+                                                    JSONDecoder().decode(LogInModel.self, from: result!)
+                                                self.delegate4?.didRecieveDataUpdate4(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.delegate4?.didFailDataUpdateWithError4(error: error)
+                                            }
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.delegate4?.didFailDataUpdateWithError4(error: error)
                                     })
     }
 }

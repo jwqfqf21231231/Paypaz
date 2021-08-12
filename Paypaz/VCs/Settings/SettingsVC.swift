@@ -20,7 +20,7 @@ class SettingsVC : CustomViewController {
     }
     private func setNotificationStatus()
     {
-        if(UserDefaults.standard.getNotificationStatus() == "0")
+        if UserDefaults.standard.value(forKey: "isNotification") as? String == "0"
         {
             swt_Notification.setOn(false, animated: false)
 
@@ -75,7 +75,7 @@ class SettingsVC : CustomViewController {
     }
     @IBAction func btn_ChangePhoneNumber(_ sender:UIButton)
     {
-        _ = self.pushToVC("ChangePhoneNumber")
+        _ = self.pushToVC("EditPhoneNoVC")
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -85,11 +85,10 @@ extension SettingsVC : NotificationModelDelegate
 {
     func didRecieveDataUpdate(data: ResendOTPModel)
     {
-        print("NotificationModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            print(data.message ?? "")
+            view.makeToast(data.message ?? "")
         }
         else
         {

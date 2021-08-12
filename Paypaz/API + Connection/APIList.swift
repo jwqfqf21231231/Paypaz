@@ -56,8 +56,13 @@ enum urlString:String
     case CONTACTUS = "user/contactus"
     case NOTIFICATIONSTATUS = "user/notification/status"
     
+    case CHANGEPHONENUMBER = "user/phone/otp"
+    case VERIFYCHANGEDPHONENUMBER = "user/phone/update"
+    
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"
     case UPLOADEDEVENTIMAGE = "uploads/events/"
     case UPLOADEDPRODUCTIMAGE = "uploads/products/"
+    
+    case LOGOUT = "user/logout"
 }

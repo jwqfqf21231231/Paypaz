@@ -11,7 +11,9 @@ import Toast_Swift
 class OTPVerificationVC : CustomViewController {
     var doForgotPasscode : Bool?
     var doForgotPassword : Bool?
+    var doChangePassword : Bool?
     private let dataSource = OTPVerificationDataModel()
+    private let dataSource1 = EditPhoneNoDataModel()
     // MARK:- ---
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var lbl_Notify : UILabel!
@@ -42,6 +44,8 @@ class OTPVerificationVC : CustomViewController {
         dataSource.delegate1 = self
         dataSource.delegate2 = self
         dataSource.delegate3 = self
+        dataSource.delegate4 = self
+        dataSource1.delegate1 = self
         otpView.delegate = self
 
     }
@@ -64,6 +68,11 @@ class OTPVerificationVC : CustomViewController {
                 lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
             }
         }
+        else if doChangePassword ?? false
+        {
+            lbl_Title.text = "OTP Verification"
+            lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
+        }
         else
         {
             lbl_Title.text = "OTP Verification"
@@ -73,11 +82,21 @@ class OTPVerificationVC : CustomViewController {
     
     // MARK:- --- Action ----
     @IBAction func btn_Resend(_ sender:UIButton) {
-        Connection.svprogressHudShow(view: self)
-        dataSource.resendOTP()
+        if doChangePassword ?? false
+        {
+            Connection.svprogressHudShow(view: self)
+            dataSource1.phoneNumber = phoneNumber
+            dataSource1.phoneCode = UserDefaults.standard.getPhoneCode()
+            dataSource1.resendOTP()
+        }
+        else
+        {
+            Connection.svprogressHudShow(view: self)
+            dataSource.resendOTP()
+        }
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-        
+
         if self.doForgotPassword ?? false
         {
             dataSource.otp = otpString
@@ -90,6 +109,12 @@ class OTPVerificationVC : CustomViewController {
             Connection.svprogressHudShow(view: self)
             dataSource.otp = otpString
             dataSource.forgotPasscodeOTPVerify()
+        }
+        else if self.doChangePassword ?? false{
+            Connection.svprogressHudShow(view: self)
+            dataSource.phoneNumber = phoneNumber
+            dataSource.otp = otpString
+            dataSource.doVerifyPhoneNumber()
         }
         else
         {
@@ -133,7 +158,7 @@ extension OTPVerificationVC : PopupDelegate {
 }
 extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
 {
-    func didRecieveDataUpdate(data: ResendOTPModel) {
+    func didRecieveDataUpdate1(data: ResendOTPModel) {
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
@@ -243,6 +268,68 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
     }
     
     func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension OTPVerificationVC : VerifyChangePasswordModelDelegate
+{
+    func didRecieveDataUpdate4(data: LogInModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
+            for vc in self.navigationController!.viewControllers as Array {
+                if vc.isKind(of:SettingsVC.self) {
+                    self.navigationController!.popToViewController(vc, animated: true)
+                    break
+                }
+            }
+        }
+        else
+        {
+            view.makeToast(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError4(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension OTPVerificationVC : ResendOTPToChangePhoneNo
+{
+    func didRecieveDataUpdate5(data: LogInModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            view.makeToast("OTP Resend Successfully")
+        }
+        else
+        {
+            self.view.makeToast(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError5(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

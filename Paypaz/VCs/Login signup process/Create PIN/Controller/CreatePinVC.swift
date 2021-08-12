@@ -53,18 +53,6 @@ class CreatePinVC : CustomViewController {
             sender.isSelected = true
             
         }
-       
-       // if otpView.otpFieldEntrySecureType
-//        {
-//            sender.setImage(UIImage(named: "show_eye"), for: .normal)
-//            sender.setTitle("Show", for: .normal)
-//        }
-//        else
-//        {
-//            sender.setImage(UIImage(named: "password"), for: .normal)
-//            sender.setTitle("Hide", for: .normal)
-//        }
-//        otpView.otpFieldEntrySecureType = !otpView.otpFieldEntrySecureType
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
         
@@ -103,6 +91,7 @@ extension CreatePinVC : CreatePinDataModelDelegate
 {
     func didRecieveDataUpdate(data: LogInModel)
     {
+        Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
             UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")

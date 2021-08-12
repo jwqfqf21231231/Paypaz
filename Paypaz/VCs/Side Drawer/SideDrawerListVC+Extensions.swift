@@ -28,24 +28,25 @@ extension SideDrawerListVC : UITableViewDelegate {
         self.sideMenuController?.hideLeftView()
         
         switch indexPath.row {
-        case 0: self.pushToChildVC("HomeVC")
+        case 0:
+            _ = self.pushToChildVC("HomeVC",animated: false)
         case 1:
-            _ = self.pushToChildVC("WalletVC")
+            _ = self.pushToChildVC("WalletVC",animated: false)
         case 2:
-            _ = self.pushToChildVC("MyTicketsVC")
+            _ = self.pushToChildVC("MyTicketsVC",animated: false)
         case 3:
-            _ = self.pushToChildVC("SettingsVC")
+            _ = self.pushToChildVC("SettingsVC",animated: false)
         case 4:
-            _ = self.pushToChildVC("MyEventsListVC")
+            _ = self.pushToChildVC("MyEventsListVC",animated: false)
         case 5:
-            _ = self.pushToChildVC("FavouritesEventsListVC")
+            _ = self.pushToChildVC("FavouritesEventsListVC",animated: false)
         case 6:
-            _ = self.pushToChildVC("InvitesListVC")
+            _ = self.pushToChildVC("InvitesListVC",animated: false)
         case 7:
-            _ = self.pushToChildVC("EventReportsHistoryVC")
+            _ = self.pushToChildVC("EventReportsHistoryVC",animated: false)
         case 8:
-            Helper.clearUserDataAndSignOut()
-            _ = self.pushToChildVC("LoginVC")
+            Connection.svprogressHudShow(view: self)
+            dataSource1.loggingOUt()
             #warning("--->>Change this during functionality in case of logout")
         default:
             print("....")

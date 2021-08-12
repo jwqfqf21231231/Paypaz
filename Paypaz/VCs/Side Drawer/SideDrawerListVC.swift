@@ -9,9 +9,9 @@
 import UIKit
 import SDWebImage
 class SideDrawerListVC : CustomViewController {
-
+    
     private let dataSource = UserDetailsDataModel()
-
+    let dataSource1 = LogOutDataModel()
     @IBOutlet weak var img_ProfilePic : UIImageView!
     @IBOutlet weak var lbl_ProfileName : UILabel!
     @IBOutlet weak var lbl_PhoneNo : UILabel!
@@ -31,14 +31,14 @@ class SideDrawerListVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
+        dataSource1.delegate = self
         self.arr_Menu = [Constants.title_Home, Constants.title_Wallet, Constants.title_MyTickets, Constants.title_Settings, Constants.title_MyEvents, Constants.title_Favourites , Constants.title_Invites, Constants.title_EventReport, Constants.title_Logout]
-    
+        
         self.arr_imgs = ["home", "wallet", "ticketsicon", "settings", "event", "heart-o", "add-group", "event_report", "logout"]
         
         self.addTapGestureToView()
         self.getUserDetails()
     }
-  
     private func getUserDetails()
     {
         Connection.svprogressHudShow(view: self)
@@ -49,7 +49,7 @@ class SideDrawerListVC : CustomViewController {
         
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
         if let nav = self.sideMenuController?.rootViewController as? UINavigationController {
-            nav.pushViewController(viewController, animated: true)
+            nav.pushViewController(viewController, animated: animated)
         }
         return viewController
         
@@ -97,6 +97,35 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
     }
     
     func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension SideDrawerListVC : LogOutDataModelDelegate
+{
+    func didRecieveDataUpdate1(data: ResendOTPModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            _ = self.pushToVC("LoginVC")
+            Helper.clearUserDataAndSignOut()
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError1(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

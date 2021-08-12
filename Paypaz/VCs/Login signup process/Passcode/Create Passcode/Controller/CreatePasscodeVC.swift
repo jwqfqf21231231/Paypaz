@@ -28,6 +28,7 @@ class CreatePasscodeVC: CustomViewController {
         otpView.shouldRequireCursor = false
         otpView.shouldAllowIntermediateEditing = false
         otpView.otpFieldEntrySecureType = true
+        otpView.changeStateOfTextField()
         otpView.initializeUI()
         // Do any additional setup after loading the view.
     }

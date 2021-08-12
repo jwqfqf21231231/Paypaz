@@ -21,7 +21,6 @@ class NotificationDataModel: NSObject
     var status = ""
     func changeNotificationStatus()
     {
-        UserDefaults.standard.setNotificationStatus(value: status)
         let url =  APIList().getUrlString(url: .NOTIFICATIONSTATUS)
         let parameter : Parameters = [
             "status" : status

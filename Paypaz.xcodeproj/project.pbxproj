@@ -14,6 +14,8 @@
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
 		0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245326AA81C600840D15 /* MonthYearPickerView.swift */; };
 		0437245926AA86C900840D15 /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245826AA86C900840D15 /* CardExtension.swift */; };
+		0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */; };
+		0447C91126C3DA240030FB7F /* LogOutDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C91026C3DA240030FB7F /* LogOutDataModel.swift */; };
 		0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */; };
 		0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */; };
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
@@ -200,6 +202,8 @@
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
 		0437245326AA81C600840D15 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
 		0437245826AA86C900840D15 /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
+		0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoDataModel.swift; sourceTree = "<group>"; };
+		0447C91026C3DA240030FB7F /* LogOutDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDataModel.swift; sourceTree = "<group>"; };
 		0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
 		0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
 		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
@@ -470,6 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				04B5E28A26B0345100333E94 /* NotificationDataModel.swift */,
+				0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */,
+				0447C91026C3DA240030FB7F /* LogOutDataModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1858,6 +1864,7 @@
 				445C77A42637E57D00AD4DF3 /* FavouritesEventsListVC.swift in Sources */,
 				44509ED3263133B8000B19F3 /* MorePeopleCell.swift in Sources */,
 				0437245926AA86C900840D15 /* CardExtension.swift in Sources */,
+				0447C91126C3DA240030FB7F /* LogOutDataModel.swift in Sources */,
 				445C77A12637DD6F00AD4DF3 /* MyEventsCell.swift in Sources */,
 				445C77AB2637F62300AD4DF3 /* InvitesListVC+Extensions.swift in Sources */,
 				44E5591D26327F8900193305 /* BankSavedSuccessPopupVC.swift in Sources */,
@@ -1901,6 +1908,7 @@
 				0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */,
 				445433E8262DA4D200443AE1 /* SideDrawerListVC+Extensions.swift in Sources */,
 				44C8F2D2261F1DEF000F03DB /* Extensions.swift in Sources */,
+				0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */,
 				0C9F29E7268AE2BE00CE6178 /* APIList.swift in Sources */,
 				0C3DAAA62698220900CCE2DC /* ConfirmPasscodeDataModel.swift in Sources */,
 				0C8EC602269709EE00D51F60 /* MyPostedProductsModel.swift in Sources */,

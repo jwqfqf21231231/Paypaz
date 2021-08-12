@@ -28,6 +28,7 @@ class PasscodeVC : CustomViewController {
         otpView.shouldRequireCursor = false
         otpView.shouldAllowIntermediateEditing = false
         otpView.otpFieldEntrySecureType = true
+        otpView.changeStateOfTextField()
         otpView.initializeUI()
     }
     func setDelegates()
