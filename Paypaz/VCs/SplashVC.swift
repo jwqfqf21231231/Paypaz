@@ -9,22 +9,22 @@
 import UIKit
 
 class SplashVC : CustomViewController {
-
+    
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if UserDefaults.standard.isLoggedIn() == true
-//        {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-//                        _ = self?.pushToVC("LoginVC", animated: false)
-//                    }
-//        }
-//        else
-//        {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-//                        _ = self?.pushToVC("WelcomeVC", animated: false)
-//                    }
-//        }
+        //        if UserDefaults.standard.isLoggedIn() == true
+        //        {
+        //            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+        //                        _ = self?.pushToVC("LoginVC", animated: false)
+        //                    }
+        //        }
+        //        else
+        //        {
+        //            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+        //                        _ = self?.pushToVC("WelcomeVC", animated: false)
+        //                    }
+        //        }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             if UserDefaults.standard.isLoggedIn() == true
             {
@@ -41,17 +41,14 @@ class SplashVC : CustomViewController {
                     
                 }else
                 {
-
+                    
                     if UserDefaults.standard.value(forKey: "isVerify") as? String != "1"
                     {
                         _ = self?.pushToVC("OTPVerificationVC")
                     }
                     else if UserDefaults.standard.value(forKey: "isProfile") as? String != "1"
                     {
-                        if let vc = self?.pushToVC("CreateProfileVC") as? CreateProfileVC
-                        {
-                            vc.isUpdate = "1"
-                        }
+                        _ = self?.pushToVC("CreateProfileVC")
                     }
                     else if UserDefaults.standard.value(forKey: "isPasscode") as? String != "1"
                     {
@@ -77,7 +74,7 @@ class SplashVC : CustomViewController {
             {
                 _ = self?.pushToVC("WelcomeVC")
             }
-           
+            
         }
     }
 }

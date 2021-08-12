@@ -47,7 +47,7 @@ class OTPVerificationVC : CustomViewController {
         dataSource.delegate4 = self
         dataSource1.delegate1 = self
         otpView.delegate = self
-
+        
     }
     private func changeTitle()
     {
@@ -96,32 +96,41 @@ class OTPVerificationVC : CustomViewController {
         }
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-
-        if self.doForgotPassword ?? false
+        if !hasEntered
         {
-            dataSource.otp = otpString
-            dataSource.doForgotPassword = true
-            Connection.svprogressHudShow(view: self)
-            dataSource.verifyOTP()
-        }
-        else if self.doForgotPasscode ?? false{
-            
-            Connection.svprogressHudShow(view: self)
-            dataSource.otp = otpString
-            dataSource.forgotPasscodeOTPVerify()
-        }
-        else if self.doChangePassword ?? false{
-            Connection.svprogressHudShow(view: self)
-            dataSource.phoneNumber = phoneNumber
-            dataSource.otp = otpString
-            dataSource.doVerifyPhoneNumber()
+            view.makeToast("Please enter OTP")
         }
         else
         {
-            Connection.svprogressHudShow(view: self)
-            dataSource.otp = otpString
-            dataSource.verifyOTP()
+            if self.doForgotPassword ?? false
+            {
+                dataSource.otp = otpString
+                dataSource.doForgotPassword = true
+                Connection.svprogressHudShow(view: self)
+                dataSource.verifyOTP()
+            }
+            else if self.doForgotPasscode ?? false
+            {
+                Connection.svprogressHudShow(view: self)
+                dataSource.otp = otpString
+                dataSource.forgotPasscodeOTPVerify()
+                
+            }
+            else if self.doChangePassword ?? false
+            {
+                Connection.svprogressHudShow(view: self)
+                dataSource.phoneNumber = phoneNumber
+                dataSource.otp = otpString
+                dataSource.doVerifyPhoneNumber()
+            }
+            else
+            {
+                Connection.svprogressHudShow(view: self)
+                dataSource.otp = otpString
+                dataSource.verifyOTP()
+            }
         }
+        
     }
 }
 
@@ -132,7 +141,7 @@ extension OTPVerificationVC: VPMOTPViewDelegate {
         self.hasEntered = hasEntered
         return hasEntered
     }
-    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
         if hasEntered && index < 3
         {
             return false
@@ -150,10 +159,8 @@ extension OTPVerificationVC: VPMOTPViewDelegate {
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
         UserDefaults.standard.setLoggedIn(value: true)
-        if let vc = self.pushToVC("CreateProfileVC") as? CreateProfileVC
-        {
-            vc.isUpdate = "1"
-        }
+        _ = self.pushToVC("CreateProfileVC")
+        
     }
 }
 extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
@@ -287,6 +294,7 @@ extension OTPVerificationVC : VerifyChangePasswordModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            NotificationCenter.default.post(name: NSNotification.Name("ReloadUserDetails"), object: nil)
             UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
             for vc in self.navigationController!.viewControllers as Array {
                 if vc.isKind(of:SettingsVC.self) {

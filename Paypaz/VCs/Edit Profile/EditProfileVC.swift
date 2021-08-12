@@ -22,6 +22,7 @@ class EditProfileVC: CustomViewController {
     @IBOutlet weak var img_Profile : UIImageView!
     @IBOutlet weak var txt_firstName : RoundTextField!
     @IBOutlet weak var txt_lastName  : RoundTextField!
+    @IBOutlet weak var txt_email : RoundTextField!
     @IBOutlet weak var txt_DOB       : RoundTextField!
     @IBOutlet weak var txt_City      : RoundTextField!
     @IBOutlet weak var txt_State     : RoundTextField!
@@ -87,39 +88,40 @@ class EditProfileVC: CustomViewController {
     }
     @IBAction func btn_Save(_ sender:UIButton) {
         
-        if txt_firstName.text == ""{
-            self.showAlert(withMsg: "Please enter your first name", withOKbtn: true)
+        if txt_firstName.text?.trim().count == 0{
+            view.makeToast("Please enter your first name")
         }
-        else if txt_lastName.text == ""{
-            self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
+        else if txt_lastName.text?.trim().count == 0{
+            view.makeToast("Please enter last Name")
         }
-        
-        else if txt_DOB.text == ""{
-            self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
-            _ = self.pushToVC("OTPVerificationVC")
+        else if txt_email.text?.trim().count == 0
+        {
+            view.makeToast("Please enter email")
         }
-        else if txt_City.text == ""{
-            self.showAlert(withMsg: "Please enter City", withOKbtn: true)
-            _ = self.pushToVC("OTPVerificationVC")
+        else if txt_DOB.text?.trim().count == 0{
+            view.makeToast("Please enter date of birth")
         }
-        else if txt_State.text == ""{
-            self.showAlert(withMsg: "Please enter State", withOKbtn: true)
-            _ = self.pushToVC("OTPVerificationVC")
+        else if txt_City.text?.trim().count == 0{
+            view.makeToast("Please enter city")
+        }
+        else if txt_State.text?.trim().count == 0{
+            view.makeToast("Please enter state")
         }
         else if txtView_Address.text == ""
         {
-            self.showAlert(withMsg: "Please enter Address", withOKbtn: true)
+            view.makeToast("Please enter address")
         }
         else
         {
             Connection.svprogressHudShow(view: self)
-            dataSource.firstName = txt_firstName.text!
-            dataSource.lastName = txt_lastName.text!
-            dataSource.city = txt_City.text!
-            dataSource.address = txtView_Address.text!
-            dataSource.dateOfBirth = txt_DOB.text!
-            dataSource.state = txt_State.text!
-            dataSource.profilePic = pickedImage
+            dataSource.firstName = txt_firstName.text ?? ""
+            dataSource.lastName = txt_lastName.text ?? ""
+            dataSource.email = txt_email.text ?? ""
+            dataSource.city = txt_City.text ?? ""
+            dataSource.address = txtView_Address.text ?? ""
+            dataSource.dateOfBirth = txt_DOB.text ?? ""
+            dataSource.state = txt_State.text ?? ""
+            dataSource.profilePic = img_Profile.image
             dataSource.isUpdate = "0"
             dataSource.uploadProImg()
         }
@@ -151,6 +153,7 @@ extension EditProfileVC : UserDetailsDataModelDelegate
             DispatchQueue.main.async {
                 self.txt_firstName.text = data.data?.firstName
                 self.txt_lastName.text = data.data?.lastName
+                self.txt_email.text = data.data?.email
                 self.txt_DOB.text = data.data?.dob
                 self.txt_City.text = data.data?.city
                 self.txt_State.text = data.data?.state

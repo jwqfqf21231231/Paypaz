@@ -53,7 +53,7 @@ extension ConfirmPasscodeVC: VPMOTPViewDelegate {
         self.hasEntered = hasEntered
         return hasEntered
     }
-    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
         if hasEntered && index < 3
         {
             return false

@@ -23,13 +23,10 @@ class PasscodeVC : CustomViewController {
         super.viewDidLoad()
         setDelegates()
         hideKeyboardWhenTappedArround()
-        otpView.otpFieldsCount = 4
-        otpView.otpFieldDefaultBackgroundColor = UIColor.white
-        otpView.shouldRequireCursor = false
-        otpView.shouldAllowIntermediateEditing = false
+        
         otpView.otpFieldEntrySecureType = true
-        otpView.changeStateOfTextField()
         otpView.initializeUI()
+        otpView.changeStateOfTextField()
     }
     func setDelegates()
     {
@@ -60,7 +57,7 @@ extension PasscodeVC: VPMOTPViewDelegate {
         self.hasEntered = hasEntered
         return hasEntered
     }
-    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
         if hasEntered && index < 3
         {
             return false

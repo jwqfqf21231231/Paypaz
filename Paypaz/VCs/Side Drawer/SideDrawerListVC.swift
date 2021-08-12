@@ -38,6 +38,11 @@ class SideDrawerListVC : CustomViewController {
         
         self.addTapGestureToView()
         self.getUserDetails()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadUserDetails(notification:)), name: NSNotification.Name("ReloadUserDetails"), object: nil)
+    }
+    @objc func reloadUserDetails(notification: Notification)
+    {
+        getUserDetails()
     }
     private func getUserDetails()
     {

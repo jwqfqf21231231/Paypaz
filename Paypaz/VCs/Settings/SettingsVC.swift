@@ -20,15 +20,18 @@ class SettingsVC : CustomViewController {
     }
     private func setNotificationStatus()
     {
+        
         if UserDefaults.standard.value(forKey: "isNotification") as? String == "0"
         {
             swt_Notification.setOn(false, animated: false)
-
+            
         }
         else
         {
             swt_Notification.setOn(true, animated: false)
         }
+        
+        
     }
     @objc func notificationChange(_ sender : UISwitch)
     {
@@ -108,5 +111,5 @@ extension SettingsVC : NotificationModelDelegate
             self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
-
+    
 }

@@ -15,8 +15,9 @@ class CreatePasscodeVC: UIViewController {
     weak var delegate : PopupDelegate?
     var createPasscode = ""
     var confirmPasscode = ""
-    var hasEntered = false
-    var tag = "0"
+    var hasEnteredPasscode = false
+    var hasEnteredConfirmPasscode = false
+    var tag = ""
     
     // MARK:- ---
     @IBOutlet weak var lbl_Title : UILabel!
@@ -30,20 +31,15 @@ class CreatePasscodeVC: UIViewController {
         otpView1.delegate = self
         otpView2.delegate = self
         dataSource.delegate = self
-        otpView1.otpFieldsCount = 4
-        otpView1.otpFieldDefaultBackgroundColor = UIColor.white
-        otpView1.shouldRequireCursor = false
-        otpView1.shouldAllowIntermediateEditing = false
+        
         otpView1.otpFieldEntrySecureType = true
-        otpView1.changeStateOfTextField()
         otpView1.initializeUI()
-        otpView2.otpFieldsCount = 4
-        otpView2.otpFieldDefaultBackgroundColor = UIColor.white
-        otpView2.shouldRequireCursor = false
-        otpView2.shouldAllowIntermediateEditing = false
+        otpView1.changeStateOfTextField()
+        
         otpView2.otpFieldEntrySecureType = true
-        otpView2.changeStateOfTextField()
         otpView2.initializeUI()
+        otpView2.changeStateOfTextField()
+    
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -59,17 +55,17 @@ class CreatePasscodeVC: UIViewController {
     }
     
     @IBAction func btn_Next(_ sender:UIButton) {
-        if createPasscode.count != 4
+        if !hasEnteredPasscode
         {
             self.view.makeToast("Enter passcode", duration: 3, position: .bottom)
         }
-        else if confirmPasscode.count != 4
+        else if !hasEnteredConfirmPasscode
         {
             self.view.makeToast("Enter confirm passcode", duration: 3, position: .bottom)
         }
         else if(createPasscode != confirmPasscode)
         {
-            self.view.makeToast("Enter the Same Passcode", duration: 3, position: .bottom)
+            self.view.makeToast("create passcode and confirm passcode should match", duration: 3, position: .bottom)
         }
         else
         {
@@ -80,66 +76,27 @@ class CreatePasscodeVC: UIViewController {
     }
     
 }
-//extension CreatePasscodeVC : VPMOTPViewDelegate {
-//    func hasEnteredAllOTP(hasEntered: Bool) -> Bool {
-//        print("Has entered all OTP? \(hasEntered)")
-//        self.hasEntered = hasEntered
-//        return hasEntered
-//    }
-//    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
-//        if hasEntered && index < 3
-//        {
-//            return false
-//        }
-//        else
-//        {
-//            return true
-//        }
-//    }
-//    func enteredOTP(otpString: String) {
-//        print("OTPString: \(otpString)")
-//        self.typedPasscode = otpString
-//    }
-//}
+
 extension CreatePasscodeVC:VPMOTPViewDelegate{
     func hasEnteredAllOTP(hasEntered: Bool,tag:Int) -> Bool {
         print("Has entered all OTP? \(hasEntered)")
-//        if tag == 5{
-//            if hasEntered == true{
-//                if UserData.User?.protected_password != "" {
-//                    if  UserData.DefalutStatus == "On" {
-//                        if UserData.User?.protected_password == self.verifyPassword ?? ""{
-//                            UserData.DefalutStatus = "Off"
-//                            statusSwitch.isOn = false
-//                            self.popupView.isHidden = true
-//                            self.verifyotpView.initializeUI()
-//
-//                        }else{
-//                            self.showBrokenRules(message: "Password incorrect".localized)
-//                        }
-//                    }else{
-//                        if UserData.User?.protected_password == self.verifyPassword ?? ""{
-//                            UserData.DefalutStatus = "On"
-//                            statusSwitch.isOn = true
-//                            self.popupView.isHidden = true
-//                            self.verifyotpView.initializeUI()
-//
-//                        }else{
-//                            self.showBrokenRules(message: "Password incorrect".localized)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        self.hasEntered = hasEntered
-        self.tag = "\(tag)"
+        if tag == 0
+        {
+            self.hasEnteredPasscode = hasEntered
+        }
+        else
+        {
+            self.hasEnteredConfirmPasscode = hasEntered
+        }
         return hasEntered
-        return true
     }
     
-    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
+        self.tag = "\(tag)"
         print(index)
-            if hasEntered && index < 3
+        if tag == 0
+        {
+            if hasEnteredPasscode && index < 3
             {
                 return false
             }
@@ -147,11 +104,22 @@ extension CreatePasscodeVC:VPMOTPViewDelegate{
             {
                 return true
             }
+        }
+        else
+        {
+            if hasEnteredConfirmPasscode && index < 3
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
+        }
     }
     func enteredOTP(otpString: String, tag: Int) {
         if tag == 0{
             createPasscode = otpString
-            self.tag =
         }
         else{
             confirmPasscode = otpString

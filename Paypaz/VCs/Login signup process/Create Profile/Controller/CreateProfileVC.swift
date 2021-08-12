@@ -15,7 +15,6 @@ class CreateProfileVC  : CustomViewController {
     var pickedImage : UIImage?
     var fontCamera  = false
     var images      = [String:Any]()
-    var isUpdate = ""
     var picSelected = false
     let sharedInstance = Connection()
     
@@ -92,7 +91,7 @@ class CreateProfileVC  : CustomViewController {
             dataSource.dateOfBirth = txt_DOB.text!
             dataSource.state = txt_State.text!
             dataSource.profilePic = pickedImage
-            dataSource.isUpdate = isUpdate
+            dataSource.isUpdate = "1"
             dataSource.uploadProImg()
         }
     }

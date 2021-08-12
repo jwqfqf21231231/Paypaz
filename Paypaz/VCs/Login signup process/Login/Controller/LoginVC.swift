@@ -173,7 +173,7 @@ extension LoginVC : LogInDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            view.makeToast(data.message ?? "")
         }
     }
     

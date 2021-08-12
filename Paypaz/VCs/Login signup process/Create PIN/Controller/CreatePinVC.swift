@@ -12,11 +12,16 @@ class CreatePinVC : CustomViewController {
     
     var isCreatingPin : Bool?
     weak var delegate : PopupDelegate?
-    var typedPin = ""
-    var hasEntered = false
+    var createPin = ""
+    var confirmPin = ""
+    var hasEnteredPin = false
+    var hasEnteredConfirmPin = false
+    var tag = ""
+
     private let dataSource = CreatePinDataModel()
-    @IBOutlet weak var otpView: VPMOTPView!
     @IBOutlet weak var lbl_title   : UILabel!
+    @IBOutlet weak var otpView1 : VPMOTPView!
+    @IBOutlet weak var otpView2 : VPMOTPView!
     
     
     // MARK:- --- View Life Cycle ----
@@ -24,14 +29,16 @@ class CreatePinVC : CustomViewController {
         super.viewDidLoad()
         dataSource.delegate = self
         hideKeyboardWhenTappedArround()
-        otpView.otpFieldsCount = 4
-        otpView.otpFieldDefaultBackgroundColor = UIColor.white
-        otpView.delegate = self
-        otpView.shouldRequireCursor = false
-        otpView.shouldAllowIntermediateEditing = false
-        otpView.initializeUI()
-        otpView.otpFieldEntrySecureType = true
-        otpView.changeStateOfTextField()
+        otpView1.delegate = self
+        otpView2.delegate = self
+        
+        otpView1.otpFieldEntrySecureType = true
+        otpView1.initializeUI()
+        otpView1.changeStateOfTextField()
+        
+        otpView2.otpFieldEntrySecureType = true
+        otpView2.initializeUI()
+        otpView2.changeStateOfTextField()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +51,8 @@ class CreatePinVC : CustomViewController {
     }
     
     // MARK:- --- Action ----
-    @IBAction func btn_show(_ sender:UIButton) {
+    
+   /* @IBAction func btn_show(_ sender:UIButton) {
         otpView.otpFieldEntrySecureType = !otpView.otpFieldEntrySecureType
         otpView.changeStateOfTextField()
         if sender.isSelected == true{
@@ -53,40 +61,86 @@ class CreatePinVC : CustomViewController {
             sender.isSelected = true
             
         }
-    }
+    }*/
+
     @IBAction func btn_Submit(_ sender:UIButton) {
-        
         if self.isCreatingPin ?? false {
-            UserDefaults.standard.setPin(value: typedPin)
-            dataSource.pincode = typedPin
-            dataSource.createPin()
+            if !hasEnteredPin
+            {
+                self.view.makeToast("Enter passcode", duration: 3, position: .bottom)
+            }
+            else if !hasEnteredConfirmPin
+            {
+                self.view.makeToast("Enter confirm passcode", duration: 3, position: .bottom)
+            }
+            else if(createPin != confirmPin)
+            {
+                self.view.makeToast("create pin and confirm pin should match", duration: 3, position: .bottom)
+            }
+            else
+            {
+                Connection.svprogressHudShow(view: self)
+                dataSource.pincode = confirmPin
+                dataSource.createPin()
+            }
+            
         } else {
             self.navigationController?.popViewController(animated: true)
             // self.delegate?.isClickedButton()
         }
+        
     }
 }
-extension CreatePinVC: VPMOTPViewDelegate {
+extension CreatePinVC:VPMOTPViewDelegate{
     func hasEnteredAllOTP(hasEntered: Bool,tag:Int) -> Bool {
         print("Has entered all OTP? \(hasEntered)")
-        self.hasEntered = hasEntered
-        return hasEntered
-    }
-    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
-        if hasEntered && index < 3
+        if tag == 0
         {
-            return false
+            self.hasEnteredPin = hasEntered
         }
         else
         {
-            return true
+            self.hasEnteredConfirmPin = hasEntered
+        }
+        return hasEntered
+    }
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
+        self.tag = "\(tag)"
+        print(index)
+        if tag == 0
+        {
+            if hasEnteredPin && index < 3
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
+        }
+        else
+        {
+            if hasEnteredConfirmPin && index < 3
+            {
+                return false
+            }
+            else
+            {
+                return true
+            }
         }
     }
-    func enteredOTP(otpString: String,tag:Int) {
+    func enteredOTP(otpString: String, tag: Int) {
+        if tag == 0{
+            createPin = otpString
+        }
+        else{
+            confirmPin = otpString
+        }
         print("OTPString: \(otpString)")
-        self.typedPin = otpString
     }
 }
+
 extension CreatePinVC : CreatePinDataModelDelegate
 {
     func didRecieveDataUpdate(data: LogInModel)
@@ -95,6 +149,7 @@ extension CreatePinVC : CreatePinDataModelDelegate
         if data.success == 1
         {
             UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
+            UserDefaults.standard.setPin(value: confirmPin)
             if let vc = self.pushToVC("CreditDebitCardVC") as? CreditDebitCardVC
             {
                 vc.fromPin = true

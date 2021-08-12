@@ -36,7 +36,7 @@ protocol VPMOTPViewDelegate: class {
     ///
     /// - Parameter index: the index of the field. Index starts from 0.
     /// - Returns: return true to show keyboard and vice versa
-    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool
     
     /// Called whenever all the OTP fields have been entered. It'll be called immediately after `hasEnteredAllOTP` delegate method is called.
     ///
@@ -85,7 +85,7 @@ class VPMOTPView: UIView {
     var otpFilledEntryDisplay: Bool = false
     
     /// If set to `false`, the blinking cursor for OTP field will not be visible. Defaults to `true`.
-    var shouldRequireCursor: Bool = true
+    var shouldRequireCursor: Bool = false
     
     /// If `shouldRequireCursor` is set to `false`, then this property will not have any effect. If `true`, then the color of cursor can be changed using this property. Defaults to `blue` color.
     var cursorColor: UIColor = UIColor.blue
@@ -100,10 +100,10 @@ class VPMOTPView: UIView {
     var otpFieldBorderWidth: CGFloat = 1
     
     /// If set, then editing can be done to intermediate fields even though previous fields are empty. Else editing will take place from last filled text field only. Defaults to `true`.
-    var shouldAllowIntermediateEditing: Bool = true
+    var shouldAllowIntermediateEditing: Bool = false
     
     /// Set this value if a background color is needed when a text is not enetered in the OTP field. Defaults to `clear` color.
-    var otpFieldDefaultBackgroundColor: UIColor = UIColor.clear
+    var otpFieldDefaultBackgroundColor: UIColor = UIColor.white
     
     /// Set this value if a background color is needed when a text is enetered in the OTP field. Defaults to `clear` color.
     var otpFieldEnteredBackgroundColor: UIColor = UIColor.clear
@@ -155,7 +155,7 @@ class VPMOTPView: UIView {
             otpField.layer.borderColor = otpFieldEnteredBorderColor.cgColor
             otpField.becomeFirstResponder()
         }
-       
+        
     }
     func changeStateOfTextField(){
         for index in stride(from: 0, to: otpFieldsCount, by: 1) {
@@ -260,11 +260,11 @@ class VPMOTPView: UIView {
                 }
                 
                 let fieldBackgroundColor = (otpField?.text ?? "").isEmpty ? otpFieldDefaultBackgroundColor : otpFieldEnteredBackgroundColor
-                let fieldBorderColor = (otpField?.text ?? "").isEmpty ? otpFieldDefaultBorderColor : otpFieldEnteredBorderColor
+                //let fieldBorderColor = (otpField?.text ?? "").isEmpty ? otpFieldDefaultBorderColor : otpFieldEnteredBorderColor
                 
                 if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
                     otpField?.shapeLayer.fillColor = fieldBackgroundColor.cgColor
-                    otpField?.shapeLayer.strokeColor = fieldBorderColor.cgColor
+                  //  otpField?.shapeLayer.strokeColor = fieldBorderColor.cgColor
                 } else {
                     otpField?.backgroundColor = fieldBackgroundColor
                 }
@@ -309,7 +309,7 @@ class VPMOTPView: UIView {
 
 extension VPMOTPView: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        let shouldBeginEditing = delegate?.shouldBecomeFirstResponderForOTP(otpFieldIndex: (textField.tag - 1)) ?? true
+        let shouldBeginEditing = delegate?.shouldBecomeFirstResponderForOTP(otpFieldIndex: (textField.tag - 1), tag: self.tag) ?? true
         if shouldBeginEditing {
             let status = isPreviousFieldsEntered(forTextField: textField)
             if status
@@ -336,12 +336,8 @@ extension VPMOTPView: UITextFieldDelegate {
             // If field has a text already, then replace the text and move to next field if present
             secureEntryData[textField.tag - 1] = string
             
-            if otpFilledEntryDisplay {
-                textField.text = " "
-            }
-            else {
-                textField.text = string
-            }
+            
+            textField.text = string
             
             if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
                 (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldEnteredBackgroundColor.cgColor
@@ -399,15 +395,15 @@ extension VPMOTPView: UITextFieldDelegate {
             (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldDefaultBorderColor.cgColor
         } else {
             
-            if textField.tag == 1
-            {
-                textField.layer.borderColor = otpFieldEnteredBorderColor.cgColor
-
-            }
-            else
-            {
-                textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
-            }
+            //            if textField.tag == 1
+            //            {
+            //                textField.layer.borderColor = otpFieldEnteredBorderColor.cgColor
+            //
+            //            }
+            //            else
+            //            {
+            //                textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
+            //            }
             
             textField.backgroundColor = otpFieldDefaultBackgroundColor
         }

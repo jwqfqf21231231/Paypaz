@@ -204,6 +204,7 @@ extension SignupVC : SignUpDataModelDelegate
             UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
             UserDefaults.standard.setPhoneCode(value: "+\(data.data?.phoneCode ?? "")")
             UserDefaults.standard.setCountryCode(value: data.data?.countryCode ?? "")
+            UserDefaults.standard.setValue(data.data?.isNotification, forKey: "isNotification")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC
             self.navigationController?.pushViewController(viewController, animated: false)
         }

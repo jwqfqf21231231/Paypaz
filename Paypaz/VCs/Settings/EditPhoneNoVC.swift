@@ -49,6 +49,9 @@ class EditPhoneNoVC: UIViewController {
         }
         self.present(listVC, animated: true, completion: nil)
     }
+    @IBAction func btn_Back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     func updatePlaceholder(_ code:String) {
         do {
             formatter = NBAsYouTypeFormatter(regionCode: code)
