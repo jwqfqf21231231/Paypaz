@@ -48,7 +48,7 @@ class ConfirmPasscodeVC: CustomViewController {
     }
 }
 extension ConfirmPasscodeVC: VPMOTPViewDelegate {
-    func hasEnteredAllOTP(hasEntered: Bool) -> Bool {
+    func hasEnteredAllOTP(hasEntered: Bool,tag:Int) -> Bool {
         print("Has entered all OTP? \(hasEntered)")
         self.hasEntered = hasEntered
         return hasEntered
@@ -63,7 +63,7 @@ extension ConfirmPasscodeVC: VPMOTPViewDelegate {
             return true
         }
     }
-    func enteredOTP(otpString: String) {
+    func enteredOTP(otpString: String,tag:Int) {
         print("OTPString: \(otpString)")
         self.typedPasscode = otpString
     }

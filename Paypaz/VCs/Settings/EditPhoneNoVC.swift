@@ -30,12 +30,6 @@ class EditPhoneNoVC: UIViewController {
         hideKeyboardWhenTappedArround()
         updatePlaceholder(country_code)
     }
-    func pushVC (_ identifier : String, animated:Bool = true) -> UIViewController{
- 
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
-        self.navigationController?.pushViewController(viewController, animated: animated)
-        return viewController
-    }
     @IBAction func selectPhoneNoCode()
     {
         guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }

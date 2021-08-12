@@ -41,13 +41,13 @@ protocol VPMOTPViewDelegate: class {
     /// Called whenever all the OTP fields have been entered. It'll be called immediately after `hasEnteredAllOTP` delegate method is called.
     ///
     /// - Parameter otpString: The entered otp characters
-    func enteredOTP(otpString: String)
+    func enteredOTP(otpString: String,tag: Int)
     
     /// Called whenever an OTP is entered.
     ///
     /// - Parameter hasEntered: `hasEntered` will be `true` if all the OTP fields have been filled.
     /// - Returns: return if OTP entered is valid or not. If false and all otp has been entered, then error
-    func hasEnteredAllOTP(hasEntered: Bool) -> Bool
+    func hasEnteredAllOTP(hasEntered: Bool,tag: Int) -> Bool
 }
 
 class VPMOTPView: UIView {
@@ -159,7 +159,7 @@ class VPMOTPView: UIView {
     }
     func changeStateOfTextField(){
         for index in stride(from: 0, to: otpFieldsCount, by: 1) {
-            var otpField = viewWithTag(index + 1) as? VPMOTPTextField
+            let otpField = viewWithTag(index + 1) as? VPMOTPTextField
             if otpFieldEntrySecureType{
                 otpField?.isSecureTextEntry = true
             }
@@ -249,7 +249,7 @@ class VPMOTPView: UIView {
     // Helper function to get the OTP String entered
     fileprivate func calculateEnteredOTPSTring(isDeleted: Bool) {
         if isDeleted {
-            _ = delegate?.hasEnteredAllOTP(hasEntered: false)
+            _ = delegate?.hasEnteredAllOTP(hasEntered: false, tag: self.tag)
             
             // Set the default enteres state for otp entry
             for index in stride(from: 0, to: otpFieldsCount, by: 1) {
@@ -267,7 +267,6 @@ class VPMOTPView: UIView {
                     otpField?.shapeLayer.strokeColor = fieldBorderColor.cgColor
                 } else {
                     otpField?.backgroundColor = fieldBackgroundColor
-                    //otpField?.layer.borderColor = fieldBorderColor.cgColor
                 }
             }
         }
@@ -282,10 +281,10 @@ class VPMOTPView: UIView {
             }
             
             if enteredOTPString.count == otpFieldsCount {
-                delegate?.enteredOTP(otpString: enteredOTPString)
+                delegate?.enteredOTP(otpString: enteredOTPString,tag: self.tag)
                 
                 // Check if all OTP fields have been filled or not. Based on that call the 2 delegate methods.
-                let isValid = delegate?.hasEnteredAllOTP(hasEntered: (enteredOTPString.count == otpFieldsCount)) ?? false
+                let isValid = delegate?.hasEnteredAllOTP(hasEntered: (enteredOTPString.count == otpFieldsCount), tag: self.tag) ?? false
                 
                 // Set the error state for invalid otp entry
                 for index in stride(from: 0, to: otpFieldsCount, by: 1) {

@@ -77,6 +77,13 @@ extension UIViewController
         }
 
     }
+    func pushVC (_ identifier : String, animated:Bool = true) -> UIViewController{
+ 
+        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
+        self.navigationController?.pushViewController(viewController, animated: animated)
+        return viewController
+    }
+
     //MARK:-
     //Hide keyboard on tap outside
     func hideKeyboardWhenTappedArround() {
