@@ -23,7 +23,7 @@ class ForgotPasswordVC : UIViewController {
     var textStr = ""
     var phoneNo = ""
     var placeHolderText = ""
-    
+    var apiDailCode = "91"
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
     private lazy var phoneUtil: NBPhoneNumberUtil = NBPhoneNumberUtil()
@@ -80,13 +80,14 @@ class ForgotPasswordVC : UIViewController {
     @IBAction func selectPhoneNoCode()
     {
         guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }
-        listVC.countryID = {[weak self] (dial_code,name,code) in
+        listVC.countryID = {[weak self] (dial_code,name,code,dialCode) in
             guard  let self = self else {
                 return
             }
+            self.apiDailCode = dial_code
             self.country_code = code
-            self.phone_code = dial_code
-            self.code_btn.setTitle(dial_code, for: .normal)
+            self.phone_code = dialCode
+            self.code_btn.setTitle(dialCode, for: .normal)
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2

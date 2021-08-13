@@ -43,6 +43,7 @@ class CreateCardDataModel: NSObject
     var email = ""
     var phone = ""
     
+    
     func getBanks()
     {
         let url =  APIList().getUrlString(url: .BANKINFO)
@@ -81,7 +82,6 @@ class CreateCardDataModel: NSObject
         let url =  APIList().getUrlString(url: .CREATECARD)
         
         let parameter : Parameters = [
-            "bankID" : bankID,
             "cardNumber" : cardNumber,
             "expDate" : expDate,
             "cardHolderName" : cardHolderName,

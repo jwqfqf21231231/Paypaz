@@ -67,7 +67,7 @@ extension ViewProfileVC : UserDetailsDataModelDelegate
                 self.lbl_ProfileName.text = fullName
                 self.lbl_DOB.text = data.data?.dob
                 self.lbl_PhoneNo.text = UserDefaults.standard.getPhoneCode() + " " + (data.data?.phoneNumber ?? "")
-                self.lbl_Address.text = data.data?.address
+                self.lbl_Address.text = data.data?.state ?? ""
             }
         }
         else

@@ -30,7 +30,7 @@ class CountryListTable: UIViewController {
     }
     @IBOutlet weak var heading_lbl : UILabel!
     @IBOutlet var searchBar: UISearchBar!
-    var countryID : ((_ id:String,_ name:String, _ code:String) -> Void)?
+    var countryID : ((_ id:String,_ name:String, _ code:String, _ dialCode:String) -> Void)?
     var filterdata = [CountiesWithPhoneModel]()
    
     override func viewDidLoad() {
@@ -103,17 +103,19 @@ extension CountryListTable:UITableViewDelegate,UITableViewDataSource,UISearchBar
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if type == .city{
-            countryID?(cityFilterList[indexPath.row].name ?? "", "", "")
+            countryID?(cityFilterList[indexPath.row].name ?? "", "", "", "")
         }
         else if type == .religion{
-            countryID?(religionFilter[indexPath.row], "","")
+            countryID?(religionFilter[indexPath.row], "","", "")
         }
         else{
             if type == .phoneNumber{
-                countryID?(filterdata[indexPath.row].dial_code ?? "", filterdata[indexPath.row].countryName ?? "", filterdata[indexPath.row].code ?? "")
+                let dailCode = self.filterdata[indexPath.row].dial_code ?? ""
+                let replaceingCode = dailCode.replacingOccurrences(of: "+", with: "")
+                countryID?(replaceingCode, filterdata[indexPath.row].countryName ?? "", filterdata[indexPath.row].code ?? "", filterdata[indexPath.row].dial_code ?? "")
             }
             else{
-                countryID?(filterdata[indexPath.row].countryName ?? "", filterdata[indexPath.row].code ?? "", "")
+                countryID?(filterdata[indexPath.row].countryName ?? "", filterdata[indexPath.row].code ?? "", "", "")
             }
         }
         dismiss(animated: true, completion: nil)

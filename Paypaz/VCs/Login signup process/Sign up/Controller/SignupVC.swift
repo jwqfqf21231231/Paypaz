@@ -28,6 +28,7 @@ class SignupVC : UIViewController {
     var textStr = ""
     var phoneNo = ""
     var placeHolderText = ""
+    var apiDailCode = "91"
     
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -53,13 +54,14 @@ class SignupVC : UIViewController {
     @IBAction func selectPhoneNoCode()
     {
         guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }
-        listVC.countryID = {[weak self] (dial_code,name,code) in
+        listVC.countryID = {[weak self] (dial_code,name,code,dialCode) in
             guard  let self = self else {
                 return
             }
             self.country_code = code
-            self.phone_code = dial_code
-            self.code_btn.setTitle(dial_code, for: .normal)
+            self.phone_code = dialCode
+            self.apiDailCode  = dial_code
+            self.code_btn.setTitle(dialCode, for: .normal)
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2
@@ -98,6 +100,7 @@ class SignupVC : UIViewController {
         if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
+            dataSource.phoneCode = self.apiDailCode
             dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
             dataSource.email = txt_email.text ?? ""
             dataSource.password = txt_Password.text ?? ""
@@ -202,7 +205,7 @@ extension SignupVC : SignUpDataModelDelegate
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")
             UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
-            UserDefaults.standard.setPhoneCode(value: "+\(data.data?.phoneCode ?? "")")
+            UserDefaults.standard.setPhoneCode(value: "+\(data.data?.phoneCode ?? "")" )
             UserDefaults.standard.setCountryCode(value: data.data?.countryCode ?? "")
             UserDefaults.standard.setValue(data.data?.isNotification, forKey: "isNotification")
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTPVerificationVC") as! OTPVerificationVC

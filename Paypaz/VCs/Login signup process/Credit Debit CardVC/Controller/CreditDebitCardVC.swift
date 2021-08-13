@@ -22,12 +22,12 @@ class CreditDebitCardVC : CardViewController {
     var fromPin : Bool?
     var isAddingNewCard : Bool?
     private let dataSource = CreateCardDataModel()
+    @IBOutlet weak var btn_cardNumber : RoundButton!
     @IBOutlet weak var txt_cardNumber : RoundTextField!
     @IBOutlet weak var txt_expDate : RoundTextField!
     @IBOutlet weak var txt_cardHolderName : RoundTextField!
     @IBOutlet weak var txt_cvv : RoundTextField!
     @IBOutlet weak var img_CardImage : UIImageView!
-    @IBOutlet weak var btn_Skip : RoundButton!
     
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class CreditDebitCardVC : CardViewController {
         self.hideKeyboardWhenTappedAround()
         dataSource.delegate = self
         dataSource.delegate1 = self
-        self.getBankInfo()
+    //    self.getBankInfo()
         // Do any additional setup after loading the view.
     }
     private func setDelegates()
@@ -50,13 +50,6 @@ class CreditDebitCardVC : CardViewController {
     {
         Connection.svprogressHudShow(view: self)
         dataSource.getBanks()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if isAddingNewCard ?? false {
-            self.btn_Skip.alpha = 0.0
-        }
     }
     
     // MARK: - --- Action ----
@@ -91,7 +84,6 @@ class CreditDebitCardVC : CardViewController {
             if validateFields() == true
             {
                 Connection.svprogressHudShow(view: self)
-                dataSource.bankID = selected ?? ""
                 dataSource.cardNumber = txt_cardNumber.text ?? ""
                 dataSource.expDate = txt_expDate.text ?? ""
                 dataSource.cardHolderName = txt_cardHolderName.text ?? ""
@@ -132,9 +124,6 @@ class CreditDebitCardVC : CardViewController {
         }
         return false
         
-    }
-    @IBAction func btn_Skip(_ sender:UIButton) {
-        _ = self.pushToVC("SideDrawerBaseVC")
     }
     
 }
@@ -185,7 +174,7 @@ extension CreditDebitCardVC : CreateCardDataModelDelegate
             }
             else
             {
-                _ = self.pushToVC("SideDrawerBaseVC")
+                _ = self.pushToVC("SideDrawerBaseVC",animated: false)
             }
         }
         else
@@ -250,21 +239,25 @@ extension CreditDebitCardVC : UITextFieldDelegate{
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         if let field = textField as? RoundTextField {
-            field.border_Color = UIColor(named: "SkyblueColor")//UIColor.red
-            if textField == txt_expDate{
-                txt_expDate.inputView = picker
+            if textField == txt_cardNumber
+            {
+                btn_cardNumber.border_Color = UIColor(named: "SkyblueColor")
             }
-            
+            else
+            {
+                field.border_Color = UIColor(named: "SkyblueColor")//UIColor.red
+                if textField == txt_expDate{
+                    txt_expDate.inputView = picker
+                }
+            }
         }
         //  textField.layer.borderColor = UIColor.red.cgColor
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         if let field = textField as? RoundTextField {
-            if textField == txt_expDate{
-                picker.onDateSelected = { (month: Int, year: Int) in
-                    self.txt_expDate.text = "\(String(format: "%02d", month))/\(String(year))" }
-            }else if textField == txt_cardNumber{
+            
+            if textField == txt_cardNumber{
                 
                 // MARK:- CARD NAME & CARD VALIDATER CHECK
                 let card_type = CreditCardValidator(txt_cardNumber.text ?? "")
@@ -300,11 +293,19 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                     txt_cardNumber.text! = ""
                     let a = "Card is not valid"
                     self.showAlert(withMsg: a, withOKbtn: true)
+                
                 }
+                btn_cardNumber.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
             }
-            field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
-            
-            
+            else if textField == txt_expDate{
+                picker.onDateSelected = { (month: Int, year: Int) in
+                    self.txt_expDate.text = "\(String(format: "%02d", month))/\(String(year))" }
+                field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
+            }
+            else
+            {
+                field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
+            }
         }
     }
 }

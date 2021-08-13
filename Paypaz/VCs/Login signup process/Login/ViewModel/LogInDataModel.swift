@@ -18,6 +18,7 @@ class LogInDataModel: NSObject
 {
     weak var delegate: LogInDataModelDelegate?
     let sharedInstance = Connection()
+    var phoneCode = ""
     var email = ""
     var password = ""
     var parameter : Parameters = [:]
@@ -34,7 +35,7 @@ class LogInDataModel: NSObject
         let parameter : Parameters = [
             "emailORphone":email ,
             "password":password,
-            "phoneCode":UserDefaults.standard.getPhoneCode(),
+            "phoneCode":phoneCode,
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude(),
             "deviceType":"ios",

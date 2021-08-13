@@ -121,7 +121,7 @@ extension SideDrawerListVC : LogOutDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            _ = self.pushToVC("LoginVC")
+            _ = self.pushToVC("LoginVC",animated:false)
             Helper.clearUserDataAndSignOut()
         }
         else

@@ -35,20 +35,20 @@ class ContactUsVC : CustomViewController {
     }
     @IBAction func btn_Submit(_ sender:UIButton)
     {
-        let email = txt_Email.text?.trimmingCharacters(in: .whitespaces)
-        if email == ""{
-            self.showAlert(withMsg: "Please enter your email id", withOKbtn: true)
+        if txt_Email.text?.trim().count == 0{
+            view.makeToast("Please enter your email id")
         }
-        else if txt_Email.text?.trim().count == 0{
-            self.showAlert(withMsg: "Please Enter Valid Email Id", withOKbtn: true)
+        else if Helper.isEmailValid(email: txt_Email.text!) == false
+        {
+            view.makeToast("Please enter valid email id")
         }
         else if txt_Subject.text?.trim().count == 0
         {
-            self.showAlert(withMsg: "Please Enter Subject", withOKbtn: true)
+            view.makeToast("Please enter subject")
         }
         else if txt_Message.text.trim().count == 0
         {
-            self.showAlert(withMsg: "Please Enter Message", withOKbtn: true)
+            view.makeToast("please enter message")
         }
         else
         {
@@ -64,11 +64,13 @@ extension ContactUsVC : ContactUsDataModelDelegate
 {
     func didRecieveDataUpdate(data: SuccessModel)
     {
-        print("ContactUsModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.navigationController?.popViewController(animated: false)
+            view.makeToast(data.message ?? "")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.navigationController?.popViewController(animated: false)
+            }
         }
         else
         {

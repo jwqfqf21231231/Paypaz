@@ -31,8 +31,6 @@ class Helper : NSObject
         let userDefaults = UserDefaults.standard
         userDefaults.removeObject(forKey: "userID")
         userDefaults.removeObject(forKey: "registerToken")
-        userDefaults.removeObject(forKey: "latitude")
-        userDefaults.removeObject(forKey: "longitude")
         userDefaults.removeObject(forKey: "email")
         userDefaults.removeObject(forKey: "phoneNo")
         userDefaults.removeObject(forKey: "phoneCode")

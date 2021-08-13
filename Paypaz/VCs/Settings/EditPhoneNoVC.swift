@@ -19,6 +19,8 @@ class EditPhoneNoVC: UIViewController {
     var textStr = ""
     var phoneNo = ""
     var placeHolderText = ""
+    var apiDailCode = "91"
+
     private let dataSource = EditPhoneNoDataModel()
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -33,13 +35,14 @@ class EditPhoneNoVC: UIViewController {
     @IBAction func selectPhoneNoCode()
     {
         guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }
-        listVC.countryID = {[weak self] (dial_code,name,code) in
+        listVC.countryID = {[weak self] (dial_code,name,code,dialCode) in
             guard  let self = self else {
                 return
             }
             self.country_code = code
-            self.phone_code = dial_code
-            self.code_btn.setTitle(dial_code, for: .normal)
+            self.phone_code = dialCode
+            self.apiDailCode = dial_code
+            self.code_btn.setTitle(dialCode, for: .normal)
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
             self.code_btn.imageView?.contentMode = .scaleAspectFill
             self.code_btn.imageView?.layer.cornerRadius = 2
@@ -75,15 +78,15 @@ class EditPhoneNoVC: UIViewController {
     @IBAction func btn_Save(_ sender:UIButton) {
         UserDefaults.standard.setPhoneCode(value: phone_code)
         UserDefaults.standard.setCountryCode(value: country_code)
-        if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        if txt_PhoneNo.text?.trim().count == 0 || txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
         {
-            view.makeToast("Please Enter Valid Phone Number")
+            view.makeToast("Please Enter Valid Mobile Number")
         }
         else
         {
             Connection.svprogressHudShow(view: self)
             dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
-            dataSource.phoneCode = phone_code
+            dataSource.phoneCode = apiDailCode 
             dataSource.changePhoneNumber()
         }
     }
@@ -167,7 +170,7 @@ extension EditPhoneNoVC : EditPhoneNoDataModelDelegate
         if data.success == 1
         {
             if let vc = self.pushVC("OTPVerificationVC") as? OTPVerificationVC{
-                vc.doChangePassword = true
+                vc.doChangePhoneNumber = true
                 vc.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
             }
         }

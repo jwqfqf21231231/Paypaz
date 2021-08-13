@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import GooglePlaces
+
 class CreateProfileVC  : CustomViewController {
     
     private let dataSource = CreateProfileDataModel()
@@ -77,7 +79,23 @@ class CreateProfileVC  : CustomViewController {
         self.txt_State.delegate     = self
         self.txtView_Address.delegate = self
     }
-    
+    @IBAction func btn_ChooseLocation(_ sender:UIButton)
+    {
+        self.view.endEditing(true)
+        let placePicker = GMSAutocompleteViewController()
+        if #available(iOS 13.0, *) {
+            placePicker.primaryTextColor = UIColor.label
+            placePicker.secondaryTextColor = UIColor.secondaryLabel
+            placePicker.tableCellSeparatorColor = UIColor.separator
+            placePicker.tableCellBackgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        placePicker.modalPresentationStyle = .fullScreen
+        placePicker.delegate = self
+        self.present(placePicker, animated: true, completion: nil)
+    }
     // MARK: - --- Action ----
     
     @IBAction func btn_Save(_ sender:UIButton) {
@@ -134,6 +152,35 @@ class CreateProfileVC  : CustomViewController {
             self.images["identity_img"] = img
             self.picSelected = true
         }
+    }
+}
+extension CreateProfileVC: GMSAutocompleteViewControllerDelegate{
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        print("Place name: \(place.name ?? "")")
+        print("Place address: \(place.formattedAddress ?? "")")
+        self.txtView_Address.text = place.name ?? ""
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 extension CreateProfileVC : CreateProfileDataModelDelegate

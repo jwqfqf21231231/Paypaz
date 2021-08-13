@@ -11,7 +11,7 @@ import Toast_Swift
 class OTPVerificationVC : CustomViewController {
     var doForgotPasscode : Bool?
     var doForgotPassword : Bool?
-    var doChangePassword : Bool?
+    var doChangePhoneNumber : Bool?
     private let dataSource = OTPVerificationDataModel()
     private let dataSource1 = EditPhoneNoDataModel()
     // MARK:- ---
@@ -68,7 +68,7 @@ class OTPVerificationVC : CustomViewController {
                 lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
             }
         }
-        else if doChangePassword ?? false
+        else if doChangePhoneNumber ?? false
         {
             lbl_Title.text = "OTP Verification"
             lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + phoneNumber
@@ -82,7 +82,7 @@ class OTPVerificationVC : CustomViewController {
     
     // MARK:- --- Action ----
     @IBAction func btn_Resend(_ sender:UIButton) {
-        if doChangePassword ?? false
+        if doChangePhoneNumber ?? false
         {
             Connection.svprogressHudShow(view: self)
             dataSource1.phoneNumber = phoneNumber
@@ -116,7 +116,7 @@ class OTPVerificationVC : CustomViewController {
                 dataSource.forgotPasscodeOTPVerify()
                 
             }
-            else if self.doChangePassword ?? false
+            else if self.doChangePhoneNumber ?? false
             {
                 Connection.svprogressHudShow(view: self)
                 dataSource.phoneNumber = phoneNumber

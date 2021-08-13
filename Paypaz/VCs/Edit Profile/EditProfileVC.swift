@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SDWebImage
+import GooglePlaces
+
 class EditProfileVC: CustomViewController {
     //Here i am using CreateProfileDataModel which you can find it in CreateProfile
     //Here i am using UserDetailsDataModel which you can find it in Side Drawer
@@ -50,6 +52,23 @@ class EditProfileVC: CustomViewController {
         datePicker.datePickerMode = .date
         txt_DOB.inputView=datePicker
         txt_DOB.inputAccessoryView=createToolBar()
+    }
+    @IBAction func btn_ChooseLocation(_ sender:UIButton)
+    {
+        self.view.endEditing(true)
+        let placePicker = GMSAutocompleteViewController()
+        if #available(iOS 13.0, *) {
+            placePicker.primaryTextColor = UIColor.label
+            placePicker.secondaryTextColor = UIColor.secondaryLabel
+            placePicker.tableCellSeparatorColor = UIColor.separator
+            placePicker.tableCellBackgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        placePicker.modalPresentationStyle = .fullScreen
+        placePicker.delegate = self
+        self.present(placePicker, animated: true, completion: nil)
     }
     @objc func donePressed()
     {
@@ -107,7 +126,7 @@ class EditProfileVC: CustomViewController {
         else if txt_State.text?.trim().count == 0{
             view.makeToast("Please enter state")
         }
-        else if txtView_Address.text == ""
+        else if txtView_Address.text.trim().count == 0
         {
             view.makeToast("Please enter address")
         }
@@ -140,6 +159,35 @@ class EditProfileVC: CustomViewController {
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
         
+    }
+}
+extension EditProfileVC: GMSAutocompleteViewControllerDelegate{
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        print("Place name: \(place.name ?? "")")
+        print("Place address: \(place.formattedAddress ?? "")")
+        self.txtView_Address.text = place.name ?? ""
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 extension EditProfileVC : UserDetailsDataModelDelegate

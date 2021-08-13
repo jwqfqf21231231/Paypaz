@@ -18,6 +18,7 @@ class SignUpDataModel: NSObject
 {
     weak var delegate: SignUpDataModelDelegate?
     let sharedInstance = Connection()
+    var phoneCode = ""
     var email = ""
     var password = ""
     var phoneNumber = ""
@@ -33,7 +34,7 @@ class SignUpDataModel: NSObject
         let parameter : Parameters = [
             "phoneNumber":phoneNumber,
             "email":email ,
-            "phoneCode":UserDefaults.standard.getPhoneCode(),
+            "phoneCode":phoneCode,
             "password":password,
             "deviceToken":deviceToken,
             "deviceType":"ios",
