@@ -69,11 +69,6 @@ class ContactsPermission: UIViewController {
 //                    self.tablev.reloadData()
 //                }
             })
-        for i in arrfname
-        {
-            print(i)
-        }
-        
        /* var contacts: [CNContact] = {
                 let contactStore = CNContactStore()
                 let keysToFetch: [CNKeyDescriptor] = [

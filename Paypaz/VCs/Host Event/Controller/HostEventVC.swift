@@ -107,6 +107,7 @@ class HostEventVC : CustomViewController {
     //MARK:- ---- View Life Cycle ---
     override func viewDidLoad() {
         super.viewDidLoad()
+     
         setTitle()
         if self.eventID != ""
         {
@@ -130,6 +131,17 @@ class HostEventVC : CustomViewController {
         self.view_addNewBtn.isHidden = true
         self.tableView_ProductsHeight.constant = 0.0
         dataSource.isEdit = self.isEdit
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchedContactsInfo(notification:)), name: Notification.Name("MessageReceived"), object: nil)
+    }
+    @objc func fetchedContactsInfo(notification:Notification)
+    {
+        if let contactInfo: ContactInfo = notification.object as? ContactInfo {
+            let contactNames = contactInfo.firstName
+            print(contactNames ?? "")
+        }
+        
     }
     private func setTitle()
     {

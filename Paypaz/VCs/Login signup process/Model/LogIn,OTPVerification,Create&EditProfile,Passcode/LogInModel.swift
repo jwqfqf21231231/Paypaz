@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 // MARK: - LogInModel
 struct LogInModel: Codable {
     let success: Int?
@@ -36,4 +38,13 @@ struct DataClass2: Codable {
 }
 struct CityCodable:Codable {
     var id, name :String?
+}
+
+
+struct ContactInfo{
+    var firstName:String?
+    var lastName:String?
+    var coutryCode:String?
+    var phoneNumber:String?
+    var profilePic:UIImage?
 }
