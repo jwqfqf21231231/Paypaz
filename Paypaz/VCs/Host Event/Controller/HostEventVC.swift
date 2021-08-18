@@ -92,7 +92,6 @@ class HostEventVC : CustomViewController {
             tableView_Products.delegate   = self
         }
     }
-    @IBOutlet weak var tableView_ProductsHeight : NSLayoutConstraint!
     @IBOutlet weak var tableView_Members        : UITableView!{
         didSet{
             tableView_Members.dataSource = self
@@ -129,7 +128,6 @@ class HostEventVC : CustomViewController {
         hideKeyboardWhenTappedArround()
         dataSource.delegate = self
         self.view_addNewBtn.isHidden = true
-        self.tableView_ProductsHeight.constant = 0.0
         dataSource.isEdit = self.isEdit
         
         
@@ -327,9 +325,7 @@ class HostEventVC : CustomViewController {
         super.viewDidLayoutSubviews()
         
         self.tableView_MembersHeight.constant = self.tableView_Members.contentSize.height
-        if self.btn_clickToAdd.isHidden {
-            self.tableView_ProductsHeight.constant = self.tableView_Products.contentSize.height
-        }
+      
     }
     //MARK:- ---- Action ---
     
@@ -399,7 +395,7 @@ class HostEventVC : CustomViewController {
                 self.btn_clickToAdd.isHidden = true
                 self.view_addNewBtn.isHidden = false
                 DispatchQueue.main.async {
-                    self.tableView_ProductsHeight.constant = CGFloat(self.productIDArr.count * 60)
+                    
                     self.tableView_Products.reloadData()
                 }
             }
@@ -645,7 +641,6 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             products = data.data
-            self.tableView_ProductsHeight.constant = CGFloat((self.productIDArr.count) * 60)
             DispatchQueue.main.async {
                 self.btn_clickToAdd.isHidden = true
                 self.view_addNewBtn.isHidden = false

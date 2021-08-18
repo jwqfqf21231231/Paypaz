@@ -26,6 +26,8 @@
 		04C7D73226B3D59800747777 /* CountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C7D73126B3D59800747777 /* CountryCodes.json */; };
 		04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */; };
 		04FD51A726B8FBC200F4CCA2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD51A626B8FBC200F4CCA2 /* Helper.swift */; };
+		04FFC95226CD263800E3E171 /* AddEventProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC95126CD263800E3E171 /* AddEventProductsVC.swift */; };
+		04FFC95726CD3A9D00E3E171 /* InviteMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC95626CD3A9D00E3E171 /* InviteMembersVC.swift */; };
 		0AD485829E4F7A0568A05ACF /* Pods_Paypaz_PaypazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */; };
 		0C00BFDA268EE03E00BC3267 /* UserDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */; };
 		0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */; };
@@ -214,6 +216,8 @@
 		04C7D73126B3D59800747777 /* CountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
 		04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyEventDataModel.swift; sourceTree = "<group>"; };
 		04FD51A626B8FBC200F4CCA2 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		04FFC95126CD263800E3E171 /* AddEventProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventProductsVC.swift; sourceTree = "<group>"; };
+		04FFC95626CD3A9D00E3E171 /* InviteMembersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMembersVC.swift; sourceTree = "<group>"; };
 		076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaypazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C00BFD9268EE03E00BC3267 /* UserDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsDataModel.swift; sourceTree = "<group>"; };
 		0C00BFDE268EE11C00BC3267 /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
@@ -628,6 +632,8 @@
 			children = (
 				4488D7A0262961E1006416DF /* HostEventVC.swift */,
 				44509EE226317F30000B19F3 /* HostEventVC+Extensions.swift */,
+				04FFC95126CD263800E3E171 /* AddEventProductsVC.swift */,
+				04FFC95626CD3A9D00E3E171 /* InviteMembersVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1850,6 +1856,7 @@
 				0C8EC61C2697299E00D51F60 /* ProductDetailsDataModel.swift in Sources */,
 				44A5648C262F05A700FCF3D5 /* ProductTableCell.swift in Sources */,
 				0CE747972696E6DB00D1121B /* MyPostedEventModel.swift in Sources */,
+				04FFC95726CD3A9D00E3E171 /* InviteMembersVC.swift in Sources */,
 				44F76678263AC15B007F78CB /* MoneyAddedSuccessPopupVC.swift in Sources */,
 				445433CB262D56CD00443AE1 /* ForgotPasswordVC.swift in Sources */,
 				0C388B0D268F4591008AED6F /* AddProductModel.swift in Sources */,
@@ -1863,6 +1870,7 @@
 				0C5B97F7268DA72B00CBAC41 /* ResendOTPModel.swift in Sources */,
 				445C77A42637E57D00AD4DF3 /* FavouritesEventsListVC.swift in Sources */,
 				44509ED3263133B8000B19F3 /* MorePeopleCell.swift in Sources */,
+				04FFC95226CD263800E3E171 /* AddEventProductsVC.swift in Sources */,
 				0437245926AA86C900840D15 /* CardExtension.swift in Sources */,
 				0447C91126C3DA240030FB7F /* LogOutDataModel.swift in Sources */,
 				445C77A12637DD6F00AD4DF3 /* MyEventsCell.swift in Sources */,

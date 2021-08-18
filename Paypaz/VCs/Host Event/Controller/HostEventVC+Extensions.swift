@@ -72,7 +72,6 @@ extension HostEventVC : PopupDelegate {
 extension HostEventVC : AddProductDelegate {
     
     func isAddedProduct() {
-        self.tableView_ProductsHeight.constant = self.tableView_Products.contentSize.height
         self.view.layoutIfNeeded()
         self.btn_clickToAdd.isHidden = true
         self.view_addNewBtn.isHidden = false

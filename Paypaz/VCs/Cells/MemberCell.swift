@@ -11,7 +11,9 @@ import UIKit
 class MemberCell : UITableViewCell {
 
     @IBOutlet weak var btn_tick : UIButton!
-    
+    @IBOutlet weak var contactName_lbl : UILabel!
+    @IBOutlet weak var contactNo_lbl : UILabel!
+    @IBOutlet weak var contactPic_img : UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
