@@ -22,6 +22,7 @@ class AddProductDataModel: NSObject
     weak var delegate : AddProductDataModelDelegate?
     weak var delegate2 : EditProductDataModelDelegate?
     let sharedInstance = Connection()
+    var eventID = ""
     var productName = ""
     var productPrice = ""
     var productQuantity = ""
@@ -35,11 +36,15 @@ class AddProductDataModel: NSObject
         let url =  APIList().getUrlString(url: .ADDPRODUCT)
         let parameter : [String:String] = [
             "name" : productName,
-            "description" : productDescription,
             "price" : productPrice,
-            "quantity" : productQuantity
+            "description" : productDescription,
+            "quantity" : productQuantity,
+            "eventID" : eventID
         ]
-        sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: nil,success:
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: header,success:
                                         {
                                             (JSON) in
                                             let  result :Data? = JSON

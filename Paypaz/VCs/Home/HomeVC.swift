@@ -38,6 +38,6 @@ class HomeVC : CustomViewController {
        _ = self.pushToVC("PaymentTypeVC")
     }
     @IBAction func btn_Event(_ sender:UIButton) {
-        _ = self.pushToVC("EventVC")
+        _ = self.pushToVC("HostEventVC")
     }
 }

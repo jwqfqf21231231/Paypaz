@@ -21,6 +21,7 @@ class HostEventDataModel: NSObject
     let sharedInstance = Connection()
     var typeId = ""
     var name = ""
+    var eventQuantity = ""
     var location = ""
     var price = ""
     var startDate = ""
@@ -34,6 +35,7 @@ class HostEventDataModel: NSObject
     var products = ""
     var eventImg : UIImage?
     var eventID = ""
+    var eventDescription = ""
     
     var url = ""
     var parameter = [String:String]()
@@ -44,17 +46,13 @@ class HostEventDataModel: NSObject
         parameter = [
             "typeID" : typeId,
             "name" : name,
+            "description" : eventDescription,
             "location" : location,
             "price" : price,
+            "quantity" : eventQuantity,
             "startDate" : startDate,
             "endDate" : endDate,
-            "startTime" : startTime,
-            "endTime" : endTime,
-            "ispublic" : isPublic,
-            "isinviteMember" : isInviteMember,
             "paymentType" : paymentType,
-            "memberID" : memberID,
-            "products" : products,
             "latitude" : UserDefaults.standard.getLatitude(),
             "longitude" : UserDefaults.standard.getLatitude()
         ]

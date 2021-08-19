@@ -12,6 +12,7 @@ class AddEventProductsVC: CustomViewController {
     
     var productIDArr = [String]()
     var productArr = [[String:Any]]()
+    var eventID = ""
     @IBOutlet weak var tableView_Products       : UITableView!{
         didSet{
             tableView_Products.dataSource = self
@@ -23,11 +24,21 @@ class AddEventProductsVC: CustomViewController {
         
         // Do any additional setup after loading the view.
     }
+    @IBAction func btn_Back(_ sender:UIButton)
+    {
+        for vc in self.navigationController!.viewControllers as Array {
+            if vc.isKind(of:HomeVC.self) {
+                self.navigationController!.popToViewController(vc, animated: true)
+                break
+            }
+        }
+        
+    }
     @IBAction func btn_addProducts(_ sender:UIButton)
     {
         if let addProduct = self.presentPopUpVC("AddProductVC", animated: false) as? AddProductVC {
             //addProduct.delegate = self
-            
+            addProduct.eventID = eventID
             addProduct.callback = { [self] item in
                 self.productArr.append(["image" : item["productImage"]!,"price" : item["productPrice"]!,"name" : item["productName"]!,"description" : item["productDescription"]!,"fromServer" : false])
                 
@@ -61,7 +72,7 @@ class AddEventProductsVC: CustomViewController {
          }*/
     }
     @IBAction func btn_Continue(){
-        
+        _ = self.pushVC("InviteMembersVC") as? InviteMembersVC
     }
     
 }
@@ -89,5 +100,38 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         cell.lbl_ProductName.text = productArr[indexPath.row]["name"] as? String
         cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
         return cell
+    }
+}
+extension AddEventProductsVC : MyPostedProductsDataModelDelegate
+{
+    func didRecieveDataUpdate(data: MyPostedProductsModel)
+    {
+        print("MyPostedProductsModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            //products = data.data
+            DispatchQueue.main.async {
+                //self.tableView_Products.reloadData()
+            }
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message , withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError2(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.view.makeToast("No Products Data", duration: 3, position: .bottom)
+            //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
     }
 }

@@ -17,6 +17,7 @@ class AddProductVC : CustomViewController {
     var callback : DataCallback?
     //var createdProductData : ((_ productImage:UIImage,_ price:String,_ name:String,_ description:String) -> Void)?
     var isEdit : Bool?
+    var eventID = ""
     var productID = ""
     var pickedImage : UIImage?
     var fontCamera  = false
@@ -61,6 +62,7 @@ class AddProductVC : CustomViewController {
     {
         self.txt_ProductName.delegate = self
         self.txt_ProductPrice.delegate = self
+        self.txt_ProductQuantity.delegate = self
         self.txt_Description.delegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +114,7 @@ class AddProductVC : CustomViewController {
             dataSource.productPrice = txt_ProductPrice.text ?? ""
             dataSource.productQuantity = txt_ProductQuantity.text ?? ""
             dataSource.productDescription = txt_Description.text ?? ""
+            dataSource.eventID = eventID
             if isEdit ?? false
             {
                 dataSource.productID = self.productID

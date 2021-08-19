@@ -14,15 +14,6 @@ class HostEventVC : CustomViewController {
     var isEdit : Bool? //The value for isEdit comes from MyEventsListVC+Extensions (60th line)
     var eventID = ""
     private let dataSource2 = MyPostedEventDataModel()
-    var products = [MyProducts](){
-        didSet{
-            for i in 0..<self.products.count
-            {
-                self.productIDArr.append(self.products[i].id)
-                self.productArr.append(["image" : products[i].image,"price" : products[i].price,"name" : products[i].name,"description" : products[i].datumDescription,"fromServer" : true])
-            }
-        }
-    }
     
     var pickedImage : UIImage?
     var fontCamera  = false
@@ -51,10 +42,7 @@ class HostEventVC : CustomViewController {
             }
         }
     }
-    var isPublicStatus = ""
-    var isInviteMemberStatus = ""
-    var productIDArr = [String]()
-    var productArr = [[String:Any]]()
+   
     weak var delegate : PopupDelegate?
     private let dataSource = HostEventDataModel()
     
@@ -68,10 +56,10 @@ class HostEventVC : CustomViewController {
     @IBOutlet weak var view_Dashed : UIView!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_EventPic : UIImageView!
-    @IBOutlet weak var txt_EventName : UITextField!
+    @IBOutlet weak var txt_EventName : RoundTextField!
+    @IBOutlet weak var txt_EventQuantity : RoundTextField!
     @IBOutlet weak var btn_ChooseLocation : UIButton!
-    @IBOutlet weak var btn_Price : UIButton!
-    @IBOutlet weak var txt_Price : UITextField!
+    @IBOutlet weak var txt_Price : RoundTextField!
     @IBOutlet weak var btn_StartDate : UIButton!
     @IBOutlet weak var txt_StartDate : UITextField!
     @IBOutlet weak var btn_EndDate : UIButton!
@@ -80,25 +68,23 @@ class HostEventVC : CustomViewController {
     @IBOutlet weak var txt_StartTime : UITextField!
     @IBOutlet weak var btn_EndTime : UIButton!
     @IBOutlet weak var txt_EndTime : UITextField!
-    @IBOutlet weak var btn_EventTitle           : UIButton!
-    @IBOutlet weak var isPublic : UISwitch!
-    @IBOutlet weak var isInviteMember : UISwitch!
-    @IBOutlet weak var view_addNewBtn           : UIView!
+    @IBOutlet weak var btn_EventTitle : UIButton!
     @IBOutlet weak var btn_CreateEvent : UIButton!
-    @IBOutlet weak var btn_Paypaz               : RoundButton!
-    @IBOutlet weak var btn_bankAcc              : RoundButton!
+    @IBOutlet weak var btn_Paypaz : RoundButton!
+    @IBOutlet weak var btn_bankAcc : RoundButton!
+    @IBOutlet weak var txt_Description : RoundTextView!
     
     
     //MARK:- ---- View Life Cycle ---
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.paymentType = "0"
+        self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         setTitle()
         if self.eventID != ""
         {
             Connection.svprogressHudShow(view: self)
             dataSource2.delegate = self
-            dataSource2.delegate2 = self
             dataSource2.eventID = self.eventID
             dataSource2.getEvent()
             dataSource2.getProducts()
@@ -108,25 +94,11 @@ class HostEventVC : CustomViewController {
         self.txt_EndDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
         self.txt_StartTime.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
         self.txt_EndTime.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
-        self.txt_Price.addTarget(self, action: #selector(givePrice), for: .editingDidBegin)
-        self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
-        self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         hideKeyboardWhenTappedArround()
         dataSource.delegate = self
-        self.view_addNewBtn.isHidden = true
         dataSource.isEdit = self.isEdit
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchedContactsInfo(notification:)), name: Notification.Name("MessageReceived"), object: nil)
     }
-    @objc func fetchedContactsInfo(notification:Notification)
-    {
-        if let contactInfo: ContactInfo = notification.object as? ContactInfo {
-            let contactNames = contactInfo.firstName
-            print(contactNames ?? "")
-        }
-        
-    }
+   
     private func setTitle()
     {
         if isEdit ?? false
@@ -140,10 +112,7 @@ class HostEventVC : CustomViewController {
             btn_CreateEvent.setTitle("Create Event", for: .normal)
         }
     }
-    @objc func givePrice()
-    {
-        self.btn_Price.setTitle("", for: .normal)
-    }
+   
     @objc func donePressed()
     {
         let dateFormatter=DateFormatter()
@@ -155,8 +124,8 @@ class HostEventVC : CustomViewController {
             
             let dateString = dateFormatter.string(from: picker.date)
             self.startDate = dateString
-            //self.btn_StartDate.setTitleColor(.black, for: .normal)
             self.btn_StartDate.setTitle(dateString, for: .normal)
+            self.btn_StartDate.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
             self.view.endEditing(true)
         case 1:
             dateFormatter.dateStyle = .short
@@ -164,26 +133,30 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: picker.date)
             self.endDate = dateString
-            //self.btn_EndDate.setTitleColor(.black, for: .normal)
             self.btn_EndDate.setTitle(dateString, for: .normal)
+            self.btn_EndDate.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
             self.view.endEditing(true)
         case 2:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
-            dateFormatter.dateFormat = "hh:mm a"
+            dateFormatter.dateFormat = "hh:mm:ss"
             let dateString = dateFormatter.string(from:picker.date)
             self.startTime = dateString
-            //self.btn_StartTime.setTitleColor(.black, for: .normal)
-            self.btn_StartTime.setTitle(dateString, for: .normal)
+            dateFormatter.dateFormat = "hh:mm"
+            let btnTitle = dateFormatter.string(from: picker.date)
+            self.btn_StartTime.setTitle(btnTitle, for: .normal)
+            self.btn_StartTime.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
             self.view.endEditing(true)
         default:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
-            dateFormatter.dateFormat = "hh:mm a"
+            dateFormatter.dateFormat = "hh:mm:ss"
             let dateString = dateFormatter.string(from:picker.date)
             self.endTime = dateString
-            //self.btn_EndTime.setTitleColor(.black, for: .normal)
-            self.btn_EndTime.setTitle(dateString, for: .normal)
+            dateFormatter.dateFormat = "hh:mm"
+            let btnTitle = dateFormatter.string(from: picker.date)
+            self.btn_EndTime.setTitle(btnTitle, for: .normal)
+            self.btn_EndTime.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
             self.view.endEditing(true)
         }
         
@@ -316,6 +289,7 @@ class HostEventVC : CustomViewController {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChooseEventTypeVC") as? ChooseEventTypeVC
         vc?.selectedEventData = { [weak self] (eventName,selectedID) in
             guard let self = self else {return}
+            self.btn_EventTitle.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
             self.btn_EventTitle.setTitle(eventName, for: .normal)
             self.selectedEventId = selectedID
         }
@@ -338,44 +312,59 @@ class HostEventVC : CustomViewController {
         self.btn_Paypaz.setImage(UIImage(named: "paypaz_green"), for: .normal)
         self.btn_bankAcc.setImage(UIImage(named: "green_account"), for: .normal)
     }
-   
+    func convertToUTC(dateToConvert:String) -> String {
+         let formatter = DateFormatter()
+         formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+         let convertedDate = formatter.date(from: dateToConvert)
+         formatter.timeZone = TimeZone(identifier: "UTC")
+         return formatter.string(from: convertedDate!)
+            
+        }
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
         
         if(img_EventPic.image == nil)
         {
-            showAlert(withMsg: "Give Event Image", withOKbtn: true)
+            self.view.makeToast("Add Event Image")
         }
-        else if(txt_EventName.text == "")
+        else if(txt_EventName.text?.trim().count == 0)
         {
-            showAlert(withMsg: "Enter Event Name", withOKbtn: true)
+            self.view.makeToast("Enter Event Name")
         }
-        else if(selectedEventId == "")
+        else if(selectedEventId?.trim().count == 0)
         {
-            showAlert(withMsg: "Select Event Type", withOKbtn: true)
+            self.view.makeToast("Select Event Type")
         }
-        else if(txt_Price.text == "")
+        else if(txt_Price.text?.trim().count == 0)
         {
-            showAlert(withMsg: "Enter Price", withOKbtn: true)
+            self.view.makeToast("Enter Price")
         }
-        else if(location == "")
+        else if(txt_EventQuantity.text?.trim().count == 0)
         {
-            showAlert(withMsg: "Add Location", withOKbtn: true)
+            self.view.makeToast("Enter Event Quantity")
         }
-        else if(startDate == "")
+        else if(location.trim().count == 0)
         {
-            showAlert(withMsg: "Enter Start Date", withOKbtn: true)
+            self.view.makeToast("Add Location")
         }
-        else if(endDate == "")
+        else if(startDate.trim().count == 0)
         {
-            showAlert(withMsg: "Enter End Date", withOKbtn: true)
+            self.view.makeToast("Enter Start Date")
         }
-        else if(startTime == "")
+        else if(endDate.trim().count == 0)
         {
-            showAlert(withMsg: "Enter Start Time", withOKbtn: true)
+            self.view.makeToast("Enter End Date")
         }
-        else if(endTime == "")
+        else if(startTime.trim().count == 0)
         {
-            showAlert(withMsg: "Enter End Time", withOKbtn: true)
+            self.view.makeToast("Enter Start Time")
+        }
+        else if(endTime.trim().count == 0)
+        {
+            self.view.makeToast("Enter End Time")
+        }
+        else if(txt_Description.text.trim().count == 0)
+        {
+            self.view.makeToast("Enter Description")
         }
         else
         {
@@ -384,29 +373,20 @@ class HostEventVC : CustomViewController {
             dataSource.name = txt_EventName.text ?? ""
             dataSource.typeId = selectedEventId ?? ""
             dataSource.price = txt_Price.text ?? ""
+            dataSource.eventQuantity = txt_EventQuantity.text ?? ""
             dataSource.location = self.location
-            dataSource.startDate = startDate
-            dataSource.endDate = endDate
-            dataSource.startTime = startTime
-            dataSource.endTime = endTime
+            var sD = startDate + " " + startTime
+            var eD = endDate + " " + endTime
+            sD = convertToUTC(dateToConvert: sD)
+            eD = convertToUTC(dateToConvert: eD)
+            dataSource.startDate = sD
+            dataSource.endDate = eD
+            dataSource.eventDescription = txt_Description.text ?? ""
             dataSource.paymentType = paymentType ?? ""
-            dataSource.isInviteMember = isInviteMemberStatus
-            dataSource.eventID = self.eventID
-            var products:String = ""
-            for i in 0..<productIDArr.count
-            {
-                if(i == productIDArr.count-1)
-                {
-                    products += "\(productIDArr[i])"
-                }
-                else
-                {
-                    products += "\(productIDArr[i]),"
-                }
-            }
-            dataSource.products = products
+           
             if isEdit ?? false
             {
+                dataSource.eventID = self.eventID
                 dataSource.updateEvent()
             }
             else
@@ -425,6 +405,7 @@ extension HostEventVC: GMSAutocompleteViewControllerDelegate{
         //print("Place attributions: \(place.attributions!)")
         self.location = place.name ?? ""
         self.btn_ChooseLocation.setTitle(place.name ?? "", for: .normal)
+        self.btn_ChooseLocation.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
         // let loc1 = (place.name ?? "")
         //let loc2 = (place.formattedAddress ?? "")
         //self.location_txt.text = loc1
@@ -471,11 +452,15 @@ extension HostEventVC : HostEventDataModelDelegate
             }
             else
             {
-                eventID = data.data?.id ?? ""
-                if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                    popup.selectedPopupType = .eventCreatedSuccess
-                    popup.delegate = self
+                _ = self.pushVC("AddEventProductsVC")
+                if let vc = self.pushVC("AddEventProductsVC") as? AddEventProductsVC{
+                    vc.eventID = data.data?.id ?? ""
                 }
+//                eventID = data.data?.id ?? ""
+//                if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+//                    popup.selectedPopupType = .eventCreatedSuccess
+//                    popup.delegate = self
+//                }
             }
         }
         else
@@ -507,7 +492,6 @@ extension HostEventVC : MyPostedEventDataModelDelegate
         {
             DispatchQueue.main.async {
                 self.txt_EventName.text = data.data?.name
-                self.btn_Price.setTitle("", for: .normal)
                 self.txt_Price.text = data.data?.price
                 switch data.data?.typeID
                 {
@@ -542,10 +526,6 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
                 self.img_EventPic.sd_setImage(with: URL(string: url+(data.data?.image ?? "")), placeholderImage: UIImage(named: "profile_c"))
                 self.view_Dashed.isHidden = true
-                self.isPublicStatus = data.data?.ispublic ?? ""
-                self.isPublicStatus == "1" ? self.isPublic.setOn(true, animated: false) : self.isPublic.setOn(false, animated: false)
-                self.isInviteMemberStatus = data.data?.isinviteMember ?? ""
-                self.isInviteMemberStatus == "1" ? self.isInviteMember.setOn(true, animated: false) : self.isInviteMember.setOn(false, animated: false)
                 self.paymentType = data.data?.paymentType ?? " "
             }
         }
@@ -569,36 +549,3 @@ extension HostEventVC : MyPostedEventDataModelDelegate
     }
 }
 
-extension HostEventVC : MyPostedProductsDataModelDelegate
-{
-    func didRecieveDataUpdate(data: MyPostedProductsModel)
-    {
-        print("MyPostedProductsModelData = ",data)
-        Connection.svprogressHudDismiss(view: self)
-        if data.success == 1
-        {
-            products = data.data
-            DispatchQueue.main.async {
-                //self.tableView_Products.reloadData()
-            }
-        }
-        else
-        {
-            self.showAlert(withMsg: data.message , withOKbtn: true)
-        }
-    }
-    
-    func didFailDataUpdateWithError2(error: Error)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if error.localizedDescription == "Check Internet Connection"
-        {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
-        }
-        else
-        {
-            self.view.makeToast("No Products Data", duration: 3, position: .bottom)
-            //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
-        }
-    }
-}
