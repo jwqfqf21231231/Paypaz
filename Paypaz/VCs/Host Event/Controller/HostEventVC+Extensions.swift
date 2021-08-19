@@ -69,12 +69,12 @@ extension HostEventVC : PopupDelegate {
     }
 }
 //MARK:-
-extension HostEventVC : AddProductDelegate {
-    
-    func isAddedProduct() {
-        self.view.layoutIfNeeded()
-        self.btn_clickToAdd.isHidden = true
-        self.view_addNewBtn.isHidden = false
-        
-    }
-}
+//extension HostEventVC : AddProductDelegate {
+//    
+//    func isAddedProduct() {
+//        self.view.layoutIfNeeded()
+//        self.btn_clickToAdd.isHidden = true
+//        self.view_addNewBtn.isHidden = false
+//
+//    }
+//}

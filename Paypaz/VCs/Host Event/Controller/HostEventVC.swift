@@ -85,20 +85,6 @@ class HostEventVC : CustomViewController {
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var view_addNewBtn           : UIView!
     @IBOutlet weak var btn_CreateEvent : UIButton!
-    @IBOutlet weak var btn_clickToAdd           : RoundButton!
-    @IBOutlet weak var tableView_Products       : UITableView!{
-        didSet{
-            tableView_Products.dataSource = self
-            tableView_Products.delegate   = self
-        }
-    }
-    @IBOutlet weak var tableView_Members        : UITableView!{
-        didSet{
-            tableView_Members.dataSource = self
-            tableView_Members.delegate   = self
-        }
-    }
-    @IBOutlet weak var tableView_MembersHeight  : NSLayoutConstraint!
     @IBOutlet weak var btn_Paypaz               : RoundButton!
     @IBOutlet weak var btn_bankAcc              : RoundButton!
     
@@ -106,7 +92,7 @@ class HostEventVC : CustomViewController {
     //MARK:- ---- View Life Cycle ---
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         setTitle()
         if self.eventID != ""
         {
@@ -152,32 +138,6 @@ class HostEventVC : CustomViewController {
         {
             lbl_Title.text = "Host Event"
             btn_CreateEvent.setTitle("Create Event", for: .normal)
-        }
-    }
-    @objc func onSwitchValueChange(swtch:UISwitch)
-    {
-        switch swtch.tag{
-        case 0:
-            if(swtch.isOn)
-            {
-                self.isPublicStatus = "1"
-            }
-            else
-            {
-                self.isPublicStatus = "0"
-            }
-        default:
-            if(swtch.isOn)
-            {
-                self.tableView_Members.isHidden = false
-                self.isInviteMemberStatus = "1"
-            }
-            else
-            {
-                self.tableView_Members.isHidden = true
-                self.isInviteMemberStatus = "0"
-            }
-            
         }
     }
     @objc func givePrice()
@@ -321,12 +281,6 @@ class HostEventVC : CustomViewController {
         }
         
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        self.tableView_MembersHeight.constant = self.tableView_Members.contentSize.height
-      
-    }
     //MARK:- ---- Action ---
     
     @IBAction func btn_ChooseLocation(_ sender:UIButton)
@@ -384,23 +338,7 @@ class HostEventVC : CustomViewController {
         self.btn_Paypaz.setImage(UIImage(named: "paypaz_green"), for: .normal)
         self.btn_bankAcc.setImage(UIImage(named: "green_account"), for: .normal)
     }
-    @IBAction func btn_addNewProduct(_ sender:UIButton) {
-        if let addProduct = self.presentPopUpVC("AddProductVC", animated: false) as? AddProductVC {
-            addProduct.delegate = self
-            
-            addProduct.callback = { [self] item in
-                self.productArr.append(["image" : item["productImage"]!,"price" : item["productPrice"]!,"name" : item["productName"]!,"description" : item["productDescription"]!,"fromServer" : false])
-                
-                self.productIDArr.append(item["productID"] as! String)
-                self.btn_clickToAdd.isHidden = true
-                self.view_addNewBtn.isHidden = false
-                DispatchQueue.main.async {
-                    
-                    self.tableView_Products.reloadData()
-                }
-            }
-        }
-    }
+   
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
         
         if(img_EventPic.image == nil)
@@ -452,7 +390,6 @@ class HostEventVC : CustomViewController {
             dataSource.startTime = startTime
             dataSource.endTime = endTime
             dataSource.paymentType = paymentType ?? ""
-            dataSource.isPublic = isPublicStatus
             dataSource.isInviteMember = isInviteMemberStatus
             dataSource.eventID = self.eventID
             var products:String = ""
@@ -488,11 +425,11 @@ extension HostEventVC: GMSAutocompleteViewControllerDelegate{
         //print("Place attributions: \(place.attributions!)")
         self.location = place.name ?? ""
         self.btn_ChooseLocation.setTitle(place.name ?? "", for: .normal)
-       // let loc1 = (place.name ?? "")
+        // let loc1 = (place.name ?? "")
         //let loc2 = (place.formattedAddress ?? "")
         //self.location_txt.text = loc1
         //print(self.location_txt.text)
-       // let lat = place.coordinate.latitude
+        // let lat = place.coordinate.latitude
         // self.event_latitude = lat
         //  print("Place Latitude: \(self.event_latitude)")
         //let long = place.coordinate.longitude
@@ -642,9 +579,7 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         {
             products = data.data
             DispatchQueue.main.async {
-                self.btn_clickToAdd.isHidden = true
-                self.view_addNewBtn.isHidden = false
-                self.tableView_Products.reloadData()
+                //self.tableView_Products.reloadData()
             }
         }
         else
@@ -663,7 +598,7 @@ extension HostEventVC : MyPostedProductsDataModelDelegate
         else
         {
             self.view.makeToast("No Products Data", duration: 3, position: .bottom)
-          //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+            //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

@@ -9,7 +9,9 @@
 import UIKit
 
 class InviteMembersVC: UIViewController {
-
+    
+    var isPublicStatus = ""
+    var isInviteMemberStatus = ""
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var tableView_Members        : UITableView!{
@@ -20,11 +22,40 @@ class InviteMembersVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
+        self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         tableView_Members.separatorStyle = .none
         // Do any additional setup after loading the view.
     }
+    @objc func onSwitchValueChange(swtch:UISwitch)
+    {
+        switch swtch.tag{
+        case 0:
+            if(swtch.isOn)
+            {
+                self.isPublicStatus = "1"
+            }
+            else
+            {
+                self.isPublicStatus = "0"
+            }
+        default:
+            if(swtch.isOn)
+            {
+                self.isInviteMemberStatus = "1"
+            }
+            else
+            {
+                self.isInviteMemberStatus = "0"
+            }
+            
+        }
+    }
+    @IBAction func btn_Done(_ sender:UIButton)
+    {
+        
+    }
     
-
 }
 extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
 {

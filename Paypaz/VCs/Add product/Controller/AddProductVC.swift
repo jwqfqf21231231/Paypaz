@@ -29,6 +29,7 @@ class AddProductVC : CustomViewController {
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var txt_ProductName : RoundTextField!
     @IBOutlet weak var txt_ProductPrice : RoundTextField!
+    @IBOutlet weak var txt_ProductQuantity : RoundTextField!
     @IBOutlet weak var txt_Description : RoundTextView!
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
@@ -85,19 +86,23 @@ class AddProductVC : CustomViewController {
     @IBAction func btn_Done(_ sender:UIButton) {
         if(img_ProductPic.image == nil)
         {
-            showAlert(withMsg: "Please give Product Image", withOKbtn: true)
+            self.view.makeToast("Please give Product Image")
         }
-        else if(txt_ProductName.text == "")
+        else if(txt_ProductName.text?.trim().count == 0)
         {
-            showAlert(withMsg: "Please Enter Product Name", withOKbtn: true)
+            self.view.makeToast("Please Enter Product Name")
         }
-        else if(txt_ProductPrice.text == "")
+        else if(txt_ProductPrice.text?.trim().count == 0)
         {
-            showAlert(withMsg: "Please Specify Product Price" , withOKbtn: true)
+            self.view.makeToast("Please Specify Product Price")
         }
-        else if(txt_Description.text == "")
+        else if(txt_ProductQuantity.text?.trim().count == 0)
         {
-            showAlert(withMsg: "Please give some Description about your Product", withOKbtn: true)
+            self.view.makeToast("Please Specify Product Quantity")
+        }
+        else if(txt_Description.text.trim().count == 0)
+        {
+            self.view.makeToast("Please give some Description about your Product")
         }
         else
         {
@@ -105,6 +110,7 @@ class AddProductVC : CustomViewController {
             dataSource.productPic = img_ProductPic.image
             dataSource.productName = txt_ProductName.text ?? ""
             dataSource.productPrice = txt_ProductPrice.text ?? ""
+            dataSource.productQuantity = txt_ProductQuantity.text ?? ""
             dataSource.productDescription = txt_Description.text ?? ""
             if isEdit ?? false
             {

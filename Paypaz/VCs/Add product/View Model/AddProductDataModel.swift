@@ -24,6 +24,7 @@ class AddProductDataModel: NSObject
     let sharedInstance = Connection()
     var productName = ""
     var productPrice = ""
+    var productQuantity = ""
     var productPic : UIImage?
     var productDescription = ""
     
@@ -36,6 +37,7 @@ class AddProductDataModel: NSObject
             "name" : productName,
             "description" : productDescription,
             "price" : productPrice,
+            "quantity" : productQuantity
         ]
         sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: nil,success:
                                         {
@@ -69,7 +71,8 @@ class AddProductDataModel: NSObject
             "name" : productName,
             "description" : productDescription,
             "price" : productPrice,
-            "productID" : productID
+            "productID" : productID,
+            "quantity" : productQuantity
         ]
         sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: nil,success:
                                         {
