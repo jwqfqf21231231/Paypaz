@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "3A7AEDE9-7BAC-4685-A84C-A02121555929"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "288DF0ED-5C39-4CF2-BB7C-95534C999952"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Paypaz/VCs/Host Event/Controller/InviteMembersVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "fetchContacts()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "288DF0ED-5C39-4CF2-BB7C-95534C999952 - d96d50403250c5bd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;__C.CNContact&gt;) -&gt; () in Paypaz.InviteMembersVC.fetchContacts() -&gt; ()"
+                  moduleName = "Paypaz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajay/Documents/GitHub/Paypaz/Paypaz/VCs/Host%20Event/Controller/InviteMembersVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "288DF0ED-5C39-4CF2-BB7C-95534C999952 - 206e70688620356d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.CNContact) -&gt; () in closure #1 (Swift.Array&lt;__C.CNContact&gt;) -&gt; () in Paypaz.InviteMembersVC.fetchContacts() -&gt; ()"
+                  moduleName = "Paypaz"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ajay/Documents/GitHub/Paypaz/Paypaz/VCs/Host%20Event/Controller/InviteMembersVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "218">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

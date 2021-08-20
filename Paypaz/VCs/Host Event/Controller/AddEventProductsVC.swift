@@ -13,6 +13,7 @@ class AddEventProductsVC: CustomViewController {
     var productIDArr = [String]()
     var productArr = [[String:Any]]()
     var eventID = ""
+    @IBOutlet weak var btn_Submit : UIButton!
     @IBOutlet weak var tableView_Products       : UITableView!{
         didSet{
             tableView_Products.dataSource = self
@@ -44,7 +45,9 @@ class AddEventProductsVC: CustomViewController {
                 
                 self.productIDArr.append(item["productID"] as! String)
                 DispatchQueue.main.async {
-                    
+                    btn_Submit.setTitle("Continue", for: .normal)
+                    btn_Submit.setTitleColor(.white, for: .normal)
+                    btn_Submit.backgroundColor = UIColor(named: "GreenColor")
                     self.tableView_Products.reloadData()
                 }
             }
@@ -72,7 +75,9 @@ class AddEventProductsVC: CustomViewController {
          }*/
     }
     @IBAction func btn_Continue(){
-        _ = self.pushVC("InviteMembersVC") as? InviteMembersVC
+        if let vc = self.pushVC("InviteMembersVC") as? InviteMembersVC{
+            vc.eventID = eventID
+        }
     }
     
 }

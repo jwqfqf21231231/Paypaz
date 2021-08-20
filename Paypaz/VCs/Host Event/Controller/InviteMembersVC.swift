@@ -9,12 +9,15 @@
 import UIKit
 import Contacts
 import libPhoneNumber_iOS
-class InviteMembersVC: UIViewController {
+class InviteMembersVC: CustomViewController {
     
     var img = UIImage()
     var contactDetails = [ContactInfo]()
     var isPublicStatus = "0"
     var isInviteMemberStatus = "0"
+    var eventID = ""
+    weak var delegate : PopupDelegate?
+    
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var tableView_Members        : UITableView!{
@@ -66,16 +69,13 @@ class InviteMembersVC: UIViewController {
                     self.img = UIImage.init(data: $0.thumbnailImageData!)!
                    
                 }
-                
-                let CountryCode = "\($0.postalAddresses.first?.value.isoCountryCode ?? "nil")"
-                let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
-                let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, coutryCode:CountryCode, phoneNumber:phoneNumber, profilePic:self.img)
-                self.contactDetails.append(contactDetail)
-          
+                if ((($0.phoneNumbers.first?.value.stringValue ?? "nil")?.contains("+")) == true){
+                    let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
+                    let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img)
+                    self.contactDetails.append(contactDetail)
+                }
             })
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: NSNotification.Name("MessageReceived"), object: self.contactDetails)
-            }
+            
 
         })
         
@@ -106,6 +106,9 @@ class InviteMembersVC: UIViewController {
             if isInviteMemberStatus == "1"
             {
                 fetchContacts()
+                DispatchQueue.main.async {
+                    self.tableView_Members.reloadData()
+                }
             }
             else{
                 
@@ -114,21 +117,34 @@ class InviteMembersVC: UIViewController {
     }
     @IBAction func btn_Done(_ sender:UIButton)
     {
-        
+        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+            popup.selectedPopupType = .eventCreatedSuccess
+            popup.delegate = self
+        }
     }
     
 }
 extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return contactDetails.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell") as? MemberCell else { return MemberCell() }
-        cell.contactName_lbl.text = "Ajay"
-        cell.contactNo_lbl.text = "+91 8309762337"
-        
+        cell.contactName_lbl.text = contactDetails[
+            indexPath.row].firstName
+        cell.contactNo_lbl.text = contactDetails[indexPath.row].phoneNumber
+        cell.btn_tick.tag = indexPath.row
         return cell
     }
     
+}
+extension InviteMembersVC : PopupDelegate {
+    
+    func isClickedButton() {
+      self.navigationController?.popViewController(animated: false)
+        self.delegate?.passEventID?(eventID: self.eventID)
+        
+        
+    }
 }

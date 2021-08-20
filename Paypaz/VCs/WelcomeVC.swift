@@ -82,10 +82,7 @@ class WelcomeVC : CustomViewController {
                 self.contactDetails.append(contactDetail)
           
             })
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: NSNotification.Name("MessageReceived"), object: self.contactDetails)
-            }
-
+           
         })
         
        
