@@ -129,7 +129,6 @@ class RoundTextField : UITextField {
             //self.layer.masksToBounds = true
         }
     }
-    
     @IBInspectable var border_Width: Double {
         get {
             return Double(self.layer.borderWidth)
@@ -454,9 +453,11 @@ class RoundTextView : IQTextView {
 
 extension UITextField{
     func isEmptyOrWhitespace() -> Bool {
-            if(self.text!.isEmpty) {
-                return true
-            }
-            return (self.text!.trimmingCharacters(in: NSCharacterSet.whitespaces) == "")
+        if(self.text!.isEmpty) {
+            return true
         }
+        return (self.text!.trimmingCharacters(in: NSCharacterSet.whitespaces) == "")
+    }
 }
+
+

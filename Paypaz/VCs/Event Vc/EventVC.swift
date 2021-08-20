@@ -18,13 +18,22 @@ class EventVC : CustomViewController {
         
         
     }
-    
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToCreatedEvent(_:)), name: NSNotification.Name("getEventID"), object: nil)
+    }
+    @objc func goToCreatedEvent(_ notification:Notification){
+        if let dict = notification.userInfo as NSDictionary?{
+            let eventID = dict["eventID"] as? String
+            if let vc = self.pushVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC{
+                vc.eventID = eventID ?? ""
+
+            }
+        }
+    }
     //MARK:- --- Action ----
     @IBAction func btn_HostEvent(_ sender:UIButton) {
-        if let eventVC = self.pushToVC("HostEventVC") as? HostEventVC {
-            eventVC.delegate = self
-        }
+       _ = self.pushToVC("HostEventVC")
     }
     @IBAction func btn_BuyEvent(_ sender:UIButton) {
         
@@ -38,16 +47,5 @@ class EventVC : CustomViewController {
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
-    }
-}
-//MARK:-
-extension EventVC : PopupDelegate {
-    
-    func isClickedButton() {
-    }
-    func passEventID(eventID: String) {
-        if let vc = self.pushToVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC{
-            vc.eventID = eventID
-        }
     }
 }

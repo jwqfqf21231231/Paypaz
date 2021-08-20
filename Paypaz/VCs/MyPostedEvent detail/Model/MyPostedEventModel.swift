@@ -18,8 +18,15 @@ struct MyPostedEventModel: Codable {
 // MARK: - DataClass
 struct MyEvent: Codable {
     let id, userID, typeID, name: String?
-    let location, latitude, longitude, price: String?
-    let image, startDate, endDate, startTime: String?
-    let endTime, ispublic, isinviteMember, paymentType: String?
-    let memberID, status, createdDate, updatedDate: String?
+       let dataDescription, location, latitude, longitude: String?
+       let price, quantity, image, startDate: String?
+       let endDate, startTime, endTime, ispublic: String?
+       let isinviteMember, paymentType, memberID, status: String?
+       let createdDate, updatedDate: String?
+
+       enum CodingKeys: String, CodingKey {
+           case id, userID, typeID, name
+           case dataDescription = "description"
+           case location, latitude, longitude, price, quantity, image, startDate, endDate, startTime, endTime, ispublic, isinviteMember, paymentType, memberID, status, createdDate, updatedDate
+       }
 }

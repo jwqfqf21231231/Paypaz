@@ -16,7 +16,10 @@ class InviteMembersVC: CustomViewController {
     var isPublicStatus = "0"
     var isInviteMemberStatus = "0"
     var eventID = ""
+    var contactDict = [String:String]()
+    var contactArray = [[String:String]]()
     weak var delegate : PopupDelegate?
+    private let dataSource = InviteMemberDataModel()
     
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
@@ -28,6 +31,8 @@ class InviteMembersVC: CustomViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.delegate = self
+        fetchContacts()
         self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         tableView_Members.separatorStyle = .none
@@ -63,11 +68,11 @@ class InviteMembersVC: CustomViewController {
     {
         fetchContacts(completion: {contacts in
             contacts.forEach({print("Name: \($0.givenName), number: \($0.phoneNumbers.first?.value.stringValue ?? "nil"), CountryCode: \($0.postalAddresses.first?.value.isoCountryCode ?? "nil")")
-                               
+                
                 if $0.thumbnailImageData != nil
                 {
                     self.img = UIImage.init(data: $0.thumbnailImageData!)!
-                   
+                    
                 }
                 if ((($0.phoneNumbers.first?.value.stringValue ?? "nil")?.contains("+")) == true){
                     let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
@@ -76,11 +81,11 @@ class InviteMembersVC: CustomViewController {
                 }
             })
             
-
+            
         })
         
-       
-       
+        
+        
     }
     @objc func onSwitchValueChange(swtch:UISwitch)
     {
@@ -103,31 +108,81 @@ class InviteMembersVC: CustomViewController {
             {
                 self.isInviteMemberStatus = "0"
             }
-            if isInviteMemberStatus == "1"
-            {
-                fetchContacts()
-                DispatchQueue.main.async {
-                    self.tableView_Members.reloadData()
-                }
-            }
-            else{
-                
+            self.tableView_Members.reloadData()
+        }
+    }
+    @IBAction func btn_Back(_ sender:UIButton){
+        for vc in self.navigationController!.viewControllers as Array {
+            if vc.isKind(of:EventVC.self) {
+                self.navigationController!.popToViewController(vc, animated: true)
+                break
             }
         }
     }
     @IBAction func btn_Done(_ sender:UIButton)
     {
-        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-            popup.selectedPopupType = .eventCreatedSuccess
-            popup.delegate = self
+        
+        Connection.svprogressHudShow(view: self)
+        dataSource.eventID = eventID
+        dataSource.isPublic = isPublicStatus
+        dataSource.isInviteMember = isInviteMemberStatus
+        if isInviteMemberStatus == "1"{
+            if contactArray.count == 0
+            {
+                view.makeToast("Please select contacts to invite")
+            }
+            else{
+                let jsonData = try! JSONSerialization.data(withJSONObject:contactArray)
+                let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+                print(jsonString!)
+                dataSource.contacts = jsonString!
+            }
+        }
+        dataSource.inviteMembers()
+    }
+    
+}
+extension InviteMembersVC : InviteMemberDataModelDelegate
+{
+    func didRecieveDataUpdate(data: ResendOTPModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                popup.selectedPopupType = .eventCreatedSuccess
+                popup.delegate = self
+            }
+        }
+        else
+        {
+            view.makeToast(data.message ?? "")
         }
     }
     
+    func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
 }
 extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactDetails.count
+        if isInviteMemberStatus == "1"
+        {
+            return contactDetails.count
+        }
+        else{
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell") as? MemberCell else { return MemberCell() }
@@ -135,16 +190,52 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
             indexPath.row].firstName
         cell.contactNo_lbl.text = contactDetails[indexPath.row].phoneNumber
         cell.btn_tick.tag = indexPath.row
+        cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
         return cell
     }
-    
+    @objc func btn_Selected(_ sender:UIButton)
+    {
+        if sender.isSelected == true{
+            sender.isSelected = false
+           let flag = contactArray.contains(where:  { (abc) -> Bool in
+            return abc["contactID"] ?? "" == "\(sender.tag)"
+            })
+            if flag{
+                self.contactArray.removeAll(where: { (abc) -> Bool in
+                    return abc["contactID"] ?? "" == "\(sender.tag)"
+                })
+            }
+        }else{
+            sender.isSelected = true
+            contactDict["contactID"] = "\(sender.tag)"
+            contactDict["name"] = contactDetails[sender.tag].firstName
+            guard let phoneUtil = NBPhoneNumberUtil.sharedInstance() else {
+                return
+            }
+            do {
+                let numberProto: NBPhoneNumber = try phoneUtil.parse(contactDetails[sender.tag].phoneNumber, defaultRegion: "IN")
+                let countryCode = numberProto.countryCode!
+                let phoneNumber = numberProto.nationalNumber!
+                contactDict["phoneCode"] = "\(countryCode)"
+                contactDict["phoneNumber"] = "\(phoneNumber)"
+                contactArray.append(contactDict)
+            }
+            catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
 }
 extension InviteMembersVC : PopupDelegate {
     
     func isClickedButton() {
-      self.navigationController?.popViewController(animated: false)
-        self.delegate?.passEventID?(eventID: self.eventID)
-        
-        
+        for vc in self.navigationController!.viewControllers as Array {
+            if vc.isKind(of:EventVC.self) {
+                self.navigationController!.popToViewController(vc, animated: true)
+                break
+            }
+        }
+        NotificationCenter.default.post(name: NSNotification.Name("getEventID"), object:nil, userInfo: ["eventID":self.eventID])
     }
 }

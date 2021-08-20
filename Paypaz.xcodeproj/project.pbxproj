@@ -21,6 +21,7 @@
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
+		04B3FBAB26CF94040004A6F3 /* InviteMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */; };
 		04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E28A26B0345100333E94 /* NotificationDataModel.swift */; };
 		04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7D72B26B3C77300747777 /* CountryListTable.swift */; };
 		04C7D73226B3D59800747777 /* CountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C7D73126B3D59800747777 /* CountryCodes.json */; };
@@ -81,7 +82,6 @@
 		44509EDB263162FD000B19F3 /* WalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EDA263162FD000B19F3 /* WalletVC.swift */; };
 		44509EDD26316310000B19F3 /* WalletVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EDC26316310000B19F3 /* WalletVC+Extensions.swift */; };
 		44509EE0263178F8000B19F3 /* EventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EDF263178F8000B19F3 /* EventVC.swift */; };
-		44509EE326317F30000B19F3 /* HostEventVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EE226317F30000B19F3 /* HostEventVC+Extensions.swift */; };
 		44509EE526318048000B19F3 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EE426318048000B19F3 /* MemberCell.swift */; };
 		44509EE826318200000B19F3 /* AddProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EE726318200000B19F3 /* AddProductVC.swift */; };
 		44509EEB263193F6000B19F3 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44509EEA263193F6000B19F3 /* SettingsVC.swift */; };
@@ -211,6 +211,7 @@
 		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
+		04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberDataModel.swift; sourceTree = "<group>"; };
 		04B5E28A26B0345100333E94 /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
 		04C7D72B26B3C77300747777 /* CountryListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTable.swift; sourceTree = "<group>"; };
 		04C7D73126B3D59800747777 /* CountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
@@ -272,7 +273,6 @@
 		44509EDA263162FD000B19F3 /* WalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletVC.swift; sourceTree = "<group>"; };
 		44509EDC26316310000B19F3 /* WalletVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletVC+Extensions.swift"; sourceTree = "<group>"; };
 		44509EDF263178F8000B19F3 /* EventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventVC.swift; sourceTree = "<group>"; };
-		44509EE226317F30000B19F3 /* HostEventVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HostEventVC+Extensions.swift"; sourceTree = "<group>"; };
 		44509EE426318048000B19F3 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		44509EE726318200000B19F3 /* AddProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVC.swift; sourceTree = "<group>"; };
 		44509EEA263193F6000B19F3 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
@@ -623,6 +623,7 @@
 			isa = PBXGroup;
 			children = (
 				0C388B1D268F4970008AED6F /* HostEventDataModel.swift */,
+				04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -631,7 +632,6 @@
 			isa = PBXGroup;
 			children = (
 				4488D7A0262961E1006416DF /* HostEventVC.swift */,
-				44509EE226317F30000B19F3 /* HostEventVC+Extensions.swift */,
 				04FFC95126CD263800E3E171 /* AddEventProductsVC.swift */,
 				04FFC95626CD3A9D00E3E171 /* InviteMembersVC.swift */,
 			);
@@ -1776,8 +1776,8 @@
 				04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */,
 				44F76674263AB85A007F78CB /* AddMoneyPopupVC.swift in Sources */,
 				44E5592E2632ED4200193305 /* ContactListVC+Extensions.swift in Sources */,
-				44509EE326317F30000B19F3 /* HostEventVC+Extensions.swift in Sources */,
 				0CECCDF12693321000611D62 /* ConfirmPasscodeVC.swift in Sources */,
+				04B3FBAB26CF94040004A6F3 /* InviteMemberDataModel.swift in Sources */,
 				0CD9A4C1268C27A5009DA000 /* ForgotPasswordDataModel.swift in Sources */,
 				0C388B19268F4962008AED6F /* HostEventModel.swift in Sources */,
 				445433D1262D5DF700443AE1 /* SuccessPopupVC.swift in Sources */,

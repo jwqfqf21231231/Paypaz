@@ -36,7 +36,6 @@ class AddProductVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
-        dataSource.delegate2 = self
         dataSource1.delegate = self
         hideKeyboardWhenTappedArround()
         setTitle()

@@ -18,12 +18,13 @@ struct ProductDetailsModel: Codable {
 // MARK: - DataClass
 struct ProductInfo: Codable {
     let id, userID, eventID, name: String?
-    let dataDescription, price, image, status: String?
-    let createdDate, updatedDate: String?
+    let dataDescription, price, quantity, image: String?
+    let status, createdDate, updatedDate: String?
 
     enum CodingKeys: String, CodingKey {
         case id, userID, eventID, name
         case dataDescription = "description"
-        case price, image, status, createdDate, updatedDate
+        case price, quantity, image, status, createdDate, updatedDate
     }
 }
+

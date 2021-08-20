@@ -24,6 +24,8 @@ class ProductDetailsDataModel: NSObject
     weak var delegate2 : DeleteProductDataModelDelegate?
     let sharedInstance = Connection()
     var productID = ""
+    var eventID = ""
+    var type = ""
     func getProductDetails()
     {
         let url =  APIList().getUrlString(url: .PARTICULARPRODUCTINFO)
@@ -61,9 +63,13 @@ class ProductDetailsDataModel: NSObject
     }
     func deleteProduct()
     {
-        var url =  APIList().getUrlString(url: .DELETEPRODUCT)
-        url = url + "\(productID)"
-        sharedInstance.requestDELETE(url, params: nil, headers: nil,
+        let url =  APIList().getUrlString(url: .DELETEPRODUCT)
+        let parameter : Parameters = [
+            "productID" : productID,
+            "eventID" : eventID,
+            "type" : type
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:
                                     {
                                         (JSON) in
@@ -89,7 +95,6 @@ class ProductDetailsDataModel: NSObject
                                     {
                                         (error) in
                                         self.delegate2?.didFailDataUpdateWithError3(error: error)
-                                        
                                     })
     }
 }

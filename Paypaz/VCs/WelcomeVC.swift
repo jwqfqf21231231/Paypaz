@@ -19,15 +19,16 @@ class WelcomeVC : CustomViewController {
                 return
             }
         do {
-            let numberProto: NBPhoneNumber = try phoneUtil.parse("+1-202-555-0184", defaultRegion: "IN")
+            let numberProto: NBPhoneNumber = try phoneUtil.parse("+91 83097 62337", defaultRegion: "IN")
             let ex = try phoneUtil.getExampleNumber("IN")
             let countryCode = numberProto.countryCode
             let number = numberProto.clearCountryCodeSource()
                         //Log.d("code", "" + ex)
                 let formattedString: String = try phoneUtil.format(numberProto, numberFormat: .E164)
-
                 NSLog("[%@]", formattedString)
             print("Number Prototype:\(numberProto)")
+            print("\(numberProto.countryCode!)")
+            print("\(numberProto.nationalNumber!)")
             print("Country Code:\(countryCode)")
             print("Example Number:\(ex)")
             print("Removed Country code :\(number)")

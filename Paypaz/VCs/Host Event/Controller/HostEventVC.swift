@@ -20,10 +20,15 @@ class HostEventVC : CustomViewController {
     var images      = [String:Any]()
     var picker:UIDatePicker!
     var location = ""
+    var latitude = ""
+    var longitude = ""
     var startDate = ""
     var endDate = ""
     var startTime = ""
     var endTime = ""
+    var sDate = Date()
+    var sTime = Date()
+    var eDate = Date()
     var paymentType : String?{
         didSet{
             if paymentType == "0"
@@ -43,7 +48,6 @@ class HostEventVC : CustomViewController {
         }
     }
    
-    weak var delegate : PopupDelegate?
     private let dataSource = HostEventDataModel()
     
     var selectedEventId : String?
@@ -60,13 +64,9 @@ class HostEventVC : CustomViewController {
     @IBOutlet weak var txt_EventQuantity : RoundTextField!
     @IBOutlet weak var btn_ChooseLocation : UIButton!
     @IBOutlet weak var txt_Price : RoundTextField!
-    @IBOutlet weak var btn_StartDate : UIButton!
     @IBOutlet weak var txt_StartDate : UITextField!
-    @IBOutlet weak var btn_EndDate : UIButton!
     @IBOutlet weak var txt_EndDate : UITextField!
-    @IBOutlet weak var btn_StartTime : UIButton!
     @IBOutlet weak var txt_StartTime : UITextField!
-    @IBOutlet weak var btn_EndTime : UIButton!
     @IBOutlet weak var txt_EndTime : UITextField!
     @IBOutlet weak var btn_EventTitle : UIButton!
     @IBOutlet weak var btn_CreateEvent : UIButton!
@@ -78,6 +78,7 @@ class HostEventVC : CustomViewController {
     //MARK:- ---- View Life Cycle ---
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.paymentType = "0"
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         setTitle()
@@ -87,7 +88,7 @@ class HostEventVC : CustomViewController {
             dataSource2.delegate = self
             dataSource2.eventID = self.eventID
             dataSource2.getEvent()
-            dataSource2.getProducts()
+
             
         }
         self.txt_StartDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
@@ -124,8 +125,17 @@ class HostEventVC : CustomViewController {
             
             let dateString = dateFormatter.string(from: picker.date)
             self.startDate = dateString
-            self.btn_StartDate.setTitle(dateString, for: .normal)
-            self.btn_StartDate.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
+            self.txt_StartDate.text = dateString
+            self.txt_StartDate.textColor = UIColor(named: "BlueColor")
+            // Modification
+            self.sDate = picker.date
+            self.startTime = ""
+            self.endDate = ""
+            self.endTime = ""
+            self.txt_EndDate.text?.removeAll()
+            self.txt_StartTime.text?.removeAll()
+            self.txt_EndTime.text?.removeAll()
+            // upto here
             self.view.endEditing(true)
         case 1:
             dateFormatter.dateStyle = .short
@@ -133,8 +143,11 @@ class HostEventVC : CustomViewController {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: picker.date)
             self.endDate = dateString
-            self.btn_EndDate.setTitle(dateString, for: .normal)
-            self.btn_EndDate.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
+            self.txt_EndDate.text = dateString
+            // Modifications
+            self.eDate = picker.date
+            self.endTime = ""
+            self.txt_EndTime.text?.removeAll()
             self.view.endEditing(true)
         case 2:
             dateFormatter.dateStyle = .none
@@ -144,8 +157,12 @@ class HostEventVC : CustomViewController {
             self.startTime = dateString
             dateFormatter.dateFormat = "hh:mm"
             let btnTitle = dateFormatter.string(from: picker.date)
-            self.btn_StartTime.setTitle(btnTitle, for: .normal)
-            self.btn_StartTime.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
+            self.txt_StartTime.text = btnTitle
+            // Modification
+            self.sTime = picker.date
+            self.endTime = ""
+            self.txt_EndTime.text?.removeAll()
+            // upto here
             self.view.endEditing(true)
         default:
             dateFormatter.dateStyle = .none
@@ -155,8 +172,7 @@ class HostEventVC : CustomViewController {
             self.endTime = dateString
             dateFormatter.dateFormat = "hh:mm"
             let btnTitle = dateFormatter.string(from: picker.date)
-            self.btn_EndTime.setTitle(btnTitle, for: .normal)
-            self.btn_EndTime.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
+            self.txt_EndTime.text = btnTitle
             self.view.endEditing(true)
         }
         
@@ -173,6 +189,12 @@ class HostEventVC : CustomViewController {
     }
     @objc func callDatePicker(field:UITextField)
     {
+        
+        //Modification
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let currentDate = dateFormatter.string(from: Date())
+        //upto here
         picker=UIDatePicker()
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels
@@ -181,13 +203,14 @@ class HostEventVC : CustomViewController {
             // Fallback on earlier versions
         }
         
-        fieldTag = field.tag
+        
         switch field.tag  {
         case 0:
             picker.datePickerMode = .date
             picker.minimumDate = Date()
             txt_StartDate.inputView = picker
             txt_StartDate.inputAccessoryView = createToolBar()
+            fieldTag = field.tag
         case 1:
             if startDate == ""
             {
@@ -198,8 +221,11 @@ class HostEventVC : CustomViewController {
             else
             {
                 picker.datePickerMode = .date
+                //Modification
+                picker.minimumDate = sDate //upto here
                 txt_EndDate.inputView = picker
                 txt_EndDate.inputAccessoryView = createToolBar()
+                fieldTag = field.tag
             }
         case 2:
             if startDate == ""
@@ -223,8 +249,14 @@ class HostEventVC : CustomViewController {
             else
             {
                 picker.datePickerMode = .time
+                //Modifications
+                if startDate == currentDate
+                {
+                    picker.minimumDate = Date()
+                }//upto here
                 txt_StartTime.inputView = picker
                 txt_StartTime.inputAccessoryView = createToolBar()
+                fieldTag = field.tag
             }
         default:
             if startDate == ""
@@ -248,8 +280,14 @@ class HostEventVC : CustomViewController {
             else
             {
                 picker.datePickerMode = .time
+                //Modification
+                if startDate == endDate
+                {
+                    picker.minimumDate = sTime
+                }//upto here
                 txt_EndTime.inputView = picker
                 txt_EndTime.inputAccessoryView = createToolBar()
+                fieldTag = field.tag
             }
         }
         
@@ -375,6 +413,8 @@ class HostEventVC : CustomViewController {
             dataSource.price = txt_Price.text ?? ""
             dataSource.eventQuantity = txt_EventQuantity.text ?? ""
             dataSource.location = self.location
+            dataSource.latitude = self.latitude
+            dataSource.longitude = self.longitude
             var sD = startDate + " " + startTime
             var eD = endDate + " " + endTime
             sD = convertToUTC(dateToConvert: sD)
@@ -410,10 +450,10 @@ extension HostEventVC: GMSAutocompleteViewControllerDelegate{
         //let loc2 = (place.formattedAddress ?? "")
         //self.location_txt.text = loc1
         //print(self.location_txt.text)
-        // let lat = place.coordinate.latitude
+        self.latitude = "\(place.coordinate.latitude)"
         // self.event_latitude = lat
         //  print("Place Latitude: \(self.event_latitude)")
-        //let long = place.coordinate.longitude
+        self.longitude = "\(place.coordinate.longitude)"
         // self.event_longitude = long
         // print("Place Longitude: \(self.event_longitude)")
         dismiss(animated: true, completion: nil)
@@ -452,8 +492,7 @@ extension HostEventVC : HostEventDataModelDelegate
             }
             else
             {
-                _ = self.pushVC("AddEventProductsVC")
-                if let vc = self.pushVC("AddEventProductsVC") as? AddEventProductsVC{
+                if let vc = self.pushVC("AddEventProductsVC",animated: false) as? AddEventProductsVC{
                     vc.eventID = data.data?.id ?? ""
                 }
 //                eventID = data.data?.id ?? ""
@@ -493,6 +532,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
             DispatchQueue.main.async {
                 self.txt_EventName.text = data.data?.name
                 self.txt_Price.text = data.data?.price
+                self.btn_EventTitle.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
                 switch data.data?.typeID
                 {
                 case "1" : self.btn_EventTitle.setTitle("Sports & Fitness", for: .normal)
@@ -512,16 +552,19 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 default : self.btn_EventTitle.setTitle("Other", for: .normal)
                     self.selectedEventId = "8"
                 }
+                self.txt_EventQuantity.text = data.data?.quantity
                 self.startDate = data.data?.startDate ?? ""
                 self.endDate = data.data?.endDate ?? ""
                 self.startTime = data.data?.startTime ?? ""
                 self.endTime = data.data?.endTime ?? ""
                 
                 self.btn_ChooseLocation.setTitle(data.data?.location, for: .normal)
-                self.btn_StartDate.setTitle(self.startDate, for: .normal)
-                self.btn_EndDate.setTitle(self.endDate, for: .normal)
-                self.btn_StartTime.setTitle(self.startTime, for: .normal)
-                self.btn_EndTime.setTitle(self.endTime, for: .normal)
+                self.btn_ChooseLocation.setTitleColor(UIColor(named:"BlueColor"), for: .normal)
+                self.txt_StartDate.text = self.startDate
+                self.txt_EndDate.text = self.endDate
+                self.txt_StartTime.text = self.startTime
+                self.txt_EndTime.text = self.endTime
+                self.txt_Description.text = data.data?.dataDescription
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
                 self.img_EventPic.sd_setImage(with: URL(string: url+(data.data?.image ?? "")), placeholderImage: UIImage(named: "profile_c"))

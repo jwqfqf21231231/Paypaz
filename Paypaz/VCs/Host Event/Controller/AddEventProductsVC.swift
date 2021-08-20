@@ -28,7 +28,7 @@ class AddEventProductsVC: CustomViewController {
     @IBAction func btn_Back(_ sender:UIButton)
     {
         for vc in self.navigationController!.viewControllers as Array {
-            if vc.isKind(of:HomeVC.self) {
+            if vc.isKind(of:EventVC.self) {
                 self.navigationController!.popToViewController(vc, animated: true)
                 break
             }
@@ -45,9 +45,9 @@ class AddEventProductsVC: CustomViewController {
                 
                 self.productIDArr.append(item["productID"] as! String)
                 DispatchQueue.main.async {
-                    btn_Submit.setTitle("Continue", for: .normal)
-                    btn_Submit.setTitleColor(.white, for: .normal)
-                    btn_Submit.backgroundColor = UIColor(named: "GreenColor")
+                    self.btn_Submit.setTitle("Continue", for: .normal)
+                    self.btn_Submit.setTitleColor(.white, for: .normal)
+                    self.btn_Submit.backgroundColor = UIColor(named: "GreenColor")
                     self.tableView_Products.reloadData()
                 }
             }

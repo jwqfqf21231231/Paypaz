@@ -23,6 +23,8 @@ class HostEventDataModel: NSObject
     var name = ""
     var eventQuantity = ""
     var location = ""
+    var latitude = ""
+    var longitude = ""
     var price = ""
     var startDate = ""
     var endDate = ""
@@ -48,13 +50,13 @@ class HostEventDataModel: NSObject
             "name" : name,
             "description" : eventDescription,
             "location" : location,
+            "latitude" : latitude,
+            "longitude" : longitude,
             "price" : price,
             "quantity" : eventQuantity,
             "startDate" : startDate,
             "endDate" : endDate,
-            "paymentType" : paymentType,
-            "latitude" : UserDefaults.standard.getLatitude(),
-            "longitude" : UserDefaults.standard.getLatitude()
+            "paymentType" : paymentType
         ]
         
         let header : HTTPHeaders = [
@@ -96,6 +98,7 @@ class HostEventDataModel: NSObject
         parameter = [
             "typeID" : typeId,
             "name" : name,
+            "description" : eventDescription,
             "location" : location,
             "price" : price,
             "startDate" : startDate,

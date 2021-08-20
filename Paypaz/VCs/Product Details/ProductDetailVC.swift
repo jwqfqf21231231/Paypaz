@@ -18,6 +18,7 @@ class ProductDetailVC : CustomViewController {
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var lbl_ProductName : UILabel!
     @IBOutlet weak var lbl_ProductPrice : UILabel!
+    @IBOutlet weak var lbl_ProductQuantity : UILabel!
     @IBOutlet weak var lbl_Description : UILabel!
     @IBOutlet weak var lbl_EventName : UILabel!
     override func viewDidLoad() {
@@ -59,6 +60,9 @@ class ProductDetailVC : CustomViewController {
     @IBAction func btn_Delete(_ sender:UIButton)
     {
         Connection.svprogressHudShow(view: self)
+        dataSource.productID = self.productID
+        dataSource.eventID = self.eventID
+        dataSource.type = "1"
         dataSource.deleteProduct()
     }
 }
@@ -78,6 +82,7 @@ extension ProductDetailVC : ProductDetailsDataModelDelegate
         if data.success == 1
         {
             self.eventID = data.data?.eventID ?? ""
+            self.productID = data.data?.id ?? ""
             let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
             let imageString = data.data?.image ?? ""
             self.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -85,6 +90,7 @@ extension ProductDetailVC : ProductDetailsDataModelDelegate
             self.lbl_ProductName.text = data.data?.name
             self.lbl_Description.text = data.data?.dataDescription
             self.lbl_ProductPrice.text = "Price:\(data.data?.price ?? "")"
+            self.lbl_ProductQuantity.text = data.data?.quantity
         }
         else
         {

@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3E80025A-95F2-46AA-9D49-6335460A7C9D"
+            uuid = "DB3B105B-3354-4A13-BD7F-F7D6BF9857E8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Paypaz/VCs/Host Event/Controller/HostEventVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "didRecieveDataUpdate(data:)"
             landmarkType = "7">
          </BreakpointContent>
