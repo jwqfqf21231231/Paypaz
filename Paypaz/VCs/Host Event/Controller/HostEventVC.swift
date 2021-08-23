@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 import GooglePlaces
-class HostEventVC : CustomViewController {
+class HostEventVC : UIViewController {
     
     var isEdit : Bool? //The value for isEdit comes from MyEventsListVC+Extensions (60th line)
     var eventID = ""
@@ -47,7 +47,8 @@ class HostEventVC : CustomViewController {
             }
         }
     }
-   
+    
+    weak var delegate : PopupDelegate?
     private let dataSource = HostEventDataModel()
     
     var selectedEventId : String?
@@ -62,25 +63,25 @@ class HostEventVC : CustomViewController {
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var txt_EventName : RoundTextField!
     @IBOutlet weak var txt_EventQuantity : RoundTextField!
-    @IBOutlet weak var btn_ChooseLocation : UIButton!
+    @IBOutlet weak var btn_ChooseLocation : RoundButton!
     @IBOutlet weak var txt_Price : RoundTextField!
-    @IBOutlet weak var txt_StartDate : UITextField!
-    @IBOutlet weak var txt_EndDate : UITextField!
-    @IBOutlet weak var txt_StartTime : UITextField!
-    @IBOutlet weak var txt_EndTime : UITextField!
-    @IBOutlet weak var btn_EventTitle : UIButton!
-    @IBOutlet weak var btn_CreateEvent : UIButton!
+    @IBOutlet weak var txt_StartDate : RoundTextField!
+    @IBOutlet weak var txt_EndDate : RoundTextField!
+    @IBOutlet weak var txt_StartTime : RoundTextField!
+    @IBOutlet weak var txt_EndTime : RoundTextField!
+    @IBOutlet weak var btn_EventTitle : RoundButton!
+    @IBOutlet weak var btn_CreateEvent : RoundButton!
     @IBOutlet weak var btn_Paypaz : RoundButton!
     @IBOutlet weak var btn_bankAcc : RoundButton!
     @IBOutlet weak var txt_Description : RoundTextView!
-    
+    var toolBar:UIToolbar!
     
     //MARK:- ---- View Life Cycle ---
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.paymentType = "0"
-        self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
+        self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 12, bottom: 15, right: 15)
         setTitle()
         if self.eventID != ""
         {
@@ -88,7 +89,7 @@ class HostEventVC : CustomViewController {
             dataSource2.delegate = self
             dataSource2.eventID = self.eventID
             dataSource2.getEvent()
-
+            
             
         }
         self.txt_StartDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
@@ -99,7 +100,7 @@ class HostEventVC : CustomViewController {
         dataSource.delegate = self
         dataSource.isEdit = self.isEdit
     }
-   
+    
     private func setTitle()
     {
         if isEdit ?? false
@@ -113,12 +114,12 @@ class HostEventVC : CustomViewController {
             btn_CreateEvent.setTitle("Create Event", for: .normal)
         }
     }
-   
+    
     @objc func donePressed()
     {
         let dateFormatter=DateFormatter()
         switch fieldTag {
-        case 0:
+        case 10:
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -137,7 +138,7 @@ class HostEventVC : CustomViewController {
             self.txt_EndTime.text?.removeAll()
             // upto here
             self.view.endEditing(true)
-        case 1:
+        case 20:
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -149,13 +150,13 @@ class HostEventVC : CustomViewController {
             self.endTime = ""
             self.txt_EndTime.text?.removeAll()
             self.view.endEditing(true)
-        case 2:
+        case 30:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
             dateFormatter.dateFormat = "hh:mm:ss"
             let dateString = dateFormatter.string(from:picker.date)
             self.startTime = dateString
-            dateFormatter.dateFormat = "hh:mm"
+            dateFormatter.dateFormat = "hh:mm a"
             let btnTitle = dateFormatter.string(from: picker.date)
             self.txt_StartTime.text = btnTitle
             // Modification
@@ -164,23 +165,25 @@ class HostEventVC : CustomViewController {
             self.txt_EndTime.text?.removeAll()
             // upto here
             self.view.endEditing(true)
-        default:
+        case 40:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
             dateFormatter.dateFormat = "hh:mm:ss"
             let dateString = dateFormatter.string(from:picker.date)
             self.endTime = dateString
-            dateFormatter.dateFormat = "hh:mm"
+            dateFormatter.dateFormat = "hh:mm a"
             let btnTitle = dateFormatter.string(from: picker.date)
             self.txt_EndTime.text = btnTitle
             self.view.endEditing(true)
+        default:
+            return
         }
         
     }
     func createToolBar()->UIToolbar
     {
         //tool bar
-        let toolBar=UIToolbar()
+        toolBar = UIToolbar()
         toolBar.sizeToFit()
         //bar button item
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
@@ -195,31 +198,42 @@ class HostEventVC : CustomViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let currentDate = dateFormatter.string(from: Date())
         //upto here
-        picker=UIDatePicker()
-        if #available(iOS 13.4, *) {
-            picker.preferredDatePickerStyle = .wheels
-            
-        } else {
-            // Fallback on earlier versions
+        if picker != nil{
+            self.picker.removeFromSuperview()
+            self.picker = nil
         }
-        
-        
+        if toolBar != nil{
+            self.toolBar.removeFromSuperview()
+            self.toolBar = nil
+        }
         switch field.tag  {
-        case 0:
+        case 10:
+            picker=UIDatePicker()
+            if #available(iOS 13.4, *) {
+                picker.preferredDatePickerStyle = .wheels
+                
+            }
             picker.datePickerMode = .date
             picker.minimumDate = Date()
             txt_StartDate.inputView = picker
             txt_StartDate.inputAccessoryView = createToolBar()
             fieldTag = field.tag
-        case 1:
+        case 20:
+            
             if startDate == ""
             {
                 self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
-                txt_EndDate.resignFirstResponder()
+                self.view.endEditing(true)
+                //txt_EndDate.resignFirstResponder()
                 break
             }
             else
             {
+                picker=UIDatePicker()
+                if #available(iOS 13.4, *) {
+                    picker.preferredDatePickerStyle = .wheels
+                    
+                }
                 picker.datePickerMode = .date
                 //Modification
                 picker.minimumDate = sDate //upto here
@@ -227,7 +241,7 @@ class HostEventVC : CustomViewController {
                 txt_EndDate.inputAccessoryView = createToolBar()
                 fieldTag = field.tag
             }
-        case 2:
+        case 30:
             if startDate == ""
             {
                 self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
@@ -248,6 +262,11 @@ class HostEventVC : CustomViewController {
             }
             else
             {
+                picker=UIDatePicker()
+                if #available(iOS 13.4, *) {
+                    picker.preferredDatePickerStyle = .wheels
+                    
+                }
                 picker.datePickerMode = .time
                 //Modifications
                 if startDate == currentDate
@@ -258,7 +277,7 @@ class HostEventVC : CustomViewController {
                 txt_StartTime.inputAccessoryView = createToolBar()
                 fieldTag = field.tag
             }
-        default:
+        case 40:
             if startDate == ""
             {
                 self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
@@ -279,6 +298,11 @@ class HostEventVC : CustomViewController {
             }
             else
             {
+                picker=UIDatePicker()
+                if #available(iOS 13.4, *) {
+                    picker.preferredDatePickerStyle = .wheels
+                    
+                }
                 picker.datePickerMode = .time
                 //Modification
                 if startDate == endDate
@@ -289,8 +313,9 @@ class HostEventVC : CustomViewController {
                 txt_EndTime.inputAccessoryView = createToolBar()
                 fieldTag = field.tag
             }
+        default:
+            return
         }
-        
     }
     //MARK:- ---- Action ---
     
@@ -351,13 +376,13 @@ class HostEventVC : CustomViewController {
         self.btn_bankAcc.setImage(UIImage(named: "green_account"), for: .normal)
     }
     func convertToUTC(dateToConvert:String) -> String {
-         let formatter = DateFormatter()
-         formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-         let convertedDate = formatter.date(from: dateToConvert)
-         formatter.timeZone = TimeZone(identifier: "UTC")
-         return formatter.string(from: convertedDate!)
-            
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let convertedDate = formatter.date(from: dateToConvert)
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        return formatter.string(from: convertedDate!)
+        
+    }
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
         
         if(img_EventPic.image == nil)
@@ -423,7 +448,7 @@ class HostEventVC : CustomViewController {
             dataSource.endDate = eD
             dataSource.eventDescription = txt_Description.text ?? ""
             dataSource.paymentType = paymentType ?? ""
-           
+            
             if isEdit ?? false
             {
                 dataSource.eventID = self.eventID
@@ -492,14 +517,18 @@ extension HostEventVC : HostEventDataModelDelegate
             }
             else
             {
-                if let vc = self.pushVC("AddEventProductsVC",animated: false) as? AddEventProductsVC{
-                    vc.eventID = data.data?.id ?? ""
+                self.eventID = data.data?.id ?? ""
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "SuccessPopupVC") as? SuccessPopupVC
+                {
+                    vc.modalPresentationStyle = .overCurrentContext
+                    vc.selectedPopupType = .eventCreatedSuccess
+                    vc.delegate = self
+                    self.present(vc, animated: false, completion: nil)
                 }
-//                eventID = data.data?.id ?? ""
-//                if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-//                    popup.selectedPopupType = .eventCreatedSuccess
-//                    popup.delegate = self
-//                }
+                //                if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                //                    popup.selectedPopupType = .eventCreatedSuccess
+                //                    popup.delegate = self
+                //                }
             }
         }
         else
@@ -591,4 +620,22 @@ extension HostEventVC : MyPostedEventDataModelDelegate
         }
     }
 }
-
+extension HostEventVC : PopupDelegate {
+    
+    func isClickedButton() {
+        if let vc = self.pushVC("AddEventProductsVC",animated: false) as? AddEventProductsVC{
+            vc.eventID = self.eventID
+        }
+    }
+}
+extension HostEventVC : UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let _ = textField as? RoundTextField{
+            if textField.tag == 10 || textField.tag == 20 || textField.tag == 30 || textField.tag == 40{
+                self.view.endEditing(true)
+            }
+        }
+    }
+    
+}

@@ -13,6 +13,7 @@ class AddEventProductsVC: CustomViewController {
     var productIDArr = [String]()
     var productArr = [[String:Any]]()
     var eventID = ""
+    private let dataSource = ProductDetailsDataModel()
     @IBOutlet weak var btn_Submit : UIButton!
     @IBOutlet weak var tableView_Products       : UITableView!{
         didSet{
@@ -22,7 +23,7 @@ class AddEventProductsVC: CustomViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataSource.delegate2 = self
         // Do any additional setup after loading the view.
     }
     @IBAction func btn_Back(_ sender:UIButton)
@@ -104,7 +105,19 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         }
         cell.lbl_ProductName.text = productArr[indexPath.row]["name"] as? String
         cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
+        cell.btn_Delete.tag = indexPath.row
+        cell.btn_Delete.addTarget(self, action: #selector(deleteProduct(button:)), for: .touchUpInside)
         return cell
+    }
+    @objc func deleteProduct(button : UIButton)
+    {
+        Connection.svprogressHudShow(view: self)
+        dataSource.productID = productIDArr[button.tag]
+        dataSource.eventID = self.eventID
+        productIDArr.remove(at: button.tag)
+        productArr.remove(at: button.tag)
+        dataSource.type = "0"
+        dataSource.deleteProduct()
     }
 }
 extension AddEventProductsVC : MyPostedProductsDataModelDelegate
@@ -115,14 +128,11 @@ extension AddEventProductsVC : MyPostedProductsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            //products = data.data
-            DispatchQueue.main.async {
-                //self.tableView_Products.reloadData()
-            }
+           
         }
         else
         {
-            self.showAlert(withMsg: data.message , withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "" , withOKbtn: true)
         }
     }
     
@@ -137,6 +147,36 @@ extension AddEventProductsVC : MyPostedProductsDataModelDelegate
         {
             self.view.makeToast("No Products Data", duration: 3, position: .bottom)
             //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension AddEventProductsVC : DeleteProductDataModelDelegate
+{
+    func didRecieveDataUpdate(data: SuccessModel)
+    {
+        print("DeleteProductModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            
+            tableView_Products.reloadData()
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

@@ -22,11 +22,11 @@ struct MyEvent: Codable {
        let price, quantity, image, startDate: String?
        let endDate, startTime, endTime, ispublic: String?
        let isinviteMember, paymentType, memberID, status: String?
-       let createdDate, updatedDate: String?
+       let createdDate, updatedDate, typeName: String?
 
        enum CodingKeys: String, CodingKey {
            case id, userID, typeID, name
            case dataDescription = "description"
-           case location, latitude, longitude, price, quantity, image, startDate, endDate, startTime, endTime, ispublic, isinviteMember, paymentType, memberID, status, createdDate, updatedDate
+           case location, latitude, longitude, price, quantity, image, startDate, endDate, startTime, endTime, ispublic, isinviteMember, paymentType, memberID, status, createdDate, updatedDate, typeName
        }
 }

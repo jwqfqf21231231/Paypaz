@@ -18,7 +18,6 @@ class InviteMembersVC: CustomViewController {
     var eventID = ""
     var contactDict = [String:String]()
     var contactArray = [[String:String]]()
-    weak var delegate : PopupDelegate?
     private let dataSource = InviteMemberDataModel()
     
     @IBOutlet weak var isPublic : UISwitch!
@@ -114,7 +113,7 @@ class InviteMembersVC: CustomViewController {
     @IBAction func btn_Back(_ sender:UIButton){
         for vc in self.navigationController!.viewControllers as Array {
             if vc.isKind(of:EventVC.self) {
-                self.navigationController!.popToViewController(vc, animated: true)
+                self.navigationController!.popToViewController(vc, animated: false)
                 break
             }
         }
@@ -149,10 +148,13 @@ extension InviteMembersVC : InviteMemberDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                popup.selectedPopupType = .eventCreatedSuccess
-                popup.delegate = self
+            for vc in self.navigationController!.viewControllers as Array {
+                if vc.isKind(of:EventVC.self) {
+                    self.navigationController!.popToViewController(vc, animated: false)
+                    break
+                }
             }
+            NotificationCenter.default.post(name: NSNotification.Name("getEventID"), object:nil, userInfo: ["eventID":self.eventID])
         }
         else
         {
@@ -188,6 +190,12 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell") as? MemberCell else { return MemberCell() }
         cell.contactName_lbl.text = contactDetails[
             indexPath.row].firstName
+//        if contactDetails[indexPath.row].profilePic == nil{
+//            cell.contactPic_img.image = UIImage(named: "profile_a")
+//        }
+//        else{
+//            cell.contactPic_img.image = contactDetails[indexPath.row].profilePic
+//        }
         cell.contactNo_lbl.text = contactDetails[indexPath.row].phoneNumber
         cell.btn_tick.tag = indexPath.row
         cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
@@ -225,17 +233,5 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
             }
         }
         
-    }
-}
-extension InviteMembersVC : PopupDelegate {
-    
-    func isClickedButton() {
-        for vc in self.navigationController!.viewControllers as Array {
-            if vc.isKind(of:EventVC.self) {
-                self.navigationController!.popToViewController(vc, animated: true)
-                break
-            }
-        }
-        NotificationCenter.default.post(name: NSNotification.Name("getEventID"), object:nil, userInfo: ["eventID":self.eventID])
     }
 }

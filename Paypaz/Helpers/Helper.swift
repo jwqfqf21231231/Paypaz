@@ -51,6 +51,15 @@ class Helper : NSObject
 
 extension UIViewController
 {
+    func getFormattedDate(strDate: String , currentFomat:String, expectedFromat: String) -> String{
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = currentFomat
+        
+        let date : Date = dateFormatterGet.date(from: strDate) ?? Date()
+        
+        dateFormatterGet.dateFormat = expectedFromat
+        return dateFormatterGet.string(from: date)
+    }
     func showAlert(withMsg message:String, withOKbtn okbutton:Bool){
         //NOTE:- Indicator is also an alert, so when indicator will hide, then show this alert
         // to avoid 'already presenting view controller' warning

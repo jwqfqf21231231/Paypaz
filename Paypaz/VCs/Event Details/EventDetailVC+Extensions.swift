@@ -39,7 +39,7 @@ extension EventDetailVC : UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell
             else { return ProductCell() }
             let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
-            let imageString = products[indexPath.row].image
+            let imageString = products[indexPath.row].image ?? ""
             cell.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
             cell.lbl_ProductName.text = products[indexPath.row].name
@@ -79,7 +79,7 @@ extension EventDetailVC : UICollectionViewDelegate, UICollectionViewDelegateFlow
         }  else if collectionView.tag != 10{
             if let vc = self.pushToVC("ProductDetailVC") as? ProductDetailVC
             {
-                vc.productID = self.products[indexPath.row].id
+                vc.productID = self.products[indexPath.row].id ?? ""
                 vc.eventID = self.eventID
                 vc.delegate = self
             }
@@ -142,14 +142,14 @@ extension EventDetailVC : MyPostedProductsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.products = data.data
+            self.products = data.data ?? []
             DispatchQueue.main.async {
                 self.collectionView_Products.reloadData()
             }
         }
         else
         {
-            self.showAlert(withMsg: data.message , withOKbtn: true)
+            self.showAlert(withMsg: data.message ?? "" , withOKbtn: true)
         }
     }
     

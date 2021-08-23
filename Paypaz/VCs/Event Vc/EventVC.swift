@@ -25,7 +25,7 @@ class EventVC : CustomViewController {
     @objc func goToCreatedEvent(_ notification:Notification){
         if let dict = notification.userInfo as NSDictionary?{
             let eventID = dict["eventID"] as? String
-            if let vc = self.pushVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC{
+            if let vc = self.pushVC("MyPostedEventDetailsVC",animated: false) as? MyPostedEventDetailsVC{
                 vc.eventID = eventID ?? ""
 
             }

@@ -54,6 +54,7 @@ enum urlString:String
     case DELETEPRODUCT = "user/product/delete"
     
     case INVITEMEMBERS = "user/contacts/add"
+    case CONTACTLIST = "user/event/contacts"
     
     case CONTACTUS = "user/contactus"
     case NOTIFICATIONSTATUS = "user/notification/status"

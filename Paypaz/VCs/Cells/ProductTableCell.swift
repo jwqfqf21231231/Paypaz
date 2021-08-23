@@ -11,6 +11,7 @@ class ProductTableCell : UITableViewCell {
     @IBOutlet weak var img_Product: UIImageView!
     @IBOutlet weak var lbl_ProductName: UILabel!
     @IBOutlet weak var lbl_Description: UILabel!
+    @IBOutlet weak var btn_Delete : UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()

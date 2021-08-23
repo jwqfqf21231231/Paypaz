@@ -28,9 +28,9 @@ class InviteMemberDataModel: NSObject
         
         let url =  APIList().getUrlString(url: .INVITEMEMBERS)
         let parameter : Parameters = [
-            "eventID" : "58" ,
+            "eventID" : eventID,
             "isPublic" : isPublic,
-            "isInviteMember" : isInviteMember,
+            "isinviteMember" : isInviteMember,
             "contacts" : contacts,
         ]
         let header : HTTPHeaders = [

@@ -10,16 +10,16 @@ import Foundation
 
 // MARK: - MyPostedProductsModel
 struct MyPostedProductsModel: Codable {
-    let data: [MyProducts]
-    let success: Int
-    let message: String
+    let data: [MyProducts]?
+    let success: Int?
+    let message: String?
 }
 
 // MARK: - Datum
 struct MyProducts: Codable {
-    let id, userID, eventID, name: String
-    let datumDescription, price, image, status: String
-    let createdDate, updatedDate: String
+    let id, userID, eventID, name: String?
+    let datumDescription, price, image, status: String?
+    let createdDate, updatedDate: String?
 
     enum CodingKeys: String, CodingKey {
         case id, userID, eventID, name

@@ -197,17 +197,21 @@ class RoundTextField : UITextField {
         }
         
     }
-    
+    @IBInspectable var insetX: CGFloat = 0
+    @IBInspectable var insetY: CGFloat = 0
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
+        return bounds.insetBy(dx: insetX, dy: insetY)
+       // return bounds.inset(by: padding)
     }
     
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
+        return bounds.insetBy(dx: insetX, dy: insetY)
+       // return bounds.inset(by: padding)
     }
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
+        return bounds.insetBy(dx: insetX, dy: insetY)
+       // return bounds.inset(by: padding)
     }
     
     //Shadow
