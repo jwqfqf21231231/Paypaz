@@ -11,7 +11,7 @@ import SDWebImage
 extension MyPostedEventDetailsVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 10 {
-            return 5
+            return self.contacts.count
         } else {
             return self.products.count
         }
@@ -41,7 +41,7 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
             cell.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
             cell.lbl_ProductName.text = products[indexPath.row].name
-            cell.lbl_ProductPrice.text = "$ \(products[indexPath.row].price)"
+            cell.lbl_ProductPrice.text = "$ \(((products[indexPath.row].price!) as NSString).integerValue)"
             return cell
         }
         
@@ -84,12 +84,20 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
                 let imageString = (data.data?.image) ?? ""
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 self.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "ticket_img"))
+                self.btn_Category.setTitle(data.data?.typeName, for: .normal)
                 self.lbl_EventName.text = data.data?.name
-                self.lbl_Price.text = "$ \(data.data?.price ?? "")"
+                self.lbl_Price.text = "$ \(((data.data?.price!)! as NSString).integerValue)"
                 self.lbl_Description.text = data.data?.dataDescription
-                let startDate = self.getFormattedDate(strDate: data.data?.startDate ?? "", currentFomat: "yyyy-MM-dd hh:mm:ss", expectedFromat: "yyyy-MM-dd hh:mm a")
-                let endDate = self.getFormattedDate(strDate: data.data?.endDate ?? "", currentFomat: "yyyy-MM-dd hh:mm:ss", expectedFromat: "yyyy-MM-dd hh:mm a")
-                self.lbl_EventDateTime.text = "\(startDate) to \(endDate)"
+                
+                let sDate = self.getFormattedDate(strDate: data.data?.startDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "dd MMM yyyy")
+                var sTime = self.getFormattedDate(strDate: data.data?.startDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "HH:mm:ss")
+                sTime = sTime.UTCToLocal(incomingFormat: "HH:mm:ss", outGoingFormat: "hh:mm a")
+                
+                let eDate = self.getFormattedDate(strDate: data.data?.endDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "dd MMM yyyy")
+                var eTime = self.getFormattedDate(strDate: data.data?.endDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "HH:mm:ss")
+                eTime = eTime.UTCToLocal(incomingFormat: "HH:mm:ss", outGoingFormat: "hh:mm a")
+                
+                self.lbl_EventDateTime.text = "\(sDate) At \(sTime) To \(eDate) At \(eTime)"
                 self.lbl_EventLocation.text = data.data?.location
             }
         }
@@ -128,7 +136,12 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "" , withOKbtn: true)
+            print(data.message ?? "")
+        }
+        if self.products.count == 0
+        {
+            self.view_Product.isHidden = true
+            self.view_ProductHeight.constant = 0
         }
     }
     
@@ -146,7 +159,38 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
                 self.collectionView_Products.reloadData()
             }
             self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
-            // self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
+{
+    func didRecieveDataUpdate(data: MyPostedContactsModel)
+    {
+        print("MyPostedContactsModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.contacts = data.data ?? []
+            DispatchQueue.main.async {
+                self.collectionView_People.reloadData()
+            }
+        }
+        else
+        {
+            print(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
         }
     }
 }

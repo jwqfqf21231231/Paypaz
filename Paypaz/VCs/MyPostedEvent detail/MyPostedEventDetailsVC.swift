@@ -13,6 +13,7 @@ class MyPostedEventDetailsVC : CustomViewController {
     var eventID = ""
     var eventDetails : MyEvent?
     var products = [MyProducts]()
+    var contacts = [InvitedContacts]()
     private let dataSource = MyPostedEventDataModel()
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var lbl_EventName : UILabel!
@@ -32,8 +33,10 @@ class MyPostedEventDetailsVC : CustomViewController {
             collectionView_People.delegate   = self
         }
     }
-    @IBOutlet weak var btn_edit              : RoundButton!
-    
+    @IBOutlet weak var btn_edit : RoundButton!
+    @IBOutlet weak var btn_Category : UIButton!
+    @IBOutlet weak var view_Product : UIView!
+    @IBOutlet weak var view_ProductHeight : NSLayoutConstraint!
     var isEditHidden : Bool?
     
     
@@ -43,8 +46,10 @@ class MyPostedEventDetailsVC : CustomViewController {
         self.btn_edit.alpha = 0.0
         dataSource.delegate = self
         dataSource.delegate2 = self
+        dataSource.delegate3 = self
         self.getEvent()
         self.getProducts()
+        self.getInvitees()
     }
     private func getEvent()
     {
@@ -55,8 +60,15 @@ class MyPostedEventDetailsVC : CustomViewController {
     private func getProducts()
     {
         Connection.svprogressHudShow(view: self)
+        dataSource.eventID = self.eventID
         dataSource.getProducts()
         
+    }
+    private func getInvitees()
+    {
+        Connection.svprogressHudShow(view: self)
+        dataSource.eventID = self.eventID
+        dataSource.getContacts()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -67,12 +79,12 @@ class MyPostedEventDetailsVC : CustomViewController {
             self.btn_edit.alpha = 1.0
         }
     }
-     // MARK: - --- Action ----
-       @IBAction func btn_back(_ sender:UIButton) {
-          self.navigationController?.popViewController(animated: true)
-       }
+    // MARK: ---- Action ----
+    @IBAction func btn_back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func btn_Ok(_ sender:UIButton) {
-       self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
         if let vc = self.pushToVC("ViewAllProductsVC") as? ViewAllProductsVC
@@ -80,5 +92,5 @@ class MyPostedEventDetailsVC : CustomViewController {
             vc.eventID = self.eventID
         }
     }
-
+    
 }

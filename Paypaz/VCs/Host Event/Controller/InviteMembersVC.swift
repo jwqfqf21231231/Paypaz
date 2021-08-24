@@ -120,24 +120,27 @@ class InviteMembersVC: CustomViewController {
     }
     @IBAction func btn_Done(_ sender:UIButton)
     {
-        
-        Connection.svprogressHudShow(view: self)
         dataSource.eventID = eventID
         dataSource.isPublic = isPublicStatus
         dataSource.isInviteMember = isInviteMemberStatus
         if isInviteMemberStatus == "1"{
             if contactArray.count == 0
             {
-                view.makeToast("Please select contacts to invite")
+                view.makeToast("Please select atleast one member from contacts list to invite members")
             }
             else{
                 let jsonData = try! JSONSerialization.data(withJSONObject:contactArray)
                 let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
                 print(jsonString!)
                 dataSource.contacts = jsonString!
+                Connection.svprogressHudShow(view: self)
+                dataSource.inviteMembers()
             }
         }
-        dataSource.inviteMembers()
+        else{
+            Connection.svprogressHudShow(view: self)
+            dataSource.inviteMembers()
+        }
     }
     
 }

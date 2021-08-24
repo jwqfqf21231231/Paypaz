@@ -33,9 +33,7 @@ class DeleteEventPopupVC : CustomViewController {
         dataSource.deleteEvent() 
     }
     @IBAction func btn_No(_ sender:UIButton) {
-        self.dismiss(animated: false) {//[weak self] in
-          
-        }
+        self.dismiss(animated: false)
         
     }
    

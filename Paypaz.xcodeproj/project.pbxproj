@@ -21,6 +21,7 @@
 		0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */; };
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
+		0466B7DD26D4F80B009EE67C /* SMIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466B7DC26D4F80A009EE67C /* SMIconLabel.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		04B3FBAB26CF94040004A6F3 /* InviteMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */; };
 		04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E28A26B0345100333E94 /* NotificationDataModel.swift */; };
@@ -212,6 +213,7 @@
 		0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
 		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
+		0466B7DC26D4F80A009EE67C /* SMIconLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMIconLabel.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberDataModel.swift; sourceTree = "<group>"; };
 		04B5E28A26B0345100333E94 /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
@@ -1277,6 +1279,7 @@
 		44C8F2CD261F1C09000F03DB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0466B7DC26D4F80A009EE67C /* SMIconLabel.swift */,
 				0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */,
 				0437245826AA86C900840D15 /* CardExtension.swift */,
 				44C8F2D1261F1DEF000F03DB /* Extensions.swift */,
@@ -1881,6 +1884,7 @@
 				445C77AB2637F62300AD4DF3 /* InvitesListVC+Extensions.swift in Sources */,
 				44E5591D26327F8900193305 /* BankSavedSuccessPopupVC.swift in Sources */,
 				445C779D2637CDB500AD4DF3 /* MyEventsListVC+Extensions.swift in Sources */,
+				0466B7DD26D4F80B009EE67C /* SMIconLabel.swift in Sources */,
 				0CDC3DB2268B1EFF00061DF5 /* LogInModel.swift in Sources */,
 				0CDC3DBA268B1F0D00061DF5 /* LogInDataModel.swift in Sources */,
 				44C8F2D6261F1ECF000F03DB /* WelcomeVC.swift in Sources */,

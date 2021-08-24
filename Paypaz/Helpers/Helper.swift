@@ -16,13 +16,13 @@ class Helper : NSObject
     class func isEmailValid(email: String) -> Bool
     {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+        
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
     class func validatePassword(passwordString : String) -> Bool
     {
-       let password = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[0-9])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{8,16}$")
+        let password = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[0-9])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{8,16}$")
         
         return password.evaluate(with: passwordString)
     }
@@ -82,15 +82,15 @@ extension UIViewController
                 }
             }
         }
-
+        
     }
     func pushVC (_ identifier : String, animated:Bool = true) -> UIViewController{
- 
+        
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
         self.navigationController?.pushViewController(viewController, animated: animated)
         return viewController
     }
-
+    
     //MARK:-
     //Hide keyboard on tap outside
     func hideKeyboardWhenTappedArround() {
@@ -135,14 +135,14 @@ extension UIViewController
     }
 }
 extension NSMutableAttributedString {
-
+    
     func setColor(color: UIColor, forText stringValue: String) {
         let attrs = [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor : color]
-       let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
-      //  self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
+        //  self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
         self.addAttributes(attrs, range: range)
     }
-
+    
 }
 extension String
 {
@@ -151,16 +151,41 @@ extension String
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     func stringByRemovingAll(characters: [Character]) -> String {
-           return String(self.filter({ !characters.contains($0) }))
-       }
-   
-   
+        return String(self.filter({ !characters.contains($0) }))
+    }
+    
+    func localToUTC(incomingFormat: String, outGoingFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = incomingFormat
+        dateFormatter.calendar = NSCalendar.current
+        dateFormatter.timeZone = TimeZone.current
+        
+        let dt = dateFormatter.date(from: self)
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = outGoingFormat
+        
+        return dateFormatter.string(from: dt ?? Date())
+    }
+    
+    func UTCToLocal(incomingFormat: String, outGoingFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = incomingFormat
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        let dt = dateFormatter.date(from: self)
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = outGoingFormat
+        
+        return dateFormatter.string(from: dt ?? Date())
+    }
+    
+    
 }
 extension UIButton{
     func addDropDown(forDataSource data:[String], completion: @escaping(String)->Void) {
         resignFirstResponder()
         let selectTypeDropDown = DropDown()
-       // selectTypeDropDown.textFont = UIFont.init(name: "sf_pro_text_regular", size: 10)
+        // selectTypeDropDown.textFont = UIFont.init(name: "sf_pro_text_regular", size: 10)
         selectTypeDropDown.textColor = UIColor.black
         selectTypeDropDown.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
         selectTypeDropDown.width = self.frame.width

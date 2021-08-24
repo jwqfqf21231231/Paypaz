@@ -153,12 +153,10 @@ class HostEventVC : UIViewController {
         case 30:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
-            dateFormatter.dateFormat = "hh:mm:ss"
+            dateFormatter.dateFormat = "hh:mm a"
             let dateString = dateFormatter.string(from:picker.date)
             self.startTime = dateString
-            dateFormatter.dateFormat = "hh:mm a"
-            let btnTitle = dateFormatter.string(from: picker.date)
-            self.txt_StartTime.text = btnTitle
+            self.txt_StartTime.text = dateString
             // Modification
             self.sTime = picker.date
             self.endTime = ""
@@ -168,12 +166,10 @@ class HostEventVC : UIViewController {
         case 40:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
-            dateFormatter.dateFormat = "hh:mm:ss"
+            dateFormatter.dateFormat = "hh:mm a"
             let dateString = dateFormatter.string(from:picker.date)
             self.endTime = dateString
-            dateFormatter.dateFormat = "hh:mm a"
-            let btnTitle = dateFormatter.string(from: picker.date)
-            self.txt_EndTime.text = btnTitle
+            self.txt_EndTime.text = dateString
             self.view.endEditing(true)
         default:
             return
@@ -375,14 +371,7 @@ class HostEventVC : UIViewController {
         self.btn_Paypaz.setImage(UIImage(named: "paypaz_green"), for: .normal)
         self.btn_bankAcc.setImage(UIImage(named: "green_account"), for: .normal)
     }
-    func convertToUTC(dateToConvert:String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        let convertedDate = formatter.date(from: dateToConvert)
-        formatter.timeZone = TimeZone(identifier: "UTC")
-        return formatter.string(from: convertedDate!)
-        
-    }
+    
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
         
         if(img_EventPic.image == nil)
@@ -440,10 +429,13 @@ class HostEventVC : UIViewController {
             dataSource.location = self.location
             dataSource.latitude = self.latitude
             dataSource.longitude = self.longitude
-            var sD = startDate + " " + startTime
-            var eD = endDate + " " + endTime
-            sD = convertToUTC(dateToConvert: sD)
-            eD = convertToUTC(dateToConvert: eD)
+            
+            
+            let sTime = startTime.localToUTC(incomingFormat: "hh:mm a", outGoingFormat: "HH:mm:ss")
+            let eTime = endTime.localToUTC(incomingFormat: "hh:mm a", outGoingFormat: "HH:mm:ss")
+            let sD = startDate + " " + sTime
+            let eD = endDate + " " + eTime
+            
             dataSource.startDate = sD
             dataSource.endDate = eD
             dataSource.eventDescription = txt_Description.text ?? ""
@@ -467,20 +459,11 @@ extension HostEventVC: GMSAutocompleteViewControllerDelegate{
         
         print("Place name: \(place.name ?? "")")
         print("Place address: \(place.formattedAddress ?? "")")
-        //print("Place attributions: \(place.attributions!)")
         self.location = place.name ?? ""
         self.btn_ChooseLocation.setTitle(place.name ?? "", for: .normal)
         self.btn_ChooseLocation.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
-        // let loc1 = (place.name ?? "")
-        //let loc2 = (place.formattedAddress ?? "")
-        //self.location_txt.text = loc1
-        //print(self.location_txt.text)
         self.latitude = "\(place.coordinate.latitude)"
-        // self.event_latitude = lat
-        //  print("Place Latitude: \(self.event_latitude)")
         self.longitude = "\(place.coordinate.longitude)"
-        // self.event_longitude = long
-        // print("Place Longitude: \(self.event_longitude)")
         dismiss(animated: true, completion: nil)
     }
     
@@ -525,10 +508,6 @@ extension HostEventVC : HostEventDataModelDelegate
                     vc.delegate = self
                     self.present(vc, animated: false, completion: nil)
                 }
-                //                if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                //                    popup.selectedPopupType = .eventCreatedSuccess
-                //                    popup.delegate = self
-                //                }
             }
         }
         else
@@ -627,15 +606,4 @@ extension HostEventVC : PopupDelegate {
             vc.eventID = self.eventID
         }
     }
-}
-extension HostEventVC : UITextFieldDelegate{
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let _ = textField as? RoundTextField{
-            if textField.tag == 10 || textField.tag == 20 || textField.tag == 30 || textField.tag == 40{
-                self.view.endEditing(true)
-            }
-        }
-    }
-    
 }

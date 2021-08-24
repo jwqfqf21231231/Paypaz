@@ -50,8 +50,4 @@ class MoreOptionsPopupVC : CustomViewController {
     }
     
 }
-extension MoreOptionsPopupVC : PopupDelegate {
-    func isClickedButton() {
-        
-    }
-}
+
