@@ -61,7 +61,21 @@ class SplashVC : CustomViewController {
             }
             else
             {
+                self?.getLocation()
                 _ = self?.pushToVC("WelcomeVC")
+            }
+            
+        }
+    }
+    // MARK:- Getting Current Location
+    private func getLocation()
+    {
+        let instance = LocationManager.shared
+        instance.getUserLocation { (lat, long) in
+            if lat != nil && long != nil{
+                UserDefaults.standard.setLatitude(value: "\(lat ?? 0.0)")
+                UserDefaults.standard.setLongitude(value: "\(long ?? 0.0)")
+                
             }
             
         }

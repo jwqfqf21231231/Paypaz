@@ -46,7 +46,7 @@ class CardViewController : UIViewController {
 //            }
         }
     
-    func pushToVC (_ identifier : String, animated:Bool = true) -> UIViewController{
+    func pushToVC (_ identifier : String, animated:Bool = false) -> UIViewController{
  
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
         self.navigationController?.pushViewController(viewController, animated: animated)

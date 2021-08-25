@@ -57,13 +57,14 @@ class HostEventVC : UIViewController {
     
     
     
-    //MARK:- ----
+    //MARK:- ---- Outlets ----
     @IBOutlet weak var view_Dashed : UIView!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var txt_EventName : RoundTextField!
     @IBOutlet weak var txt_EventQuantity : RoundTextField!
-    @IBOutlet weak var btn_ChooseLocation : RoundButton!
+    @IBOutlet weak var view_ChooseLocation : UIView!
+    @IBOutlet weak var lbl_ChooseLocation : UILabel!
     @IBOutlet weak var txt_Price : RoundTextField!
     @IBOutlet weak var txt_StartDate : RoundTextField!
     @IBOutlet weak var txt_EndDate : RoundTextField!
@@ -81,7 +82,7 @@ class HostEventVC : UIViewController {
         super.viewDidLoad()
         
         self.paymentType = "0"
-        self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 12, bottom: 15, right: 15)
+        self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 15)
         setTitle()
         if self.eventID != ""
         {
@@ -99,8 +100,23 @@ class HostEventVC : UIViewController {
         hideKeyboardWhenTappedArround()
         dataSource.delegate = self
         dataSource.isEdit = self.isEdit
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(chooseLocation))
+        view_ChooseLocation.addGestureRecognizer(tapGesture)
     }
-    
+    @objc func chooseLocation() {
+        self.view.endEditing(true)
+        let placePicker = GMSAutocompleteViewController()
+        if #available(iOS 13.0, *) {
+            placePicker.primaryTextColor = UIColor.label
+            placePicker.secondaryTextColor = UIColor.secondaryLabel
+            placePicker.tableCellSeparatorColor = UIColor.separator
+            placePicker.tableCellBackgroundColor = UIColor.systemBackground
+        }
+        placePicker.modalPresentationStyle = .fullScreen
+        placePicker.delegate = self
+        self.present(placePicker, animated: true, completion: nil)
+    }
     private func setTitle()
     {
         if isEdit ?? false
@@ -159,8 +175,10 @@ class HostEventVC : UIViewController {
             self.txt_StartTime.text = dateString
             // Modification
             self.sTime = picker.date
-            self.endTime = ""
-            self.txt_EndTime.text?.removeAll()
+            if startDate == endDate{
+                self.endTime = ""
+                self.txt_EndTime.text?.removeAll()
+            }
             // upto here
             self.view.endEditing(true)
         case 40:
@@ -220,7 +238,7 @@ class HostEventVC : UIViewController {
             {
                 self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
                 self.view.endEditing(true)
-                //txt_EndDate.resignFirstResponder()
+                txt_EndDate.resignFirstResponder()
                 break
             }
             else
@@ -241,18 +259,6 @@ class HostEventVC : UIViewController {
             if startDate == ""
             {
                 self.view.makeToast("First Enter Start Date", duration: 1, position: .center)
-                txt_StartTime.resignFirstResponder()
-                break
-            }
-            if endDate == ""
-            {
-                self.view.makeToast("First Enter End Date", duration: 1, position: .center)
-                txt_StartTime.resignFirstResponder()
-                break
-            }
-            if startDate == "" && endDate == ""
-            {
-                self.view.makeToast("First Enter Start Date and End Date", duration: 1, position: .center)
                 txt_StartTime.resignFirstResponder()
                 break
             }
@@ -280,13 +286,13 @@ class HostEventVC : UIViewController {
                 txt_EndTime.resignFirstResponder()
                 break
             }
-            if startDate == "" && endDate == ""
+            if endDate == ""
             {
-                self.view.makeToast("First Enter Start Date and End Date", duration: 1, position: .center)
+                self.view.makeToast("First Enter End Date", duration: 1, position: .center)
                 txt_EndTime.resignFirstResponder()
                 break
             }
-            if startTime == ""
+            if startDate == endDate && startTime == ""
             {
                 self.view.makeToast("First Enter Start Time", duration: 1, position: .center)
                 txt_EndTime.resignFirstResponder()
@@ -314,25 +320,7 @@ class HostEventVC : UIViewController {
         }
     }
     //MARK:- ---- Action ---
-    
-    @IBAction func btn_ChooseLocation(_ sender:UIButton)
-    {
-        self.view.endEditing(true)
-        let placePicker = GMSAutocompleteViewController()
-        if #available(iOS 13.0, *) {
-            placePicker.primaryTextColor = UIColor.label
-            placePicker.secondaryTextColor = UIColor.secondaryLabel
-            placePicker.tableCellSeparatorColor = UIColor.separator
-            placePicker.tableCellBackgroundColor = UIColor.systemBackground
-        } else {
-            // Fallback on earlier versions
-        }
-        
-        placePicker.modalPresentationStyle = .fullScreen
-        placePicker.delegate = self
-        self.present(placePicker, animated: true, completion: nil)
-    }
-    
+   
     @IBAction func btn_AddPic(_ sender:UIButton)
     {
         ImagePickerController.init().pickImage(self, isCamraFront:fontCamera) { (img) in
@@ -430,11 +418,10 @@ class HostEventVC : UIViewController {
             dataSource.latitude = self.latitude
             dataSource.longitude = self.longitude
             
-            
-            let sTime = startTime.localToUTC(incomingFormat: "hh:mm a", outGoingFormat: "HH:mm:ss")
-            let eTime = endTime.localToUTC(incomingFormat: "hh:mm a", outGoingFormat: "HH:mm:ss")
-            let sD = startDate + " " + sTime
-            let eD = endDate + " " + eTime
+            var sD = startDate + " " + startTime
+            var eD = endDate + " " + endTime
+            sD = sD.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm a", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
+            eD = eD.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm a", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
             
             dataSource.startDate = sD
             dataSource.endDate = eD
@@ -459,9 +446,9 @@ extension HostEventVC: GMSAutocompleteViewControllerDelegate{
         
         print("Place name: \(place.name ?? "")")
         print("Place address: \(place.formattedAddress ?? "")")
-        self.location = place.name ?? ""
-        self.btn_ChooseLocation.setTitle(place.name ?? "", for: .normal)
-        self.btn_ChooseLocation.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
+        self.location = place.formattedAddress ?? ""
+        self.lbl_ChooseLocation.textColor = UIColor(named: "BlueColor")
+        self.lbl_ChooseLocation.text = place.formattedAddress
         self.latitude = "\(place.coordinate.latitude)"
         self.longitude = "\(place.coordinate.longitude)"
         dismiss(animated: true, completion: nil)
@@ -565,9 +552,8 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.endDate = data.data?.endDate ?? ""
                 self.startTime = data.data?.startTime ?? ""
                 self.endTime = data.data?.endTime ?? ""
-                
-                self.btn_ChooseLocation.setTitle(data.data?.location, for: .normal)
-                self.btn_ChooseLocation.setTitleColor(UIColor(named:"BlueColor"), for: .normal)
+                self.lbl_ChooseLocation.text = data.data?.location
+                self.lbl_ChooseLocation.textColor = UIColor(named: "BlueColor")
                 self.txt_StartDate.text = self.startDate
                 self.txt_EndDate.text = self.endDate
                 self.txt_StartTime.text = self.startTime

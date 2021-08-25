@@ -160,7 +160,7 @@ extension CreateProfileVC: GMSAutocompleteViewControllerDelegate{
         
         print("Place name: \(place.name ?? "")")
         print("Place address: \(place.formattedAddress ?? "")")
-        self.txtView_Address.text = place.name ?? ""
+        self.txtView_Address.text = place.formattedAddress ?? ""
         dismiss(animated: true, completion: nil)
     }
     

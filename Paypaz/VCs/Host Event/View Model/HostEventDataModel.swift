@@ -103,8 +103,6 @@ class HostEventDataModel: NSObject
             "price" : price,
             "startDate" : startDate,
             "endDate" : endDate,
-            "startTime" : startTime,
-            "endTime" : endTime,
             "ispublic" : isPublic,
             "isinviteMember" : isInviteMember,
             "paymentType" : paymentType,

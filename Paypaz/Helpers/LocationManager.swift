@@ -22,7 +22,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
     func getUserLocation(_ completion:@escaping (_ lat:CLLocationDegrees?, _ long:CLLocationDegrees?)->()){
         
         self.gotLocationOfUser = completion
-        
         self.location_manager = CLLocationManager()
         self.location_manager?.requestWhenInUseAuthorization()
         self.location_manager?.delegate = self
@@ -75,7 +74,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
 
 extension CLLocation {
     func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
-                    -> Void ) {
+                                -> Void ) {
         // Use the last reported location.
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(self, preferredLocale: Locale.current) { (placemarks, error) in
@@ -84,7 +83,7 @@ extension CLLocation {
                 completionHandler(firstLocation)
             }
             else {
-             // An error occurred during geocoding.
+                // An error occurred during geocoding.
                 completionHandler(nil)
             }
         }

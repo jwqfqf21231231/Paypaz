@@ -18,6 +18,6 @@ struct MyPostedContactsModel: Codable {
 // MARK: - Datum
 struct InvitedContacts: Codable {
     let id, userID, eventID, contactID: String?
-    let name, phoneNumber, phoneCode, status: String?
-    let createdDate, updatedDate: String?
+    let name, phoneNumber, phoneCode, parentID: String?
+    let status, createdDate, updatedDate, userProfile: String?
 }

@@ -11,6 +11,8 @@ import UIKit
 class MyEventsListVC : CustomViewController {
     
     var events = [Event]()
+    var newEventItems = [Event]()
+    var currentPage = 1
     let dataSource = MyEventsListDataModel()
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
@@ -25,8 +27,9 @@ class MyEventsListVC : CustomViewController {
         super.viewDidLoad()
         Connection.svprogressHudShow(view: self)
         dataSource.delegate = self
+        dataSource.pageNo = "0"
         dataSource.getMyEvents()
-        // Do any additional setup after loading the view.
+        
     }
     
     // MARK: - --- Action ----
@@ -36,12 +39,22 @@ class MyEventsListVC : CustomViewController {
     
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
-//        for vc in self.navigationController?.viewControllers ?? [] {
-//            if let home = vc as? HomeVC {
-//                self.navigationController?.popToViewController(home, animated: true)
-//                break
-//            }
-//        }
+        //        for vc in self.navigationController?.viewControllers ?? [] {
+        //            if let home = vc as? HomeVC {
+        //                self.navigationController?.popToViewController(home, animated: true)
+        //                break
+        //            }
+        //        }
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.events.count{
+                currentPage = currentPage + 1
+                dataSource.pageNo = "\(currentPage-1)"
+                dataSource.getMyEvents()
+            }
+        }
     }
 }
 

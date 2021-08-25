@@ -32,6 +32,7 @@ class AddProductVC : CustomViewController {
     @IBOutlet weak var txt_ProductPrice : RoundTextField!
     @IBOutlet weak var txt_ProductQuantity : RoundTextField!
     @IBOutlet weak var txt_Description : RoundTextView!
+    @IBOutlet weak var tapView:UIView!
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,18 @@ class AddProductVC : CustomViewController {
         setDelegates()
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         self.view.backgroundColor = UIColor.clear
+        addTapgesture(view: self.tapView)
     }
+    @objc func backToParent(){
+        self.dismiss(animated: false)
+    }
+    
+    private func addTapgesture(view:UIView){
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(backToParent))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     private func setTitle()
     {
         if isEdit ?? false

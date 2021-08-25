@@ -37,6 +37,8 @@ class MyPostedEventDetailsVC : CustomViewController {
     @IBOutlet weak var btn_Category : UIButton!
     @IBOutlet weak var view_Product : UIView!
     @IBOutlet weak var view_ProductHeight : NSLayoutConstraint!
+    @IBOutlet weak var view_Invitee : UIView!
+    @IBOutlet weak var view_InviteeHeight : NSLayoutConstraint!
     var isEditHidden : Bool?
     
     

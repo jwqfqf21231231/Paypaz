@@ -38,6 +38,9 @@ extension MyEventsListVC : UITableViewDataSource {
 }
 extension MyEventsListVC : UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = self.pushToVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC
         {
@@ -79,7 +82,13 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.events = data.data ?? []
+            if currentPage-1 != 0{
+                self.newEventItems = data.data ?? []
+                self.events.append(contentsOf: self.newEventItems)
+            }
+            else{
+                self.events = data.data ?? []
+            }
             DispatchQueue.main.async {
                 self.tableView_Events.reloadData()
             }

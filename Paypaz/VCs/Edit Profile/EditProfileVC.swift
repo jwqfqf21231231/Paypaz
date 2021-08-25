@@ -48,7 +48,7 @@ class EditProfileVC: CustomViewController {
         } else {
             // Fallback on earlier versions
         }
-       
+        
         datePicker.datePickerMode = .date
         txt_DOB.inputView=datePicker
         txt_DOB.inputAccessoryView=createToolBar()
@@ -167,7 +167,7 @@ extension EditProfileVC: GMSAutocompleteViewControllerDelegate{
         
         print("Place name: \(place.name ?? "")")
         print("Place address: \(place.formattedAddress ?? "")")
-        self.txtView_Address.text = place.name ?? ""
+        self.txtView_Address.text = place.formattedAddress ?? ""
         dismiss(animated: true, completion: nil)
     }
     

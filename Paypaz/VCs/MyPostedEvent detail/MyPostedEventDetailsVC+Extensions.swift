@@ -25,10 +25,12 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
                 else { return MorePeopleCell() }
                 return cell
             } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell
-                else { return ProductCell() }
-                
-                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactCell", for: indexPath) as? ContactCell
+                else { return ContactCell() }
+                let contactPic = contacts[indexPath.row].userProfile ?? ""
+                self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                let url =  APIList().getUrlString(url: .USERIMAGE)
+                cell.img_ContactPic.sd_setImage(with: URL(string: url+(contactPic)), placeholderImage: UIImage(named: "profile_c"))
                 return cell
             }
             
@@ -89,15 +91,18 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
                 self.lbl_Price.text = "$ \(((data.data?.price!)! as NSString).integerValue)"
                 self.lbl_Description.text = data.data?.dataDescription
                 
-                let sDate = self.getFormattedDate(strDate: data.data?.startDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "dd MMM yyyy")
-                var sTime = self.getFormattedDate(strDate: data.data?.startDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "HH:mm:ss")
-                sTime = sTime.UTCToLocal(incomingFormat: "HH:mm:ss", outGoingFormat: "hh:mm a")
+                var sDate = data.data?.startDate ?? ""
+                sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+                var eDate = data.data?.endDate ?? ""
+                eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+                let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
+                let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm:a")
                 
-                let eDate = self.getFormattedDate(strDate: data.data?.endDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "dd MMM yyyy")
-                var eTime = self.getFormattedDate(strDate: data.data?.endDate ?? "", currentFomat: "yyyy-MM-dd HH:mm:ss", expectedFromat: "HH:mm:ss")
-                eTime = eTime.UTCToLocal(incomingFormat: "HH:mm:ss", outGoingFormat: "hh:mm a")
                 
-                self.lbl_EventDateTime.text = "\(sDate) At \(sTime) To \(eDate) At \(eTime)"
+                let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
+                let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+                
+                self.lbl_EventDateTime.text = "\(startDate) At \(startTime) To \(endDate) At \(endTime)"
                 self.lbl_EventLocation.text = data.data?.location
             }
         }
@@ -170,7 +175,16 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            
             self.contacts = data.data ?? []
+            let flag = contacts.contains(where:  { (abc) -> Bool in
+                return abc.userProfile?.count == nil
+             })
+             if flag{
+                 self.contacts.removeAll(where: { (abc) -> Bool in
+                    return abc.userProfile?.count == nil
+                 })
+             }
             DispatchQueue.main.async {
                 self.collectionView_People.reloadData()
             }
@@ -178,6 +192,10 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
         else
         {
             print(data.message ?? "")
+        }
+        if self.contacts.count == 0{
+            view_Invitee.isHidden = true
+            view_InviteeHeight.constant = 0
         }
     }
     
