@@ -37,10 +37,11 @@ class AddProductVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
+        dataSource.delegate2 = self
         dataSource1.delegate = self
         hideKeyboardWhenTappedArround()
         setTitle()
-        setDelegates()
+//        setDelegates()
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         self.view.backgroundColor = UIColor.clear
         addTapgesture(view: self.tapView)
@@ -69,13 +70,13 @@ class AddProductVC : CustomViewController {
             lbl_Title.text = "Add Product"
         }
     }
-    private func setDelegates()
-    {
-        self.txt_ProductName.delegate = self
-        self.txt_ProductPrice.delegate = self
-        self.txt_ProductQuantity.delegate = self
-        self.txt_Description.delegate = self
-    }
+//    private func setDelegates()
+//    {
+//        self.txt_ProductName.delegate = self
+//        self.txt_ProductPrice.delegate = self
+//        self.txt_ProductQuantity.delegate = self
+//        self.txt_Description.delegate = self
+//    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -153,14 +154,15 @@ extension AddProductVC : ProductDetailsDataModelDelegate
             let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
             let imageString = data.data?.image ?? ""
             self.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            self.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "ticket_img"))
+            self.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
             self.view_DashedView.isHidden = true
             self.txt_ProductName.text = data.data?.name
             self.txt_ProductPrice.text = data.data?.price
+            self.txt_ProductQuantity.text = data.data?.quantity
             self.txt_Description.text = data.data?.dataDescription
-//            guard let callback = self.callback else { return }
-//            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? ""])
-//            self.dismiss(animated: true)
+           /* guard let callback = self.callback else { return }
+            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? ""])
+            self.dismiss(animated: true)*/
         }
         else
         {
@@ -220,8 +222,8 @@ extension AddProductVC : EditProductDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.navigationController?.popViewController(animated: false)
             self.delegate?.isAddedProduct()
+            self.dismiss(animated: false, completion: nil)
         }
         else
         {

@@ -91,6 +91,7 @@ class MyPostedEventDetailsVC : CustomViewController {
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
         if let vc = self.pushToVC("ViewAllProductsVC") as? ViewAllProductsVC
         {
+            vc.eventName = self.lbl_EventName.text ?? ""
             vc.eventID = self.eventID
         }
     }

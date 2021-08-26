@@ -37,21 +37,22 @@ class MyEventsListVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func btn_P_Logo(_ sender:UIButton) {
+   /* @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
-        //        for vc in self.navigationController?.viewControllers ?? [] {
-        //            if let home = vc as? HomeVC {
-        //                self.navigationController?.popToViewController(home, animated: true)
-        //                break
-        //            }
-        //        }
-    }
+        for vc in self.navigationController?.viewControllers ?? [] {
+            if let home = vc as? HomeVC {
+                self.navigationController?.popToViewController(home, animated: true)
+                break
+            }
+        }
+    }*/
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
             if currentPage*10 == self.events.count{
+                Connection.svprogressHudShow(view: self)
+                dataSource.pageNo = "\(currentPage)"
                 currentPage = currentPage + 1
-                dataSource.pageNo = "\(currentPage-1)"
                 dataSource.getMyEvents()
             }
         }

@@ -50,12 +50,13 @@ class ProductDetailVC : CustomViewController {
     
     @IBAction func btn_Edit(_ sender:UIButton)
     {
-        if let vc = self.pushToVC("AddProductVC") as? AddProductVC
-        {
-            vc.isEdit = true
-            vc.productID = self.productID
-            vc.delegate = self
-        }
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddProductVC") as? AddProductVC
+            else { return  }
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.isEdit = true
+        vc.productID = self.productID
+        vc.delegate = self
+        self.present(vc, animated: false, completion: nil)
     }
     @IBAction func btn_Delete(_ sender:UIButton)
     {

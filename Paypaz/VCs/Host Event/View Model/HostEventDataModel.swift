@@ -21,23 +21,17 @@ class HostEventDataModel: NSObject
     let sharedInstance = Connection()
     var typeId = ""
     var name = ""
-    var eventQuantity = ""
+    var eventDescription = ""
     var location = ""
     var latitude = ""
     var longitude = ""
     var price = ""
+    var eventQuantity = ""
     var startDate = ""
     var endDate = ""
-    var startTime = ""
-    var endTime = ""
-    var isPublic = ""
-    var isInviteMember = ""
     var paymentType = ""
-    var memberID = ""
-    var products = ""
     var eventImg : UIImage?
     var eventID = ""
-    var eventDescription = ""
     
     var url = ""
     var parameter = [String:String]()
@@ -103,13 +97,10 @@ class HostEventDataModel: NSObject
             "price" : price,
             "startDate" : startDate,
             "endDate" : endDate,
-            "ispublic" : isPublic,
-            "isinviteMember" : isInviteMember,
             "paymentType" : paymentType,
-            "memberID" : memberID,
-            "products" : products,
-            "latitude" : UserDefaults.standard.getLatitude(),
-            "longitude" : UserDefaults.standard.getLatitude(),
+            "latitude" : latitude,
+            "longitude" : longitude,
+            "quantity" : eventQuantity,
             "eventID" : eventID
         ]
         sharedInstance.uploadImage(url, imgData: eventImg!.jpegData(compressionQuality: 0.25)!,

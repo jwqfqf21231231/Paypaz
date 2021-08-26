@@ -11,10 +11,17 @@ import UIKit
 class ViewAllProductsVC : CustomViewController {
     //Here i will be using MyPostedProductModel and MyPostedProductDataModel
     //The value for eventID will come from previousVC i.e MyPostedEventDetailsVC
+    var eventName = ""
     var eventID = ""
     var products = [MyProducts]()
+    var newProducts = [MyProducts]()
+    var currentPage = 1
+    var productId = [Int:String]()
+    var eventId = [Int:String]()
     private let dataSource = MyPostedEventDataModel()
+    let dataSource1 = ProductDetailsDataModel()
     weak var delegate : PopupDelegate?
+    @IBOutlet weak var lbl_EventName : UILabel!
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
             tableView_Products.dataSource = self
@@ -26,19 +33,34 @@ class ViewAllProductsVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate2 = self
+        dataSource1.delegate2 = self
         getAllProducts()
-        // Do any additional setup after loading the view.
     }
+   
     func getAllProducts()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = eventID
+        dataSource.pageNo = "0"
         dataSource.getProducts()
     }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.products.count{
+                Connection.svprogressHudShow(view: self)
+                dataSource.eventID = eventID
+                dataSource.pageNo = "\(currentPage)"
+                currentPage = currentPage + 1
+                dataSource.getProducts()
+            }
+        }
+    }
     
-     // MARK: - --- Action ----
-       @IBAction func btn_back(_ sender:UIButton) {
-          self.navigationController?.popViewController(animated: true)
-       }
-
+    
+    // MARK: - --- Action ----
+    @IBAction func btn_back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

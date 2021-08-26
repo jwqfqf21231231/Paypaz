@@ -24,6 +24,8 @@ extension ViewAllProductsVC : UITableViewDataSource {
         cell.lbl_ProductPrice.text = products[indexPath.row].price
         cell.lbl_ProductDescription.text = products[indexPath.row].datumDescription
         cell.btn_Edit.tag = indexPath.row
+        self.productId[indexPath.row] = products[indexPath.row].id
+        self.eventId[indexPath.row] = products[indexPath.row].eventID
         cell.btn_Delete.tag = indexPath.row
         cell.btn_Edit.addTarget(self, action: #selector(editButtonClicked(_:)), for: .touchUpInside)
         cell.btn_Delete.addTarget(self, action: #selector(deleteButtonClicked(_:)), for: .touchUpInside)
@@ -31,11 +33,59 @@ extension ViewAllProductsVC : UITableViewDataSource {
     }
     @objc func editButtonClicked(_ sender:UIButton)
     {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddProductVC") as? AddProductVC
+        else { return  }
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.isEdit = true
+        vc.productID = self.productId[sender.tag] ?? ""
+        vc.delegate = self
+        self.present(vc, animated: false, completion: nil)
         print("edit button clicked")
     }
     @objc func deleteButtonClicked(_ sender:UIButton)
     {
-        print("delete button clicked")
+        Connection.svprogressHudShow(view: self)
+        dataSource1.productID = self.productId[sender.tag] ?? ""
+        dataSource1.eventID = self.eventId[sender.tag] ?? ""
+        dataSource1.type = "1"
+        dataSource1.deleteProduct()
+    }
+}
+extension ViewAllProductsVC : AddProductDelegate
+{
+    func isAddedProduct() {
+        self.currentPage = 1
+        getAllProducts()
+    }
+}
+extension ViewAllProductsVC : DeleteProductDataModelDelegate
+{
+    func didRecieveDataUpdate(data: SuccessModel)
+    {
+        print("DeleteProductModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.currentPage = 1
+            getAllProducts()
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
     }
 }
 extension ViewAllProductsVC : UITableViewDelegate {
@@ -56,14 +106,41 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.products = data.data ?? []
+            let normalString = NSMutableAttributedString(string: "All Products From ")
+            let attributedString = NSMutableAttributedString(string:"\"\(self.eventName) Event\"", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)])
+            normalString.append(attributedString)
+            self.lbl_EventName.attributedText = normalString
+            if currentPage-1 != 0{
+                if data.message != "Data not found"{
+                    self.newProducts = data.data ?? []
+                    self.products.append(contentsOf: self.newProducts)
+                }
+            }
+            else{
+                self.products = data.data ?? []
+            }
             DispatchQueue.main.async {
                 self.tableView_Products.reloadData()
             }
+            
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "" , withOKbtn: true)
+            
+            if data.message == "Data not found" && currentPage-1 >= 1{
+                print("No data at page No : \(currentPage-1)")
+            }
+            else if data.message == "Data not found" && currentPage-1 == 0{
+                view.makeToast(data.message ?? "", duration: 3, position: .center)
+                self.lbl_EventName.text?.removeAll()
+                self.products = []
+                DispatchQueue.main.async {
+                    self.tableView_Products.reloadData()
+                }
+            }
+            else{
+                view.makeToast(data.message ?? "", duration: 3, position: .center)
+            }
         }
     }
     

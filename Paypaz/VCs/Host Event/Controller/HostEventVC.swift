@@ -139,12 +139,10 @@ class HostEventVC : UIViewController {
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            
             let dateString = dateFormatter.string(from: picker.date)
             self.startDate = dateString
             self.txt_StartDate.text = dateString
             self.txt_StartDate.textColor = UIColor(named: "BlueColor")
-            // Modification
             self.sDate = picker.date
             self.startTime = ""
             self.endDate = ""
@@ -152,8 +150,8 @@ class HostEventVC : UIViewController {
             self.txt_EndDate.text?.removeAll()
             self.txt_StartTime.text?.removeAll()
             self.txt_EndTime.text?.removeAll()
-            // upto here
             self.view.endEditing(true)
+            
         case 20:
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
@@ -161,11 +159,11 @@ class HostEventVC : UIViewController {
             let dateString = dateFormatter.string(from: picker.date)
             self.endDate = dateString
             self.txt_EndDate.text = dateString
-            // Modifications
             self.eDate = picker.date
             self.endTime = ""
             self.txt_EndTime.text?.removeAll()
             self.view.endEditing(true)
+            
         case 30:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
@@ -173,14 +171,13 @@ class HostEventVC : UIViewController {
             let dateString = dateFormatter.string(from:picker.date)
             self.startTime = dateString
             self.txt_StartTime.text = dateString
-            // Modification
             self.sTime = picker.date
             if startDate == endDate{
                 self.endTime = ""
                 self.txt_EndTime.text?.removeAll()
             }
-            // upto here
             self.view.endEditing(true)
+            
         case 40:
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
@@ -196,22 +193,19 @@ class HostEventVC : UIViewController {
     }
     func createToolBar()->UIToolbar
     {
-        //tool bar
+        //Tool bar
         toolBar = UIToolbar()
         toolBar.sizeToFit()
-        //bar button item
+        //Bar button item
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         toolBar.setItems([doneBtn], animated: false)
         return toolBar
     }
     @objc func callDatePicker(field:UITextField)
     {
-        
-        //Modification
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let currentDate = dateFormatter.string(from: Date())
-        //upto here
         if picker != nil{
             self.picker.removeFromSuperview()
             self.picker = nil
@@ -249,8 +243,7 @@ class HostEventVC : UIViewController {
                     
                 }
                 picker.datePickerMode = .date
-                //Modification
-                picker.minimumDate = sDate //upto here
+                picker.minimumDate = sDate
                 txt_EndDate.inputView = picker
                 txt_EndDate.inputAccessoryView = createToolBar()
                 fieldTag = field.tag
@@ -270,11 +263,10 @@ class HostEventVC : UIViewController {
                     
                 }
                 picker.datePickerMode = .time
-                //Modifications
                 if startDate == currentDate
                 {
                     picker.minimumDate = Date()
-                }//upto here
+                }
                 txt_StartTime.inputView = picker
                 txt_StartTime.inputAccessoryView = createToolBar()
                 fieldTag = field.tag
@@ -306,11 +298,10 @@ class HostEventVC : UIViewController {
                     
                 }
                 picker.datePickerMode = .time
-                //Modification
                 if startDate == endDate
                 {
                     picker.minimumDate = sTime
-                }//upto here
+                }
                 txt_EndTime.inputView = picker
                 txt_EndTime.inputAccessoryView = createToolBar()
                 fieldTag = field.tag
@@ -526,34 +517,28 @@ extension HostEventVC : MyPostedEventDataModelDelegate
         {
             DispatchQueue.main.async {
                 self.txt_EventName.text = data.data?.name
-                self.txt_Price.text = data.data?.price
                 self.btn_EventTitle.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
-                switch data.data?.typeID
-                {
-                case "1" : self.btn_EventTitle.setTitle("Sports & Fitness", for: .normal)
-                    self.selectedEventId = "1"
-                case "2" : self.btn_EventTitle.setTitle("Music", for: .normal)
-                    self.selectedEventId = "2"
-                case "3" : self.btn_EventTitle.setTitle("Festival", for: .normal)
-                    self.selectedEventId = "3"
-                case "4" : self.btn_EventTitle.setTitle("Charity & Causes", for: .normal)
-                    self.selectedEventId = "4"
-                case "5" : self.btn_EventTitle.setTitle("Seminar", for: .normal)
-                    self.selectedEventId = "5"
-                case "6" : self.btn_EventTitle.setTitle("Neighbour", for: .normal)
-                    self.selectedEventId = "6"
-                case "7" : self.btn_EventTitle.setTitle("Education", for: .normal)
-                    self.selectedEventId = "7"
-                default : self.btn_EventTitle.setTitle("Other", for: .normal)
-                    self.selectedEventId = "8"
-                }
+                self.btn_EventTitle.setTitle(data.data?.typeName, for: .normal)
+                self.selectedEventId = data.data?.typeID
+                self.txt_Price.text = data.data?.price
                 self.txt_EventQuantity.text = data.data?.quantity
-                self.startDate = data.data?.startDate ?? ""
-                self.endDate = data.data?.endDate ?? ""
-                self.startTime = data.data?.startTime ?? ""
-                self.endTime = data.data?.endTime ?? ""
+                var sDate = data.data?.startDate ?? ""
+                sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+                var eDate = data.data?.endDate ?? ""
+                eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+                let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
+                let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm:a")
+                let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
+                let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+                self.startDate = startDate
+                self.endDate = endDate
+                self.startTime = startTime
+                self.endTime = endTime
                 self.lbl_ChooseLocation.text = data.data?.location
                 self.lbl_ChooseLocation.textColor = UIColor(named: "BlueColor")
+                self.location = data.data?.location ?? ""
+                self.latitude = data.data?.latitude ?? ""
+                self.longitude = data.data?.longitude ?? ""
                 self.txt_StartDate.text = self.startDate
                 self.txt_EndDate.text = self.endDate
                 self.txt_StartTime.text = self.startTime

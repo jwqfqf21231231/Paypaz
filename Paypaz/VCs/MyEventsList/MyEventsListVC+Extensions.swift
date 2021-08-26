@@ -16,17 +16,28 @@ extension MyEventsListVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyEventsCell")  as? MyEventsCell
-            else { return MyEventsCell() }
+        else { return MyEventsCell() }
         let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
         let imageString = (events[indexPath.row].image ?? "").trimmingCharacters(in: .whitespaces)
         cell.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        cell.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "profile_c"))
+        cell.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "place_holder"))
         cell.lbl_EventName.text = events[indexPath.row].name
-        cell.lbl_EventTime.text = events[indexPath.row].startDate
+        var sDate = events[indexPath.row].startDate ?? ""
+        sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+        var eDate = events[indexPath.row].endDate ?? ""
+        eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+        let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
+        let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm:a")
+        
+        
+        let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
+        let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+        
+        cell.lbl_EventTime.text = "\(startDate) At \(startTime) To \(endDate) At \(endTime)"
         cell.lbl_EventAddress.text = events[indexPath.row].location
         cell.btn_More.tag = indexPath.row
         cell.btn_More.addTarget(self, action: #selector(moreOptionsClicked(_:)), for: .touchUpInside)
-          return cell
+        return cell
     }
     
     @objc func moreOptionsClicked(_ sender : UIButton){
@@ -51,8 +62,7 @@ extension MyEventsListVC : UITableViewDelegate {
 
 extension MyEventsListVC : PopupDelegate {
     func isClickedButton() {
-        //Connection.svprogressHudShow(view: self)
-        
+        Connection.svprogressHudShow(view: self)
         dataSource.getMyEvents()
     }
 }
@@ -78,7 +88,6 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
 {
     func didRecieveDataUpdate(data: MyEventsListModel)
     {
-        //print("MyEventsListModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
@@ -95,12 +104,13 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         }
         else
         {
-            self.events = []
-            DispatchQueue.main.async {
-                self.tableView_Events.reloadData()
+            if data.message == "Data not found"{
+                self.events = []
+                DispatchQueue.main.async {
+                    self.tableView_Events.reloadData()
+                }
             }
             self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-           // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
