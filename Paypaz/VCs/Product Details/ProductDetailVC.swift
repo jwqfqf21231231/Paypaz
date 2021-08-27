@@ -8,12 +8,19 @@
 
 import UIKit
 import SDWebImage
+protocol UpdatedProductDelegate : class {
+    func isUpdatedProduct(data:MyProducts?, productId :String, isEdited:Bool?, isDeleted:Bool?)
+}
+
 class ProductDetailVC : CustomViewController {
     //productID will come from previousVC .ie ViewAllProductsVC
+    var isEdited : Bool?
     var productID = ""
     var eventID = ""
+    var product : MyProducts?
     private let dataSource = ProductDetailsDataModel()
     private let dataSource2 = MyPostedEventDataModel()
+    weak var updatedProductDelegate : UpdatedProductDelegate?
     weak var delegate : PopupDelegate?
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var lbl_ProductName : UILabel!
@@ -44,8 +51,14 @@ class ProductDetailVC : CustomViewController {
     }
     //MARK:- --- Action ---
     @IBAction func btn_back (_ sender:UIButton) {
-        self.navigationController?.popViewController(animated: true)
-        self.delegate?.isClickedButton()
+        if isEdited ?? false{
+            self.updatedProductDelegate?.isUpdatedProduct(data: self.product, productId: self.productID,isEdited: true, isDeleted: false)
+            self.navigationController?.popViewController(animated: true)
+
+        }else{
+            self.navigationController?.popViewController(animated: true)
+
+        }
     }
     
     @IBAction func btn_Edit(_ sender:UIButton)
@@ -69,7 +82,9 @@ class ProductDetailVC : CustomViewController {
 }
 extension ProductDetailVC : AddProductDelegate
 {
-    func isAddedProduct() {
+    func isAddedProduct(data: MyProducts?, productId: String) {
+        self.isEdited = true
+        self.product = data
         Connection.svprogressHudShow(view: self)
         dataSource.getProductDetails()
     }
@@ -91,7 +106,7 @@ extension ProductDetailVC : ProductDetailsDataModelDelegate
             self.lbl_ProductName.text = data.data?.name
             self.lbl_Description.text = data.data?.dataDescription
             self.lbl_ProductPrice.text = "Price:\(data.data?.price ?? "")"
-            self.lbl_ProductQuantity.text = data.data?.quantity
+            self.lbl_ProductQuantity.text = data.data?.quantity ?? ""
         }
         else
         {
@@ -150,7 +165,7 @@ extension ProductDetailVC : DeleteProductDataModelDelegate
         if data.success == 1
         {
             self.navigationController?.popViewController(animated: false)
-            self.delegate?.isClickedButton()
+            self.updatedProductDelegate?.isUpdatedProduct(data: nil, productId: self.productID, isEdited: false, isDeleted: true)
         }
         else
         {

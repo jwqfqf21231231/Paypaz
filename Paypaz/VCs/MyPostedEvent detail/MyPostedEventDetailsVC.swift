@@ -21,6 +21,14 @@ class MyPostedEventDetailsVC : CustomViewController {
     @IBOutlet weak var lbl_Description : UILabel!
     @IBOutlet weak var lbl_EventDateTime : UILabel!
     @IBOutlet weak var lbl_EventLocation : UILabel!
+    @IBOutlet weak var btn_edit : RoundButton!
+    @IBOutlet weak var btn_Category : UIButton!
+    @IBOutlet weak var view_Product : UIView!
+    @IBOutlet weak var view_ProductHeight : NSLayoutConstraint!
+    @IBOutlet weak var view_Invitee : UIView!
+    @IBOutlet weak var view_InviteeHeight : NSLayoutConstraint!
+    @IBOutlet weak var img_UserPic : UIImageView!
+    @IBOutlet weak var lbl_UserName : UILabel!
     @IBOutlet weak var collectionView_Products : UICollectionView!{
         didSet {
             collectionView_Products.dataSource = self
@@ -33,12 +41,7 @@ class MyPostedEventDetailsVC : CustomViewController {
             collectionView_People.delegate   = self
         }
     }
-    @IBOutlet weak var btn_edit : RoundButton!
-    @IBOutlet weak var btn_Category : UIButton!
-    @IBOutlet weak var view_Product : UIView!
-    @IBOutlet weak var view_ProductHeight : NSLayoutConstraint!
-    @IBOutlet weak var view_Invitee : UIView!
-    @IBOutlet weak var view_InviteeHeight : NSLayoutConstraint!
+    
     var isEditHidden : Bool?
     
     

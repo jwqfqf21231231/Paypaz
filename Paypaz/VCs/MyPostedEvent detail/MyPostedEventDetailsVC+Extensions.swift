@@ -82,10 +82,15 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
             self.eventDetails = data.data
             
             DispatchQueue.main.async {
-                let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
-                let imageString = (data.data?.image) ?? ""
+                var url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
+                var imageString = (data.data?.image) ?? ""
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 self.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "ticket_img"))
+                url = APIList().getUrlString(url: .USERIMAGE)
+                imageString = data.data?.userProfile ?? ""
+                self.img_UserPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                self.img_UserPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "place_holder"))
+                self.lbl_UserName.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
                 self.btn_Category.setTitle(data.data?.typeName, for: .normal)
                 self.lbl_EventName.text = data.data?.name
                 self.lbl_Price.text = "$ \(((data.data?.price!)! as NSString).integerValue)"

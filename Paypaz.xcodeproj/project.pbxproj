@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040A4F5726D8A124009C0581 /* CornerViewSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A4F5526D8A124009C0581 /* CornerViewSide.swift */; };
+		040A4F5826D8A124009C0581 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A4F5626D8A124009C0581 /* DesignableView.swift */; };
 		040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */; };
 		041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */; };
 		0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359326B00641008FA98A /* FavouritesDataModel.swift */; };
@@ -200,6 +202,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040A4F5526D8A124009C0581 /* CornerViewSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerViewSide.swift; sourceTree = "<group>"; };
+		040A4F5626D8A124009C0581 /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardDataModel.swift; sourceTree = "<group>"; };
 		041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedContactsModel.swift; sourceTree = "<group>"; };
 		0428359326B00641008FA98A /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
@@ -1282,6 +1286,8 @@
 		44C8F2CD261F1C09000F03DB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				040A4F5526D8A124009C0581 /* CornerViewSide.swift */,
+				040A4F5626D8A124009C0581 /* DesignableView.swift */,
 				0466B7DC26D4F80A009EE67C /* SMIconLabel.swift */,
 				0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */,
 				0437245826AA86C900840D15 /* CardExtension.swift */,
@@ -1834,9 +1840,11 @@
 				0C9F29F8268AEA9100CE6178 /* OTPVerificationDataModel.swift in Sources */,
 				0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */,
 				44596F39266A5B1500401884 /* EventReportsHistoryVC.swift in Sources */,
+				040A4F5726D8A124009C0581 /* CornerViewSide.swift in Sources */,
 				44E5EFA2262DB74000FEE2C0 /* ViewAllProductsVC.swift in Sources */,
 				44596F3B266A5B2A00401884 /* EventReportsHistoryVC+Extensions.swift in Sources */,
 				44E5EF9D262DB22800FEE2C0 /* MyTicketsVC.swift in Sources */,
+				040A4F5826D8A124009C0581 /* DesignableView.swift in Sources */,
 				44F7666E263A9507007F78CB /* ProductListVC.swift in Sources */,
 				44C8F2D4261F1E15000F03DB /* Constants.swift in Sources */,
 				0C5B97FF268DE09000CBAC41 /* ImagePickerController.swift in Sources */,

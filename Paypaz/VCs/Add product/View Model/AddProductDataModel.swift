@@ -28,18 +28,20 @@ class AddProductDataModel: NSObject
     var productQuantity = ""
     var productPic : UIImage?
     var productDescription = ""
-    
+    var isPaid = ""
     var productID = ""
     
     func addProduct()
     {
         let url =  APIList().getUrlString(url: .ADDPRODUCT)
+    
         let parameter : [String:String] = [
             "name" : productName,
             "price" : productPrice,
             "description" : productDescription,
             "quantity" : productQuantity,
-            "eventID" : eventID
+            "eventID" : eventID,
+            "isPaid" : isPaid
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
@@ -80,27 +82,27 @@ class AddProductDataModel: NSObject
             "quantity" : productQuantity
         ]
         sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: nil,success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
                                         {
-                                            (JSON) in
-                                            let  result :Data? = JSON
-                                            if result != nil
-                                            {
-                                                do
+                                            do
                                                 {
                                                     let response = try JSONDecoder().decode(AddProductModel.self, from: result!)
                                                     self.delegate2?.didRecieveDataUpdate3(data: response)
                                                 }
-                                                catch let error as NSError
-                                                {
-                                                    self.delegate2?.didFailDataUpdateWithError3(error: error)
-                                                }
+                                            catch let error as NSError
+                                            {
+                                                self.delegate2?.didFailDataUpdateWithError3(error: error)
                                             }
-                                        },
-                                       failure:
-                                        {
-                                            (error) in
-                                            self.delegate2?.didFailDataUpdateWithError3(error: error)
-                                            
-                                        })
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.delegate2?.didFailDataUpdateWithError3(error: error)
+                                        
+                                    })
     }
 }

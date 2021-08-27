@@ -13,14 +13,15 @@ class ViewAllProductsVC : CustomViewController {
     //The value for eventID will come from previousVC i.e MyPostedEventDetailsVC
     var eventName = ""
     var eventID = ""
+    var deletedProductId = ""
     var products = [MyProducts]()
     var newProducts = [MyProducts]()
     var currentPage = 1
-    var productId = [Int:String]()
-    var eventId = [Int:String]()
+    
     private let dataSource = MyPostedEventDataModel()
     let dataSource1 = ProductDetailsDataModel()
     weak var delegate : PopupDelegate?
+    
     @IBOutlet weak var lbl_EventName : UILabel!
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
@@ -42,6 +43,7 @@ class ViewAllProductsVC : CustomViewController {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = eventID
         dataSource.pageNo = "0"
+        self.currentPage = 1
         dataSource.getProducts()
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

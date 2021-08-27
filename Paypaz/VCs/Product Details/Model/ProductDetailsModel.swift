@@ -10,21 +10,8 @@ import Foundation
 
 // MARK: - ProductDetailsModel
 struct ProductDetailsModel: Codable {
-    let data: ProductInfo?
+    let data: MyProducts?
     let success: Int?
     let message: String?
-}
-
-// MARK: - DataClass
-struct ProductInfo: Codable {
-    let id, userID, eventID, name: String?
-    let dataDescription, price, quantity, image: String?
-    let status, createdDate, updatedDate: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id, userID, eventID, name
-        case dataDescription = "description"
-        case price, quantity, image, status, createdDate, updatedDate
-    }
 }
 

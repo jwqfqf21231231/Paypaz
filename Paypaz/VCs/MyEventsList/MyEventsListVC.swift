@@ -32,7 +32,7 @@ class MyEventsListVC : CustomViewController {
         
     }
     
-    // MARK: - --- Action ----
+    // MARK: - ---- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }

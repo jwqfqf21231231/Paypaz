@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import IQKeyboardManagerSwift
 protocol AddProductDelegate : class {
-    func isAddedProduct()
+    func isAddedProduct(data:MyProducts?,productId :String)
 }
 typealias DataCallback = ([String:Any]) -> Void
 class AddProductVC : CustomViewController {
@@ -22,6 +22,7 @@ class AddProductVC : CustomViewController {
     var pickedImage : UIImage?
     var fontCamera  = false
     var images      = [String:Any]()
+    var paymentStatus = "0"
     weak var delegate : AddProductDelegate?
     private let dataSource = AddProductDataModel()
     private let dataSource1 = ProductDetailsDataModel()
@@ -32,6 +33,8 @@ class AddProductVC : CustomViewController {
     @IBOutlet weak var txt_ProductPrice : RoundTextField!
     @IBOutlet weak var txt_ProductQuantity : RoundTextField!
     @IBOutlet weak var txt_Description : RoundTextView!
+    @IBOutlet weak var btn_Free : UIButton!
+    @IBOutlet weak var btn_Paid : UIButton!
     @IBOutlet weak var tapView:UIView!
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
@@ -41,7 +44,6 @@ class AddProductVC : CustomViewController {
         dataSource1.delegate = self
         hideKeyboardWhenTappedArround()
         setTitle()
-//        setDelegates()
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 15)
         self.view.backgroundColor = UIColor.clear
         addTapgesture(view: self.tapView)
@@ -70,13 +72,6 @@ class AddProductVC : CustomViewController {
             lbl_Title.text = "Add Product"
         }
     }
-//    private func setDelegates()
-//    {
-//        self.txt_ProductName.delegate = self
-//        self.txt_ProductPrice.delegate = self
-//        self.txt_ProductQuantity.delegate = self
-//        self.txt_Description.delegate = self
-//    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -88,6 +83,23 @@ class AddProductVC : CustomViewController {
     
     
     //MARK:- --- Action ----
+    @IBAction func btn_DoPayment(_ sender:UIButton){
+        paymentStatus = "\(sender.tag)"
+        if sender.tag == 0{
+            btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+        }
+        else{
+            btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
+        }
+        if paymentStatus == "0"{
+            txt_ProductPrice.isHidden = false
+        }
+        else{
+            txt_ProductPrice.isHidden = true
+        }
+    }
     @IBAction func btn_AddPic(_ sender:UIButton)
     {
         ImagePickerController.init().pickImage(self, isCamraFront:fontCamera) { (img) in
@@ -100,23 +112,23 @@ class AddProductVC : CustomViewController {
     @IBAction func btn_Done(_ sender:UIButton) {
         if(img_ProductPic.image == nil)
         {
-            self.view.makeToast("Please give Product Image")
+            self.view.makeToast("Please add product image")
         }
         else if(txt_ProductName.text?.trim().count == 0)
         {
-            self.view.makeToast("Please Enter Product Name")
+            self.view.makeToast("Please enter product name")
         }
-        else if(txt_ProductPrice.text?.trim().count == 0)
+        else if paymentStatus == "0" && (txt_ProductPrice.text?.trim().count == 0)
         {
-            self.view.makeToast("Please Specify Product Price")
+            self.view.makeToast("Please enter product price")
         }
         else if(txt_ProductQuantity.text?.trim().count == 0)
         {
-            self.view.makeToast("Please Specify Product Quantity")
+            self.view.makeToast("Please enter product quantity")
         }
         else if(txt_Description.text.trim().count == 0)
         {
-            self.view.makeToast("Please give some Description about your Product")
+            self.view.makeToast("Please enter product description")
         }
         else
         {
@@ -126,6 +138,12 @@ class AddProductVC : CustomViewController {
             dataSource.productPrice = txt_ProductPrice.text ?? ""
             dataSource.productQuantity = txt_ProductQuantity.text ?? ""
             dataSource.productDescription = txt_Description.text ?? ""
+            if paymentStatus == "0"{
+                dataSource.isPaid = "1"
+            }
+            else{
+                dataSource.isPaid = "0"
+            }
             dataSource.eventID = eventID
             if isEdit ?? false
             {
@@ -156,6 +174,14 @@ extension AddProductVC : ProductDetailsDataModelDelegate
             self.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
             self.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
             self.view_DashedView.isHidden = true
+            if data.data?.isPaid == "0"{
+                btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+                btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+                self.txt_ProductPrice.isHidden = true
+            }
+            else{
+               
+            }
             self.txt_ProductName.text = data.data?.name
             self.txt_ProductPrice.text = data.data?.price
             self.txt_ProductQuantity.text = data.data?.quantity
@@ -222,7 +248,8 @@ extension AddProductVC : EditProductDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.delegate?.isAddedProduct()
+            
+            self.delegate?.isAddedProduct(data: data.data, productId: productID)
             self.dismiss(animated: false, completion: nil)
         }
         else

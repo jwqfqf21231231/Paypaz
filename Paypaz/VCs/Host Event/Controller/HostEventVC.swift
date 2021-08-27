@@ -54,7 +54,7 @@ class HostEventVC : UIViewController {
     var selectedEventId : String?
     var btn_Title:String?
     var fieldTag:Int?
-    
+    var paymentStatus = "0"
     
     
     //MARK:- ---- Outlets ----
@@ -75,6 +75,10 @@ class HostEventVC : UIViewController {
     @IBOutlet weak var btn_Paypaz : RoundButton!
     @IBOutlet weak var btn_bankAcc : RoundButton!
     @IBOutlet weak var txt_Description : RoundTextView!
+    @IBOutlet weak var view_PaymentMethod : UIView!
+    @IBOutlet weak var view_Height : NSLayoutConstraint!
+    @IBOutlet weak var btn_Free : UIButton!
+    @IBOutlet weak var btn_Paid : UIButton!
     var toolBar:UIToolbar!
     
     //MARK:- ---- View Life Cycle ---
@@ -321,7 +325,27 @@ class HostEventVC : UIViewController {
             self.images["identity_img"] = img
         }
     }
-    
+    @IBAction func btn_DoPayment(_ sender:UIButton){
+        paymentStatus = "\(sender.tag)"
+        if sender.tag == 0{
+            btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+        }
+        else{
+            btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
+        }
+        if paymentStatus == "0"{
+            view_PaymentMethod.isHidden = false
+            view_Height.constant = 125.5
+            txt_Price.isHidden = false
+        }
+        else{
+            view_PaymentMethod.isHidden = true
+            view_Height.constant = 0
+            txt_Price.isHidden = true
+        }
+    }
     @IBAction func btn_SelectEvent(_ sender:UIButton)
     {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChooseEventTypeVC") as? ChooseEventTypeVC
@@ -365,7 +389,7 @@ class HostEventVC : UIViewController {
         {
             self.view.makeToast("Select Event Type")
         }
-        else if(txt_Price.text?.trim().count == 0)
+        else if paymentStatus == "0" && (txt_Price.text?.trim().count == 0)
         {
             self.view.makeToast("Enter Price")
         }
@@ -417,7 +441,9 @@ class HostEventVC : UIViewController {
             dataSource.startDate = sD
             dataSource.endDate = eD
             dataSource.eventDescription = txt_Description.text ?? ""
-            dataSource.paymentType = paymentType ?? ""
+            if paymentStatus == "0"{
+                dataSource.paymentType = paymentType ?? ""
+            }
             
             if isEdit ?? false
             {

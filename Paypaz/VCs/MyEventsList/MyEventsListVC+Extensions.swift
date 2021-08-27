@@ -24,16 +24,11 @@ extension MyEventsListVC : UITableViewDataSource {
         cell.lbl_EventName.text = events[indexPath.row].name
         var sDate = events[indexPath.row].startDate ?? ""
         sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
-        var eDate = events[indexPath.row].endDate ?? ""
-        eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+
         let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
         let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm:a")
         
-        
-        let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
-        let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
-        
-        cell.lbl_EventTime.text = "\(startDate) At \(startTime) To \(endDate) At \(endTime)"
+        cell.lbl_EventTime.text = "\(startDate) At \(startTime)"
         cell.lbl_EventAddress.text = events[indexPath.row].location
         cell.btn_More.tag = indexPath.row
         cell.btn_More.addTarget(self, action: #selector(moreOptionsClicked(_:)), for: .touchUpInside)

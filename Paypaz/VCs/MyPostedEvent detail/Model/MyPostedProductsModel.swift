@@ -9,21 +9,21 @@
 import Foundation
 
 // MARK: - MyPostedProductsModel
-struct MyPostedProductsModel: Codable {
+class MyPostedProductsModel: Codable {
     let data: [MyProducts]?
     let success: Int?
     let message: String?
 }
 
 // MARK: - Datum
-struct MyProducts: Codable {
+class MyProducts: Codable {
     let id, userID, eventID, name: String?
-    let datumDescription, price, image, status: String?
-    let createdDate, updatedDate: String?
-
+    let dataDescription, price, quantity, image: String?
+    let isPaid, status, createdDate, updatedDate: String?
+    
     enum CodingKeys: String, CodingKey {
         case id, userID, eventID, name
-        case datumDescription = "description"
-        case price, image, status, createdDate, updatedDate
+        case dataDescription = "description"
+        case price, quantity, image, isPaid, status, createdDate, updatedDate
     }
 }
