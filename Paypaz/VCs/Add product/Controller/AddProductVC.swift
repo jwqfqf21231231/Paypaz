@@ -22,7 +22,7 @@ class AddProductVC : CustomViewController {
     var pickedImage : UIImage?
     var fontCamera  = false
     var images      = [String:Any]()
-    var paymentStatus = "0"
+    var paymentStatus = "1"
     weak var delegate : AddProductDelegate?
     private let dataSource = AddProductDataModel()
     private let dataSource1 = ProductDetailsDataModel()
@@ -86,18 +86,18 @@ class AddProductVC : CustomViewController {
     @IBAction func btn_DoPayment(_ sender:UIButton){
         paymentStatus = "\(sender.tag)"
         if sender.tag == 0{
-            btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
-            btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
-        }
-        else{
             btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
             btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
         }
+        else{
+            btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+        }
         if paymentStatus == "0"{
-            txt_ProductPrice.isHidden = false
+            txt_ProductPrice.isHidden = true
         }
         else{
-            txt_ProductPrice.isHidden = true
+            txt_ProductPrice.isHidden = false
         }
     }
     @IBAction func btn_AddPic(_ sender:UIButton)
@@ -135,16 +135,15 @@ class AddProductVC : CustomViewController {
             Connection.svprogressHudShow(view: self)
             dataSource.productPic = img_ProductPic.image
             dataSource.productName = txt_ProductName.text ?? ""
-            dataSource.productPrice = txt_ProductPrice.text ?? ""
             dataSource.productQuantity = txt_ProductQuantity.text ?? ""
             dataSource.productDescription = txt_Description.text ?? ""
             if paymentStatus == "0"{
-                dataSource.isPaid = "1"
-            }
-            else{
                 dataSource.isPaid = "0"
             }
-            dataSource.eventID = eventID
+            else{
+                dataSource.isPaid = "1"
+                dataSource.productPrice = txt_ProductPrice.text ?? ""
+            }
             if isEdit ?? false
             {
                 dataSource.productID = self.productID
@@ -152,6 +151,7 @@ class AddProductVC : CustomViewController {
             }
             else
             {
+                dataSource.eventID = eventID
                 dataSource.addProduct()
             }
             //        self.dismiss(animated: true) { [weak self] in
@@ -175,15 +175,18 @@ extension AddProductVC : ProductDetailsDataModelDelegate
             self.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
             self.view_DashedView.isHidden = true
             if data.data?.isPaid == "0"{
-                btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
-                btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+                btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
+                btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
                 self.txt_ProductPrice.isHidden = true
             }
             else{
-               
+                btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+                btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+                self.txt_ProductPrice.text = data.data?.price
+                self.txt_ProductPrice.isHidden = false
             }
+            self.paymentStatus = data.data?.isPaid ?? ""
             self.txt_ProductName.text = data.data?.name
-            self.txt_ProductPrice.text = data.data?.price
             self.txt_ProductQuantity.text = data.data?.quantity
             self.txt_Description.text = data.data?.dataDescription
            /* guard let callback = self.callback else { return }

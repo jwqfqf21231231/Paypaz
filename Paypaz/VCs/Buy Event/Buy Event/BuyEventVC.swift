@@ -11,8 +11,8 @@ import UIKit
 class BuyEventVC : CustomViewController {
 
     var typeID = ""
-    var eventData = [Event]()
-    var filteredEventData = [Event]()
+    var eventData = [MyEvent]()
+    var filteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
     
     @IBOutlet weak var txt_Search : UITextField!

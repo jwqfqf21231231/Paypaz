@@ -9,12 +9,16 @@
 import UIKit
 import SDWebImage
 import GooglePlaces
+protocol EditEventDelegate : class {
+    func editEventData(data : MyEvent?, eventID : String)
+    
+}
 class HostEventVC : UIViewController {
     
     var isEdit : Bool? //The value for isEdit comes from MyEventsListVC+Extensions (60th line)
     var eventID = ""
     private let dataSource2 = MyPostedEventDataModel()
-    
+    weak var editEventDelegate : EditEventDelegate?
     var pickedImage : UIImage?
     var fontCamera  = false
     var images      = [String:Any]()
@@ -315,7 +319,7 @@ class HostEventVC : UIViewController {
         }
     }
     //MARK:- ---- Action ---
-   
+    
     @IBAction func btn_AddPic(_ sender:UIButton)
     {
         ImagePickerController.init().pickImage(self, isCamraFront:fontCamera) { (img) in
@@ -423,28 +427,29 @@ class HostEventVC : UIViewController {
         }
         else
         {
-            Connection.svprogressHudShow(view: self)
-            dataSource.eventImg = img_EventPic.image
-            dataSource.name = txt_EventName.text ?? ""
-            dataSource.typeId = selectedEventId ?? ""
-            dataSource.price = txt_Price.text ?? ""
-            dataSource.eventQuantity = txt_EventQuantity.text ?? ""
-            dataSource.location = self.location
-            dataSource.latitude = self.latitude
-            dataSource.longitude = self.longitude
-            
             var sD = startDate + " " + startTime
             var eD = endDate + " " + endTime
             sD = sD.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm a", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
             eD = eD.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm a", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
             
+            dataSource.typeId = selectedEventId ?? ""
+            dataSource.name = txt_EventName.text ?? ""
+            dataSource.eventDescription = txt_Description.text ?? ""
+            dataSource.location = self.location
             dataSource.startDate = sD
             dataSource.endDate = eD
-            dataSource.eventDescription = txt_Description.text ?? ""
             if paymentStatus == "0"{
                 dataSource.paymentType = paymentType ?? ""
+                dataSource.price = txt_Price.text ?? ""
             }
-            
+            else{
+                dataSource.paymentType = "2"
+            }
+            dataSource.latitude = self.latitude
+            dataSource.longitude = self.longitude
+            dataSource.eventImg = img_EventPic.image
+            dataSource.eventQuantity = txt_EventQuantity.text ?? ""
+            Connection.svprogressHudShow(view: self)
             if isEdit ?? false
             {
                 dataSource.eventID = self.eventID
@@ -501,6 +506,7 @@ extension HostEventVC : HostEventDataModelDelegate
             if isEdit ?? false
             {
                 self.navigationController?.popViewController(animated: false)
+                self.editEventDelegate?.editEventData(data: data.data, eventID: data.data?.id ?? "")
             }
             else
             {
@@ -546,35 +552,56 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.btn_EventTitle.setTitleColor(UIColor(named: "BlueColor"), for: .normal)
                 self.btn_EventTitle.setTitle(data.data?.typeName, for: .normal)
                 self.selectedEventId = data.data?.typeID
-                self.txt_Price.text = data.data?.price
                 self.txt_EventQuantity.text = data.data?.quantity
+                
                 var sDate = data.data?.startDate ?? ""
                 sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
                 var eDate = data.data?.endDate ?? ""
                 eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
-                let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
-                let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm:a")
-                let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
-                let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
-                self.startDate = startDate
-                self.endDate = endDate
-                self.startTime = startTime
-                self.endTime = endTime
+                self.startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
+                self.endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
+                self.startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+                self.endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+                self.txt_StartDate.text = self.startDate
+                self.txt_EndDate.text = self.endDate
+                self.txt_StartTime.text = self.startTime
+                self.txt_EndTime.text = self.endTime
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                self.sDate = dateFormatter.date(from: self.startDate)!
+                self.eDate = dateFormatter.date(from: self.endDate)!
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+                self.sTime = dateFormatter.date(from: data.data?.startDate ?? "")!
+                
+                
                 self.lbl_ChooseLocation.text = data.data?.location
                 self.lbl_ChooseLocation.textColor = UIColor(named: "BlueColor")
                 self.location = data.data?.location ?? ""
                 self.latitude = data.data?.latitude ?? ""
                 self.longitude = data.data?.longitude ?? ""
-                self.txt_StartDate.text = self.startDate
-                self.txt_EndDate.text = self.endDate
-                self.txt_StartTime.text = self.startTime
-                self.txt_EndTime.text = self.endTime
+                
+                
                 self.txt_Description.text = data.data?.dataDescription
                 self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
                 self.img_EventPic.sd_setImage(with: URL(string: url+(data.data?.image ?? "")), placeholderImage: UIImage(named: "profile_c"))
                 self.view_Dashed.isHidden = true
-                self.paymentType = data.data?.paymentType ?? " "
+                
+                if data.data?.paymentType == "2"{
+                    self.btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
+                    self.btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
+                    self.view_PaymentMethod.isHidden = true
+                    self.view_Height.constant = 0
+                    self.txt_Price.isHidden = true
+                }
+                else{
+                    self.btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+                    self.btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+                    self.txt_Price.text = data.data?.price
+                    self.paymentType = data.data?.paymentType ?? " "
+                }
+                
             }
         }
         else

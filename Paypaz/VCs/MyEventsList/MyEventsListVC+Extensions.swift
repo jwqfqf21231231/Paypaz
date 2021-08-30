@@ -24,7 +24,7 @@ extension MyEventsListVC : UITableViewDataSource {
         cell.lbl_EventName.text = events[indexPath.row].name
         var sDate = events[indexPath.row].startDate ?? ""
         sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
-
+        
         let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
         let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm:a")
         
@@ -32,6 +32,12 @@ extension MyEventsListVC : UITableViewDataSource {
         cell.lbl_EventAddress.text = events[indexPath.row].location
         cell.btn_More.tag = indexPath.row
         cell.btn_More.addTarget(self, action: #selector(moreOptionsClicked(_:)), for: .touchUpInside)
+        if events[indexPath.row].isinviteMember == "0"{
+            cell.lbl_PeopleInvited.text?.removeAll()
+        }
+        else{
+            cell.lbl_PeopleInvited.text = "People Invited"
+        }
         return cell
     }
     
@@ -42,6 +48,7 @@ extension MyEventsListVC : UITableViewDataSource {
         }
     }
 }
+
 extension MyEventsListVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -54,28 +61,46 @@ extension MyEventsListVC : UITableViewDelegate {
         }
     }
 }
-
-extension MyEventsListVC : PopupDelegate {
-    func isClickedButton() {
-        Connection.svprogressHudShow(view: self)
-        dataSource.getMyEvents()
-    }
-}
-
 extension MyEventsListVC : MoreOptionsDelegate {
     func hasSelectedOption(type: OptionType,eventID:String) {
         if type == .delete {
             if let deletePopup = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC {
                 deletePopup.eventID = eventID
-                deletePopup.delegate  = self
+                deletePopup.updateEventDelegate = self
             }
-        } else
+        }
+        else
         {
             if let vc = self.pushToVC("HostEventVC") as? HostEventVC
             {
                 vc.eventID = eventID
                 vc.isEdit = true
+                vc.editEventDelegate = self
             }
+        }
+    }
+}
+extension MyEventsListVC : EditEventDelegate
+{
+    func editEventData(data:MyEvent?, eventID: String) {
+        if let index = events.firstIndex(where: { (abc) -> Bool in
+            return abc.id == eventID
+        }){
+            if let data = data{
+                self.events[index] = data
+                self.tableView_Events.reloadData()
+            }
+        }
+    }
+}
+extension MyEventsListVC : DeleteEventDelegate
+{
+    func deleteEventData(eventID: String) {
+        if let index = events.firstIndex(where: { (abc) -> Bool in
+            return abc.id == eventID
+        }){
+            self.events.remove(at: index)
+            self.tableView_Events.reloadData()
         }
     }
 }
@@ -99,13 +124,21 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found"{
+            if data.message == "Data not found" && currentPage-1 >= 1{
+                print("No data at page No : \(currentPage-1)")
+                currentPage = currentPage-1
+            }
+            else if data.message == "Data not found" && currentPage-1 == 0{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
                 self.events = []
                 DispatchQueue.main.async {
                     self.tableView_Events.reloadData()
                 }
             }
-            self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+            else{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+
+            }
         }
     }
     

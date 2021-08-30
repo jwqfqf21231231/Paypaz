@@ -15,6 +15,7 @@ class MyEventsCell : UITableViewCell {
     @IBOutlet weak var lbl_EventTime : UILabel!
     @IBOutlet weak var lbl_EventAddress : UILabel!
     @IBOutlet weak var btn_More   : UIButton!
+    @IBOutlet weak var lbl_PeopleInvited : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

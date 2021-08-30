@@ -8,9 +8,12 @@
 
 import UIKit
 
+protocol DeleteEventDelegate : class {
+    func deleteEventData(eventID :String)
+}
 class DeleteEventPopupVC : CustomViewController {
 
-    weak var delegate : PopupDelegate?
+    weak var updateEventDelegate : DeleteEventDelegate?
     var eventID = ""
     private let dataSource = DeleteEventDataModel()
 //    @IBOutlet weak var lbl_Title   : UILabel!
@@ -48,7 +51,8 @@ extension DeleteEventPopupVC : DeleteEventDataModelDelegate
         if data.success == 1
         {
             self.dismiss(animated: false) {[weak self] in
-                self?.delegate?.isClickedButton()
+                self?.updateEventDelegate?.deleteEventData(eventID: self?.eventID ?? "")
+              //  self?.delegate?.isClickedButton()
             }
         }
         else

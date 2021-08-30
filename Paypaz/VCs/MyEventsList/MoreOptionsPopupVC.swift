@@ -17,10 +17,9 @@ enum OptionType {
     case delete
 }
 class MoreOptionsPopupVC : CustomViewController {
-    
     weak var delegate : MoreOptionsDelegate?
     var eventID = ""
-    //MARK:- --- View Life Cycle ----
+    //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +33,7 @@ class MoreOptionsPopupVC : CustomViewController {
         super.viewWillDisappear(animated)
         self.view.backgroundColor = UIColor.clear
     }
-    // MARK: - --- Action ----
+    // MARK: - ---- Action ----
     @IBAction func btn_Cancel(_ sender:UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

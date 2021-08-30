@@ -10,7 +10,7 @@ import UIKit
 
 class FavouritesEventsListVC : CustomViewController {
     
-    var favEvents = [Event]()
+    var favEvents = [MyEvent]()
     private let dataSource = FavouritesDataModel()
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {

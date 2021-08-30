@@ -87,7 +87,7 @@ extension ViewAllProductsVC : DeleteProductDataModelDelegate
             }){
                 self.products.remove(at: index)
                 self.tableView_Products.reloadData()
-        }
+            }
         }
         else
         {
@@ -190,8 +190,8 @@ extension ViewAllProductsVC : UpdatedProductDelegate{
             }){
                 self.products.remove(at: index)
                 self.tableView_Products.reloadData()
+            }
+            
         }
-        
     }
-}
 }

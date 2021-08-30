@@ -37,8 +37,8 @@ class AddProductDataModel: NSObject
     
         let parameter : [String:String] = [
             "name" : productName,
-            "price" : productPrice,
             "description" : productDescription,
+            "price" : productPrice,
             "quantity" : productQuantity,
             "eventID" : eventID,
             "isPaid" : isPaid
@@ -79,7 +79,8 @@ class AddProductDataModel: NSObject
             "description" : productDescription,
             "price" : productPrice,
             "productID" : productID,
-            "quantity" : productQuantity
+            "quantity" : productQuantity,
+            "isPaid" : isPaid
         ]
         sharedInstance.uploadImage(url, imgData: productPic!.jpegData(compressionQuality: 0.25)!, params: parameter, headers: nil,success:
                                     {

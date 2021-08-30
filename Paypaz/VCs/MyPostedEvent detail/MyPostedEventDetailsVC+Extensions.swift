@@ -20,22 +20,23 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView.tag == 10 {
-            if indexPath.row == 4 {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MorePeopleCell", for: indexPath) as? MorePeopleCell
-                else { return MorePeopleCell() }
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactCell", for: indexPath) as? ContactCell
-                else { return ContactCell() }
-                let contactPic = contacts[indexPath.row].userProfile ?? ""
-                self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                let url =  APIList().getUrlString(url: .USERIMAGE)
-                cell.img_ContactPic.sd_setImage(with: URL(string: url+(contactPic)), placeholderImage: UIImage(named: "profile_c"))
-                return cell
-            }
+            /*if indexPath.row == 4 {
+             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MorePeopleCell", for: indexPath) as? MorePeopleCell
+             else { return MorePeopleCell() }
+             return cell
+             } else {*/
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactCell", for: indexPath) as? ContactCell
+            else { return ContactCell() }
+            let contactPic = contacts[indexPath.row].userProfile ?? ""
+            self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            let url =  APIList().getUrlString(url: .USERIMAGE)
+            cell.img_ContactPic.sd_setImage(with: URL(string: url+(contactPic)), placeholderImage: UIImage(named: "profile_c"))
+            return cell
+            //            }
             
-            
-        } else {
+        }
+        else
+        {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell
             else { return ProductCell() }
             let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
@@ -46,10 +47,7 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
             cell.lbl_ProductPrice.text = "$ \(((products[indexPath.row].price!) as NSString).integerValue)"
             return cell
         }
-        
     }
-    
-    
 }
 extension MyPostedEventDetailsVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -184,12 +182,12 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
             self.contacts = data.data ?? []
             let flag = contacts.contains(where:  { (abc) -> Bool in
                 return abc.userProfile?.count == nil
-             })
-             if flag{
-                 self.contacts.removeAll(where: { (abc) -> Bool in
+            })
+            if flag{
+                self.contacts.removeAll(where: { (abc) -> Bool in
                     return abc.userProfile?.count == nil
-                 })
-             }
+                })
+            }
             DispatchQueue.main.async {
                 self.collectionView_People.reloadData()
             }
