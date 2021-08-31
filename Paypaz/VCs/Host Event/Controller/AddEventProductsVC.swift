@@ -13,7 +13,10 @@ class AddEventProductsVC: CustomViewController {
     var productIDArr = [String]()
     var productArr = [[String:Any]]()
     var eventID = ""
+    var isEdit : Bool?
     private let dataSource = ProductDetailsDataModel()
+    private let productsDataSource = MyPostedEventDataModel()
+    @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var btn_Submit : UIButton!
     @IBOutlet weak var tableView_Products       : UITableView!{
         didSet{
@@ -24,17 +27,36 @@ class AddEventProductsVC: CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate2 = self
+        productsDataSource.delegate2 = self
+        if isEdit ?? false{
+            self.lbl_Title.text = "Edit Event Products"
+            self.btn_Submit.setTitle("Save", for: .normal)
+            self.btn_Submit.setTitleColor(.white, for: .normal)
+            self.btn_Submit.backgroundColor = UIColor(named: "GreenColor")
+            getProducts()
+        }
         // Do any additional setup after loading the view.
+    }
+    private func getProducts(){
+        Connection.svprogressHudShow(view: self)
+        productsDataSource.eventID = eventID
+        productsDataSource.pageNo = "0"
+        //self.currentPage = 1
+        productsDataSource.getProducts()
     }
     @IBAction func btn_Back(_ sender:UIButton)
     {
-        for vc in self.navigationController!.viewControllers as Array {
-            if vc.isKind(of:EventVC.self) {
-                self.navigationController!.popToViewController(vc, animated: true)
-                break
+        if isEdit ?? false{
+            self.navigationController?.popViewController(animated: false)
+        }
+        else{
+            for vc in self.navigationController!.viewControllers as Array {
+                if vc.isKind(of:EventVC.self) {
+                    self.navigationController!.popToViewController(vc, animated: true)
+                    break
+                }
             }
         }
-        
     }
     @IBAction func btn_addProducts(_ sender:UIButton)
     {
@@ -53,34 +75,17 @@ class AddEventProductsVC: CustomViewController {
                 }
             }
         }
-        /*    var products:String = ""
-         for i in 0..<productIDArr.count
-         {
-         if(i == productIDArr.count-1)
-         {
-         products += "\(productIDArr[i])"
-         }
-         else
-         {
-         products += "\(productIDArr[i]),"
-         }
-         }
-         dataSource.products = products
-         if isEdit ?? false
-         {
-         dataSource.updateEvent()
-         }
-         else
-         {
-         dataSource.addEvent()
-         }*/
     }
     @IBAction func btn_Continue(){
-        if let vc = self.pushVC("InviteMembersVC") as? InviteMembersVC{
-            vc.eventID = eventID
+        if isEdit ?? false{
+            self.navigationController?.popViewController(animated: false)
+        }
+        else{
+            if let vc = self.pushVC("InviteMembersVC") as? InviteMembersVC{
+                vc.eventID = eventID
+            }
         }
     }
-    
 }
 extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
     
@@ -128,11 +133,16 @@ extension AddEventProductsVC : MyPostedProductsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-           
+            let products = data.data ?? []
+            for i in 0..<products.count{
+                productArr.append(["image" : products[i].image ?? "","price" : products[i].price ?? "","name" : products[i].name ?? "","description" : products[i].dataDescription ?? "","fromServer" : true])
+                productIDArr.append(products[i].id ?? "")
+            }
+            tableView_Products.reloadData()
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "" , withOKbtn: true)
+            self.view.makeToast(data.message ?? "", duration: 1, position: .center)
         }
     }
     
@@ -146,7 +156,6 @@ extension AddEventProductsVC : MyPostedProductsDataModelDelegate
         else
         {
             self.view.makeToast("No Products Data", duration: 3, position: .bottom)
-            //  self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

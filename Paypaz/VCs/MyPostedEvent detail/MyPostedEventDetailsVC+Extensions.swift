@@ -17,7 +17,6 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
             else{
                 return contacts.count
             }
-            //return self.contacts.count
         } else {
             return self.products.count
         }
@@ -29,6 +28,8 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
             if indexPath.row == 4 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MorePeopleCell", for: indexPath) as? MorePeopleCell
                 else { return MorePeopleCell() }
+                let num = contacts.count - 4
+                cell.lbl_Count.text = "+\(num)\n More"
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactCell", for: indexPath) as? ContactCell
@@ -50,7 +51,12 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
             cell.img_ProductPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
             cell.lbl_ProductName.text = products[indexPath.row].name
-            cell.lbl_ProductPrice.text = "$ \(((products[indexPath.row].price!) as NSString).integerValue)"
+            if products[indexPath.row].isPaid == "0"{
+                cell.lbl_ProductPrice.text = "Free"
+            }
+            else{
+                cell.lbl_ProductPrice.text = "$\(((products[indexPath.row].price!) as NSString).integerValue)"
+            }
             return cell
         }
     }
@@ -70,7 +76,11 @@ extension MyPostedEventDetailsVC : UICollectionViewDelegate, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 10 {
             if indexPath.row == 4 {
-                _ = self.presentPopUpVC("InvitedPeopleVC", animated: true)
+                if let vc = self.presentPopUpVC("InvitedPeopleVC", animated: false) as? InvitedPeopleVC{
+                    var contacts = self.contacts
+                    contacts.removeFirst(4)
+                    vc.contacts = contacts
+                }
             }
         }
     }
@@ -97,7 +107,12 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
                 self.lbl_UserName.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
                 self.btn_Category.setTitle(data.data?.typeName, for: .normal)
                 self.lbl_EventName.text = data.data?.name
-                self.lbl_Price.text = "$ \(((data.data?.price!)! as NSString).integerValue)"
+                if data.data?.paymentType ?? "" == "2"{
+                    self.lbl_Price.text = "Free"
+                }
+                else{
+                    self.lbl_Price.text = "$\(((data.data?.price!)! as NSString).integerValue)"
+                }
                 self.lbl_Description.text = data.data?.dataDescription
                 
                 var sDate = data.data?.startDate ?? ""
@@ -184,16 +199,7 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            
             self.contacts = data.data ?? []
-//            let flag = contacts.contains(where:  { (abc) -> Bool in
-//                return abc.userProfile?.count == nil
-//            })
-//            if flag{
-//                self.contacts.removeAll(where: { (abc) -> Bool in
-//                    return abc.userProfile?.count == nil
-//                })
-//            }
             DispatchQueue.main.async {
                 self.collectionView_People.reloadData()
             }

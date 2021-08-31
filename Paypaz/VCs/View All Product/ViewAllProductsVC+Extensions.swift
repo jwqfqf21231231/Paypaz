@@ -22,7 +22,12 @@ extension ViewAllProductsVC : UITableViewDataSource {
         cell.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"), options: .highPriority, context: nil)
         cell.img_ProductPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
         cell.lbl_ProductName.text = products[indexPath.row].name
-        cell.lbl_ProductPrice.text = products[indexPath.row].price
+        if products[indexPath.row].isPaid == "0"{
+            cell.lbl_ProductPrice.text = "Free"
+        }
+        else{
+            cell.lbl_ProductPrice.text = "$\((products[indexPath.row].price! as NSString).integerValue)"
+        }
         cell.lbl_ProductDescription.text = products[indexPath.row].dataDescription
         cell.btn_Edit.tag = indexPath.row
         cell.btn_Delete.tag = indexPath.row
@@ -57,6 +62,7 @@ extension ViewAllProductsVC : UITableViewDelegate {
         {
             vc.productID = self.products[indexPath.row].id ?? ""
             vc.eventID = self.products[indexPath.row].eventID ?? ""
+            vc.eventName = self.eventName 
             vc.updatedProductDelegate = self
         }
     }

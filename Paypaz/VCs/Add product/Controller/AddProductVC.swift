@@ -118,7 +118,7 @@ class AddProductVC : CustomViewController {
         {
             self.view.makeToast("Please enter product name")
         }
-        else if paymentStatus == "0" && (txt_ProductPrice.text?.trim().count == 0)
+        else if paymentStatus == "1" && (txt_ProductPrice.text?.trim().count == 0)
         {
             self.view.makeToast("Please enter product price")
         }
@@ -154,11 +154,7 @@ class AddProductVC : CustomViewController {
                 dataSource.eventID = eventID
                 dataSource.addProduct()
             }
-            //        self.dismiss(animated: true) { [weak self] in
-            //            self?.delegate?.isAddedProduct()
-            //        }
         }
-        
     }
 }
 extension AddProductVC : ProductDetailsDataModelDelegate

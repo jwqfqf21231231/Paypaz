@@ -9,16 +9,21 @@
 import UIKit
 
 protocol MoreOptionsDelegate : class {
-    func hasSelectedOption(type:OptionType,eventID:String)
+    func hasSelectedOption(type:OptionType,eventID:String,isPublic:String,isInvitedMember:String)
 }
 
 enum OptionType {
-    case edit
-    case delete
+    case edit_Event
+    case edit_EventProducts
+    case edit_InvitedMembers
+    case delete_Event
+    case share
 }
 class MoreOptionsPopupVC : CustomViewController {
     weak var delegate : MoreOptionsDelegate?
     var eventID = ""
+    var isPublic = ""
+    var isInvitedMember = ""
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +44,27 @@ class MoreOptionsPopupVC : CustomViewController {
     }
     @IBAction func btn_Edit(_ sender:UIButton) {
         self.dismiss(animated: false) { [weak self] in
-            self?.delegate?.hasSelectedOption(type: .edit,eventID: self?.eventID ?? "")
+            self?.delegate?.hasSelectedOption(type: .edit_Event,eventID: self?.eventID ?? "",isPublic: self?.isPublic ?? "",isInvitedMember: self?.isInvitedMember ?? "")
+        }
+    }
+    @IBAction func btn_EditEventProducts(_sender:UIButton){
+        self.dismiss(animated: false) {[weak self] in
+            self?.delegate?.hasSelectedOption(type: .edit_EventProducts,eventID: self?.eventID ?? "",isPublic: self?.isPublic ?? "",isInvitedMember: self?.isInvitedMember ?? "")
+        }
+    }
+    @IBAction func btn_EditInvitedMembers(_sender:UIButton){
+        self.dismiss(animated: false) {[weak self] in
+            self?.delegate?.hasSelectedOption(type: .edit_InvitedMembers,eventID: self?.eventID ?? "",isPublic: self?.isPublic ?? "",isInvitedMember: self?.isInvitedMember ?? "")
         }
     }
     @IBAction func btn_Delete(_ sender:UIButton) {
         self.dismiss(animated: false) { [weak self] in
-            self?.delegate?.hasSelectedOption(type: .delete,eventID: self?.eventID ?? "")
+            self?.delegate?.hasSelectedOption(type: .delete_Event,eventID: self?.eventID ?? "",isPublic: self?.isPublic ?? "",isInvitedMember: self?.isInvitedMember ?? "")
+        }
+    }
+    @IBAction func btn_Share(_ sender:UIButton){
+        self.dismiss(animated: false) { [weak self] in
+            self?.delegate?.hasSelectedOption(type: .share, eventID: self?.eventID ?? "",isPublic: self?.isPublic ?? "",isInvitedMember: self?.isInvitedMember ?? "")
         }
     }
     

@@ -598,7 +598,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 else{
                     self.btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
                     self.btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
-                    self.txt_Price.text = data.data?.price
+                    self.txt_Price.text = "\(((data.data?.price)! as NSString).integerValue)"
                     self.paymentType = data.data?.paymentType ?? " "
                 }
                 

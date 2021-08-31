@@ -9,6 +9,6 @@
 import UIKit
 
 class MorePeopleCell : UICollectionViewCell {
-   
+    @IBOutlet weak var lbl_Count : UILabel!
     
 }

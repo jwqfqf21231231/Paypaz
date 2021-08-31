@@ -16,10 +16,12 @@ class InviteMembersVC: CustomViewController {
     var isPublicStatus = "0"
     var isInviteMemberStatus = "0"
     var eventID = ""
+    var isEdit : Bool?
+    var invitedContacts = [InvitedContacts]()
     var contactDict = [String:String]()
     var contactArray = [[String:String]]()
     private let dataSource = InviteMemberDataModel()
-    
+    private let dataSource1 = MyPostedEventDataModel()
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var tableView_Members        : UITableView!{
@@ -30,12 +32,46 @@ class InviteMembersVC: CustomViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchContacts()
         dataSource.delegate = self
-        fetchContacts()
         self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         tableView_Members.separatorStyle = .none
-        // Do any additional setup after loading the view.
+        if isEdit ?? false{
+            dataSource1.delegate3 = self
+            getInvitees()
+            if invitedContacts.count > 0{
+                sortContacts()
+            }
+        }
+    }
+    private func sortContacts(){
+        
+        var filteredContacts = [ContactInfo]()
+        for m in contactDetails where invitedContacts.contains(where: { $0.name != m.firstName }) {
+            filteredContacts.append(m)
+        }
+        contactDetails = filteredContacts
+        tableView_Members.reloadData()
+    }
+    private func getInvitees()
+    {
+        if isPublicStatus == "0"{
+            isPublic.setOn(false, animated: false)
+        }
+        else{
+            isPublic.setOn(true, animated: false)
+        }
+        if isInviteMemberStatus == "0"{
+            isInviteMember.setOn(false, animated: false)
+        }
+        else{
+            isInviteMember.setOn(true, animated: false)
+            Connection.svprogressHudShow(view: self)
+            dataSource1.eventID = self.eventID
+            dataSource1.getContacts()
+        }
+        
     }
     func fetchContacts(completion: @escaping (_ result: [CNContact]) -> Void){
         DispatchQueue.main.async {
@@ -60,8 +96,8 @@ class InviteMembersVC: CustomViewController {
                     print("Error \(error?.localizedDescription ?? "")")
                 }
             })
-            
         }
+        
     }
     func fetchContacts()
     {
@@ -74,17 +110,13 @@ class InviteMembersVC: CustomViewController {
                     
                 }
                 if ((($0.phoneNumbers.first?.value.stringValue ?? "nil")?.contains("+")) == true){
+                    
                     let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
                     let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img)
                     self.contactDetails.append(contactDetail)
                 }
             })
-            
-            
         })
-        
-        
-        
     }
     @objc func onSwitchValueChange(swtch:UISwitch)
     {
@@ -111,10 +143,15 @@ class InviteMembersVC: CustomViewController {
         }
     }
     @IBAction func btn_Back(_ sender:UIButton){
-        for vc in self.navigationController!.viewControllers as Array {
-            if vc.isKind(of:EventVC.self) {
-                self.navigationController!.popToViewController(vc, animated: false)
-                break
+        if isEdit ?? false{
+            self.navigationController?.popViewController(animated: false)
+        }
+        else{
+            for vc in self.navigationController!.viewControllers as Array {
+                if vc.isKind(of:EventVC.self) {
+                    self.navigationController!.popToViewController(vc, animated: false)
+                    break
+                }
             }
         }
     }
@@ -144,6 +181,35 @@ class InviteMembersVC: CustomViewController {
     }
     
 }
+extension InviteMembersVC : MyPostedContactsDataModelDelegate
+{
+    func didRecieveDataUpdate(data: MyPostedContactsModel)
+    {
+        print("MyPostedContactsModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.invitedContacts = data.data ?? []
+        }
+        else
+        {
+            print(data.message ?? "")
+        }
+    }
+    func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
+        }
+    }
+}
+
 extension InviteMembersVC : InviteMemberDataModelDelegate
 {
     func didRecieveDataUpdate(data: ResendOTPModel)
@@ -193,12 +259,6 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell") as? MemberCell else { return MemberCell() }
         cell.contactName_lbl.text = contactDetails[
             indexPath.row].firstName
-//        if contactDetails[indexPath.row].profilePic == nil{
-//            cell.contactPic_img.image = UIImage(named: "profile_a")
-//        }
-//        else{
-//            cell.contactPic_img.image = contactDetails[indexPath.row].profilePic
-//        }
         cell.contactNo_lbl.text = contactDetails[indexPath.row].phoneNumber
         cell.btn_tick.tag = indexPath.row
         cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
@@ -208,8 +268,8 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
     {
         if sender.isSelected == true{
             sender.isSelected = false
-           let flag = contactArray.contains(where:  { (abc) -> Bool in
-            return abc["contactID"] ?? "" == "\(sender.tag)"
+            let flag = contactArray.contains(where:  { (abc) -> Bool in
+                return abc["contactID"] ?? "" == "\(sender.tag)"
             })
             if flag{
                 self.contactArray.removeAll(where: { (abc) -> Bool in

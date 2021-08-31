@@ -44,6 +44,8 @@ extension MyEventsListVC : UITableViewDataSource {
     @objc func moreOptionsClicked(_ sender : UIButton){
         if let popup = self.presentPopUpVC("MoreOptionsPopupVC", animated: true) as? MoreOptionsPopupVC {
             popup.eventID = events[sender.tag].id ?? ""
+            popup.isPublic = events[sender.tag].ispublic ?? ""
+            popup.isInvitedMember = events[sender.tag].isinviteMember ?? ""
             popup.delegate = self
         }
     }
@@ -63,21 +65,38 @@ extension MyEventsListVC : UITableViewDelegate {
     }
 }
 extension MyEventsListVC : MoreOptionsDelegate {
-    func hasSelectedOption(type: OptionType,eventID:String) {
-        if type == .delete {
-            if let deletePopup = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC {
-                deletePopup.eventID = eventID
-                deletePopup.updateEventDelegate = self
-            }
-        }
-        else
-        {
+    func hasSelectedOption(type: OptionType,eventID:String,isPublic:String,isInvitedMember:String) {
+        if type == .edit_Event{
             if let vc = self.pushToVC("HostEventVC") as? HostEventVC
             {
                 vc.eventID = eventID
                 vc.isEdit = true
                 vc.editEventDelegate = self
             }
+        }
+        else if type == .edit_EventProducts{
+            if let vc = self.pushToVC("AddEventProductsVC") as? AddEventProductsVC{
+                vc.isEdit = true
+                vc.eventID = eventID
+            }
+        }
+        else if type == .edit_InvitedMembers{
+            if let vc = self.pushToVC("InviteMembersVC") as? InviteMembersVC{
+                vc.isEdit = true
+                vc.eventID = eventID
+                vc.isPublicStatus = isPublic
+                vc.isInviteMemberStatus = isInvitedMember
+            }
+            print("Invited Members for an event")
+        }
+        else if type == .delete_Event {
+            if let deletePopup = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC {
+                deletePopup.eventID = eventID
+                deletePopup.updateEventDelegate = self
+            }
+        }
+        else{
+            postshareLink(profile_URL: "The text that i want to share")
         }
     }
 }
@@ -138,7 +157,7 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
             }
             else{
                 self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-
+                
             }
         }
     }
