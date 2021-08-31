@@ -11,7 +11,13 @@ import SDWebImage
 extension MyPostedEventDetailsVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 10 {
-            return self.contacts.count
+            if self.contacts.count > 4{
+                return 5
+            }
+            else{
+                return contacts.count
+            }
+            //return self.contacts.count
         } else {
             return self.products.count
         }
@@ -20,19 +26,19 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView.tag == 10 {
-            /*if indexPath.row == 4 {
-             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MorePeopleCell", for: indexPath) as? MorePeopleCell
-             else { return MorePeopleCell() }
-             return cell
-             } else {*/
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactCell", for: indexPath) as? ContactCell
-            else { return ContactCell() }
-            let contactPic = contacts[indexPath.row].userProfile ?? ""
-            self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            let url =  APIList().getUrlString(url: .USERIMAGE)
-            cell.img_ContactPic.sd_setImage(with: URL(string: url+(contactPic)), placeholderImage: UIImage(named: "profile_c"))
-            return cell
-            //            }
+            if indexPath.row == 4 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MorePeopleCell", for: indexPath) as? MorePeopleCell
+                else { return MorePeopleCell() }
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContactCell", for: indexPath) as? ContactCell
+                else { return ContactCell() }
+                let contactPic = contacts[indexPath.row].userProfile ?? ""
+                self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                let url =  APIList().getUrlString(url: .USERIMAGE)
+                cell.img_ContactPic.sd_setImage(with: URL(string: url+(contactPic)), placeholderImage: UIImage(named: "place_holder"))
+                return cell
+            }
             
         }
         else
@@ -180,14 +186,14 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
         {
             
             self.contacts = data.data ?? []
-            let flag = contacts.contains(where:  { (abc) -> Bool in
-                return abc.userProfile?.count == nil
-            })
-            if flag{
-                self.contacts.removeAll(where: { (abc) -> Bool in
-                    return abc.userProfile?.count == nil
-                })
-            }
+//            let flag = contacts.contains(where:  { (abc) -> Bool in
+//                return abc.userProfile?.count == nil
+//            })
+//            if flag{
+//                self.contacts.removeAll(where: { (abc) -> Bool in
+//                    return abc.userProfile?.count == nil
+//                })
+//            }
             DispatchQueue.main.async {
                 self.collectionView_People.reloadData()
             }

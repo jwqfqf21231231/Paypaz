@@ -57,6 +57,7 @@ extension MyEventsListVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = self.pushToVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC
         {
+            vc.isEditHidden = true
             vc.eventID = events[indexPath.row].id ?? ""
         }
     }
