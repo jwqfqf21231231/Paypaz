@@ -27,21 +27,7 @@ class MyEventsListVC : CustomViewController {
         dataSource.pageNo = "0"
         dataSource.getMyEvents()
     }
-    func postshareLink(profile_URL:String){
-            let objectsToShare = [profile_URL]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-            activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-            
-            activityVC.popoverPresentationController?.sourceView = self.view
-            
-            activityVC.completionWithItemsHandler = { activity, success, items, error in
-                if success{
-                    print("Successfully Send link")
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-            self.present(activityVC, animated: true, completion: nil)
-        }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){

@@ -74,6 +74,7 @@ class InviteMembersVC: CustomViewController {
         }
         else{
             isInviteMember.setOn(true, animated: false)
+            isInviteMember.isUserInteractionEnabled = false
             Connection.svprogressHudShow(view: self)
             dataSource1.eventID = self.eventID
             dataSource1.getContacts()
@@ -171,10 +172,24 @@ class InviteMembersVC: CustomViewController {
         dataSource.eventID = eventID
         dataSource.isPublic = isPublicStatus
         dataSource.isInviteMember = isInviteMemberStatus
-        if isInviteMemberStatus == "1"{
+        if isInviteMemberStatus == "1" && isEdit == false{
             if contactArray.count == 0
             {
                 view.makeToast("Please select atleast one member from contacts list to invite members")
+            }
+            else{
+                let jsonData = try! JSONSerialization.data(withJSONObject:contactArray)
+                let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+                print(jsonString!)
+                dataSource.contacts = jsonString!
+                Connection.svprogressHudShow(view: self)
+                dataSource.inviteMembers()
+            }
+        }
+        else if isInviteMemberStatus == "1" && isEdit == true{
+            if contactArray.count == 0{
+                Connection.svprogressHudShow(view: self)
+                dataSource.inviteMembers()
             }
             else{
                 let jsonData = try! JSONSerialization.data(withJSONObject:contactArray)
@@ -286,6 +301,7 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
             cell.btn_tick.isUserInteractionEnabled = false
         }
         else{
+            let _ = contactDetails[indexPath.row].isSelected ?? false ? (cell.btn_tick.isSelected = true) : (cell.btn_tick.isSelected = false)
             cell.btn_tick.tag = indexPath.row
             cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
         }
@@ -295,6 +311,7 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
     {
         if sender.isSelected == true{
             sender.isSelected = false
+            contactDetails[sender.tag].isSelected = false
             let flag = contactArray.contains(where:  { (abc) -> Bool in
                 return abc["contactID"] ?? "" == "\(sender.tag)"
             })
@@ -305,6 +322,7 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
             }
         }else{
             sender.isSelected = true
+            contactDetails[sender.tag].isSelected = true
             contactDict["contactID"] = "\(sender.tag)"
             contactDict["name"] = contactDetails[sender.tag].firstName
             guard let phoneUtil = NBPhoneNumberUtil.sharedInstance() else {

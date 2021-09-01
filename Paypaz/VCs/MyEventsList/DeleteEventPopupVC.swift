@@ -16,11 +16,7 @@ class DeleteEventPopupVC : CustomViewController {
     weak var updateEventDelegate : DeleteEventDelegate?
     var eventID = ""
     private let dataSource = DeleteEventDataModel()
-//    @IBOutlet weak var lbl_Title   : UILabel!
-//    @IBOutlet weak var lbl_message : UILabel!
-//    
-//    var popupData : (title:String, msg:String)?
-    
+
     // MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()

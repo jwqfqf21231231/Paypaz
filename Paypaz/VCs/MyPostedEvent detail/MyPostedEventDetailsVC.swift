@@ -7,13 +7,19 @@
 //
 
 import UIKit
+protocol UpdateEventDelegate : class{
+    func updateEventData(data : MyEvent?,eventID : String,deleted : Bool?)
+}
 
 class MyPostedEventDetailsVC : CustomViewController {
     
     var eventID = ""
+    var isPublicStatus = ""
+    var isInviteMemberStatus = ""
     var eventDetails : MyEvent?
     var products = [MyProducts]()
     var contacts = [InvitedContacts]()
+    weak var updateEventDelegate : UpdateEventDelegate?
     private let dataSource = MyPostedEventDataModel()
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var lbl_EventName : UILabel!
@@ -41,14 +47,10 @@ class MyPostedEventDetailsVC : CustomViewController {
             collectionView_People.delegate   = self
         }
     }
-    
-    var isEditHidden : Bool?
-    
-    
+
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.btn_edit.alpha = 0.0
         dataSource.delegate = self
         dataSource.delegate2 = self
         dataSource.delegate3 = self
@@ -56,37 +58,29 @@ class MyPostedEventDetailsVC : CustomViewController {
         self.getProducts()
         self.getInvitees()
     }
-    private func getEvent()
+    func getEvent()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.getEvent()
     }
-    private func getProducts()
+    func getProducts()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.getProducts()
         
     }
-    private func getInvitees()
+    func getInvitees()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.getContacts()
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.getProducts()
-        if self.isEditHidden ?? false {
-            self.btn_edit.alpha = 0.0
-        } else {
-            self.btn_edit.alpha = 1.0
-        }
-    }
     // MARK: ---- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
+        updateEventDelegate?.updateEventData(data: eventDetails, eventID: eventID, deleted: false)
     }
     @IBAction func btn_Ok(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -94,8 +88,17 @@ class MyPostedEventDetailsVC : CustomViewController {
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
         if let vc = self.pushToVC("ViewAllProductsVC") as? ViewAllProductsVC
         {
+            vc.updateProductsListDelegate = self
             vc.eventName = self.lbl_EventName.text ?? ""
             vc.eventID = self.eventID
+        }
+    }
+    @IBAction func btn_Edit(_ sender:UIButton){
+        if let popup = self.presentPopUpVC("MoreOptionsPopupVC", animated: true) as? MoreOptionsPopupVC {
+            popup.eventID = eventID
+            popup.isPublic = isPublicStatus
+            popup.isInvitedMember = isInviteMemberStatus
+            popup.delegate = self
         }
     }
     

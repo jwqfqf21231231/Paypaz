@@ -587,7 +587,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
                 self.img_EventPic.sd_setImage(with: URL(string: url+(data.data?.image ?? "")), placeholderImage: UIImage(named: "profile_c"))
                 self.view_Dashed.isHidden = true
-                
+                self.paymentStatus = data.data?.paymentType ?? ""
                 if data.data?.paymentType == "2"{
                     self.btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
                     self.btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)

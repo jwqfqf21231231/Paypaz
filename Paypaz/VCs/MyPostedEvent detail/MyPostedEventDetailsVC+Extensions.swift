@@ -128,6 +128,8 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
                 
                 self.lbl_EventDateTime.text = "\(startDate) At \(startTime) To \(endDate) At \(endTime)"
                 self.lbl_EventLocation.text = data.data?.location
+                self.isPublicStatus = data.data?.ispublic ?? ""
+                self.isInviteMemberStatus = data.data?.isinviteMember ?? ""
             }
         }
         else
@@ -172,6 +174,10 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
             self.view_Product.isHidden = true
             self.view_ProductHeight.constant = 0
         }
+        else{
+            self.view_Product.isHidden = false
+            self.view_ProductHeight.constant = 115.5
+        }
     }
     
     func didFailDataUpdateWithError2(error: Error)
@@ -212,6 +218,10 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
             view_Invitee.isHidden = true
             view_InviteeHeight.constant = 0
         }
+        else{
+            view_Invitee.isHidden = false
+            view_InviteeHeight.constant = 102
+        }
     }
     
     func didFailDataUpdateWithError3(error: Error)
@@ -224,6 +234,84 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
         else
         {
             self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
+        }
+    }
+}
+extension MyPostedEventDetailsVC : MoreOptionsDelegate {
+    func hasSelectedOption(type: OptionType,eventID:String,isPublic:String,isInvitedMember:String) {
+        if type == .edit_Event{
+            if let vc = self.pushToVC("HostEventVC") as? HostEventVC
+            {
+                vc.eventID = eventID
+                vc.isEdit = true
+                vc.editEventDelegate = self
+            }
+        }
+        else if type == .edit_EventProducts{
+            if let vc = self.pushToVC("AddEventProductsVC") as? AddEventProductsVC{
+                vc.isEdit = true
+                vc.eventID = eventID
+                vc.editEventProductsDelegate = self
+            }
+        }
+        else if type == .edit_InvitedMembers{
+            if let vc = self.pushToVC("InviteMembersVC") as? InviteMembersVC{
+                vc.isEdit = true
+                vc.eventID = eventID
+                vc.isPublicStatus = isPublic
+                vc.isInviteMemberStatus = isInvitedMember
+                vc.editInviteMemberDelegate = self
+            }
+        }
+        else if type == .delete_Event {
+            if let deletePopup = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC {
+                deletePopup.eventID = eventID
+                deletePopup.updateEventDelegate = self
+            }
+        }
+        else{
+            postshareLink(profile_URL: "The text that i want to share")
+        }
+    }
+}
+extension MyPostedEventDetailsVC : EditEventDelegate
+{
+    func editEventData(data:MyEvent?, eventID: String) {
+        self.getEvent()
+    }
+}
+extension MyPostedEventDetailsVC : EditEventProductsDelegate
+{
+    func loadProductsData() {
+        self.getProducts()
+    }
+}
+extension MyPostedEventDetailsVC : EditInviteMemberDelegate
+{
+    func editInviteData(data:[String:String]?, eventID: String) {
+        self.getInvitees()
+        self.getEvent()
+    }
+}
+extension MyPostedEventDetailsVC : DeleteEventDelegate
+{
+    func deleteEventData(eventID: String) {
+        self.navigationController?.popViewController(animated: false)
+        updateEventDelegate?.updateEventData(data: eventDetails, eventID: eventID, deleted: true)
+    }
+}
+extension MyPostedEventDetailsVC : UpdateProductsListDelegate
+{
+    func updateProductsList(data: [MyProducts]) {
+        self.products = data
+        if products.count == 0{
+            self.view_Product.isHidden = true
+            self.view_ProductHeight.constant = 0
+        }
+        else{
+            self.view_Product.isHidden = false
+            self.view_ProductHeight.constant = 115.5
+            self.collectionView_Products.reloadData()
         }
     }
 }

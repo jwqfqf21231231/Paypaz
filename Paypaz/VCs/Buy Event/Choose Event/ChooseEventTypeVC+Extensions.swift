@@ -26,7 +26,7 @@ extension ChooseEventTypeVC:UICollectionViewDelegate,UICollectionViewDelegateFlo
         }
         else
         {
-            selectedEventData?(eventData[indexPath.row].name ?? "",eventData[indexPath.row].id ?? "")
+            selectedEventData?(filteredEventData[indexPath.row].name ?? "",filteredEventData[indexPath.row].id ?? "")
             self.navigationController?.popViewController(animated: true)
         }        
     }

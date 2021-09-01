@@ -10,7 +10,21 @@ import UIKit
 
 class InvitedPeopleVC  : CustomViewController {
     
-    var contacts = [InvitedContacts]()
+    var contacts = [InvitedContacts](){
+        didSet{
+            let screenSize = UIScreen.main.bounds.size.height * 0.65
+            let cellHeight = (UIScreen.main.bounds.size.width * 0.9 * 0.9 * 0.12) + 16
+            let tblHeight  = CGFloat(self.contacts.count) * cellHeight
+            if tblHeight > screenSize {
+                self.tableViewHeight.constant = screenSize
+            } else {
+                self.tableViewHeight.constant = tblHeight
+            }
+            tableViewPeople.reloadData()
+        }
+    }
+    var peopleInvited : Bool?
+    var eventID = ""
     @IBOutlet weak var tableViewHeight : NSLayoutConstraint!
     @IBOutlet weak var tableViewPeople : UITableView! {
         didSet {
@@ -18,11 +32,22 @@ class InvitedPeopleVC  : CustomViewController {
             self.tableViewPeople.delegate   = self
         }
     }
+    private let dataSource = MyPostedEventDataModel()
     
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clear
+        dataSource.delegate3 = self
+        if peopleInvited ?? false{
+            getInvitees()
+        }
+    }
+    func getInvitees()
+    {
+        Connection.svprogressHudShow(view: self)
+        dataSource.eventID = self.eventID
+        dataSource.getContacts()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -36,13 +61,13 @@ class InvitedPeopleVC  : CustomViewController {
         super.viewDidLayoutSubviews()
         
         let screenSize = UIScreen.main.bounds.size.height * 0.65
-        let tblHeight  = self.tableViewPeople.contentSize.height
+        let cellHeight = (UIScreen.main.bounds.size.width * 0.9 * 0.9 * 0.12) + 16
+        let tblHeight  = CGFloat(self.contacts.count) * cellHeight
         if tblHeight > screenSize {
             self.tableViewHeight.constant = screenSize
         } else {
-            self.tableViewHeight.constant = self.tableViewPeople.contentSize.height
+            self.tableViewHeight.constant = tblHeight
         }
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,5 +78,35 @@ class InvitedPeopleVC  : CustomViewController {
     //MARK:- ---- Action ----
     @IBAction func btn_SeeMore(_ sender:UIButton) {
         
+    }
+}
+extension InvitedPeopleVC : MyPostedContactsDataModelDelegate
+{
+    func didRecieveDataUpdate(data: MyPostedContactsModel)
+    {
+        print("MyPostedContactsModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.contacts = data.data ?? []
+//            self.tableViewPeople.reloadData()
+        }
+        else
+        {
+            print(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
+        }
     }
 }

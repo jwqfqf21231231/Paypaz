@@ -36,6 +36,7 @@ class AddProductVC : CustomViewController {
     @IBOutlet weak var btn_Free : UIButton!
     @IBOutlet weak var btn_Paid : UIButton!
     @IBOutlet weak var tapView:UIView!
+    @IBOutlet weak var btn_Done : UIButton!
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,7 @@ class AddProductVC : CustomViewController {
         if isEdit ?? false
         {
             lbl_Title.text = "Edit Product"
+            btn_Done.setTitle("Update", for: .normal)
             Connection.svprogressHudShow(view: self)
             dataSource1.productID = self.productID
             dataSource1.getProductDetails()
@@ -178,16 +180,13 @@ extension AddProductVC : ProductDetailsDataModelDelegate
             else{
                 btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
                 btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
-                self.txt_ProductPrice.text = data.data?.price
+                self.txt_ProductPrice.text = "\(((data.data?.price)! as NSString).integerValue)"
                 self.txt_ProductPrice.isHidden = false
             }
             self.paymentStatus = data.data?.isPaid ?? ""
             self.txt_ProductName.text = data.data?.name
             self.txt_ProductQuantity.text = data.data?.quantity
             self.txt_Description.text = data.data?.dataDescription
-           /* guard let callback = self.callback else { return }
-            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? ""])
-            self.dismiss(animated: true)*/
         }
         else
         {
@@ -218,7 +217,7 @@ extension AddProductVC : AddProductDataModelDelegate
         {
             guard let callback = self.callback else { return }
             callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? ""])
-            self.dismiss(animated: true)
+            self.dismiss(animated: false)
         }
         else
         {

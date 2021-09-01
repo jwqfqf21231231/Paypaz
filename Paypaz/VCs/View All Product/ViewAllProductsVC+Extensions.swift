@@ -94,6 +94,9 @@ extension ViewAllProductsVC : DeleteProductDataModelDelegate
                 self.products.remove(at: index)
                 self.tableView_Products.reloadData()
             }
+            if products.count == 0{
+                self.lbl_EventName.text?.removeAll()
+            }
         }
         else
         {

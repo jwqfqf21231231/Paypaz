@@ -8,6 +8,10 @@
 
 import UIKit
 import SDWebImage
+protocol EditEventProductsDelegate : class {
+    func loadProductsData()
+    
+}
 class AddEventProductsVC: CustomViewController {
     
     var productIDArr = [String]()
@@ -16,6 +20,7 @@ class AddEventProductsVC: CustomViewController {
     var isEdit : Bool?
     private let dataSource = ProductDetailsDataModel()
     private let productsDataSource = MyPostedEventDataModel()
+    weak var editEventProductsDelegate : EditEventProductsDelegate? 
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var btn_Submit : UIButton!
     @IBOutlet weak var tableView_Products       : UITableView!{
@@ -79,6 +84,7 @@ class AddEventProductsVC: CustomViewController {
     @IBAction func btn_Continue(){
         if isEdit ?? false{
             self.navigationController?.popViewController(animated: false)
+            editEventProductsDelegate?.loadProductsData()
         }
         else{
             if let vc = self.pushVC("InviteMembersVC") as? InviteMembersVC{

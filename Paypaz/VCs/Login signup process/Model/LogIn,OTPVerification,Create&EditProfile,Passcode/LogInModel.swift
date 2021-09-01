@@ -48,4 +48,5 @@ struct ContactInfo{
     var phoneNumber:String?
     var profilePic:UIImage?
     var isInvited : Bool?
+    var isSelected : Bool?
 }

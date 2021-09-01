@@ -33,14 +33,25 @@ extension MyEventsListVC : UITableViewDataSource {
         cell.btn_More.tag = indexPath.row
         cell.btn_More.addTarget(self, action: #selector(moreOptionsClicked(_:)), for: .touchUpInside)
         if events[indexPath.row].isinviteMember == "0"{
-            cell.lbl_PeopleInvited.text?.removeAll()
+            cell.btn_Height.constant = 0
+            cell.btn_PeopleInvited.isHidden = true
         }
         else{
-            cell.lbl_PeopleInvited.text = "People Invited"
+            cell.btn_Height.constant = 32
+            cell.btn_PeopleInvited.isHidden = false
+            cell.btn_PeopleInvited.tag = indexPath.row
+            cell.btn_PeopleInvited.addTarget(self, action: #selector(peopleInvited(_:)), for: .touchUpInside)
         }
         return cell
     }
-    
+    @objc func peopleInvited(_ sender:UIButton){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "InvitedPeopleVC") as! InvitedPeopleVC
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.eventID = self.events[sender.tag].id ?? ""
+        vc.peopleInvited = true
+        self.present(vc, animated: false,completion: nil)
+        
+    }
     @objc func moreOptionsClicked(_ sender : UIButton){
         if let popup = self.presentPopUpVC("MoreOptionsPopupVC", animated: true) as? MoreOptionsPopupVC {
             popup.eventID = events[sender.tag].id ?? ""
@@ -50,7 +61,28 @@ extension MyEventsListVC : UITableViewDataSource {
         }
     }
 }
-
+extension MyEventsListVC : UpdateEventDelegate{
+    func updateEventData(data : MyEvent?,eventID : String,deleted : Bool?){
+        if deleted ?? false{
+            if let index = events.firstIndex(where: { (abc) -> Bool in
+                return abc.id == eventID
+            }){
+                self.events.remove(at: index)
+                self.tableView_Events.reloadData()
+            }
+        }
+        else{
+            if let index = events.firstIndex(where: { (abc) -> Bool in
+                return abc.id == eventID
+            }){
+                if let data = data{
+                    self.events[index] = data
+                    self.tableView_Events.reloadData()
+                }
+            }
+        }
+    }
+}
 extension MyEventsListVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -59,7 +91,7 @@ extension MyEventsListVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = self.pushToVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC
         {
-            vc.isEditHidden = true
+            vc.updateEventDelegate = self
             vc.eventID = events[indexPath.row].id ?? ""
         }
     }
