@@ -47,4 +47,5 @@ struct ContactInfo{
     var coutryCode:String?
     var phoneNumber:String?
     var profilePic:UIImage?
+    var isInvited : Bool?
 }

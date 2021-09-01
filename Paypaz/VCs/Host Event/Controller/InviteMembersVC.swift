@@ -9,6 +9,10 @@
 import UIKit
 import Contacts
 import libPhoneNumber_iOS
+protocol EditInviteMemberDelegate : class {
+    func editInviteData(data : [String:String]?, eventID : String)
+    
+}
 class InviteMembersVC: CustomViewController {
     
     var img = UIImage()
@@ -22,6 +26,8 @@ class InviteMembersVC: CustomViewController {
     var contactArray = [[String:String]]()
     private let dataSource = InviteMemberDataModel()
     private let dataSource1 = MyPostedEventDataModel()
+    weak var editInviteMemberDelegate : EditInviteMemberDelegate?
+
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var tableView_Members        : UITableView!{
@@ -37,22 +43,23 @@ class InviteMembersVC: CustomViewController {
         self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         tableView_Members.separatorStyle = .none
-        if isEdit ?? false{
-            dataSource1.delegate3 = self
-            getInvitees()
-            if invitedContacts.count > 0{
-                sortContacts()
-            }
-        }
+        
     }
     private func sortContacts(){
-        
-        var filteredContacts = [ContactInfo]()
-        for m in contactDetails where invitedContacts.contains(where: { $0.name != m.firstName }) {
-            filteredContacts.append(m)
+        for i in 0..<contactDetails.count{
+            for j in 0..<invitedContacts.count{
+                if contactDetails[i].phoneNumber?.stringByRemovingAll(characters: ["+","-"]).removingWhitespaceAndNewlines() == (invitedContacts[j].phoneCode!)+(invitedContacts[j].phoneNumber!){
+                    contactDetails[i].isInvited = true
+                }
+            }
         }
-        contactDetails = filteredContacts
         tableView_Members.reloadData()
+//        var filteredContacts = [ContactInfo]()
+//        for m in contactDetails where invitedContacts.contains(where: { $0.phoneNumber == m.phoneNumber?.removingWhitespaceAndNewlines()}) {
+//            m.isInvited = true
+//        }
+//        contactDetails = filteredContacts
+//        tableView_Members.reloadData()
     }
     private func getInvitees()
     {
@@ -95,6 +102,10 @@ class InviteMembersVC: CustomViewController {
                 }else{
                     print("Error \(error?.localizedDescription ?? "")")
                 }
+                if self.isEdit ?? false{
+                    self.dataSource1.delegate3 = self
+                    self.getInvitees()
+                }
             })
         }
         
@@ -112,7 +123,7 @@ class InviteMembersVC: CustomViewController {
                 if ((($0.phoneNumbers.first?.value.stringValue ?? "nil")?.contains("+")) == true){
                     
                     let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
-                    let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img)
+                    let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img, isInvited: false)
                     self.contactDetails.append(contactDetail)
                 }
             })
@@ -190,6 +201,9 @@ extension InviteMembersVC : MyPostedContactsDataModelDelegate
         if data.success == 1
         {
             self.invitedContacts = data.data ?? []
+            if self.invitedContacts.count > 0{
+                self.sortContacts()
+            }
         }
         else
         {
@@ -217,13 +231,20 @@ extension InviteMembersVC : InviteMemberDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            for vc in self.navigationController!.viewControllers as Array {
-                if vc.isKind(of:EventVC.self) {
-                    self.navigationController!.popToViewController(vc, animated: false)
-                    break
-                }
+            if isEdit ?? false{
+                self.navigationController?.popViewController(animated: false)
+                self.editInviteMemberDelegate?.editInviteData(data:["isPublic":isPublicStatus,"isInviteMember":isInviteMemberStatus],eventID:self.eventID)
             }
-            NotificationCenter.default.post(name: NSNotification.Name("getEventID"), object:nil, userInfo: ["eventID":self.eventID])
+            else{
+                for vc in self.navigationController!.viewControllers as Array {
+                    if vc.isKind(of:EventVC.self) {
+                        self.navigationController!.popToViewController(vc, animated: false)
+                        break
+                    }
+                }
+                NotificationCenter.default.post(name: NSNotification.Name("getEventID"), object:nil, userInfo: ["eventID":self.eventID])
+            }
+            
         }
         else
         {
@@ -260,8 +281,14 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
         cell.contactName_lbl.text = contactDetails[
             indexPath.row].firstName
         cell.contactNo_lbl.text = contactDetails[indexPath.row].phoneNumber
-        cell.btn_tick.tag = indexPath.row
-        cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
+        if contactDetails[indexPath.row].isInvited == true{
+            cell.btn_tick.isSelected = true
+            cell.btn_tick.isUserInteractionEnabled = false
+        }
+        else{
+            cell.btn_tick.tag = indexPath.row
+            cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
+        }
         return cell
     }
     @objc func btn_Selected(_ sender:UIButton)

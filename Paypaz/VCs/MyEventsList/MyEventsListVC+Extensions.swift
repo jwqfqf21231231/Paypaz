@@ -86,6 +86,7 @@ extension MyEventsListVC : MoreOptionsDelegate {
                 vc.eventID = eventID
                 vc.isPublicStatus = isPublic
                 vc.isInviteMemberStatus = isInvitedMember
+                vc.editInviteMemberDelegate = self
             }
             print("Invited Members for an event")
         }
@@ -97,6 +98,20 @@ extension MyEventsListVC : MoreOptionsDelegate {
         }
         else{
             postshareLink(profile_URL: "The text that i want to share")
+        }
+    }
+}
+extension MyEventsListVC : EditInviteMemberDelegate
+{
+    func editInviteData(data:[String:String]?, eventID: String) {
+        if let index = events.firstIndex(where: { (abc) -> Bool in
+            return abc.id == eventID
+        }){
+            if let data = data{
+                self.events[index].ispublic = data["isPublic"]
+                self.events[index].isinviteMember = data["isInviteMember"]
+                self.tableView_Events.reloadData()
+            }
         }
     }
 }
