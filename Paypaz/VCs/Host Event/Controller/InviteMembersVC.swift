@@ -20,7 +20,7 @@ class InviteMembersVC: CustomViewController {
     var isPublicStatus = "0"
     var isInviteMemberStatus = "0"
     var eventID = ""
-    var isEdit : Bool?
+    var isEdit : Bool? = false
     var invitedContacts = [InvitedContacts]()
     var contactDict = [String:String]()
     var contactArray = [[String:String]]()
@@ -302,6 +302,7 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
         }
         else{
             let _ = contactDetails[indexPath.row].isSelected ?? false ? (cell.btn_tick.isSelected = true) : (cell.btn_tick.isSelected = false)
+            cell.btn_tick.isUserInteractionEnabled = true
             cell.btn_tick.tag = indexPath.row
             cell.btn_tick.addTarget(self, action: #selector(btn_Selected(_:)), for: .touchUpInside)
         }

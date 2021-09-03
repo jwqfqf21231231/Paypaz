@@ -8,20 +8,14 @@
 
 import UIKit
 import SDWebImage
-protocol UpdatedProductDelegate : class {
-    func isUpdatedProduct(data:MyProducts?, productId :String, isEdited:Bool?, isDeleted:Bool?)
-}
 
 class ProductDetailVC : CustomViewController {
     //productID will come from previousVC .ie ViewAllProductsVC
-    var isEdited : Bool?
     var productID = ""
     var eventName = ""
     var eventID = ""
     var product : MyProducts?
     private let dataSource = ProductDetailsDataModel()
-    weak var updatedProductDelegate : UpdatedProductDelegate?
-    weak var delegate : PopupDelegate?
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var lbl_ProductName : UILabel!
     @IBOutlet weak var lbl_ProductPrice : UILabel!
@@ -30,7 +24,6 @@ class ProductDetailVC : CustomViewController {
     @IBOutlet weak var lbl_EventName : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.delegate2 = self
         dataSource.delegate = self
         getProductDetails()
         // Do any additional setup after loading the view.
@@ -43,41 +36,7 @@ class ProductDetailVC : CustomViewController {
     }
     //MARK:- --- Action ---
     @IBAction func btn_back (_ sender:UIButton) {
-        if isEdited ?? false{
-            self.updatedProductDelegate?.isUpdatedProduct(data: self.product, productId: self.productID,isEdited: true, isDeleted: false)
-            self.navigationController?.popViewController(animated: true)
-
-        }else{
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
-    @IBAction func btn_Edit(_ sender:UIButton)
-    {
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddProductVC") as? AddProductVC
-            else { return  }
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.isEdit = true
-        vc.productID = self.productID
-        vc.delegate = self
-        self.present(vc, animated: false, completion: nil)
-    }
-    @IBAction func btn_Delete(_ sender:UIButton)
-    {
-        Connection.svprogressHudShow(view: self)
-        dataSource.productID = self.productID
-        dataSource.eventID = self.eventID
-        dataSource.type = "1"
-        dataSource.deleteProduct()
-    }
-}
-extension ProductDetailVC : AddProductDelegate
-{
-    func isAddedProduct(data: MyProducts?, productId: String) {
-        self.isEdited = true
-        self.product = data
-        Connection.svprogressHudShow(view: self)
-        dataSource.getProductDetails()
+        self.navigationController?.popViewController(animated: true)
     }
 }
 extension ProductDetailVC : ProductDetailsDataModelDelegate
@@ -112,36 +71,6 @@ extension ProductDetailVC : ProductDetailsDataModelDelegate
     }
     
     func didFailDataUpdateWithError2(error: Error)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if error.localizedDescription == "Check Internet Connection"
-        {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
-        }
-        else
-        {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
-        }
-    }
-}
-extension ProductDetailVC : DeleteProductDataModelDelegate
-{
-    func didRecieveDataUpdate(data: SuccessModel)
-    {
-        print("DeleteProductModelData = ",data)
-        Connection.svprogressHudDismiss(view: self)
-        if data.success == 1
-        {
-            self.navigationController?.popViewController(animated: false)
-            self.updatedProductDelegate?.isUpdatedProduct(data: nil, productId: self.productID, isEdited: false, isDeleted: true)
-        }
-        else
-        {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-        }
-    }
-    
-    func didFailDataUpdateWithError3(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

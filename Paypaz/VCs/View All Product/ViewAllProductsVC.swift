@@ -7,15 +7,11 @@
 //
 
 import UIKit
-protocol UpdateProductsListDelegate : class{
-    func updateProductsList(data : [MyProducts])
-}
+
 class ViewAllProductsVC : CustomViewController {
-    //Here i will be using MyPostedProductModel and MyPostedProductDataModel
-    //The value for eventID will come from previousVC i.e MyPostedEventDetailsVC
+  
     var eventName = ""
     var eventID = ""
-    var deletedProductId = ""
     var products = [MyProducts]()
     var newProducts = [MyProducts]()
     var currentPage = 1
@@ -23,7 +19,6 @@ class ViewAllProductsVC : CustomViewController {
     private let dataSource = MyPostedEventDataModel()
     let dataSource1 = ProductDetailsDataModel()
     weak var delegate : PopupDelegate?
-    weak var updateProductsListDelegate : UpdateProductsListDelegate?
     
     @IBOutlet weak var lbl_EventName : UILabel!
     @IBOutlet weak var tableView_Products : UITableView! {
@@ -37,7 +32,6 @@ class ViewAllProductsVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate2 = self
-        dataSource1.delegate2 = self
         getAllProducts()
     }
    
@@ -66,7 +60,6 @@ class ViewAllProductsVC : CustomViewController {
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: false)
-        updateProductsListDelegate?.updateProductsList(data: self.products)
     }
     
 }

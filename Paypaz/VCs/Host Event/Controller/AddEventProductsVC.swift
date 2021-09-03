@@ -35,7 +35,7 @@ class AddEventProductsVC: CustomViewController {
         productsDataSource.delegate2 = self
         if isEdit ?? false{
             self.lbl_Title.text = "Edit Event Products"
-            self.btn_Submit.setTitle("Save", for: .normal)
+            self.btn_Submit.setTitle("Done", for: .normal)
             self.btn_Submit.setTitleColor(.white, for: .normal)
             self.btn_Submit.backgroundColor = UIColor(named: "GreenColor")
             getProducts()
@@ -53,6 +53,7 @@ class AddEventProductsVC: CustomViewController {
     {
         if isEdit ?? false{
             self.navigationController?.popViewController(animated: false)
+            editEventProductsDelegate?.loadProductsData()
         }
         else{
             for vc in self.navigationController!.viewControllers as Array {
@@ -66,14 +67,19 @@ class AddEventProductsVC: CustomViewController {
     @IBAction func btn_addProducts(_ sender:UIButton)
     {
         if let addProduct = self.presentPopUpVC("AddProductVC", animated: false) as? AddProductVC {
-            //addProduct.delegate = self
             addProduct.eventID = eventID
             addProduct.callback = { [self] item in
-                self.productArr.append(["image" : item["productImage"]!,"price" : item["productPrice"]!,"name" : item["productName"]!,"description" : item["productDescription"]!,"fromServer" : false])
+                self.productArr.append(["image" : item["productImage"]!,"price" : item["productPrice"]!,"name" : item["productName"]!,"description" : item["productDescription"]!,"isPaid" :item["isPaid"]!,"fromServer" : false])
                 
                 self.productIDArr.append(item["productID"] as! String)
                 DispatchQueue.main.async {
-                    self.btn_Submit.setTitle("Continue", for: .normal)
+                    if self.isEdit ?? false{
+                        self.btn_Submit.setTitle("Done", for: .normal)
+                    }
+                    else{
+                        self.btn_Submit.setTitle("Continue", for: .normal)
+
+                    }
                     self.btn_Submit.setTitleColor(.white, for: .normal)
                     self.btn_Submit.backgroundColor = UIColor(named: "GreenColor")
                     self.tableView_Products.reloadData()
@@ -116,9 +122,23 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         }
         cell.lbl_ProductName.text = productArr[indexPath.row]["name"] as? String
         cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
+        cell.lbl_Price.text = productArr[indexPath.row]["isPaid"] as! String == "0" ? "Free" : "$\((productArr[indexPath.row]["price"] as! NSString).integerValue)"
         cell.btn_Delete.tag = indexPath.row
+        cell.btn_Edit.tag = indexPath.row
+        cell.btn_Edit.addTarget(self, action: #selector(editProduct(button:)), for: .touchUpInside)
         cell.btn_Delete.addTarget(self, action: #selector(deleteProduct(button:)), for: .touchUpInside)
         return cell
+    }
+    @objc func editProduct(button : UIButton)
+    {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddProductVC") as? AddProductVC
+        else { return  }
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.isEdit = true
+        vc.productID = productIDArr[button.tag]
+        vc.delegate = self
+        self.present(vc, animated: false, completion: nil)
+        print("edit button clicked")
     }
     @objc func deleteProduct(button : UIButton)
     {
@@ -131,6 +151,19 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         dataSource.deleteProduct()
     }
 }
+extension AddEventProductsVC : AddProductDelegate
+{
+    func isAddedProduct(data:MyProducts?,productId :String)
+    {
+        if let index = productIDArr.firstIndex(where: { (abc) -> Bool in
+            return abc == productId
+        }){
+            productArr.remove(at: index)
+            productArr.insert(["image" : (data?.image ?? ""),"price" : (data?.price ?? ""),"name" : (data?.name ?? ""),"description" : (data?.dataDescription ?? ""),"isPaid" : (data?.isPaid ?? ""),"fromServer" : true], at: index)
+            self.tableView_Products.reloadData()
+        }
+    }
+}
 extension AddEventProductsVC : MyPostedProductsDataModelDelegate
 {
     func didRecieveDataUpdate(data: MyPostedProductsModel)
@@ -141,7 +174,7 @@ extension AddEventProductsVC : MyPostedProductsDataModelDelegate
         {
             let products = data.data ?? []
             for i in 0..<products.count{
-                productArr.append(["image" : products[i].image ?? "","price" : products[i].price ?? "","name" : products[i].name ?? "","description" : products[i].dataDescription ?? "","fromServer" : true])
+                productArr.append(["image" : products[i].image ?? "","price" : products[i].price ?? "","name" : products[i].name ?? "","description" : products[i].dataDescription ?? "","isPaid" : products[i].isPaid ?? "","fromServer" : true])
                 productIDArr.append(products[i].id ?? "")
             }
             tableView_Products.reloadData()

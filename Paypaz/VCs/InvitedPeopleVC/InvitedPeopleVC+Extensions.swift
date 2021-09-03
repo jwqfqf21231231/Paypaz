@@ -23,6 +23,7 @@ extension InvitedPeopleVC : UITableViewDataSource {
         cell.img_icons.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.img_icons.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "place_holder"))
         cell.lbl_title.text = contacts[indexPath.row].name
+        cell.lbl_PhoneNo.text = "+\((contacts[indexPath.row].phoneCode!) + " " + (contacts[indexPath.row].phoneNumber!))"
         return cell
     }
 }

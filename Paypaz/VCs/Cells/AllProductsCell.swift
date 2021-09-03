@@ -14,6 +14,4 @@ class AllProductsCell: UITableViewCell {
     @IBOutlet weak var lbl_ProductName : UILabel!
     @IBOutlet weak var lbl_ProductPrice : UILabel!
     @IBOutlet weak var lbl_ProductDescription : UILabel!
-    @IBOutlet weak var btn_Edit : RoundButton!
-    @IBOutlet weak var btn_Delete : RoundButton!
 }

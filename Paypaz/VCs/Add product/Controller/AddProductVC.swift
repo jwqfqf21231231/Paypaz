@@ -216,7 +216,7 @@ extension AddProductVC : AddProductDataModelDelegate
         if data.success == 1
         {
             guard let callback = self.callback else { return }
-            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? ""])
+            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? "","isPaid":data.data?.isPaid ?? ""])
             self.dismiss(animated: false)
         }
         else

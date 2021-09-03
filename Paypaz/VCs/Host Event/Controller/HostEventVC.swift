@@ -15,7 +15,7 @@ protocol EditEventDelegate : class {
 }
 class HostEventVC : UIViewController {
     
-    var isEdit : Bool? //The value for isEdit comes from MyEventsListVC+Extensions (60th line)
+    var isEdit : Bool?
     var eventID = ""
     private let dataSource2 = MyPostedEventDataModel()
     weak var editEventDelegate : EditEventDelegate?
@@ -130,7 +130,7 @@ class HostEventVC : UIViewController {
         if isEdit ?? false
         {
             lbl_Title.text = "Edit Event"
-            btn_CreateEvent.setTitle("Update Event", for: .normal)
+            btn_CreateEvent.setTitle("Save", for: .normal)
         }
         else
         {

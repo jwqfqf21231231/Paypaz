@@ -11,8 +11,9 @@ class ProductTableCell : UITableViewCell {
     @IBOutlet weak var img_Product: UIImageView!
     @IBOutlet weak var lbl_ProductName: UILabel!
     @IBOutlet weak var lbl_Description: UILabel!
+    @IBOutlet weak var lbl_Price : UILabel!
     @IBOutlet weak var btn_Delete : UIButton!
-
+    @IBOutlet weak var btn_Edit : UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,7 +21,7 @@ class ProductTableCell : UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 10, right: 5))
+        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 10, right: 5))
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

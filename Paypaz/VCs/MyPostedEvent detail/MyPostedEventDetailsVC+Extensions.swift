@@ -167,6 +167,9 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
+            if data.message == "Data not found"{
+                self.products.removeAll()
+            }
             print(data.message ?? "")
         }
         if self.products.count == 0
@@ -298,20 +301,5 @@ extension MyPostedEventDetailsVC : DeleteEventDelegate
     func deleteEventData(eventID: String) {
         self.navigationController?.popViewController(animated: false)
         updateEventDelegate?.updateEventData(data: eventDetails, eventID: eventID, deleted: true)
-    }
-}
-extension MyPostedEventDetailsVC : UpdateProductsListDelegate
-{
-    func updateProductsList(data: [MyProducts]) {
-        self.products = data
-        if products.count == 0{
-            self.view_Product.isHidden = true
-            self.view_ProductHeight.constant = 0
-        }
-        else{
-            self.view_Product.isHidden = false
-            self.view_ProductHeight.constant = 115.5
-            self.collectionView_Products.reloadData()
-        }
     }
 }

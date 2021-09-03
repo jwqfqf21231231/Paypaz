@@ -29,8 +29,6 @@ extension EventDetailVC : UICollectionViewDataSource {
             else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as? ProductCell
                 else { return ProductCell() }
-                
-                
                 return cell
             }
         }
@@ -64,36 +62,30 @@ extension EventDetailVC : UICollectionViewDelegate, UICollectionViewDelegateFlow
         }
         
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if collectionView.tag == 10  {
-            if indexPath.row == 4 {
-                if let _ = self.presentPopUpVC("InvitedPeopleVC", animated: false) as? InvitedPeopleVC {
-                    
-                }
-            }else {
+        if collectionView.tag == 10
+        {
+            if indexPath.row == 4
+            {
+               _ = self.presentPopUpVC("InvitedPeopleVC", animated: false) as? InvitedPeopleVC
+            }
+            else{
                 _ = self.pushToVC("OtherUserProfileVC")
             }
-            
-        }  else if collectionView.tag != 10{
+        }
+        else
+        {
             if let vc = self.pushToVC("ProductDetailVC") as? ProductDetailVC
             {
                 vc.productID = self.products[indexPath.row].id ?? ""
                 vc.eventID = self.eventID
-                vc.delegate = self
             }
         }
-        
     }
 }
-extension EventDetailVC : PopupDelegate
-{
-    func isClickedButton() {
-        Connection.svprogressHudShow(view: self)
-        getProducts()
-    }
-}
+
 extension EventDetailVC : MyPostedEventDataModelDelegate
 {
     func didRecieveDataUpdate(data: MyPostedEventModel)
@@ -163,7 +155,6 @@ extension EventDetailVC : MyPostedProductsDataModelDelegate
         else
         {
             self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
-            // self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

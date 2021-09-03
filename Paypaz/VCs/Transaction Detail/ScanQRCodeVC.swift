@@ -9,18 +9,14 @@
 import UIKit
 
 class ScanQRCodeVC: CustomViewController {
-
-//MARK:- --- View Life Cycle ----
-override func viewDidLoad() {
-    super.viewDidLoad()
-
- 
+    
+    //MARK:- --- View Life Cycle ----
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    
-    
 
-//MARK:- --- Action ----
-@IBAction func btn_Back(_ sender:UIButton) {
-    self.navigationController?.popViewController(animated: true)
-}
+    //MARK:- --- Action ----
+    @IBAction func btn_Back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

@@ -29,31 +29,7 @@ extension ViewAllProductsVC : UITableViewDataSource {
             cell.lbl_ProductPrice.text = "$\((products[indexPath.row].price! as NSString).integerValue)"
         }
         cell.lbl_ProductDescription.text = products[indexPath.row].dataDescription
-        cell.btn_Edit.tag = indexPath.row
-        cell.btn_Delete.tag = indexPath.row
-        cell.btn_Edit.addTarget(self, action: #selector(editButtonClicked(_:)), for: .touchUpInside)
-        cell.btn_Delete.addTarget(self, action: #selector(deleteButtonClicked(_:)), for: .touchUpInside)
         return cell
-    }
-    @objc func editButtonClicked(_ sender:UIButton)
-    {
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddProductVC") as? AddProductVC
-        else { return  }
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.isEdit = true
-        vc.productID = products[sender.tag].id ?? ""
-        vc.delegate = self
-        self.present(vc, animated: false, completion: nil)
-        print("edit button clicked")
-    }
-    @objc func deleteButtonClicked(_ sender:UIButton)
-    {
-        Connection.svprogressHudShow(view: self)
-        self.deletedProductId = self.products[sender.tag].id ?? ""
-        dataSource1.productID = self.products[sender.tag].id ?? ""
-        dataSource1.eventID = self.products[sender.tag].eventID ?? ""
-        dataSource1.type = "1"
-        dataSource1.deleteProduct()
     }
 }
 extension ViewAllProductsVC : UITableViewDelegate {
@@ -63,60 +39,11 @@ extension ViewAllProductsVC : UITableViewDelegate {
             vc.productID = self.products[indexPath.row].id ?? ""
             vc.eventID = self.products[indexPath.row].eventID ?? ""
             vc.eventName = self.eventName 
-            vc.updatedProductDelegate = self
         }
     }
 }
-extension ViewAllProductsVC : AddProductDelegate
-{
-    func isAddedProduct(data: MyProducts?, productId: String) {
-        if let index = products.firstIndex(where: { (abc) -> Bool in
-            return abc.id == productId
-        }){
-            if let productData = data{
-                self.products[index] = productData
-                self.tableView_Products.reloadData()
-            }
-        }
-    }
-}
-extension ViewAllProductsVC : DeleteProductDataModelDelegate
-{
-    func didRecieveDataUpdate(data: SuccessModel)
-    {
-        print("DeleteProductModelData = ",data)
-        Connection.svprogressHudDismiss(view: self)
-        if data.success == 1
-        {
-            if let index = products.firstIndex(where: { (abc) -> Bool in
-                return abc.id == self.deletedProductId
-            }){
-                self.products.remove(at: index)
-                self.tableView_Products.reloadData()
-            }
-            if products.count == 0{
-                self.lbl_EventName.text?.removeAll()
-            }
-        }
-        else
-        {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-        }
-    }
-    
-    func didFailDataUpdateWithError3(error: Error)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if error.localizedDescription == "Check Internet Connection"
-        {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
-        }
-        else
-        {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
-        }
-    }
-}
+
+
 
 extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
 {
@@ -140,11 +67,9 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
             DispatchQueue.main.async {
                 self.tableView_Products.reloadData()
             }
-            
         }
         else
         {
-            
             if data.message == "Data not found" && currentPage-1 >= 1{
                 print("No data at page No : \(currentPage-1)")
                 currentPage = currentPage-1
@@ -177,30 +102,6 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
                 self.tableView_Products.reloadData()
             }
             self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
-        }
-    }
-}
-extension ViewAllProductsVC : UpdatedProductDelegate{
-    
-    func isUpdatedProduct(data: MyProducts?, productId: String, isEdited: Bool?, isDeleted: Bool?) {
-        if isEdited ?? false{
-            if let index = products.firstIndex(where: { (abc) -> Bool in
-                return abc.id == productId
-            }){
-                if let productData = data{
-                    self.products[index] = productData
-                    self.tableView_Products.reloadData()
-                }
-            }
-        }
-        if isDeleted ?? false{
-            if let index = products.firstIndex(where: { (abc) -> Bool in
-                return abc.id == productId
-            }){
-                self.products.remove(at: index)
-                self.tableView_Products.reloadData()
-            }
-            
         }
     }
 }
