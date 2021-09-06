@@ -9,11 +9,11 @@
 import UIKit
 
 class CalendarCell : UICollectionViewCell {
-
+    
     @IBOutlet weak var lbl_day  : UILabel!
     @IBOutlet weak var lbl_date : UILabel!
     @IBOutlet weak var bgView   : RoundView!
-   
+    
     override var isSelected: Bool{
         didSet {
             if isSelected {
@@ -29,6 +29,6 @@ class CalendarCell : UICollectionViewCell {
         }
     }
     
-
+    
 }
 

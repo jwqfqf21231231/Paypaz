@@ -19,12 +19,18 @@ extension BuyEventVC : UITableViewDataSource {
             else { return BuyEventTblCell() }
         
        // self.addTapGestureOnImg(cell.img_event)
+        
+        var sDate = filteredEventData[indexPath.row].startDate ?? ""
+        sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+        cell.lbl_EventDay.text = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "d")
+        cell.lbl_EventMonth.text = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "EEE")
         cell.img_event.sd_imageIndicator = SDWebImageActivityIndicator.gray
         let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
         cell.img_event.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "event_img"))
         cell.txt_eventName.text = filteredEventData[indexPath.row].name
         cell.txt_personName.text = (filteredEventData[indexPath.row].firstName ?? "")+" "+(filteredEventData[indexPath.row].lastName ?? "")
-        cell.txt_eventPrice.text = filteredEventData[indexPath.row].price
+        cell.txt_eventPrice.text = "$\((filteredEventData[indexPath.row].price! as NSString).integerValue)"
+        cell.lbl_Distance.text = "\(filteredEventData[indexPath.row].distance ?? "") miles away"
         cell.btn_addToCart.addTarget(self, action: #selector(self.clicked_btn_addToCart(_:)), for: .touchUpInside)
         cell.btn_Buy.addTarget(self, action: #selector(self.clicked_btn_Buy(_:)), for: .touchUpInside)
         cell.btn_fav.addTarget(self, action: #selector(self.clicked_btn_Fav(_:)), for: .touchUpInside)
@@ -99,6 +105,12 @@ extension BuyEventVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+        let data = arrCalendarDays?[indexPath.row]
+        let day = data?.components(separatedBy: " ").last
+        Connection.svprogressHudShow(view: self)
+        dataSource.isFilter = "2"
+        dataSource.day = day ?? ""
+        dataSource.typeID = typeID
+        dataSource.filterEvents()
     }
 }

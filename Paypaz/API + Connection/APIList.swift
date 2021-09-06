@@ -46,6 +46,7 @@ enum urlString:String
     case GETEVENTACCTOTYPES = "home/type/events"
     case ADDFAV = "user/event/favourite/add"
     case LISTFAVOURITE = "user/favourite/list"
+    case FILTEREVENT = "home/event/filter"
     
     case ADDPRODUCT = "user/product/add"
     case MYPRODUCTS = "user/event/products"
@@ -61,6 +62,8 @@ enum urlString:String
     
     case CHANGEPHONENUMBER = "user/phone/otp"
     case VERIFYCHANGEDPHONENUMBER = "user/phone/update"
+    
+    case InviteList = "user/invite/list"
     
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"

@@ -37,6 +37,7 @@ class BuyEventVC : CustomViewController {
         super.viewDidLoad()
         self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
         dataSource.delegate = self
+        dataSource.delegate2 = self
         let arr = self.arrayOfDates()
         self.arrCalendarDays = arr as? [String] ?? []
         self.collectionViewCalendar.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .left)
@@ -145,6 +146,45 @@ extension BuyEventVC : EventInfoDataModelDelegate
     }
     
     func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension BuyEventVC : FilteredEventDataModelDelegate
+{
+    func didRecieveDataUpdate1(data: MyEventsListModel)
+    {
+        print("FilteredEventModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.eventData = data.data ?? []
+            self.filteredEventData = data.data ?? []
+            DispatchQueue.main.async {
+                self.tableView_Events.reloadData()
+            }
+        }
+        else
+        {
+            if data.message == "Data not found"{
+                self.eventData.removeAll()
+                self.filteredEventData.removeAll()
+                self.tableView_Events.reloadData()
+            }
+            self.view.makeToast(data.message, duration: 0.5, position: .bottom)
+           // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError2(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

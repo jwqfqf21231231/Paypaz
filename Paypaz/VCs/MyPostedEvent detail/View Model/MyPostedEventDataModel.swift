@@ -25,7 +25,6 @@ protocol MyPostedContactsDataModelDelegate:class {
 class MyPostedEventDataModel: NSObject
 {
     var eventID = ""
-    var pageNo = "0"
     weak var delegate: MyPostedEventDataModelDelegate?
     weak var delegate2: MyPostedProductsDataModelDelegate?
     weak var delegate3: MyPostedContactsDataModelDelegate?
@@ -69,8 +68,7 @@ class MyPostedEventDataModel: NSObject
     {
         let url =  APIList().getUrlString(url: .MYPRODUCTS)
         let parameter : Parameters = [
-            "eventID" : eventID,
-            "pageNo" : pageNo
+            "eventID" : eventID
         ]
         sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:

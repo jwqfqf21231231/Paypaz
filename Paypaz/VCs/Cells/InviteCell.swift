@@ -13,17 +13,9 @@ class InviteCell : UITableViewCell {
     @IBOutlet weak var btn_accept  : RoundButton!
     @IBOutlet weak var btn_reject  : RoundButton!
     @IBOutlet weak var txt_message : UILabel!
+    @IBOutlet weak var img_InviteePic : UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+   
     override func prepareForReuse() {
         super.prepareForReuse()
         self.txt_message.attributedText = self.setAttributedTxt()

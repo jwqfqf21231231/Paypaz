@@ -18,9 +18,10 @@ class MyPostedEventDetailsVC : CustomViewController {
     var isInviteMemberStatus = ""
     var eventDetails : MyEvent?
     var products = [MyProducts]()
+    var newProductItems = [MyProducts]()
     var contacts = [InvitedContacts]()
     weak var updateEventDelegate : UpdateEventDelegate?
-    private let dataSource = MyPostedEventDataModel()
+    let dataSource = MyPostedEventDataModel()
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var lbl_EventName : UILabel!
     @IBOutlet weak var lbl_Price : UILabel!

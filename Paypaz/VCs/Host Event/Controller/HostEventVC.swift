@@ -89,7 +89,7 @@ class HostEventVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.paymentType = "0"
+//        self.paymentType = "0"
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 15)
         setTitle()
         if self.eventID != ""
@@ -438,7 +438,7 @@ class HostEventVC : UIViewController {
             dataSource.location = self.location
             dataSource.startDate = sD
             dataSource.endDate = eD
-            if paymentStatus == "0"{
+            if paymentStatus == "0" || paymentStatus == "1"{
                 dataSource.paymentType = paymentType ?? ""
                 dataSource.price = txt_Price.text ?? ""
             }

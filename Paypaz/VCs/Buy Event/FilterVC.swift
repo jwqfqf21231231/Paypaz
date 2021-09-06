@@ -7,10 +7,15 @@
 //
 
 import UIKit
-
+protocol FilterData:class {
+    func filterData(distance:String,date:String)
+}
 class FilterVC : CustomViewController {
     
-    
+    @IBOutlet weak var distance:UISlider!
+    @IBOutlet weak var txt_Date : UITextField!
+    @IBOutlet weak var txt_Time : UITextField!
+    weak var delegate : FilterData?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,5 +36,6 @@ class FilterVC : CustomViewController {
     }
     @IBAction func btn_Apply(_ sender:UIButton) {
         self.dismiss(animated: true, completion: nil)
+        delegate?.filterData(distance: "5", date: "4")
     }
 }

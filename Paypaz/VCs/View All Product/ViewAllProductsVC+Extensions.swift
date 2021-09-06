@@ -57,24 +57,16 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
             let attributedString = NSMutableAttributedString(string:"\"\(self.eventName) Event\"", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)])
             normalString.append(attributedString)
             self.lbl_EventName.attributedText = normalString
-            if currentPage-1 != 0{
-                self.newProducts = data.data ?? []
-                self.products.append(contentsOf: self.newProducts)
-            }
-            else{
-                self.products = data.data ?? []
-            }
+            
+            self.products = data.data ?? []
+            
             DispatchQueue.main.async {
                 self.tableView_Products.reloadData()
             }
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
-            }
-            else if data.message == "Data not found" && currentPage-1 == 0{
+            if data.message == "Data not found"{
                 view.makeToast(data.message ?? "", duration: 3, position: .center)
                 self.lbl_EventName.text?.removeAll()
                 self.products = []

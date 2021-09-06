@@ -45,8 +45,6 @@ class AddEventProductsVC: CustomViewController {
     private func getProducts(){
         Connection.svprogressHudShow(view: self)
         productsDataSource.eventID = eventID
-        productsDataSource.pageNo = "0"
-        //self.currentPage = 1
         productsDataSource.getProducts()
     }
     @IBAction func btn_Back(_ sender:UIButton)
@@ -149,6 +147,11 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         productArr.remove(at: button.tag)
         dataSource.type = "0"
         dataSource.deleteProduct()
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = self.pushVC("ProductDetailVC") as? ProductDetailVC{
+            vc.productID = productIDArr[indexPath.row]
+        }
     }
 }
 extension AddEventProductsVC : AddProductDelegate

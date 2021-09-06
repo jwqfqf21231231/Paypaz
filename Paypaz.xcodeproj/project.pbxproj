@@ -10,6 +10,8 @@
 		040A4F5726D8A124009C0581 /* CornerViewSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A4F5526D8A124009C0581 /* CornerViewSide.swift */; };
 		040A4F5826D8A124009C0581 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A4F5626D8A124009C0581 /* DesignableView.swift */; };
 		040E5AC2269C0D0B00254FB7 /* CreditDebitCardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */; };
+		040F7C3726E5DCC900F4186B /* InvitesListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F7C3626E5DCC900F4186B /* InvitesListDataModel.swift */; };
+		040F7C3E26E5DE9100F4186B /* InvitesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */; };
 		041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */; };
 		0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359326B00641008FA98A /* FavouritesDataModel.swift */; };
 		0428359D26B009BF008FA98A /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359C26B009BF008FA98A /* FavouriteCell.swift */; };
@@ -205,6 +207,8 @@
 		040A4F5526D8A124009C0581 /* CornerViewSide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerViewSide.swift; sourceTree = "<group>"; };
 		040A4F5626D8A124009C0581 /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
 		040E5AC1269C0D0B00254FB7 /* CreditDebitCardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditDebitCardDataModel.swift; sourceTree = "<group>"; };
+		040F7C3626E5DCC900F4186B /* InvitesListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListDataModel.swift; sourceTree = "<group>"; };
+		040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListModel.swift; sourceTree = "<group>"; };
 		041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedContactsModel.swift; sourceTree = "<group>"; };
 		0428359326B00641008FA98A /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
 		0428359C26B009BF008FA98A /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
@@ -433,6 +437,22 @@
 				445433DC262D685300443AE1 /* CreditDebitCardVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		040F7C3B26E5DD1300F4186B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		040F7C3C26E5DD2300F4186B /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				040F7C3626E5DCC900F4186B /* InvitesListDataModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 		0428359826B00803008FA98A /* View Model */ = {
@@ -1174,6 +1194,8 @@
 		445C77A72637F5EE00AD4DF3 /* InvitesList */ = {
 			isa = PBXGroup;
 			children = (
+				040F7C3B26E5DD1300F4186B /* Model */,
+				040F7C3C26E5DD2300F4186B /* View Model */,
 				445C77A82637F60500AD4DF3 /* InvitesListVC.swift */,
 				445C77AA2637F62300AD4DF3 /* InvitesListVC+Extensions.swift */,
 			);
@@ -1806,6 +1828,7 @@
 				0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */,
 				445433DD262D685300443AE1 /* CreditDebitCardVC.swift in Sources */,
 				0C9F29CC268AE16600CE6178 /* SignUpModel.swift in Sources */,
+				040F7C3E26E5DE9100F4186B /* InvitesListModel.swift in Sources */,
 				041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */,
 				0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */,
 				445433CE262D56F500443AE1 /* OTPVerificationVC.swift in Sources */,
@@ -1932,6 +1955,7 @@
 				44DBD008263011B200255F9A /* EventDetailVC.swift in Sources */,
 				0C120A3A2690211E00FD806A /* ChooseEventCell.swift in Sources */,
 				44E5591926327B7A00193305 /* TermsPoliciesVC.swift in Sources */,
+				040F7C3726E5DCC900F4186B /* InvitesListDataModel.swift in Sources */,
 				0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */,
 				0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */,
 				445433E8262DA4D200443AE1 /* SideDrawerListVC+Extensions.swift in Sources */,

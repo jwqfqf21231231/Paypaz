@@ -17,7 +17,9 @@ class BuyEventTblCell : UITableViewCell {
     @IBOutlet weak var btn_addToCart  : UIButton!
     @IBOutlet weak var btn_Buy        : UIButton!
     @IBOutlet weak var btn_fav        : UIButton!
-    
+    @IBOutlet weak var lbl_Distance   : UILabel!
+    @IBOutlet weak var lbl_EventDay : UILabel!
+    @IBOutlet weak var lbl_EventMonth : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
