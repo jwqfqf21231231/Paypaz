@@ -1,33 +1,34 @@
 //
-//  InvitesListDataModel.swift
+//  IsAcceptEventInvite.swift
 //  Paypaz
 //
-//  Created by MAC on 06/09/21.
+//  Created by MAC on 07/09/21.
 //  Copyright © 2021 iOSDeveloper. All rights reserved.
 //
-
 
 import Foundation
 import Alamofire
 
-protocol InvitesListDataModelDelegate:class {
-    func didRecieveDataUpdate(data:InvitesListModel)
+protocol IsAcceptEventInviteDataModelDelegate:class {
+    func didRecieveDataUpdate(data:ResendOTPModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
-class InvitesListDataModel: NSObject
+class IsAcceptEventInviteDataModel: NSObject
 {
-    weak var delegate: InvitesListDataModelDelegate?
+    weak var delegate: IsAcceptEventInviteDataModelDelegate?
     let sharedInstance = Connection()
-    var pageNo = "0"
+    var isAccept = ""
+    var inviteID = ""
     var parameter : Parameters = [:]
-    func getInvitees()
+    func acceptOrInvite()
     {
         
-        let url =  APIList().getUrlString(url: .INVITELIST)
+        let url =  APIList().getUrlString(url: .ACCEPTORREJECTINVITE)
         
         let parameter : Parameters = [
-            "pageNo" : pageNo
+            "isAccept" : isAccept,
+            "inviteID" : inviteID
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
@@ -42,7 +43,7 @@ class InvitesListDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(InvitesListModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
                                                 self.delegate?.didRecieveDataUpdate(data: response)
                                             }
                                             catch let error as NSError
@@ -65,3 +66,4 @@ class InvitesListDataModel: NSObject
     }
     
 }
+

@@ -122,7 +122,6 @@ class BuyEventDataModel: NSObject
             "latitude" : UserDefaults.standard.getLatitude(),
             "longitude" : UserDefaults.standard.getLongitude(),
             "distance" : distance,
-            "search" : search,
             "day" : day,
             "pageNo" : pageNo,
             "date" : date,

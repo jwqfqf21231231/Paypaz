@@ -13,7 +13,7 @@ class InvitesListVC : CustomViewController {
     var invitesList = [InvitesList]()
     var newInvitesList = [InvitesList]()
     var currentPage = 1
-    private let dataSource = InvitesListDataModel()
+     let dataSource = InvitesListDataModel()
     @IBOutlet weak var tableView_Invites : UITableView! {
         didSet {
             tableView_Invites.dataSource = self
@@ -31,7 +31,7 @@ class InvitesListVC : CustomViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
-            if currentPage*10 == self.invitesList.count{
+            if currentPage*10 >= self.invitesList.count{
                 Connection.svprogressHudShow(view: self)
                 dataSource.pageNo = "\(currentPage)"
                 currentPage = currentPage + 1

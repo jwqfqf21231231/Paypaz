@@ -22,7 +22,8 @@ extension InvitesListVC : UITableViewDataSource {
         cell.img_InviteePic.sd_setImage(with: URL(string: url+(invitesList[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.btn_accept.addTarget(self, action: #selector(btn_accept(_:)), for: .touchUpInside)
         cell.btn_reject.addTarget(self, action: #selector(btn_reject(_:)), for: .touchUpInside)
-        
+        cell.btn_accept.tag = indexPath.row
+        cell.btn_reject.tag = indexPath.row
         cell.setCellData()
         return cell
     }
@@ -30,19 +31,22 @@ extension InvitesListVC : UITableViewDataSource {
     
     @objc func btn_accept(_ sender:UIButton) {
         if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-            popup.delegate  = self
+            popup.acceptOrRejectDelegate = self
+            popup.doAccept = true
+            popup.inviteID = invitesList[sender.tag].id ?? ""
             popup.selectedPopupType = .InviteAccept
         }
     }
     
     @objc func btn_reject(_ sender:UIButton) {
         if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-            popup.delegate  = self
+            popup.acceptOrRejectDelegate = self
+            popup.doAccept = true
+            popup.inviteID = invitesList[sender.tag].id ?? ""
             popup.selectedPopupType = .InviteReject
         }
     }
 }
-
 
 extension InvitesListVC : UITableViewDelegate {
     
@@ -51,10 +55,22 @@ extension InvitesListVC : UITableViewDelegate {
         
     }
 }
-extension InvitesListVC : PopupDelegate {
-    func isClickedButton() {
-        //self.navigationController?.popViewController(animated: true)
+extension InvitesListVC : AcceptOrRejectInviteDelegate {
+    func acceptOrReject(inviteID: String) {
+        if let index = invitesList.firstIndex(where: { (abc) -> Bool in
+            return abc.id == inviteID
+        }){
+            invitesList.remove(at: index)
+            tableView_Invites.reloadData()
+            if invitesList.count <= 5{
+                Connection.svprogressHudShow(view: self)
+                dataSource.pageNo = "\(currentPage)"
+                currentPage = currentPage + 1
+                dataSource.getInvitees()
+            }
+        }
     }
+        //self.navigationController?.popViewController(animated: true)
 }
 extension InvitesListVC : InvitesListDataModelDelegate
 {

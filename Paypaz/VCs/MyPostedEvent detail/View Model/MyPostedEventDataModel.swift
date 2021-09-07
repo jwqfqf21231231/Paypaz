@@ -19,7 +19,7 @@ protocol MyPostedProductsDataModelDelegate:class {
     func didFailDataUpdateWithError2(error:Error)
 }
 protocol MyPostedContactsDataModelDelegate:class {
-    func didRecieveDataUpdate(data:MyPostedContactsModel)
+    func didRecieveDataUpdate3(data:MyPostedContactsModel)
     func didFailDataUpdateWithError3(error:Error)
 }
 class MyPostedEventDataModel: NSObject
@@ -114,7 +114,7 @@ class MyPostedEventDataModel: NSObject
                                             do
                                             {
                                                 let response = try JSONDecoder().decode(MyPostedContactsModel.self, from: result!)
-                                                self.delegate3?.didRecieveDataUpdate(data: response)
+                                                self.delegate3?.didRecieveDataUpdate3(data: response)
                                             }
                                             catch let error as NSError
                                             {

@@ -22,7 +22,11 @@ class HostEventVC : UIViewController {
     var pickedImage : UIImage?
     var fontCamera  = false
     var images      = [String:Any]()
+    
     var picker:UIDatePicker!
+    var toolBar:UIToolbar!
+    var fieldTag:Int?
+
     var location = ""
     var latitude = ""
     var longitude = ""
@@ -57,7 +61,6 @@ class HostEventVC : UIViewController {
     
     var selectedEventId : String?
     var btn_Title:String?
-    var fieldTag:Int?
     var paymentStatus = "0"
     
     
@@ -83,7 +86,6 @@ class HostEventVC : UIViewController {
     @IBOutlet weak var view_Height : NSLayoutConstraint!
     @IBOutlet weak var btn_Free : UIButton!
     @IBOutlet weak var btn_Paid : UIButton!
-    var toolBar:UIToolbar!
     
     //MARK:- ---- View Life Cycle ---
     override func viewDidLoad() {

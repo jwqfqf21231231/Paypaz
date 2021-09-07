@@ -19,6 +19,7 @@ struct InvitesListModel: Codable {
 struct InvitesList: Codable {
     let id, eventID, senderID, receiverID: String?
     let message, isAccept, status, createdDate: String?
+    let type,title: String?
     let updatedDate: String?
     let userProfile: String?
 }

@@ -63,7 +63,10 @@ enum urlString:String
     case CHANGEPHONENUMBER = "user/phone/otp"
     case VERIFYCHANGEDPHONENUMBER = "user/phone/update"
     
-    case InviteList = "user/invite/list"
+    case NOTIFICATIONLIST = "user/notification/list"
+    
+    case INVITELIST = "user/invite/list"
+    case ACCEPTORREJECTINVITE = "user/invite/change/status"
     
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"

@@ -9,7 +9,7 @@
 import UIKit
 
 class BuyEventVC : CustomViewController {
-
+    
     var typeID = ""
     var eventData = [MyEvent]()
     var filteredEventData = [MyEvent]()
@@ -18,11 +18,11 @@ class BuyEventVC : CustomViewController {
     @IBOutlet weak var txt_Search : UITextField!
     
     @IBOutlet weak var tableView_Events : UITableView! {
-           didSet {
-               tableView_Events.dataSource = self
-               tableView_Events.delegate   = self
-           }
-       }
+        didSet {
+            tableView_Events.dataSource = self
+            tableView_Events.delegate   = self
+        }
+    }
     @IBOutlet weak var collectionViewCalendar : UICollectionView! {
         didSet {
             collectionViewCalendar.dataSource = self
@@ -66,33 +66,45 @@ class BuyEventVC : CustomViewController {
         dataSource.getMyEvents()
     }
     func arrayOfDates() -> NSArray {
-            
-            let numberOfDays: Int = 30
-            let startDate = Date()
-            let formatter: DateFormatter = DateFormatter()
-            formatter.dateFormat = "EEE d"
-            let calendar = Calendar.current
-            var offset = DateComponents()
-            var dates: [Any] = [formatter.string(from: startDate)]
-            
-            for i in 1..<numberOfDays {
-                offset.day = i
-                let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
-                let nextDayString = formatter.string(from: nextDay!)
-                dates.append(nextDayString)
-            }
-            return dates as NSArray
+        
+        let numberOfDays: Int = 30
+        let startDate = Date()
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "EEE d"
+        let calendar = Calendar.current
+        var offset = DateComponents()
+        var dates: [Any] = [formatter.string(from: startDate)]
+        
+        for i in 1..<numberOfDays {
+            offset.day = i
+            let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
+            let nextDayString = formatter.string(from: nextDay!)
+            dates.append(nextDayString)
         }
+        return dates as NSArray
+    }
     
     
     // MARK: - --- Action ----
-        @IBAction func btn_back(_ sender:UIButton) {
-            self.navigationController?.popViewController(animated: true)
-        }
-    @IBAction func btn_Filter(_ sender:UIButton) {
-        _ = self.presentPopUpVC("FilterVC", animated: true)
+    @IBAction func btn_back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
-   
+    @IBAction func btn_Filter(_ sender:UIButton) {
+        if let vc = self.presentPopUpVC("FilterVC", animated: true) as? FilterVC{
+            vc.delegate = self
+        }
+    }
+    
+}
+extension BuyEventVC : FilterData{
+    func filterData(distance: String, date: String) {
+        Connection.svprogressHudShow(view: self)
+        dataSource.isFilter = "1"
+        dataSource.distance = distance
+        dataSource.date = date
+        dataSource.typeID = typeID
+        dataSource.filterEvents()
+    }
 }
 extension BuyEventVC : FavEventDataModelDelegate
 {
@@ -107,7 +119,7 @@ extension BuyEventVC : FavEventDataModelDelegate
         else
         {
             self.view.makeToast(data.message, duration: 3, position: .bottom)
-           // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -141,7 +153,7 @@ extension BuyEventVC : EventInfoDataModelDelegate
         else
         {
             self.view.makeToast(data.message, duration: 3, position: .bottom)
-           // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     
@@ -180,7 +192,7 @@ extension BuyEventVC : FilteredEventDataModelDelegate
                 self.tableView_Events.reloadData()
             }
             self.view.makeToast(data.message, duration: 0.5, position: .bottom)
-           // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

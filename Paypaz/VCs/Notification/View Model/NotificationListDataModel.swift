@@ -1,8 +1,8 @@
 //
-//  InvitesListDataModel.swift
+//  NotificationListDataModel.swift
 //  Paypaz
 //
-//  Created by MAC on 06/09/21.
+//  Created by MAC on 07/09/21.
 //  Copyright © 2021 iOSDeveloper. All rights reserved.
 //
 
@@ -10,21 +10,21 @@
 import Foundation
 import Alamofire
 
-protocol InvitesListDataModelDelegate:class {
+protocol NotificationListDataModelDelegate:class {
     func didRecieveDataUpdate(data:InvitesListModel)
     func didFailDataUpdateWithError(error:Error)
     
 }
-class InvitesListDataModel: NSObject
+class NotificationListDataModel: NSObject
 {
-    weak var delegate: InvitesListDataModelDelegate?
+    weak var delegate: NotificationListDataModelDelegate?
     let sharedInstance = Connection()
     var pageNo = "0"
     var parameter : Parameters = [:]
-    func getInvitees()
+    func getNotifications()
     {
         
-        let url =  APIList().getUrlString(url: .INVITELIST)
+        let url =  APIList().getUrlString(url: .NOTIFICATIONLIST)
         
         let parameter : Parameters = [
             "pageNo" : pageNo

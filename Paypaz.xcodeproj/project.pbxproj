@@ -33,6 +33,9 @@
 		04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7D72B26B3C77300747777 /* CountryListTable.swift */; };
 		04C7D73226B3D59800747777 /* CountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C7D73126B3D59800747777 /* CountryCodes.json */; };
 		04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */; };
+		04F4163126E76DF7009919A1 /* IsAcceptEventInvite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4163026E76DF7009919A1 /* IsAcceptEventInvite.swift */; };
+		04F4163726E78B21009919A1 /* NotificationListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4163626E78B21009919A1 /* NotificationListDataModel.swift */; };
+		04F4164426E78F80009919A1 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4164326E78F80009919A1 /* NotificationCell.swift */; };
 		04FD51A726B8FBC200F4CCA2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD51A626B8FBC200F4CCA2 /* Helper.swift */; };
 		04FFC95226CD263800E3E171 /* AddEventProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC95126CD263800E3E171 /* AddEventProductsVC.swift */; };
 		04FFC95726CD3A9D00E3E171 /* InviteMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC95626CD3A9D00E3E171 /* InviteMembersVC.swift */; };
@@ -230,6 +233,9 @@
 		04C7D72B26B3C77300747777 /* CountryListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTable.swift; sourceTree = "<group>"; };
 		04C7D73126B3D59800747777 /* CountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
 		04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyEventDataModel.swift; sourceTree = "<group>"; };
+		04F4163026E76DF7009919A1 /* IsAcceptEventInvite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAcceptEventInvite.swift; sourceTree = "<group>"; };
+		04F4163626E78B21009919A1 /* NotificationListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListDataModel.swift; sourceTree = "<group>"; };
+		04F4164326E78F80009919A1 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		04FD51A626B8FBC200F4CCA2 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		04FFC95126CD263800E3E171 /* AddEventProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventProductsVC.swift; sourceTree = "<group>"; };
 		04FFC95626CD3A9D00E3E171 /* InviteMembersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMembersVC.swift; sourceTree = "<group>"; };
@@ -451,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				040F7C3626E5DCC900F4186B /* InvitesListDataModel.swift */,
+				04F4163026E76DF7009919A1 /* IsAcceptEventInvite.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -537,6 +544,42 @@
 				04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		04F4163526E78A6C009919A1 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				04F4163626E78B21009919A1 /* NotificationListDataModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		04F4163E26E78DD5009919A1 /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				445433EA262DA8A500443AE1 /* DrawerCell.swift */,
+				44A5648B262F05A700FCF3D5 /* ProductTableCell.swift */,
+				44509EE426318048000B19F3 /* MemberCell.swift */,
+				445C77A02637DD6F00AD4DF3 /* MyEventsCell.swift */,
+				445C77AC26380BA300AD4DF3 /* InviteCell.swift */,
+				44F7666A263A90E0007F78CB /* BuyEventTblCell.swift */,
+				0C8EC60E269715DA00D51F60 /* AllProductsCell.swift */,
+				0428359C26B009BF008FA98A /* FavouriteCell.swift */,
+				04F4164326E78F80009919A1 /* NotificationCell.swift */,
+			);
+			path = "Table Cells";
+			sourceTree = "<group>";
+		};
+		04F4163F26E78DEA009919A1 /* Collection Cells */ = {
+			isa = PBXGroup;
+			children = (
+				44509ED2263133B8000B19F3 /* MorePeopleCell.swift */,
+				44835B20263BDACF00EBE620 /* CalendarCell.swift */,
+				0C120A392690211E00FD806A /* ChooseEventCell.swift */,
+				0CECCDEA269328CC00611D62 /* ProductCell.swift */,
+				048F8AE226D62FC10072F5E1 /* ContactCell.swift */,
+			);
+			path = "Collection Cells";
 			sourceTree = "<group>";
 		};
 		0C00BFC8268EDDA500BC3267 /* ViewModel */ = {
@@ -969,6 +1012,7 @@
 		44509ED62631612D000B19F3 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				04F4163526E78A6C009919A1 /* View Model */,
 				44509ED42631612A000B19F3 /* NotificationsListVC.swift */,
 				44509ED726316152000B19F3 /* NotificationListV+Extensions.swift */,
 			);
@@ -1142,19 +1186,8 @@
 		445433E9262DA89200443AE1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				445433EA262DA8A500443AE1 /* DrawerCell.swift */,
-				44A5648B262F05A700FCF3D5 /* ProductTableCell.swift */,
-				44509ED2263133B8000B19F3 /* MorePeopleCell.swift */,
-				44509EE426318048000B19F3 /* MemberCell.swift */,
-				445C77A02637DD6F00AD4DF3 /* MyEventsCell.swift */,
-				445C77AC26380BA300AD4DF3 /* InviteCell.swift */,
-				44F7666A263A90E0007F78CB /* BuyEventTblCell.swift */,
-				44835B20263BDACF00EBE620 /* CalendarCell.swift */,
-				0C120A392690211E00FD806A /* ChooseEventCell.swift */,
-				0CECCDEA269328CC00611D62 /* ProductCell.swift */,
-				0C8EC60E269715DA00D51F60 /* AllProductsCell.swift */,
-				0428359C26B009BF008FA98A /* FavouriteCell.swift */,
-				048F8AE226D62FC10072F5E1 /* ContactCell.swift */,
+				04F4163F26E78DEA009919A1 /* Collection Cells */,
+				04F4163E26E78DD5009919A1 /* Table Cells */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1860,6 +1893,7 @@
 				0C388B1E268F4970008AED6F /* HostEventDataModel.swift in Sources */,
 				04FD51A726B8FBC200F4CCA2 /* Helper.swift in Sources */,
 				045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */,
+				04F4164426E78F80009919A1 /* NotificationCell.swift in Sources */,
 				0C9F29F8268AEA9100CE6178 /* OTPVerificationDataModel.swift in Sources */,
 				0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */,
 				44596F39266A5B1500401884 /* EventReportsHistoryVC.swift in Sources */,
@@ -1963,7 +1997,9 @@
 				0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */,
 				0C9F29E7268AE2BE00CE6178 /* APIList.swift in Sources */,
 				0C3DAAA62698220900CCE2DC /* ConfirmPasscodeDataModel.swift in Sources */,
+				04F4163126E76DF7009919A1 /* IsAcceptEventInvite.swift in Sources */,
 				0C8EC602269709EE00D51F60 /* MyPostedProductsModel.swift in Sources */,
+				04F4163726E78B21009919A1 /* NotificationListDataModel.swift in Sources */,
 				448DDFF22636CEC800CE324D /* ViewProfileVC.swift in Sources */,
 				44835B1C263BB18F00EBE620 /* SendToBankVC.swift in Sources */,
 				44A5648A262F058000FCF3D5 /* MyTicketDetailVC+Extensions.swift in Sources */,

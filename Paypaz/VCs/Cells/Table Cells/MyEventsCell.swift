@@ -18,15 +18,4 @@ class MyEventsCell : UITableViewCell {
     @IBOutlet weak var btn_PeopleInvited : UIButton!
     @IBOutlet weak var btn_Height : NSLayoutConstraint!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

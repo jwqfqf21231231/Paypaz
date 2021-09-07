@@ -203,7 +203,7 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
 }
 extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
 {
-    func didRecieveDataUpdate(data: MyPostedContactsModel)
+    func didRecieveDataUpdate3(data: MyPostedContactsModel)
     {
         print("MyPostedContactsModelData = ",data)
         Connection.svprogressHudDismiss(view: self)

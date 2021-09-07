@@ -59,19 +59,21 @@ class MyPostedEventDetailsVC : CustomViewController {
         self.getProducts()
         self.getInvitees()
     }
+    
     func getEvent()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.getEvent()
     }
+    
     func getProducts()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = self.eventID
         dataSource.getProducts()
-        
     }
+    
     func getInvitees()
     {
         Connection.svprogressHudShow(view: self)

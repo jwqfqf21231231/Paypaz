@@ -53,7 +53,7 @@ class SettingsVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_Cart(_ sender:UIButton) {
-        _ = self.pushToVC("NotificationsListVC")
+        _ = self.pushToVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
         _ = self.pushToVC("NotificationsListVC")

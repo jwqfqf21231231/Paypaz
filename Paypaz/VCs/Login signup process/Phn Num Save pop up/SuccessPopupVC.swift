@@ -12,7 +12,9 @@ import UIKit
     func isClickedButton()
     @objc optional func passEventID(eventID : String)
 }
-
+protocol AcceptOrRejectInviteDelegate : class{
+    func acceptOrReject(inviteID : String)
+}
 enum PopupType {
     case InviteAccept
     case InviteReject
@@ -26,13 +28,17 @@ enum PopupType {
 class SuccessPopupVC : CustomViewController {
     
     weak var delegate : PopupDelegate?
-    
+    weak var acceptOrRejectDelegate : AcceptOrRejectInviteDelegate?
     @IBOutlet weak var lbl_Title   : UILabel!
     @IBOutlet weak var lbl_message : UILabel!
     @IBOutlet weak var imgIcon     : UIImageView!
     
     var selectedPopupType : PopupType?
     
+    var doAccept : Bool?
+    var inviteID = ""
+    var isAccept : Int?
+    private let dataSource = IsAcceptEventInviteDataModel()
     // MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +53,14 @@ class SuccessPopupVC : CustomViewController {
             switch type {
                 
             case .InviteAccept:
+                self.isAccept = 1
                 self.lbl_Title.text   = "Invitation Accepted"
                 self.lbl_message.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit In dui enim, ornare"
                 
                 self.imgIcon.image = UIImage(named: "invi_accept")
                 
             case .InviteReject:
+                self.isAccept = 2
                 self.lbl_Title.text   = "Invitation Rejected"
                 self.lbl_message.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit In dui enim, ornare"
                 
@@ -108,10 +116,44 @@ class SuccessPopupVC : CustomViewController {
     }
     // MARK: - --- Action ----
     @IBAction func btn_Continue(_ sender:UIButton) {
-        self.dismiss(animated: false) {[weak self] in
-            self?.delegate?.isClickedButton()
+        if doAccept ?? false{
+            dataSource.delegate = self
+            dataSource.inviteID = self.inviteID
+            dataSource.isAccept = "\(self.isAccept ?? 1)"
+            dataSource.acceptOrInvite()
+            Connection.svprogressHudShow(view: self)
         }
-        
+        else{
+            self.dismiss(animated: false) {[weak self] in
+                self?.delegate?.isClickedButton()
+            }
+        }
     }
-
+}
+extension SuccessPopupVC : IsAcceptEventInviteDataModelDelegate {
+    func didRecieveDataUpdate(data: ResendOTPModel) {
+        print("MyPostedEventModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.dismiss(animated: false) { [weak self] in
+                self?.acceptOrRejectDelegate?.acceptOrReject(inviteID: self?.inviteID ?? "")
+            }
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    func didFailDataUpdateWithError(error: Error){
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
 }

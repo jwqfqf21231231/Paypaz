@@ -12,8 +12,5 @@ class ChooseEventCell: UICollectionViewCell {
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var lbl_EventName : UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    
 }

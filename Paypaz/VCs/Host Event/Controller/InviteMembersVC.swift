@@ -209,7 +209,7 @@ class InviteMembersVC: CustomViewController {
 }
 extension InviteMembersVC : MyPostedContactsDataModelDelegate
 {
-    func didRecieveDataUpdate(data: MyPostedContactsModel)
+    func didRecieveDataUpdate3(data: MyPostedContactsModel)
     {
         print("MyPostedContactsModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
