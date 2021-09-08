@@ -53,32 +53,32 @@ class SettingsVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_Cart(_ sender:UIButton) {
-        _ = self.pushToVC("MyCartVC")
+        _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
-        _ = self.pushToVC("NotificationsListVC")
+        _ = self.pushVC("NotificationsListVC")
     }
     @IBAction func btn_AddBank(_ sender:UIButton) {
-        _ = self.pushToVC("AddBankAccountVC")
+        _ = self.pushVC("AddBankAccountVC")
     }
     @IBAction func btn_AddCardDetails(_ sender:UIButton) {
-        if let cardVC = self.pushToVC("CreditDebitCardVC") as? CreditDebitCardVC {
+        if let cardVC = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC {
             cardVC.fromSettings = true
             cardVC.isAddingNewCard = false
         }
     }
     @IBAction func btn_TermsPolicies(_ sender:UIButton) {
-        _ = self.pushToVC("TermsPoliciesVC")
+        _ = self.pushVC("TermsPoliciesVC")
     }
     @IBAction func btn_ContactUs(_ sender:UIButton) {
-        _ = self.pushToVC("ContactUsVC")
+        _ = self.pushVC("ContactUsVC")
     }
     @IBAction func btn_ChangePassword(_ sender:UIButton) {
-        _ = self.pushToVC("ChangePasswordVC")
+        _ = self.pushVC("ChangePasswordVC")
     }
     @IBAction func btn_ChangePhoneNumber(_ sender:UIButton)
     {
-        _ = self.pushToVC("EditPhoneNoVC")
+        _ = self.pushVC("EditPhoneNoVC")
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)

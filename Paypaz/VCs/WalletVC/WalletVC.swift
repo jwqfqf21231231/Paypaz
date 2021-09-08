@@ -32,7 +32,7 @@ class WalletVC : CustomViewController {
     }
     @IBAction func btn_PayRequest(_ sender:UIButton) {
        // _ = self.pushToVC("ContactListVC")
-         _ = self.pushToVC("PaymentTypeVC")
+         _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_AddMoney(_ sender:UIButton) {
         if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
@@ -41,7 +41,7 @@ class WalletVC : CustomViewController {
     }
     
     @IBAction func btn_SendToBank(_ sender:UIButton) {
-        _ = self.pushToVC("SendToBankVC")
+        _ = self.pushVC("SendToBankVC")
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -50,9 +50,9 @@ class WalletVC : CustomViewController {
 extension WalletVC : AddMoneyPopupDelegate {
     func isSelectedType(bank: Bool) {
         if bank {
-             _ = self.pushToVC("AddBankDetailsVC")
+             _ = self.pushVC("AddBankDetailsVC")
         } else {
-             _ = self.pushToVC("AddCardDetailsVC")
+             _ = self.pushVC("AddCardDetailsVC")
         }
     }
 }

@@ -41,7 +41,7 @@ extension FavouritesEventsListVC : UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let vc = self.pushToVC("EventDetailVC") as? EventDetailVC{
+        if let vc = self.pushVC("EventDetailVC") as? EventDetailVC{
             vc.eventID = favEvents[indexPath.row].id ?? ""
         }
         //  _ = self.pushToVC("EventDetailVC")

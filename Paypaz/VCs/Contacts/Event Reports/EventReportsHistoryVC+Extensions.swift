@@ -26,7 +26,7 @@ extension EventReportsHistoryVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        _ = self.pushToVC("EventReportVC")
+        _ = self.pushVC("EventReportVC")
     }
 }
 

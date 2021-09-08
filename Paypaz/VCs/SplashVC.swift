@@ -21,11 +21,11 @@ class SplashVC : CustomViewController {
                 {
                     if UserDefaults.standard.isLoggedIn() == true
                     {
-                        _ = self?.pushToVC("PasscodeVC")
+                        _ = self?.pushVC("PasscodeVC")
                     }
                     else
                     {
-                        _ = self?.pushToVC("WelcomeVC")
+                        _ = self?.pushVC("WelcomeVC")
                     }
                     
                 }else
@@ -33,26 +33,26 @@ class SplashVC : CustomViewController {
                     
                     if UserDefaults.standard.value(forKey: "isVerify") as? String != "1"
                     {
-                        _ = self?.pushToVC("OTPVerificationVC")
+                        _ = self?.pushVC("OTPVerificationVC")
                     }
                     else if UserDefaults.standard.value(forKey: "isProfile") as? String != "1"
                     {
-                        _ = self?.pushToVC("CreateProfileVC")
+                        _ = self?.pushVC("CreateProfileVC")
                     }
                     else if UserDefaults.standard.value(forKey: "isPasscode") as? String != "1"
                     {
-                        _ = self?.pushToVC("CreatePasscodeVC")
+                        _ = self?.pushVC("CreatePasscodeVC")
                     }
                     else if UserDefaults.standard.value(forKey: "isPin") as? String != "1"
                     {
-                        if let vc = self?.pushToVC("CreatePinVC") as? CreatePinVC
+                        if let vc = self?.pushVC("CreatePinVC") as? CreatePinVC
                         {
                             vc.isCreatingPin = true
                         }
                     }
                     else if UserDefaults.standard.value(forKey: "isVerifyCard") as? String != "1"
                     {
-                        if let vc = self?.pushToVC("CreditDebitCardVC") as? CreditDebitCardVC
+                        if let vc = self?.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
                         {
                             vc.fromPin = true
                         }
@@ -62,7 +62,7 @@ class SplashVC : CustomViewController {
             else
             {
                 self?.getLocation()
-                _ = self?.pushToVC("WelcomeVC")
+                _ = self?.pushVC("WelcomeVC")
             }
             
         }

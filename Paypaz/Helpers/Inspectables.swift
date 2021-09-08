@@ -14,8 +14,8 @@ import IQKeyboardManagerSwift
 @IBDesignable
 class RoundButton:UIButton {
     
-   @IBInspectable var cornerRadius : CGFloat = 0
-   @IBInspectable var border_Color : UIColor? {
+    @IBInspectable var cornerRadius : CGFloat = 0
+    @IBInspectable var border_Color : UIColor? {
         get {
             return UIColor(cgColor: self.layer.borderColor!)
         }
@@ -61,7 +61,7 @@ class RoundButton:UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-      
+        
         clipsToBounds      = true
         
         if showShadow
@@ -76,10 +76,10 @@ class RoundButton:UIButton {
 }
 @IBDesignable
 class RightImageButton : RoundButton {
-
+    
     @IBInspectable var rightImage: UIImage? = nil
     @IBInspectable var gapPadding: CGFloat = 0
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -88,24 +88,24 @@ class RightImageButton : RoundButton {
         super.init(coder: aDecoder)
         setup()
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setup()
     }
-
+    
     func setup() {
-
+        
         if(rightImage != nil) {
             let imageView = UIImageView(image: rightImage)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.contentMode = .scaleAspectFit
-
+            
             addSubview(imageView)
-
+            
             let length = CGFloat(16)
             titleEdgeInsets.left += length
-
+            
             NSLayoutConstraint.activate([
                 imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -gapPadding),
                 imageView.centerYAnchor.constraint(equalTo: self.titleLabel!.centerYAnchor, constant: 0),
@@ -115,7 +115,104 @@ class RightImageButton : RoundButton {
         }
     }
 }
-//MARK:- TextField Border & Corner radius
+//MARK:- ---- View (Shadow, Border, Corner Radius) -----
+class DesignableView: UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var _cornerSides: String? {
+        didSet {
+            cornerSides = CornerSides(rawValue: _cornerSides)
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor = .clear {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var shadowColor: UIColor = .clear {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var shadowRadius: CGFloat = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var shadowOpacity: Float = 0.0 {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var shadowOffset: CGSize = CGSize.zero {
+        didSet {
+            updateView()
+        }
+    }
+    
+    open var cornerSides: CornerSides  = .allSides {
+        didSet {
+            updateView()
+        }
+    }
+    
+    func updateView() {
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
+        layer.borderColor = borderColor.cgColor
+        
+        layer.shadowColor = shadowColor.cgColor
+        layer.shadowRadius = shadowRadius
+        layer.shadowOpacity = shadowOpacity
+        layer.shadowOffset = shadowOffset
+    }
+    
+    func configureCornerSide() {
+        guard !cornerRadius.isNaN && cornerRadius > 0 else {
+            return
+        }
+        
+        if cornerSides == .allSides {
+            layer.cornerRadius = cornerRadius
+        } else {
+            layer.cornerRadius = 0.0
+            // if a layer mask is specified, remove it
+            layer.mask?.removeFromSuperlayer()
+            layer.mask = cornerSidesLayer(inRect: bounds)
+        }
+    }
+    
+    private func cornerSidesLayer(inRect bounds: CGRect) -> CAShapeLayer {
+        let cornerSideLayer = CAShapeLayer()
+        cornerSideLayer.name = "cornerSideLayer"
+        cornerSideLayer.frame = CGRect(origin: .zero, size: bounds.size)
+        
+        let cornerRadii = CGSize(width: cornerRadius, height: cornerRadius)
+        let roundingCorners: UIRectCorner = cornerSides.rectCorner
+        cornerSideLayer.path = UIBezierPath(roundedRect: bounds,
+                                            byRoundingCorners: roundingCorners,
+                                            cornerRadii: cornerRadii).cgPath
+        return cornerSideLayer
+    }
+    
+}
+//MARK:- ---- TextField (Border, CornerRadius, Left & Right Image, Padding)----
 
 @IBDesignable
 class RoundTextField : UITextField {
@@ -145,16 +242,16 @@ class RoundTextField : UITextField {
             self.layer.borderColor = newValue?.cgColor
         }
     }
-     @IBInspectable var placeHolderColor : UIColor? {
-           get {
-               return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
-           }
-           set {
-               guard let attributedPlaceholder = attributedPlaceholder else { return }
+    @IBInspectable var placeHolderColor : UIColor? {
+        get {
+            return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
+        }
+        set {
+            guard let attributedPlaceholder = attributedPlaceholder else { return }
             let attributes: [NSAttributedString.Key: UIColor] = [.foregroundColor: newValue ?? UIColor.lightGray]
-               self.attributedPlaceholder = NSAttributedString(string: attributedPlaceholder.string, attributes: attributes)
-           }
-       }
+            self.attributedPlaceholder = NSAttributedString(string: attributedPlaceholder.string, attributes: attributes)
+        }
+    }
     @IBInspectable var leftImage: UIImage? {
         didSet {
             updateView()
@@ -201,17 +298,17 @@ class RoundTextField : UITextField {
     @IBInspectable var insetY: CGFloat = 0
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: insetX, dy: insetY)
-       // return bounds.inset(by: padding)
+        // return bounds.inset(by: padding)
     }
     
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: insetX, dy: insetY)
-       // return bounds.inset(by: padding)
+        // return bounds.inset(by: padding)
     }
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: insetX, dy: insetY)
-       // return bounds.inset(by: padding)
+        // return bounds.inset(by: padding)
     }
     
     //Shadow
@@ -245,7 +342,7 @@ class RoundTextField : UITextField {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-      
+        
         clipsToBounds      = true
         
         if showShadow
@@ -255,15 +352,14 @@ class RoundTextField : UITextField {
         }
     }
 }
-//MARK:- UIImage Corner Radius
-@IBDesignable
+//MARK:- ---- UIImage (Corner Radius, Border)----
 class RoundImage : UIImageView {
     
     @IBInspectable var cornerRadius : CGFloat = 0
     
     override func layoutSubviews() {
         super.layoutSubviews()
-         //Change corner radius with percentage
+        //Change corner radius with percentage
         let corner_Radius  = (cornerRadius * layer.frame.height)/100
         layer.cornerRadius = corner_Radius
         clipsToBounds      = true
@@ -286,7 +382,7 @@ class RoundImage : UIImageView {
         }
     }
 }
-//MARK:- Dashed View
+//MARK:- ---- Dashed View ----
 @IBDesignable
 class DashedView : UIView {
     
@@ -322,8 +418,8 @@ class DashedView : UIView {
         self.dashBorder = dashBorder
     }
 }
-//MARK:- ------- UIView -------
-//MARK:-
+//MARK:- ------- Round View -------
+
 @IBDesignable
 class RoundView : UIView
 {
@@ -351,18 +447,18 @@ class RoundView : UIView
         if LeftBottom {
             roundedCorners.insert(.bottomLeft)
         }
-
-            maskLayer.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: roundedCorners, cornerRadii: CGSize(width: makeRoundCorner, height: makeRoundCorner)).cgPath
-            layer.mask = maskLayer
+        
+        maskLayer.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: roundedCorners, cornerRadii: CGSize(width: makeRoundCorner, height: makeRoundCorner)).cgPath
+        layer.mask = maskLayer
     }
     
 }
-//MARK:- ----- UISlider ------
+//MARK:- ----- Custom UISlider ------
 open class CustomSlider : UISlider {
     @IBInspectable open var trackWidth:CGFloat = 2 {
         didSet {setNeedsDisplay()}
     }
-
+    
     override open func trackRect(forBounds bounds: CGRect) -> CGRect {
         let defaultBounds = super.trackRect(forBounds: bounds)
         return CGRect(
@@ -379,41 +475,41 @@ class PlainCircularProgressBar: UIView {
         didSet { setNeedsDisplay() }
     }
     @IBInspectable var ringWidth: CGFloat = 5
-
+    
     var progress: CGFloat = 0 {
         didSet { setNeedsDisplay() }
     }
-
+    
     private var progressLayer = CAShapeLayer()
     private var backgroundMask = CAShapeLayer()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayers()
-
+        
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupLayers()
     }
-
+    
     private func setupLayers() {
         backgroundMask.lineWidth = 20
         backgroundMask.fillColor = nil
         backgroundMask.strokeColor = UIColor.black.cgColor
         layer.mask = backgroundMask
-
+        
         progressLayer.lineWidth = 20
         progressLayer.fillColor = nil
         layer.addSublayer(progressLayer)
         layer.transform = CATransform3DMakeRotation(CGFloat(90 * Double.pi / 180), 0, 0, -1)
     }
-
+    
     override func draw(_ rect: CGRect) {
         let circlePath = UIBezierPath(ovalIn: rect.insetBy(dx: ringWidth / 2, dy: ringWidth / 2))
         backgroundMask.path = circlePath.cgPath
-
+        
         progressLayer.path = circlePath.cgPath
         progressLayer.lineCap = .round
         progressLayer.strokeStart = 0
@@ -422,8 +518,7 @@ class PlainCircularProgressBar: UIView {
         progressLayer.strokeColor = color?.cgColor
     }
 }
-//MARK:- TextView Border & Corner radius
-
+//MARK:- ---- TextView (Corner Radius, Border)----
 @IBDesignable
 class RoundTextView : IQTextView {
     @IBInspectable var corner_Radius: CGFloat {
@@ -454,14 +549,3 @@ class RoundTextView : IQTextView {
         }
     }
 }
-
-extension UITextField{
-    func isEmptyOrWhitespace() -> Bool {
-        if(self.text!.isEmpty) {
-            return true
-        }
-        return (self.text!.trimmingCharacters(in: NSCharacterSet.whitespaces) == "")
-    }
-}
-
-

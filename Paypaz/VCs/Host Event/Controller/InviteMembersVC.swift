@@ -32,6 +32,7 @@ class InviteMembersVC: CustomViewController {
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var tableView_Members        : UITableView!{
         didSet{
+            tableView_Members.separatorStyle = .none
             tableView_Members.dataSource = self
             tableView_Members.delegate   = self
         }
@@ -42,13 +43,11 @@ class InviteMembersVC: CustomViewController {
         dataSource.delegate = self
         self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
-        tableView_Members.separatorStyle = .none
-        
     }
     private func sortContacts(){
         for i in 0..<contactDetails.count{
             for j in 0..<invitedContacts.count{
-                if contactDetails[i].phoneNumber?.stringByRemovingAll(characters: ["+","-"]).removingWhitespaceAndNewlines() == (invitedContacts[j].phoneCode!)+(invitedContacts[j].phoneNumber!){
+                if contactDetails[i].phoneNumber?.trimCharactersFromString(characters: ["+","-"]).removingWhitespaceAndNewlines() == (invitedContacts[j].phoneCode!)+(invitedContacts[j].phoneNumber!){
                     contactDetails[i].isInvited = true
                 }
             }

@@ -77,16 +77,19 @@ class EventDetailVC : CustomViewController {
     }
     
     @IBAction func btn_addToCart(_ sender:RoundButton) {
-        _ = self.pushToVC("MyCartVC")
+        _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
-        if let vc = self.pushToVC("ViewAllProductsVC") as? ViewAllProductsVC
+        if let vc = self.pushVC("ViewAllProductsVC") as? ViewAllProductsVC
         {
             vc.eventName = self.lbl_EventName.text ?? ""
             vc.eventID = self.eventID
         }
     }
     @IBAction func btn_CreatedByUser(_ sender:UIButton) {
-        _ = self.pushToVC("OtherUserProfileVC")
+        _ = self.pushVC("OtherUserProfileVC")
+    }
+    @IBAction func btn_Share(_ sender:UIButton){
+        postshareLink(profile_URL: "The text that i want to share")
     }
 }

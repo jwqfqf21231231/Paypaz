@@ -69,7 +69,7 @@ class EditPhoneNoVC: UIViewController {
         } catch _ {
             
         }
-        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
+        placeHolderText = txt_PhoneNo.placeholder?.trimCharactersFromString(characters: ["-"," "]) ?? ""
         
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {

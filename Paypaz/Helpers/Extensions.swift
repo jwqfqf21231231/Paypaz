@@ -15,70 +15,39 @@ class CustomViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.addNetworkCheckHandler()
+        // self.addNetworkCheckHandler()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if #available(iOS 13.0, *) {
-          self.overrideUserInterfaceStyle = .light
+            self.overrideUserInterfaceStyle = .light
         }
     }
-   
-     func addNetworkCheckHandler() {
-//            if #available(iOS 12.0, *) {
-//                let appDel = UIApplication.shared.delegate as? AppDelegate ?? AppDelegate()
-//                appDel.monitor.start(queue: .global())
-//                appDel.monitor.pathUpdateHandler = { [weak self] path in
-//                    
-//                  //  DispatchQueue.main.async {
-//                        if path.status == .satisfied {
-//                            appDel.isNetworkConnected = true
-//                            self?.didChangeNetworkConnection?(true)
-//                        } else {
-//                            appDel.isNetworkConnected = false
-//                            self?.didChangeNetworkConnection?(false)
-//                        }
-//                   // }
+    
+    func addNetworkCheckHandler() {
+//        if #available(iOS 12.0, *) {
+//            let appDel = UIApplication.shared.delegate as? AppDelegate ?? AppDelegate()
+//            appDel.monitor.start(queue: .global())
+//            appDel.monitor.pathUpdateHandler = { [weak self] path in
+//                
+//                //  DispatchQueue.main.async {
+//                if path.status == .satisfied {
+//                    appDel.isNetworkConnected = true
+//                    self?.didChangeNetworkConnection?(true)
+//                } else {
+//                    appDel.isNetworkConnected = false
+//                    self?.didChangeNetworkConnection?(false)
 //                }
+//                // }
 //            }
-        }
-    
-    func pushToVC (_ identifier : String, animated:Bool = false) -> UIViewController{
- 
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
-        self.navigationController?.pushViewController(viewController, animated: animated)
-        return viewController
+//        }
     }
     
-    func presentPopUpVC(_ identifier : String, animated:Bool) -> UIViewController{
-        
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier)
-            else { return UIViewController() }
-            viewController.modalPresentationStyle = .overCurrentContext
-            self.present(viewController, animated: animated, completion: nil)
-        return viewController
-        
-    }
-    func presentVC(_ identifier : String) -> UIViewController {
-        
-        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier)
-            else { return UIViewController() }
-        
-        viewController.modalPresentationStyle = .fullScreen
-        
-            self.present(viewController, animated: true, completion: nil)
-        return viewController
-        
-    }
-    
-    
-   
-   
 }
 
-//MARK:- ---- Text field delegate ---
+//MARK:- ---- Text Field Delegate ---
 extension CustomViewController : UITextFieldDelegate{
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
@@ -95,7 +64,6 @@ extension CustomViewController : UITextFieldDelegate{
         if let field = textField as? RoundTextField {
             field.border_Color = UIColor(named: "SkyblueColor")
         }
-      //  textField.layer.borderColor = UIColor.red.cgColor
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
@@ -107,12 +75,11 @@ extension CustomViewController : UITextFieldDelegate{
             else
             {
                 field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
-                //UIColor.lightGray.withAlphaComponent(0.65)
-                //UIColor(red: 0.93, green: 0.95, blue: 1.00, alpha: 1.00)
             }
         }
     }
 }
+//MARK:- ---- Text View Delegate ---
 extension CustomViewController : UITextViewDelegate{
     public func textViewDidBeginEditing(_ textView: UITextView) {
         if let view = textView as? RoundTextView{

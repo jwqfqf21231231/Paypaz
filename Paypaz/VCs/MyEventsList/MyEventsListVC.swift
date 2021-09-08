@@ -12,8 +12,10 @@ class MyEventsListVC : CustomViewController {
     
     var events = [MyEvent]()
     var newEventItems = [MyEvent]()
+    var contacts = [InvitedContacts]()
     var currentPage = 1
     let dataSource = MyEventsListDataModel()
+    let contactsDataSource = MyPostedEventDataModel()
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
             tableView_Events.dataSource = self
@@ -23,6 +25,7 @@ class MyEventsListVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Connection.svprogressHudShow(view: self)
+        contactsDataSource.delegate3 = self
         dataSource.delegate = self
         dataSource.pageNo = "0"
         dataSource.getMyEvents()

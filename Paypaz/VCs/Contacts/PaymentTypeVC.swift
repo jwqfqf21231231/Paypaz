@@ -20,7 +20,7 @@ class PaymentTypeVC: CustomViewController {
     
     //MARK:- --- Action ----
     @IBAction func btn_LocalPayment(_ sender:UIButton) {
-        if let req_payAmountVC = self.pushToVC("RequestPayAmountVC") as? RequestPayAmountVC {
+        if let req_payAmountVC = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
             req_payAmountVC.selectedPaymentType = .local
         }
         //    if let contacts = self.pushToVC("ContactListVC") as? ContactListVC {
@@ -28,7 +28,7 @@ class PaymentTypeVC: CustomViewController {
         //    }
     }
     @IBAction func btn_GlobalPayment(_ sender:UIButton) {
-        if let req_payAmountVC = self.pushToVC("RequestPayAmountVC") as? RequestPayAmountVC {
+        if let req_payAmountVC = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
             req_payAmountVC.selectedPaymentType = .global
         }
         //   if let contacts = self.pushToVC("ContactListVC") as? ContactListVC {

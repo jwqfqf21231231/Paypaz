@@ -84,7 +84,7 @@ class SendToBankVC : CustomViewController {
                 popupVC.selectedMoneyType = .MoneySentSuccess
             }
         } else {
-            if let passcodeVC = self.pushToVC("PasscodeVC") as? PasscodeVC {
+            if let passcodeVC = self.pushVC("PasscodeVC") as? PasscodeVC {
                 passcodeVC.delegate = self
                 passcodeVC.isNavigatedFromPaymentVC = true
             }

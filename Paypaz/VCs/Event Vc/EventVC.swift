@@ -33,7 +33,7 @@ class EventVC : CustomViewController {
     }
     //MARK:- --- Action ----
     @IBAction func btn_HostEvent(_ sender:UIButton) {
-       _ = self.pushToVC("HostEventVC")
+       _ = self.pushVC("HostEventVC")
     }
     @IBAction func btn_BuyEvent(_ sender:UIButton) {
         

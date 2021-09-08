@@ -13,19 +13,6 @@ import DropDown
 
 class Helper : NSObject
 {
-    class func isEmailValid(email: String) -> Bool
-    {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-    class func validatePassword(passwordString : String) -> Bool
-    {
-        let password = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[0-9])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{8,16}$")
-        
-        return password.evaluate(with: passwordString)
-    }
     class func clearUserDataAndSignOut()
     {
         let userDefaults = UserDefaults.standard
@@ -105,8 +92,26 @@ extension UIViewController
         self.navigationController?.pushViewController(viewController, animated: animated)
         return viewController
     }
+    func presentPopUpVC(_ identifier : String, animated:Bool) -> UIViewController{
+        
+        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier)
+        else { return UIViewController() }
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: animated, completion: nil)
+        return viewController
+        
+    }
+    func presentVC(_ identifier : String) -> UIViewController {
+        
+        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier)
+        else { return UIViewController() }
+        
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true, completion: nil)
+        return viewController
+        
+    }
     
-    //MARK:-
     //Hide keyboard on tap outside
     func hideKeyboardWhenTappedArround() {
         let tapGesture = UITapGestureRecognizer(target: self,
@@ -130,7 +135,7 @@ extension UIViewController
                 if let json = jsonData as? [[String:String]]
                 {
                     for list in json{
-                        let data = CountiesWithPhoneModel.init(dial_code: (list["dial_code"] as? String ?? ""), countryName: (list["name"] as? String ?? ""), code: (list["code"] as? String ?? ""))
+                        let data = CountiesWithPhoneModel.init(dial_code: (list["dial_code"] ?? ""), countryName: (list["name"] ?? ""), code: (list["code"] ?? ""))
                         country_code.append(data)
                     }
                     return (country_code,"")
@@ -149,32 +154,60 @@ extension UIViewController
         var code :String?
     }
 }
+
 extension NSMutableAttributedString {
-    
     func setColor(color: UIColor, forText stringValue: String) {
         let attrs = [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor : color]
         let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
         //  self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
         self.addAttributes(attrs, range: range)
     }
-    
+}
+
+extension UITextField{
+    func isEmptyOrWhitespace() -> Bool {
+        if(self.text!.isEmpty) {
+            return true
+        }
+        return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+    }
+    func isEmailValid() -> Bool
+    {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: self.text!)
+    }
+    func validatePassword() -> Bool
+    {
+        let password = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[0-9])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{8,16}$")
+        
+        return password.evaluate(with: self.text!)
+    }
+}
+extension UITextView{
+    func isEmptyOrWhitespace() -> Bool {
+        if(self.text!.isEmpty) {
+            return true
+        }
+        return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+    }
 }
 extension String
 {
-    func trim() -> String
-    {
+    func trim() -> String{
         return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
-    func stringByRemovingAll(characters: [Character]) -> String {
+    
+    func trimCharactersFromString(characters: [Character]) -> String {
         return String(self.filter({ !characters.contains($0) }))
     }
     
-    func localToUTC(incomingFormat: String, outGoingFormat: String) -> String {
+    func localToUTC(incomingFormat: String, outGoingFormat: String) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = incomingFormat
         dateFormatter.calendar = NSCalendar.current
         dateFormatter.timeZone = TimeZone.current
-        
         let dt = dateFormatter.date(from: self)
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         dateFormatter.dateFormat = outGoingFormat
@@ -182,15 +215,13 @@ extension String
         return dateFormatter.string(from: dt ?? Date())
     }
     
-    func UTCToLocal(incomingFormat: String, outGoingFormat: String) -> String {
+    func UTCToLocal(incomingFormat: String, outGoingFormat: String) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = incomingFormat
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        
         let dt = dateFormatter.date(from: self)
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = outGoingFormat
-        
         return dateFormatter.string(from: dt ?? Date())
     }
     

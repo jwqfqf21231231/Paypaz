@@ -28,7 +28,7 @@ class AddBankAccountVC : CardViewController {
         super.viewDidLoad()
         dataSource.delegate1 = self
         dataSource.delegate2 = self
-        self.hideKeyboardWhenTappedAround()
+        self.hideKeyboardWhenTappedArround()
         getBankInfo()
     }
     @IBAction func btn_SelectBank(_ sender:UIButton)

@@ -80,7 +80,7 @@ class LoginVC : UIViewController {
         } catch _ {
             
         }
-        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
+        placeHolderText = txt_PhoneNo.placeholder?.trimCharactersFromString(characters: ["-"," "]) ?? ""
         
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {
@@ -108,19 +108,19 @@ class LoginVC : UIViewController {
     func validateFields() -> Bool
     {
         view.endEditing(true)
-        if txt_email.text?.trim().count == 0 && txt_PhoneNo.text?.trim().count == 0
+        if txt_email.isEmptyOrWhitespace() && txt_PhoneNo.isEmptyOrWhitespace()
         {
             view.makeToast("Please Enter Either Email ID or Phone Number")
         }
-        else if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        else if !txt_PhoneNo.isEmptyOrWhitespace() && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
         {
             view.makeToast("Please Enter Valid Phone Number")
         }
-        else if txt_email.text?.trim().count != 0 && Helper.isEmailValid(email: txt_email.text!) == false
+        else if !txt_email.isEmptyOrWhitespace() && !txt_email.isEmailValid()
         {
             view.makeToast("Please Enter Valid Email ID")
         }
-        else if txt_Password.text?.trim().count == 0
+        else if txt_Password.isEmptyOrWhitespace()
         {
             view.makeToast("Please Enter Password")
         }

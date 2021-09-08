@@ -77,11 +77,13 @@ extension MyPostedEventDetailsVC : UICollectionViewDelegate, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 10 {
             if indexPath.row == 4 {
-                if let vc = self.presentPopUpVC("InvitedPeopleVC", animated: false) as? InvitedPeopleVC{
-                    var contacts = self.contacts
-                    contacts.removeFirst(4)
-                    vc.contacts = contacts
-                }
+                var contacts = self.contacts
+                contacts.removeFirst(4)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "InvitedPeopleVC") as! InvitedPeopleVC
+                vc.modalPresentationStyle = .overCurrentContext
+                vc.contacts = contacts
+                vc.peopleInvited = true
+                self.present(vc, animated: false,completion: nil)
             }
         }
     }
@@ -244,7 +246,7 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
 extension MyPostedEventDetailsVC : MoreOptionsDelegate {
     func hasSelectedOption(type: OptionType,eventID:String,isPublic:String,isInvitedMember:String) {
         if type == .edit_Event{
-            if let vc = self.pushToVC("HostEventVC") as? HostEventVC
+            if let vc = self.pushVC("HostEventVC") as? HostEventVC
             {
                 vc.eventID = eventID
                 vc.isEdit = true
@@ -252,14 +254,14 @@ extension MyPostedEventDetailsVC : MoreOptionsDelegate {
             }
         }
         else if type == .edit_EventProducts{
-            if let vc = self.pushToVC("AddEventProductsVC") as? AddEventProductsVC{
+            if let vc = self.pushVC("AddEventProductsVC") as? AddEventProductsVC{
                 vc.isEdit = true
                 vc.eventID = eventID
                 vc.editEventProductsDelegate = self
             }
         }
         else if type == .edit_InvitedMembers{
-            if let vc = self.pushToVC("InviteMembersVC") as? InviteMembersVC{
+            if let vc = self.pushVC("InviteMembersVC") as? InviteMembersVC{
                 vc.isEdit = true
                 vc.eventID = eventID
                 vc.isPublicStatus = isPublic

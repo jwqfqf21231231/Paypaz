@@ -87,7 +87,7 @@ class SignupVC : UIViewController {
         } catch _ {
             
         }
-        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
+        placeHolderText = txt_PhoneNo.placeholder?.trimCharactersFromString(characters: ["-"," "]) ?? ""
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of:phone_code, with: "")
@@ -111,26 +111,26 @@ class SignupVC : UIViewController {
     func validateFields() -> Bool
     {
         view.endEditing(true)
-        if txt_PhoneNo.text?.trim().count == 0
+        if txt_PhoneNo.isEmptyOrWhitespace()
         {
             view.makeToast("Please Enter Your Mobile No")
         }
-        else if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        else if !txt_PhoneNo.isEmptyOrWhitespace() && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
         {
             view.makeToast("Please Enter Valid Phone Number")
         }
-        else if Helper.isEmailValid(email: txt_email.text!) == false{
+        else if !txt_email.isEmailValid(){
             view.makeToast("Please Enter valid Email ID")
         }
-        else if txt_Password.text?.trim().count == 0
+        else if txt_Password.isEmptyOrWhitespace()
         {
             view.makeToast("please enter password")
         }
-        else if Helper.validatePassword(passwordString: (txt_Password.text!.trim())) == false
+        else if !txt_Password.validatePassword()
         {
             view.makeToast("Password must be a minimum of 8 characters and include a capital letter, numerical digit and special character.")
         }
-        else if txt_ConfirmPassword.text?.trim().count == 0
+        else if txt_ConfirmPassword.isEmptyOrWhitespace()
         {
             view.makeToast("Please enter confirm password")
         }

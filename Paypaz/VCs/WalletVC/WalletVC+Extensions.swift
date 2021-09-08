@@ -25,7 +25,7 @@ extension WalletVC : UITableViewDataSource {
 //MARK:-
 extension WalletVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         _ = self.pushToVC("TransactionDetailVC")
+         _ = self.pushVC("TransactionDetailVC")
     }
 
 }

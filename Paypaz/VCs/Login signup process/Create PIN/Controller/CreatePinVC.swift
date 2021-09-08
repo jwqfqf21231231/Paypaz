@@ -150,7 +150,7 @@ extension CreatePinVC : CreatePinDataModelDelegate
         {
             UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
             UserDefaults.standard.setPin(value: confirmPin)
-            if let vc = self.pushToVC("CreditDebitCardVC") as? CreditDebitCardVC
+            if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
             {
                 vc.fromPin = true
             }

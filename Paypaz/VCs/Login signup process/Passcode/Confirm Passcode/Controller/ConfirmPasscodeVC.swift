@@ -79,11 +79,11 @@ extension ConfirmPasscodeVC : ConfirmPasscodeDataModelDelegate
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             if UserDefaults.standard.value(forKey: "isPin") as? String == "1"
             {
-                _ = self.pushToVC("SideDrawerBaseVC")
+                _ = self.pushVC("SideDrawerBaseVC")
             }
             else
             {
-                if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC{
+                if let createVc = self.pushVC("CreatePinVC") as? CreatePinVC{
                     createVc.isCreatingPin = true
                 }
             }

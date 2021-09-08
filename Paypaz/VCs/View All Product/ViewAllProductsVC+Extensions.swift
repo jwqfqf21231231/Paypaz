@@ -34,7 +34,7 @@ extension ViewAllProductsVC : UITableViewDataSource {
 }
 extension ViewAllProductsVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = self.pushToVC("ProductDetailVC") as? ProductDetailVC
+        if let vc = self.pushVC("ProductDetailVC") as? ProductDetailVC
         {
             vc.productID = self.products[indexPath.row].id ?? ""
             vc.eventID = self.products[indexPath.row].eventID ?? ""
@@ -54,8 +54,9 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             let normalString = NSMutableAttributedString(string: "All Products From ")
-            let attributedString = NSMutableAttributedString(string:"\"\(self.eventName) Event\"", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)])
+            let attributedString = NSMutableAttributedString(string:"\"\(self.eventName) Event\"", attributes: [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15)])
             normalString.append(attributedString)
+   
             self.lbl_EventName.attributedText = normalString
             
             self.products = data.data ?? []

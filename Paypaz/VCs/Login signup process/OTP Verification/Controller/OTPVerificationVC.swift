@@ -159,7 +159,7 @@ extension OTPVerificationVC: VPMOTPViewDelegate {
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
         UserDefaults.standard.setLoggedIn(value: true)
-        _ = self.pushToVC("CreateProfileVC")
+        _ = self.pushVC("CreateProfileVC")
         
     }
 }
@@ -263,7 +263,7 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let CreatePasscodeVC = self.pushToVC("CreatePasscodeVC") as? CreatePasscodeVC
+            if let CreatePasscodeVC = self.pushVC("CreatePasscodeVC") as? CreatePasscodeVC
             {
                 CreatePasscodeVC.setNewPasscode = true
             }

@@ -33,7 +33,7 @@ class CreditDebitCardVC : CardViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegates()
-        self.hideKeyboardWhenTappedAround()
+        self.hideKeyboardWhenTappedArround()
         dataSource.delegate = self
         dataSource.delegate1 = self
     //    self.getBankInfo()
@@ -174,7 +174,7 @@ extension CreditDebitCardVC : CreateCardDataModelDelegate
             }
             else
             {
-                _ = self.pushToVC("SideDrawerBaseVC",animated: false)
+                _ = self.pushVC("SideDrawerBaseVC",animated: false)
             }
         }
         else

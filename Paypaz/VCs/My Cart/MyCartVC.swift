@@ -23,7 +23,6 @@ class MyCartVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
@@ -36,7 +35,7 @@ class MyCartVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_Checkout(_ sender:UIButton) {
-        _ = self.pushToVC("PayAmountVC")
+        _ = self.pushVC("PayAmountVC")
     }
     
 }

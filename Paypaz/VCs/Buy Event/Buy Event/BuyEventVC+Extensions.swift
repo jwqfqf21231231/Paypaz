@@ -50,7 +50,7 @@ extension BuyEventVC : UITableViewDataSource {
         img.addGestureRecognizer(tap)
     }
     @objc func clicked_btn_addToCart(_ sender:RoundButton) {
-        _ = self.pushToVC("MyCartVC")
+        _ = self.pushVC("MyCartVC")
     }
     @objc func clicked_btn_Buy(_ sender:RoundButton) {
         if let products = self.presentPopUpVC("ProductListVC", animated: true) as? ProductListVC {
@@ -58,14 +58,14 @@ extension BuyEventVC : UITableViewDataSource {
         }
     }
     @objc func clicked_img_Event(_ sender:UITapGestureRecognizer) {
-        _ = self.pushToVC("EventDetailVC")
+        _ = self.pushVC("EventDetailVC")
     }
 }
 extension BuyEventVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if let vc = self.pushToVC("EventDetailVC") as? EventDetailVC{
+        if let vc = self.pushVC("EventDetailVC") as? EventDetailVC{
             vc.eventID = filteredEventData[indexPath.row].id ?? ""
         }
     }
@@ -75,7 +75,7 @@ extension BuyEventVC : UITableViewDelegate {
 extension BuyEventVC : PopupDelegate {
 
     func isClickedButton() {
-        _ = self.pushToVC("PayAmountVC")
+        _ = self.pushVC("PayAmountVC")
     }
 }
 //MARK:- ---- Collection View ----

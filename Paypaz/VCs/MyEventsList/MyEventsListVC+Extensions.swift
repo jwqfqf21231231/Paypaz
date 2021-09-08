@@ -32,25 +32,27 @@ extension MyEventsListVC : UITableViewDataSource {
         cell.lbl_EventAddress.text = events[indexPath.row].location
         cell.btn_More.tag = indexPath.row
         cell.btn_More.addTarget(self, action: #selector(moreOptionsClicked(_:)), for: .touchUpInside)
-        if events[indexPath.row].isinviteMember == "0"{
-            cell.btn_Height.constant = 0
-            cell.btn_PeopleInvited.isHidden = true
-        }
-        else{
-            cell.btn_Height.constant = 32
-            cell.btn_PeopleInvited.isHidden = false
-            cell.btn_PeopleInvited.tag = indexPath.row
-            cell.btn_PeopleInvited.addTarget(self, action: #selector(peopleInvited(_:)), for: .touchUpInside)
-        }
+        /*if events[indexPath.row].isinviteMember == "0"{
+         cell.btn_Height.constant = 0
+         cell.btn_PeopleInvited.isHidden = true
+         }
+         else{
+         cell.btn_Height.constant = 25
+         cell.btn_PeopleInvited.isHidden = false*/
+        cell.btn_PeopleInvited.tag = indexPath.row
+        cell.btn_PeopleInvited.addTarget(self, action: #selector(peopleInvited(_:)), for: .touchUpInside)
         return cell
     }
     @objc func peopleInvited(_ sender:UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "InvitedPeopleVC") as! InvitedPeopleVC
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.eventID = self.events[sender.tag].id ?? ""
-        vc.peopleInvited = true
-        self.present(vc, animated: false,completion: nil)
-        
+        if events[sender.tag].isinviteMember == "0"{
+            self.showAlert(withMsg: "No Invitees", withOKbtn: true)
+        }
+        else{
+            
+            Connection.svprogressHudShow(view: self)
+            contactsDataSource.eventID = self.events[sender.tag].id ?? ""
+            contactsDataSource.getContacts()
+        }
     }
     @objc func moreOptionsClicked(_ sender : UIButton){
         if let popup = self.presentPopUpVC("MoreOptionsPopupVC", animated: true) as? MoreOptionsPopupVC {
@@ -89,7 +91,7 @@ extension MyEventsListVC : UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc = self.pushToVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC
+        if let vc = self.pushVC("MyPostedEventDetailsVC") as? MyPostedEventDetailsVC
         {
             vc.updateEventDelegate = self
             vc.eventID = events[indexPath.row].id ?? ""
@@ -99,7 +101,7 @@ extension MyEventsListVC : UITableViewDelegate {
 extension MyEventsListVC : MoreOptionsDelegate {
     func hasSelectedOption(type: OptionType,eventID:String,isPublic:String,isInvitedMember:String) {
         if type == .edit_Event{
-            if let vc = self.pushToVC("HostEventVC") as? HostEventVC
+            if let vc = self.pushVC("HostEventVC") as? HostEventVC
             {
                 vc.eventID = eventID
                 vc.isEdit = true
@@ -107,13 +109,13 @@ extension MyEventsListVC : MoreOptionsDelegate {
             }
         }
         else if type == .edit_EventProducts{
-            if let vc = self.pushToVC("AddEventProductsVC") as? AddEventProductsVC{
+            if let vc = self.pushVC("AddEventProductsVC") as? AddEventProductsVC{
                 vc.isEdit = true
                 vc.eventID = eventID
             }
         }
         else if type == .edit_InvitedMembers{
-            if let vc = self.pushToVC("InviteMembersVC") as? InviteMembersVC{
+            if let vc = self.pushVC("InviteMembersVC") as? InviteMembersVC{
                 vc.isEdit = true
                 vc.eventID = eventID
                 vc.isPublicStatus = isPublic
@@ -219,6 +221,39 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         else
         {
             self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension MyEventsListVC : MyPostedContactsDataModelDelegate
+{
+    func didRecieveDataUpdate3(data: MyPostedContactsModel)
+    {
+        print("MyPostedContactsModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "InvitedPeopleVC") as! InvitedPeopleVC
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.contacts = data.data ?? []
+            vc.peopleInvited = true
+            self.present(vc, animated: false,completion: nil)
+        }
+        else
+        {
+            print(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
         }
     }
 }

@@ -60,14 +60,14 @@ class ForgotPasswordVC : UIViewController {
     func validateFields() -> Bool
     {
         view.endEditing(true)
-        if txt_PhoneNo.text?.trim().count == 0 && txt_email.text?.trim().count == 0 {
+        if txt_PhoneNo.isEmptyOrWhitespace() && txt_email.isEmptyOrWhitespace() {
             view.makeToast("Please Enter Either Email or Phone Number")
         }
-        else if txt_PhoneNo.text?.trim().count != 0 && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        else if !txt_PhoneNo.isEmptyOrWhitespace() && txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
         {
             view.makeToast("Please Enter Valid Phone Number")
         }
-        else if txt_email.text?.trim().count != 0 && Helper.isEmailValid(email: txt_email.text!) == false
+        else if !txt_email.isEmptyOrWhitespace() && !txt_email.isEmailValid()
         {
             view.makeToast("Please Enter Valid Email ID ")
         }
@@ -113,7 +113,7 @@ class ForgotPasswordVC : UIViewController {
         } catch _ {
             
         }
-        placeHolderText = txt_PhoneNo.placeholder?.stringByRemovingAll(characters: ["-"," "]) ?? ""
+        placeHolderText = txt_PhoneNo.placeholder?.trimCharactersFromString(characters: ["-"," "]) ?? ""
     }
     private func remove(dialCode: String, in phoneNumber: String) -> String {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of:phone_code, with: "")

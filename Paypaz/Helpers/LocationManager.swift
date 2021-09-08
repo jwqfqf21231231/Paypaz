@@ -29,13 +29,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
     }
     
     func stopLocationUpdate(){
-        
         if self.location_manager != nil{
             self.location_manager?.stopUpdatingLocation()
             self.location_manager?.delegate = nil
             print("...stop getting location....")
         }
-        
     }
     
     //MARK:- --- Delegate ----
@@ -47,6 +45,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
             self.gotLocationOfUser?(nil,nil)
         }
     }
+    
     internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         self.gotLocationOfUser?(nil,nil)
     }
@@ -67,7 +66,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
         default:
             print("invalid")
         }
-        
         self.gotLocationOfUser?(nil,nil)
     }
 }

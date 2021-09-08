@@ -80,7 +80,7 @@ extension PasscodeVC : PasscodeDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            _ = self.pushToVC("SideDrawerBaseVC")
+            _ = self.pushVC("SideDrawerBaseVC")
         }
         else
         {
@@ -109,7 +109,7 @@ extension PasscodeVC : ForgotPasscodeDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let OTPVerificationVC = self.pushToVC("OTPVerificationVC",animated:false) as? OTPVerificationVC{
+            if let OTPVerificationVC = self.pushVC("OTPVerificationVC",animated:false) as? OTPVerificationVC{
                 OTPVerificationVC.doForgotPasscode = true
             }
         }

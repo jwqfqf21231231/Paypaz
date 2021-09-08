@@ -43,12 +43,16 @@ class SuccessPopupVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.first?.view == self.view {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         if let type = self.selectedPopupType {
             switch type {
                 
@@ -95,6 +99,10 @@ class SuccessPopupVC : CustomViewController {
                 print("...")
             }
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.backgroundColor = UIColor.clear
     }
     private func setAttributed(for txt:String) {
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: txt)

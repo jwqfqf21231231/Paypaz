@@ -63,7 +63,7 @@ class ContactListVC : CustomViewController {
         self.selectGlobalPayment()
     }*/
     @IBAction func btn_Scanner(_ sender:UIButton) {
-        _ = self.pushToVC("QRCodeScannerVC")
+        _ = self.pushVC("QRCodeScannerVC")
     }
     @IBAction func btn_GivePermission(_ sender:UIButton) {
         self.view_ContactsList.alpha = 1.0

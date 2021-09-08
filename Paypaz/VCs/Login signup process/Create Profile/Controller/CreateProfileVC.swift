@@ -119,22 +119,22 @@ class CreateProfileVC  : CustomViewController {
         {
             self.showAlert(withMsg: "Please add your image", withOKbtn: true)
         }
-        else if txt_firstName.text?.trim().count == 0{
+        else if txt_firstName.isEmptyOrWhitespace(){
             self.showAlert(withMsg: "Please enter your first name", withOKbtn: true)
         }
-        else if txt_lastName.text?.trim().count == 0{
+        else if txt_lastName.isEmptyOrWhitespace(){
             self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
         }
-        else if txt_DOB.text?.trim().count == 0{
+        else if txt_DOB.isEmptyOrWhitespace(){
             self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
         }
-        else if txt_City.text?.trim().count == 0{
+        else if txt_City.isEmptyOrWhitespace(){
             self.showAlert(withMsg: "Please enter City", withOKbtn: true)
         }
-        else if txt_State.text?.trim().count == 0{
+        else if txt_State.isEmptyOrWhitespace(){
             self.showAlert(withMsg: "Please enter State", withOKbtn: true)
         }
-        else if txtView_Address.text.trim().count == 0
+        else if txtView_Address.isEmptyOrWhitespace()
         {
             self.showAlert(withMsg: "Please enter Address", withOKbtn: true)
         }
@@ -191,7 +191,7 @@ extension CreateProfileVC : CreateProfileDataModelDelegate
         UserDefaults.standard.set(data.data?.isProfile, forKey: "isProfile")
         if data.success == 1
         {
-            _ = self.pushToVC("CreatePasscodeVC",animated: false)
+            _ = self.pushVC("CreatePasscodeVC",animated: false)
         }
         else
         {

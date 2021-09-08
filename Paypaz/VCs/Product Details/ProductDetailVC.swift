@@ -38,6 +38,9 @@ class ProductDetailVC : CustomViewController {
     @IBAction func btn_back (_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func btn_Share(_ sender:UIButton){
+        postshareLink(profile_URL: "The text that i want to share")
+    }
 }
 extension ProductDetailVC : ProductDetailsDataModelDelegate
 {

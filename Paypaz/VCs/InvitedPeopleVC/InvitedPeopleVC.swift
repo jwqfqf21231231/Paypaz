@@ -10,28 +10,18 @@ import UIKit
 
 class InvitedPeopleVC  : CustomViewController {
     
-    var contacts = [InvitedContacts](){
-        didSet{
-            let screenSize = UIScreen.main.bounds.size.height * 0.65
-            let cellHeight = (UIScreen.main.bounds.size.width * 0.9 * 0.9 * 0.12) + 16
-            let tblHeight  = CGFloat(self.contacts.count) * cellHeight
-            if tblHeight > screenSize {
-                self.tableViewHeight.constant = screenSize
-            } else {
-                self.tableViewHeight.constant = tblHeight
-            }
-            tableViewPeople.reloadData()
-        }
-    }
+    
     var peopleInvited : Bool?
     var eventID = ""
     @IBOutlet weak var tableViewHeight : NSLayoutConstraint!
     @IBOutlet weak var tableViewPeople : UITableView! {
         didSet {
+            self.tableViewPeople.separatorStyle = .none
             self.tableViewPeople.dataSource = self
             self.tableViewPeople.delegate   = self
         }
     }
+    var contacts = [InvitedContacts]()
     private let dataSource = MyPostedEventDataModel()
     
     //MARK:- ---- View Life Cycle ----
@@ -40,6 +30,9 @@ class InvitedPeopleVC  : CustomViewController {
         self.view.backgroundColor = UIColor.clear
         dataSource.delegate3 = self
         if peopleInvited ?? false{
+            tableViewPeople.reloadData()
+        }
+        else{
             getInvitees()
         }
     }
@@ -89,7 +82,6 @@ extension InvitedPeopleVC : MyPostedContactsDataModelDelegate
         if data.success == 1
         {
             self.contacts = data.data ?? []
-//            self.tableViewPeople.reloadData()
         }
         else
         {

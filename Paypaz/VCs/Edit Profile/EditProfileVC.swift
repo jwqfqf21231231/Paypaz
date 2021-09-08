@@ -107,26 +107,26 @@ class EditProfileVC: CustomViewController {
     }
     @IBAction func btn_Save(_ sender:UIButton) {
         
-        if txt_firstName.text?.trim().count == 0{
+        if txt_firstName.isEmptyOrWhitespace(){
             view.makeToast("Please enter your first name")
         }
-        else if txt_lastName.text?.trim().count == 0{
+        else if txt_lastName.isEmptyOrWhitespace(){
             view.makeToast("Please enter last Name")
         }
-        else if txt_email.text?.trim().count == 0
+        else if txt_email.isEmptyOrWhitespace()
         {
             view.makeToast("Please enter email")
         }
-        else if txt_DOB.text?.trim().count == 0{
+        else if txt_DOB.isEmptyOrWhitespace(){
             view.makeToast("Please enter date of birth")
         }
-        else if txt_City.text?.trim().count == 0{
+        else if txt_City.isEmptyOrWhitespace(){
             view.makeToast("Please enter city")
         }
-        else if txt_State.text?.trim().count == 0{
+        else if txt_State.isEmptyOrWhitespace(){
             view.makeToast("Please enter state")
         }
-        else if txtView_Address.text.trim().count == 0
+        else if txtView_Address.isEmptyOrWhitespace()
         {
             view.makeToast("Please enter address")
         }
@@ -239,7 +239,7 @@ extension EditProfileVC : CreateProfileDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            _ = self.pushToVC("SideDrawerBaseVC",animated: false)
+            _ = self.pushVC("SideDrawerBaseVC",animated: false)
         }
         else
         {

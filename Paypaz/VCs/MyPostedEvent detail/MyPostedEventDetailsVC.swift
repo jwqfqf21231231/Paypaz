@@ -86,13 +86,13 @@ class MyPostedEventDetailsVC : CustomViewController {
         updateEventDelegate?.updateEventData(data: eventDetails, eventID: eventID, deleted: false)
     }
     @IBAction func btn_QR(_ sender:UIButton){
-        let _ = self.pushToVC("ScanQRCodeVC") as? ScanQRCodeVC
+        let _ = self.pushVC("ScanQRCodeVC") as? ScanQRCodeVC
     }
     @IBAction func btn_Ok(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
-        if let vc = self.pushToVC("ViewAllProductsVC") as? ViewAllProductsVC
+        if let vc = self.pushVC("ViewAllProductsVC") as? ViewAllProductsVC
         {
             vc.eventName = self.lbl_EventName.text ?? ""
             vc.eventID = self.eventID

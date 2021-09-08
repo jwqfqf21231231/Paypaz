@@ -27,7 +27,7 @@ extension MyTicketsVC : UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        _ = self.pushToVC("MyTicketDetailVC")
+        _ = self.pushVC("MyTicketDetailVC")
     }
 }
 

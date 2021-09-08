@@ -24,6 +24,6 @@ override func viewDidLoad() {
     self.navigationController?.popViewController(animated: true)
 }
     @IBAction func btn_QRCode(_ sender:UIButton) {
-         _ = self.pushToVC("ScanQRCodeVC")
+         _ = self.pushVC("ScanQRCodeVC")
     }
 }

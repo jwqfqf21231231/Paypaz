@@ -26,8 +26,7 @@ class RequestPayAmountVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        self.view_userInfo.alpha = 0.0
+        self.view_userInfo.alpha = 1
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,7 +50,7 @@ class RequestPayAmountVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_Request(_ sender:RoundButton){
-        if let contacts = self.pushToVC("ContactListVC") as? ContactListVC {
+        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
             let local = (self.selectedPaymentType == PaymentType.local)
             contacts.isLocalContactSelected = local
             contacts.isRequestingMoney = true
@@ -60,7 +59,7 @@ class RequestPayAmountVC : CustomViewController {
         
     }
     @IBAction func btn_Pay(_ sender:RoundButton){
-        if let contacts = self.pushToVC("ContactListVC") as? ContactListVC {
+        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
             let local = (self.selectedPaymentType == PaymentType.local)
             contacts.isLocalContactSelected = local
             contacts.isRequestingMoney = false
@@ -103,7 +102,7 @@ extension RequestPayAmountVC : ContactSelectedDelegate {
                 }
             }
         } else {
-            if let createVc = self.pushToVC("CreatePinVC") as? CreatePinVC {
+            if let createVc = self.pushVC("CreatePinVC") as? CreatePinVC {
                 createVc.isCreatingPin = false
                 createVc.delegate = self
             }

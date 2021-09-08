@@ -73,7 +73,7 @@ class WelcomeVC : CustomViewController {
     @IBAction func btn_getStarted(_ sender:UIButton) {
         
         fetchContacts()
-        _ = self.pushToVC("LoginVC")
+        _ = self.pushVC("LoginVC")
     }
     
 }

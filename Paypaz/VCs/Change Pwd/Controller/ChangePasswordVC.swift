@@ -88,10 +88,14 @@ class ChangePasswordVC : CustomViewController {
         
         if self.hideOldPassword ?? false {
             
-            if txt_NewPassword.text?.trim().count == 0{
+            if txt_NewPassword.isEmptyOrWhitespace(){
                 view.makeToast("please enter new password")
             }
-            else if txt_ConfirmPassword.text?.trim().count == 0{
+            else if !txt_NewPassword.validatePassword()
+            {
+                view.makeToast("Password must be a minimum of 8 characters and include a capital letter, numerical digit and special character.")
+            }
+            else if txt_ConfirmPassword.isEmptyOrWhitespace(){
                 view.makeToast("please enter confirm password")
             }
             else if txt_NewPassword.text?.trim() != txt_ConfirmPassword.text?.trim()
@@ -112,6 +116,10 @@ class ChangePasswordVC : CustomViewController {
             }
             else if txt_NewPassword.text?.trim().count == 0{
                 view.makeToast("please enter new password")
+            }
+            else if !txt_NewPassword.validatePassword()
+            {
+                view.makeToast("Password must be a minimum of 8 characters and include a capital letter, numerical digit and special character.")
             }
             else if txt_ConfirmPassword.text?.trim().count == 0{
                 view.makeToast("please enter confirm password")

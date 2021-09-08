@@ -25,19 +25,19 @@ class HomeVC : CustomViewController {
         self.sideMenuController?.toggleLeftView()
     }
     @IBAction func btn_Cart(_ sender:UIButton) {
-        _ = self.pushToVC("MyCartVC")
+        _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
-        _ = self.pushToVC("NotificationsListVC")
+        _ = self.pushVC("NotificationsListVC")
     }
     
     @IBAction func btn_PaypazSecureMoney(_ sender:UIButton) {
-        _ = self.pushToVC("WalletVC")
+        _ = self.pushVC("WalletVC")
     }
     @IBAction func btn_Payment(_ sender:UIButton) {
-       _ = self.pushToVC("PaymentTypeVC")
+       _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_Event(_ sender:UIButton) {
-        _ = self.pushToVC("EventVC")
+        _ = self.pushVC("EventVC")
     }
 }

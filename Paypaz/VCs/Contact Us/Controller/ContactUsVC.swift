@@ -35,18 +35,18 @@ class ContactUsVC : CustomViewController {
     }
     @IBAction func btn_Submit(_ sender:UIButton)
     {
-        if txt_Email.text?.trim().count == 0{
+        if txt_Email.isEmptyOrWhitespace(){
             view.makeToast("Please enter your email id")
         }
-        else if Helper.isEmailValid(email: txt_Email.text!) == false
+        else if !txt_Email.isEmailValid()
         {
             view.makeToast("Please enter valid email id")
         }
-        else if txt_Subject.text?.trim().count == 0
+        else if txt_Subject.isEmptyOrWhitespace()
         {
             view.makeToast("Please enter subject")
         }
-        else if txt_Message.text.trim().count == 0
+        else if txt_Message.isEmptyOrWhitespace()
         {
             view.makeToast("please enter message")
         }

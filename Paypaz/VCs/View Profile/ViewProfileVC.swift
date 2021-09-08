@@ -45,10 +45,10 @@ class ViewProfileVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_ViewQR(_ sender:UIButton) {
-         _ = self.pushToVC("ScanQRCodeVC")
+         _ = self.pushVC("ScanQRCodeVC")
     }
     @IBAction func btn_Edit(_ sender:UIButton) {
-        _ = self.pushToVC("EditProfileVC",animated: false)
+        _ = self.pushVC("EditProfileVC",animated: false)
     }
 }
 extension ViewProfileVC : UserDetailsDataModelDelegate
