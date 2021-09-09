@@ -31,7 +31,7 @@ class ForgotPasswordVC : UIViewController {
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-       setDelegates()
+        setDelegates()
         updatePlaceholder(country_code)
     }
     func setDelegates()
@@ -159,7 +159,7 @@ extension ForgotPasswordVC : UITextFieldDelegate
                     if self.textStr.count < placeHolderText.count{
                         self.textStr = self.textStr + string
                         didEditText(textStr)
-
+                        
                     }
                 }
                 return false

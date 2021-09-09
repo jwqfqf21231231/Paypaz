@@ -22,6 +22,9 @@ extension InvitesListVC : UITableViewDataSource {
         cell.img_InviteePic.sd_setImage(with: URL(string: url+(invitesList[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.btn_accept.addTarget(self, action: #selector(btn_accept(_:)), for: .touchUpInside)
         cell.btn_reject.addTarget(self, action: #selector(btn_reject(_:)), for: .touchUpInside)
+        var sendDate = invitesList[indexPath.row].createdDate ?? ""
+        sendDate = sendDate.commentDateConverter
+        cell.lbl_Time.text = sendDate
         cell.btn_accept.tag = indexPath.row
         cell.btn_reject.tag = indexPath.row
         cell.setCellData()

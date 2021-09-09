@@ -193,6 +193,14 @@ extension UITextView{
         return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
     }
 }
+extension UILabel{
+    func isEmptyOrWhitespace() -> Bool {
+        if(self.text!.isEmpty) {
+            return true
+        }
+        return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+    }
+}
 extension String
 {
     func trim() -> String{

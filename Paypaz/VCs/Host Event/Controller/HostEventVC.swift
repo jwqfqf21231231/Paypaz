@@ -26,8 +26,8 @@ class HostEventVC : UIViewController {
     var picker:UIDatePicker!
     var toolBar:UIToolbar!
     var fieldTag:Int?
-
-    var location = ""
+    
+    var location : String?
     var latitude = ""
     var longitude = ""
     var startDate = ""
@@ -91,7 +91,7 @@ class HostEventVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.paymentType = "0"
+        //        self.paymentType = "0"
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 15)
         setTitle()
         if self.eventID != ""
@@ -382,52 +382,7 @@ class HostEventVC : UIViewController {
     }
     
     @IBAction func btn_CreateEvent(_ sender:UIButton) {
-        
-        if(img_EventPic.image == nil)
-        {
-            self.view.makeToast("Add Event Image")
-        }
-        else if(txt_EventName.text?.trim().count == 0)
-        {
-            self.view.makeToast("Enter Event Name")
-        }
-        else if(selectedEventId?.trim().count == 0)
-        {
-            self.view.makeToast("Select Event Type")
-        }
-        else if paymentStatus == "0" && (txt_Price.text?.trim().count == 0)
-        {
-            self.view.makeToast("Enter Price")
-        }
-        else if(txt_EventQuantity.text?.trim().count == 0)
-        {
-            self.view.makeToast("Enter Event Quantity")
-        }
-        else if(location.trim().count == 0)
-        {
-            self.view.makeToast("Add Location")
-        }
-        else if(startDate.trim().count == 0)
-        {
-            self.view.makeToast("Enter Start Date")
-        }
-        else if(endDate.trim().count == 0)
-        {
-            self.view.makeToast("Enter End Date")
-        }
-        else if(startTime.trim().count == 0)
-        {
-            self.view.makeToast("Enter Start Time")
-        }
-        else if(endTime.trim().count == 0)
-        {
-            self.view.makeToast("Enter End Time")
-        }
-        else if(txt_Description.text.trim().count == 0)
-        {
-            self.view.makeToast("Enter Description")
-        }
-        else
+        if validateFields() == true
         {
             var sD = startDate + " " + startTime
             var eD = endDate + " " + endTime
@@ -437,7 +392,7 @@ class HostEventVC : UIViewController {
             dataSource.typeId = selectedEventId ?? ""
             dataSource.name = txt_EventName.text ?? ""
             dataSource.eventDescription = txt_Description.text ?? ""
-            dataSource.location = self.location
+            dataSource.location = self.location ?? ""
             dataSource.startDate = sD
             dataSource.endDate = eD
             if paymentStatus == "0" || paymentStatus == "1"{
@@ -462,6 +417,60 @@ class HostEventVC : UIViewController {
                 dataSource.addEvent()
             }
         }
+        
+    }
+    func validateFields() -> Bool
+    {
+        view.endEditing(true)
+        if(img_EventPic.image == nil)
+        {
+            self.view.makeToast("Add Event Image")
+        }
+        else if(txt_EventName.isEmptyOrWhitespace())
+        {
+            self.view.makeToast("Enter Event Name")
+        }
+        else if(selectedEventId?.isEmpty == nil)
+        {
+            self.view.makeToast("Select Event Type")
+        }
+        else if paymentStatus == "0" && (txt_Price.isEmptyOrWhitespace())
+        {
+            self.view.makeToast("Enter Price")
+        }
+        else if(txt_EventQuantity.isEmptyOrWhitespace())
+        {
+            self.view.makeToast("Enter Event Quantity")
+        }
+        else if(location?.isEmpty == nil)
+        {
+            self.view.makeToast("Add Location")
+        }
+        else if(startDate.trim().count == 0)
+        {
+            self.view.makeToast("Enter Start Date")
+        }
+        else if(endDate.trim().count == 0)
+        {
+            self.view.makeToast("Enter End Date")
+        }
+        else if(startTime.trim().count == 0)
+        {
+            self.view.makeToast("Enter Start Time")
+        }
+        else if(endTime.trim().count == 0)
+        {
+            self.view.makeToast("Enter End Time")
+        }
+        else if(txt_Description.isEmptyOrWhitespace())
+        {
+            self.view.makeToast("Enter Description")
+        }
+        else
+        {
+            return true
+        }
+        return false
     }
 }
 extension HostEventVC: GMSAutocompleteViewControllerDelegate{

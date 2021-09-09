@@ -14,6 +14,7 @@ class InviteCell : UITableViewCell {
     @IBOutlet weak var btn_reject  : RoundButton!
     @IBOutlet weak var txt_message : UILabel!
     @IBOutlet weak var img_InviteePic : UIImageView!
+    @IBOutlet weak var lbl_Time : UILabel!
     
    
     override func prepareForReuse() {

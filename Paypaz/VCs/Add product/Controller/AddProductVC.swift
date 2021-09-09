@@ -116,19 +116,19 @@ class AddProductVC : CustomViewController {
         {
             self.view.makeToast("Please add product image")
         }
-        else if(txt_ProductName.text?.trim().count == 0)
+        else if(txt_ProductName.isEmptyOrWhitespace())
         {
             self.view.makeToast("Please enter product name")
         }
-        else if paymentStatus == "1" && (txt_ProductPrice.text?.trim().count == 0)
+        else if paymentStatus == "1" && (txt_ProductPrice.isEmptyOrWhitespace())
         {
             self.view.makeToast("Please enter product price")
         }
-        else if(txt_ProductQuantity.text?.trim().count == 0)
+        else if(txt_ProductQuantity.isEmptyOrWhitespace())
         {
             self.view.makeToast("Please enter product quantity")
         }
-        else if(txt_Description.text.trim().count == 0)
+        else if(txt_Description.isEmptyOrWhitespace())
         {
             self.view.makeToast("Please enter product description")
         }

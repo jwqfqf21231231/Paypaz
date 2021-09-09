@@ -54,7 +54,7 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             let normalString = NSMutableAttributedString(string: "All Products From ")
-            let attributedString = NSMutableAttributedString(string:"\"\(self.eventName) Event\"", attributes: [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15)])
+            let attributedString = NSMutableAttributedString(string:"\"\(self.eventName) Event\"", attributes: [NSAttributedString.Key.font :  UIFont.boldSystemFont(ofSize: 16)])
             normalString.append(attributedString)
    
             self.lbl_EventName.attributedText = normalString

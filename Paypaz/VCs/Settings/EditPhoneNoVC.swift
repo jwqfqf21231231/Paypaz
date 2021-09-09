@@ -76,9 +76,7 @@ class EditPhoneNoVC: UIViewController {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of: phone_code, with: "")
     }
     @IBAction func btn_Save(_ sender:UIButton) {
-        UserDefaults.standard.setPhoneCode(value: phone_code)
-        UserDefaults.standard.setCountryCode(value: country_code)
-        if txt_PhoneNo.text?.trim().count == 0 || txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
+        if txt_PhoneNo.isEmptyOrWhitespace() || txt_PhoneNo.text?.removingWhitespaceAndNewlines().count != placeHolderText.count
         {
             view.makeToast("Please Enter Valid Mobile Number")
         }
@@ -169,6 +167,8 @@ extension EditPhoneNoVC : EditPhoneNoDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            UserDefaults.standard.setPhoneCode(value: phone_code)
+            UserDefaults.standard.setCountryCode(value: country_code)
             if let vc = self.pushVC("OTPVerificationVC") as? OTPVerificationVC{
                 vc.doChangePhoneNumber = true
                 vc.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""

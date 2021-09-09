@@ -40,7 +40,6 @@ class AddEventProductsVC: CustomViewController {
             self.btn_Submit.backgroundColor = UIColor(named: "GreenColor")
             getProducts()
         }
-        // Do any additional setup after loading the view.
     }
     private func getProducts(){
         Connection.svprogressHudShow(view: self)
@@ -76,7 +75,7 @@ class AddEventProductsVC: CustomViewController {
                     }
                     else{
                         self.btn_Submit.setTitle("Continue", for: .normal)
-
+                        
                     }
                     self.btn_Submit.setTitleColor(.white, for: .normal)
                     self.btn_Submit.backgroundColor = UIColor(named: "GreenColor")
@@ -122,8 +121,14 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
         cell.lbl_Price.text = productArr[indexPath.row]["isPaid"] as! String == "0" ? "Free" : "$\((productArr[indexPath.row]["price"] as! NSString).integerValue)"
         cell.btn_Delete.tag = indexPath.row
-        cell.btn_Edit.tag = indexPath.row
-        cell.btn_Edit.addTarget(self, action: #selector(editProduct(button:)), for: .touchUpInside)
+        if isEdit ?? false{
+            cell.btn_Edit.isHidden = false
+            cell.btn_Edit.tag = indexPath.row
+            cell.btn_Edit.addTarget(self, action: #selector(editProduct(button:)), for: .touchUpInside)
+        }
+        else{
+            cell.btn_Edit.isHidden = true
+        }
         cell.btn_Delete.addTarget(self, action: #selector(deleteProduct(button:)), for: .touchUpInside)
         return cell
     }
@@ -140,18 +145,34 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
     }
     @objc func deleteProduct(button : UIButton)
     {
-        Connection.svprogressHudShow(view: self)
-        dataSource.productID = productIDArr[button.tag]
-        dataSource.eventID = self.eventID
-        productIDArr.remove(at: button.tag)
-        productArr.remove(at: button.tag)
-        dataSource.type = "0"
-        dataSource.deleteProduct()
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "DeleteEventPopupVC") as? DeleteEventPopupVC{
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.updateProductDelegate = self
+            vc.deleteProduct = true
+            vc.eventID = self.eventID
+            vc.productID = productIDArr[button.tag]
+            vc.indexNo = button.tag
+            if isEdit ?? false{
+                vc.type = "1"
+            }
+            else{
+                vc.type = "0"
+            }
+            self.present(vc, animated: false, completion: nil)
+        }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = self.pushVC("ProductDetailVC") as? ProductDetailVC{
             vc.productID = productIDArr[indexPath.row]
         }
+    }
+}
+extension AddEventProductsVC : DeleteProductDelegate
+{
+    func deleteProductData(indexNo:Int){
+        productIDArr.remove(at: indexNo)
+        productArr.remove(at: indexNo)
+        tableView_Products.reloadData()
     }
 }
 extension AddEventProductsVC : AddProductDelegate
