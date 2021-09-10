@@ -14,7 +14,7 @@ class BuyEventVC : CustomViewController {
     var eventData = [MyEvent]()
     var filteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
-    
+    var index = 0
     @IBOutlet weak var txt_Search : UITextField!
     
     @IBOutlet weak var tableView_Events : UITableView! {
@@ -25,21 +25,23 @@ class BuyEventVC : CustomViewController {
     }
     @IBOutlet weak var collectionViewCalendar : UICollectionView! {
         didSet {
+            collectionViewCalendar.allowsSelection = true
             collectionViewCalendar.dataSource = self
             collectionViewCalendar.delegate   = self
         }
     }
     
     var arrCalendarDays : [String]?
-    
+    var arrCalendarUTCDays : [String]?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
-        dataSource.delegate = self
         dataSource.delegate2 = self
         let arr = self.arrayOfDates()
+        let UTCArr = self.DatesToSend()
         self.arrCalendarDays = arr as? [String] ?? []
+        self.arrCalendarUTCDays = UTCArr as? [String] ?? []
         self.collectionViewCalendar.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .left)
         getEvents()
     }
@@ -63,7 +65,13 @@ class BuyEventVC : CustomViewController {
     {
         Connection.svprogressHudShow(view: self)
         dataSource.typeID = self.typeID
-        dataSource.getMyEvents()
+        dataSource.isFilter = "2"
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm a"
+        let currentDate = dateformatter.string(from: Date())
+        dataSource.day = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm a", outGoingFormat: "yyyy-MM-dd")
+        dataSource.pageNo = "0"
+        dataSource.getFilteredEvents()
     }
     func arrayOfDates() -> NSArray {
         
@@ -74,7 +82,7 @@ class BuyEventVC : CustomViewController {
         let calendar = Calendar.current
         var offset = DateComponents()
         var dates: [Any] = [formatter.string(from: startDate)]
-        
+
         for i in 1..<numberOfDays {
             offset.day = i
             let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
@@ -83,7 +91,23 @@ class BuyEventVC : CustomViewController {
         }
         return dates as NSArray
     }
-    
+    func DatesToSend() -> NSArray {
+        let numberOfDays: Int = 30
+        let startDate = Date()
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm a"
+        let calendar = Calendar.current
+        var offset = DateComponents()
+        var dates: [Any] = [formatter.string(from: startDate).localToUTC(incomingFormat: "yyyy-MM-dd HH:mm a", outGoingFormat: "yyyy-MM-dd")]
+        
+        for i in 1..<numberOfDays {
+            offset.day = i
+            let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
+            let nextDayString = formatter.string(from: nextDay!).localToUTC(incomingFormat: "yyyy-MM-dd HH:mm a", outGoingFormat: "yyyy-MM-dd")
+            dates.append(nextDayString)
+        }
+        return dates as NSArray
+    }
     
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
@@ -103,7 +127,7 @@ extension BuyEventVC : FilterData{
         dataSource.distance = distance
         dataSource.date = date
         dataSource.typeID = typeID
-        dataSource.filterEvents()
+        dataSource.getFilteredEvents()
     }
 }
 extension BuyEventVC : FavEventDataModelDelegate
@@ -124,40 +148,6 @@ extension BuyEventVC : FavEventDataModelDelegate
     }
     
     func didFailDataUpdateWithError1(error: Error)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if error.localizedDescription == "Check Internet Connection"
-        {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
-        }
-        else
-        {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
-        }
-    }
-}
-extension BuyEventVC : EventInfoDataModelDelegate
-{
-    func didRecieveDataUpdate(data: MyEventsListModel)
-    {
-        print("EventModelData = ",data)
-        Connection.svprogressHudDismiss(view: self)
-        if data.success == 1
-        {
-            self.eventData = data.data ?? []
-            self.filteredEventData = data.data ?? []
-            DispatchQueue.main.async {
-                self.tableView_Events.reloadData()
-            }
-        }
-        else
-        {
-            self.view.makeToast(data.message, duration: 3, position: .bottom)
-            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-        }
-    }
-    
-    func didFailDataUpdateWithError(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

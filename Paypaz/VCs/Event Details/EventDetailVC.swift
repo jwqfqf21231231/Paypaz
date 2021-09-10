@@ -11,6 +11,7 @@ import UIKit
 class EventDetailVC : CustomViewController {
     
     var eventID = ""
+    var isFavourite : String?
     var eventDetails : MyEvent?
     var products = [MyProducts]()
     var contacts = [InvitedContacts]()
@@ -29,6 +30,7 @@ class EventDetailVC : CustomViewController {
     @IBOutlet weak var view_Product : UIView!
     @IBOutlet weak var view_ProductHeight : NSLayoutConstraint!
     @IBOutlet weak var view_InviteeHeight : NSLayoutConstraint!
+    @IBOutlet weak var btn_isFavourited : UIButton!
     @IBOutlet weak var collectionView_Products : UICollectionView!{
         didSet {
             collectionView_Products.dataSource = self
@@ -49,6 +51,10 @@ class EventDetailVC : CustomViewController {
         dataSource.delegate = self
         dataSource.delegate2 = self
         dataSource.delegate3 = self
+        if isFavourite == "0"
+        {
+            btn_isFavourited.isHidden = true
+        }
         self.getEventInfo()
         self.getProducts()
         self.getInvitees()

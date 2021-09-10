@@ -20,7 +20,7 @@ class CalendarCell : UICollectionViewCell {
                 self.bgView.backgroundColor = UIColor(named: "GreenColor")
                 self.lbl_day.textColor      = UIColor.white
                 self.lbl_date.textColor     = UIColor.white
-                
+
             } else {
                 self.bgView.backgroundColor = UIColor(named: "LightBluish") ?? UIColor.white
                 self.lbl_day.textColor      = UIColor.black

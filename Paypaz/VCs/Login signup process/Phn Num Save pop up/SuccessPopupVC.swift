@@ -37,18 +37,13 @@ class SuccessPopupVC : CustomViewController {
     
     var doAccept : Bool?
     var inviteID = ""
-    var isAccept : Int?
+    var isAccept : String?
     private let dataSource = IsAcceptEventInviteDataModel()
     // MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.first?.view == self.view {
-            self.dismiss(animated: true, completion: nil)
-        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -57,21 +52,28 @@ class SuccessPopupVC : CustomViewController {
             switch type {
                 
             case .InviteAccept:
-                self.isAccept = 1
                 self.lbl_Title.text   = "Invitation Accepted"
-                self.lbl_message.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit In dui enim, ornare"
-                
+                self.lbl_message.text = "You Have Accepted The Invitation"
                 self.imgIcon.image = UIImage(named: "invi_accept")
                 
-            case .InviteReject:
-                self.isAccept = 2
-                self.lbl_Title.text   = "Invitation Rejected"
-                self.lbl_message.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit In dui enim, ornare"
+                dataSource.delegate = self
+                dataSource.inviteID = self.inviteID
+                dataSource.isAccept = "1"
+                dataSource.acceptOrInvite()
+                Connection.svprogressHudShow(view: self)
                 
+            case .InviteReject:
+                self.lbl_Title.text   = "Invitation Rejected"
+                self.lbl_message.text = "You Have Rejected The Invitation"
                 let redclr = UIColor(red: 0.94, green: 0.26, blue: 0.26, alpha: 1.00)
                 self.lbl_Title.textColor = redclr
-                
                 self.imgIcon.image    = UIImage(named: "invi_reject")
+                
+                dataSource.delegate = self
+                dataSource.inviteID = self.inviteID
+                dataSource.isAccept = "2"
+                dataSource.acceptOrInvite()
+                Connection.svprogressHudShow(view: self)
                 
             case .EventAmountPaid:
                 self.lbl_Title.text   = "Amount Paid Successfully"
@@ -125,11 +127,9 @@ class SuccessPopupVC : CustomViewController {
     // MARK: - --- Action ----
     @IBAction func btn_Continue(_ sender:UIButton) {
         if doAccept ?? false{
-            dataSource.delegate = self
-            dataSource.inviteID = self.inviteID
-            dataSource.isAccept = "\(self.isAccept ?? 1)"
-            dataSource.acceptOrInvite()
-            Connection.svprogressHudShow(view: self)
+            self.dismiss(animated: false) { [weak self] in
+                self?.acceptOrRejectDelegate?.acceptOrReject(inviteID: self?.inviteID ?? "")
+            }
         }
         else{
             self.dismiss(animated: false) {[weak self] in
@@ -144,9 +144,7 @@ extension SuccessPopupVC : IsAcceptEventInviteDataModelDelegate {
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.dismiss(animated: false) { [weak self] in
-                self?.acceptOrRejectDelegate?.acceptOrReject(inviteID: self?.inviteID ?? "")
-            }
+            
         }
         else
         {

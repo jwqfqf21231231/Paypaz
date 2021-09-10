@@ -32,6 +32,12 @@ extension BuyEventVC : UITableViewDataSource {
         cell.txt_eventPrice.text = "$\((filteredEventData[indexPath.row].price! as NSString).integerValue)"
         cell.lbl_Distance.text = "\(filteredEventData[indexPath.row].distance ?? "") miles away"
         cell.btn_addToCart.addTarget(self, action: #selector(self.clicked_btn_addToCart(_:)), for: .touchUpInside)
+        if filteredEventData[indexPath.row].isFavourited == "1"{
+            cell.btn_fav.setImage(UIImage(named: "red"), for: .normal)
+        }
+        else{
+            cell.btn_fav.setImage(UIImage(named: "heart_grey"), for: .normal)
+        }
         cell.btn_Buy.addTarget(self, action: #selector(self.clicked_btn_Buy(_:)), for: .touchUpInside)
         cell.btn_fav.addTarget(self, action: #selector(self.clicked_btn_Fav(_:)), for: .touchUpInside)
         cell.btn_fav.tag = Int(filteredEventData[indexPath.row].id ?? "") ?? 0
@@ -40,9 +46,24 @@ extension BuyEventVC : UITableViewDataSource {
     @objc func clicked_btn_Fav(_ sender: UIButton)
     {
         dataSource.delegate1 = self
-        sender.setImage(UIImage(named: "red"), for: .normal)
+        //sender.setImage(UIImage(named: "red"), for: .normal)
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = "\(sender.tag)"
+        if sender.isSelected == true{
+            sender.isSelected = false
+            sender.setImage(UIImage(named: "heart_grey"), for: .normal)
+            dataSource.status = "0"
+        }else{
+            sender.isSelected = true
+            sender.setImage(UIImage(named: "red"), for: .normal)
+            dataSource.status = "1"
+        }
+//        if sender.image(for: .selected) == UIImage(named: "red"){
+//            dataSource.status = "0"
+//        }
+//        else{
+//            dataSource.status = "1"
+//        }
         dataSource.favEvent()
     }
     private func addTapGestureOnImg(_ img:RoundImage) {
@@ -67,6 +88,7 @@ extension BuyEventVC : UITableViewDelegate {
 
         if let vc = self.pushVC("EventDetailVC") as? EventDetailVC{
             vc.eventID = filteredEventData[indexPath.row].id ?? ""
+            vc.isFavourite = filteredEventData[indexPath.row].isFavourited ?? ""
         }
     }
 }
@@ -86,9 +108,7 @@ extension BuyEventVC : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as? CalendarCell else { return CalendarCell() }
-        
         let data = self.arrCalendarDays?[indexPath.row]
         let day  = data?.components(separatedBy: " ").first
         let date = data?.components(separatedBy: " ").last
@@ -96,6 +116,8 @@ extension BuyEventVC : UICollectionViewDataSource {
         cell.lbl_date.text = date
         return cell
     }
+    
+
 }
 extension BuyEventVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -103,14 +125,13 @@ extension BuyEventVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLay
         let h = collectionView.frame.size.height
         return CGSize(width: h * 0.8, height: h * 0.9)
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = arrCalendarDays?[indexPath.row]
-        let day = data?.components(separatedBy: " ").last
+        let data = arrCalendarUTCDays?[indexPath.row]
         Connection.svprogressHudShow(view: self)
         dataSource.isFilter = "2"
-        dataSource.day = day ?? ""
+        dataSource.day = data ?? ""
         dataSource.typeID = typeID
-        dataSource.filterEvents()
+        dataSource.getFilteredEvents()
+        
     }
 }
