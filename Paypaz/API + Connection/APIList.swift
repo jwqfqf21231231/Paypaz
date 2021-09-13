@@ -64,6 +64,7 @@ enum urlString:String
     case VERIFYCHANGEDPHONENUMBER = "user/phone/update"
     
     case NOTIFICATIONLIST = "user/notification/list"
+    case CLEARNOTIFICATIONS = "user/notifications/clear"
     
     case INVITELIST = "user/invite/list"
     case ACCEPTORREJECTINVITE = "user/invite/change/status"

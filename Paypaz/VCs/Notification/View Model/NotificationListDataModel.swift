@@ -15,9 +15,16 @@ protocol NotificationListDataModelDelegate:class {
     func didFailDataUpdateWithError(error:Error)
     
 }
+protocol DeleteNotificationsDataModelDelegate:class {
+    func didRecieveDataUpdate1(data:ResendOTPModel)
+    func didFailDataUpdateWithError1(error:Error)
+    
+}
 class NotificationListDataModel: NSObject
 {
     weak var delegate: NotificationListDataModelDelegate?
+    weak var deleteNotificationsDelegate : DeleteNotificationsDataModelDelegate?
+
     let sharedInstance = Connection()
     var pageNo = "0"
     var parameter : Parameters = [:]
@@ -63,5 +70,43 @@ class NotificationListDataModel: NSObject
                                         
                                     })
     }
+    func clearNotifications()
+    {
+        
+        let url =  APIList().getUrlString(url: .CLEARNOTIFICATIONS)
+
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestDELETE(url, params: nil, headers: header,
+                                     success:
+                                        {
+                                            (JSON) in
+                                            let  result :Data? = JSON
+                                            if result != nil
+                                            {
+                                                do
+                                            {
+                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                self.deleteNotificationsDelegate?.didRecieveDataUpdate1(data: response)
+                                            }
+                                                catch let error as NSError
+                                                {
+                                                    self.deleteNotificationsDelegate?.didFailDataUpdateWithError1(error: error)
+                                                }
+                                            }
+                                            else
+                                            {
+                                                print("No response from server")
+                                            }
+                                        },
+                                     failure:
+                                        {
+                                            (error) in
+                                            self.deleteNotificationsDelegate?.didFailDataUpdateWithError1(error: error)
+                                            
+                                        })
+    }
+
     
 }

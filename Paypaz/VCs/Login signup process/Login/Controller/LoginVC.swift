@@ -16,7 +16,11 @@ class LoginVC : UIViewController {
     @IBOutlet weak var txt_PhoneNo : RoundTextField!
     @IBOutlet weak var txt_email    : RoundTextField!
     @IBOutlet weak var txt_Password : RoundTextField!
-    @IBOutlet weak var code_btn : UIButton!
+    @IBOutlet weak var code_btn : UIButton!{
+        didSet{
+            self.code_btn.imageView?.contentMode = .scaleAspectFill
+        }
+    }
     
     //Country Code and Phone Code
     var country_code = "IN"

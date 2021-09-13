@@ -22,7 +22,6 @@ class FilterVC : CustomViewController {
     var fieldTag:Int?
     var pickedDistance:String?
 
-
     weak var delegate : FilterData?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
@@ -46,6 +45,9 @@ class FilterVC : CustomViewController {
             self.toolBar.removeFromSuperview()
             self.toolBar = nil
         }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let currentDate = dateFormatter.string(from: Date())
         switch field.tag  {
         case 10:
             picker=UIDatePicker()
@@ -73,7 +75,9 @@ class FilterVC : CustomViewController {
                     picker.preferredDatePickerStyle = .wheels
                 }
                 picker.datePickerMode = .time
-                picker.minimumDate = Date()
+                if txt_Date.text == currentDate{
+                    picker.minimumDate = Date()
+                }
                 txt_Time.inputView = picker
                 txt_Time.inputAccessoryView = createToolBar()
                 fieldTag = field.tag

@@ -98,4 +98,33 @@ extension NotificationsListVC : NotificationListDataModelDelegate
         }
     }
 }
-
+extension NotificationsListVC : DeleteNotificationsDataModelDelegate
+{
+    func didRecieveDataUpdate1(data: ResendOTPModel)
+    {
+        print("Clear Notifications Data Model = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.notifications.removeAll()
+            self.tableViewNotifications.reloadData()
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError1(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}

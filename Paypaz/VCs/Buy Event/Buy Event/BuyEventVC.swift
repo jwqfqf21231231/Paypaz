@@ -67,9 +67,9 @@ class BuyEventVC : CustomViewController {
         dataSource.typeID = self.typeID
         dataSource.isFilter = "2"
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd HH:mm a"
+        dateformatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let currentDate = dateformatter.string(from: Date())
-        dataSource.day = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm a", outGoingFormat: "yyyy-MM-dd")
+        dataSource.day = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm:ss", outGoingFormat: "yyyy-MM-dd")
         dataSource.pageNo = "0"
         dataSource.getFilteredEvents()
     }
@@ -95,15 +95,15 @@ class BuyEventVC : CustomViewController {
         let numberOfDays: Int = 30
         let startDate = Date()
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm a"
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let calendar = Calendar.current
         var offset = DateComponents()
-        var dates: [Any] = [formatter.string(from: startDate).localToUTC(incomingFormat: "yyyy-MM-dd HH:mm a", outGoingFormat: "yyyy-MM-dd")]
+        var dates: [Any] = [formatter.string(from: startDate).localToUTC(incomingFormat: "yyyy-MM-dd hh:mm:ss", outGoingFormat: "yyyy-MM-dd")]
         
         for i in 1..<numberOfDays {
             offset.day = i
             let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
-            let nextDayString = formatter.string(from: nextDay!).localToUTC(incomingFormat: "yyyy-MM-dd HH:mm a", outGoingFormat: "yyyy-MM-dd")
+            let nextDayString = formatter.string(from: nextDay!).localToUTC(incomingFormat: "yyyy-MM-dd hh:mm:ss", outGoingFormat: "yyyy-MM-dd")
             dates.append(nextDayString)
         }
         return dates as NSArray

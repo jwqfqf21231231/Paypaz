@@ -34,9 +34,11 @@ extension BuyEventVC : UITableViewDataSource {
         cell.btn_addToCart.addTarget(self, action: #selector(self.clicked_btn_addToCart(_:)), for: .touchUpInside)
         if filteredEventData[indexPath.row].isFavourited == "1"{
             cell.btn_fav.setImage(UIImage(named: "red"), for: .normal)
+            cell.btn_fav.isSelected = true
         }
         else{
             cell.btn_fav.setImage(UIImage(named: "heart_grey"), for: .normal)
+            cell.btn_fav.isSelected = false
         }
         cell.btn_Buy.addTarget(self, action: #selector(self.clicked_btn_Buy(_:)), for: .touchUpInside)
         cell.btn_fav.addTarget(self, action: #selector(self.clicked_btn_Fav(_:)), for: .touchUpInside)
@@ -46,7 +48,6 @@ extension BuyEventVC : UITableViewDataSource {
     @objc func clicked_btn_Fav(_ sender: UIButton)
     {
         dataSource.delegate1 = self
-        //sender.setImage(UIImage(named: "red"), for: .normal)
         Connection.svprogressHudShow(view: self)
         dataSource.eventID = "\(sender.tag)"
         if sender.isSelected == true{
@@ -58,12 +59,6 @@ extension BuyEventVC : UITableViewDataSource {
             sender.setImage(UIImage(named: "red"), for: .normal)
             dataSource.status = "1"
         }
-//        if sender.image(for: .selected) == UIImage(named: "red"){
-//            dataSource.status = "0"
-//        }
-//        else{
-//            dataSource.status = "1"
-//        }
         dataSource.favEvent()
     }
     private func addTapGestureOnImg(_ img:RoundImage) {

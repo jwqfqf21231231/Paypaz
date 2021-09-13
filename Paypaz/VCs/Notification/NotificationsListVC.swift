@@ -25,6 +25,7 @@ class NotificationsListVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
+        dataSource.deleteNotificationsDelegate = self
         Connection.svprogressHudShow(view: self)
         dataSource.pageNo = "0"
         dataSource.getNotifications()
@@ -46,7 +47,8 @@ class NotificationsListVC : CustomViewController {
          self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_ClearAll(_ sender:UIButton) {
-        
+        Connection.svprogressHudShow(view: self)
+        dataSource.clearNotifications()
     }
 }
 

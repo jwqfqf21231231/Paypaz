@@ -22,28 +22,61 @@ class BuyEventDataModel: NSObject
     weak var delegate1: FavEventDataModelDelegate?
     weak var delegate2: FilteredEventDataModelDelegate?
     let sharedInstance = Connection()
+    var search = ""
     var typeID = ""
     var pageNo = "0"
     var eventID = ""
     var isFilter = ""
     var distance = ""
-    var search = ""
     var day = ""
     var date = ""
     var status = ""
+    var parameter : Parameters?
     func getFilteredEvents()
     {
         let url =  APIList().getUrlString(url: .FILTEREVENT)
-        let parameter : Parameters = [
-            "isFilter" : isFilter,
-            "latitude" : UserDefaults.standard.getLatitude(),
-            "longitude" : UserDefaults.standard.getLongitude(),
-            "distance" : distance,
-            "day" : day,
-            "pageNo" : pageNo,
-            "date" : date,
-            "typeID" : typeID
-        ]
+        if isFilter == "1"{
+            parameter  = [
+                "isFilter" : isFilter,
+                "latitude" : UserDefaults.standard.getLatitude(),
+                "longitude" : UserDefaults.standard.getLongitude(),
+                "distance" : distance,
+                "pageNo" : pageNo,
+                "date" : date,
+                "typeID" : typeID
+            ]
+        }
+        else if isFilter == "2"
+        {
+            parameter  = [
+                "isFilter" : isFilter,
+                "latitude" : UserDefaults.standard.getLatitude(),
+                "longitude" : UserDefaults.standard.getLongitude(),
+                "day" : day,
+                "pageNo" : pageNo,
+                "typeID" : typeID
+            ]
+        }
+        else if isFilter == "0"{
+            parameter  = [
+                "isFilter" : isFilter,
+                "latitude" : UserDefaults.standard.getLatitude(),
+                "longitude" : UserDefaults.standard.getLongitude(),
+                "pageNo" : pageNo,
+                "search" : search,
+                "typeID" : typeID
+            ]
+        }
+        else{
+            parameter  = [
+                "isFilter" : isFilter,
+                "latitude" : UserDefaults.standard.getLatitude(),
+                "longitude" : UserDefaults.standard.getLongitude(),
+                "day" : day,
+                "pageNo" : pageNo,
+                "typeID" : typeID
+            ]
+        }
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
         ]
@@ -115,5 +148,5 @@ class BuyEventDataModel: NSObject
                                         
                                     })
     }
-
+    
 }

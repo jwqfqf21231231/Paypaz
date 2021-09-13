@@ -11,7 +11,10 @@ import UIKit
 class FavouritesEventsListVC : CustomViewController {
     
     var favEvents = [MyEvent]()
+    var newFavEvents = [MyEvent]()
+    var currentPage = 1
     private let dataSource = FavouritesDataModel()
+    let contactsDataSource = MyPostedEventDataModel()
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
             tableView_Events.dataSource = self
@@ -24,57 +27,29 @@ class FavouritesEventsListVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
+        contactsDataSource.delegate3 = self
         getFavEvents()
-        // Do any additional setup after loading the view.
     }
     private func getFavEvents()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.getFavEvents()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    
-      
-    }
 
-    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.favEvents.count{
+                Connection.svprogressHudShow(view: self)
+                dataSource.pageNo = "\(currentPage)"
+                currentPage = currentPage + 1
+                dataSource.getFavEvents()
+            }
+        }
+    }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
 }
 
-extension FavouritesEventsListVC : FavouritesListDataModelDelegate
-{
-    func didRecieveDataUpdate(data: MyEventsListModel)
-    {
-        print("FavEventModelData = ",data)
-        Connection.svprogressHudDismiss(view: self)
-        if data.success == 1
-        {
-            self.favEvents = data.data ?? []
-            DispatchQueue.main.async {
-                self.tableView_Events.reloadData()
-            }
-        }
-        else
-        {
-            self.view.makeToast(data.message, duration: 3, position: .bottom)
-           // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-        }
-    }
-    
-    func didFailDataUpdateWithError(error: Error)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if error.localizedDescription == "Check Internet Connection"
-        {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
-        }
-        else
-        {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
-        }
-    }
-}
