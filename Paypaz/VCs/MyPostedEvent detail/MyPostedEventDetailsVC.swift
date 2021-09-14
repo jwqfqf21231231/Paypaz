@@ -16,6 +16,7 @@ class MyPostedEventDetailsVC : CustomViewController {
     var eventID = ""
     var isPublicStatus = ""
     var isInviteMemberStatus = ""
+    var btn_EditHidden : Bool?
     var eventDetails : MyEvent?
     var products = [MyProducts]()
     var newProductItems = [MyProducts]()
@@ -55,6 +56,9 @@ class MyPostedEventDetailsVC : CustomViewController {
         dataSource.delegate = self
         dataSource.delegate2 = self
         dataSource.delegate3 = self
+        if btn_EditHidden ?? false{
+            self.btn_edit.isHidden = true
+        }
         self.getEvent()
         self.getProducts()
         self.getInvitees()

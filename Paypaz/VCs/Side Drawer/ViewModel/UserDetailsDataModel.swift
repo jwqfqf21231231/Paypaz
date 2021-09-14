@@ -11,7 +11,7 @@ import Alamofire
 
 protocol UserDetailsDataModelDelegate:class {
     func didRecieveDataUpdate(data:UserDetailsModel)
-    func didFailDataUpdateWithError(error:Error)
+    func didFailDataUpdateWithError1(error:Error)
     
 }
 class UserDetailsDataModel: NSObject
@@ -38,13 +38,13 @@ class UserDetailsDataModel: NSObject
                                         }
                                         catch let error as NSError
                                         {
-                                            self.delegate?.didFailDataUpdateWithError(error: error)
+                                            self.delegate?.didFailDataUpdateWithError1(error: error)
                                         }
                                     }
                                     
                                   }, failure: {
                                     (error) in
-                                    self.delegate?.didFailDataUpdateWithError(error: error)
+                                    self.delegate?.didFailDataUpdateWithError1(error: error)
                                     
                                   })
     }

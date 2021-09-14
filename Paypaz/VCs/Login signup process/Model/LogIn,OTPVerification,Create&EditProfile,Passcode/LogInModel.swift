@@ -14,11 +14,11 @@ struct LogInModel: Codable {
     let success: Int?
     let message: String?
     let messages: String?
-    let data: DataClass2?
+    let data: UserDetails?
 }
 
 // MARK: - DataClass
-struct DataClass2: Codable {
+struct UserDetails: Codable {
     let id, firstName, lastName, emailORphone: String?
     let email, phoneNumber, password, userProfile: String?
     let otp, passcode, dob, address: String?

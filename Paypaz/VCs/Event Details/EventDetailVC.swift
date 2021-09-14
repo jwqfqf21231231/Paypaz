@@ -93,7 +93,9 @@ class EventDetailVC : CustomViewController {
         }
     }
     @IBAction func btn_CreatedByUser(_ sender:UIButton) {
-        _ = self.pushVC("OtherUserProfileVC")
+        if let vc = self.pushVC("OtherUserProfileVC") as? OtherUserProfileVC{
+            vc.userID = eventDetails?.userID ?? ""
+        }
     }
     @IBAction func btn_Share(_ sender:UIButton){
         postshareLink(profile_URL: "The text that i want to share")

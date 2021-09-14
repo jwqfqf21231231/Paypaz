@@ -11,7 +11,7 @@ import Alamofire
 
 protocol LogInDataModelDelegate:class {
     func didRecieveDataUpdate(data:LogInModel)
-    func didFailDataUpdateWithError(error:Error)
+    func didFailDataUpdateWithError1(error:Error)
     
 }
 class LogInDataModel: NSObject
@@ -21,7 +21,7 @@ class LogInDataModel: NSObject
     var phoneCode = ""
     var email = ""
     var password = ""
-    var parameter : Parameters = [:]
+    var userID = ""
     func requestLogIn()
     {
         
@@ -56,7 +56,7 @@ class LogInDataModel: NSObject
                                             }
                                             catch let error as NSError
                                             {
-                                                self.delegate?.didFailDataUpdateWithError(error: error)
+                                                self.delegate?.didFailDataUpdateWithError1(error: error)
                                             }
                                         }
                                         else
@@ -68,7 +68,44 @@ class LogInDataModel: NSObject
                                    failure:
                                     {
                                         (error) in
-                                        self.delegate?.didFailDataUpdateWithError(error: error)
+                                        self.delegate?.didFailDataUpdateWithError1(error: error)
+                                        
+                                    })
+    }
+    func getUserProfile(){
+        let url =  APIList().getUrlString(url: .USERPROFILE)
+     
+        let parameter : Parameters = [
+            "userID" : userID
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: nil,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
+                                                self.delegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.delegate?.didFailDataUpdateWithError1(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No Response from server...")
+                                        }
+                                        
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.delegate?.didFailDataUpdateWithError1(error: error)
                                         
                                     })
     }

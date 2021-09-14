@@ -8,6 +8,46 @@
 
 import UIKit
 import SDWebImage
+
+//MARK:- ---- Collection View ----
+extension BuyEventVC : UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.arrCalendarDays?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as? CalendarCell else { return CalendarCell() }
+        let data = self.arrCalendarDays?[indexPath.row]
+        let day  = data?.components(separatedBy: " ").first
+        let date = data?.components(separatedBy: " ").last
+        cell.lbl_day.text  = day
+        cell.lbl_date.text = date
+        return cell
+    }
+    
+
+}
+extension BuyEventVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let h = collectionView.frame.size.height
+        return CGSize(width: h * 0.8, height: h * 0.9)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = arrCalendarUTCDays?[indexPath.row]
+        Connection.svprogressHudShow(view: self)
+        dataSource.isFilter = "2"
+        self.isFilter = "2"
+        dataSource.day = data ?? ""
+        self.dayToSend = data
+        dataSource.typeID = typeID
+        dataSource.getFilteredEvents()
+        
+    }
+}
+
+//MARK:- ---- Table View ----
 extension BuyEventVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,6 +70,8 @@ extension BuyEventVC : UITableViewDataSource {
         cell.txt_eventName.text = filteredEventData[indexPath.row].name
         cell.txt_personName.text = (filteredEventData[indexPath.row].firstName ?? "")+" "+(filteredEventData[indexPath.row].lastName ?? "")
         cell.txt_eventPrice.text = "$\((filteredEventData[indexPath.row].price! as NSString).integerValue)"
+        var distance = Double(((filteredEventData[indexPath.row].distance ?? "") as NSString).integerValue)
+        distance = distance/0.609
         cell.lbl_Distance.text = "\(filteredEventData[indexPath.row].distance ?? "") miles away"
         cell.btn_addToCart.addTarget(self, action: #selector(self.clicked_btn_addToCart(_:)), for: .touchUpInside)
         if filteredEventData[indexPath.row].isFavourited == "1"{
@@ -93,40 +135,5 @@ extension BuyEventVC : PopupDelegate {
 
     func isClickedButton() {
         _ = self.pushVC("PayAmountVC")
-    }
-}
-//MARK:- ---- Collection View ----
-extension BuyEventVC : UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.arrCalendarDays?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCell", for: indexPath) as? CalendarCell else { return CalendarCell() }
-        let data = self.arrCalendarDays?[indexPath.row]
-        let day  = data?.components(separatedBy: " ").first
-        let date = data?.components(separatedBy: " ").last
-        cell.lbl_day.text  = day
-        cell.lbl_date.text = date
-        return cell
-    }
-    
-
-}
-extension BuyEventVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let h = collectionView.frame.size.height
-        return CGSize(width: h * 0.8, height: h * 0.9)
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = arrCalendarUTCDays?[indexPath.row]
-        Connection.svprogressHudShow(view: self)
-        dataSource.isFilter = "2"
-        dataSource.day = data ?? ""
-        dataSource.typeID = typeID
-        dataSource.getFilteredEvents()
-        
     }
 }

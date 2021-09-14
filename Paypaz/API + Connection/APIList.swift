@@ -37,6 +37,8 @@ enum urlString:String
     case FORGOTPASSCODEOTP = "user/passcode/otp"
     
     case USERDETAILS = "user/detail"
+    case USERPROFILE = "home/user/profile"
+    
     case HOSTEVENT = "user/event/add"
     case UPDATEEVENT = "user/event/update"
     case DELETEEVENT = "user/event/delete/"
@@ -44,6 +46,7 @@ enum urlString:String
     case MYEVENTSLIST = "user/events"
     case PARTICULAREVENTINFO = "home/event/detail"
     case GETEVENTACCTOTYPES = "home/type/events"
+    case GETEVENTACCTOUSERID = "home/events/list"
     case ADDFAV = "user/event/favourite/add"
     case LISTFAVOURITE = "user/favourite/list"
     case FILTEREVENT = "home/event/filter"

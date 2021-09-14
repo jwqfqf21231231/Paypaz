@@ -34,6 +34,10 @@ class BuyEventDataModel: NSObject
     var parameter : Parameters?
     func getFilteredEvents()
     {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+        var currentDate = dateformatter.string(from: Date())
+        currentDate = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
         let url =  APIList().getUrlString(url: .FILTEREVENT)
         if isFilter == "1"{
             parameter  = [
@@ -41,6 +45,7 @@ class BuyEventDataModel: NSObject
                 "latitude" : UserDefaults.standard.getLatitude(),
                 "longitude" : UserDefaults.standard.getLongitude(),
                 "distance" : distance,
+                "currentDate" : currentDate,
                 "pageNo" : pageNo,
                 "date" : date,
                 "typeID" : typeID
@@ -52,6 +57,7 @@ class BuyEventDataModel: NSObject
                 "isFilter" : isFilter,
                 "latitude" : UserDefaults.standard.getLatitude(),
                 "longitude" : UserDefaults.standard.getLongitude(),
+                "currentDate" : currentDate,
                 "day" : day,
                 "pageNo" : pageNo,
                 "typeID" : typeID
@@ -62,6 +68,7 @@ class BuyEventDataModel: NSObject
                 "isFilter" : isFilter,
                 "latitude" : UserDefaults.standard.getLatitude(),
                 "longitude" : UserDefaults.standard.getLongitude(),
+                "currentDate" : currentDate,
                 "pageNo" : pageNo,
                 "search" : search,
                 "typeID" : typeID

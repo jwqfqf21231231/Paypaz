@@ -11,10 +11,16 @@ import UIKit
 class BuyEventVC : CustomViewController {
     
     var typeID = ""
+    var currentPage = 1
+    var isFilter : String?
+    var dayToSend : String?
+    var distance : String?
+    var dateToSend : String?
     var eventData = [MyEvent]()
+    var newEventData = [MyEvent]()
     var filteredEventData = [MyEvent]()
+    var newFilteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
-    var index = 0
     @IBOutlet weak var txt_Search : UITextField!
     
     @IBOutlet weak var tableView_Events : UITableView! {
@@ -30,7 +36,6 @@ class BuyEventVC : CustomViewController {
             collectionViewCalendar.delegate   = self
         }
     }
-    
     var arrCalendarDays : [String]?
     var arrCalendarUTCDays : [String]?
     //MARK:- --- View Life Cycle ----
@@ -65,11 +70,8 @@ class BuyEventVC : CustomViewController {
     {
         Connection.svprogressHudShow(view: self)
         dataSource.typeID = self.typeID
-        dataSource.isFilter = "2"
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        let currentDate = dateformatter.string(from: Date())
-        dataSource.day = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm:ss", outGoingFormat: "yyyy-MM-dd")
+        dataSource.isFilter = self.isFilter ?? "2"
+        dataSource.day = dayToSend ?? ""
         dataSource.pageNo = "0"
         dataSource.getFilteredEvents()
     }
@@ -95,18 +97,45 @@ class BuyEventVC : CustomViewController {
         let numberOfDays: Int = 30
         let startDate = Date()
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let calendar = Calendar.current
         var offset = DateComponents()
-        var dates: [Any] = [formatter.string(from: startDate).localToUTC(incomingFormat: "yyyy-MM-dd hh:mm:ss", outGoingFormat: "yyyy-MM-dd")]
+        var dates: [Any] = [formatter.string(from: startDate).localToUTC(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd")]
         
         for i in 1..<numberOfDays {
             offset.day = i
             let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)
-            let nextDayString = formatter.string(from: nextDay!).localToUTC(incomingFormat: "yyyy-MM-dd hh:mm:ss", outGoingFormat: "yyyy-MM-dd")
+            let nextDayString = formatter.string(from: nextDay!).localToUTC(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd")
             dates.append(nextDayString)
         }
         return dates as NSArray
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.filteredEventData.count{
+                if isFilter == "1"{
+                    dataSource.typeID = typeID
+                    dataSource.isFilter = self.isFilter ?? "1"
+                    dataSource.distance = self.distance ?? ""
+                    dataSource.date = self.dateToSend ?? ""
+                    dataSource.pageNo = "\(currentPage)"
+                    Connection.svprogressHudShow(view: self)
+                    dataSource.getFilteredEvents()
+                    currentPage = currentPage + 1
+                }
+                else
+                {
+                    dataSource.typeID = self.typeID
+                    dataSource.isFilter = self.isFilter ?? "2"
+                    dataSource.day = dayToSend ?? ""
+                    dataSource.pageNo = "\(currentPage)"
+                    Connection.svprogressHudShow(view: self)
+                    dataSource.getFilteredEvents()
+                    currentPage = currentPage + 1
+                }
+            }
+        }
     }
     
     // MARK: - --- Action ----
@@ -124,8 +153,11 @@ extension BuyEventVC : FilterData{
     func filterData(distance: String, date: String) {
         Connection.svprogressHudShow(view: self)
         dataSource.isFilter = "1"
+        self.isFilter = "1"
         dataSource.distance = distance
         dataSource.date = date
+        self.distance = distance
+        self.dateToSend = date
         dataSource.typeID = typeID
         dataSource.getFilteredEvents()
     }
@@ -168,21 +200,38 @@ extension BuyEventVC : FilteredEventDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.eventData = data.data ?? []
-            self.filteredEventData = data.data ?? []
+            if currentPage-1 != 0{
+                self.newEventData = data.data ?? []
+                self.newFilteredEventData = data.data ?? []
+                self.eventData.append(contentsOf: self.newEventData)
+                self.filteredEventData.append(contentsOf: newFilteredEventData)
+            }
+            else{
+                self.eventData = data.data ?? []
+                self.filteredEventData = data.data ?? []
+            }
             DispatchQueue.main.async {
                 self.tableView_Events.reloadData()
             }
         }
         else
         {
-            if data.message == "Data not found"{
-                self.eventData.removeAll()
-                self.filteredEventData.removeAll()
-                self.tableView_Events.reloadData()
+            if data.message == "Data not found" && currentPage-1 >= 1{
+                print("No data at page No : \(currentPage-1)")
+                currentPage = currentPage-1
             }
-            self.view.makeToast(data.message, duration: 0.5, position: .bottom)
-            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            else if data.message == "Data not found" && currentPage-1 == 0{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                self.eventData = []
+                self.filteredEventData = []
+                DispatchQueue.main.async {
+                    self.tableView_Events.reloadData()
+                }
+            }
+            else{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                
+            }
         }
     }
     

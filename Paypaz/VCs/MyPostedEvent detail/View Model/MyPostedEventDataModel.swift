@@ -35,7 +35,10 @@ class MyPostedEventDataModel: NSObject
         let parameter : Parameters = [
             "eventID" : eventID
         ]
-        sharedInstance.requestPOST(url, params: parameter, headers: nil,
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: header,
                                    success:
                                     {
                                         (JSON) in

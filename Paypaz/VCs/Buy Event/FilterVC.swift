@@ -114,8 +114,8 @@ class FilterVC : CustomViewController {
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
             dateFormatter.dateFormat = "hh:mm a"
-            let dateString = dateFormatter.string(from:picker.date)
-            self.txt_Time.text = dateString
+            let timeString = dateFormatter.string(from:picker.date)
+            self.txt_Time.text = timeString
             self.view.endEditing(true)
     
         default:

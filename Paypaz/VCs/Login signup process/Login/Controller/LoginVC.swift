@@ -184,7 +184,7 @@ extension LoginVC : LogInDataModelDelegate
         }
     }
     
-    func didFailDataUpdateWithError(error: Error)
+    func didFailDataUpdateWithError1(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

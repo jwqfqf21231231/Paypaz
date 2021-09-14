@@ -19,6 +19,7 @@ class MyEventsListDataModel: NSObject
     weak var delegate: MyEventsListDataModelDelegate?
     let sharedInstance = Connection()
     var pageNo = "0"
+    var userID = ""
     func getMyEvents()
     {
         let url =  APIList().getUrlString(url: .MYEVENTSLIST)
@@ -29,6 +30,41 @@ class MyEventsListDataModel: NSObject
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
         ]
         sharedInstance.requestPOST(url, params: parameter, headers: header,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(MyEventsListModel.self, from: result!)
+                                                self.delegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.delegate?.didFailDataUpdateWithError(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No response from server")
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.delegate?.didFailDataUpdateWithError(error: error)
+                                        
+                                    })
+    }
+    func getOtherUserEvents(){
+        let url =  APIList().getUrlString(url: .GETEVENTACCTOUSERID)
+        let parameter : Parameters = [
+            "userID" : userID,
+            "pageNo" : pageNo
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:
                                     {
                                         (JSON) in
