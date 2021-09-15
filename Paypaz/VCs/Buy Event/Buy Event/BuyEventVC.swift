@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BuyEventVC : CustomViewController {
+class BuyEventVC : UIViewController {
     
     var typeID = ""
     var currentPage = 1
@@ -52,7 +52,18 @@ class BuyEventVC : CustomViewController {
     }
     @objc func searchEventAsPerText(_ textField:UITextField)
     {
-        self.filteredEventData.removeAll()
+        if textField.isEmptyOrWhitespace(){
+            print("Empty space")
+        }
+        else{
+            dataSource.isFilter = "0"
+            self.isFilter = "0"
+            dataSource.search = textField.text ?? ""
+            //Connection.svprogressHudShow(view: self)
+            dataSource.getFilteredEvents()
+        }
+        
+       /* self.filteredEventData.removeAll()
         if textField.text?.count != 0 {
             for eventData in self.eventData {
                 let isMatchingEventName : NSString = eventData.name! as NSString
@@ -64,14 +75,13 @@ class BuyEventVC : CustomViewController {
         } else {
             self.filteredEventData = self.eventData
         }
-        self.tableView_Events.reloadData()
+        self.tableView_Events.reloadData()*/
     }
     func getEvents()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.typeID = self.typeID
-        dataSource.isFilter = self.isFilter ?? "2"
-        dataSource.day = dayToSend ?? ""
+        dataSource.isFilter = self.isFilter ?? "3"
         dataSource.pageNo = "0"
         dataSource.getFilteredEvents()
     }
@@ -124,11 +134,27 @@ class BuyEventVC : CustomViewController {
                     dataSource.getFilteredEvents()
                     currentPage = currentPage + 1
                 }
+                else if isFilter == "2"{
+                    dataSource.typeID = typeID
+                    dataSource.isFilter = self.isFilter ?? "1"
+                    dataSource.day = self.dayToSend ?? ""
+                    dataSource.pageNo = "\(currentPage)"
+                    Connection.svprogressHudShow(view: self)
+                    dataSource.getFilteredEvents()
+                    currentPage = currentPage + 1
+                }
+                else if isFilter == "0"{
+                    dataSource.typeID = typeID
+                    dataSource.isFilter = self.isFilter ?? "0"
+                    dataSource.pageNo = "\(currentPage)"
+                    Connection.svprogressHudShow(view: self)
+                    dataSource.getFilteredEvents()
+                    currentPage = currentPage + 1
+                }
                 else
                 {
                     dataSource.typeID = self.typeID
-                    dataSource.isFilter = self.isFilter ?? "2"
-                    dataSource.day = dayToSend ?? ""
+                    dataSource.isFilter = self.isFilter ?? "3"
                     dataSource.pageNo = "\(currentPage)"
                     Connection.svprogressHudShow(view: self)
                     dataSource.getFilteredEvents()
@@ -147,10 +173,11 @@ class BuyEventVC : CustomViewController {
             vc.delegate = self
         }
     }
-    
 }
 extension BuyEventVC : FilterData{
     func filterData(distance: String, date: String) {
+        UserDefaults.standard.setDistance(value: distance)
+        self.txt_Search.text?.removeAll()
         Connection.svprogressHudShow(view: self)
         dataSource.isFilter = "1"
         self.isFilter = "1"

@@ -149,6 +149,42 @@ extension UserDefaults
         }
         return string(forKey: UserDefaultsKeys.userID.rawValue) ?? ""
     }
+    func setDistance(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.distance.rawValue)
+    }
+    func getDistance() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.distance.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.distance.rawValue) ?? ""
+    }
+    func setDate(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.date.rawValue)
+    }
+    func getDate() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.date.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.date.rawValue) ?? ""
+    }
+    func setDay(value:String)
+    {
+        set(value,forKey: UserDefaultsKeys.day.rawValue)
+    }
+    func getDay() -> String
+    {
+        guard string(forKey: UserDefaultsKeys.day.rawValue) != nil
+            else{
+                return ""
+        }
+        return string(forKey: UserDefaultsKeys.day.rawValue) ?? ""
+    }
 }
 
 
@@ -167,5 +203,8 @@ enum UserDefaultsKeys : String
     case notificationStatus
     case phoneCode
     case countryCode
+    case distance
+    case date
+    case day
 }
 

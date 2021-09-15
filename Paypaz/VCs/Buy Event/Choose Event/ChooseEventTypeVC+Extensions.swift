@@ -22,11 +22,7 @@ extension ChooseEventTypeVC:UICollectionViewDelegate,UICollectionViewDelegateFlo
             if let vc = pushVC("BuyEventVC") as? BuyEventVC
             {
                 vc.typeID = eventData[indexPath.row].id ?? ""
-                vc.isFilter = "2"
-                let dateformatter = DateFormatter()
-                dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let currentDate = dateformatter.string(from: Date())
-                vc.dayToSend = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd")
+                vc.isFilter = "3"
             }
         }
         else

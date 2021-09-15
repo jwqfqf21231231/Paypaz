@@ -14,6 +14,9 @@ class ProductTableCell : UITableViewCell {
     @IBOutlet weak var lbl_Price : UILabel!
     @IBOutlet weak var btn_Delete : UIButton!
     @IBOutlet weak var btn_Edit : UIButton!
+    @IBOutlet weak var btn_AddProduct : UIButton!
+    @IBOutlet weak var btn_DeleteProduct : UIButton!
+    @IBOutlet weak var lbl_ProductCount : UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

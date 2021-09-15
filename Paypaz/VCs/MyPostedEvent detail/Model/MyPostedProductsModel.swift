@@ -20,6 +20,7 @@ class MyProducts: Codable {
     let id, userID, eventID, name: String?
     let dataDescription, price, quantity, image: String?
     let isPaid, status, createdDate, updatedDate: String?
+    var updatedProductPrice = 0
     
     enum CodingKeys: String, CodingKey {
         case id, userID, eventID, name

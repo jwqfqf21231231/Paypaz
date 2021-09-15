@@ -83,7 +83,9 @@ class EventDetailVC : CustomViewController {
     }
     
     @IBAction func btn_addToCart(_ sender:RoundButton) {
-        _ = self.pushVC("MyCartVC")
+        if let vc = self.pushVC("MyCartVC") as? MyCartVC{
+            vc.eventID = self.eventID
+        }
     }
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
         if let vc = self.pushVC("ViewAllProductsVC") as? ViewAllProductsVC

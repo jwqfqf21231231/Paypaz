@@ -11,7 +11,7 @@ import SDWebImage
 
 //MARK:- ---- Collection View ----
 extension BuyEventVC : UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.arrCalendarDays?.count ?? 0
     }
@@ -26,21 +26,22 @@ extension BuyEventVC : UICollectionViewDataSource {
         return cell
     }
     
-
+    
 }
 extension BuyEventVC : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let h = collectionView.frame.size.height
         return CGSize(width: h * 0.8, height: h * 0.9)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let data = arrCalendarUTCDays?[indexPath.row]
+        let data = arrCalendarUTCDays?[indexPath.row] ?? ""
         Connection.svprogressHudShow(view: self)
         dataSource.isFilter = "2"
         self.isFilter = "2"
-        dataSource.day = data ?? ""
+        dataSource.day = data
         self.dayToSend = data
+        UserDefaults.standard.setDay(value: data)
         dataSource.typeID = typeID
         dataSource.getFilteredEvents()
         
@@ -56,24 +57,34 @@ extension BuyEventVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BuyEventTblCell")  as? BuyEventTblCell
-            else { return BuyEventTblCell() }
+        else { return BuyEventTblCell() }
         
-       // self.addTapGestureOnImg(cell.img_event)
+        // self.addTapGestureOnImg(cell.img_event)
         
         var sDate = filteredEventData[indexPath.row].startDate ?? ""
         sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
         cell.lbl_EventDay.text = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "d")
-        cell.lbl_EventMonth.text = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "EEE")
+        cell.lbl_EventMonth.text = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "MMM")
         cell.img_event.sd_imageIndicator = SDWebImageActivityIndicator.gray
         let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
         cell.img_event.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "event_img"))
         cell.txt_eventName.text = filteredEventData[indexPath.row].name
         cell.txt_personName.text = (filteredEventData[indexPath.row].firstName ?? "")+" "+(filteredEventData[indexPath.row].lastName ?? "")
         cell.txt_eventPrice.text = "$\((filteredEventData[indexPath.row].price! as NSString).integerValue)"
-        var distance = Double(((filteredEventData[indexPath.row].distance ?? "") as NSString).integerValue)
-        distance = distance/0.609
-        cell.lbl_Distance.text = "\(filteredEventData[indexPath.row].distance ?? "") miles away"
+        let distance = Float(((filteredEventData[indexPath.row].distance ?? "") as NSString).integerValue)
+        if distance < 0.6{
+            var dist = Float(distance)
+            dist = dist*0.609
+            cell.lbl_Distance.text = "\(Int(dist)) meters away"
+        }
+        else if distance == 1{
+            cell.lbl_Distance.text = "\(Int(distance)) mile away"
+        }
+        else{
+            cell.lbl_Distance.text = "\(Int(distance)) miles away"
+        }
         cell.btn_addToCart.addTarget(self, action: #selector(self.clicked_btn_addToCart(_:)), for: .touchUpInside)
+        cell.btn_addToCart.tag = indexPath.row
         if filteredEventData[indexPath.row].isFavourited == "1"{
             cell.btn_fav.setImage(UIImage(named: "red"), for: .normal)
             cell.btn_fav.isSelected = true
@@ -83,23 +94,26 @@ extension BuyEventVC : UITableViewDataSource {
             cell.btn_fav.isSelected = false
         }
         cell.btn_Buy.addTarget(self, action: #selector(self.clicked_btn_Buy(_:)), for: .touchUpInside)
+        cell.btn_Buy.tag = indexPath.row
         cell.btn_fav.addTarget(self, action: #selector(self.clicked_btn_Fav(_:)), for: .touchUpInside)
-        cell.btn_fav.tag = Int(filteredEventData[indexPath.row].id ?? "") ?? 0
+        cell.btn_fav.tag = indexPath.row
         return cell
     }
     @objc func clicked_btn_Fav(_ sender: UIButton)
     {
         dataSource.delegate1 = self
         Connection.svprogressHudShow(view: self)
-        dataSource.eventID = "\(sender.tag)"
+        dataSource.eventID = "\(filteredEventData[sender.tag].id ?? "")"
         if sender.isSelected == true{
             sender.isSelected = false
             sender.setImage(UIImage(named: "heart_grey"), for: .normal)
             dataSource.status = "0"
+            self.filteredEventData[sender.tag].isFavourited = "0"
         }else{
             sender.isSelected = true
             sender.setImage(UIImage(named: "red"), for: .normal)
             dataSource.status = "1"
+            self.filteredEventData[sender.tag].isFavourited = "1"
         }
         dataSource.favEvent()
     }
@@ -108,7 +122,9 @@ extension BuyEventVC : UITableViewDataSource {
         img.addGestureRecognizer(tap)
     }
     @objc func clicked_btn_addToCart(_ sender:RoundButton) {
-        _ = self.pushVC("MyCartVC")
+        if let vc = self.pushVC("MyCartVC") as? MyCartVC{
+            vc.eventID = filteredEventData[sender.tag].id
+        }
     }
     @objc func clicked_btn_Buy(_ sender:RoundButton) {
         if let products = self.presentPopUpVC("ProductListVC", animated: true) as? ProductListVC {
@@ -122,7 +138,7 @@ extension BuyEventVC : UITableViewDataSource {
 extension BuyEventVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         if let vc = self.pushVC("EventDetailVC") as? EventDetailVC{
             vc.eventID = filteredEventData[indexPath.row].id ?? ""
             vc.isFavourite = filteredEventData[indexPath.row].isFavourited ?? ""
@@ -132,7 +148,7 @@ extension BuyEventVC : UITableViewDelegate {
 
 
 extension BuyEventVC : PopupDelegate {
-
+    
     func isClickedButton() {
         _ = self.pushVC("PayAmountVC")
     }

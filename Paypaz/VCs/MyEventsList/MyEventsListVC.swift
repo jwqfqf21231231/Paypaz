@@ -24,6 +24,7 @@ class MyEventsListVC : CustomViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         Connection.svprogressHudShow(view: self)
         contactsDataSource.delegate3 = self
         dataSource.delegate = self

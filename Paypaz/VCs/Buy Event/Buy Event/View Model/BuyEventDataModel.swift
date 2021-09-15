@@ -64,6 +64,18 @@ class BuyEventDataModel: NSObject
             ]
         }
         else if isFilter == "0"{
+            var distance = "20"
+            if UserDefaults.standard.getDistance() != ""{
+                distance = UserDefaults.standard.getDistance()
+            }
+            var date = ""
+            if UserDefaults.standard.getDate() != ""{
+                date = UserDefaults.standard.getDate()
+            }
+            var day = ""
+            if UserDefaults.standard.getDay() != ""{
+                day = UserDefaults.standard.getDay()
+            }
             parameter  = [
                 "isFilter" : isFilter,
                 "latitude" : UserDefaults.standard.getLatitude(),
@@ -71,6 +83,9 @@ class BuyEventDataModel: NSObject
                 "currentDate" : currentDate,
                 "pageNo" : pageNo,
                 "search" : search,
+                "distance" : distance,
+                "date" : date,
+                "day" : day,
                 "typeID" : typeID
             ]
         }
@@ -79,7 +94,7 @@ class BuyEventDataModel: NSObject
                 "isFilter" : isFilter,
                 "latitude" : UserDefaults.standard.getLatitude(),
                 "longitude" : UserDefaults.standard.getLongitude(),
-                "day" : day,
+                "currentDate" : currentDate,
                 "pageNo" : pageNo,
                 "typeID" : typeID
             ]
