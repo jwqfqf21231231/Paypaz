@@ -22,7 +22,8 @@ class BuyEventVC : UIViewController {
     var newFilteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
     @IBOutlet weak var txt_Search : UITextField!
-    
+ 
+
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
             tableView_Events.dataSource = self

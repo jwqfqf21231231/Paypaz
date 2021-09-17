@@ -7,17 +7,22 @@
 //
 
 import UIKit
-
+protocol AddedSuccessfullyPopUp : class{
+    func addedToCart()
+}
 class MyCartVC : CustomViewController {
     
+    var addToCart : Bool?
     var eventID : String?
     var eventDetails : MyEvent?
     var products = [MyProducts]()
     let dataSource = MyPostedEventDataModel()
     var eventPrice = 0
     var productPrice = 0
+    var totalPrice = 0
     var eventOriginalPrice : Int?
-    var productsPricesArray = [Int]()
+    var productDict = [String:String]()
+    var productsArray = [[String:String]]()
     @IBOutlet weak var img_EventPic : UIImageView!
     @IBOutlet weak var lbl_EventName : UILabel!
     @IBOutlet weak var lbl_EventDate : UILabel!
@@ -27,6 +32,10 @@ class MyCartVC : CustomViewController {
     @IBOutlet weak var lbl_ProductPrice : UILabel!
     @IBOutlet weak var lbl_TotalPrice : UILabel!
     @IBOutlet weak var lbl_EventCount : UILabel!
+    @IBOutlet weak var lbl_Title : UILabel!
+    @IBOutlet weak var btn_AddEvent : UIButton!
+    @IBOutlet weak var view_Products : UIView!
+
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
             tableView_Products.dataSource = self
@@ -34,11 +43,17 @@ class MyCartVC : CustomViewController {
         }
     }
     @IBOutlet weak var tableView_Height   : NSLayoutConstraint!
-    
+    private let addToCartDataSource = AddToCartDataModel()
+    weak var successDelegate:AddedSuccessfullyPopUp?
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        if addToCart ?? false{
+            lbl_Title.text = "Add To Cart"
+            btn_AddEvent.isHidden = true
+        }
+        addToCartDataSource.delegate = self
         dataSource.delegate = self
         dataSource.delegate2 = self
         getEvent()
@@ -53,13 +68,14 @@ class MyCartVC : CustomViewController {
         calculateTotalPrice()
     }
     func calculateTotalPrice(){
+        self.totalPrice = (eventPrice+productPrice)
         lbl_TotalPrice.text = "$\(eventPrice+productPrice)"
     }
-    override func viewDidLayoutSubviews() {
+   /* override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.tableView_Height.constant = CGFloat(self.products.count * 135)
-    }
+    }*/
     
     func getEvent()
     {
@@ -81,7 +97,39 @@ class MyCartVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_Checkout(_ sender:UIButton) {
-        _ = self.pushVC("PayAmountVC")
+      
+        //_ = self.pushVC("PayAmountVC")
+    }
+    @IBAction func btn_AddToCart(_ sender:UIButton){
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+        var currentDate = dateformatter.string(from: Date())
+        currentDate = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
+        if ((lbl_EventCount.text! as NSString).integerValue) == 0{
+            self.view.makeToast("Please add atleast one ticked for event")
+        }
+        else{
+            Connection.svprogressHudShow(view: self)
+            addToCartDataSource.eventID = self.eventID ?? ""
+            addToCartDataSource.eventUserID = self.eventDetails?.userID ?? ""
+            addToCartDataSource.eventQty = lbl_EventCount.text ?? ""
+            addToCartDataSource.eventPrice = "\(Double(self.eventPrice))"
+            addToCartDataSource.subTotal = "\(Double(self.totalPrice))"
+            addToCartDataSource.discount = "0.0"
+            addToCartDataSource.tax = "0.0"
+            addToCartDataSource.grandTotal = "\(Double(self.totalPrice))"
+            addToCartDataSource.addedDate = currentDate
+            if products.count != 0{
+                if productsArray.count != 0{
+                    let jsonData = try! JSONSerialization.data(withJSONObject:productsArray)
+                    let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+                    print(jsonString!)
+                    addToCartDataSource.products = jsonString ?? ""
+                    addToCartDataSource.productsPrice = "\(Double(self.productPrice))"
+                }
+            }
+            addToCartDataSource.addToCart()
+        }
     }
     @IBAction func btn_IncreaseEvent(_ sender:UIButton){
         var count = (lbl_EventCount.text! as NSString).integerValue

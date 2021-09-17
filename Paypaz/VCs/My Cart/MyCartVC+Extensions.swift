@@ -24,6 +24,9 @@ extension MyCartVC : UITableViewDataSource {
         cell.btn_DeleteProduct.tag = indexPath.row
         cell.btn_AddProduct.addTarget(self, action: #selector(btn_AddProducts(_:)), for: .touchUpInside)
         cell.btn_DeleteProduct.addTarget(self, action: #selector(btn_RemoveProducts(_:)), for: .touchUpInside)
+        if self.addToCart == true{
+            cell.btn_Delete.isHidden = true
+        }
         if products[indexPath.row].isPaid == "0"{
             cell.lbl_Price.text = "Free"
         }
@@ -37,7 +40,7 @@ extension MyCartVC : UITableViewDataSource {
     }
     @objc func btn_DeleteProduct(_ sender:UIButton){
         self.products.remove(at: sender.tag)
-        self.tableView_Height.constant = CGFloat(self.products.count * 135)
+        //self.tableView_Height.constant = CGFloat(self.products.count * 135)
         self.tableView_Products.reloadData()
     }
     @objc func btn_AddProducts(_ sender:UIButton){
@@ -51,6 +54,7 @@ extension MyCartVC : UITableViewDataSource {
             productPrice = productPrice * count
             products[sender.tag].updatedProductPrice = productPrice
             calculateTotalProductPrice()
+            productCollection(productData: products[sender.tag], count: count)
         }
     }
     @objc func btn_RemoveProducts(_ sender:UIButton){
@@ -65,6 +69,38 @@ extension MyCartVC : UITableViewDataSource {
                 products[sender.tag].updatedProductPrice = productPrice
                 calculateTotalProductPrice()
             }
+            productCollection(productData: products[sender.tag], count: count)
+        }
+    }
+    func productCollection(productData:MyProducts, count:Int){
+        if !productsArray.isEmpty{
+            if let index = productsArray.firstIndex (where: {(abc) -> Bool in
+                abc["productID"] == productData.id
+            }){
+                if count > 0{
+                    productsArray[index]["productQty"] = "\(count)"
+                    productsArray[index]["productQtyPrice"] = "\(Float(((productData.price! as NSString).integerValue)*count))"
+                }
+                else{
+                    productsArray.remove(at: index)
+                }
+            }
+            else{
+                let productPrice = (productData.price! as NSString).integerValue
+                productDict["productID"] = productData.id
+                productDict["productPrice"] = "\(Float(productPrice))"
+                productDict["productQty"] = "\(count)"
+                productDict["productQtyPrice"] = "\(Float(productData.updatedProductPrice))"//"\(Float(productPrice*count))"
+                productsArray.append(productDict)
+            }
+        }
+        else{
+            let productPrice = (productData.price! as NSString).integerValue
+            productDict["productID"] = productData.id
+            productDict["productPrice"] = "\(Float(productPrice))"
+            productDict["productQty"] = "\(count)"
+            productDict["productQtyPrice"] = "\(Float(productData.updatedProductPrice))"//"\(Float(productPrice*count))"
+            productsArray.append(productDict)
         }
     }
 }
@@ -82,6 +118,7 @@ extension MyCartVC : MyPostedEventDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            self.eventDetails = data.data
             let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
             let imageString = (data.data?.image) ?? ""
             self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -124,7 +161,10 @@ extension MyCartVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             self.products = data.data ?? []
-            self.tableView_Height.constant = CGFloat(200 * products.count)
+            //            self.tableView_Height.constant = CGFloat(200 * products.count)
+            DispatchQueue.main.async {
+                self.tableView_Height.constant = self.tableView_Products.contentSize.height
+            }
             self.tableView_Products.reloadData()
         }
         else
@@ -134,15 +174,14 @@ extension MyCartVC : MyPostedProductsDataModelDelegate
             }
             print(data.message ?? "")
         }
-        //        if self.products.count == 0
-        //        {
-        //            self.view_Product.isHidden = true
-        //            self.view_ProductHeight.constant = 0
-        //        }
-        //        else{
-        //            self.view_Product.isHidden = false
-        //            self.view_ProductHeight.constant = 115.5
-        //        }
+        if self.products.count == 0
+        {
+            self.view_Products.isHidden = true
+            
+        }
+        else{
+            self.view_Products.isHidden = false
+        }
     }
     
     func didFailDataUpdateWithError2(error: Error)
@@ -159,6 +198,35 @@ extension MyCartVC : MyPostedProductsDataModelDelegate
                 self.tableView_Products.reloadData()
             }
             self.view.makeToast(error.localizedDescription, duration: 3, position: .bottom)
+        }
+    }
+}
+extension MyCartVC : AddToCartDataModelDelegate
+{
+    func didRecieveDataUpdate(data: ResendOTPModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.dismiss(animated: false) {[weak self] in
+                self?.successDelegate?.addedToCart()
+            }
+        }
+        else
+        {
+            view.makeToast(data.message ?? "")
+        }
+    }
+    func didFailDataUpdateWithError1(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

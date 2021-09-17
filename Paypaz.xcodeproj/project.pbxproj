@@ -24,6 +24,7 @@
 		0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */; };
 		0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */; };
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
+		045C787926F354D1001F0606 /* AddToCartDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C787826F354D1001F0606 /* AddToCartDataModel.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		048F8AE326D62FC10072F5E1 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8AE226D62FC10072F5E1 /* ContactCell.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
@@ -223,6 +224,7 @@
 		0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
 		0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
 		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
+		045C787826F354D1001F0606 /* AddToCartDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartDataModel.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		048F8AE226D62FC10072F5E1 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
@@ -507,6 +509,14 @@
 				0453C10026C2459C00F9B72D /* VPMOTPTextField.swift */,
 			);
 			path = OTPClass;
+			sourceTree = "<group>";
+		};
+		045C787726F3548B001F0606 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				045C787826F354D1001F0606 /* AddToCartDataModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 		04B5E29226B0345D00333E94 /* View Model */ = {
@@ -1470,6 +1480,7 @@
 		44E559212632C80000193305 /* My Cart */ = {
 			isa = PBXGroup;
 			children = (
+				045C787726F3548B001F0606 /* View Model */,
 				44E559222632C81000193305 /* MyCartVC.swift */,
 				44E559242632C81F00193305 /* MyCartVC+Extensions.swift */,
 			);
@@ -1984,6 +1995,7 @@
 				44A1BFFA2656467C0047F7B4 /* OtherUserProfileVC.swift in Sources */,
 				44DBD008263011B200255F9A /* EventDetailVC.swift in Sources */,
 				0C120A3A2690211E00FD806A /* ChooseEventCell.swift in Sources */,
+				045C787926F354D1001F0606 /* AddToCartDataModel.swift in Sources */,
 				44E5591926327B7A00193305 /* TermsPoliciesVC.swift in Sources */,
 				040F7C3726E5DCC900F4186B /* InvitesListDataModel.swift in Sources */,
 				0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */,

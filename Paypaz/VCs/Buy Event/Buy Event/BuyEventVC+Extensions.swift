@@ -122,9 +122,12 @@ extension BuyEventVC : UITableViewDataSource {
         img.addGestureRecognizer(tap)
     }
     @objc func clicked_btn_addToCart(_ sender:RoundButton) {
-        if let vc = self.pushVC("MyCartVC") as? MyCartVC{
-            vc.eventID = filteredEventData[sender.tag].id
-        }
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MyCartVC") as! MyCartVC
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.eventID = filteredEventData[sender.tag].id
+        vc.addToCart = true
+        vc.successDelegate = self
+        self.present(vc, animated: false,completion: nil)
     }
     @objc func clicked_btn_Buy(_ sender:RoundButton) {
         if let products = self.presentPopUpVC("ProductListVC", animated: true) as? ProductListVC {
@@ -133,6 +136,11 @@ extension BuyEventVC : UITableViewDataSource {
     }
     @objc func clicked_img_Event(_ sender:UITapGestureRecognizer) {
         _ = self.pushVC("EventDetailVC")
+    }
+}
+extension BuyEventVC : AddedSuccessfullyPopUp{
+    func addedToCart() {
+        self.view.makeToast("Event Added To Cart", duration: 1, position: .bottom)
     }
 }
 extension BuyEventVC : UITableViewDelegate {
