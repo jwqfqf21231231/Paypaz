@@ -30,6 +30,7 @@
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		04B3FBAB26CF94040004A6F3 /* InviteMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */; };
 		04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5E28A26B0345100333E94 /* NotificationDataModel.swift */; };
+		04BC210C26F8B25400FA6B65 /* LogOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BC210B26F8B25400FA6B65 /* LogOutVC.swift */; };
 		04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7D72B26B3C77300747777 /* CountryListTable.swift */; };
 		04C7D73226B3D59800747777 /* CountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C7D73126B3D59800747777 /* CountryCodes.json */; };
 		04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */; };
@@ -230,6 +231,7 @@
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberDataModel.swift; sourceTree = "<group>"; };
 		04B5E28A26B0345100333E94 /* NotificationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataModel.swift; sourceTree = "<group>"; };
+		04BC210B26F8B25400FA6B65 /* LogOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutVC.swift; sourceTree = "<group>"; };
 		04C7D72B26B3C77300747777 /* CountryListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTable.swift; sourceTree = "<group>"; };
 		04C7D73126B3D59800747777 /* CountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
 		04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyEventDataModel.swift; sourceTree = "<group>"; };
@@ -1187,6 +1189,7 @@
 				445433E2262DA31F00443AE1 /* SideDrawerBaseVC.swift */,
 				445433E5262DA4C100443AE1 /* SideDrawerListVC.swift */,
 				445433E7262DA4D200443AE1 /* SideDrawerListVC+Extensions.swift */,
+				04BC210B26F8B25400FA6B65 /* LogOutVC.swift */,
 			);
 			path = "Side Drawer";
 			sourceTree = "<group>";
@@ -1868,6 +1871,7 @@
 				0CE7478D2696D47E00D1121B /* MyEventsListDataModel.swift in Sources */,
 				0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */,
 				445433DD262D685300443AE1 /* CreditDebitCardVC.swift in Sources */,
+				04BC210C26F8B25400FA6B65 /* LogOutVC.swift in Sources */,
 				0C9F29CC268AE16600CE6178 /* SignUpModel.swift in Sources */,
 				040F7C3E26E5DE9100F4186B /* InvitesListModel.swift in Sources */,
 				041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */,

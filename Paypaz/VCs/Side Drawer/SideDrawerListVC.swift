@@ -11,7 +11,6 @@ import SDWebImage
 class SideDrawerListVC : CustomViewController {
     
     private let dataSource = UserDetailsDataModel()
-    let dataSource1 = LogOutDataModel()
     @IBOutlet weak var img_ProfilePic : UIImageView!
     @IBOutlet weak var lbl_ProfileName : UILabel!
     @IBOutlet weak var lbl_PhoneNo : UILabel!
@@ -26,12 +25,14 @@ class SideDrawerListVC : CustomViewController {
     var arr_imgs : [String]?
     
     @IBOutlet weak var view_Profile : UIView!
+    let dataSource1 = LogOutDataModel()
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
         dataSource1.delegate = self
+        
         self.arr_Menu = [Constants.title_Home, Constants.title_Wallet, Constants.title_MyTickets, Constants.title_Settings, Constants.title_MyEvents, Constants.title_Favourites , Constants.title_Invites, Constants.title_EventReport, Constants.title_Logout]
         
         self.arr_imgs = ["home", "wallet", "ticketsicon", "settings", "event", "heart-o", "add-group", "event_report", "logout"]
@@ -101,7 +102,7 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
         }
     }
     
-    func didFailDataUpdateWithError(error: Error)
+    func didFailDataUpdateWithError1(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
@@ -114,8 +115,15 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
         }
     }
 }
+extension SideDrawerListVC : LoggingOut{
+    func logOut(){
+        Connection.svprogressHudShow(view: self)
+        self.dataSource1.loggingOUt()
+    }
+}
 extension SideDrawerListVC : LogOutDataModelDelegate
 {
+    
     func didRecieveDataUpdate1(data: ResendOTPModel)
     {
         Connection.svprogressHudDismiss(view: self)
@@ -130,7 +138,7 @@ extension SideDrawerListVC : LogOutDataModelDelegate
         }
     }
     
-    func didFailDataUpdateWithError1(error: Error)
+    func didFailDataUpdateWithError2(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

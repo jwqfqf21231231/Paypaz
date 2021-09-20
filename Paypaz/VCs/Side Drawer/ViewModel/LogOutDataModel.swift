@@ -11,7 +11,7 @@ import Alamofire
 
 protocol LogOutDataModelDelegate:class {
     func didRecieveDataUpdate1(data:ResendOTPModel)
-    func didFailDataUpdateWithError1(error:Error)
+    func didFailDataUpdateWithError2(error:Error)
     
 }
 class LogOutDataModel: NSObject
@@ -38,13 +38,13 @@ class LogOutDataModel: NSObject
                                         }
                                         catch let error as NSError
                                         {
-                                            self.delegate?.didFailDataUpdateWithError1(error: error)
+                                            self.delegate?.didFailDataUpdateWithError2(error: error)
                                         }
                                     }
                                     
                                   }, failure: {
                                     (error) in
-                                    self.delegate?.didFailDataUpdateWithError1(error: error)
+                                    self.delegate?.didFailDataUpdateWithError2(error: error)
                                     
                                   })
     }

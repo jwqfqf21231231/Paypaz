@@ -45,8 +45,9 @@ extension SideDrawerListVC : UITableViewDelegate {
         case 7:
             _ = self.pushToChildVC("EventReportsHistoryVC",animated: false)
         case 8:
-            Connection.svprogressHudShow(view: self)
-            dataSource1.loggingOUt()
+            if let vc = self.presentPopUpVC("LogOutVC", animated: false) as? LogOutVC{
+                vc.delegate = self
+            }
             #warning("--->>Change this during functionality in case of logout")
         default:
             print("....")
@@ -54,3 +55,4 @@ extension SideDrawerListVC : UITableViewDelegate {
         
     }
 }
+
