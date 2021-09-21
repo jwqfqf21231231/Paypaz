@@ -12,9 +12,11 @@ import UIKit
     func isClickedButton()
     @objc optional func passEventID(eventID : String)
 }
+
 protocol AcceptOrRejectInviteDelegate : class{
     func acceptOrReject(inviteID : String)
 }
+
 enum PopupType {
     case InviteAccept
     case InviteReject
@@ -23,26 +25,26 @@ enum PopupType {
     case PaymentRequestSent
     case PayMoneyToContacts
     case eventCreatedSuccess
-    
 }
+
 class SuccessPopupVC : CustomViewController {
     
     weak var delegate : PopupDelegate?
+    var selectedPopupType : PopupType?
     weak var acceptOrRejectDelegate : AcceptOrRejectInviteDelegate?
+    
     @IBOutlet weak var lbl_Title   : UILabel!
     @IBOutlet weak var lbl_message : UILabel!
     @IBOutlet weak var imgIcon     : UIImageView!
-    
-    var selectedPopupType : PopupType?
     
     var doAccept : Bool?
     var inviteID = ""
     var isAccept : String?
     private let dataSource = IsAcceptEventInviteDataModel()
+    
     // MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -50,7 +52,7 @@ class SuccessPopupVC : CustomViewController {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         if let type = self.selectedPopupType {
             switch type {
-                
+            
             case .InviteAccept:
                 self.lbl_Title.text   = "Invitation Accepted"
                 self.lbl_message.text = "You Have Accepted The Invitation"
@@ -77,7 +79,7 @@ class SuccessPopupVC : CustomViewController {
                 
             case .EventAmountPaid:
                 self.lbl_Title.text   = "Amount Paid Successfully"
-             //   self.lbl_message.text = "$ 840 has been paid for event name to John Deo bank a/c 03213543467567"
+                //   self.lbl_message.text = "$ 840 has been paid for event name to John Deo bank a/c 03213543467567"
                 self.setAttributed(for: "$ 840 has been paid for event name to John Deo bank account 03213543467567")
                 
             case .PaymentRequestSent:
@@ -102,10 +104,12 @@ class SuccessPopupVC : CustomViewController {
             }
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.backgroundColor = UIColor.clear
     }
+    
     private func setAttributed(for txt:String) {
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: txt)
         attributedString.setColor(color: UIColor.darkGray.withAlphaComponent(0.6), forText: txt)
@@ -115,15 +119,16 @@ class SuccessPopupVC : CustomViewController {
         attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "bank account 03213543467567")
         attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "Mobile no. +1 9323848308")
         
-      //  let attrs = [NSAttributedString.Key.font : UIFont(name: "seguisb", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15)]//]
+        //  let attrs = [NSAttributedString.Key.font : UIFont(name: "seguisb", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15)]//]
         //let boldString = NSMutableAttributedString(string: " Mad Anthony Mud Run ", attributes:attrs)
-
-       // attributedString.append(boldString)
         
-       // let attrs1 = [NSAttributedString.Key.foregroundColor : UIColor.black]
-      //  attributedString.append(NSMutableAttributedString(string: "Event.", attributes:attrs1))
+        // attributedString.append(boldString)
+        
+        // let attrs1 = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        //  attributedString.append(NSMutableAttributedString(string: "Event.", attributes:attrs1))
         self.lbl_message.attributedText = attributedString
     }
+    
     // MARK: - --- Action ----
     @IBAction func btn_Continue(_ sender:UIButton) {
         if doAccept ?? false{
@@ -138,6 +143,7 @@ class SuccessPopupVC : CustomViewController {
         }
     }
 }
+
 extension SuccessPopupVC : IsAcceptEventInviteDataModelDelegate {
     func didRecieveDataUpdate(data: ResendOTPModel) {
         print("MyPostedEventModelData = ",data)

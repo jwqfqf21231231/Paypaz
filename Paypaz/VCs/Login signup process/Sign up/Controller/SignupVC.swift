@@ -21,7 +21,6 @@ class SignupVC : UIViewController {
     @IBOutlet weak var txt_ConfirmPassword : RoundTextField!
     @IBOutlet weak var code_btn : UIButton!
     
-    
     //Country Code and Phone Code
     var country_code = "IN"
     var phone_code = "+91"
@@ -42,6 +41,7 @@ class SignupVC : UIViewController {
         self.setDelegate()
         updatePlaceholder(country_code)
     }
+    
     private func setDelegate(){
         self.txt_PhoneNo.delegate = self
         self.txt_email.delegate    = self
@@ -49,32 +49,7 @@ class SignupVC : UIViewController {
         self.txt_ConfirmPassword.delegate = self
     }
     
-    
-    // MARK: ---- Action ----
-    @IBAction func selectPhoneNoCode()
-    {
-        guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }
-        listVC.countryID = {[weak self] (dial_code,name,code,dialCode) in
-            guard  let self = self else {
-                return
-            }
-            self.country_code = code
-            self.phone_code = dialCode
-            self.apiDailCode  = dial_code
-            self.code_btn.setTitle(dialCode, for: .normal)
-            self.code_btn.setImage(UIImage.init(named: code), for: .normal)
-            self.code_btn.imageView?.contentMode = .scaleAspectFill
-            self.code_btn.imageView?.layer.cornerRadius = 2
-            self.updatePlaceholder(code)
-            self.txt_PhoneNo.text?.removeAll()
-            self.textStr.removeAll()
-        }
-        self.present(listVC, animated: true, completion: nil)
-        
-    }
     func updatePlaceholder(_ code:String) {
-        UserDefaults.standard.setPhoneCode(value: phone_code)
-        UserDefaults.standard.setCountryCode(value: country_code)
         do {
             formatter = NBAsYouTypeFormatter(regionCode: code)
             let example = try phoneUtil.getExampleNumber(code)
@@ -89,25 +64,11 @@ class SignupVC : UIViewController {
         }
         placeHolderText = txt_PhoneNo.placeholder?.trimCharactersFromString(characters: ["-"," "]) ?? ""
     }
+    
     private func remove(dialCode: String, in phoneNumber: String) -> String {
         return phoneNumber.replacingOccurrences(of: "\(dialCode) ", with: "").replacingOccurrences(of:phone_code, with: "")
     }
-    @IBAction func btn_SignIn(_ sender:UIButton) {
-        self.navigationController?.popViewController(animated: false)
-    }
     
-    @IBAction func btn_Signup(_ sender:UIButton) {
-        if validateFields() == true
-        {
-            Connection.svprogressHudShow(view: self)
-            dataSource.phoneCode = self.apiDailCode
-            dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
-            dataSource.email = txt_email.text ?? ""
-            dataSource.password = txt_Password.text ?? ""
-            dataSource.requestSignUp()
-        }
-        
-    }
     func validateFields() -> Bool
     {
         view.endEditing(true)
@@ -148,6 +109,47 @@ class SignupVC : UIViewController {
         }
         return false
     }
+    
+    // MARK: ---- Action ----
+    @IBAction func selectPhoneNoCode()
+    {
+        guard let  listVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryListTable") as? CountryListTable else { return }
+        listVC.countryID = {[weak self] (dial_code,name,code,dialCode) in
+            guard  let self = self else {
+                return
+            }
+            self.country_code = code
+            self.phone_code = dialCode
+            self.apiDailCode  = dial_code
+            self.code_btn.setTitle(dialCode, for: .normal)
+            self.code_btn.setImage(UIImage.init(named: code), for: .normal)
+            self.code_btn.imageView?.contentMode = .scaleAspectFill
+            self.code_btn.imageView?.layer.cornerRadius = 2
+            self.updatePlaceholder(code)
+            self.txt_PhoneNo.text?.removeAll()
+            self.textStr.removeAll()
+        }
+        self.present(listVC, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func btn_SignIn(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: false)
+    }
+    
+    @IBAction func btn_Signup(_ sender:UIButton) {
+        if validateFields() == true
+        {
+            Connection.svprogressHudShow(view: self)
+            dataSource.phoneCode = self.apiDailCode
+            dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
+            dataSource.email = txt_email.text ?? ""
+            dataSource.password = txt_Password.text ?? ""
+            dataSource.requestSignUp()
+        }
+        
+    }
+    
     @IBAction func btn_Eye(_ sender:UIButton)
     {
         switch sender.tag {
@@ -173,6 +175,7 @@ class SignupVC : UIViewController {
             }
         }
     }
+    
     @IBAction func btn_Check(_ sender:UIButton)
     {
         isChecked = !isChecked
@@ -185,6 +188,7 @@ class SignupVC : UIViewController {
             sender.setImage(UIImage(named: ""), for: .normal)
         }
     }
+    
     @IBAction func btn_Terms_Conditions(_ sender:UIButton)
     {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "TermsPoliciesVC") as? TermsPoliciesVC {
@@ -230,11 +234,14 @@ extension SignupVC : SignUpDataModelDelegate
         }
     }
 }
+
+// MARK:- --- TextField Validations ---
 extension SignupVC : UITextFieldDelegate
 {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if let field = textField as? RoundTextField
         {
@@ -244,12 +251,14 @@ extension SignupVC : UITextFieldDelegate
             }
         }
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let field = textField as? RoundTextField
         {
             field.border_Color = UIColor(red: 125/255, green: 125/255, blue: 125/255, alpha: 1)
         }
     }
+    
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
@@ -270,6 +279,7 @@ extension SignupVC : UITextFieldDelegate
         }
         return true
     }
+    
     @objc private func didEditText(_ string:String) {
         var cleanedPhoneNumber = clean(string: "\(String(describing:self.phone_code)) \(string)")
         if let validPhoneNumber = getValidNumber(phoneNumber: cleanedPhoneNumber) {
@@ -285,11 +295,13 @@ extension SignupVC : UITextFieldDelegate
             }
         }
     }
+    
     private func clean(string: String) -> String {
         var allowedCharactersSet = CharacterSet.decimalDigits
         allowedCharactersSet.insert("+")
         return string.components(separatedBy: allowedCharactersSet.inverted).joined(separator: "")
     }
+    
     private func getValidNumber(phoneNumber: String) -> NBPhoneNumber? {
         do {
             let parsedPhoneNumber: NBPhoneNumber = try phoneUtil.parse(phoneNumber, defaultRegion:self.phone_code)

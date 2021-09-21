@@ -208,9 +208,16 @@ class HostEventVC : UIViewController {
         toolBar.sizeToFit()
         //Bar button item
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        toolBar.setItems([doneBtn], animated: false)
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancel))
+        toolBar.setItems([doneBtn,flexible,cancel], animated: false)
         return toolBar
     }
+    
+    @objc func tapCancel() {
+        self.view.endEditing(true)
+    }
+    
     @objc func callDatePicker(field:UITextField)
     {
         let dateFormatter = DateFormatter()

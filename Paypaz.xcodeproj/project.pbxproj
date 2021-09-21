@@ -12,6 +12,7 @@
 		040F7C3726E5DCC900F4186B /* InvitesListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F7C3626E5DCC900F4186B /* InvitesListDataModel.swift */; };
 		040F7C3E26E5DE9100F4186B /* InvitesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */; };
 		041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */; };
+		042270BA26F9B0620060D600 /* EnterPinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042270B926F9B0620060D600 /* EnterPinVC.swift */; };
 		0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359326B00641008FA98A /* FavouritesDataModel.swift */; };
 		0428359D26B009BF008FA98A /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359C26B009BF008FA98A /* FavouriteCell.swift */; };
 		0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* SuccessModel.swift */; };
@@ -77,7 +78,6 @@
 		0CE7478D2696D47E00D1121B /* MyEventsListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7478C2696D47E00D1121B /* MyEventsListDataModel.swift */; };
 		0CE747972696E6DB00D1121B /* MyPostedEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE747962696E6DB00D1121B /* MyPostedEventModel.swift */; };
 		0CE7479C2696E75600D1121B /* MyPostedEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE7479B2696E75600D1121B /* MyPostedEventDataModel.swift */; };
-		0CEC00022695B7C10023116D /* ContactsPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC00012695B7C10023116D /* ContactsPermission.swift */; };
 		0CEC000F2695C6D60023116D /* PasscodeOTPDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC000E2695C6D60023116D /* PasscodeOTPDataModel.swift */; };
 		0CECCDEB269328CC00611D62 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CECCDEA269328CC00611D62 /* ProductCell.swift */; };
 		0CECCDF12693321000611D62 /* ConfirmPasscodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CECCDF02693321000611D62 /* ConfirmPasscodeVC.swift */; };
@@ -213,6 +213,7 @@
 		040F7C3626E5DCC900F4186B /* InvitesListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListDataModel.swift; sourceTree = "<group>"; };
 		040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListModel.swift; sourceTree = "<group>"; };
 		041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedContactsModel.swift; sourceTree = "<group>"; };
+		042270B926F9B0620060D600 /* EnterPinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinVC.swift; sourceTree = "<group>"; };
 		0428359326B00641008FA98A /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
 		0428359C26B009BF008FA98A /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
 		0431B71E269C6BD00082EAB3 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
@@ -278,7 +279,6 @@
 		0CE7478C2696D47E00D1121B /* MyEventsListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsListDataModel.swift; sourceTree = "<group>"; };
 		0CE747962696E6DB00D1121B /* MyPostedEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedEventModel.swift; sourceTree = "<group>"; };
 		0CE7479B2696E75600D1121B /* MyPostedEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedEventDataModel.swift; sourceTree = "<group>"; };
-		0CEC00012695B7C10023116D /* ContactsPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPermission.swift; sourceTree = "<group>"; };
 		0CEC000E2695C6D60023116D /* PasscodeOTPDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeOTPDataModel.swift; sourceTree = "<group>"; };
 		0CECCDEA269328CC00611D62 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		0CECCDF02693321000611D62 /* ConfirmPasscodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPasscodeVC.swift; sourceTree = "<group>"; };
@@ -462,6 +462,14 @@
 				04F4163026E76DF7009919A1 /* IsAcceptEventInvite.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		042270B826F9B02A0060D600 /* Enter Pin */ = {
+			isa = PBXGroup;
+			children = (
+				042270B926F9B0620060D600 /* EnterPinVC.swift */,
+			);
+			path = "Enter Pin";
 			sourceTree = "<group>";
 		};
 		0428359826B00803008FA98A /* View Model */ = {
@@ -1167,6 +1175,7 @@
 				445433D2262D5FF000443AE1 /* Create Profile */,
 				0C388AF7268F1BBC008AED6F /* Passcode */,
 				445433D8262D609C00443AE1 /* Create PIN */,
+				042270B826F9B02A0060D600 /* Enter Pin */,
 				445433DB262D683600443AE1 /* Credit Debit CardVC */,
 				04C7D72B26B3C77300747777 /* CountryListTable.swift */,
 			);
@@ -1498,7 +1507,6 @@
 				44E5592D2632ED4200193305 /* ContactListVC+Extensions.swift */,
 				44857F4C26397C1D006402CA /* RequestPayAmountVC.swift */,
 				445873032654D21200DEF59C /* PaymentTypeVC.swift */,
-				0CEC00012695B7C10023116D /* ContactsPermission.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -1875,6 +1883,7 @@
 				0C9F29CC268AE16600CE6178 /* SignUpModel.swift in Sources */,
 				040F7C3E26E5DE9100F4186B /* InvitesListModel.swift in Sources */,
 				041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */,
+				042270BA26F9B0620060D600 /* EnterPinVC.swift in Sources */,
 				0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */,
 				445433CE262D56F500443AE1 /* OTPVerificationVC.swift in Sources */,
 				0CE747882696D3A400D1121B /* MyEventsListModel.swift in Sources */,
@@ -1968,7 +1977,6 @@
 				048F8AE326D62FC10072F5E1 /* ContactCell.swift in Sources */,
 				0CDC3DBA268B1F0D00061DF5 /* LogInDataModel.swift in Sources */,
 				44C8F2D6261F1ECF000F03DB /* WelcomeVC.swift in Sources */,
-				0CEC00022695B7C10023116D /* ContactsPermission.swift in Sources */,
 				0CECCE0226934D7E00611D62 /* ChooseEventTypeVC.swift in Sources */,
 				445C77A62637E5AF00AD4DF3 /* FavouritesEventsListVC+Extensions.swift in Sources */,
 				445433C8262D56B600443AE1 /* SignupVC.swift in Sources */,

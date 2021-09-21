@@ -93,7 +93,6 @@ extension RequestPayAmountVC : ContactSelectedDelegate {
     
     func isSelectedContact(for request:Bool) {
         self.view_userInfo.alpha = 1.0
-        
         if request {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 if let popup = self?.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
@@ -101,15 +100,9 @@ extension RequestPayAmountVC : ContactSelectedDelegate {
                     popup.selectedPopupType = .PaymentRequestSent
                 }
             }
-        } else {
-            if let createVc = self.pushVC("CreatePinVC") as? CreatePinVC {
-                createVc.isCreatingPin = false
-                createVc.delegate = self
-            }
         }
-        
+        else{
+            _ = self.pushVC("EnterPinVC")
+        }
     }
-    
-
-
 }

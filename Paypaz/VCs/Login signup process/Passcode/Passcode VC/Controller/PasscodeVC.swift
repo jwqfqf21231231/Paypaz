@@ -10,12 +10,11 @@ import UIKit
 
 class PasscodeVC : CustomViewController {
     
-    weak var delegate : PopupDelegate?
     var typedPasscode = ""
-    var otp = ""
     var hasEntered = false
     private let dataSource = PasscodeDataModel()
     @IBOutlet weak var otpView: VPMOTPView!
+    weak var delegate : PopupDelegate?
     var isNavigatedFromPaymentVC : Bool?
     
     // MARK:- --- View Life Cycle ----
@@ -23,22 +22,24 @@ class PasscodeVC : CustomViewController {
         super.viewDidLoad()
         setDelegates()
         hideKeyboardWhenTappedArround()
-        
         otpView.otpFieldEntrySecureType = true
         otpView.initializeUI()
         otpView.changeStateOfTextField()
     }
+    
     func setDelegates()
     {
         otpView.delegate = self
         dataSource.delegate = self
         dataSource.delegate2 = self
     }
+    
     // MARK:- --- Action ----
     @IBAction func btn_ForgotPasscode(_ sender:UIButton) {
         Connection.svprogressHudShow(view: self)
         dataSource.getOTP()
     }
+    
     @IBAction func btn_Submit(_ sender:UIButton) {
         if self.isNavigatedFromPaymentVC ?? false {
             self.navigationController?.popViewController(animated: true)
@@ -48,15 +49,16 @@ class PasscodeVC : CustomViewController {
             dataSource.passcode = typedPasscode
             dataSource.validatePasscode()
         }
-        
     }
 }
+
 extension PasscodeVC: VPMOTPViewDelegate {
     func hasEnteredAllOTP(hasEntered: Bool,tag:Int) -> Bool {
         print("Has entered all OTP? \(hasEntered)")
         self.hasEntered = hasEntered
         return hasEntered
     }
+    
     func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
         if hasEntered && index < 3
         {
@@ -67,14 +69,15 @@ extension PasscodeVC: VPMOTPViewDelegate {
             return true
         }
     }
+    
     func enteredOTP(otpString: String,tag:Int) {
         print("OTPString: \(otpString)")
         self.typedPasscode = otpString
     }
 }
+
 extension PasscodeVC : PasscodeDataModelDelegate
 {
-    
     func didRecieveDataUpdate(data: LogInModel)
     {
         Connection.svprogressHudDismiss(view: self)

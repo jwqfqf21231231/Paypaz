@@ -120,6 +120,9 @@ class InviteMembersVC: CustomViewController {
                     self.img = UIImage.init(data: $0.thumbnailImageData!)!
                     
                 }
+                else{
+                    self.img = UIImage(named: "place_holder")!
+                }
                 if ((($0.phoneNumbers.first?.value.stringValue ?? "nil")?.contains("+")) == true){
                     
                     let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
@@ -281,6 +284,7 @@ extension InviteMembersVC : UITableViewDataSource,UITableViewDelegate
         cell.contactName_lbl.text = contactDetails[
             indexPath.row].firstName
         cell.contactNo_lbl.text = contactDetails[indexPath.row].phoneNumber
+        cell.contactPic_img.image = contactDetails[indexPath.row].profilePic
         if contactDetails[indexPath.row].isInvited == true{
             cell.btn_tick.isSelected = true
             cell.btn_tick.isUserInteractionEnabled = false

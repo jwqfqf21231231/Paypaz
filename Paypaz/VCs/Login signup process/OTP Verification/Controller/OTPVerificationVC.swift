@@ -9,12 +9,13 @@
 import UIKit
 import Toast_Swift
 class OTPVerificationVC : CustomViewController {
+    
     var doForgotPasscode : Bool?
     var doForgotPassword : Bool?
     var doChangePhoneNumber : Bool?
     private let dataSource = OTPVerificationDataModel()
     private let dataSource1 = EditPhoneNoDataModel()
-    // MARK:- ---
+    
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var lbl_Notify : UILabel!
     @IBOutlet weak var otpView: VPMOTPView!
@@ -25,19 +26,15 @@ class OTPVerificationVC : CustomViewController {
     //To Save Typed OTP Characters
     var otpString = ""
     
-    
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         self.changeTitle()
         hideKeyboardWhenTappedArround()
         setDelegates()
-        otpView.otpFieldsCount = 4
-        otpView.otpFieldDefaultBackgroundColor = UIColor.white
-        otpView.shouldRequireCursor = false
-        otpView.shouldAllowIntermediateEditing = false
         otpView.initializeUI()
     }
+    
     func setDelegates()
     {
         dataSource.delegate = self
@@ -47,8 +44,8 @@ class OTPVerificationVC : CustomViewController {
         dataSource.delegate4 = self
         dataSource1.delegate1 = self
         otpView.delegate = self
-        
     }
+    
     private func changeTitle()
     {
         if doForgotPasscode ?? false
@@ -95,6 +92,7 @@ class OTPVerificationVC : CustomViewController {
             dataSource.resendOTP()
         }
     }
+    
     @IBAction func btn_Submit(_ sender:UIButton) {
         if !hasEntered
         {
@@ -102,35 +100,30 @@ class OTPVerificationVC : CustomViewController {
         }
         else
         {
+            Connection.svprogressHudShow(view: self)
             if self.doForgotPassword ?? false
             {
                 dataSource.otp = otpString
                 dataSource.doForgotPassword = true
-                Connection.svprogressHudShow(view: self)
                 dataSource.verifyOTP()
             }
             else if self.doForgotPasscode ?? false
             {
-                Connection.svprogressHudShow(view: self)
                 dataSource.otp = otpString
                 dataSource.forgotPasscodeOTPVerify()
-                
             }
             else if self.doChangePhoneNumber ?? false
             {
-                Connection.svprogressHudShow(view: self)
                 dataSource.phoneNumber = phoneNumber
                 dataSource.otp = otpString
                 dataSource.doVerifyPhoneNumber()
             }
             else
             {
-                Connection.svprogressHudShow(view: self)
                 dataSource.otp = otpString
                 dataSource.verifyOTP()
             }
         }
-        
     }
 }
 
@@ -141,6 +134,7 @@ extension OTPVerificationVC: VPMOTPViewDelegate {
         self.hasEntered = hasEntered
         return hasEntered
     }
+    
     func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int,tag:Int) -> Bool {
         if hasEntered && index < 3
         {
@@ -151,11 +145,13 @@ extension OTPVerificationVC: VPMOTPViewDelegate {
             return true
         }
     }
+    
     func enteredOTP(otpString: String,tag:Int) {
         print("OTPString: \(otpString)")
         self.otpString = otpString
     }
 }
+
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
         UserDefaults.standard.setLoggedIn(value: true)
@@ -163,6 +159,7 @@ extension OTPVerificationVC : PopupDelegate {
         
     }
 }
+
 extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
 {
     func didRecieveDataUpdate1(data: ResendOTPModel) {
@@ -178,6 +175,7 @@ extension OTPVerificationVC : ForgotPasswordOTPModelDelegate
             view.makeToast(data.message ?? "")
         }
     }
+    
     func didFailDataUpdateWithError1(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
@@ -256,6 +254,7 @@ extension OTPVerificationVC : ResendOTPModelDelegate
         }
     }
 }
+
 extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
 {
     func didRecieveDataUpdate3(data: ResendOTPModel)
@@ -287,6 +286,7 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
         }
     }
 }
+
 extension OTPVerificationVC : VerifyChangePasswordModelDelegate
 {
     func didRecieveDataUpdate4(data: LogInModel)
@@ -322,6 +322,7 @@ extension OTPVerificationVC : VerifyChangePasswordModelDelegate
         }
     }
 }
+
 extension OTPVerificationVC : ResendOTPToChangePhoneNo
 {
     func didRecieveDataUpdate5(data: LogInModel)

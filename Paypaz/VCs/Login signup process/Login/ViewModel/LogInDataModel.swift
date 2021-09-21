@@ -74,7 +74,7 @@ class LogInDataModel: NSObject
     }
     func getUserProfile(){
         let url =  APIList().getUrlString(url: .USERPROFILE)
-     
+        
         let parameter : Parameters = [
             "userID" : userID
         ]

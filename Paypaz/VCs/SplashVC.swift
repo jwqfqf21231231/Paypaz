@@ -19,16 +19,10 @@ class SplashVC : CustomViewController {
             {
                 if UserDefaults.standard.value(forKey: "isVerify") as? String == "1" && UserDefaults.standard.value(forKey: "isPasscode") as? String == "1" && UserDefaults.standard.value(forKey: "isPin") as? String == "1" && UserDefaults.standard.value(forKey: "isVerifyCard") as? String == "1"
                 {
-                    if UserDefaults.standard.isLoggedIn() == true
-                    {
                         _ = self?.pushVC("PasscodeVC")
-                    }
-                    else
-                    {
-                        _ = self?.pushVC("WelcomeVC")
-                    }
-                    
-                }else
+                 
+                }
+                else
                 {
                     
                     if UserDefaults.standard.value(forKey: "isVerify") as? String != "1"

@@ -16,17 +16,16 @@ class CreateProfileVC  : CustomViewController {
     var datePicker:UIDatePicker!
     var pickedImage : UIImage?
     var fontCamera  = false
-    var images      = [String:Any]()
     var picSelected = false
     let sharedInstance = Connection()
     
-    @IBOutlet weak var img_Profile : UIImageView!
-    @IBOutlet weak var txt_firstName : RoundTextField!
-    @IBOutlet weak var txt_lastName  : RoundTextField!
-    @IBOutlet weak var txt_DOB       : RoundTextField!
-    @IBOutlet weak var txt_City      : RoundTextField!
-    @IBOutlet weak var txt_State     : RoundTextField!
-    @IBOutlet weak var txtView_Address : RoundTextView!
+    @IBOutlet weak var img_Profile      : UIImageView!
+    @IBOutlet weak var txt_firstName    : RoundTextField!
+    @IBOutlet weak var txt_lastName     : RoundTextField!
+    @IBOutlet weak var txt_DOB          : RoundTextField!
+    @IBOutlet weak var txt_City         : RoundTextField!
+    @IBOutlet weak var txt_State        : RoundTextField!
+    @IBOutlet weak var txtView_Address  : RoundTextView!
     
     func createToolBar()->UIToolbar
     {
@@ -35,21 +34,27 @@ class CreateProfileVC  : CustomViewController {
         toolBar.sizeToFit()
         //bar button item
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        toolBar.setItems([doneBtn], animated: true)
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancel))
+        toolBar.setItems([doneBtn,flexible,cancel], animated: false)
         return toolBar
+    }
+    
+    @objc func tapCancel() {
+        self.view.endEditing(true)
     }
     
     func createDatePicker()
     {
         datePicker=UIDatePicker()
         if #available(iOS 13.4, *) {
-            datePicker.preferredDatePickerStyle = .wheels        } else {
-            // Fallback on earlier versions
+            datePicker.preferredDatePickerStyle = .wheels
         }
         datePicker.datePickerMode = .date
         txt_DOB.inputView=datePicker
         txt_DOB.inputAccessoryView=createToolBar()
     }
+    
     @objc func donePressed()
     {
         let dateFormatter=DateFormatter()
@@ -68,7 +73,6 @@ class CreateProfileVC  : CustomViewController {
         dataSource.delegate = self
         hideKeyboardWhenTappedArround()
         self.setDelegate()
-        
     }
     
     private func setDelegate() {
@@ -79,6 +83,7 @@ class CreateProfileVC  : CustomViewController {
         self.txt_State.delegate     = self
         self.txtView_Address.delegate = self
     }
+    
     @IBAction func btn_ChooseLocation(_ sender:UIButton)
     {
         self.view.endEditing(true)
@@ -88,16 +93,13 @@ class CreateProfileVC  : CustomViewController {
             placePicker.secondaryTextColor = UIColor.secondaryLabel
             placePicker.tableCellSeparatorColor = UIColor.separator
             placePicker.tableCellBackgroundColor = UIColor.systemBackground
-        } else {
-            // Fallback on earlier versions
         }
-        
         placePicker.modalPresentationStyle = .fullScreen
         placePicker.delegate = self
         self.present(placePicker, animated: true, completion: nil)
     }
-    // MARK: - --- Action ----
     
+    // MARK: - --- Action ----
     @IBAction func btn_Save(_ sender:UIButton) {
         if validateFields() == true
         {
@@ -108,11 +110,12 @@ class CreateProfileVC  : CustomViewController {
             dataSource.address = txtView_Address.text!
             dataSource.dateOfBirth = txt_DOB.text!
             dataSource.state = txt_State.text!
-            dataSource.profilePic = pickedImage
+            dataSource.profilePic = img_Profile.image!
             dataSource.isUpdate = "1"
             dataSource.uploadProImg()
         }
     }
+    
     func validateFields() -> Bool
     {
         if picSelected == false
@@ -144,20 +147,19 @@ class CreateProfileVC  : CustomViewController {
         }
         return false
     }
+    
     @IBAction func btn_ChangePic(_ sender:UIButton)
     {
         ImagePickerController.init().pickImage(self, isCamraFront:fontCamera) { (img) in
             self.img_Profile.image = img
-            self.pickedImage = img
-            self.images["identity_img"] = img
             self.picSelected = true
         }
     }
 }
+
 extension CreateProfileVC: GMSAutocompleteViewControllerDelegate{
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        
         print("Place name: \(place.name ?? "")")
         print("Place address: \(place.formattedAddress ?? "")")
         self.txtView_Address.text = place.formattedAddress ?? ""
@@ -183,14 +185,15 @@ extension CreateProfileVC: GMSAutocompleteViewControllerDelegate{
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
+
 extension CreateProfileVC : CreateProfileDataModelDelegate
 {
     func didRecieveDataUpdate(data: LogInModel)
     {
         Connection.svprogressHudDismiss(view: self)
-        UserDefaults.standard.set(data.data?.isProfile, forKey: "isProfile")
         if data.success == 1
         {
+            UserDefaults.standard.set(data.data?.isProfile, forKey: "isProfile")
             _ = self.pushVC("CreatePasscodeVC",animated: false)
         }
         else

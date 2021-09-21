@@ -12,8 +12,8 @@ import Alamofire
 protocol CreatePinDataModelDelegate:class {
     func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
-    
 }
+
 class CreatePinDataModel: NSObject
 {
     weak var delegate: CreatePinDataModelDelegate?
@@ -22,7 +22,6 @@ class CreatePinDataModel: NSObject
     func createPin()
     {
         let url =  APIList().getUrlString(url: .CREATEPIN)
-    
         let parameter : Parameters = [
             "pincode" : pincode
         ]

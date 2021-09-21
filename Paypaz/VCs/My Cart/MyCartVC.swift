@@ -94,7 +94,7 @@ class MyCartVC : CustomViewController {
     
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: false, completion: nil)
     }
     @IBAction func btn_Checkout(_ sender:UIButton) {
       

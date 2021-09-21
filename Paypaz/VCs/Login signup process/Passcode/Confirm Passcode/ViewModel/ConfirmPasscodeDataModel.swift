@@ -12,8 +12,8 @@ import Alamofire
 protocol ConfirmPasscodeDataModelDelegate:class {
     func didRecieveDataUpdate(data:LogInModel)
     func didFailDataUpdateWithError(error:Error)
-    
 }
+
 class ConfirmPasscodeDataModel: NSObject
 {
     weak var delegate: ConfirmPasscodeDataModelDelegate?
@@ -55,7 +55,6 @@ class ConfirmPasscodeDataModel: NSObject
                                     {
                                         (error) in
                                         self.delegate?.didFailDataUpdateWithError(error: error)
-                                        
                                     })
     }
 }

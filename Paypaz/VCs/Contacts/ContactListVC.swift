@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Contacts
+import libPhoneNumber_iOS
 protocol ContactSelectedDelegate : class {
     func isSelectedContact(for request:Bool)
 }
@@ -24,14 +26,16 @@ class ContactListVC : CustomViewController {
 //    @IBOutlet weak var view_Global : UIView!
     @IBOutlet weak var view_ContactsList : UIView!
     
+    var img = UIImage()
     var isLocalContactSelected : Bool?
     var isRequestingMoney      : Bool?
+    var contactDetails = [ContactInfo]()
     weak var delegate : ContactSelectedDelegate?
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchContacts()
         self.view_ContactsList.alpha = 0.0
       //  self.selectLocalPayment()
     }
@@ -52,6 +56,55 @@ class ContactListVC : CustomViewController {
         self.btn_Global.setTitleColor(.white, for: .normal)
         self.btn_Local.setTitleColor(lightBlue, for: .normal)
     }*/
+    func fetchContacts(completion: @escaping (_ result: [CNContact]) -> Void){
+        DispatchQueue.main.async {
+            var results = [CNContact]()
+            let keys = [CNContactGivenNameKey,CNContactFamilyNameKey,CNContactMiddleNameKey,CNContactEmailAddressesKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey,CNContactUrlAddressesKey,CNContactPostalAddressesKey] as [CNKeyDescriptor]
+            let fetchRequest = CNContactFetchRequest(keysToFetch: keys)
+            fetchRequest.sortOrder = .userDefault
+            let store = CNContactStore()
+            store.requestAccess(for: .contacts, completionHandler: {(grant,error) in
+                if grant{
+                    do {
+                        try store.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
+                            results.append(contact)
+                        })
+                    }
+                    catch let error {
+                        print(error.localizedDescription)
+                    }
+                    completion(results)
+                    
+                }else{
+                    print("Error \(error?.localizedDescription ?? "")")
+                }
+                self.tableView_Contacts.reloadData()
+            })
+        }
+        
+    }
+    func fetchContacts()
+    {
+        fetchContacts(completion: {contacts in
+            contacts.forEach({print("Name: \($0.givenName), number: \($0.phoneNumbers.first?.value.stringValue ?? "nil"), CountryCode: \($0.postalAddresses.first?.value.isoCountryCode ?? "nil")")
+                
+                if $0.thumbnailImageData != nil
+                {
+                    self.img = UIImage.init(data: $0.thumbnailImageData!)!
+                }
+                else{
+                    self.img = UIImage(named: "place_holder")!
+                }
+                
+                if ((($0.phoneNumbers.first?.value.stringValue ?? "nil")?.contains("+")) == true){
+                    
+                    let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
+                    let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img, isInvited: false)
+                    self.contactDetails.append(contactDetail)
+                }
+            })
+        })
+    }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)

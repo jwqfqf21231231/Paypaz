@@ -32,7 +32,7 @@ protocol VerifyChangePasswordModelDelegate:class {
 class OTPVerificationDataModel: NSObject
 {
     var doForgotPassword : Bool?
-    weak var delegate : OTPVerificationDataModelDelegate?
+    weak var delegate  : OTPVerificationDataModelDelegate?
     weak var delegate1 : ForgotPasswordOTPModelDelegate?
     weak var delegate2 : ResendOTPModelDelegate?
     weak var delegate3 : ForgotPasscodeVerifyOTPModelDelegate?
@@ -186,7 +186,7 @@ class OTPVerificationDataModel: NSObject
         url = APIList().getUrlString(url: .VERIFYCHANGEDPHONENUMBER)
         parameter = [
             "phoneNumber" : phoneNumber,
-            "phoneCode" : UserDefaults.standard.getPhoneCode(),
+            "phoneCode"   : UserDefaults.standard.getPhoneCode(),
             "countryCode" : UserDefaults.standard.getCountryCode(),
             "otp" : otp
         ]

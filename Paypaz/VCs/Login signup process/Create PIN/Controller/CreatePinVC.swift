@@ -51,18 +51,7 @@ class CreatePinVC : CustomViewController {
     }
     
     // MARK:- --- Action ----
-    
-   /* @IBAction func btn_show(_ sender:UIButton) {
-        otpView.otpFieldEntrySecureType = !otpView.otpFieldEntrySecureType
-        otpView.changeStateOfTextField()
-        if sender.isSelected == true{
-            sender.isSelected = false
-        }else{
-            sender.isSelected = true
-            
-        }
-    }*/
-
+  
     @IBAction func btn_Submit(_ sender:UIButton) {
         if self.isCreatingPin ?? false {
             if !hasEnteredPin

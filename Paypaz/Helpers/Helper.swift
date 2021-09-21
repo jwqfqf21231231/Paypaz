@@ -35,16 +35,13 @@ class Helper : NSObject
     
 }
 
-
 extension UIViewController
 {
     func postshareLink(profile_URL:String){
         let objectsToShare = [profile_URL]
         let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.addToReadingList]
-        
         activityVC.popoverPresentationController?.sourceView = self.view
-        
         activityVC.completionWithItemsHandler = { activity, success, items, error in
             if success{
                 print("Successfully Send link")
@@ -53,15 +50,15 @@ extension UIViewController
         }
         self.present(activityVC, animated: true, completion: nil)
     }
+    
     func getFormattedDate(strDate: String , currentFomat:String, expectedFromat: String) -> String{
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = currentFomat
-        
         let date : Date = dateFormatterGet.date(from: strDate) ?? Date()
-        
         dateFormatterGet.dateFormat = expectedFromat
         return dateFormatterGet.string(from: date)
     }
+    
     func showAlert(withMsg message:String, withOKbtn okbutton:Bool){
         //NOTE:- Indicator is also an alert, so when indicator will hide, then show this alert
         // to avoid 'already presenting view controller' warning
@@ -86,43 +83,45 @@ extension UIViewController
         }
         
     }
-    func pushVC (_ identifier : String, animated:Bool = true) -> UIViewController{
-        
+    
+    func pushVC (_ identifier : String, animated:Bool = true) -> UIViewController
+    {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier) else { return UIViewController() }
         self.navigationController?.pushViewController(viewController, animated: animated)
         return viewController
     }
-    func presentPopUpVC(_ identifier : String, animated:Bool) -> UIViewController{
-        
+    
+    func presentPopUpVC(_ identifier : String, animated:Bool) -> UIViewController
+    {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier)
         else { return UIViewController() }
         viewController.modalPresentationStyle = .overCurrentContext
         self.present(viewController, animated: animated, completion: nil)
         return viewController
-        
     }
-    func presentVC(_ identifier : String) -> UIViewController {
-        
+    
+    func presentVC(_ identifier : String) -> UIViewController
+    {
         guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: identifier)
         else { return UIViewController() }
         
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: true, completion: nil)
         return viewController
-        
     }
     
     //Hide keyboard on tap outside
-    func hideKeyboardWhenTappedArround() {
+    func hideKeyboardWhenTappedArround()
+    {
         let tapGesture = UITapGestureRecognizer(target: self,
                                                 action: #selector(hideSystemKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
     
-    @objc func hideSystemKeyboard() {
+    @objc func hideSystemKeyboard()
+    {
         view.endEditing(true)
     }
-    
     
     func getDataFormFile() -> ([CountiesWithPhoneModel],String)
     {
@@ -148,6 +147,7 @@ extension UIViewController
         }
         return ([],"error")
     }
+    
     struct CountiesWithPhoneModel {
         var dial_code :String?
         var countryName : String?
@@ -155,7 +155,8 @@ extension UIViewController
     }
 }
 
-extension NSMutableAttributedString {
+extension NSMutableAttributedString
+{
     func setColor(color: UIColor, forText stringValue: String) {
         let attrs = [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor : color]
         let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
@@ -164,7 +165,8 @@ extension NSMutableAttributedString {
     }
 }
 
-extension UITextField{
+extension UITextField
+{
     func isEmptyOrWhitespace() -> Bool {
         if(self.text!.isEmpty) {
             return true
@@ -185,7 +187,9 @@ extension UITextField{
         return password.evaluate(with: self.text!)
     }
 }
-extension UITextView{
+
+extension UITextView
+{
     func isEmptyOrWhitespace() -> Bool {
         if(self.text!.isEmpty) {
             return true
@@ -193,7 +197,9 @@ extension UITextView{
         return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
     }
 }
-extension UILabel{
+
+extension UILabel
+{
     func isEmptyOrWhitespace() -> Bool {
         if(self.text!.isEmpty) {
             return true
@@ -201,6 +207,7 @@ extension UILabel{
         return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
     }
 }
+
 extension String
 {
     func trim() -> String{
@@ -232,10 +239,10 @@ extension String
         dateFormatter.dateFormat = outGoingFormat
         return dateFormatter.string(from: dt ?? Date())
     }
-    
-    
 }
-extension UIButton{
+
+extension UIButton
+{
     func addDropDown(forDataSource data:[String], completion: @escaping(String)->Void) {
         resignFirstResponder()
         let selectTypeDropDown = DropDown()
@@ -259,6 +266,7 @@ extension UIButton{
         selectTypeDropDown.show()
     }
 }
+
 extension UIColor
 {
     static let boarderColor = UIColor(red: 125 / 255, green: 125 / 255, blue: 125/255, alpha: 1)

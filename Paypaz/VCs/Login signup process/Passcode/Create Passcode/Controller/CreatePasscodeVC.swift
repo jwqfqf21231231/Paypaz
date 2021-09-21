@@ -10,7 +10,6 @@ import UIKit
 
 class CreatePasscodeVC: UIViewController {
     
-    
     var setNewPasscode : Bool?
     weak var delegate : PopupDelegate?
     var createPasscode = ""
@@ -19,7 +18,6 @@ class CreatePasscodeVC: UIViewController {
     var hasEnteredConfirmPasscode = false
     var tag = ""
     
-    // MARK:- ---
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var otpView1 : VPMOTPView!
     @IBOutlet weak var otpView2 : VPMOTPView!
@@ -39,9 +37,8 @@ class CreatePasscodeVC: UIViewController {
         otpView2.otpFieldEntrySecureType = true
         otpView2.initializeUI()
         otpView2.changeStateOfTextField()
-    
-        // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if self.setNewPasscode ?? false
@@ -74,7 +71,6 @@ class CreatePasscodeVC: UIViewController {
             dataSource.createPasscode()
         }
     }
-    
 }
 
 extension CreatePasscodeVC:VPMOTPViewDelegate{
@@ -117,6 +113,7 @@ extension CreatePasscodeVC:VPMOTPViewDelegate{
             }
         }
     }
+    
     func enteredOTP(otpString: String, tag: Int) {
         if tag == 0{
             createPasscode = otpString

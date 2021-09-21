@@ -71,7 +71,6 @@ class WelcomeVC : CustomViewController {
     
     //MARK:- --- Action ----
     @IBAction func btn_getStarted(_ sender:UIButton) {
-        
         fetchContacts()
         _ = self.pushVC("LoginVC")
     }
