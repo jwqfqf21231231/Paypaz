@@ -9,16 +9,16 @@
 import UIKit
 
 class HomeVC : CustomViewController {
-
+    
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     
-        }
         
+        
+    }
     
-
+    
+    
     //MARK:- --- Action ----
     @IBAction func btn_SideDrawer(_ sender:UIButton) {
         
@@ -35,7 +35,7 @@ class HomeVC : CustomViewController {
         _ = self.pushVC("WalletVC")
     }
     @IBAction func btn_Payment(_ sender:UIButton) {
-       _ = self.pushVC("PaymentTypeVC")
+        _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_Event(_ sender:UIButton) {
         _ = self.pushVC("EventVC")

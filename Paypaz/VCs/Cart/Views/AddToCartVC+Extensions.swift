@@ -8,7 +8,7 @@
 
 import UIKit
 import SDWebImage
-extension MyCartVC : UITableViewDataSource {
+extension AddToCartVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
     }
@@ -24,9 +24,9 @@ extension MyCartVC : UITableViewDataSource {
         cell.btn_DeleteProduct.tag = indexPath.row
         cell.btn_AddProduct.addTarget(self, action: #selector(btn_AddProducts(_:)), for: .touchUpInside)
         cell.btn_DeleteProduct.addTarget(self, action: #selector(btn_RemoveProducts(_:)), for: .touchUpInside)
-        if self.addToCart == true{
-            cell.btn_Delete.isHidden = true
-        }
+        //        if self.addToCart == true{
+        //            cell.btn_Delete.isHidden = true
+        //        }
         if products[indexPath.row].isPaid == "0"{
             cell.lbl_Price.text = "Free"
         }
@@ -34,15 +34,15 @@ extension MyCartVC : UITableViewDataSource {
             cell.lbl_Price.text = "$\(((products[indexPath.row].price!) as NSString).integerValue)"
         }
         cell.lbl_ProductName.text = products[indexPath.row].name
-        cell.btn_Delete.tag = indexPath.row
-        cell.btn_Delete.addTarget(self, action: #selector(btn_DeleteProduct(_:)), for: .touchUpInside)
+        //        cell.btn_Delete.tag = indexPath.row
+        //        cell.btn_Delete.addTarget(self, action: #selector(btn_DeleteProduct(_:)), for: .touchUpInside)
         return cell
     }
-    @objc func btn_DeleteProduct(_ sender:UIButton){
-        self.products.remove(at: sender.tag)
-        //self.tableView_Height.constant = CGFloat(self.products.count * 135)
-        self.tableView_Products.reloadData()
-    }
+    /*@objc func btn_DeleteProduct(_ sender:UIButton){
+     self.products.remove(at: sender.tag)
+     //self.tableView_Height.constant = CGFloat(self.products.count * 135)
+     self.tableView_Products.reloadData()
+     }*/
     @objc func btn_AddProducts(_ sender:UIButton){
         
         var productPrice = ((products[sender.tag].price!) as NSString).integerValue
@@ -104,13 +104,13 @@ extension MyCartVC : UITableViewDataSource {
         }
     }
 }
-extension MyCartVC : UITableViewDelegate {
+extension AddToCartVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
     }
 }
-extension MyCartVC : MyPostedEventDataModelDelegate
+extension AddToCartVC : MyPostedEventDataModelDelegate
 {
     func didRecieveDataUpdate(data: MyPostedEventModel)
     {
@@ -152,7 +152,7 @@ extension MyCartVC : MyPostedEventDataModelDelegate
     }
 }
 
-extension MyCartVC : MyPostedProductsDataModelDelegate
+extension AddToCartVC : MyPostedProductsDataModelDelegate
 {
     func didRecieveDataUpdate(data: MyPostedProductsModel)
     {
@@ -201,16 +201,18 @@ extension MyCartVC : MyPostedProductsDataModelDelegate
         }
     }
 }
-extension MyCartVC : AddToCartDataModelDelegate
+extension AddToCartVC : AddToCartDataModelDelegate
 {
     func didRecieveDataUpdate(data: ResendOTPModel)
     {
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.dismiss(animated: false) {[weak self] in
-                self?.successDelegate?.addedToCart()
-            }
+            self.successDelegate?.addedToCart()
+            self.navigationController?.popViewController(animated: false)
+//            self.dismiss(animated: false) {[weak self] in
+//                self?.successDelegate?.addedToCart()
+//            }
         }
         else
         {

@@ -286,7 +286,8 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                         case .mir:
                             self.img_CardImage.image = UIImage(named: "mir")
                         default:
-                            self.img_CardImage.image = UIImage(named: "visa")
+                            return
+                            //self.img_CardImage.image = UIImage(named: "visa")
                         }
                     }
                 }else{

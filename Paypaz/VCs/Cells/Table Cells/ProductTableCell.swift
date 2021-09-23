@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 class ProductTableCell : UITableViewCell {
     @IBOutlet weak var img_Product          : UIImageView!
     @IBOutlet weak var lbl_ProductName      : UILabel!
@@ -17,6 +18,8 @@ class ProductTableCell : UITableViewCell {
     @IBOutlet weak var btn_AddProduct       : UIButton!
     @IBOutlet weak var btn_DeleteProduct    : UIButton!
     @IBOutlet weak var lbl_ProductCount     : UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,3 +35,5 @@ class ProductTableCell : UITableViewCell {
         // Configure the view for the selected state
     }
 }
+
+  

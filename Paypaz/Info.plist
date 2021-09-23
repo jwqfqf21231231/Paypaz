@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSContactsUsageDescription</key>
-	<string>This allows us to connect you with your contacts within the application</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Paypaz</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,11 +29,13 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Paypaz requires access to camera to scan QR code</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This allows us to connect you with your contacts within the application</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App needs to access location for tracking the users.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App needs to access location for tracking the users.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App needs to access location for tracking the users.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>App needs to access location for tracking the users.</string>
 	<key>UIAppFonts</key>
 	<array>

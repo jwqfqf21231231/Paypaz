@@ -37,9 +37,7 @@ class SuccessPopupVC : CustomViewController {
     @IBOutlet weak var lbl_message : UILabel!
     @IBOutlet weak var imgIcon     : UIImageView!
     
-    var doAccept : Bool?
     var inviteID = ""
-    var isAccept : String?
     private let dataSource = IsAcceptEventInviteDataModel()
     
     // MARK:- ---- View Life Cycle ----
@@ -131,14 +129,17 @@ class SuccessPopupVC : CustomViewController {
     
     // MARK: - --- Action ----
     @IBAction func btn_Continue(_ sender:UIButton) {
-        if doAccept ?? false{
-            self.dismiss(animated: false) { [weak self] in
-                self?.acceptOrRejectDelegate?.acceptOrReject(inviteID: self?.inviteID ?? "")
-            }
-        }
-        else{
-            self.dismiss(animated: false) {[weak self] in
-                self?.delegate?.isClickedButton()
+        if let type = self.selectedPopupType{
+            switch type {
+            case .InviteAccept:
+                self.dismiss(animated: false) { [weak self] in
+                    self?.acceptOrRejectDelegate?.acceptOrReject(inviteID: self?.inviteID ?? "")
+                }
+            case .PhoneSaved:
+                self.dismiss(animated: false) {[weak self] in
+                    self?.delegate?.isClickedButton()
+                }
+            default: return
             }
         }
     }

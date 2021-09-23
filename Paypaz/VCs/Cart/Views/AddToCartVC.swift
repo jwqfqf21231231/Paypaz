@@ -10,8 +10,9 @@ import UIKit
 protocol AddedSuccessfullyPopUp : class{
     func addedToCart()
 }
-class MyCartVC : CustomViewController {
+class AddToCartVC : CustomViewController {
     
+    var cartID = ""
     var addToCart : Bool?
     var eventID : String?
     var eventDetails : MyEvent?
@@ -33,7 +34,6 @@ class MyCartVC : CustomViewController {
     @IBOutlet weak var lbl_TotalPrice : UILabel!
     @IBOutlet weak var lbl_EventCount : UILabel!
     @IBOutlet weak var lbl_Title : UILabel!
-    @IBOutlet weak var btn_AddEvent : UIButton!
     @IBOutlet weak var view_Products : UIView!
 
     @IBOutlet weak var tableView_Products : UITableView! {
@@ -51,7 +51,6 @@ class MyCartVC : CustomViewController {
         super.viewDidLoad()
         if addToCart ?? false{
             lbl_Title.text = "Add To Cart"
-            btn_AddEvent.isHidden = true
         }
         addToCartDataSource.delegate = self
         dataSource.delegate = self
@@ -94,7 +93,8 @@ class MyCartVC : CustomViewController {
     
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
-        self.dismiss(animated: false, completion: nil)
+        self.navigationController?.popViewController(animated: false)
+        //self.dismiss(animated: false, completion: nil)
     }
     @IBAction func btn_Checkout(_ sender:UIButton) {
       

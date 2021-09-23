@@ -15,6 +15,10 @@
 		042270BA26F9B0620060D600 /* EnterPinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042270B926F9B0620060D600 /* EnterPinVC.swift */; };
 		0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359326B00641008FA98A /* FavouritesDataModel.swift */; };
 		0428359D26B009BF008FA98A /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359C26B009BF008FA98A /* FavouriteCell.swift */; };
+		042F44BC26FC3F9400B94715 /* CartDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44BB26FC3F9400B94715 /* CartDetailModel.swift */; };
+		042F44CA26FC406400B94715 /* CartItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44C926FC406400B94715 /* CartItemsModel.swift */; };
+		042F44EE26FC6B4E00B94715 /* MyCartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44ED26FC6B4E00B94715 /* MyCartVC.swift */; };
+		042F44F326FC6BA700B94715 /* MyCartVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44F226FC6BA700B94715 /* MyCartVC+Extensions.swift */; };
 		0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* SuccessModel.swift */; };
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
 		0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245326AA81C600840D15 /* MonthYearPickerView.swift */; };
@@ -166,8 +170,8 @@
 		44E5591B26327F7300193305 /* AddBankAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5591A26327F7300193305 /* AddBankAccountVC.swift */; };
 		44E5591D26327F8900193305 /* BankSavedSuccessPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5591C26327F8900193305 /* BankSavedSuccessPopupVC.swift */; };
 		44E559202632AAA800193305 /* PayAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5591F2632AAA800193305 /* PayAmountVC.swift */; };
-		44E559232632C81000193305 /* MyCartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E559222632C81000193305 /* MyCartVC.swift */; };
-		44E559252632C81F00193305 /* MyCartVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E559242632C81F00193305 /* MyCartVC+Extensions.swift */; };
+		44E559232632C81000193305 /* AddToCartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E559222632C81000193305 /* AddToCartVC.swift */; };
+		44E559252632C81F00193305 /* AddToCartVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E559242632C81F00193305 /* AddToCartVC+Extensions.swift */; };
 		44E559272632E80C00193305 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E559262632E80C00193305 /* QRScannerView.swift */; };
 		44E559292632E8EA00193305 /* QRCodeScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E559282632E8EA00193305 /* QRCodeScannerVC.swift */; };
 		44E5592C2632EC1500193305 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E5592B2632EC1500193305 /* ContactListVC.swift */; };
@@ -216,6 +220,10 @@
 		042270B926F9B0620060D600 /* EnterPinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinVC.swift; sourceTree = "<group>"; };
 		0428359326B00641008FA98A /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
 		0428359C26B009BF008FA98A /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
+		042F44BB26FC3F9400B94715 /* CartDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDetailModel.swift; sourceTree = "<group>"; };
+		042F44C926FC406400B94715 /* CartItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemsModel.swift; sourceTree = "<group>"; };
+		042F44ED26FC6B4E00B94715 /* MyCartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartVC.swift; sourceTree = "<group>"; };
+		042F44F226FC6BA700B94715 /* MyCartVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartVC+Extensions.swift"; sourceTree = "<group>"; };
 		0431B71E269C6BD00082EAB3 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
 		0437245326AA81C600840D15 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
@@ -374,8 +382,8 @@
 		44E5591A26327F7300193305 /* AddBankAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankAccountVC.swift; sourceTree = "<group>"; };
 		44E5591C26327F8900193305 /* BankSavedSuccessPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankSavedSuccessPopupVC.swift; sourceTree = "<group>"; };
 		44E5591F2632AAA800193305 /* PayAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayAmountVC.swift; sourceTree = "<group>"; };
-		44E559222632C81000193305 /* MyCartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartVC.swift; sourceTree = "<group>"; };
-		44E559242632C81F00193305 /* MyCartVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartVC+Extensions.swift"; sourceTree = "<group>"; };
+		44E559222632C81000193305 /* AddToCartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartVC.swift; sourceTree = "<group>"; };
+		44E559242632C81F00193305 /* AddToCartVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddToCartVC+Extensions.swift"; sourceTree = "<group>"; };
 		44E559262632E80C00193305 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		44E559282632E8EA00193305 /* QRCodeScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerVC.swift; sourceTree = "<group>"; };
 		44E5592B2632EC1500193305 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
@@ -478,6 +486,26 @@
 				0428359326B00641008FA98A /* FavouritesDataModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		042F44C026FC3F9800B94715 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				042F44C926FC406400B94715 /* CartItemsModel.swift */,
+				042F44BB26FC3F9400B94715 /* CartDetailModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		042F44EC26FC6B3400B94715 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				44E559222632C81000193305 /* AddToCartVC.swift */,
+				44E559242632C81F00193305 /* AddToCartVC+Extensions.swift */,
+				042F44ED26FC6B4E00B94715 /* MyCartVC.swift */,
+				042F44F226FC6BA700B94715 /* MyCartVC+Extensions.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0431B71B269C6B950082EAB3 /* Controller */ = {
@@ -1393,7 +1421,7 @@
 				445C77B02638152F00AD4DF3 /* EventReportVC.swift */,
 				445C77A72637F5EE00AD4DF3 /* InvitesList */,
 				445C77992637CD3A00AD4DF3 /* MyEventsList */,
-				44E559212632C80000193305 /* My Cart */,
+				44E559212632C80000193305 /* Cart */,
 				445433DF262D68C200443AE1 /* Home */,
 				44E5591E2632AA9600193305 /* PayAmount */,
 				44509EDE263178E9000B19F3 /* Event Vc */,
@@ -1489,14 +1517,14 @@
 			path = PayAmount;
 			sourceTree = "<group>";
 		};
-		44E559212632C80000193305 /* My Cart */ = {
+		44E559212632C80000193305 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				042F44C026FC3F9800B94715 /* Model */,
 				045C787726F3548B001F0606 /* View Model */,
-				44E559222632C81000193305 /* MyCartVC.swift */,
-				44E559242632C81F00193305 /* MyCartVC+Extensions.swift */,
+				042F44EC26FC6B3400B94715 /* Views */,
 			);
-			path = "My Cart";
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		44E5592A2632EC0400193305 /* Contacts */ = {
@@ -1911,10 +1939,12 @@
 				44E5592C2632EC1500193305 /* ContactListVC.swift in Sources */,
 				44509EE0263178F8000B19F3 /* EventVC.swift in Sources */,
 				44A1BFFD26564A0C0047F7B4 /* OtherUserProfileVC+Extensions.swift in Sources */,
+				042F44CA26FC406400B94715 /* CartItemsModel.swift in Sources */,
 				0C388B1E268F4970008AED6F /* HostEventDataModel.swift in Sources */,
 				04FD51A726B8FBC200F4CCA2 /* Helper.swift in Sources */,
 				045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */,
 				04F4164426E78F80009919A1 /* NotificationCell.swift in Sources */,
+				042F44F326FC6BA700B94715 /* MyCartVC+Extensions.swift in Sources */,
 				0C9F29F8268AEA9100CE6178 /* OTPVerificationDataModel.swift in Sources */,
 				0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */,
 				44596F39266A5B1500401884 /* EventReportsHistoryVC.swift in Sources */,
@@ -1936,6 +1966,7 @@
 				04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */,
 				44F76670263A9538007F78CB /* ProductListVC+Extensions.swift in Sources */,
 				0C388B29268F4F90008AED6F /* AddProductDataModel.swift in Sources */,
+				042F44BC26FC3F9400B94715 /* CartDetailModel.swift in Sources */,
 				44509ED52631612A000B19F3 /* NotificationsListVC.swift in Sources */,
 				0C388AFC268F1CB8008AED6F /* CreatePasscodeVC.swift in Sources */,
 				44509ED126313194000B19F3 /* InvitedPeopleVC+Extensions.swift in Sources */,
@@ -1994,16 +2025,17 @@
 				44835B21263BDACF00EBE620 /* CalendarCell.swift in Sources */,
 				44509EEB263193F6000B19F3 /* SettingsVC.swift in Sources */,
 				44509EE826318200000B19F3 /* AddProductVC.swift in Sources */,
-				44E559252632C81F00193305 /* MyCartVC+Extensions.swift in Sources */,
+				44E559252632C81F00193305 /* AddToCartVC+Extensions.swift in Sources */,
 				0C2234192693F12B0014B06A /* ChooseEventModel.swift in Sources */,
 				0C9F29D2268AE17800CE6178 /* SignUpDataModel.swift in Sources */,
 				44DBD00A263011BF00255F9A /* EventDetailVC+Extensions.swift in Sources */,
 				0CED86A726A455EB00F4D68E /* BankInfoModel.swift in Sources */,
 				4488D7A1262961E1006416DF /* HostEventVC.swift in Sources */,
 				44C8F2D0261F1CA9000F03DB /* SplashVC.swift in Sources */,
-				44E559232632C81000193305 /* MyCartVC.swift in Sources */,
+				44E559232632C81000193305 /* AddToCartVC.swift in Sources */,
 				4465691C264BE1EB001EB101 /* MoreOptionsPopupVC.swift in Sources */,
 				445C77AD26380BA300AD4DF3 /* InviteCell.swift in Sources */,
+				042F44EE26FC6B4E00B94715 /* MyCartVC.swift in Sources */,
 				44A1BFFA2656467C0047F7B4 /* OtherUserProfileVC.swift in Sources */,
 				44DBD008263011B200255F9A /* EventDetailVC.swift in Sources */,
 				0C120A3A2690211E00FD806A /* ChooseEventCell.swift in Sources */,

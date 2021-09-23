@@ -73,6 +73,8 @@ enum urlString:String
     case ACCEPTORREJECTINVITE = "user/invite/change/status"
     
     case ADDTOCART = "home/event/cart/add"
+    case CARTITEMS = "user/carts"
+    case CARTDETAILS = "user/cart/detail"
     
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"

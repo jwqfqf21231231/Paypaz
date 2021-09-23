@@ -16,11 +16,16 @@ class EnterPinVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTappedArround()
-        otpView.initializeUI()
         otpView.delegate = self
+        otpView.otpFieldEntrySecureType = true
+        otpView.initializeUI()
+        otpView.changeStateOfTextField()
+        hideKeyboardWhenTappedArround()
     }
     
+    @IBAction func btn_Back(_ sender:UIButton){
+        self.navigationController?.popViewController(animated: false)
+    }
     @IBAction func btn_show(_ sender:UIButton) {
         otpView.otpFieldEntrySecureType = !otpView.otpFieldEntrySecureType
         otpView.changeStateOfTextField()

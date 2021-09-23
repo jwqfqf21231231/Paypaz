@@ -83,7 +83,7 @@ class EventDetailVC : CustomViewController {
     }
     
     @IBAction func btn_addToCart(_ sender:RoundButton) {
-        if let vc = self.pushVC("MyCartVC") as? MyCartVC{
+        if let vc = self.pushVC("AddToCartVC") as? AddToCartVC{
             vc.eventID = self.eventID
         }
     }

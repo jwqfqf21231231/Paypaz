@@ -203,6 +203,7 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
             UserDefaults.standard.setLoggedIn(value: true)
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                popup.selectedPopupType = .PhoneSaved
                 popup.delegate = self
             }
         }

@@ -25,7 +25,7 @@ protocol AddBankAccountDataModelDelegate:class {
 }
 class CreateCardDataModel: NSObject
 {
-    weak var delegate : CreateCardDataModelDelegate?
+    weak var delegate  : CreateCardDataModelDelegate?
     weak var delegate1 : BankInfoDataModelDelegate?
     weak var delegate2 : AddBankAccountDataModelDelegate?
     let sharedInstance = Connection()
@@ -73,10 +73,9 @@ class CreateCardDataModel: NSObject
                                     {
                                         (error) in
                                         self.delegate1?.didFailDataUpdateWithError1(error: error)
-                                        
                                     })
-        
     }
+    
     func createCard()
     {
         let url =  APIList().getUrlString(url: .CREATECARD)
@@ -119,10 +118,10 @@ class CreateCardDataModel: NSObject
                                         
                                     })
     }
+    
     func addBankAccount()
     {
         let url =  APIList().getUrlString(url: .ADDBANKACCOUNT)
-        
         let parameter : Parameters = [
             "bankID" : bankID,
             "accountNumber" : accountNumber,
@@ -159,7 +158,6 @@ class CreateCardDataModel: NSObject
                                     {
                                         (error) in
                                         self.delegate2?.didFailDataUpdateWithError2(error: error)
-                                        
                                     })
     }
 }

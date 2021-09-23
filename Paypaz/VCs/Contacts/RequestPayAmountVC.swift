@@ -25,9 +25,9 @@ class RequestPayAmountVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view_userInfo.alpha = 1
+        self.view_userInfo.alpha = 0.0
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -45,10 +45,12 @@ class RequestPayAmountVC : CustomViewController {
             }
         }
     }
+    
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func btn_Request(_ sender:RoundButton){
         if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
             let local = (self.selectedPaymentType == PaymentType.local)
@@ -58,6 +60,7 @@ class RequestPayAmountVC : CustomViewController {
         }
         
     }
+    
     @IBAction func btn_Pay(_ sender:RoundButton){
         if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
             let local = (self.selectedPaymentType == PaymentType.local)
@@ -67,6 +70,7 @@ class RequestPayAmountVC : CustomViewController {
         }
         
     }
+    
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         for vc in self.navigationController?.viewControllers ?? [] {
             if let home = vc as? HomeVC {
@@ -94,13 +98,13 @@ extension RequestPayAmountVC : ContactSelectedDelegate {
     func isSelectedContact(for request:Bool) {
         self.view_userInfo.alpha = 1.0
         if request {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                if let popup = self?.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                    //  popup.delegate = self
-                    popup.selectedPopupType = .PaymentRequestSent
-                }
+            //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                //  popup.delegate = self
+                popup.selectedPopupType = .PaymentRequestSent
             }
         }
+        //        }
         else{
             _ = self.pushVC("EnterPinVC")
         }

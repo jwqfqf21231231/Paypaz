@@ -210,7 +210,7 @@ class HostEventVC : UIViewController {
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancel))
-        toolBar.setItems([doneBtn,flexible,cancel], animated: false)
+        toolBar.setItems([cancel,flexible,doneBtn], animated: false)
         return toolBar
     }
     
@@ -234,9 +234,8 @@ class HostEventVC : UIViewController {
         switch field.tag  {
         case 10:
             picker=UIDatePicker()
-            if #available(iOS 13.4, *) {
+            if #available(iOS 13.4, *){
                 picker.preferredDatePickerStyle = .wheels
-                
             }
             picker.datePickerMode = .date
             picker.minimumDate = Date()

@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         print(path)
         if #available(iOS 13.0, *) {
-        window = UIWindow(frame: UIScreen.main.bounds)
+            window = UIWindow(frame: UIScreen.main.bounds)
+            self.window?.overrideUserInterfaceStyle = .light
         }
         // Setting The google api key
         GMSPlacesClient.provideAPIKey("AIzaSyA5S2wr0I-x6Yp3HibMdjcAdIlZ9Gz0Cw0")

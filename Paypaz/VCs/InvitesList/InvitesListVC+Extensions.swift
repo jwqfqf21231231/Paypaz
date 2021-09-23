@@ -39,7 +39,6 @@ extension InvitesListVC : UITableViewDataSource {
     @objc func btn_accept(_ sender:UIButton) {
         if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
             popup.acceptOrRejectDelegate = self
-            popup.doAccept = true
             popup.inviteID = invitesList[sender.tag].id ?? ""
             popup.selectedPopupType = .InviteAccept
         }
@@ -48,7 +47,6 @@ extension InvitesListVC : UITableViewDataSource {
     @objc func btn_reject(_ sender:UIButton) {
         if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
             popup.acceptOrRejectDelegate = self
-            popup.doAccept = true
             popup.inviteID = invitesList[sender.tag].id ?? ""
             popup.selectedPopupType = .InviteReject
         }
