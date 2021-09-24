@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 struct APIList
 {
-    let BASE_URL = "http://amandeep.parastechnologies.in/paypaz/"
+    let BASE_URL = "https://parastechnologies.in/paypaz/"
     func getUrlString(url: urlString) -> String
     {
         return BASE_URL + url.rawValue

@@ -127,17 +127,17 @@ extension BuyEventVC : UITableViewDataSource {
             vc.addToCart = true
             vc.successDelegate = self
         }
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MyCartVC") as! MyCartVC
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.eventID = filteredEventData[sender.tag].id
-//        vc.addToCart = true
-//        vc.successDelegate = self
-//        self.present(vc, animated: false,completion: nil)
     }
+    
     @objc func clicked_btn_Buy(_ sender:RoundButton) {
-        if let products = self.presentPopUpVC("ProductListVC", animated: true) as? ProductListVC {
-            products.delegate = self
+        if let vc = self.pushVC("AddToCartVC") as? AddToCartVC{
+            vc.eventID = filteredEventData[sender.tag].id
+            vc.addToCart = true
+            vc.buyEvent = true
         }
+        //        if let products = self.presentPopUpVC("ProductListVC", animated: true) as? ProductListVC {
+        //            products.delegate = self
+        //        }
     }
     @objc func clicked_img_Event(_ sender:UITapGestureRecognizer) {
         _ = self.pushVC("EventDetailVC")

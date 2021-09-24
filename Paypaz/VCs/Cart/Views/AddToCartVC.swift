@@ -14,9 +14,11 @@ class AddToCartVC : CustomViewController {
     
     var cartID = ""
     var addToCart : Bool?
+    var buyEvent : Bool?
     var eventID : String?
     var eventDetails : MyEvent?
     var products = [MyProducts]()
+    var cartItemProducts = [Product]()
     let dataSource = MyPostedEventDataModel()
     var eventPrice = 0
     var productPrice = 0
@@ -36,7 +38,8 @@ class AddToCartVC : CustomViewController {
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var btn_AddToCart : UIButton!
     @IBOutlet weak var view_Products : UIView!
-
+    @IBOutlet weak var lbl_ViewAllProducts : UILabel!
+    
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
             tableView_Products.dataSource = self
@@ -51,7 +54,13 @@ class AddToCartVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if addToCart ?? false{
-            lbl_Title.text = "Add To Cart"
+            if buyEvent ?? false{
+                lbl_Title.text = "Buy Ticket"
+                btn_AddToCart.isHidden = true
+            }
+            else{
+                lbl_Title.text = "Add To Cart"
+            }
             addToCartDataSource.delegate = self
             dataSource.delegate = self
             dataSource.delegate2 = self
@@ -59,29 +68,43 @@ class AddToCartVC : CustomViewController {
             getProducts()
         }
         else{
-            addToCartDataSource.cartDetailsDelegate = self
             btn_AddToCart.isHidden = true
             lbl_Title.text = "Buy Ticket"
+            lbl_ViewAllProducts.text = "All Added Products"
+            Connection.svprogressHudShow(view: self)
+            addToCartDataSource.cartDetailsDelegate = self
+            addToCartDataSource.cartID = self.cartID
+            addToCartDataSource.getCartDetails()
         }
         
     }
     func calculateTotalProductPrice(){
-        productPrice = 0
-        for i in 0..<products.count{
-            productPrice += products[i].updatedProductPrice
+        if addToCart ?? false{
+            productPrice = 0
+            for i in 0..<products.count{
+                productPrice += products[i].updatedProductPrice
+            }
+            self.lbl_ProductPrice.text = "$\(productPrice)"
+            calculateTotalPrice()
         }
-        self.lbl_ProductPrice.text = "$\(productPrice)"
-        calculateTotalPrice()
+        else{
+            productPrice = 0
+            for i in 0..<cartItemProducts.count{
+                productPrice += cartItemProducts[i].updatedProductPrice ?? 0
+            }
+            self.lbl_ProductPrice.text = "$\(productPrice)"
+            calculateTotalPrice()
+        }
     }
     func calculateTotalPrice(){
         self.totalPrice = (eventPrice+productPrice)
         lbl_TotalPrice.text = "$\(eventPrice+productPrice)"
     }
-   /* override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        self.tableView_Height.constant = CGFloat(self.products.count * 135)
-    }*/
+    /* override func viewDidLayoutSubviews() {
+     super.viewDidLayoutSubviews()
+     
+     self.tableView_Height.constant = CGFloat(self.products.count * 135)
+     }*/
     
     func getEvent()
     {
@@ -101,11 +124,15 @@ class AddToCartVC : CustomViewController {
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: false)
-        //self.dismiss(animated: false, completion: nil)
     }
     @IBAction func btn_Checkout(_ sender:UIButton) {
-      
-        //_ = self.pushVC("PayAmountVC")
+        let eventCount = ((self.lbl_EventCount.text ?? "") as NSString).integerValue
+        if eventCount < 1{
+            self.view.makeToast("Please add atleast one ticket for event")
+        }
+        else{
+            _ = self.pushVC("PayAmountVC")
+        }
     }
     @IBAction func btn_AddToCart(_ sender:UIButton){
         let dateformatter = DateFormatter()

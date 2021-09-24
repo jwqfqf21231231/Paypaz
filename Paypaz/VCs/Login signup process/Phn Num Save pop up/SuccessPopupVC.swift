@@ -131,6 +131,10 @@ class SuccessPopupVC : CustomViewController {
     @IBAction func btn_Continue(_ sender:UIButton) {
         if let type = self.selectedPopupType{
             switch type {
+            case .eventCreatedSuccess:
+                self.dismiss(animated: false) { [weak self] in
+                    self?.delegate?.isClickedButton()
+                }
             case .InviteAccept:
                 self.dismiss(animated: false) { [weak self] in
                     self?.acceptOrRejectDelegate?.acceptOrReject(inviteID: self?.inviteID ?? "")

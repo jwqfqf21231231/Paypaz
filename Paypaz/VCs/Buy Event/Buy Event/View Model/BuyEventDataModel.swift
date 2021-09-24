@@ -37,6 +37,8 @@ class BuyEventDataModel: NSObject
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         var currentDate = dateformatter.string(from: Date())
+        currentDate = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm", outGoingFormat: "yyyy-MM-dd")
+        UserDefaults.standard.setDay(value: currentDate)
         currentDate = currentDate.localToUTC(incomingFormat: "yyyy-MM-dd HH:mm", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
         let url =  APIList().getUrlString(url: .FILTEREVENT)
         if isFilter == "1"{

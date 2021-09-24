@@ -22,8 +22,8 @@ class BuyEventVC : UIViewController {
     var newFilteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
     @IBOutlet weak var txt_Search : UITextField!
- 
-
+    
+    
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
             tableView_Events.dataSource = self
@@ -64,19 +64,19 @@ class BuyEventVC : UIViewController {
             dataSource.getFilteredEvents()
         }
         
-       /* self.filteredEventData.removeAll()
-        if textField.text?.count != 0 {
-            for eventData in self.eventData {
-                let isMatchingEventName : NSString = eventData.name! as NSString
-                let range = isMatchingEventName.lowercased.range(of: textField.text!, options: NSString.CompareOptions.caseInsensitive, range: nil, locale: nil)
-                if range != nil {
-                    filteredEventData.append(eventData)
-                }
-            }
-        } else {
-            self.filteredEventData = self.eventData
-        }
-        self.tableView_Events.reloadData()*/
+        /* self.filteredEventData.removeAll()
+         if textField.text?.count != 0 {
+         for eventData in self.eventData {
+         let isMatchingEventName : NSString = eventData.name! as NSString
+         let range = isMatchingEventName.lowercased.range(of: textField.text!, options: NSString.CompareOptions.caseInsensitive, range: nil, locale: nil)
+         if range != nil {
+         filteredEventData.append(eventData)
+         }
+         }
+         } else {
+         self.filteredEventData = self.eventData
+         }
+         self.tableView_Events.reloadData()*/
     }
     func getEvents()
     {
@@ -95,7 +95,7 @@ class BuyEventVC : UIViewController {
         let calendar = Calendar.current
         var offset = DateComponents()
         var dates: [Any] = [formatter.string(from: startDate)]
-
+        
         for i in 1..<numberOfDays {
             offset.day = i
             let nextDay: Date? = calendar.date(byAdding: offset, to: startDate)

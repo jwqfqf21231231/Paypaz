@@ -85,6 +85,8 @@ class EventDetailVC : CustomViewController {
     @IBAction func btn_addToCart(_ sender:RoundButton) {
         if let vc = self.pushVC("AddToCartVC") as? AddToCartVC{
             vc.eventID = self.eventID
+            vc.addToCart = true
+            vc.successDelegate = self
         }
     }
     @IBAction func btn_ViewMoreProduct(_ sender:RoundButton) {
@@ -101,5 +103,10 @@ class EventDetailVC : CustomViewController {
     }
     @IBAction func btn_Share(_ sender:UIButton){
         postshareLink(profile_URL: "The text that i want to share")
+    }
+}
+extension EventDetailVC : AddedSuccessfullyPopUp{
+    func addedToCart() {
+        self.view.makeToast("Event Added To Cart", duration: 1, position: .bottom)
     }
 }

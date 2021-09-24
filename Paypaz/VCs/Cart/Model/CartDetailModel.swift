@@ -22,7 +22,7 @@ struct CartInfo: Codable {
     let subTotal, discount, tax, grandTotal: String?
     let addedDate, paymentMethod, type, userStatus: String?
     let status, createdDate, updatedDate, name: String?
-    let location, image: String?
+    let location, image, startDate, endDate, price: String?
     let products: [Product]?
 }
 
@@ -31,4 +31,5 @@ struct Product: Codable {
     let id, orderID, eventID, productID: String?
     let productPrice, productQty, productQtyPrice, status: String?
     let createdDate, updatedDate, name, image: String?
+    var updatedProductPrice :Int?
 }

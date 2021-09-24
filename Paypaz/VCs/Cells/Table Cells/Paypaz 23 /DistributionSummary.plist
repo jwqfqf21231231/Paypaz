@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Paypaz.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+				<key>dateExpires</key>
+				<string>20/07/22</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>Alamofire.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>CCValidator.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>CreditCardValidator.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>DropDown.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>IQKeyboardManagerSwift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>LGSideMenuController.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>SDWebImage.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>SVProgressHUD.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>Toast_Swift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>04E3C3C1BA4B1FD6BDEA7C956F9025B91F9753A0</string>
+						<key>dateExpires</key>
+						<string>20/07/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>libPhoneNumber_iOS.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6N43GY3295</string>
+						<key>name</key>
+						<string>Harish Kumar</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>6N43GY3295.demoapp1.com</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>6N43GY3295</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>6N43GY3295.demoapp1.com</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>Paypaz.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>2552c68e-192a-4d20-89dd-cacb9b869895</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: demoapp1.com</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>6N43GY3295</string>
+				<key>name</key>
+				<string>Harish Kumar</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
