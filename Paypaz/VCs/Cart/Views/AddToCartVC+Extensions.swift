@@ -24,9 +24,7 @@ extension AddToCartVC : UITableViewDataSource {
         cell.btn_DeleteProduct.tag = indexPath.row
         cell.btn_AddProduct.addTarget(self, action: #selector(btn_AddProducts(_:)), for: .touchUpInside)
         cell.btn_DeleteProduct.addTarget(self, action: #selector(btn_RemoveProducts(_:)), for: .touchUpInside)
-        //        if self.addToCart == true{
-        //            cell.btn_Delete.isHidden = true
-        //        }
+     
         if products[indexPath.row].isPaid == "0"{
             cell.lbl_Price.text = "Free"
         }
@@ -34,15 +32,10 @@ extension AddToCartVC : UITableViewDataSource {
             cell.lbl_Price.text = "$\(((products[indexPath.row].price!) as NSString).integerValue)"
         }
         cell.lbl_ProductName.text = products[indexPath.row].name
-        //        cell.btn_Delete.tag = indexPath.row
-        //        cell.btn_Delete.addTarget(self, action: #selector(btn_DeleteProduct(_:)), for: .touchUpInside)
+       
         return cell
     }
-    /*@objc func btn_DeleteProduct(_ sender:UIButton){
-     self.products.remove(at: sender.tag)
-     //self.tableView_Height.constant = CGFloat(self.products.count * 135)
-     self.tableView_Products.reloadData()
-     }*/
+   
     @objc func btn_AddProducts(_ sender:UIButton){
         
         var productPrice = ((products[sender.tag].price!) as NSString).integerValue
@@ -220,6 +213,48 @@ extension AddToCartVC : AddToCartDataModelDelegate
         }
     }
     func didFailDataUpdateWithError1(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension AddToCartVC : GetCartDetailsDataModelDelegate
+{
+    func didRecieveDataUpdate(data: CartDetailsModel)
+    {
+        print("EventModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
+            let imageString = (data.data?.image) ?? ""
+            self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            self.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "ticket_img"))
+            self.lbl_EventName.text = data.data?.name
+            var sDate = data.data?.addedDate ?? ""
+            sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+            let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
+            self.lbl_EventDate.text = startDate
+            self.lbl_Address.text = data.data?.location ?? ""
+            self.lbl_Price.text = data.data?.eventPrice ?? ""
+            self.lbl_EventCount.text = data.data?.eventQty ?? ""
+            self.products = data.data?.products as! [MyProducts]
+            self.tableView_Products.reloadData()
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError3(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

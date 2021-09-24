@@ -33,6 +33,7 @@ extension MyCartVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = self.pushVC("AddToCartVC") as? AddToCartVC{
             vc.cartID = Items[indexPath.row].id ?? ""
+            vc.addToCart = false
         }
     }
 }

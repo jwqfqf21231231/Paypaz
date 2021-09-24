@@ -34,6 +34,7 @@ class AddToCartVC : CustomViewController {
     @IBOutlet weak var lbl_TotalPrice : UILabel!
     @IBOutlet weak var lbl_EventCount : UILabel!
     @IBOutlet weak var lbl_Title : UILabel!
+    @IBOutlet weak var btn_AddToCart : UIButton!
     @IBOutlet weak var view_Products : UIView!
 
     @IBOutlet weak var tableView_Products : UITableView! {
@@ -51,12 +52,18 @@ class AddToCartVC : CustomViewController {
         super.viewDidLoad()
         if addToCart ?? false{
             lbl_Title.text = "Add To Cart"
+            addToCartDataSource.delegate = self
+            dataSource.delegate = self
+            dataSource.delegate2 = self
+            getEvent()
+            getProducts()
         }
-        addToCartDataSource.delegate = self
-        dataSource.delegate = self
-        dataSource.delegate2 = self
-        getEvent()
-        getProducts()
+        else{
+            addToCartDataSource.cartDetailsDelegate = self
+            btn_AddToCart.isHidden = true
+            lbl_Title.text = "Buy Ticket"
+        }
+        
     }
     func calculateTotalProductPrice(){
         productPrice = 0
