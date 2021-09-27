@@ -10,21 +10,22 @@ import UIKit
 
 class WalletVC : CustomViewController {
     
-    //MARK:- ----
     @IBOutlet weak var tableViewTransactions : UITableView! {
         didSet {
             self.tableViewTransactions.dataSource = self
             self.tableViewTransactions.delegate   = self
         }
     }
-    
+    @IBOutlet weak var lbl_TotalBalance : UILabel!
+    private let dataSource = GetWalletAmountDataModel()
+
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        dataSource.getWalletAmountDelegate = self
+        Connection.svprogressHudShow(view: self)
+        dataSource.getWalletAmount()
     }
-    
     
     //MARK:- ---- Action ----
     @IBAction func btn_Back(_ sender:UIButton) {
@@ -48,11 +49,15 @@ class WalletVC : CustomViewController {
     }
 }
 extension WalletVC : AddMoneyPopupDelegate {
-    func isSelectedType(bank: Bool) {
+    func isSelectedType(bank: Bool,amount:String) {
         if bank {
-             _ = self.pushVC("AddBankDetailsVC")
+            if let vc = self.pushVC("AddBankDetailsVC") as? AddBankDetailsVC{
+                vc.amountToAdd = amount
+            }
         } else {
-             _ = self.pushVC("AddCardDetailsVC")
+            if let vc = self.pushVC("AddCardDetailsVC") as? AddCardDetailsVC{
+                vc.amountToAdd = amount
+            }
         }
     }
 }

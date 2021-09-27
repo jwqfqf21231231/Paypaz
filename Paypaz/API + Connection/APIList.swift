@@ -76,6 +76,9 @@ enum urlString:String
     case CARTITEMS = "user/carts"
     case CARTDETAILS = "user/cart/detail"
     
+    case ADDAMOUNTINWALLET = "user/wallet/add"
+    case GETWALLETAMOUNT = "user/wallet"
+    
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"
     case UPLOADEDEVENTIMAGE = "uploads/events/"

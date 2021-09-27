@@ -210,8 +210,13 @@ extension AddToCartVC : MyPostedEventDataModelDelegate
             let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
             self.lbl_EventDate.text = startDate + " At " + startTime
             self.lbl_Address.text = data.data?.location
-            self.eventOriginalPrice = (((data.data?.price!)! as NSString).integerValue)
-            self.lbl_Price.text = "$\(((data.data?.price!)! as NSString).integerValue)"
+            self.eventOriginalPrice = (((data.data?.price ?? "") as NSString).integerValue)
+            if eventOriginalPrice == 0{
+                self.lbl_Price.text = "Free"
+            }
+            else{
+                self.lbl_Price.text = "$\(eventOriginalPrice ?? 0)"
+            }
         }
         else
         {
@@ -255,14 +260,14 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
             }
             print(data.message ?? "")
         }
-        if self.products.count == 0
-        {
-            self.view_Products.isHidden = true
-            
-        }
-        else{
-            self.view_Products.isHidden = false
-        }
+//        if self.products.count == 0
+//        {
+//            self.view_Products.isHidden = true
+//            
+//        }
+//        else{
+//            self.view_Products.isHidden = false
+//        }
     }
     
     func didFailDataUpdateWithError2(error: Error)

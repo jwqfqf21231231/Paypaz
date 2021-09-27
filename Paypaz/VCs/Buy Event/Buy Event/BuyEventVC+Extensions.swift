@@ -70,7 +70,13 @@ extension BuyEventVC : UITableViewDataSource {
         cell.img_event.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "event_img"))
         cell.txt_eventName.text = filteredEventData[indexPath.row].name
         cell.txt_personName.text = (filteredEventData[indexPath.row].firstName ?? "")+" "+(filteredEventData[indexPath.row].lastName ?? "")
-        cell.txt_eventPrice.text = "$\((filteredEventData[indexPath.row].price! as NSString).integerValue)"
+        let price = (filteredEventData[indexPath.row].price! as NSString).integerValue
+        if price < 1{
+            cell.txt_eventPrice.text = "Free"
+        }
+        else{
+            cell.txt_eventPrice.text = "$\(price)"
+        }
         let distance = Float(((filteredEventData[indexPath.row].distance ?? "") as NSString).integerValue)
         if distance < 0.6{
             var dist = Float(distance)

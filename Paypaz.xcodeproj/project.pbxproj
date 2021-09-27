@@ -21,7 +21,6 @@
 		042F44F326FC6BA700B94715 /* MyCartVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44F226FC6BA700B94715 /* MyCartVC+Extensions.swift */; };
 		0431B71F269C6BD00082EAB3 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B71E269C6BD00082EAB3 /* SuccessModel.swift */; };
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
-		0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245326AA81C600840D15 /* MonthYearPickerView.swift */; };
 		0437245926AA86C900840D15 /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245826AA86C900840D15 /* CardExtension.swift */; };
 		043CC9D026EA0FF300118EA8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CC9CF26EA0FF300118EA8 /* DateExtension.swift */; };
 		0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */; };
@@ -31,6 +30,10 @@
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
 		045C787926F354D1001F0606 /* AddToCartDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C787826F354D1001F0606 /* AddToCartDataModel.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
+		0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */; };
+		0485A4CD270180A600DF3AF3 /* GetWalletAmountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */; };
+		0485A4FA2701A8EB00DF3AF3 /* MonthYearPickerView-2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4F92701A8EB00DF3AF3 /* MonthYearPickerView-2.swift */; };
+		0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4FE2701B07200DF3AF3 /* PickerClass.swift */; };
 		048F8AE326D62FC10072F5E1 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8AE226D62FC10072F5E1 /* ContactCell.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		04B3FBAB26CF94040004A6F3 /* InviteMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */; };
@@ -226,7 +229,6 @@
 		042F44F226FC6BA700B94715 /* MyCartVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartVC+Extensions.swift"; sourceTree = "<group>"; };
 		0431B71E269C6BD00082EAB3 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
-		0437245326AA81C600840D15 /* MonthYearPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthYearPickerView.swift; sourceTree = "<group>"; };
 		0437245826AA86C900840D15 /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
 		043CC9CF26EA0FF300118EA8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoDataModel.swift; sourceTree = "<group>"; };
@@ -236,6 +238,10 @@
 		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
 		045C787826F354D1001F0606 /* AddToCartDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartDataModel.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
+		0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmount.swift; sourceTree = "<group>"; };
+		0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmountDataModel.swift; sourceTree = "<group>"; };
+		0485A4F92701A8EB00DF3AF3 /* MonthYearPickerView-2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MonthYearPickerView-2.swift"; sourceTree = "<group>"; };
+		0485A4FE2701B07200DF3AF3 /* PickerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerClass.swift; sourceTree = "<group>"; };
 		048F8AE226D62FC10072F5E1 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberDataModel.swift; sourceTree = "<group>"; };
@@ -555,6 +561,22 @@
 				045C787826F354D1001F0606 /* AddToCartDataModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		0485A4C227017F6700DF3AF3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0485A4CB2701806C00DF3AF3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		04B5E29226B0345D00333E94 /* View Model */ = {
@@ -1068,6 +1090,8 @@
 		44509ED9263162EA000B19F3 /* WalletVC */ = {
 			isa = PBXGroup;
 			children = (
+				0485A4C227017F6700DF3AF3 /* Model */,
+				0485A4CB2701806C00DF3AF3 /* ViewModel */,
 				44509EDA263162FD000B19F3 /* WalletVC.swift */,
 				44509EDC26316310000B19F3 /* WalletVC+Extensions.swift */,
 				44F76673263AB85A007F78CB /* AddMoneyPopupVC.swift */,
@@ -1389,6 +1413,8 @@
 		44C8F2CD261F1C09000F03DB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0485A4FE2701B07200DF3AF3 /* PickerClass.swift */,
+				0485A4F92701A8EB00DF3AF3 /* MonthYearPickerView-2.swift */,
 				043CC9CF26EA0FF300118EA8 /* DateExtension.swift */,
 				040A4F5526D8A124009C0581 /* CornerViewSide.swift */,
 				0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */,
@@ -1400,7 +1426,6 @@
 				44C8F2D7261F2623000F03DB /* Inspectables.swift */,
 				44E559262632E80C00193305 /* QRScannerView.swift */,
 				445C77AE263813F300AD4DF3 /* CircularProgressView.swift */,
-				0437245326AA81C600840D15 /* MonthYearPickerView.swift */,
 				04FD51A626B8FBC200F4CCA2 /* Helper.swift */,
 			);
 			path = Helpers;
@@ -1905,7 +1930,6 @@
 				445433E3262DA31F00443AE1 /* SideDrawerBaseVC.swift in Sources */,
 				04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */,
 				0CE7478D2696D47E00D1121B /* MyEventsListDataModel.swift in Sources */,
-				0437245426AA81C600840D15 /* MonthYearPickerView.swift in Sources */,
 				445433DD262D685300443AE1 /* CreditDebitCardVC.swift in Sources */,
 				04BC210C26F8B25400FA6B65 /* LogOutVC.swift in Sources */,
 				0C9F29CC268AE16600CE6178 /* SignUpModel.swift in Sources */,
@@ -1925,6 +1949,7 @@
 				44F76669263A9082007F78CB /* BuyEventVC+Extensions.swift in Sources */,
 				44A56487262EEB8200FCF3D5 /* MyTicketDetailVC.swift in Sources */,
 				445433EB262DA8A500443AE1 /* DrawerCell.swift in Sources */,
+				0485A4FA2701A8EB00DF3AF3 /* MonthYearPickerView-2.swift in Sources */,
 				448DDFF42636CF5A00CE324D /* ViewProfileVC+Extensions.swift in Sources */,
 				44857F4D26397C1D006402CA /* RequestPayAmountVC.swift in Sources */,
 				445873042654D21200DEF59C /* PaymentTypeVC.swift in Sources */,
@@ -1959,6 +1984,7 @@
 				0C8EC60F269715DA00D51F60 /* AllProductsCell.swift in Sources */,
 				0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */,
 				44E559272632E80C00193305 /* QRScannerView.swift in Sources */,
+				0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */,
 				0CECCDEB269328CC00611D62 /* ProductCell.swift in Sources */,
 				445433D4262D600200443AE1 /* CreateProfileVC.swift in Sources */,
 				44F76676263ABF64007F78CB /* AddCardDetailsVC.swift in Sources */,
@@ -2047,12 +2073,14 @@
 				445433E8262DA4D200443AE1 /* SideDrawerListVC+Extensions.swift in Sources */,
 				44C8F2D2261F1DEF000F03DB /* Extensions.swift in Sources */,
 				0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */,
+				0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */,
 				0C9F29E7268AE2BE00CE6178 /* APIList.swift in Sources */,
 				0C3DAAA62698220900CCE2DC /* ConfirmPasscodeDataModel.swift in Sources */,
 				04F4163126E76DF7009919A1 /* IsAcceptEventInvite.swift in Sources */,
 				0C8EC602269709EE00D51F60 /* MyPostedProductsModel.swift in Sources */,
 				04F4163726E78B21009919A1 /* NotificationListDataModel.swift in Sources */,
 				448DDFF22636CEC800CE324D /* ViewProfileVC.swift in Sources */,
+				0485A4CD270180A600DF3AF3 /* GetWalletAmountDataModel.swift in Sources */,
 				44835B1C263BB18F00EBE620 /* SendToBankVC.swift in Sources */,
 				44A5648A262F058000FCF3D5 /* MyTicketDetailVC+Extensions.swift in Sources */,
 				0C34FB97269827D000BAE79B /* CreatePinDataModel.swift in Sources */,

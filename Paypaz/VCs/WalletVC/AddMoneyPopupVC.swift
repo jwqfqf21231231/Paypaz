@@ -8,7 +8,7 @@
 
 import UIKit
 protocol AddMoneyPopupDelegate : class {
-    func isSelectedType(bank:Bool)
+    func isSelectedType(bank:Bool,amount:String)
 }
 
 class AddMoneyPopupVC  : CustomViewController {
@@ -16,6 +16,7 @@ class AddMoneyPopupVC  : CustomViewController {
     weak var delegate : AddMoneyPopupDelegate?
     var selectedType  : AddMoneyType?
     
+    @IBOutlet weak var txt_AmountToAdd : UITextField!
     @IBOutlet weak var btn_BankAcc     : RoundButton!
     @IBOutlet weak var btn_DebitCredit : RoundButton!
     
@@ -39,9 +40,15 @@ class AddMoneyPopupVC  : CustomViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func btn_AddMoney(_ sender:UIButton) {
-        let selected = self.selectedType ?? AddMoneyType.BankAccount
-        self.dismiss(animated: false) { [weak self] in
-            self?.delegate?.isSelectedType(bank: selected == .BankAccount)
+        let amount = (txt_AmountToAdd.text! as NSString).integerValue
+        if amount > 0{
+            let selected = self.selectedType ?? AddMoneyType.BankAccount
+            self.dismiss(animated: false) { [weak self] in
+                self?.delegate?.isSelectedType(bank: selected == .BankAccount,amount: self?.txt_AmountToAdd.text ?? "")
+            }
+        }
+        else{
+            self.view.makeToast("The amount must be greater than 0")
         }
     }
     @IBAction func btn_BankAccount(_ sender:UIButton) {

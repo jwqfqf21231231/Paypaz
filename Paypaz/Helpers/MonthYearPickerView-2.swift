@@ -96,10 +96,10 @@ class MonthYearPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let month = self.selectedRow(inComponent: 0)+1
         let year = years[self.selectedRow(inComponent: 1)]
-        if let block = onDateSelected {
-            block(month, year)
-        }
-        
+//        if let block = onDateSelected {
+//            block(month, year)
+//        }
+        onDateSelected?(month,year)
         self.month = month
         self.year = year
         completed?()

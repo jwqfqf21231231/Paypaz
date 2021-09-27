@@ -10,10 +10,7 @@ import UIKit
 
 class AddBankDetailsVC : CustomViewController {
    
-   //MARK:- ----
-   
-
-   
+    var amountToAdd = ""
    //MARK:- ---- View Life Cycle ----
    override func viewDidLoad() {
        super.viewDidLoad()

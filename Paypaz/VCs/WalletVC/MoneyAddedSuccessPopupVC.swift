@@ -17,17 +17,18 @@ class MoneyAddedSuccessPopupVC  : CustomViewController {
     
     weak var delegate     : PopupDelegate?
     var selectedMoneyType : AddMoneyType?
-    
+    var amount = ""
+    @IBOutlet weak var lbl_Money : UILabel!
     @IBOutlet weak var img_icon  : UIImageView!
     @IBOutlet weak var lbl_title : UILabel!
     @IBOutlet weak var bg_View   : RoundView!
-    
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.bg_View.alpha        = 0.0
         self.view.backgroundColor = UIColor.clear
+        lbl_Money.text = "$\(amount)"
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

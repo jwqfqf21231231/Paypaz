@@ -29,5 +29,32 @@ extension WalletVC : UITableViewDelegate {
     }
 
 }
-
+extension WalletVC : GetWalletAmountDelegate
+{
+    func didRecieveDataUpdate(data: GetWalletAmount)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.lbl_TotalBalance.text = "$\(data.data?.amount ?? "")"
+        }
+        else
+        {
+            view.makeToast(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
 
