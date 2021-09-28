@@ -143,7 +143,9 @@ class SuccessPopupVC : CustomViewController {
                 self.dismiss(animated: false) {[weak self] in
                     self?.delegate?.isClickedButton()
                 }
-            default: return
+            default: self.dismiss(animated: false) {[weak self] in
+                self?.delegate?.isClickedButton()
+            }
             }
         }
     }

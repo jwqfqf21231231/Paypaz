@@ -37,7 +37,8 @@ class AddToCartVC : CustomViewController {
     @IBOutlet weak var lbl_EventCount : UILabel!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var btn_AddToCart : UIButton!
-    @IBOutlet weak var view_Products : UIView!
+    @IBOutlet weak var tableView_Height : NSLayoutConstraint!
+    //@IBOutlet weak var view_Products : UIView!
     @IBOutlet weak var lbl_ViewAllProducts : UILabel!
     
     @IBOutlet weak var tableView_Products : UITableView! {
@@ -46,7 +47,7 @@ class AddToCartVC : CustomViewController {
             tableView_Products.delegate   = self
         }
     }
-    @IBOutlet weak var tableView_Height   : NSLayoutConstraint!
+    //@IBOutlet weak var tableView_Height   : NSLayoutConstraint!
     private let addToCartDataSource = AddToCartDataModel()
     weak var successDelegate:AddedSuccessfullyPopUp?
     

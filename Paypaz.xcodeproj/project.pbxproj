@@ -23,6 +23,8 @@
 		0431B727269C6BDF0082EAB3 /* ContactUsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */; };
 		0437245926AA86C900840D15 /* CardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437245826AA86C900840D15 /* CardExtension.swift */; };
 		043CC9D026EA0FF300118EA8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CC9CF26EA0FF300118EA8 /* DateExtension.swift */; };
+		044547D42702F16B00EF9D55 /* PaymentOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044547D32702F16B00EF9D55 /* PaymentOptionsVC.swift */; };
+		044547D927031C7100EF9D55 /* PaymentCardsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044547D827031C7100EF9D55 /* PaymentCardsVC.swift */; };
 		0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */; };
 		0447C91126C3DA240030FB7F /* LogOutDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447C91026C3DA240030FB7F /* LogOutDataModel.swift */; };
 		0453C10126C2459D00F9B72D /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */; };
@@ -231,6 +233,8 @@
 		0431B726269C6BDF0082EAB3 /* ContactUsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsDataModel.swift; sourceTree = "<group>"; };
 		0437245826AA86C900840D15 /* CardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardExtension.swift; sourceTree = "<group>"; };
 		043CC9CF26EA0FF300118EA8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		044547D32702F16B00EF9D55 /* PaymentOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionsVC.swift; sourceTree = "<group>"; };
+		044547D827031C7100EF9D55 /* PaymentCardsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardsVC.swift; sourceTree = "<group>"; };
 		0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoDataModel.swift; sourceTree = "<group>"; };
 		0447C91026C3DA240030FB7F /* LogOutDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDataModel.swift; sourceTree = "<group>"; };
 		0453C0FF26C2459C00F9B72D /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
@@ -457,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				445433DC262D685300443AE1 /* CreditDebitCardVC.swift */,
+				044547D827031C7100EF9D55 /* PaymentCardsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1538,6 +1543,7 @@
 			isa = PBXGroup;
 			children = (
 				44E5591F2632AAA800193305 /* PayAmountVC.swift */,
+				044547D32702F16B00EF9D55 /* PaymentOptionsVC.swift */,
 			);
 			path = PayAmount;
 			sourceTree = "<group>";
@@ -1966,6 +1972,7 @@
 				44A1BFFD26564A0C0047F7B4 /* OtherUserProfileVC+Extensions.swift in Sources */,
 				042F44CA26FC406400B94715 /* CartItemsModel.swift in Sources */,
 				0C388B1E268F4970008AED6F /* HostEventDataModel.swift in Sources */,
+				044547D42702F16B00EF9D55 /* PaymentOptionsVC.swift in Sources */,
 				04FD51A726B8FBC200F4CCA2 /* Helper.swift in Sources */,
 				045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */,
 				04F4164426E78F80009919A1 /* NotificationCell.swift in Sources */,
@@ -2041,6 +2048,7 @@
 				0C929D352698339B007FA077 /* ForgotPasscodeModel.swift in Sources */,
 				44DBD00F2630244300255F9A /* MyPostedEventDetailsVC+Extensions.swift in Sources */,
 				44DBD00D2630242300255F9A /* MyPostedEventDetailsVC.swift in Sources */,
+				044547D927031C7100EF9D55 /* PaymentCardsVC.swift in Sources */,
 				44E5EFA4262DB76300FEE2C0 /* ViewAllProductsVC+Extensions.swift in Sources */,
 				44E5591B26327F7300193305 /* AddBankAccountVC.swift in Sources */,
 				445C779F2637CEF900AD4DF3 /* DeleteEventPopupVC.swift in Sources */,

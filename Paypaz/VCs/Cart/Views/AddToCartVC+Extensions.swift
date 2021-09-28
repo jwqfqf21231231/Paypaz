@@ -247,7 +247,7 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
         if data.success == 1
         {
             self.products = data.data ?? []
-            //            self.tableView_Height.constant = CGFloat(200 * products.count)
+                        //self.tableView_Height.constant = CGFloat(200 * products.count)
             DispatchQueue.main.async {
                 self.tableView_Height.constant = self.tableView_Products.contentSize.height
             }
@@ -260,14 +260,16 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
             }
             print(data.message ?? "")
         }
-//        if self.products.count == 0
-//        {
-//            self.view_Products.isHidden = true
-//            
-//        }
-//        else{
-//            self.view_Products.isHidden = false
-//        }
+        if self.products.count == 0
+        {
+            self.tableView_Height.constant = 0
+            //            self.view_Products.isHidden = true
+            
+        }
+        else{
+           self.tableView_Height.constant = 125
+            //            self.view_Products.isHidden = false
+        }
     }
     
     func didFailDataUpdateWithError2(error: Error)
@@ -358,11 +360,13 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
             self.cartItemProducts = data.data?.products ?? []
             if self.cartItemProducts.count == 0
             {
-                self.view_Products.isHidden = true
-                
+                self.tableView_Height.constant = 0
+                //                self.view_Products.isHidden = true
+                //
             }
             else{
-                self.view_Products.isHidden = false
+                self.tableView_Height.constant = 125
+                //                self.view_Products.isHidden = false
                 for i in 0..<cartItemProducts.count{
                     cartItemProducts[i].updatedProductPrice = (((cartItemProducts[i].productQtyPrice ?? "") as NSString).integerValue)
                 }
