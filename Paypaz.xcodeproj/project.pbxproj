@@ -34,7 +34,6 @@
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
 		0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */; };
 		0485A4CD270180A600DF3AF3 /* GetWalletAmountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */; };
-		0485A4FA2701A8EB00DF3AF3 /* MonthYearPickerView-2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4F92701A8EB00DF3AF3 /* MonthYearPickerView-2.swift */; };
 		0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4FE2701B07200DF3AF3 /* PickerClass.swift */; };
 		048F8AE326D62FC10072F5E1 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8AE226D62FC10072F5E1 /* ContactCell.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
@@ -44,6 +43,11 @@
 		04C7D72C26B3C77300747777 /* CountryListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C7D72B26B3C77300747777 /* CountryListTable.swift */; };
 		04C7D73226B3D59800747777 /* CountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 04C7D73126B3D59800747777 /* CountryCodes.json */; };
 		04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */; };
+		04F24D6627043CE5001C3843 /* CardsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F24D6527043CE5001C3843 /* CardsListModel.swift */; };
+		04F24D80270453ED001C3843 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F24D7F270453ED001C3843 /* CardCell.swift */; };
+		04F24DA92704753F001C3843 /* CardDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F24DA82704753F001C3843 /* CardDetailsModel.swift */; };
+		04F24DB127049481001C3843 /* PaymentCardsVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F24DB027049481001C3843 /* PaymentCardsVC+Extensions.swift */; };
+		04F24DB6270494EA001C3843 /* CreditDebitCardVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F24DB5270494EA001C3843 /* CreditDebitCardVC+Extensions.swift */; };
 		04F4163126E76DF7009919A1 /* IsAcceptEventInvite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4163026E76DF7009919A1 /* IsAcceptEventInvite.swift */; };
 		04F4163726E78B21009919A1 /* NotificationListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4163626E78B21009919A1 /* NotificationListDataModel.swift */; };
 		04F4164426E78F80009919A1 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4164326E78F80009919A1 /* NotificationCell.swift */; };
@@ -244,7 +248,6 @@
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmount.swift; sourceTree = "<group>"; };
 		0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmountDataModel.swift; sourceTree = "<group>"; };
-		0485A4F92701A8EB00DF3AF3 /* MonthYearPickerView-2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MonthYearPickerView-2.swift"; sourceTree = "<group>"; };
 		0485A4FE2701B07200DF3AF3 /* PickerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerClass.swift; sourceTree = "<group>"; };
 		048F8AE226D62FC10072F5E1 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
@@ -254,6 +257,11 @@
 		04C7D72B26B3C77300747777 /* CountryListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTable.swift; sourceTree = "<group>"; };
 		04C7D73126B3D59800747777 /* CountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
 		04D66CC226AED1E5003E976E /* BuyEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyEventDataModel.swift; sourceTree = "<group>"; };
+		04F24D6527043CE5001C3843 /* CardsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsListModel.swift; sourceTree = "<group>"; };
+		04F24D7F270453ED001C3843 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		04F24DA82704753F001C3843 /* CardDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsModel.swift; sourceTree = "<group>"; };
+		04F24DB027049481001C3843 /* PaymentCardsVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentCardsVC+Extensions.swift"; sourceTree = "<group>"; };
+		04F24DB5270494EA001C3843 /* CreditDebitCardVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreditDebitCardVC+Extensions.swift"; sourceTree = "<group>"; };
 		04F4163026E76DF7009919A1 /* IsAcceptEventInvite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAcceptEventInvite.swift; sourceTree = "<group>"; };
 		04F4163626E78B21009919A1 /* NotificationListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListDataModel.swift; sourceTree = "<group>"; };
 		04F4164326E78F80009919A1 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -461,7 +469,9 @@
 			isa = PBXGroup;
 			children = (
 				445433DC262D685300443AE1 /* CreditDebitCardVC.swift */,
+				04F24DB5270494EA001C3843 /* CreditDebitCardVC+Extensions.swift */,
 				044547D827031C7100EF9D55 /* PaymentCardsVC.swift */,
+				04F24DB027049481001C3843 /* PaymentCardsVC+Extensions.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -619,6 +629,15 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		04F24D6427043CC9001C3843 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04F24D6527043CE5001C3843 /* CardsListModel.swift */,
+				04F24DA82704753F001C3843 /* CardDetailsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		04F4163526E78A6C009919A1 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,6 +658,7 @@
 				0C8EC60E269715DA00D51F60 /* AllProductsCell.swift */,
 				0428359C26B009BF008FA98A /* FavouriteCell.swift */,
 				04F4164326E78F80009919A1 /* NotificationCell.swift */,
+				04F24D7F270453ED001C3843 /* CardCell.swift */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1214,6 +1234,7 @@
 		445433DB262D683600443AE1 /* Credit Debit CardVC */ = {
 			isa = PBXGroup;
 			children = (
+				04F24D6427043CC9001C3843 /* Model */,
 				040E5ABD269C0CF300254FB7 /* View Model */,
 				040E5AC6269C0D1200254FB7 /* Controller */,
 			);
@@ -1419,7 +1440,6 @@
 			isa = PBXGroup;
 			children = (
 				0485A4FE2701B07200DF3AF3 /* PickerClass.swift */,
-				0485A4F92701A8EB00DF3AF3 /* MonthYearPickerView-2.swift */,
 				043CC9CF26EA0FF300118EA8 /* DateExtension.swift */,
 				040A4F5526D8A124009C0581 /* CornerViewSide.swift */,
 				0CAAF3B5268B4AFE00C51C9F /* Constants+UserDefaults.swift */,
@@ -1955,7 +1975,6 @@
 				44F76669263A9082007F78CB /* BuyEventVC+Extensions.swift in Sources */,
 				44A56487262EEB8200FCF3D5 /* MyTicketDetailVC.swift in Sources */,
 				445433EB262DA8A500443AE1 /* DrawerCell.swift in Sources */,
-				0485A4FA2701A8EB00DF3AF3 /* MonthYearPickerView-2.swift in Sources */,
 				448DDFF42636CF5A00CE324D /* ViewProfileVC+Extensions.swift in Sources */,
 				44857F4D26397C1D006402CA /* RequestPayAmountVC.swift in Sources */,
 				445873042654D21200DEF59C /* PaymentTypeVC.swift in Sources */,
@@ -1974,6 +1993,7 @@
 				0C388B1E268F4970008AED6F /* HostEventDataModel.swift in Sources */,
 				044547D42702F16B00EF9D55 /* PaymentOptionsVC.swift in Sources */,
 				04FD51A726B8FBC200F4CCA2 /* Helper.swift in Sources */,
+				04F24DB127049481001C3843 /* PaymentCardsVC+Extensions.swift in Sources */,
 				045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */,
 				04F4164426E78F80009919A1 /* NotificationCell.swift in Sources */,
 				042F44F326FC6BA700B94715 /* MyCartVC+Extensions.swift in Sources */,
@@ -1996,6 +2016,7 @@
 				445433D4262D600200443AE1 /* CreateProfileVC.swift in Sources */,
 				44F76676263ABF64007F78CB /* AddCardDetailsVC.swift in Sources */,
 				44C8F2E6261F2847000F03DB /* LoginVC.swift in Sources */,
+				04F24D80270453ED001C3843 /* CardCell.swift in Sources */,
 				04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */,
 				44F76670263A9538007F78CB /* ProductListVC+Extensions.swift in Sources */,
 				0C388B29268F4F90008AED6F /* AddProductDataModel.swift in Sources */,
@@ -2045,6 +2066,7 @@
 				445C77A62637E5AF00AD4DF3 /* FavouritesEventsListVC+Extensions.swift in Sources */,
 				445433C8262D56B600443AE1 /* SignupVC.swift in Sources */,
 				0C9F29E8268AE2BE00CE6178 /* Connection.swift in Sources */,
+				04F24DB6270494EA001C3843 /* CreditDebitCardVC+Extensions.swift in Sources */,
 				0C929D352698339B007FA077 /* ForgotPasscodeModel.swift in Sources */,
 				44DBD00F2630244300255F9A /* MyPostedEventDetailsVC+Extensions.swift in Sources */,
 				44DBD00D2630242300255F9A /* MyPostedEventDetailsVC.swift in Sources */,
@@ -2076,12 +2098,14 @@
 				045C787926F354D1001F0606 /* AddToCartDataModel.swift in Sources */,
 				44E5591926327B7A00193305 /* TermsPoliciesVC.swift in Sources */,
 				040F7C3726E5DCC900F4186B /* InvitesListDataModel.swift in Sources */,
+				04F24DA92704753F001C3843 /* CardDetailsModel.swift in Sources */,
 				0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */,
 				0453C10226C2459D00F9B72D /* VPMOTPTextField.swift in Sources */,
 				445433E8262DA4D200443AE1 /* SideDrawerListVC+Extensions.swift in Sources */,
 				44C8F2D2261F1DEF000F03DB /* Extensions.swift in Sources */,
 				0447C90C26C39EAD0030FB7F /* EditPhoneNoDataModel.swift in Sources */,
 				0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */,
+				04F24D6627043CE5001C3843 /* CardsListModel.swift in Sources */,
 				0C9F29E7268AE2BE00CE6178 /* APIList.swift in Sources */,
 				0C3DAAA62698220900CCE2DC /* ConfirmPasscodeDataModel.swift in Sources */,
 				04F4163126E76DF7009919A1 /* IsAcceptEventInvite.swift in Sources */,

@@ -23,11 +23,26 @@ protocol AddBankAccountDataModelDelegate:class {
     func didRecieveDataUpdate2(data:ResendOTPModel)
     func didFailDataUpdateWithError2(error:Error)
 }
+protocol GetCardsListDataModelDelegate:class{
+    func didRecieveDataUpdate(data:CardsListModel)
+    func didFailDataUpdateWithError2(error:Error)
+}
+protocol DeleteCardDataModelDelegate : class {
+    func didRecieveDataUpdate(data:SignUpModel)
+    func didFailDataUpdateWithError3(error:Error)
+}
+protocol CardDetailsDataModelDelegate : class{
+    func didRecieveDataUpdate(data:CardDetailsModel)
+    func didFailDataUpdateWithError(error:Error)
+}
 class CreateCardDataModel: NSObject
 {
     weak var delegate  : CreateCardDataModelDelegate?
     weak var delegate1 : BankInfoDataModelDelegate?
     weak var delegate2 : AddBankAccountDataModelDelegate?
+    weak var cardListDelegate : GetCardsListDataModelDelegate?
+    weak var deleteCardDelegate : DeleteCardDataModelDelegate?
+    weak var cardDetailsDelegate : CardDetailsDataModelDelegate?
     let sharedInstance = Connection()
     
     //Properties for Creating Card
@@ -36,6 +51,9 @@ class CreateCardDataModel: NSObject
     var expDate = ""
     var cardHolderName = ""
     var cvv = ""
+    var status = ""
+    var cardName = ""
+    var cardID = ""
     
     //Properties for Adding Bank Account
     var accountNumber = ""
@@ -84,7 +102,9 @@ class CreateCardDataModel: NSObject
             "cardNumber" : cardNumber,
             "expDate" : expDate,
             "cardHolderName" : cardHolderName,
-            "cvv" : cvv
+            "cvv" : cvv,
+            "cardName" : cardName,
+            "status" : status
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
@@ -159,6 +179,116 @@ class CreateCardDataModel: NSObject
                                         (error) in
                                         self.delegate2?.didFailDataUpdateWithError2(error: error)
                                     })
+    }
+    
+    func getCardDetails()
+    {
+        let url =  APIList().getUrlString(url: .CARDDETAIL)
+        let parameter : Parameters = [
+            "cardID" : cardID
+        ]
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: header,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(CardDetailsModel.self, from: result!)
+                                                self.cardDetailsDelegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.cardDetailsDelegate?.didFailDataUpdateWithError(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No response from server")
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.cardDetailsDelegate?.didFailDataUpdateWithError(error: error)
+                                    })
+    }
+    func getCardsList()
+    {
+        let url =  APIList().getUrlString(url: .CARDLIST)
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestGET(url, params: nil, headers: header,
+                                  success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(CardsListModel.self, from: result!)
+                                                self.cardListDelegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.cardListDelegate?.didFailDataUpdateWithError2(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No response from server")
+                                        }
+                                    },
+                                  failure:
+                                    {
+                                        (error) in
+                                        self.cardListDelegate?.didFailDataUpdateWithError2(error: error)
+                                    })
+    }
+    
+    func deleteCard()
+    {
+        
+        var url =  APIList().getUrlString(url: .DELETECARD)
+        url = url+cardID
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestDELETE(url, params: nil, headers: header,
+                                     success:
+                                        {
+                                            (JSON) in
+                                            let  result :Data? = JSON
+                                            if result != nil
+                                            {
+                                                do
+                                            {
+                                                let response = try JSONDecoder().decode(SignUpModel.self, from: result!)
+                                                self.deleteCardDelegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                                catch let error as NSError
+                                                {
+                                                    self.deleteCardDelegate?.didFailDataUpdateWithError3(error: error)
+                                                }
+                                            }
+                                            else
+                                            {
+                                                print("No response from server")
+                                            }
+                                        },
+                                     failure:
+                                        {
+                                            (error) in
+                                            self.deleteCardDelegate?.didFailDataUpdateWithError3(error: error)
+                                            
+                                        })
     }
 }
 

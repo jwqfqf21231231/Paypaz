@@ -62,10 +62,11 @@ class SettingsVC : CustomViewController {
         _ = self.pushVC("AddBankAccountVC")
     }
     @IBAction func btn_AddCardDetails(_ sender:UIButton) {
-        if let cardVC = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC {
-            cardVC.fromSettings = true
-            cardVC.isAddingNewCard = false
-        }
+        _ = self.pushVC("PaymentCardsVC")
+//        if let cardVC = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC {
+//            cardVC.fromSettings = true
+//            cardVC.isAddingNewCard = false
+//        }
     }
     @IBAction func btn_TermsPolicies(_ sender:UIButton) {
         _ = self.pushVC("TermsPoliciesVC")

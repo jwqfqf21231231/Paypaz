@@ -28,7 +28,11 @@ enum urlString:String
     case FORGOTPASSWORDOTP = "user/forgot/verify/otp"
     case RESENDOTP = "user/resend/otp"
     case BANKINFO = "home/banks"
+    
     case CREATECARD = "user/card/create"
+    case CARDLIST = "user/card/listing"
+    case DELETECARD = "user/card/delete/"
+    case CARDDETAIL = "user/card/detail"
     case ADDBANKACCOUNT = "user/bank/create"
     
     case PASSCODE = "user/passcode"

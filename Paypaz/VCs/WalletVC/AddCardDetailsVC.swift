@@ -13,7 +13,7 @@ class AddCardDetailsVC : CardViewController {
     
     
     var amountToAdd = ""
-    var picker = MonthYearPickerView()
+    //var picker = MonthYearPickerView()
     let datePicker = ShortDatePickerView()
     private let dataSource = GetWalletAmountDataModel()
     @IBOutlet weak var btn_cardNumber : RoundButton!

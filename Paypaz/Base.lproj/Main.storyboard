@@ -4165,7 +4165,7 @@
                                 <rect key="frame" x="0.0" y="51.5" width="375" height="615.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI6-jE-VMA" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="454"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="495.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="credit_card" translatesAutoresizingMaskIntoConstraints="NO" id="ahd-5h-TiT">
                                                 <rect key="frame" x="143" y="62" width="89" height="89"/>
@@ -4276,7 +4276,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWm-b0-5ng" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="385.5" width="337.5" height="43.5"/>
+                                                <rect key="frame" x="19" y="427" width="337.5" height="43.5"/>
                                                 <color key="backgroundColor" name="GreenColor"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                                 <state key="normal" title="Verify Card">
@@ -4307,21 +4307,53 @@
                                                     <action selector="btn_VerifyCard:" destination="goZ-Qt-oBj" eventType="touchUpInside" id="OT0-Ir-Nds"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set As Primary Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xow-BE-8Hj">
+                                                <rect key="frame" x="19" y="385.5" width="140" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                <color key="textColor" name="BlueColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIV-tM-l5f" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
+                                                <rect key="frame" x="302.5" y="378" width="58.5" height="37"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="50"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="border_Width">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="border_Color">
+                                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yZv-ZF-FoZ">
+                                                <rect key="frame" x="307.5" y="381" width="51" height="31"/>
+                                                <color key="onTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="thumbTintColor" name="GreenColor"/>
+                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" red="0.97647058823529409" green="0.98431372549019602" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="yZv-ZF-FoZ" firstAttribute="trailing" secondItem="D2N-j9-brQ" secondAttribute="trailing" id="1yx-XZ-q0c"/>
                                             <constraint firstItem="ahd-5h-TiT" firstAttribute="top" secondItem="ZI6-jE-VMA" secondAttribute="top" constant="62" id="2t1-Br-kfr"/>
                                             <constraint firstItem="qIQ-Ct-fT1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="08W-lR-W2H" secondAttribute="trailing" constant="8" id="5Wf-33-tbM"/>
+                                            <constraint firstItem="Xow-BE-8Hj" firstAttribute="leading" secondItem="D2N-j9-brQ" secondAttribute="leading" id="97o-kk-AfS"/>
+                                            <constraint firstItem="gIV-tM-l5f" firstAttribute="centerY" secondItem="yZv-ZF-FoZ" secondAttribute="centerY" id="D4t-kQ-ulg"/>
                                             <constraint firstItem="D2N-j9-brQ" firstAttribute="top" secondItem="08W-lR-W2H" secondAttribute="bottom" constant="20" id="ERz-Tr-xC6"/>
-                                            <constraint firstItem="FWm-b0-5ng" firstAttribute="top" secondItem="D2N-j9-brQ" secondAttribute="bottom" constant="20" id="Ece-Xn-QyC"/>
+                                            <constraint firstItem="yZv-ZF-FoZ" firstAttribute="centerY" secondItem="Xow-BE-8Hj" secondAttribute="centerY" id="ESR-zI-Zw6"/>
                                             <constraint firstAttribute="bottom" secondItem="FWm-b0-5ng" secondAttribute="bottom" constant="25" id="FnQ-gu-q3A"/>
                                             <constraint firstItem="qIQ-Ct-fT1" firstAttribute="width" secondItem="08W-lR-W2H" secondAttribute="width" id="J1V-Ta-Zl1"/>
                                             <constraint firstItem="uJl-wu-kLn" firstAttribute="top" secondItem="ahd-5h-TiT" secondAttribute="bottom" constant="30" id="L4T-ie-gf9"/>
                                             <constraint firstItem="FWm-b0-5ng" firstAttribute="height" secondItem="D2N-j9-brQ" secondAttribute="height" multiplier="0.9" id="LlO-2u-UPH"/>
                                             <constraint firstItem="uJl-wu-kLn" firstAttribute="width" secondItem="ZI6-jE-VMA" secondAttribute="width" multiplier="0.9" id="N7R-jD-8bW"/>
                                             <constraint firstItem="08W-lR-W2H" firstAttribute="top" secondItem="uJl-wu-kLn" secondAttribute="bottom" constant="20" id="NE7-tN-wPW"/>
+                                            <constraint firstItem="gIV-tM-l5f" firstAttribute="centerX" secondItem="yZv-ZF-FoZ" secondAttribute="centerX" id="Pw8-d3-OMd"/>
                                             <constraint firstItem="08W-lR-W2H" firstAttribute="leading" secondItem="uJl-wu-kLn" secondAttribute="leading" id="UC1-ZZ-EyS"/>
+                                            <constraint firstItem="gIV-tM-l5f" firstAttribute="width" secondItem="yZv-ZF-FoZ" secondAttribute="width" multiplier="1.2" id="aan-lz-KDq"/>
                                             <constraint firstItem="D2N-j9-brQ" firstAttribute="height" secondItem="08W-lR-W2H" secondAttribute="height" id="anx-Ki-rGv"/>
+                                            <constraint firstItem="FWm-b0-5ng" firstAttribute="top" secondItem="Xow-BE-8Hj" secondAttribute="bottom" constant="20" id="fWf-Ab-ZRd"/>
                                             <constraint firstItem="D2N-j9-brQ" firstAttribute="width" secondItem="uJl-wu-kLn" secondAttribute="width" id="g99-oD-kw8"/>
                                             <constraint firstItem="08W-lR-W2H" firstAttribute="width" secondItem="uJl-wu-kLn" secondAttribute="width" multiplier="0.45" id="hmm-r4-uaj"/>
                                             <constraint firstItem="qIQ-Ct-fT1" firstAttribute="trailing" secondItem="uJl-wu-kLn" secondAttribute="trailing" id="iDw-af-coW"/>
@@ -4330,8 +4362,10 @@
                                             <constraint firstItem="08W-lR-W2H" firstAttribute="height" secondItem="uJl-wu-kLn" secondAttribute="height" id="plT-mb-fUh"/>
                                             <constraint firstItem="ahd-5h-TiT" firstAttribute="centerX" secondItem="ZI6-jE-VMA" secondAttribute="centerX" id="sPY-wv-Eyj"/>
                                             <constraint firstItem="uJl-wu-kLn" firstAttribute="centerX" secondItem="ZI6-jE-VMA" secondAttribute="centerX" id="tva-lV-t6T"/>
+                                            <constraint firstItem="Xow-BE-8Hj" firstAttribute="top" secondItem="D2N-j9-brQ" secondAttribute="bottom" constant="20" id="uc9-VQ-SJo"/>
                                             <constraint firstItem="FWm-b0-5ng" firstAttribute="width" secondItem="D2N-j9-brQ" secondAttribute="width" id="vv4-KO-2iF"/>
                                             <constraint firstItem="D2N-j9-brQ" firstAttribute="centerX" secondItem="uJl-wu-kLn" secondAttribute="centerX" id="xxD-NN-ELa"/>
+                                            <constraint firstItem="gIV-tM-l5f" firstAttribute="height" secondItem="yZv-ZF-FoZ" secondAttribute="height" multiplier="1.2" id="zYu-uk-muX"/>
                                             <constraint firstItem="FWm-b0-5ng" firstAttribute="centerX" secondItem="D2N-j9-brQ" secondAttribute="centerX" id="zo7-jV-UcK"/>
                                         </constraints>
                                     </view>
@@ -4365,6 +4399,8 @@
                     <connections>
                         <outlet property="btn_cardNumber" destination="uJl-wu-kLn" id="8de-7P-uvW"/>
                         <outlet property="img_CardImage" destination="nbW-BI-RmR" id="ODR-FB-7O0"/>
+                        <outlet property="lbl_Title" destination="pqw-1K-MaC" id="rZ3-tu-FLf"/>
+                        <outlet property="primarySwitch" destination="yZv-ZF-FoZ" id="SXv-Rr-XDn"/>
                         <outlet property="txt_cardHolderName" destination="D2N-j9-brQ" id="VxN-cz-SDJ"/>
                         <outlet property="txt_cardNumber" destination="ymz-4j-zMI" id="sbR-JN-HnD"/>
                         <outlet property="txt_cvv" destination="08W-lR-W2H" id="UKG-3d-w2z"/>
@@ -9134,7 +9170,7 @@ More</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvd-rV-6C0" customClass="RoundView" customModule="Paypaz" customModuleProvider="target">
-                                <rect key="frame" x="19" y="256" width="337.5" height="343"/>
+                                <rect key="frame" x="19" y="258" width="337.5" height="341"/>
                                 <subviews>
                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter By" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5K-TR-i9j">
                                         <rect key="frame" x="0.0" y="0.0" width="337.5" height="48.5"/>
@@ -9177,7 +9213,7 @@ More</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBP-br-9y0" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="181.5" width="304" height="20.5"/>
+                                        <rect key="frame" x="16.5" y="181.5" width="304" height="19.5"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -9192,20 +9228,20 @@ More</string>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-qm-BNr" userLabel="Line View2">
-                                        <rect key="frame" x="0.0" y="212" width="337.5" height="1"/>
+                                        <rect key="frame" x="0.0" y="211" width="337.5" height="1"/>
                                         <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="4Ff-SX-Ybl"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCc-UW-fMz">
-                                        <rect key="frame" x="16.5" y="221" width="304" height="23"/>
+                                        <rect key="frame" x="16.5" y="220" width="304" height="23"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OyJ-2b-ATS" customClass="RoundTextField" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="249" width="304" height="20.5"/>
+                                        <rect key="frame" x="16.5" y="248" width="304" height="19.5"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -9220,7 +9256,7 @@ More</string>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2o-kA-ldE" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="16.5" y="284.5" width="304" height="43.5"/>
+                                        <rect key="frame" x="16.5" y="282.5" width="304" height="43.5"/>
                                         <color key="backgroundColor" name="GreenColor"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="10"/>
@@ -9765,8 +9801,8 @@ More</string>
                                                     <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Y9-aQ-A8X" userLabel="add bank" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="195" width="367.5" height="46.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Card Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-fD-9VO">
-                                                                <rect key="frame" x="70" y="12.5" width="115" height="21.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Cards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-fD-9VO">
+                                                                <rect key="frame" x="70" y="12.5" width="108.5" height="21.5"/>
                                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                                                 <color key="textColor" name="BlueColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -13224,10 +13260,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InviteCell" id="pQ4-fn-3ID" customClass="InviteCell" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="337.5" height="165"/>
+                                        <rect key="frame" x="0.0" y="28" width="337.5" height="165.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pQ4-fn-3ID" id="2b3-cB-HVI">
-                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="165"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="165.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pz9-e9-qhW" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
@@ -13284,7 +13320,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </button>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-6N-NIN" userLabel="Line View">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-6N-NIN" userLabel="Line View">
                                                             <rect key="frame" x="56.5" y="86.5" width="270" height="1"/>
                                                             <color key="backgroundColor" red="0.52941176470588236" green="0.60392156862745094" blue="0.75686274509803919" alpha="0.11" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <constraints>
@@ -13508,7 +13544,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHD-aS-8FC" customClass="PlainCircularProgressBar" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="271" width="151" height="151.5"/>
+                                                <rect key="frame" x="9.75" y="271.25" width="151.5" height="151"/>
                                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="ringWidth">
@@ -19910,23 +19946,27 @@ More</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7z-ah-jdg">
-                                <rect key="frame" x="19" y="132.5" width="337.5" height="519.5"/>
+                                <rect key="frame" x="19" y="71.5" width="337.5" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="8Mi-Aq-mFF"/>
+                                </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProductTableCell" id="x8S-JO-qdI" customClass="ProductTableCell" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="337.5" height="73"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CardCell" id="C49-Wd-ieu" customClass="CardCell" customModule="Paypaz" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="337.5" height="90.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x8S-JO-qdI" id="jEu-Ir-9LX">
-                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="73"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C49-Wd-ieu" id="CWC-Zm-1sZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28q-pF-PRR" customClass="DesignableView" customModule="Paypaz" customModuleProvider="target">
-                                                    <rect key="frame" x="5" y="5" width="327.5" height="63"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dai-YN-qbY" customClass="DesignableView" customModule="Paypaz" customModuleProvider="target">
+                                                    <rect key="frame" x="5" y="5" width="327.5" height="80.5"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="visa" translatesAutoresizingMaskIntoConstraints="NO" id="PP5-PJ-oHW" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                            <rect key="frame" x="7" y="15" width="33" height="33"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="visa" translatesAutoresizingMaskIntoConstraints="NO" id="5yt-Cl-tNM" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
+                                                            <rect key="frame" x="15" y="31.5" width="35" height="35"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="PP5-PJ-oHW" secondAttribute="height" multiplier="1:1" id="3fH-aT-bfz"/>
+                                                                <constraint firstAttribute="width" constant="35" id="AQs-ht-h4g"/>
+                                                                <constraint firstAttribute="width" secondItem="5yt-Cl-tNM" secondAttribute="height" multiplier="1:1" id="Lzo-Mu-MKp"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -19934,43 +19974,54 @@ More</string>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <stackView opaque="NO" tag="2" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eqH-ht-0YE">
-                                                            <rect key="frame" x="50" y="10" width="237.5" height="43"/>
+                                                        <stackView opaque="NO" tag="2" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VXi-ha-G1B">
+                                                            <rect key="frame" x="65" y="27.5" width="222.5" height="43"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ya-78-R6N">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="237.5" height="19"/>
-                                                                    <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTj-NU-uiy">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="222.5" height="19"/>
+                                                                    <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                                                     <color key="textColor" name="BlueColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4988 0800 00XX XXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJJ-uv-h2Z">
-                                                                    <rect key="frame" x="0.0" y="24" width="237.5" height="19"/>
-                                                                    <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4988 0800 00XX XXXX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0r-8z-cJ6">
+                                                                    <rect key="frame" x="0.0" y="24" width="222.5" height="19"/>
+                                                                    <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                                                     <color key="textColor" name="BlueColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgN-AQ-Mmz">
-                                                            <rect key="frame" x="292.5" y="16.5" width="30" height="30"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbl-ZK-Ayi">
+                                                            <rect key="frame" x="292.5" y="34" width="30" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="ZwN-5H-IMH"/>
-                                                                <constraint firstAttribute="width" secondItem="wgN-AQ-Mmz" secondAttribute="height" multiplier="1:1" id="aE2-bb-xrt"/>
+                                                                <constraint firstAttribute="width" secondItem="Bbl-ZK-Ayi" secondAttribute="height" multiplier="1:1" id="Eg2-s8-L2E"/>
+                                                                <constraint firstAttribute="width" constant="30" id="zC9-Fr-Ngg"/>
                                                             </constraints>
                                                             <state key="normal" image="deleted"/>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M2-yh-ROj">
+                                                            <rect key="frame" x="275" y="10" width="47.5" height="19"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="19" id="yTB-xv-aRd"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                            <color key="textColor" name="BlueColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="PP5-PJ-oHW" firstAttribute="width" secondItem="28q-pF-PRR" secondAttribute="width" multiplier="0.1" id="1BK-4l-81A"/>
-                                                        <constraint firstItem="eqH-ht-0YE" firstAttribute="leading" secondItem="PP5-PJ-oHW" secondAttribute="trailing" constant="10" id="8dG-Zz-akm"/>
-                                                        <constraint firstItem="wgN-AQ-Mmz" firstAttribute="leading" secondItem="eqH-ht-0YE" secondAttribute="trailing" constant="5" id="N6G-M5-ylI"/>
-                                                        <constraint firstItem="PP5-PJ-oHW" firstAttribute="centerY" secondItem="eqH-ht-0YE" secondAttribute="centerY" id="NzY-f6-HlK"/>
-                                                        <constraint firstAttribute="bottom" secondItem="eqH-ht-0YE" secondAttribute="bottom" constant="10" id="Oui-rU-h2I"/>
-                                                        <constraint firstAttribute="trailing" secondItem="wgN-AQ-Mmz" secondAttribute="trailing" constant="5" id="Z6f-ZA-Ow8"/>
-                                                        <constraint firstItem="PP5-PJ-oHW" firstAttribute="leading" secondItem="28q-pF-PRR" secondAttribute="leading" constant="7" id="e7M-Od-vPX"/>
-                                                        <constraint firstItem="eqH-ht-0YE" firstAttribute="top" secondItem="28q-pF-PRR" secondAttribute="top" constant="10" id="f5j-3u-Oqq"/>
-                                                        <constraint firstItem="wgN-AQ-Mmz" firstAttribute="centerY" secondItem="eqH-ht-0YE" secondAttribute="centerY" id="fzS-gF-OHJ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="VXi-ha-G1B" secondAttribute="bottom" constant="10" id="0kX-7d-qGy"/>
+                                                        <constraint firstItem="VXi-ha-G1B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dai-YN-qbY" secondAttribute="top" constant="10" id="5FX-Tv-xGS"/>
+                                                        <constraint firstItem="Bbl-ZK-Ayi" firstAttribute="centerY" secondItem="VXi-ha-G1B" secondAttribute="centerY" id="63z-TB-KIK"/>
+                                                        <constraint firstItem="2M2-yh-ROj" firstAttribute="trailing" secondItem="Bbl-ZK-Ayi" secondAttribute="trailing" id="H1w-ae-G2e"/>
+                                                        <constraint firstItem="Bbl-ZK-Ayi" firstAttribute="leading" secondItem="VXi-ha-G1B" secondAttribute="trailing" constant="5" id="M3U-yX-Dwj"/>
+                                                        <constraint firstItem="5yt-Cl-tNM" firstAttribute="leading" secondItem="dai-YN-qbY" secondAttribute="leading" constant="15" id="Nyx-aR-mE7"/>
+                                                        <constraint firstItem="2M2-yh-ROj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dai-YN-qbY" secondAttribute="top" constant="10" id="SiO-yP-W2e"/>
+                                                        <constraint firstItem="Bbl-ZK-Ayi" firstAttribute="top" secondItem="2M2-yh-ROj" secondAttribute="bottom" constant="5" id="Vm9-Pr-Jay"/>
+                                                        <constraint firstItem="VXi-ha-G1B" firstAttribute="leading" secondItem="5yt-Cl-tNM" secondAttribute="trailing" constant="15" id="Y5a-ry-AC0"/>
+                                                        <constraint firstItem="5yt-Cl-tNM" firstAttribute="centerY" secondItem="VXi-ha-G1B" secondAttribute="centerY" id="ln7-OL-dWD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Bbl-ZK-Ayi" secondAttribute="trailing" constant="5" id="sAg-jT-8fJ"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -19992,28 +20043,33 @@ More</string>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="28q-pF-PRR" firstAttribute="top" secondItem="jEu-Ir-9LX" secondAttribute="top" constant="5" id="92W-jN-8DN"/>
-                                                <constraint firstItem="28q-pF-PRR" firstAttribute="leading" secondItem="jEu-Ir-9LX" secondAttribute="leading" constant="5" id="dc1-GL-pEt"/>
-                                                <constraint firstAttribute="trailing" secondItem="28q-pF-PRR" secondAttribute="trailing" constant="5" id="oSJ-LJ-F0q"/>
-                                                <constraint firstAttribute="bottom" secondItem="28q-pF-PRR" secondAttribute="bottom" constant="5" id="zfd-Sf-r4g"/>
+                                                <constraint firstAttribute="trailing" secondItem="dai-YN-qbY" secondAttribute="trailing" constant="5" id="Avd-eg-VVh"/>
+                                                <constraint firstItem="dai-YN-qbY" firstAttribute="leading" secondItem="CWC-Zm-1sZ" secondAttribute="leading" constant="5" id="O4B-Uk-pPg"/>
+                                                <constraint firstAttribute="bottom" secondItem="dai-YN-qbY" secondAttribute="bottom" constant="5" id="gcr-1B-fYR"/>
+                                                <constraint firstItem="dai-YN-qbY" firstAttribute="top" secondItem="CWC-Zm-1sZ" secondAttribute="top" constant="5" id="jG6-Vg-Xd5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="img_Product" destination="PP5-PJ-oHW" id="m7a-ZA-xrQ"/>
-                                            <outlet property="lbl_ProductName" destination="5ya-78-R6N" id="z1l-Ma-LiC"/>
+                                            <outlet property="carHolderNameLabel" destination="rTj-NU-uiy" id="Gct-KU-Kvj"/>
+                                            <outlet property="cardImage" destination="5yt-Cl-tNM" id="s1w-MD-Ck3"/>
+                                            <outlet property="cardNumberLabel" destination="q0r-8z-cJ6" id="7zd-rU-HwC"/>
+                                            <outlet property="deleteButton" destination="Bbl-ZK-Ayi" id="VEP-0a-Rrq"/>
+                                            <outlet property="primaryLabel" destination="2M2-yh-ROj" id="EK0-eg-WG8"/>
+                                            <outlet property="primaryLabelHeight" destination="yTB-xv-aRd" id="Hkz-qy-rDg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0F-L5-chk" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                <rect key="frame" x="19" y="71.5" width="337.5" height="48"/>
-                                <color key="backgroundColor" red="0.086274509799999996" green="0.76470588240000004" blue="0.3803921569" alpha="0.1043717894" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="19" y="241.5" width="337.5" height="48"/>
+                                <color key="backgroundColor" name="GreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="e0F-L5-chk" secondAttribute="height" multiplier="7:1" id="jet-kf-tbL"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Add New Card" image="plus_icon">
-                                    <color key="titleColor" name="GreenColor"/>
+                                <state key="normal" title="+ Add New Card">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -20046,30 +20102,31 @@ More</string>
                         <constraints>
                             <constraint firstItem="3TU-wG-Rpd" firstAttribute="centerX" secondItem="is8-Rc-YNo" secondAttribute="centerX" id="1ok-G5-Fh3"/>
                             <constraint firstItem="0e3-eM-S59" firstAttribute="width" secondItem="967-Fp-OcL" secondAttribute="width" id="2i2-RL-Dci"/>
+                            <constraint firstItem="u7z-ah-jdg" firstAttribute="top" secondItem="0e3-eM-S59" secondAttribute="bottom" constant="20" id="4yX-gG-ZaN"/>
                             <constraint firstItem="u7z-ah-jdg" firstAttribute="centerX" secondItem="e0F-L5-chk" secondAttribute="centerX" id="BeC-sW-UbP"/>
                             <constraint firstItem="u7z-ah-jdg" firstAttribute="width" secondItem="e0F-L5-chk" secondAttribute="width" id="CSb-Q9-JGd"/>
                             <constraint firstItem="0e3-eM-S59" firstAttribute="top" secondItem="967-Fp-OcL" secondAttribute="top" id="Geb-2V-rWT"/>
-                            <constraint firstItem="e0F-L5-chk" firstAttribute="top" secondItem="0e3-eM-S59" secondAttribute="bottom" constant="20" id="Jig-E9-IyO"/>
+                            <constraint firstItem="is8-Rc-YNo" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="e0F-L5-chk" secondAttribute="bottom" constant="5" id="S40-w8-rBz"/>
                             <constraint firstItem="0e3-eM-S59" firstAttribute="centerX" secondItem="is8-Rc-YNo" secondAttribute="centerX" id="biB-P2-M0m"/>
-                            <constraint firstItem="u7z-ah-jdg" firstAttribute="top" secondItem="e0F-L5-chk" secondAttribute="bottom" constant="13" id="eAS-cf-Ymc"/>
+                            <constraint firstItem="u7z-ah-jdg" firstAttribute="bottom" secondItem="e0F-L5-chk" secondAttribute="top" constant="-20" id="eAS-cf-Ymc"/>
                             <constraint firstItem="3TU-wG-Rpd" firstAttribute="top" secondItem="is8-Rc-YNo" secondAttribute="top" constant="5" id="jqD-xF-zPH"/>
                             <constraint firstItem="e0F-L5-chk" firstAttribute="centerX" secondItem="is8-Rc-YNo" secondAttribute="centerX" id="mMj-6g-nda"/>
-                            <constraint firstItem="is8-Rc-YNo" firstAttribute="bottom" secondItem="u7z-ah-jdg" secondAttribute="bottom" constant="15" id="wJ2-zw-hoM"/>
                             <constraint firstItem="e0F-L5-chk" firstAttribute="width" secondItem="967-Fp-OcL" secondAttribute="width" multiplier="0.9" id="xEM-5G-bGh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableViewHeight" destination="8Mi-Aq-mFF" id="nj9-P5-3R8"/>
                         <outlet property="tableView_AddCards" destination="u7z-ah-jdg" id="4bJ-Sg-ydv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5w-rC-g6D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3902" y="2331"/>
+            <point key="canvasLocation" x="3901.5999999999999" y="2330.2848575712146"/>
         </scene>
     </scenes>
     <designables>
         <designable name="08W-lR-W2H">
-            <size key="intrinsicContentSize" width="61" height="23"/>
+            <size key="intrinsicContentSize" width="41" height="23"/>
         </designable>
         <designable name="0Cn-aS-NgF">
             <size key="intrinsicContentSize" width="111.5" height="23"/>
@@ -20213,7 +20270,7 @@ More</string>
             <size key="intrinsicContentSize" width="96.5" height="23"/>
         </designable>
         <designable name="D2N-j9-brQ">
-            <size key="intrinsicContentSize" width="147" height="23"/>
+            <size key="intrinsicContentSize" width="127" height="23"/>
         </designable>
         <designable name="DNq-4y-XGo">
             <size key="intrinsicContentSize" width="30" height="31"/>
@@ -20516,7 +20573,7 @@ More</string>
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="e0F-L5-chk">
-            <size key="intrinsicContentSize" width="128" height="22"/>
+            <size key="intrinsicContentSize" width="141" height="36"/>
         </designable>
         <designable name="eDQ-51-YuB">
             <size key="intrinsicContentSize" width="19.5" height="22"/>
@@ -20553,6 +20610,9 @@ More</string>
         </designable>
         <designable name="gHk-M8-OAb">
             <size key="intrinsicContentSize" width="59" height="36"/>
+        </designable>
+        <designable name="gIV-tM-l5f">
+            <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="gKJ-eK-oWv">
             <size key="intrinsicContentSize" width="79" height="32"/>
@@ -20693,7 +20753,7 @@ More</string>
             <size key="intrinsicContentSize" width="15.5" height="22"/>
         </designable>
         <designable name="qIQ-Ct-fT1">
-            <size key="intrinsicContentSize" width="91" height="23"/>
+            <size key="intrinsicContentSize" width="71" height="23"/>
         </designable>
         <designable name="qtc-Bd-mIP">
             <size key="intrinsicContentSize" width="77.5" height="34"/>
@@ -20777,7 +20837,7 @@ More</string>
             <size key="intrinsicContentSize" width="155.5" height="23"/>
         </designable>
         <designable name="ymz-4j-zMI">
-            <size key="intrinsicContentSize" width="115.5" height="23"/>
+            <size key="intrinsicContentSize" width="95.5" height="23"/>
         </designable>
         <designable name="zUr-Ij-kVI">
             <size key="intrinsicContentSize" width="30" height="34"/>
