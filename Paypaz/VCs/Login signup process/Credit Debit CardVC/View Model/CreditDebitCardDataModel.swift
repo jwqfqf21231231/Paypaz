@@ -35,6 +35,10 @@ protocol CardDetailsDataModelDelegate : class{
     func didRecieveDataUpdate(data:CardDetailsModel)
     func didFailDataUpdateWithError(error:Error)
 }
+protocol UpdateCardDetailDataModelDelegate : class {
+    func didRecieveDataUpdate(data:ResendOTPModel)
+    func didFailDataUpdateWithError2(error:Error)
+}
 class CreateCardDataModel: NSObject
 {
     weak var delegate  : CreateCardDataModelDelegate?
@@ -43,6 +47,7 @@ class CreateCardDataModel: NSObject
     weak var cardListDelegate : GetCardsListDataModelDelegate?
     weak var deleteCardDelegate : DeleteCardDataModelDelegate?
     weak var cardDetailsDelegate : CardDetailsDataModelDelegate?
+    weak var updateCardDetailsDelegate : UpdateCardDetailDataModelDelegate?
     let sharedInstance = Connection()
     
     //Properties for Creating Card
@@ -139,6 +144,50 @@ class CreateCardDataModel: NSObject
                                     })
     }
     
+    func updateCard()
+    {
+        let url =  APIList().getUrlString(url: .UPDATECARD)
+        
+        let parameter : Parameters = [
+            "cardNumber" : cardNumber,
+            "expDate" : expDate,
+            "cardHolderName" : cardHolderName,
+            "cvv" : cvv,
+            "cardName" : cardName,
+            "status" : status,
+            "cardID" : cardID
+        ]
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: header,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                self.updateCardDetailsDelegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.updateCardDetailsDelegate?.didFailDataUpdateWithError2(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No response from server")
+                                        }
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.updateCardDetailsDelegate?.didFailDataUpdateWithError2(error: error)
+                                    })
+    }
     func addBankAccount()
     {
         let url =  APIList().getUrlString(url: .ADDBANKACCOUNT)

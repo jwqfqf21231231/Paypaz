@@ -142,6 +142,7 @@ extension CreatePinVC : CreatePinDataModelDelegate
             if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
             {
                 vc.fromPin = true
+                vc.strictlyPrimary = true
             }
         }
         else

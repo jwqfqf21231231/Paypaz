@@ -30,6 +30,7 @@ enum urlString:String
     case BANKINFO = "home/banks"
     
     case CREATECARD = "user/card/create"
+    case UPDATECARD = "user/card/update"
     case CARDLIST = "user/card/listing"
     case DELETECARD = "user/card/delete/"
     case CARDDETAIL = "user/card/detail"

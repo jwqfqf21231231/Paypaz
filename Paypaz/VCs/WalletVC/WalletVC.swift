@@ -36,9 +36,13 @@ class WalletVC : CustomViewController {
          _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_AddMoney(_ sender:UIButton) {
-        if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
-            popupVC.delegate = self
+        if let popupVC = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC{
+            popupVC.selectedPopupType = .AddCard
+            popupVC.popUpScreenDelegate = self
         }
+//        if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
+//            popupVC.delegate = self
+//        }
     }
     
     @IBAction func btn_SendToBank(_ sender:UIButton) {
@@ -46,6 +50,14 @@ class WalletVC : CustomViewController {
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+extension WalletVC : PopUpScreenDelegate{
+    func popUpScreen() {
+        if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC{
+            vc.strictlyPrimary = true
+            vc.fromSettings = true
+        }
     }
 }
 extension WalletVC : AddMoneyPopupDelegate {

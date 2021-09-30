@@ -126,6 +126,7 @@ extension MyEventsListVC : MoreOptionsDelegate {
         }
         else if type == .delete_Event {
             if let deletePopup = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC {
+                deletePopup.selectedPopupType = .DeleteEvent
                 deletePopup.eventID = eventID
                 deletePopup.updateEventDelegate = self
             }

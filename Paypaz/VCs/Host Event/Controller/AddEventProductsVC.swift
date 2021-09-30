@@ -148,7 +148,8 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "DeleteEventPopupVC") as? DeleteEventPopupVC{
             vc.modalPresentationStyle = .overCurrentContext
             vc.updateProductDelegate = self
-            vc.deleteProduct = true
+            vc.selectedPopupType = .DeleteProduct
+            //vc.deleteProduct = true
             vc.eventID = self.eventID
             vc.productID = productIDArr[button.tag]
             vc.indexNo = button.tag

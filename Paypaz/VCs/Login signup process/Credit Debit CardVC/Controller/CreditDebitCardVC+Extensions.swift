@@ -53,6 +53,8 @@ extension CreditDebitCardVC : CardDetailsDataModelDelegate
             self.txt_cardNumber.text = data.data?.cardNumber
             self.img_CardImage.image = UIImage(named: "\(data.data?.cardName ?? "")")
             self.txt_cardHolderName.text = data.data?.cardHolderName
+            self.isPrimaryOrNot = data.data?.status ?? "0"
+            self.cardName = data.data?.cardName ?? ""
             data.data?.status == "1" ? primarySwitch.setOn(true, animated: false) : primarySwitch.setOn(false, animated: false)
         }
         else
@@ -62,6 +64,35 @@ extension CreditDebitCardVC : CardDetailsDataModelDelegate
     }
     
     func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension CreditDebitCardVC : UpdateCardDetailDataModelDelegate
+{
+    func didRecieveDataUpdate(data: ResendOTPModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.addNewCardDelegate?.addNewCard()
+            self.navigationController?.popViewController(animated: false)
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError2(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
@@ -120,6 +151,9 @@ extension CreditDebitCardVC : UITextFieldDelegate{
         let enteredCharString = "\(textField.text ?? "")\(string )"
         let currentString: NSString = textField.text! as NSString
         let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+        if newString.length == 0{
+            self.img_CardImage.image = UIImage(named: "card_placeHolder")
+        }
         if textField == txt_cardNumber{
             let maxLegnth = 19
             if (enteredCharString.trim().count == 5){
@@ -141,11 +175,10 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                 return newString.length <= maxLegnth
             }
         }else if textField == txt_cvv{
-            let maxLegnth = 3
             if (textField.text?.last == " " && string == " ") || (enteredCharString.trim().count == 0){
                 return false
             } else {
-                return newString.length <= maxLegnth
+                return newString.length <= maxLength
             }
         }
         
@@ -195,6 +228,7 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                                 self.img_CardImage.image = UIImage(named: "jcb")
                             case .amex:
                                 self.cardName = "Amex"
+                                self.maxLength = 4
                                 self.img_CardImage.image = UIImage(named: "Amex")
                             case .dinersClub:
                                 self.cardName = "Dinnar"
@@ -216,8 +250,8 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                         self.showAlert(withMsg: a, withOKbtn: true)
                         
                     }
-                    btn_cardNumber.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
                 }
+                btn_cardNumber.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
             }
             else
             {

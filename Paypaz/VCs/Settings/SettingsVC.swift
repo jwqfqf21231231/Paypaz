@@ -40,10 +40,12 @@ class SettingsVC : CustomViewController {
         if sender.isOn == true
         {
             dataSource.status = "1"
+            UserDefaults.standard.setValue("1", forKey: "isNotification")
         }
         else
         {
             dataSource.status = "0"
+            UserDefaults.standard.setValue("0", forKey: "isNotification")
         }
         dataSource.changeNotificationStatus()
     }

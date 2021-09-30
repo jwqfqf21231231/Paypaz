@@ -23,6 +23,9 @@ class CreditDebitCardVC : CardViewController {
     var cardName = ""
     var isPrimaryOrNot = "0"
     var cardID = ""
+    var maxLength = 3
+    var strictlyPrimary : Bool?
+    var madePrimary : Bool?
     //Date Picker
     //var picker = MonthYearPickerView()
     let datePicker = ShortDatePickerView()
@@ -44,10 +47,15 @@ class CreditDebitCardVC : CardViewController {
         super.viewDidLoad()
         setDelegates()
         self.hideKeyboardWhenTappedArround()
+        if strictlyPrimary ?? false{
+            self.primarySwitch.setOn(true, animated: false)
+            self.primarySwitch.isUserInteractionEnabled = false
+            self.isPrimaryOrNot = "1"
+        }
         if cardID != ""{
             self.lbl_Title.text = "Edit Card Details"
-            dataSource.cardDetailsDelegate = self
             dataSource.cardID = self.cardID
+            Connection.svprogressHudShow(view: self)
             dataSource.getCardDetails()
         }
         primarySwitch.addTarget(self, action: #selector(isPrimaryOrNot(_:)), for: .valueChanged)
@@ -134,6 +142,8 @@ class CreditDebitCardVC : CardViewController {
         txt_cardNumber.delegate = self
         txt_cardHolderName.delegate = self
         dataSource.delegate = self
+        dataSource.cardDetailsDelegate = self
+        dataSource.updateCardDetailsDelegate = self
         //dataSource.delegate1 = self
     }
     private func getBankInfo()
@@ -180,7 +190,13 @@ class CreditDebitCardVC : CardViewController {
                 dataSource.cvv = txt_cvv.text ?? ""
                 dataSource.status = isPrimaryOrNot
                 dataSource.cardName = cardName
-                dataSource.createCard()
+                if cardID != ""{
+                    dataSource.cardID = self.cardID
+                    dataSource.updateCard()
+                }
+                else{
+                    dataSource.createCard()
+                }
             }
         }
     }
@@ -194,7 +210,7 @@ class CreditDebitCardVC : CardViewController {
         {
             view.makeToast("Please enter card number")
         }
-       
+        
         else if txt_expDate.isEmptyOrWhitespace()
         {
             view.makeToast("Please enter expiry date")
@@ -203,12 +219,17 @@ class CreditDebitCardVC : CardViewController {
         {
             view.makeToast("Please enter cvv number")
         }
+        else if maxLength != txt_cvv.text?.count
+        {
+            view.makeToast("Please enter valid cvv")
+        }
+        else if self.madePrimary ?? false == true  && isPrimaryOrNot == "0"{
+            view.makeToast("Please set another card as primary before make this card as secondary")
+        }
         else
         {
             return true
         }
         return false
-        
     }
-    
 }

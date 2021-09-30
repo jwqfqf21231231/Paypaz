@@ -13,51 +13,85 @@ protocol DeleteProductDelegate : class {
 protocol DeleteEventDelegate : class {
     func deleteEventData(eventID :String)
 }
+protocol PopUpScreenDelegate : class{
+    func popUpScreen()
+}
 class DeleteEventPopupVC : CustomViewController {
     
     weak var updateEventDelegate : DeleteEventDelegate?
     weak var updateProductDelegate : DeleteProductDelegate?
+    var selectedPopupType : PopupType?
+    var popUpScreenDelegate : PopUpScreenDelegate?
+
     var eventID = ""
     var productID = ""
     var indexNo : Int?
-    var deleteProduct : Bool?
+    //var deleteProduct : Bool?
     var type : String?
     private let dataSource = DeleteEventDataModel()
     private let deleteProductDataSource = ProductDetailsDataModel()
     @IBOutlet var lbl_Title : UILabel!
     @IBOutlet var lbl_Description : UILabel!
+    @IBOutlet weak var imgIcon     : UIImageView!
     // MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
+    }
+    func setDelegates(){
         dataSource.delegate = self
         deleteProductDataSource.delegate2 = self
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        setTitle()
     }
-    func setTitle(){
-        if deleteProduct ?? false{
-            lbl_Title.text = "Delete Product"
-            lbl_Description.text = "Are you sure you want to delete this product"
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        if let type = self.selectedPopupType {
+            switch type {
+            
+            case .AddCard:
+               imgIcon.image = UIImage(named: "Credit card-rafiki")
+               lbl_Title.text = "No credit/debit cards are available?"
+                lbl_Title.textColor = UIColor(named: "BlueColor")
+               lbl_Description.text = "You have not added any credit/debit card for transactions.\n Do you want to add atleast one credit/debit card for transactions?"
+            case .DeleteEvent:
+                imgIcon.image = UIImage(named: "delete_event")
+                lbl_Title.text = "Delete Event"
+                lbl_Description.text = "Are you sure you want to delete this event"
+            case .DeleteProduct:
+                imgIcon.image = UIImage(named: "delete_event")
+                lbl_Title.text = "Delete Product"
+                lbl_Description.text = "Are you sure you want to delete this product"
+            default:
+                print("...")
+            }
         }
-        else{
-            lbl_Title.text = "Delete Event"
-            lbl_Description.text = "Are you sure you want to delete this event"
-        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.backgroundColor = UIColor.clear
     }
     
     // MARK: - --- Action ----
     @IBAction func btn_Yes(_ sender:UIButton) {
-        if deleteProduct ?? false{
-            Connection.svprogressHudShow(view: self)
-            deleteProductDataSource.eventID = self.eventID
-            deleteProductDataSource.productID = self.productID
-            deleteProductDataSource.type = self.type ?? ""
-            deleteProductDataSource.deleteProduct()
-        }
-        else{
-            Connection.svprogressHudShow(view: self)
-            dataSource.eventID = self.eventID
-            dataSource.deleteEvent()
+        if let type = self.selectedPopupType {
+            switch type {
+            case .AddCard:
+                self.dismiss(animated: false) {
+                    self.popUpScreenDelegate?.popUpScreen()
+                }
+            case .DeleteEvent:
+                Connection.svprogressHudShow(view: self)
+                dataSource.eventID = self.eventID
+                dataSource.deleteEvent()
+            case .DeleteProduct :
+                Connection.svprogressHudShow(view: self)
+                deleteProductDataSource.eventID = self.eventID
+                deleteProductDataSource.productID = self.productID
+                deleteProductDataSource.type = self.type ?? ""
+                deleteProductDataSource.deleteProduct()
+            default:print("...")
+            }
         }
     }
     @IBAction func btn_No(_ sender:UIButton) {

@@ -14,10 +14,6 @@ extension PaymentCardsVC : GetCardsListDataModelDelegate
         if data.success == 1
         {
             self.existingCards = data.data ?? []
-            DispatchQueue.main.async {
-                self.tableViewHeight.constant =  self.tableView_AddCards.contentSize.height
-            }
-            tableView_AddCards.reloadData()
         }
         else
         {
@@ -40,8 +36,7 @@ extension PaymentCardsVC : GetCardsListDataModelDelegate
 }
 extension PaymentCardsVC : AddNewCardDelegate{
     func addNewCard() {
-        Connection.svprogressHudShow(view: self)
-        dataSource.getCardsList()
+        self.getCardsList()
     }
 }
 extension PaymentCardsVC : DeleteCardDataModelDelegate
@@ -51,7 +46,7 @@ extension PaymentCardsVC : DeleteCardDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            
+            self.getCardsList()
         }
         else
         {
@@ -82,7 +77,16 @@ extension PaymentCardsVC : UITableViewDataSource,UITableViewDelegate {
         
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell") as? CardCell else { return UITableViewCell() }
         cell.cardImage.image = UIImage(named: "\(existingCards[indexPath.row].cardName ?? "")")
-        cell.cardNumberLabel.text = existingCards[indexPath.row].cardNumber
+        var cardNumber = existingCards[indexPath.row].cardNumber ?? ""
+        let firstIndex = cardNumber.index(cardNumber.startIndex, offsetBy: 12)
+        if cardNumber.count < 19{
+            cardNumber.replaceSubrange((firstIndex...),with: "XX XXX")
+        }
+        else{
+            cardNumber.replaceSubrange((firstIndex...),with: "XX XXXX")
+        }
+        
+        cell.cardNumberLabel.text = cardNumber
         cell.carHolderNameLabel.text = existingCards[indexPath.row].cardHolderName
         
         if existingCards[indexPath.row].status == "0"{
@@ -101,18 +105,28 @@ extension PaymentCardsVC : UITableViewDataSource,UITableViewDelegate {
     @objc func deleteCard(button : UIButton)
     {
         dataSource.cardID = existingCards[button.tag].id ?? ""
-        existingCards.remove(at: button.tag)
-        tableView_AddCards.reloadData()
-        DispatchQueue.main.async {
-            self.tableViewHeight.constant = self.tableView_AddCards.contentSize.height
+        if existingCards[button.tag].status == "1"{
+            self.view.makeToast("Before deleting please set another card as primary")
         }
-        Connection.svprogressHudShow(view: self)
-        dataSource.deleteCard()
+        else{
+            //existingCards.remove(at: button.tag)
+            Connection.svprogressHudShow(view: self)
+            dataSource.deleteCard()
+        }
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
         if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC{
             vc.cardID = existingCards[indexPath.row].id ?? ""
+            if existingCards[indexPath.row].cardName == "Amex"{
+                vc.maxLength = 4
+            }
+            if existingCards[indexPath.row].status == "1"{
+                vc.madePrimary = true
+            }
+            vc.addNewCardDelegate = self
         }
     }
 }

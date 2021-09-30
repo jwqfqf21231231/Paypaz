@@ -25,6 +25,9 @@ enum PopupType {
     case PaymentRequestSent
     case PayMoneyToContacts
     case eventCreatedSuccess
+    case DeleteEvent
+    case DeleteProduct
+    case AddCard
 }
 
 class SuccessPopupVC : CustomViewController {
