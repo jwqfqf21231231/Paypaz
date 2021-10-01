@@ -21,10 +21,11 @@ extension MyCartVC : UITableViewDataSource {
         cell.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
         cell.lbl_EventName.text = Items[indexPath.row].name
-        var sDate = Items[indexPath.row].addedDate ?? ""
+        var sDate = Items[indexPath.row].startDate ?? ""
         sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
         let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
-        cell.lbl_EventTime.text = startDate
+        let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+        cell.lbl_EventTime.text = startDate + " At " + startTime
         cell.lbl_EventAddress.text = Items[indexPath.row].location
         return cell
     }

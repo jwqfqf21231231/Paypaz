@@ -30,7 +30,7 @@ class CreditDebitCardVC : CardViewController {
     //var picker = MonthYearPickerView()
     let datePicker = ShortDatePickerView()
     weak var addNewCardDelegate : AddNewCardDelegate?
-    var fromPin : Bool?
+    var fromPin = false
     var isAddingNewCard : Bool?
     private let dataSource = CreateCardDataModel()
     @IBOutlet weak var btn_cardNumber : RoundButton!
@@ -41,6 +41,7 @@ class CreditDebitCardVC : CardViewController {
     @IBOutlet weak var img_CardImage : UIImageView!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var primarySwitch : UISwitch!
+    @IBOutlet weak var skipButton : UIButton!
     
     // MARK: - --- View Life Cycle ----
     override func viewDidLoad() {
@@ -57,6 +58,9 @@ class CreditDebitCardVC : CardViewController {
             dataSource.cardID = self.cardID
             Connection.svprogressHudShow(view: self)
             dataSource.getCardDetails()
+        }
+        if fromPin == false{
+            skipButton.isHidden = true
         }
         primarySwitch.addTarget(self, action: #selector(isPrimaryOrNot(_:)), for: .valueChanged)
         //    self.getBankInfo()
@@ -166,7 +170,7 @@ class CreditDebitCardVC : CardViewController {
         }
     }
     @IBAction func btn_back(_ sender:UIButton) {
-        if fromPin ?? false
+        if fromPin
         {
             self.showAlert(withMsg: "You have already entered Pin", withOKbtn: true)
         }
@@ -199,6 +203,9 @@ class CreditDebitCardVC : CardViewController {
                 }
             }
         }
+    }
+    @IBAction func btn_Skip(_ sender:UIButton){
+        _ = self.pushVC("SideDrawerBaseVC")
     }
     func validateFields() -> Bool
     {

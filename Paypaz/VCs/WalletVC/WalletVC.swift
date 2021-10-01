@@ -23,10 +23,12 @@ class WalletVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.getWalletAmountDelegate = self
+       loadWalletAmount()
+    }
+    func loadWalletAmount(){
         Connection.svprogressHudShow(view: self)
         dataSource.getWalletAmount()
     }
-    
     //MARK:- ---- Action ----
     @IBAction func btn_Back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -36,10 +38,18 @@ class WalletVC : CustomViewController {
          _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_AddMoney(_ sender:UIButton) {
-        if let popupVC = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC{
-            popupVC.selectedPopupType = .AddCard
-            popupVC.popUpScreenDelegate = self
+        if UserDefaults.standard.value(forKey: "isVerifyCard") as! String != "1"{
+            if let popupVC = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC{
+                popupVC.selectedPopupType = .AddCard
+                popupVC.popUpScreenDelegate = self
+            }
         }
+        else{
+            if let vc = self.presentPopUpVC("AddMoneyPopupVC", animated: false) as? AddMoneyPopupVC{
+                vc.delegate = self
+            }
+        }
+        
 //        if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
 //            popupVC.delegate = self
 //        }
@@ -61,7 +71,7 @@ extension WalletVC : PopUpScreenDelegate{
     }
 }
 extension WalletVC : AddMoneyPopupDelegate {
-    func isSelectedType(bank: Bool,amount:String) {
+    /*func isSelectedType(bank: Bool,amount:String) {
         if bank {
             if let vc = self.pushVC("AddBankDetailsVC") as? AddBankDetailsVC{
                 vc.amountToAdd = amount
@@ -71,5 +81,8 @@ extension WalletVC : AddMoneyPopupDelegate {
                 vc.amountToAdd = amount
             }
         }
+    }*/
+    func loadWallet() {
+        self.loadWalletAmount()
     }
 }

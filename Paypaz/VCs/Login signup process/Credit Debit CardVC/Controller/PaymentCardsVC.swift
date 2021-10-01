@@ -11,17 +11,10 @@ import UIKit
 class PaymentCardsVC: UIViewController {
     var existingCards = [CardsList](){
         didSet{
+            tableViewHeight.constant = CGFloat.greatestFiniteMagnitude
             tableView_AddCards.reloadData()
-            DispatchQueue.main.async {
-                if self.existingCards.count == 1{
-                        self.tableViewHeight.constant = 90.33
-                    self.view.layoutIfNeeded()
-                }
-                else{
-                    self.tableViewHeight.constant = self.tableView_AddCards.contentSize.height
-                    self.view.layoutIfNeeded()
-                }
-            }
+            tableView_AddCards.layoutIfNeeded()
+            self.tableViewHeight.constant = self.tableView_AddCards.contentSize.height
         }
     }
     @IBOutlet weak var tableView_AddCards       : UITableView!{

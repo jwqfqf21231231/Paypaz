@@ -26,6 +26,8 @@ class GetWalletAmountDataModel: NSObject
     var cvv = ""
     var expDate = ""
     var amount = ""
+    var cardID = ""
+    var isCard = ""
     func getWalletAmount()
     {
         let url =  APIList().getUrlString(url: .GETWALLETAMOUNT)
@@ -64,9 +66,8 @@ class GetWalletAmountDataModel: NSObject
         let url =  APIList().getUrlString(url: .ADDAMOUNTINWALLET)
         
         let parameter : Parameters = [
-            "cardNumber" : cardNumber,
-            "expDate" : expDate,
-            "cardHolderName" : cardHolderName,
+            "cardID":cardID,
+            "isCard":isCard,
             "cvv" : cvv,
             "amount" : amount
         ]

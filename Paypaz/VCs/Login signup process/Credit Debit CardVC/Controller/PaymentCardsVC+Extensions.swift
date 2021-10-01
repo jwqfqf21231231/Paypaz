@@ -14,6 +14,9 @@ extension PaymentCardsVC : GetCardsListDataModelDelegate
         if data.success == 1
         {
             self.existingCards = data.data ?? []
+            if data.data == nil{
+                UserDefaults.standard.setValue("0", forKey: "isVerifyCard")
+            }
         }
         else
         {

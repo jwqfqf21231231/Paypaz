@@ -16,4 +16,6 @@ class CardCell: UITableViewCell {
     @IBOutlet weak var primaryLabel : UILabel!
     @IBOutlet weak var primaryLabelHeight : NSLayoutConstraint!
     @IBOutlet weak var deleteButton : UIButton!
+    @IBOutlet weak var innerBackgroundView : DesignableView!
+
 }
