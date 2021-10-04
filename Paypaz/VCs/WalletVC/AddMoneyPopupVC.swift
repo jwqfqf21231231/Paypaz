@@ -10,9 +10,7 @@ import UIKit
 protocol AddMoneyPopupDelegate : class {
     func loadWallet()
 }
-class CustomTapGestureRecognizer: UITapGestureRecognizer {
-    var viewIndex: Int?
-}
+
 class AddMoneyPopupVC  : UIViewController {
     
     weak var delegate : AddMoneyPopupDelegate?
@@ -217,19 +215,19 @@ extension AddMoneyPopupVC : UITableViewDataSource,UITableViewDelegate {
             }
         }
         else{
-            cell.deleteButton.setImage(UIImage(named: ""), for: .normal)
+            cell.deleteButton.setImage(nil, for: .normal)
         }
         cell.cardNumberLabel.text = cardNumber
         cell.carHolderNameLabel.text = existingCards[indexPath.row].cardHolderName
-        
-        cell.deleteButton.tag = indexPath.row
-        cell.deleteButton.addTarget(self, action: #selector(selectCard(_:)), for: .touchUpInside)
+
         let tapGesture = CustomTapGestureRecognizer(target: self,
                                                     action: #selector(tapSelector(sender:)))
         tapGesture.viewIndex = indexPath.row
         cell.innerBackgroundView.addGestureRecognizer(tapGesture)
+        
         return cell
     }
+    
     @objc func tapSelector(sender: CustomTapGestureRecognizer) {
         let index = sender.viewIndex ?? 0
         self.cardID = existingCards[index].id ?? ""
@@ -239,7 +237,7 @@ extension AddMoneyPopupVC : UITableViewDataSource,UITableViewDelegate {
         for i in 0..<existingCards.count{
             let indexPath = IndexPath.init(row: i, section: 0)
             if let cell = tableView_AddCards.cellForRow(at: indexPath) as? CardCell{
-                cell.deleteButton.setImage(UIImage(named: ""), for: .normal)
+                cell.deleteButton.setImage(nil, for: .normal)
                 cell.innerBackgroundView.backgroundColor = UIColor(red: 232/255, green: 238/255, blue: 255/255, alpha: 1)
             }
         }
@@ -250,25 +248,6 @@ extension AddMoneyPopupVC : UITableViewDataSource,UITableViewDelegate {
         }
     }
     
-    @objc func selectCard(_ sender : UIButton)
-    {
-        self.cardID = existingCards[sender.tag].id ?? ""
-        for i in 0..<existingCards.count{
-            let indexPath = IndexPath.init(row: i, section: 0)
-            if let cell = tableView_AddCards.cellForRow(at: indexPath) as? CardCell{
-                cell.deleteButton.setImage(UIImage(named: ""), for: .normal)
-                cell.innerBackgroundView.backgroundColor = UIColor(red: 232/255, green: 238/255, blue: 255/255, alpha: 1)
-            }
-        }
-        let indexpath = IndexPath.init(row: sender.tag, section: 0)
-        if let cell = tableView_AddCards.cellForRow(at: indexpath) as? CardCell{
-            cell.deleteButton.setImage(UIImage(named: "paid"), for: .normal)
-            cell.innerBackgroundView.backgroundColor = UIColor(red: 22/255, green: 195/255, blue: 97/255, alpha: 0.1)
-        }
-        if existingCards[sender.tag].cardName == "Amex"{
-            self.maxLength = 4
-        }
-    }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }

@@ -16,20 +16,28 @@ class MyTicketsVC : CustomViewController {
             tableView_Tickets.delegate   = self
         }
     }
-    
+    private let userTicketsDataSource = UserTicketsDataModel()
+    var tickets : [Tickets]?{
+        didSet{
+            tableView_Tickets.reloadData()
+        }
+    }
     
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        userTicketsDataSource.userTicketsDelegate = self
+        userTicketsDataSource.pageNo = "0"
+        Connection.svprogressHudShow(view: self)
+        userTicketsDataSource.getUserTickets()
         // Do any additional setup after loading the view.
     }
     
-
-     // MARK: - --- Action ----
-       @IBAction func btn_back(_ sender:UIButton) {
-          self.navigationController?.popViewController(animated: true)
-       }
-
+    
+    // MARK: - --- Action ----
+    @IBAction func btn_back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

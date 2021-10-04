@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import DropDown
 
-
+class CustomTapGestureRecognizer: UITapGestureRecognizer {
+    var viewIndex: Int?
+}
 class Helper : NSObject
 {
     class func clearUserDataAndSignOut()

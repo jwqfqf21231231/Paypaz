@@ -54,6 +54,7 @@ class AddToCartVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
         if addToCart ?? false{
             if buyEvent ?? false{
                 lbl_Title.text = "Buy Ticket"
@@ -62,9 +63,6 @@ class AddToCartVC : CustomViewController {
             else{
                 lbl_Title.text = "Add To Cart"
             }
-            addToCartDataSource.delegate = self
-            dataSource.delegate = self
-            dataSource.delegate2 = self
             getEvent()
             getProducts()
         }
@@ -73,12 +71,20 @@ class AddToCartVC : CustomViewController {
             lbl_Title.text = "Buy Ticket"
             lbl_ViewAllProducts.text = "All Added Products"
             Connection.svprogressHudShow(view: self)
-            addToCartDataSource.cartDetailsDelegate = self
             addToCartDataSource.cartID = self.cartID
             addToCartDataSource.getCartDetails()
         }
         
     }
+    
+    func setDelegates(){
+        addToCartDataSource.delegate = self
+        dataSource.delegate = self
+        dataSource.delegate2 = self
+        addToCartDataSource.cartDetailsDelegate = self
+        addToCartDataSource.cartCheckOutDelegate = self
+    }
+    
     func calculateTotalProductPrice(){
         if addToCart ?? false{
             productPrice = 0

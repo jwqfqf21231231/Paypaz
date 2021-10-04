@@ -13,6 +13,10 @@
 		040F7C3E26E5DE9100F4186B /* InvitesListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */; };
 		041F059126D3C8F4003F59AD /* MyPostedContactsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */; };
 		042270BA26F9B0620060D600 /* EnterPinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042270B926F9B0620060D600 /* EnterPinVC.swift */; };
+		0424ED70270ABE9800349C0A /* UserTicketsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED6F270ABE9800349C0A /* UserTicketsModel.swift */; };
+		0424ED78270ABEE800349C0A /* UserTicketsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED77270ABEE800349C0A /* UserTicketsDataModel.swift */; };
+		0424ED80270AC27100349C0A /* TicketDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED7F270AC27100349C0A /* TicketDetailsModel.swift */; };
+		0424ED88270AC80700349C0A /* TicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED87270AC80700349C0A /* TicketsCell.swift */; };
 		0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359326B00641008FA98A /* FavouritesDataModel.swift */; };
 		0428359D26B009BF008FA98A /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359C26B009BF008FA98A /* FavouriteCell.swift */; };
 		042F44BC26FC3F9400B94715 /* CartDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44BB26FC3F9400B94715 /* CartDetailModel.swift */; };
@@ -227,6 +231,10 @@
 		040F7C3D26E5DE9100F4186B /* InvitesListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesListModel.swift; sourceTree = "<group>"; };
 		041F059026D3C8F4003F59AD /* MyPostedContactsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostedContactsModel.swift; sourceTree = "<group>"; };
 		042270B926F9B0620060D600 /* EnterPinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinVC.swift; sourceTree = "<group>"; };
+		0424ED6F270ABE9800349C0A /* UserTicketsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTicketsModel.swift; sourceTree = "<group>"; };
+		0424ED77270ABEE800349C0A /* UserTicketsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTicketsDataModel.swift; sourceTree = "<group>"; };
+		0424ED7F270AC27100349C0A /* TicketDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailsModel.swift; sourceTree = "<group>"; };
+		0424ED87270AC80700349C0A /* TicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCell.swift; sourceTree = "<group>"; };
 		0428359326B00641008FA98A /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
 		0428359C26B009BF008FA98A /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
 		042F44BB26FC3F9400B94715 /* CartDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDetailModel.swift; sourceTree = "<group>"; };
@@ -501,6 +509,23 @@
 			path = "Enter Pin";
 			sourceTree = "<group>";
 		};
+		0424ED6D270ABE6D00349C0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0424ED6F270ABE9800349C0A /* UserTicketsModel.swift */,
+				0424ED7F270AC27100349C0A /* TicketDetailsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0424ED6E270ABE7500349C0A /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				0424ED77270ABEE800349C0A /* UserTicketsDataModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		0428359826B00803008FA98A /* View Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,6 +684,7 @@
 				0428359C26B009BF008FA98A /* FavouriteCell.swift */,
 				04F4164326E78F80009919A1 /* NotificationCell.swift */,
 				04F24D7F270453ED001C3843 /* CardCell.swift */,
+				0424ED87270AC80700349C0A /* TicketsCell.swift */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1368,15 +1394,6 @@
 			path = "Other profile";
 			sourceTree = "<group>";
 		};
-		44A56488262F055E00FCF3D5 /* My Ticket Details */ = {
-			isa = PBXGroup;
-			children = (
-				44A56486262EEB8200FCF3D5 /* MyTicketDetailVC.swift */,
-				44A56489262F058000FCF3D5 /* MyTicketDetailVC+Extensions.swift */,
-			);
-			path = "My Ticket Details";
-			sourceTree = "<group>";
-		};
 		44C8F291261F1BD2000F03DB = {
 			isa = PBXGroup;
 			children = (
@@ -1484,7 +1501,6 @@
 				448DDFED2636CE5600CE324D /* View Profile */,
 				445433E4262DA4AC00443AE1 /* Side Drawer */,
 				44E5EF9B262DB20D00FEE2C0 /* My tickets */,
-				44A56488262F055E00FCF3D5 /* My Ticket Details */,
 				44E5EFA0262DB72300FEE2C0 /* View All Product */,
 				44DBD003262FF8A600255F9A /* Contact Us */,
 				44DBD000262FF88F00255F9A /* Change Pwd */,
@@ -1593,8 +1609,12 @@
 		44E5EF9B262DB20D00FEE2C0 /* My tickets */ = {
 			isa = PBXGroup;
 			children = (
+				0424ED6D270ABE6D00349C0A /* Model */,
+				0424ED6E270ABE7500349C0A /* View Model */,
 				44E5EF9C262DB22800FEE2C0 /* MyTicketsVC.swift */,
 				44E5EF9E262DB26900FEE2C0 /* MyTicketsVC+Extensions.swift */,
+				44A56486262EEB8200FCF3D5 /* MyTicketDetailVC.swift */,
+				44A56489262F058000FCF3D5 /* MyTicketDetailVC+Extensions.swift */,
 			);
 			path = "My tickets";
 			sourceTree = "<group>";
@@ -1980,6 +2000,7 @@
 				445873042654D21200DEF59C /* PaymentTypeVC.swift in Sources */,
 				44F7667A263AC4CA007F78CB /* AddBankDetailsVC.swift in Sources */,
 				04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */,
+				0424ED88270AC80700349C0A /* TicketsCell.swift in Sources */,
 				0CAAF3B6268B4AFE00C51C9F /* Constants+UserDefaults.swift in Sources */,
 				44509ED826316152000B19F3 /* NotificationListV+Extensions.swift in Sources */,
 				445433E6262DA4C100443AE1 /* SideDrawerListVC.swift in Sources */,
@@ -2049,10 +2070,12 @@
 				44C8F2A0261F1BD2000F03DB /* SceneDelegate.swift in Sources */,
 				0C5B97F7268DA72B00CBAC41 /* ResendOTPModel.swift in Sources */,
 				445C77A42637E57D00AD4DF3 /* FavouritesEventsListVC.swift in Sources */,
+				0424ED78270ABEE800349C0A /* UserTicketsDataModel.swift in Sources */,
 				44509ED3263133B8000B19F3 /* MorePeopleCell.swift in Sources */,
 				04FFC95226CD263800E3E171 /* AddEventProductsVC.swift in Sources */,
 				0437245926AA86C900840D15 /* CardExtension.swift in Sources */,
 				0447C91126C3DA240030FB7F /* LogOutDataModel.swift in Sources */,
+				0424ED70270ABE9800349C0A /* UserTicketsModel.swift in Sources */,
 				445C77A12637DD6F00AD4DF3 /* MyEventsCell.swift in Sources */,
 				043CC9D026EA0FF300118EA8 /* DateExtension.swift in Sources */,
 				445C77AB2637F62300AD4DF3 /* InvitesListVC+Extensions.swift in Sources */,
@@ -2088,6 +2111,7 @@
 				0CED86A726A455EB00F4D68E /* BankInfoModel.swift in Sources */,
 				4488D7A1262961E1006416DF /* HostEventVC.swift in Sources */,
 				44C8F2D0261F1CA9000F03DB /* SplashVC.swift in Sources */,
+				0424ED80270AC27100349C0A /* TicketDetailsModel.swift in Sources */,
 				44E559232632C81000193305 /* AddToCartVC.swift in Sources */,
 				4465691C264BE1EB001EB101 /* MoreOptionsPopupVC.swift in Sources */,
 				445C77AD26380BA300AD4DF3 /* InviteCell.swift in Sources */,

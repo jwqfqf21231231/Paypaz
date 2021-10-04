@@ -80,6 +80,10 @@ enum urlString:String
     case ADDTOCART = "home/event/cart/add"
     case CARTITEMS = "user/carts"
     case CARTDETAILS = "user/cart/detail"
+    case CARTCHECKOUT = "home/checkout"
+    
+    case USERTICKETS = "user/tickets"
+    case USERTICKETDETAIL = "user/ticket/detail"
     
     case ADDAMOUNTINWALLET = "user/wallet/add"
     case GETWALLETAMOUNT = "user/wallet"
