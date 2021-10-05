@@ -13,18 +13,16 @@ class SplashVC : CustomViewController {
     // MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            if UserDefaults.standard.isLoggedIn() == true
+            if UserDefaults.standard.getLoggedIn() == "1"
             {
                 if UserDefaults.standard.value(forKey: "isVerify") as? String == "1" && UserDefaults.standard.value(forKey: "isPasscode") as? String == "1" && UserDefaults.standard.value(forKey: "isPin") as? String == "1" /*&& UserDefaults.standard.value(forKey: "isVerifyCard") as? String == "1"*/
                 {
-                        _ = self?.pushVC("PasscodeVC")
-                 
+                    _ = self?.pushVC("PasscodeVC")
                 }
                 else
                 {
-                    
                     if UserDefaults.standard.value(forKey: "isVerify") as? String != "1"
                     {
                         _ = self?.pushVC("OTPVerificationVC")
@@ -45,12 +43,12 @@ class SplashVC : CustomViewController {
                         }
                     }
                     /*else if UserDefaults.standard.value(forKey: "isVerifyCard") as? String != "1"
-                    {
-                        if let vc = self?.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
-                        {
-                            vc.fromPin = true
-                        }
-                    }*/
+                     {
+                     if let vc = self?.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
+                     {
+                     vc.fromPin = true
+                     }
+                     }*/
                 }
             }
             else

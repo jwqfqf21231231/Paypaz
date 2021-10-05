@@ -364,7 +364,7 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
             self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
             self.img_EventPic.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "ticket_img"))
             self.lbl_EventName.text = data.data?.name
-            var sDate = data.data?.addedDate ?? ""
+            var sDate = data.data?.startDate ?? ""
             sDate = sDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
             let startDate = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
             let startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")

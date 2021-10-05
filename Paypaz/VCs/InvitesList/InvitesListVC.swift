@@ -26,6 +26,7 @@ class InvitesListVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self
+        Connection.svprogressHudShow(view: self)
         dataSource.getInvitees()
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

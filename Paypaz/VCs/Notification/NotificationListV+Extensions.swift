@@ -23,19 +23,22 @@ extension NotificationsListVC : UITableViewDataSource {
         cell.img_UserPic.sd_setImage(with: URL(string: url+(notifications[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.lbl_Message.text = notifications[indexPath.row].message
         var createdDate = notifications[indexPath.row].createdDate ?? ""
-        createdDate = createdDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd")
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd"
-        let presentDate = dateformatter.string(from: Date())
-        if createdDate == presentDate{
-            createdDate = createdDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm:ss")
-            createdDate = self.getFormattedDate(strDate: createdDate , currentFomat: "yyyy-MM-dd hh:mm:ss", expectedFromat: "hh:mm a")
-            cell.lbl_Date.text = createdDate
-        }
-        else{
-            createdDate = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd", expectedFromat: "d MMMM yyyy")
-            cell.lbl_Date.text = createdDate
-        }
+        createdDate = createdDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
+        let sendDate = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
+        let sendTime = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+        cell.lbl_Date.text = sendDate + " At " + sendTime
+//        let dateformatter = DateFormatter()
+//        dateformatter.dateFormat = "yyyy-MM-dd"
+//        let presentDate = dateformatter.string(from: Date())
+//        if createdDate == presentDate{
+//            createdDate = createdDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm:ss")
+//            createdDate = self.getFormattedDate(strDate: createdDate , currentFomat: "yyyy-MM-dd hh:mm:ss", expectedFromat: "hh:mm a")
+//            cell.lbl_Date.text = createdDate
+//        }
+//        else{
+//            createdDate = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd", expectedFromat: "d MMMM yyyy")
+//            cell.lbl_Date.text = createdDate
+//        }
         return cell
     }
 }

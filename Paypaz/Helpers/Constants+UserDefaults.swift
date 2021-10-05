@@ -10,14 +10,27 @@ import Foundation
 
 extension UserDefaults
 {
-    func setLoggedIn(value: Bool)
+//    func setLoggedIn(value: Bool)
+//    {
+//        set(value, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+//    }
+//
+//    func isLoggedIn()-> Bool
+//    {
+//        return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+//    }
+    func setLoggedIn(value: String)
     {
         set(value, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
     }
     
-    func isLoggedIn()-> Bool
+    func getLoggedIn()-> String
     {
-        return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+        guard string(forKey: UserDefaultsKeys.isLoggedIn.rawValue) != nil  else
+        {
+            return ""
+        }
+        return string(forKey: UserDefaultsKeys.isLoggedIn.rawValue)!
     }
     func setRegisterToken(value:String)
     {

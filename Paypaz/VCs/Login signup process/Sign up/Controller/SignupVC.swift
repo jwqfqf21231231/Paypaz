@@ -205,7 +205,6 @@ extension SignupVC : SignUpDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            UserDefaults.standard.setLoggedIn(value: true)
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")
             UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")

@@ -154,7 +154,6 @@ extension OTPVerificationVC: VPMOTPViewDelegate {
 
 extension OTPVerificationVC : PopupDelegate {
     func isClickedButton() {
-        UserDefaults.standard.setLoggedIn(value: true)
         _ = self.pushVC("CreateProfileVC")
         
     }
@@ -200,7 +199,7 @@ extension OTPVerificationVC : OTPVerificationDataModelDelegate
         {
             UserDefaults.standard.set(data.data?.isVerify, forKey: "isVerify")
             UserDefaults.standard.setUserID(value: data.data?.id ?? "")
-            UserDefaults.standard.setLoggedIn(value: true)
+            UserDefaults.standard.setLoggedIn(value: data.data?.isLoggedIN ?? "")
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
                 popup.selectedPopupType = .PhoneSaved

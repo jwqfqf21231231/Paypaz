@@ -21,7 +21,7 @@ extension ChooseEventTypeVC:UICollectionViewDelegate,UICollectionViewDelegateFlo
         {
             if let vc = pushVC("BuyEventVC") as? BuyEventVC
             {
-                vc.typeID = eventData[indexPath.row].id ?? ""
+                vc.typeID = filteredEventData[indexPath.row].id ?? ""
                 vc.isFilter = "3"
             }
         }

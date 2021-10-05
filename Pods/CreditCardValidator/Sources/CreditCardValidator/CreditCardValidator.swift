@@ -56,17 +56,19 @@ public struct CreditCardValidator {
     
     /// Validate credit card number
     public var isValid: Bool {
-        string.count >= 9 && string
+        let val = string
             .reversed()
             .compactMap({ Int(String($0)) })
             .enumerated()
             .reduce(Calculation(odd: 0, even: 0), { value, iterator in
+                let odd = iterator.offset % 2 != 0 ? value.odd + (iterator.element / 5 + (2 * iterator.element) % 10) : value.odd
+                let even = iterator.offset % 2 == 0 ? value.even + iterator.element : value.even
                 return .init(
-                    odd: iterator.offset % 2 != 0 ? value.odd + (iterator.element / 5 + (2 * iterator.element) % 10) : value.odd,
-                    even: iterator.offset % 2 == 0 ? value.even + iterator.element : value.even
+                    odd:odd,
+                    even:even
                 )
             })
-            .result()
+        return string.count >= 9 && val.result()
     }
     
     /// Validate card number string for type

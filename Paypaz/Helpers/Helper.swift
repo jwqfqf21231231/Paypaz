@@ -24,7 +24,6 @@ class Helper : NSObject
         userDefaults.removeObject(forKey: "phoneNo")
         userDefaults.removeObject(forKey: "phoneCode")
         userDefaults.removeObject(forKey: "countryCode")
-        userDefaults.removeObject(forKey: "isLoggedIn")
         userDefaults.removeObject(forKey: "isNotification")
         userDefaults.removeObject(forKey: "isPasscode")
         userDefaults.removeObject(forKey: "isPin")
