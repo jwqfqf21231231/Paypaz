@@ -32,9 +32,6 @@ extension MyTicketsVC : UITableViewDataSource {
 }
 extension MyTicketsVC : UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
-    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let vc = self.pushVC("MyTicketDetailVC") as? MyTicketDetailVC{

@@ -91,7 +91,7 @@ class HostEventVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        self.paymentType = "0"
+        self.paymentType = "0"
         self.txt_Description.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 15)
         setTitle()
         if self.eventID != ""

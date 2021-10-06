@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 enum PayType {
     case paypaz
     case BankAcc
@@ -23,13 +24,29 @@ class PaymentOptionsVC: UIViewController {
     @IBOutlet weak var img_bank_paypaz  : UIImageView!
     @IBOutlet weak var view_line1       : UIView!
     @IBOutlet weak var view_line2       : UIView!
+    @IBOutlet weak var hostImage : UIImageView!
+    @IBOutlet weak var hostNameLabel : UILabel!
+    @IBOutlet weak var totalPriceLabel : UILabel!
     var selectedPayType : PayType?
-    
+    var cartInfo : CartInfo?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI(with: selectedPayType ?? .paypaz)
+        NotificationCenter.default.addObserver(self, selector: #selector(getHostInfo(_:)), name: Notification.Name("NotificationIdentifier"), object: nil)
     }
-    
+    @objc func getHostInfo(_ notification:Notification){
+        if let dict = notification.userInfo as NSDictionary?{
+            let imageUrl = dict["userImage"] as? String ?? ""
+            let hostName = dict["userName"] as? String
+            let price = dict[" ticketPrice"] as? String
+            self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            let url =  APIList().getUrlString(url: .USERIMAGE)
+            self.hostImage.sd_setImage(with: URL(string: url+(imageUrl)), placeholderImage: UIImage(named: "profile_c"))
+            self.hostNameLabel.text = hostName
+            self.totalPriceLabel.text = price
+        }
+    }
     private func updateUI(with type : PayType) {
         
         if type == .paypaz || type == .BankAcc {

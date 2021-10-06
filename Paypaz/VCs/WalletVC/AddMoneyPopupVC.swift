@@ -14,7 +14,8 @@ protocol AddMoneyPopupDelegate : class {
 class AddMoneyPopupVC  : UIViewController {
     
     weak var delegate : AddMoneyPopupDelegate?
-    var selectedType  : AddMoneyType?
+    var cartInfo : CartInfo?
+    //var selectedType  : AddMoneyType?
     var maxLength = 3
     var cardID = ""
     var existingCards = [CardsList](){
@@ -28,6 +29,7 @@ class AddMoneyPopupVC  : UIViewController {
     @IBOutlet weak var tableViewHeight : NSLayoutConstraint!
     @IBOutlet weak var txt_AmountToAdd : UITextField!
     @IBOutlet weak var mainViewHeight : NSLayoutConstraint!
+    @IBOutlet weak var submitButton : UIButton!
     @IBOutlet weak var txt_CVV : UITextField!{
         didSet{
             txt_CVV.delegate = self
@@ -42,7 +44,8 @@ class AddMoneyPopupVC  : UIViewController {
     }
     private let walletDataSource = GetWalletAmountDataModel()
     public let dataSource = CreateCardDataModel()
-    
+    var buyTicket : Bool?
+    var totalAmount : Int?
     //    @IBOutlet weak var btn_BankAcc     : RoundButton!
     //    @IBOutlet weak var btn_DebitCredit : RoundButton!
     
@@ -51,8 +54,13 @@ class AddMoneyPopupVC  : UIViewController {
         super.viewDidLoad()
         walletDataSource.addMoneyInWalletDelegate = self
         dataSource.cardListDelegate = self
-        self.selectedType = .BankAccount
+        //self.selectedType = .BankAccount
         getCardsList()
+        if buyTicket ?? false{
+            self.txt_AmountToAdd.isUserInteractionEnabled = false
+            self.txt_AmountToAdd.text = "\(totalAmount ?? 0)"
+            self.submitButton.setTitle("Continue", for: .normal)
+        }
     }
     func getCardsList(){
         Connection.svprogressHudShow(view: self)

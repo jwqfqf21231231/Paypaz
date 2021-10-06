@@ -37,10 +37,10 @@ class AddToCartVC : CustomViewController {
     @IBOutlet weak var lbl_EventCount : UILabel!
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var btn_AddToCart : UIButton!
+    @IBOutlet weak var hideProductsView : UIView!
     @IBOutlet weak var tableView_Height : NSLayoutConstraint!
     //@IBOutlet weak var view_Products : UIView!
     @IBOutlet weak var lbl_ViewAllProducts : UILabel!
-    
     @IBOutlet weak var tableView_Products : UITableView! {
         didSet {
             tableView_Products.dataSource = self
@@ -50,6 +50,7 @@ class AddToCartVC : CustomViewController {
     //@IBOutlet weak var tableView_Height   : NSLayoutConstraint!
     private let addToCartDataSource = AddToCartDataModel()
     weak var successDelegate:AddedSuccessfullyPopUp?
+    var cartInfo : CartInfo?
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
@@ -138,7 +139,10 @@ class AddToCartVC : CustomViewController {
             self.view.makeToast("Please add atleast one ticket for event")
         }
         else{
-            _ = self.pushVC("PayAmountVC")
+            if let vc = self.pushVC("PayAmountVC") as? PayAmountVC{
+                vc.cartInfo = self.cartInfo
+                vc.totalPrice = self.totalPrice
+            }
         }
     }
     @IBAction func btn_AddToCart(_ sender:UIButton){

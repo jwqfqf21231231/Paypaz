@@ -18,11 +18,11 @@ struct CartDetailsModel: Codable {
 // MARK: - CartInfo
 struct CartInfo: Codable {
     let id, orderNumber, userID, eventID: String?
-    let eventUserID, eventQty, eventPrice, productsPrice: String?
-    let subTotal, discount, tax, grandTotal: String?
+    let eventUserID, cardID, eventQty, eventPrice, productsPrice: String?
+    let subTotal, discount, tax, grandTotal, hostAmount, adminAmount: String?
     let addedDate, paymentMethod, type, userStatus: String?
-    let status, createdDate, updatedDate, name: String?
-    let location, image, startDate, endDate, price: String?
+    let status, transactionID, merchantReference, transactionTime, createdDate, updatedDate, name: String?
+    let location, image, startDate, endDate, price, paymentType: String?
     let products: [Product]?
 }
 

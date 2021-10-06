@@ -293,11 +293,13 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
         }
         if self.products.count == 0
         {
+            self.hideProductsView.alpha = 1
             self.tableView_Height.constant = 0
             //            self.view_Products.isHidden = true
             
         }
         else{
+            self.hideProductsView.alpha = 0
            self.tableView_Height.constant = 125
             //            self.view_Products.isHidden = false
         }
@@ -359,6 +361,7 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            self.cartInfo = data.data 
             let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
             let imageString = (data.data?.image) ?? ""
             self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -387,15 +390,18 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
             self.productPrice = (((data.data?.productsPrice ?? "") as NSString).integerValue)
             self.lbl_ProductPrice.text = "$\(self.productPrice)"
             
-            self.lbl_TotalPrice.text = "$\((((data.data?.grandTotal ?? "") as NSString).integerValue))"
+            self.totalPrice = (((data.data?.grandTotal ?? "") as NSString).integerValue)
+            self.lbl_TotalPrice.text = "$\(totalPrice)"
             self.cartItemProducts = data.data?.products ?? []
             if self.cartItemProducts.count == 0
             {
+                self.hideProductsView.alpha = 1
                 self.tableView_Height.constant = 0
                 //                self.view_Products.isHidden = true
                 //
             }
             else{
+                self.hideProductsView.alpha = 0
                 self.tableView_Height.constant = 125
                 //                self.view_Products.isHidden = false
                 for i in 0..<cartItemProducts.count{
