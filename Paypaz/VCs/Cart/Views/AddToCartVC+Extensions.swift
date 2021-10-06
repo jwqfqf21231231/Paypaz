@@ -361,7 +361,11 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.cartInfo = data.data 
+            self.cartInfo = data.data
+            let icon1 = UpdatedCartInfo(eventID: data.data?.eventID ?? "", eventUserID: data.data?.eventUserID ?? "", eventQty: data.data?.eventPrice ?? "", eventPrice: data.data?.eventQty ?? "", productsPrice: data.data?.productsPrice ?? "", subTotal: data.data?.subTotal ?? "", discount:  data.data?.discount ?? "", tax: data.data?.tax ?? "", grandTotal: data.data?.grandTotal ?? "", cartID: data.data?.cardID ?? "", paymentType: "", products:[])
+            self.updatedCartInfo = icon1
+            
+            
             let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
             let imageString = (data.data?.image) ?? ""
             self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -401,6 +405,14 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
                 //
             }
             else{
+                for i in 0..<cartItemProducts.count{
+                    productDict["productID"] = cartItemProducts[i].id
+                    productDict["productPrice"] = cartItemProducts[i].productPrice
+                    productDict["productQty"] = cartItemProducts[i].productQty
+                    productDict["productQtyPrice"] = cartItemProducts[i].productQtyPrice
+                    productsArray.append(productDict)
+                }
+                
                 self.hideProductsView.alpha = 0
                 self.tableView_Height.constant = 125
                 //                self.view_Products.isHidden = false

@@ -33,3 +33,15 @@ struct Product: Codable {
     let createdDate, updatedDate, name, image: String?
     var updatedProductPrice :Int?
 }
+
+struct UpdatedCartInfo{
+    var eventID, eventUserID, eventQty, eventPrice, productsPrice, subTotal : String?
+    var discount, tax, grandTotal, cartID, paymentType : String?
+    var products : [ProductList]?
+}
+struct ProductList: Codable {
+    var productID: String?
+    var productPrice: String?
+    var productQty: String?
+    var productQtyPrice:String?
+}

@@ -14,7 +14,7 @@ protocol AddMoneyPopupDelegate : class {
 class AddMoneyPopupVC  : UIViewController {
     
     weak var delegate : AddMoneyPopupDelegate?
-    var cartInfo : CartInfo?
+    var cartInfo : UpdatedCartInfo?
     //var selectedType  : AddMoneyType?
     var maxLength = 3
     var cardID = ""

@@ -27,26 +27,26 @@ class PaymentOptionsVC: UIViewController {
     @IBOutlet weak var hostImage : UIImageView!
     @IBOutlet weak var hostNameLabel : UILabel!
     @IBOutlet weak var totalPriceLabel : UILabel!
+    @IBOutlet weak var paypazAccount : UILabel!
     var selectedPayType : PayType?
-    var cartInfo : CartInfo?
-
+    var cartInfo : UpdatedCartInfo?
+    var userDetails = [String:String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateUI(with: selectedPayType ?? .paypaz)
-        NotificationCenter.default.addObserver(self, selector: #selector(getHostInfo(_:)), name: Notification.Name("NotificationIdentifier"), object: nil)
+        displayUserDetails()
     }
-    @objc func getHostInfo(_ notification:Notification){
-        if let dict = notification.userInfo as NSDictionary?{
-            let imageUrl = dict["userImage"] as? String ?? ""
-            let hostName = dict["userName"] as? String
-            let price = dict[" ticketPrice"] as? String
-            self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            let url =  APIList().getUrlString(url: .USERIMAGE)
-            self.hostImage.sd_setImage(with: URL(string: url+(imageUrl)), placeholderImage: UIImage(named: "profile_c"))
-            self.hostNameLabel.text = hostName
-            self.totalPriceLabel.text = price
-        }
+    
+    private func displayUserDetails(){
+        self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        let url =  APIList().getUrlString(url: .USERIMAGE)
+        self.hostImage.sd_setImage(with: URL(string: url+(userDetails["userImage"] ?? "")), placeholderImage: UIImage(named: "profile_c"))
+        self.hostNameLabel.text = userDetails["userName"]
+        self.paypazAccount.text = userDetails["userName"]
+        self.totalPriceLabel.text = "$\(userDetails["ticketPrice"] ?? "")"
     }
+    
     private func updateUI(with type : PayType) {
         
         if type == .paypaz || type == .BankAcc {

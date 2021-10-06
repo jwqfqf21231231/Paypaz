@@ -11,7 +11,7 @@ import SDWebImage
 class PayAmountVC : CustomViewController {
     
     var totalPrice : Int?
-    var cartInfo : CartInfo?
+    var cartInfo : UpdatedCartInfo?
     @IBOutlet weak var hostImage : UIImageView!
     @IBOutlet weak var hostNameLabel : UILabel!
     @IBOutlet weak var totalAmountLabel : UILabel!
@@ -48,12 +48,14 @@ class PayAmountVC : CustomViewController {
     }
     @IBAction func btn_PayByPaypaz(_ sender:UIButton) {
         if let vc = self.pushVC("PaymentOptionsVC") as? PaymentOptionsVC{
+            vc.userDetails = self.userDetails
             vc.cartInfo = self.cartInfo
             vc.selectedPayType = .paypaz
         }
     }
     @IBAction func btn_PayByQRCode(_ sender:UIButton) {
         if let vc = self.pushVC("PaymentOptionsVC") as? PaymentOptionsVC{
+            vc.userDetails = self.userDetails
             vc.cartInfo = self.cartInfo
             vc.selectedPayType = .QRCode
         }
@@ -78,9 +80,7 @@ extension PayAmountVC : LogInDataModelDelegate
             self.userDetails["userImage"] = data.data?.userProfile ?? ""
             self.userDetails["userName"] = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
             self.userDetails["ticketPrice"] = "\(totalPrice ?? 0)"
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil, userInfo:self.userDetails)
-            }
+           
             self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             let url =  APIList().getUrlString(url: .USERIMAGE)
             self.hostImage.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
