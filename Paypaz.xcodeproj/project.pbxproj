@@ -17,6 +17,9 @@
 		0424ED78270ABEE800349C0A /* UserTicketsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED77270ABEE800349C0A /* UserTicketsDataModel.swift */; };
 		0424ED80270AC27100349C0A /* TicketDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED7F270AC27100349C0A /* TicketDetailsModel.swift */; };
 		0424ED88270AC80700349C0A /* TicketsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0424ED87270AC80700349C0A /* TicketsCell.swift */; };
+		0425EBA5270EAFA800096867 /* PaymentDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425EBA4270EAFA800096867 /* PaymentDataModel.swift */; };
+		0425EBD3270EF5D800096867 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425EBD2270EF5D800096867 /* TransactionHistory.swift */; };
+		0425EBD8270EF88500096867 /* TransactionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425EBD7270EF88500096867 /* TransactionsCell.swift */; };
 		0428359426B00641008FA98A /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359326B00641008FA98A /* FavouritesDataModel.swift */; };
 		0428359D26B009BF008FA98A /* FavouriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428359C26B009BF008FA98A /* FavouriteCell.swift */; };
 		042F44BC26FC3F9400B94715 /* CartDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F44BB26FC3F9400B94715 /* CartDetailModel.swift */; };
@@ -235,6 +238,9 @@
 		0424ED77270ABEE800349C0A /* UserTicketsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTicketsDataModel.swift; sourceTree = "<group>"; };
 		0424ED7F270AC27100349C0A /* TicketDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailsModel.swift; sourceTree = "<group>"; };
 		0424ED87270AC80700349C0A /* TicketsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCell.swift; sourceTree = "<group>"; };
+		0425EBA4270EAFA800096867 /* PaymentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDataModel.swift; sourceTree = "<group>"; };
+		0425EBD2270EF5D800096867 /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
+		0425EBD7270EF88500096867 /* TransactionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCell.swift; sourceTree = "<group>"; };
 		0428359326B00641008FA98A /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
 		0428359C26B009BF008FA98A /* FavouriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCell.swift; sourceTree = "<group>"; };
 		042F44BB26FC3F9400B94715 /* CartDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDetailModel.swift; sourceTree = "<group>"; };
@@ -526,6 +532,14 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		0425EBA9270EAFD200096867 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				0425EBA4270EAFA800096867 /* PaymentDataModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		0428359826B00803008FA98A /* View Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */,
+				0425EBD2270EF5D800096867 /* TransactionHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -685,6 +700,7 @@
 				04F4164326E78F80009919A1 /* NotificationCell.swift */,
 				04F24D7F270453ED001C3843 /* CardCell.swift */,
 				0424ED87270AC80700349C0A /* TicketsCell.swift */,
+				0425EBD7270EF88500096867 /* TransactionsCell.swift */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1578,6 +1594,7 @@
 		44E5591E2632AA9600193305 /* PayAmount */ = {
 			isa = PBXGroup;
 			children = (
+				0425EBA9270EAFD200096867 /* View Model */,
 				44E5591F2632AAA800193305 /* PayAmountVC.swift */,
 				044547D32702F16B00EF9D55 /* PaymentOptionsVC.swift */,
 			);
@@ -2108,12 +2125,15 @@
 				0C2234192693F12B0014B06A /* ChooseEventModel.swift in Sources */,
 				0C9F29D2268AE17800CE6178 /* SignUpDataModel.swift in Sources */,
 				44DBD00A263011BF00255F9A /* EventDetailVC+Extensions.swift in Sources */,
+				0425EBD8270EF88500096867 /* TransactionsCell.swift in Sources */,
 				0CED86A726A455EB00F4D68E /* BankInfoModel.swift in Sources */,
 				4488D7A1262961E1006416DF /* HostEventVC.swift in Sources */,
 				44C8F2D0261F1CA9000F03DB /* SplashVC.swift in Sources */,
 				0424ED80270AC27100349C0A /* TicketDetailsModel.swift in Sources */,
+				0425EBD3270EF5D800096867 /* TransactionHistory.swift in Sources */,
 				44E559232632C81000193305 /* AddToCartVC.swift in Sources */,
 				4465691C264BE1EB001EB101 /* MoreOptionsPopupVC.swift in Sources */,
+				0425EBA5270EAFA800096867 /* PaymentDataModel.swift in Sources */,
 				445C77AD26380BA300AD4DF3 /* InviteCell.swift in Sources */,
 				042F44EE26FC6B4E00B94715 /* MyCartVC.swift in Sources */,
 				44A1BFFA2656467C0047F7B4 /* OtherUserProfileVC.swift in Sources */,

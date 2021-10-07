@@ -18,12 +18,23 @@ class WalletVC : CustomViewController {
     }
     @IBOutlet weak var lbl_TotalBalance : UILabel!
     private let dataSource = GetWalletAmountDataModel()
-
+    var transactions : [Transactions]?{
+        didSet{
+            tableViewTransactions.reloadData()
+        }
+    }
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.getWalletAmountDelegate = self
+        dataSource.transactionHistoryDelegate = self
        loadWalletAmount()
+        loadTransactionDetails()
+    }
+    func loadTransactionDetails(){
+        Connection.svprogressHudShow(view: self)
+        dataSource.pageNo = "0"
+        dataSource.getTransactionHistory()
     }
     func loadWalletAmount(){
         Connection.svprogressHudShow(view: self)

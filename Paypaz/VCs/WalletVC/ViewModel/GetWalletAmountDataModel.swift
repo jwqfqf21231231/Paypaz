@@ -16,10 +16,15 @@ protocol AddMoneyInWalletDelegate : class{
     func didRecieveDataUpdate(data:ResendOTPModel)
     func didFailDataUpdateWithError1(error:Error)
 }
+protocol TransactionHistoryDelegate : class{
+    func didRecieveDataUpdate(data:TransactionHistoryModel)
+    func didFailDataUpdateWithError1(error:Error)
+}
 class GetWalletAmountDataModel: NSObject
 {
     weak var getWalletAmountDelegate: GetWalletAmountDelegate?
     weak var addMoneyInWalletDelegate : AddMoneyInWalletDelegate?
+    weak var transactionHistoryDelegate : TransactionHistoryDelegate?
     let sharedInstance = Connection()
     var cardHolderName = ""
     var cardNumber = ""
@@ -28,6 +33,7 @@ class GetWalletAmountDataModel: NSObject
     var amount = ""
     var cardID = ""
     var isCard = ""
+    var pageNo = ""
     func getWalletAmount()
     {
         let url =  APIList().getUrlString(url: .GETWALLETAMOUNT)
@@ -102,6 +108,46 @@ class GetWalletAmountDataModel: NSObject
                                     {
                                         (error) in
                                         self.addMoneyInWalletDelegate?.didFailDataUpdateWithError1(error: error)
+                                        
+                                    })
+    }
+    func getTransactionHistory(){
+        let url =  APIList().getUrlString(url: .TRANSACTIONHISTORY)
+        
+        let parameter : Parameters = [
+            "pageNo" : pageNo
+        ]
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
+        sharedInstance.requestPOST(url, params: parameter, headers: header,
+                                   success:
+                                    {
+                                        (JSON) in
+                                        
+                                        let  result :Data? = JSON
+                                        if result != nil
+                                        {
+                                            do
+                                            {
+                                                let response = try JSONDecoder().decode(TransactionHistoryModel.self, from: result!)
+                                                self.transactionHistoryDelegate?.didRecieveDataUpdate(data: response)
+                                            }
+                                            catch let error as NSError
+                                            {
+                                                self.transactionHistoryDelegate?.didFailDataUpdateWithError1(error: error)
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("No Response from server...")
+                                        }
+                                        
+                                    },
+                                   failure:
+                                    {
+                                        (error) in
+                                        self.transactionHistoryDelegate?.didFailDataUpdateWithError1(error: error)
                                         
                                     })
     }

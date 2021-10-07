@@ -205,6 +205,7 @@ class CreditDebitCardVC : CardViewController {
         }
     }
     @IBAction func btn_Skip(_ sender:UIButton){
+        UserDefaults.standard.setValue("0", forKey: "isVerifyCard")
         _ = self.pushVC("SideDrawerBaseVC")
     }
     func validateFields() -> Bool

@@ -248,6 +248,8 @@ extension AddToCartVC : MyPostedEventDataModelDelegate
             else{
                 self.lbl_Price.text = "$\(eventOriginalPrice ?? 0)"
             }
+            let icon1 = UpdatedCartInfo(eventID: data.data?.id ?? "", eventUserID: data.data?.userID ?? "", eventQty: "0", eventPrice: data.data?.price ?? "", productsPrice: "", subTotal: "", discount:  "0.0", tax: "0.0", grandTotal: "", cartID: "0", paymentType: data.data?.paymentType, buyDirectly: true, products:[])
+            self.updatedCartInfo = icon1
         }
         else
         {
@@ -361,8 +363,7 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.cartInfo = data.data
-            let icon1 = UpdatedCartInfo(eventID: data.data?.eventID ?? "", eventUserID: data.data?.eventUserID ?? "", eventQty: data.data?.eventPrice ?? "", eventPrice: data.data?.eventQty ?? "", productsPrice: data.data?.productsPrice ?? "", subTotal: data.data?.subTotal ?? "", discount:  data.data?.discount ?? "", tax: data.data?.tax ?? "", grandTotal: data.data?.grandTotal ?? "", cartID: data.data?.cardID ?? "", paymentType: "", products:[])
+            let icon1 = UpdatedCartInfo(eventID: data.data?.eventID ?? "", eventUserID: data.data?.eventUserID ?? "", eventQty: data.data?.eventQty ?? "", eventPrice: data.data?.eventPrice ?? "", productsPrice: data.data?.productsPrice ?? "", subTotal: data.data?.subTotal ?? "", discount:  data.data?.discount ?? "", tax: data.data?.tax ?? "", grandTotal: data.data?.grandTotal ?? "", cartID: data.data?.id ?? "", paymentType: data.data?.paymentType ?? "", buyDirectly: true, products:[])
             self.updatedCartInfo = icon1
             
             

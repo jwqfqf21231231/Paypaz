@@ -37,6 +37,7 @@ struct Product: Codable {
 struct UpdatedCartInfo{
     var eventID, eventUserID, eventQty, eventPrice, productsPrice, subTotal : String?
     var discount, tax, grandTotal, cartID, paymentType : String?
+    var buyDirectly : Bool?
     var products : [ProductList]?
 }
 struct ProductList: Codable {

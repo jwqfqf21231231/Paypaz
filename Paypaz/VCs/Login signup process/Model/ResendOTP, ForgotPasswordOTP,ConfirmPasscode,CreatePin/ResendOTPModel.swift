@@ -13,3 +13,9 @@ struct ResendOTPModel: Codable {
     let success: Int?
     let message, otp, data: String?
 }
+
+
+struct Basic_Model:Codable {
+    let success:Int?
+    let message:String?
+}

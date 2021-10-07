@@ -31,9 +31,11 @@ class PaymentOptionsVC: UIViewController {
     var selectedPayType : PayType?
     var cartInfo : UpdatedCartInfo?
     var userDetails = [String:String]()
+    private let dataSource = PaymentDataModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.delegate = self
         self.updateUI(with: selectedPayType ?? .paypaz)
         displayUserDetails()
     }
@@ -71,20 +73,30 @@ class PaymentOptionsVC: UIViewController {
     }
     
     @IBAction func btn_Submit(_ sender:UIButton) {
-        
-        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-            popup.delegate  = self
-            if let type = self.selectedPayType {
-                if type == .paypaz {
-                    popup.selectedPopupType = .PayMoneyToContacts
-                } else if type == .QRCode {
-                    popup.selectedPopupType = .PayMoneyToContacts
-                } else {
-                    popup.selectedPopupType = .EventAmountPaid
-                }
-            }
-            
+        Connection.svprogressHudShow(view: self)
+        dataSource.eventID = cartInfo?.eventID ?? ""
+        dataSource.eventUserID = cartInfo?.eventUserID ?? ""
+        dataSource.eventQty = cartInfo?.eventQty ?? ""
+        dataSource.eventPrice = cartInfo?.eventPrice ?? ""
+        dataSource.productsPrice = cartInfo?.productsPrice ?? ""
+        dataSource.subTotal = cartInfo?.subTotal ?? ""
+        dataSource.discount = cartInfo?.discount ?? ""
+        dataSource.tax = cartInfo?.tax ?? ""
+        dataSource.grandTotal = cartInfo?.grandTotal ?? ""
+        dataSource.cartID = cartInfo?.cartID ?? ""
+        dataSource.paymentType = cartInfo?.paymentType ?? ""
+        if selectedPayType == .paypaz {
+            dataSource.paymentMethod = "1"
         }
+        else{
+            dataSource.paymentMethod = "2"
+        }
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(cartInfo?.products)
+        dataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""//String(data: data, encoding: .utf8)!
+        dataSource.requestPayment()
     }
     @IBAction func btn_Back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -97,6 +109,48 @@ extension PaymentOptionsVC : PopupDelegate {
                 self.navigationController!.popToViewController(vc, animated: true)
                 break
             }
+        }
+    }
+}
+extension PaymentOptionsVC : PaymentDelegate
+{
+    func didRecieveDataUpdate1(data: Basic_Model)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                
+                popup.delegate  = self
+                if let type = self.selectedPayType {
+                    if type == .paypaz {
+                        popup.selectedPopupType = .PayMoneyToContacts
+                    } else if type == .QRCode {
+                        popup.selectedPopupType = .PayMoneyToContacts
+                    } else {
+                        popup.selectedPopupType = .EventAmountPaid
+                    }
+                }
+                
+            }
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            //view.makeToast(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

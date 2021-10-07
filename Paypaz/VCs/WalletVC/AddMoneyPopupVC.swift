@@ -10,10 +10,16 @@ import UIKit
 protocol AddMoneyPopupDelegate : class {
     func loadWallet()
 }
-
+protocol PaymentSuccessfulDelegate : class{
+    func goBackToVC()
+}
+//protocol BuyEventThruCardDelegate : class{
+//    func buyEventThruCard(cvv:String,)
+//}
 class AddMoneyPopupVC  : UIViewController {
     
     weak var delegate : AddMoneyPopupDelegate?
+    weak var successDelegate : PaymentSuccessfulDelegate?
     var cartInfo : UpdatedCartInfo?
     //var selectedType  : AddMoneyType?
     var maxLength = 3
@@ -44,6 +50,7 @@ class AddMoneyPopupVC  : UIViewController {
     }
     private let walletDataSource = GetWalletAmountDataModel()
     public let dataSource = CreateCardDataModel()
+    let paymentDataSource = PaymentDataModel()
     var buyTicket : Bool?
     var totalAmount : Int?
     //    @IBOutlet weak var btn_BankAcc     : RoundButton!
@@ -52,6 +59,7 @@ class AddMoneyPopupVC  : UIViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        paymentDataSource.delegate = self
         walletDataSource.addMoneyInWalletDelegate = self
         dataSource.cardListDelegate = self
         //self.selectedType = .BankAccount
@@ -91,13 +99,39 @@ class AddMoneyPopupVC  : UIViewController {
             self.view.makeToast("Please enter your card cvv")
         }
         else{
-            
             Connection.svprogressHudShow(view: self)
-            walletDataSource.isCard = "0"
-            walletDataSource.cardID = cardID
-            walletDataSource.cvv = txt_CVV.text ?? ""
-            walletDataSource.amount = txt_AmountToAdd.text ?? ""
-            walletDataSource.addMoneyToWallet()
+            if buyTicket ?? false{
+                paymentDataSource.eventID = cartInfo?.eventID ?? ""
+                paymentDataSource.eventUserID = cartInfo?.eventUserID ?? ""
+                paymentDataSource.eventQty = cartInfo?.eventQty ?? ""
+                paymentDataSource.eventPrice = cartInfo?.eventPrice ?? ""
+                paymentDataSource.productsPrice = cartInfo?.productsPrice ?? ""
+                paymentDataSource.subTotal = cartInfo?.subTotal ?? ""
+                paymentDataSource.discount = cartInfo?.discount ?? ""
+                paymentDataSource.tax = cartInfo?.tax ?? ""
+                paymentDataSource.grandTotal = cartInfo?.grandTotal ?? ""
+                paymentDataSource.cartID = cartInfo?.cartID ?? ""
+                paymentDataSource.cardID = cardID
+                paymentDataSource.cvv = txt_CVV.text ?? ""
+//                let jsonData = try! JSONSerialization.data(withJSONObject:cartInfo?.products ?? [])
+//                let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
+//                print(jsonString!)
+//                paymentDataSource.products = jsonString ?? ""
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .prettyPrinted
+                let data = try! encoder.encode(cartInfo?.products)
+                paymentDataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""
+                paymentDataSource.paymentType = cartInfo?.paymentType ?? ""
+                paymentDataSource.paymentMethod = "3"
+                paymentDataSource.requestPayment()
+            }
+            else{
+                walletDataSource.isCard = "0"
+                walletDataSource.cardID = cardID
+                walletDataSource.cvv = txt_CVV.text ?? ""
+                walletDataSource.amount = txt_AmountToAdd.text ?? ""
+                walletDataSource.addMoneyToWallet()
+            }
         }
     }
     /* @IBAction func btn_BankAccount(_ sender:UIButton) {
@@ -117,6 +151,38 @@ class AddMoneyPopupVC  : UIViewController {
      self.btn_DebitCredit.setTitleColor(UIColor(named: "GreenColor"), for: .normal)
      }*/
 }
+extension AddMoneyPopupVC : PaymentDelegate
+{
+    func didRecieveDataUpdate1(data: Basic_Model)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.dismiss(animated: false) {
+                self.successDelegate?.goBackToVC()
+            }
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            //view.makeToast(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+
 extension AddMoneyPopupVC : AddMoneyInWalletDelegate
 {
     func didRecieveDataUpdate(data: ResendOTPModel)

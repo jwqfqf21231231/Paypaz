@@ -51,7 +51,6 @@ class AddToCartVC : CustomViewController {
     private let addToCartDataSource = AddToCartDataModel()
     weak var successDelegate:AddedSuccessfullyPopUp?
     var updatedCartInfo : UpdatedCartInfo?
-    var cartInfo : CartInfo?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,15 +100,14 @@ class AddToCartVC : CustomViewController {
                 productPrice += cartItemProducts[i].updatedProductPrice ?? 0
             }
             self.lbl_ProductPrice.text = "$\(productPrice)"
-            self.updatedCartInfo?.productsPrice = "\(productPrice)"
             calculateTotalPrice()
         }
     }
     func calculateTotalPrice(){
         self.totalPrice = (eventPrice+productPrice)
         lbl_TotalPrice.text = "$\(eventPrice+productPrice)"
-        self.updatedCartInfo?.subTotal = "\(self.totalPrice)"
-        self.updatedCartInfo?.grandTotal = "\(self.totalPrice)"
+        self.updatedCartInfo?.subTotal = "\(Double(self.totalPrice))"
+        self.updatedCartInfo?.grandTotal = "\(Double(self.totalPrice))"
     }
     /* override func viewDidLayoutSubviews() {
      super.viewDidLayoutSubviews()
@@ -142,16 +140,18 @@ class AddToCartVC : CustomViewController {
             self.view.makeToast("Please add atleast one ticket for event")
         }
         else{
-            let jsonData = try! JSONSerialization.data(withJSONObject:productsArray)
-            let decoder = JSONDecoder()
-            do {
-                let people = try decoder.decode([ProductList].self, from: jsonData)
-                updatedCartInfo?.products = people
-                print(people)
-            } catch {
-                print(error.localizedDescription)
+            if productsArray.count != 0 {
+                let jsonData = try! JSONSerialization.data(withJSONObject:productsArray)
+                let decoder = JSONDecoder()
+                do {
+                    let people = try decoder.decode([ProductList].self, from: jsonData)
+                    updatedCartInfo?.products = people
+                    self.updatedCartInfo?.productsPrice = "\(Double(productPrice))"
+                    print(people)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
-            
             if let vc = self.pushVC("PayAmountVC") as? PayAmountVC{
                 vc.cartInfo = self.updatedCartInfo
                 vc.totalPrice = self.totalPrice
@@ -203,7 +203,7 @@ class AddToCartVC : CustomViewController {
         eventPrice = (eventOriginalPrice ?? 0) * count
         lbl_EventPrice.text = "$\(eventPrice)"
         self.updatedCartInfo?.eventQty = "\(count)"
-        self.updatedCartInfo?.eventPrice = "\(eventPrice)"
+        self.updatedCartInfo?.eventPrice = "\(Double(eventPrice))"
         self.calculateTotalPrice()
     }
 }
