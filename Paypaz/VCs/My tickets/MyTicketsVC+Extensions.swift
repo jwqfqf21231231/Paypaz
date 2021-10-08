@@ -16,16 +16,17 @@ extension MyTicketsVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TicketsCell")  as? TicketsCell
         else { return TicketsCell() }
-//        let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
-//        cell.img_Ticket.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//        cell.img_Ticket.sd_setImage(with: URL(string: url+(tickets?[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "ticket_img"))
+        //        let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
+        //        cell.img_Ticket.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        //        cell.img_Ticket.sd_setImage(with: URL(string: url+(tickets?[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "ticket_img"))
         cell.lbl_EventName.text = tickets?[indexPath.row].name ?? ""
         cell.lbl_Description.text = tickets?[indexPath.row].datumDescription ?? ""
         cell.lbl_OrderNumber.text = tickets?[indexPath.row].orderNumber ?? ""
         var eDate = tickets?[indexPath.row].endDate ?? ""
         eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
         let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd-MMM-yyyy")
-        cell.lbl_EndDate.text = endDate
+        let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
+        cell.lbl_EndDate.text = endDate + " " + endTime
         
         return cell
     }

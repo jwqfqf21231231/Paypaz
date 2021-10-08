@@ -10,9 +10,6 @@ import UIKit
 protocol AddMoneyPopupDelegate : class {
     func loadWallet()
 }
-protocol PaymentSuccessfulDelegate : class{
-    func goBackToVC()
-}
 protocol BuyEventThruCardDelegate : class{
     func buyEventThruCard(cvv:String,cardName:String,cardNumber:String,cardID:String)
 }
@@ -101,16 +98,27 @@ class AddMoneyPopupVC  : UIViewController {
             self.view.makeToast("Please enter your card cvv")
         }
         else{
-            Connection.svprogressHudShow(view: self)
             if buyTicket ?? false{
-                self.successDelegate?.buyEventThruCard(cvv: txt_CVV.text ?? "", cardName: self.cardName, cardNumber: self.cardNumber, cardID: self.cardID)
+                if maxLength != txt_CVV.text?.count{
+                    self.view.makeToast("Please enter valid cvv")
+                }
+                else{
+                    self.successDelegate?.buyEventThruCard(cvv: txt_CVV.text ?? "", cardName: self.cardName, cardNumber: self.cardNumber, cardID: self.cardID)
+                    self.dismiss(animated: false, completion: nil)
+                }
             }
             else{
-                walletDataSource.isCard = "0"
-                walletDataSource.cardID = cardID
-                walletDataSource.cvv = txt_CVV.text ?? ""
-                walletDataSource.amount = txt_AmountToAdd.text ?? ""
-                walletDataSource.addMoneyToWallet()
+                if maxLength != txt_CVV.text?.count{
+                    self.view.makeToast("Please enter valid cvv")
+                }
+                else{
+                    Connection.svprogressHudShow(view: self)
+                    walletDataSource.isCard = "0"
+                    walletDataSource.cardID = cardID
+                    walletDataSource.cvv = txt_CVV.text ?? ""
+                    walletDataSource.amount = txt_AmountToAdd.text ?? ""
+                    walletDataSource.addMoneyToWallet()
+                }
             }
         }
     }
@@ -287,6 +295,8 @@ extension AddMoneyPopupVC : UITableViewDataSource,UITableViewDelegate {
     @objc func tapSelector(sender: CustomTapGestureRecognizer) {
         let index = sender.viewIndex ?? 0
         self.cardID = existingCards[index].id ?? ""
+        self.cardNumber = existingCards[index].cardNumber ?? ""
+        self.cardName = existingCards[index].cardName ?? ""
         if existingCards[index].cardName == "Amex"{
             self.maxLength = 4
         }

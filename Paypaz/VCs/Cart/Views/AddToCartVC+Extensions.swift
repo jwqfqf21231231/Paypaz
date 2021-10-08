@@ -84,7 +84,7 @@ extension AddToCartVC : UITableViewDataSource {
                 productPrice = productPrice * count
                 cartItemProducts[sender.tag].updatedProductPrice = productPrice
                 calculateTotalProductPrice()
-                productCollectionFromCart(productData: cartItemProducts[sender.tag], count: count)
+                productCollectionToBuyCart(productData: cartItemProducts[sender.tag], count: count)
             }
         }
         
@@ -95,7 +95,8 @@ extension AddToCartVC : UITableViewDataSource {
             let indexpath = IndexPath.init(row: sender.tag, section: 0)
             if let cell = tableView_Products.cellForRow(at: indexpath) as? ProductTableCell{
                 var count = ((cell.lbl_ProductCount.text!) as NSString).integerValue
-                if count > 0{
+                let maxItmesCount = (products[sender.tag].quantity! as NSString).integerValue
+                if count > 0 && count < maxItmesCount{
                     count = count - 1
                     cell.lbl_ProductCount.text = "\(count)"
                     productPrice = productPrice * count
@@ -110,14 +111,15 @@ extension AddToCartVC : UITableViewDataSource {
             let indexpath = IndexPath.init(row: sender.tag, section: 0)
             if let cell = tableView_Products.cellForRow(at: indexpath) as? ProductTableCell{
                 var count = ((cell.lbl_ProductCount.text!) as NSString).integerValue
-                if count > 0{
+                //let maxItmesCount = (cartItemProducts[sender.tag].! as NSString).integerValue
+                if count > 0 {
                     count = count - 1
                     cell.lbl_ProductCount.text = "\(count)"
                     productPrice = productPrice * count
                     cartItemProducts[sender.tag].updatedProductPrice = productPrice
                     calculateTotalProductPrice()
                 }
-                productCollectionFromCart(productData: cartItemProducts[sender.tag], count: count)
+                productCollectionToBuyCart(productData: cartItemProducts[sender.tag], count: count)
             }
         }
     }
@@ -146,6 +148,37 @@ extension AddToCartVC : UITableViewDataSource {
         else{
             let productPrice = (productData.productPrice! as NSString).integerValue
             productDict["productID"] = productData.id
+            productDict["productPrice"] = "\(Float(productPrice))"
+            productDict["productQty"] = "\(count)"
+            productDict["productQtyPrice"] = "\(Float(productData.updatedProductPrice ?? 0))"//"\(Float(productPrice*count))"
+            productsArray.append(productDict)
+        }
+    }
+    func productCollectionToBuyCart(productData:Product, count:Int){
+        if !productsArray.isEmpty{
+            if let index = productsArray.firstIndex (where: {(abc) -> Bool in
+                abc["productID"] == productData.productID
+            }){
+                if count > 0{
+                    productsArray[index]["productQty"] = "\(count)"
+                    productsArray[index]["productQtyPrice"] = "\(Float(((productData.productPrice! as NSString).integerValue)*count))"
+                }
+                else{
+                    productsArray.remove(at: index)
+                }
+            }
+            else{
+                let productPrice = (productData.productPrice! as NSString).integerValue
+                productDict["productID"] = productData.productID
+                productDict["productPrice"] = "\(Float(productPrice))"
+                productDict["productQty"] = "\(count)"
+                productDict["productQtyPrice"] = "\(Float(productData.updatedProductPrice ?? 0))"//"\(Float(productPrice*count))"
+                productsArray.append(productDict)
+            }
+        }
+        else{
+            let productPrice = (productData.productPrice! as NSString).integerValue
+            productDict["productID"] = productData.productID
             productDict["productPrice"] = "\(Float(productPrice))"
             productDict["productQty"] = "\(count)"
             productDict["productQtyPrice"] = "\(Float(productData.updatedProductPrice ?? 0))"//"\(Float(productPrice*count))"
@@ -407,7 +440,7 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
             }
             else{
                 for i in 0..<cartItemProducts.count{
-                    productDict["productID"] = cartItemProducts[i].id
+                    productDict["productID"] = cartItemProducts[i].productID
                     productDict["productPrice"] = cartItemProducts[i].productPrice
                     productDict["productQty"] = cartItemProducts[i].productQty
                     productDict["productQtyPrice"] = cartItemProducts[i].productQtyPrice

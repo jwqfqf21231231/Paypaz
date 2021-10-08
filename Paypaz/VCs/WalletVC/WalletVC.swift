@@ -16,19 +16,30 @@ class WalletVC : CustomViewController {
             self.tableViewTransactions.delegate   = self
         }
     }
+    
+    @IBOutlet weak var transactionsView : UIView!
     @IBOutlet weak var lbl_TotalBalance : UILabel!
     private let dataSource = GetWalletAmountDataModel()
     var transactions : [Transactions]?{
         didSet{
+            if transactions?.count == 0{
+                transactionsView.alpha = 1
+            }
+            else{
+                transactionsView.alpha = 0
+            }
             tableViewTransactions.reloadData()
         }
     }
+    var newTransactions = [Transactions]()
+    var currentPage = 1
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        transactionsView.alpha = 1
         dataSource.getWalletAmountDelegate = self
         dataSource.transactionHistoryDelegate = self
-       loadWalletAmount()
+        loadWalletAmount()
         loadTransactionDetails()
     }
     func loadTransactionDetails(){
@@ -45,8 +56,8 @@ class WalletVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_PayRequest(_ sender:UIButton) {
-       // _ = self.pushToVC("ContactListVC")
-         _ = self.pushVC("PaymentTypeVC")
+        // _ = self.pushToVC("ContactListVC")
+        _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_AddMoney(_ sender:UIButton) {
         if UserDefaults.standard.value(forKey: "isVerifyCard") as! String != "1"{
@@ -61,9 +72,9 @@ class WalletVC : CustomViewController {
             }
         }
         
-//        if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
-//            popupVC.delegate = self
-//        }
+        //        if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
+        //            popupVC.delegate = self
+        //        }
     }
     
     @IBAction func btn_SendToBank(_ sender:UIButton) {
@@ -71,6 +82,17 @@ class WalletVC : CustomViewController {
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.transactions?.count{
+                Connection.svprogressHudShow(view: self)
+                dataSource.pageNo = "\(currentPage)"
+                currentPage = currentPage + 1
+                dataSource.getTransactionHistory()
+            }
+        }
     }
 }
 extension WalletVC : PopUpScreenDelegate{
@@ -83,17 +105,19 @@ extension WalletVC : PopUpScreenDelegate{
 }
 extension WalletVC : AddMoneyPopupDelegate {
     /*func isSelectedType(bank: Bool,amount:String) {
-        if bank {
-            if let vc = self.pushVC("AddBankDetailsVC") as? AddBankDetailsVC{
-                vc.amountToAdd = amount
-            }
-        } else {
-            if let vc = self.pushVC("AddCardDetailsVC") as? AddCardDetailsVC{
-                vc.amountToAdd = amount
-            }
-        }
-    }*/
+     if bank {
+     if let vc = self.pushVC("AddBankDetailsVC") as? AddBankDetailsVC{
+     vc.amountToAdd = amount
+     }
+     } else {
+     if let vc = self.pushVC("AddCardDetailsVC") as? AddCardDetailsVC{
+     vc.amountToAdd = amount
+     }
+     }
+     }*/
     func loadWallet() {
+        self.currentPage = 1
         self.loadWalletAmount()
+        self.loadTransactionDetails()
     }
 }

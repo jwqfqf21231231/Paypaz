@@ -22,6 +22,11 @@ class MyTicketDetailVC : CustomViewController {
     @IBOutlet weak var endDateLabel             : UILabel!
     @IBOutlet weak var categoryButton           : UIButton!
     @IBOutlet weak var orderNumberLabel         : UILabel!
+    @IBOutlet weak var hostImage : UIImageView!
+    @IBOutlet weak var hostName : UILabel!
+    @IBOutlet weak var paymentMethodImage : UIImageView!
+    @IBOutlet weak var paymentMethodName : UILabel!
+    
     private let userTicketsDataSource = UserTicketsDataModel()
     
     var orderID = ""

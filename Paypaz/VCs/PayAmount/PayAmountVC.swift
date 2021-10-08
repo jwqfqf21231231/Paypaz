@@ -56,7 +56,7 @@ class PayAmountVC : CustomViewController {
         self.view_QRCode.isHidden = true
         dataSource.delegate = self
         
-        //self.totalAmountLabel.text = "$\(totalPrice ?? 0)"
+        self.totalAmountLabel.text = "$\(totalPrice ?? 0)"
         getUserProfile()
     }
     private func updateUI(with type : PayType) {
@@ -177,19 +177,19 @@ class PayAmountVC : CustomViewController {
         dataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""//String(data: data, encoding: .utf8)!
         dataSource.requestPayment()
         
-        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-            popup.delegate  = self
-            if let type = self.selectedPayType {
-                if type == .paypaz {
-                    popup.selectedPopupType = .PayMoneyToContacts
-                } else if type == .QRCode {
-                    popup.selectedPopupType = .PayMoneyToContacts
-                } else {
-                    popup.selectedPopupType = .EventAmountPaid
-                }
-            }
-            
-        }
+//        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+//            popup.delegate  = self
+//            if let type = self.selectedPayType {
+//                if type == .paypaz {
+//                    popup.selectedPopupType = .PayMoneyToContacts
+//                } else if type == .QRCode {
+//                    popup.selectedPopupType = .PayMoneyToContacts
+//                } else {
+//                    popup.selectedPopupType = .EventAmountPaid
+//                }
+//            }
+//
+//        }
     }
     
     /*@IBAction func btn_PayByPaypaz(_ sender:UIButton) {
@@ -229,6 +229,7 @@ extension PayAmountVC : PopupDelegate {
     func isClickedButton() {
         for vc in self.navigationController!.viewControllers as Array {
             if vc.isKind(of:HomeVC.self) {
+                NotificationCenter.default.post(name: NSNotification.Name("ShowPaymentSuccessPopUp"), object: nil)
                 self.navigationController!.popToViewController(vc, animated: true)
                 break
             }
@@ -257,9 +258,16 @@ extension PayAmountVC : BuyEventThruCardDelegate
     {
         self.cvv = cvv
         self.cardID = cardID
+        var cardNo = cardNumber
         self.img_bank_paypaz.image = UIImage(named: "\(cardName)")
-        self.lbl_id_accountNum.text = cardNumber
-        
+        let firstIndex = cardNumber.index(cardNo.startIndex, offsetBy: 12)
+        if cardNo.count < 19{
+            cardNo.replaceSubrange((firstIndex...),with: "XX XXX")
+        }
+        else{
+            cardNo.replaceSubrange((firstIndex...),with: "XX XXXX")
+        }
+        self.lbl_id_accountNum.text = cardNo
     }
 }
 extension PayAmountVC : PaymentDelegate
@@ -269,20 +277,27 @@ extension PayAmountVC : PaymentDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                
-                popup.delegate  = self
-                if let type = self.selectedPayType {
-                    if type == .paypaz {
-                        popup.selectedPopupType = .PayMoneyToContacts
-                    } else if type == .QRCode {
-                        popup.selectedPopupType = .PayMoneyToContacts
-                    } else {
-                        popup.selectedPopupType = .EventAmountPaid
-                    }
+            for vc in self.navigationController!.viewControllers as Array {
+                if vc.isKind(of:HomeVC.self) {
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPaymentSuccessPopUp"), object: nil)
+                    self.navigationController!.popToViewController(vc, animated: true)
+                    break
                 }
-                
             }
+//            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+//
+//                popup.delegate  = self
+//                if let type = self.selectedPayType {
+//                    if type == .paypaz {
+//                        popup.selectedPopupType = .PayMoneyToContacts
+//                    } else if type == .QRCode {
+//                        popup.selectedPopupType = .PayMoneyToContacts
+//                    } else {
+//                        popup.selectedPopupType = .EventAmountPaid
+//                    }
+//                }
+//
+//            }
         }
         else
         {
@@ -313,12 +328,13 @@ extension PayAmountVC : LogInDataModelDelegate
         if data.success == 1
         {
             self.userDetails["userImage"] = data.data?.userProfile ?? ""
+            self.lbl_id_accountNum.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
             self.userDetails["userName"] = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
             self.userDetails["ticketPrice"] = "\(totalPrice ?? 0)"
-            //self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             let url =  APIList().getUrlString(url: .USERIMAGE)
-            //self.hostImage.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
-            //self.hostNameLabel.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
+            self.hostImage.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
+            self.hostNameLabel.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
         }
         else
         {

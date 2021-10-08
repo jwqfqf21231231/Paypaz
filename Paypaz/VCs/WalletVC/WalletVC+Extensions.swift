@@ -7,8 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
 
-//MARK:-
 extension WalletVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -18,7 +18,10 @@ extension WalletVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsCell") as? TransactionsCell else { return TransactionsCell() }
-        
+        let url =  APIList().getUrlString(url: .USERIMAGE)
+        cell.userImage.sd_setImage(with: URL(string: url+(transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
+        cell.descriptionLabel.text = transactions?[indexPath.row].name ?? ""
+        cell.userNameLabel.text = (transactions?[indexPath.row].firstName ?? "") + " " + (transactions?[indexPath.row].lastName ?? "")
         if transactions?[indexPath.row].isCredited == "0"{
             cell.amountLabel.text = "+ $\(transactions?[indexPath.row].amount ?? "")"
             cell.amountLabel.textColor = UIColor(named: "GreenColor")
@@ -37,10 +40,10 @@ extension WalletVC : UITableViewDataSource {
 
 //MARK:-
 extension WalletVC : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         _ = self.pushVC("TransactionDetailVC")
-    }
-
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     _ = self.pushVC("TransactionDetailVC")
+     }
+     */
 }
 extension WalletVC : GetWalletAmountDelegate
 {
@@ -49,7 +52,7 @@ extension WalletVC : GetWalletAmountDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.lbl_TotalBalance.text = "$ \(((data.data?.amount)! as NSString).integerValue)"
+            self.lbl_TotalBalance.text = "$ \(data.data?.amount ?? "")"
         }
         else
         {
@@ -77,11 +80,25 @@ extension WalletVC : TransactionHistoryDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.transactions = data.data ?? []
+            if currentPage-1 != 0{
+                self.newTransactions = data.data ?? []
+                self.transactions?.append(contentsOf: self.newTransactions)
+            }
+            else{
+                self.transactions = data.data ?? []
+            }
+            
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            if data.message == "Data not found" && currentPage-1 >= 1{
+                print("No data at page No : \(currentPage-1)")
+                currentPage = currentPage-1
+            }
+            else if data.message == "Data not found" && currentPage-1 == 0{
+                self.transactions = []
+                
+            }
         }
     }
     

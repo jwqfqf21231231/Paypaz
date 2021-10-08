@@ -17,8 +17,8 @@ struct TransactionHistoryModel: Codable {
 
 // MARK: - Datum
 struct Transactions: Codable {
-    let id, walletID, userID, cardID: String?
-    let orderID, transactionID, amount, merchantReference: String?
-    let transactionTime, status, isCredited, createdDate: String?
-    let updatedDate: String?
+    let amount, isCredited, firstName, lastName: String?
+    let userProfile, name: String?
 }
+
+

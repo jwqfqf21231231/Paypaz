@@ -14,10 +14,13 @@ class HomeVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(showPopupForPaymentSuccess(notification:)), name: NSNotification.Name("ShowPaymentSuccessPopUp"), object: nil)
     }
     
-    
+    @objc func showPopupForPaymentSuccess(notification: Notification)
+    {
+        self.view.makeToast("Payment successful")
+    }
     
     //MARK:- --- Action ----
     @IBAction func btn_SideDrawer(_ sender:UIButton) {
