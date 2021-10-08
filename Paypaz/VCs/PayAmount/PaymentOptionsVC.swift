@@ -8,11 +8,7 @@
 
 import UIKit
 import SDWebImage
-enum PayType {
-    case paypaz
-    case BankAcc
-    case QRCode
-}
+
 
 class PaymentOptionsVC: UIViewController {
     

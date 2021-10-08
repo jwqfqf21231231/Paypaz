@@ -281,10 +281,10 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
         {
             self.products = data.data ?? []
                         //self.tableView_Height.constant = CGFloat(200 * products.count)
-            DispatchQueue.main.async {
-                self.tableView_Height.constant = self.tableView_Products.contentSize.height
-            }
-            self.tableView_Products.reloadData()
+//            DispatchQueue.main.async {
+//                self.tableView_Height.constant = self.tableView_Products.contentSize.height
+//            }
+//            self.tableView_Products.reloadData()
         }
         else
         {
@@ -302,7 +302,7 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
         }
         else{
             self.hideProductsView.alpha = 0
-           self.tableView_Height.constant = 125
+          // self.tableView_Height.constant = 125
             //            self.view_Products.isHidden = false
         }
     }
@@ -415,15 +415,15 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
                 }
                 
                 self.hideProductsView.alpha = 0
-                self.tableView_Height.constant = 125
+                //self.tableView_Height.constant = 125
                 //                self.view_Products.isHidden = false
                 for i in 0..<cartItemProducts.count{
                     cartItemProducts[i].updatedProductPrice = (((cartItemProducts[i].productQtyPrice ?? "") as NSString).integerValue)
                 }
-                DispatchQueue.main.async {
-                    self.tableView_Height.constant = self.tableView_Products.contentSize.height
-                }
-                self.tableView_Products.reloadData()
+//                DispatchQueue.main.async {
+//                    self.tableView_Height.constant = self.tableView_Products.contentSize.height
+//                }
+//                self.tableView_Products.reloadData()
             }
         }
         else

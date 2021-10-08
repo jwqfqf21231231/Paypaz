@@ -13,17 +13,19 @@ protocol AddMoneyPopupDelegate : class {
 protocol PaymentSuccessfulDelegate : class{
     func goBackToVC()
 }
-//protocol BuyEventThruCardDelegate : class{
-//    func buyEventThruCard(cvv:String,)
-//}
+protocol BuyEventThruCardDelegate : class{
+    func buyEventThruCard(cvv:String,cardName:String,cardNumber:String,cardID:String)
+}
 class AddMoneyPopupVC  : UIViewController {
     
     weak var delegate : AddMoneyPopupDelegate?
-    weak var successDelegate : PaymentSuccessfulDelegate?
+    weak var successDelegate : BuyEventThruCardDelegate?
     var cartInfo : UpdatedCartInfo?
     //var selectedType  : AddMoneyType?
     var maxLength = 3
     var cardID = ""
+    var cardNumber = ""
+    var cardName = ""
     var existingCards = [CardsList](){
         didSet{
             tableViewHeight.constant = CGFloat.greatestFiniteMagnitude
@@ -59,7 +61,7 @@ class AddMoneyPopupVC  : UIViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        paymentDataSource.delegate = self
+        //paymentDataSource.delegate = self
         walletDataSource.addMoneyInWalletDelegate = self
         dataSource.cardListDelegate = self
         //self.selectedType = .BankAccount
@@ -101,29 +103,7 @@ class AddMoneyPopupVC  : UIViewController {
         else{
             Connection.svprogressHudShow(view: self)
             if buyTicket ?? false{
-                paymentDataSource.eventID = cartInfo?.eventID ?? ""
-                paymentDataSource.eventUserID = cartInfo?.eventUserID ?? ""
-                paymentDataSource.eventQty = cartInfo?.eventQty ?? ""
-                paymentDataSource.eventPrice = cartInfo?.eventPrice ?? ""
-                paymentDataSource.productsPrice = cartInfo?.productsPrice ?? ""
-                paymentDataSource.subTotal = cartInfo?.subTotal ?? ""
-                paymentDataSource.discount = cartInfo?.discount ?? ""
-                paymentDataSource.tax = cartInfo?.tax ?? ""
-                paymentDataSource.grandTotal = cartInfo?.grandTotal ?? ""
-                paymentDataSource.cartID = cartInfo?.cartID ?? ""
-                paymentDataSource.cardID = cardID
-                paymentDataSource.cvv = txt_CVV.text ?? ""
-//                let jsonData = try! JSONSerialization.data(withJSONObject:cartInfo?.products ?? [])
-//                let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)
-//                print(jsonString!)
-//                paymentDataSource.products = jsonString ?? ""
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .prettyPrinted
-                let data = try! encoder.encode(cartInfo?.products)
-                paymentDataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""
-                paymentDataSource.paymentType = cartInfo?.paymentType ?? ""
-                paymentDataSource.paymentMethod = "3"
-                paymentDataSource.requestPayment()
+                self.successDelegate?.buyEventThruCard(cvv: txt_CVV.text ?? "", cardName: self.cardName, cardNumber: self.cardNumber, cardID: self.cardID)
             }
             else{
                 walletDataSource.isCard = "0"
@@ -151,7 +131,7 @@ class AddMoneyPopupVC  : UIViewController {
      self.btn_DebitCredit.setTitleColor(UIColor(named: "GreenColor"), for: .normal)
      }*/
 }
-extension AddMoneyPopupVC : PaymentDelegate
+/*extension AddMoneyPopupVC : PaymentDelegate
 {
     func didRecieveDataUpdate1(data: Basic_Model)
     {
@@ -159,7 +139,7 @@ extension AddMoneyPopupVC : PaymentDelegate
         if data.success == 1
         {
             self.dismiss(animated: false) {
-                self.successDelegate?.goBackToVC()
+                self.successDelegate?.buyEventThruCard(cvv: txt_CVV.te, cardName: <#T##String#>, cardNumber: <#T##String#>)
             }
         }
         else
@@ -181,7 +161,7 @@ extension AddMoneyPopupVC : PaymentDelegate
             self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
-}
+}*/
 
 extension AddMoneyPopupVC : AddMoneyInWalletDelegate
 {
@@ -284,6 +264,8 @@ extension AddMoneyPopupVC : UITableViewDataSource,UITableViewDelegate {
             cell.deleteButton.setImage(UIImage(named:"paid"), for: .normal)
             cell.innerBackgroundView.backgroundColor = UIColor(red: 22/255, green: 195/255, blue: 97/255, alpha: 0.1)
             self.cardID = existingCards[indexPath.row].id ?? ""
+            self.cardNumber = existingCards[indexPath.row].cardNumber ?? ""
+            self.cardName = existingCards[indexPath.row].cardName ?? ""
             if existingCards[indexPath.row].cardName == "Amex"{
                 self.maxLength = 4
             }

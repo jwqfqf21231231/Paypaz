@@ -17,8 +17,24 @@ class AddToCartVC : CustomViewController {
     var buyEvent : Bool?
     var eventID : String?
     var eventDetails : MyEvent?
-    var products = [MyProducts]()
-    var cartItemProducts = [Product]()
+    var products = [MyProducts](){
+        didSet{
+            tableView_Height.constant = CGFloat.greatestFiniteMagnitude
+            tableView_Products.reloadData()
+            tableView_Products.layoutIfNeeded()
+            tableView_Height.constant = self.tableView_Products.contentSize.height
+            self.view.layoutIfNeeded()
+        }
+    }
+    var cartItemProducts = [Product](){
+        didSet{
+            tableView_Height.constant = CGFloat.greatestFiniteMagnitude
+            tableView_Products.reloadData()
+            tableView_Products.layoutIfNeeded()
+            tableView_Height.constant = self.tableView_Products.contentSize.height
+            self.view.layoutIfNeeded()
+        }
+    }
     let dataSource = MyPostedEventDataModel()
     var eventPrice = 0
     var productPrice = 0

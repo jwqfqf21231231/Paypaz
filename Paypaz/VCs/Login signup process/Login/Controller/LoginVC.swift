@@ -16,11 +16,7 @@ class LoginVC : UIViewController {
     @IBOutlet weak var txt_PhoneNo : RoundTextField!
     @IBOutlet weak var txt_email    : RoundTextField!
     @IBOutlet weak var txt_Password : RoundTextField!
-    @IBOutlet weak var code_btn : UIButton!{
-        didSet{
-            self.code_btn.imageView?.contentMode = .scaleAspectFill
-        }
-    }
+    @IBOutlet weak var code_btn : UIButton!
     
     //Country Code and Phone Code
     var country_code = "IN"
@@ -110,8 +106,8 @@ class LoginVC : UIViewController {
             self.apiDailCode = dial_code
             self.code_btn.setTitle(dialCode, for: .normal)
             self.code_btn.setImage(UIImage.init(named: code), for: .normal)
-            self.code_btn.imageView?.contentMode = .scaleAspectFill
-            self.code_btn.imageView?.layer.cornerRadius = 2
+          //  self.code_btn.imageView?.contentMode = .scaleAspectFill
+           // self.code_btn.imageView?.layer.cornerRadius = 2
             self.updatePlaceholder(code)
             self.txt_PhoneNo.text?.removeAll()
             self.textStr.removeAll()
