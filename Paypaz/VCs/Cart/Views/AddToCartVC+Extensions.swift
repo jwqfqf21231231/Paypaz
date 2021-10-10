@@ -26,10 +26,6 @@ extension AddToCartVC : UITableViewDataSource {
             let imageString = products[indexPath.row].image ?? ""
             cell.img_Product.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.img_Product.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
-            cell.btn_AddProduct.tag = indexPath.row
-            cell.btn_DeleteProduct.tag = indexPath.row
-            cell.btn_AddProduct.addTarget(self, action: #selector(btn_AddProducts(_:)), for: .touchUpInside)
-            cell.btn_DeleteProduct.addTarget(self, action: #selector(btn_RemoveProducts(_:)), for: .touchUpInside)
             if products[indexPath.row].isPaid == "0"{
                 cell.lbl_Price.text = "Free"
             }
@@ -43,10 +39,6 @@ extension AddToCartVC : UITableViewDataSource {
             let imageString = cartItemProducts[indexPath.row].image ?? ""
             cell.img_Product.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.img_Product.sd_setImage(with: URL(string: url+imageString), placeholderImage: UIImage(named: "event_img"))
-            cell.btn_AddProduct.tag = indexPath.row
-            cell.btn_DeleteProduct.tag = indexPath.row
-            cell.btn_AddProduct.addTarget(self, action: #selector(btn_AddProducts(_:)), for: .touchUpInside)
-            cell.btn_DeleteProduct.addTarget(self, action: #selector(btn_RemoveProducts(_:)), for: .touchUpInside)
             cell.lbl_ProductCount.text = "\((((cartItemProducts[indexPath.row].productQty ?? "") as NSString).integerValue))"
             let cartProductPrice = ((cartItemProducts[indexPath.row].productPrice ?? "") as NSString).integerValue
             if cartProductPrice < 1{
@@ -57,6 +49,10 @@ extension AddToCartVC : UITableViewDataSource {
             }
             cell.lbl_ProductName.text = cartItemProducts[indexPath.row].name
         }
+        cell.btn_AddProduct.tag = indexPath.row
+        cell.btn_DeleteProduct.tag = indexPath.row
+        cell.btn_AddProduct.addTarget(self, action: #selector(btn_AddProducts(_:)), for: .touchUpInside)
+        cell.btn_DeleteProduct.addTarget(self, action: #selector(btn_RemoveProducts(_:)), for: .touchUpInside)
         return cell
     }
     
@@ -116,6 +112,7 @@ extension AddToCartVC : UITableViewDataSource {
                     count = count - 1
                     cell.lbl_ProductCount.text = "\(count)"
                     productPrice = productPrice * count
+                
                     cartItemProducts[sender.tag].updatedProductPrice = productPrice
                     calculateTotalProductPrice()
                 }
@@ -161,7 +158,7 @@ extension AddToCartVC : UITableViewDataSource {
             }){
                 if count > 0{
                     productsArray[index]["productQty"] = "\(count)"
-                    productsArray[index]["productQtyPrice"] = "\(Float(((productData.productPrice! as NSString).integerValue)*count))"
+                    productsArray[index]["productQtyPrice"] = "\(Float(productData.updatedProductPrice ?? 0))"
                 }
                 else{
                     productsArray.remove(at: index)
@@ -431,14 +428,12 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
             self.totalPrice = (((data.data?.grandTotal ?? "") as NSString).integerValue)
             self.lbl_TotalPrice.text = "$\(totalPrice)"
             self.cartItemProducts = data.data?.products ?? []
-            if self.cartItemProducts.count == 0
-            {
+            if cartItemProducts.count == 0{
                 self.hideProductsView.alpha = 1
                 self.tableView_Height.constant = 0
-                //                self.view_Products.isHidden = true
-                //
             }
             else{
+                self.hideProductsView.alpha = 0
                 for i in 0..<cartItemProducts.count{
                     productDict["productID"] = cartItemProducts[i].productID
                     productDict["productPrice"] = cartItemProducts[i].productPrice
@@ -446,17 +441,14 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
                     productDict["productQtyPrice"] = cartItemProducts[i].productQtyPrice
                     productsArray.append(productDict)
                 }
-                
-                self.hideProductsView.alpha = 0
-                //self.tableView_Height.constant = 125
-                //                self.view_Products.isHidden = false
                 for i in 0..<cartItemProducts.count{
                     cartItemProducts[i].updatedProductPrice = (((cartItemProducts[i].productQtyPrice ?? "") as NSString).integerValue)
                 }
-//                DispatchQueue.main.async {
-//                    self.tableView_Height.constant = self.tableView_Products.contentSize.height
-//                }
-//                self.tableView_Products.reloadData()
+                tableView_Height.constant = CGFloat.greatestFiniteMagnitude
+                tableView_Products.reloadData()
+                tableView_Products.layoutIfNeeded()
+                tableView_Height.constant = self.tableView_Products.contentSize.height
+                self.view.layoutIfNeeded()
             }
         }
         else
