@@ -67,7 +67,7 @@ extension MyTicketDetailVC : TicketDetailsDelegate
             if data.data?.paymentMethod ?? "" == "QR Code"{
                 self.paymentMethodImage.image = UIImage(named:"icc_qr_code")
             }
-            else if data.data?.paymentMethod ?? "" == "By Card"{
+            else if data.data?.paymentMethod ?? "" == "By card"{
                 self.paymentMethodImage.image = UIImage(named:"add_card")
             }
             else{

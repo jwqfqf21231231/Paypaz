@@ -20,7 +20,7 @@ protocol BankInfoDataModelDelegate:class {
     
 }
 protocol AddBankAccountDataModelDelegate:class {
-    func didRecieveDataUpdate2(data:ResendOTPModel)
+    func didRecieveDataUpdate2(data:LogInModel)
     func didFailDataUpdateWithError2(error:Error)
 }
 protocol GetCardsListDataModelDelegate:class{
@@ -210,7 +210,7 @@ class CreateCardDataModel: NSObject
                                         {
                                             do
                                             {
-                                                let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
+                                                let response = try JSONDecoder().decode(LogInModel.self, from: result!)
                                                 self.delegate2?.didRecieveDataUpdate2(data: response)
                                             }
                                             catch let error as NSError

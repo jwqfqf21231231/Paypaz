@@ -98,7 +98,7 @@ class AddBankAccountVC : CardViewController {
 //MARK:- --- Extensions ---
 extension AddBankAccountVC : AddBankAccountDataModelDelegate
 {
-    func didRecieveDataUpdate2(data: ResendOTPModel)
+    func didRecieveDataUpdate2(data: LogInModel)
     {
         print("CreateCardModelData = ",data)
         Connection.svprogressHudDismiss(view: self)
