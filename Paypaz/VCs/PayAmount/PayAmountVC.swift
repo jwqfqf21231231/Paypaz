@@ -148,34 +148,47 @@ class PayAmountVC : CustomViewController {
         }
     }
     @IBAction func btn_Submit(_ sender:UIButton) {
-        Connection.svprogressHudShow(view: self)
-        dataSource.eventID = cartInfo?.eventID ?? ""
-        dataSource.eventUserID = cartInfo?.eventUserID ?? ""
-        dataSource.eventQty = cartInfo?.eventQty ?? ""
-        dataSource.eventPrice = cartInfo?.eventPrice ?? ""
-        dataSource.productsPrice = cartInfo?.productsPrice ?? ""
-        dataSource.subTotal = cartInfo?.subTotal ?? ""
-        dataSource.discount = cartInfo?.discount ?? ""
-        dataSource.tax = cartInfo?.tax ?? ""
-        dataSource.grandTotal = cartInfo?.grandTotal ?? ""
-        dataSource.cartID = cartInfo?.cartID ?? ""
-        dataSource.paymentType = cartInfo?.paymentType ?? ""
-        dataSource.cvv = cvv
-        dataSource.cardID = cardID
-        if selectedPayType == .paypaz {
-            dataSource.paymentMethod = "1"
+        if self.selectedPayType == .paypaz{
+            if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                vc.delegate = self
+            }
         }
-        else if selectedPayType == .QRCode{
-            dataSource.paymentMethod = "2"
+        else if self.selectedPayType == .QRCode{
+            if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                vc.delegate = self
+            }
         }
         else{
-            dataSource.paymentMethod = "3"
+            Connection.svprogressHudShow(view: self)
+            dataSource.eventID = cartInfo?.eventID ?? ""
+            dataSource.eventUserID = cartInfo?.eventUserID ?? ""
+            dataSource.eventQty = cartInfo?.eventQty ?? ""
+            dataSource.eventPrice = cartInfo?.eventPrice ?? ""
+            dataSource.productsPrice = cartInfo?.productsPrice ?? ""
+            dataSource.subTotal = cartInfo?.subTotal ?? ""
+            dataSource.discount = cartInfo?.discount ?? ""
+            dataSource.tax = cartInfo?.tax ?? ""
+            dataSource.grandTotal = cartInfo?.grandTotal ?? ""
+            dataSource.cartID = cartInfo?.cartID ?? ""
+            dataSource.paymentType = cartInfo?.paymentType ?? ""
+            dataSource.cvv = cvv
+            dataSource.cardID = cardID
+            if selectedPayType == .paypaz {
+                dataSource.paymentMethod = "1"
+            }
+            else if selectedPayType == .QRCode{
+                dataSource.paymentMethod = "2"
+            }
+            else{
+                dataSource.paymentMethod = "3"
+            }
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try! encoder.encode(cartInfo?.products)
+            dataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""//String(data: data, encoding: .utf8)!
+            dataSource.requestPayment()
         }
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(cartInfo?.products)
-        dataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""//String(data: data, encoding: .utf8)!
-        dataSource.requestPayment()
+        
         
 //        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
 //            popup.delegate  = self
@@ -224,6 +237,34 @@ class PayAmountVC : CustomViewController {
      }
      }
      }*/
+}
+extension PayAmountVC : SendBackPinCodeDelegate{
+    func sendBackPinCode(pin : String){
+        Connection.svprogressHudShow(view: self)
+        dataSource.eventID = cartInfo?.eventID ?? ""
+        dataSource.eventUserID = cartInfo?.eventUserID ?? ""
+        dataSource.eventQty = cartInfo?.eventQty ?? ""
+        dataSource.eventPrice = cartInfo?.eventPrice ?? ""
+        dataSource.productsPrice = cartInfo?.productsPrice ?? ""
+        dataSource.subTotal = cartInfo?.subTotal ?? ""
+        dataSource.discount = cartInfo?.discount ?? ""
+        dataSource.tax = cartInfo?.tax ?? ""
+        dataSource.grandTotal = cartInfo?.grandTotal ?? ""
+        dataSource.cartID = cartInfo?.cartID ?? ""
+        dataSource.paymentType = cartInfo?.paymentType ?? ""
+        dataSource.pincode = pin
+        if selectedPayType == .paypaz {
+            dataSource.paymentMethod = "1"
+        }
+        else if selectedPayType == .QRCode{
+            dataSource.paymentMethod = "2"
+        }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(cartInfo?.products)
+        dataSource.products = NSString(data: data, encoding: String.Encoding.utf8.rawValue) ?? ""//String(data: data, encoding: .utf8)!
+        dataSource.requestPayment()
+    }
 }
 extension PayAmountVC : PopupDelegate {
     func isClickedButton() {

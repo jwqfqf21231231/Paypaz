@@ -55,7 +55,11 @@ class ViewProfileVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_ViewQR(_ sender:UIButton) {
-         _ = self.pushVC("ScanQRCodeVC")
+        if let vc = self.pushVC("ScanQRCodeVC") as? ScanQRCodeVC{
+            vc.userName = lbl_ProfileName.text ?? ""
+            vc.userImage = img_ProfilePic.image ?? UIImage(named: "place_holder")
+        }
+        
     }
     @IBAction func btn_Edit(_ sender:UIButton) {
         _ = self.pushVC("EditProfileVC",animated: false)

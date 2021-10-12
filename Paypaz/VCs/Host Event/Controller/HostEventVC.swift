@@ -444,6 +444,10 @@ class HostEventVC : UIViewController {
         {
             self.view.makeToast("Enter Price")
         }
+        else if paymentStatus == "0" && (txt_Price.text! as NSString).integerValue == 0
+        {
+            self.view.makeToast("Please make the event free..")
+        }
         else if(txt_EventQuantity.isEmptyOrWhitespace())
         {
             self.view.makeToast("Enter Event Quantity")

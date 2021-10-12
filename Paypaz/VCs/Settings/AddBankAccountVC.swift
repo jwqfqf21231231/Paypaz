@@ -11,6 +11,7 @@ import UIKit
 class AddBankAccountVC : CardViewController {
     
     //Drop Down - Properties
+    var delegate : PopupDelegate?
     var banks = [String]()
     var bankID_Names = [String:String]()
     var selected:String?
@@ -104,9 +105,11 @@ extension AddBankAccountVC : AddBankAccountDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let popup = self.presentPopUpVC("BankSavedSuccessPopupVC", animated: false) as? BankSavedSuccessPopupVC {
+            self.delegate?.isClickedButton()
+            self.navigationController?.popViewController(animated: false)
+            /*if let popup = self.presentPopUpVC("BankSavedSuccessPopupVC", animated: false) as? BankSavedSuccessPopupVC {
                 popup.delegate = self
-            }
+            }*/
         }
         else
         {

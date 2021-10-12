@@ -12,6 +12,7 @@ class OTPVerificationVC : CustomViewController {
     
     var doForgotPasscode : Bool?
     var doForgotPassword : Bool?
+    var doForgotPincode : Bool?
     var doChangePhoneNumber : Bool?
     private let dataSource = OTPVerificationDataModel()
     private let dataSource1 = EditPhoneNoDataModel()
@@ -48,7 +49,11 @@ class OTPVerificationVC : CustomViewController {
     
     private func changeTitle()
     {
-        if doForgotPasscode ?? false
+        if doForgotPincode ?? false{
+            lbl_Title.text = "Pin OTP Verification"
+            lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + "\(UserDefaults.standard.getPhoneNo())"
+        }
+        else if doForgotPasscode ?? false
         {
             lbl_Title.text = "Passcode OTP Verification"
             lbl_Notify.text = "\(UserDefaults.standard.getPhoneCode()) " + "\(UserDefaults.standard.getPhoneNo())"
@@ -108,6 +113,11 @@ class OTPVerificationVC : CustomViewController {
                 dataSource.verifyOTP()
             }
             else if self.doForgotPasscode ?? false
+            {
+                dataSource.otp = otpString
+                dataSource.forgotPasscodeOTPVerify()
+            }
+            else if self.doForgotPincode ?? false
             {
                 dataSource.otp = otpString
                 dataSource.forgotPasscodeOTPVerify()
@@ -262,10 +272,18 @@ extension OTPVerificationVC : ForgotPasscodeVerifyOTPModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let CreatePasscodeVC = self.pushVC("CreatePasscodeVC") as? CreatePasscodeVC
-            {
-                CreatePasscodeVC.setNewPasscode = true
+            if self.doForgotPincode == true{
+                if let vc = self.pushVC("CreatePinVC") as? CreatePinVC{
+                    vc.isCreatingPin = false
+                }
             }
+            else{
+                if let CreatePasscodeVC = self.pushVC("CreatePasscodeVC") as? CreatePasscodeVC
+                {
+                    CreatePasscodeVC.setNewPasscode = true
+                }
+            }
+            
         }
         else
         {

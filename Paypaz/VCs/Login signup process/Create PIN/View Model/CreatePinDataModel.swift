@@ -19,11 +19,13 @@ class CreatePinDataModel: NSObject
     weak var delegate: CreatePinDataModelDelegate?
     let sharedInstance = Connection()
     var pincode = ""
+    var isReset = ""
     func createPin()
     {
         let url =  APIList().getUrlString(url: .CREATEPIN)
         let parameter : Parameters = [
-            "pincode" : pincode
+            "pincode" : pincode,
+            "isReset" : isReset
         ]
         let header : HTTPHeaders = [
             "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"

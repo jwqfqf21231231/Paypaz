@@ -46,37 +46,38 @@ class CreatePinVC : CustomViewController {
         if self.isCreatingPin ?? false {
             self.lbl_title.text = "Create PIN"
         } else {
-            self.lbl_title.text = "Enter PIN"
+            self.lbl_title.text = "Enter New PIN"
         }
     }
     
     // MARK:- --- Action ----
   
     @IBAction func btn_Submit(_ sender:UIButton) {
-        if self.isCreatingPin ?? false {
-            if !hasEnteredPin
-            {
-                self.view.makeToast("Enter passcode", duration: 3, position: .bottom)
-            }
-            else if !hasEnteredConfirmPin
-            {
-                self.view.makeToast("Enter confirm passcode", duration: 3, position: .bottom)
-            }
-            else if(createPin != confirmPin)
-            {
-                self.view.makeToast("create pin and confirm pin should match", duration: 3, position: .bottom)
-            }
-            else
-            {
-                Connection.svprogressHudShow(view: self)
-                dataSource.pincode = confirmPin
-                dataSource.createPin()
-            }
-            
-        } else {
-            self.navigationController?.popViewController(animated: true)
-            // self.delegate?.isClickedButton()
+        
+        if !hasEnteredPin
+        {
+            self.view.makeToast("Enter passcode", duration: 3, position: .bottom)
         }
+        else if !hasEnteredConfirmPin
+        {
+            self.view.makeToast("Enter confirm passcode", duration: 3, position: .bottom)
+        }
+        else if(createPin != confirmPin)
+        {
+            self.view.makeToast("create pin and confirm pin should match", duration: 3, position: .bottom)
+        }
+        else
+        {
+            if self.isCreatingPin ?? false {
+                dataSource.isReset = "0"
+            } else {
+                dataSource.isReset = "1"
+            }
+            dataSource.pincode = confirmPin
+            Connection.svprogressHudShow(view: self)
+            dataSource.createPin()
+        }
+        
         
     }
 }
@@ -137,12 +138,22 @@ extension CreatePinVC : CreatePinDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
-            UserDefaults.standard.setPin(value: confirmPin)
-            if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
-            {
-                vc.fromPin = true
-                vc.strictlyPrimary = true
+            if isCreatingPin == false{
+                for vc in self.navigationController?.viewControllers ?? [] {
+                    if let home = vc as? EnterPinVC {
+                        self.navigationController?.popToViewController(home, animated: true)
+                        break
+                    }
+                }
+            }
+            else{
+                UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
+                UserDefaults.standard.setPin(value: confirmPin)
+                if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
+                {
+                    vc.fromPin = true
+                    vc.strictlyPrimary = true
+                }
             }
         }
         else

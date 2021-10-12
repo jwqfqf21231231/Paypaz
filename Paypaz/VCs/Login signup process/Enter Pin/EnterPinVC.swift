@@ -7,13 +7,20 @@
 //
 
 import UIKit
-
+protocol SendBackPinCodeDelegate : class{
+    func sendBackPinCode(pin:String)
+}
 class EnterPinVC: UIViewController {
     
     var hasEntered = false
     var enteredPin = ""
+    var cartInfo : UpdatedCartInfo?
+    var paymentMethod : String?
+    weak var delegate : SendBackPinCodeDelegate?
     @IBOutlet weak var otpView: VPMOTPView!
-    
+    private let passcodeDataSource = PasscodeDataModel()
+
+    private let dataSource = PaymentDataModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         otpView.delegate = self
@@ -35,21 +42,64 @@ class EnterPinVC: UIViewController {
             sender.isSelected = true
         }
     }
-    
+    @IBAction func btn_ForgotPin(_ sender:UIButton) {
+        Connection.svprogressHudShow(view: self)
+        passcodeDataSource.getOTP()
+    }
     @IBAction func btn_Submit(_ sender:UIButton) {
         if !hasEntered
         {
             self.view.makeToast("Enter Pin", duration: 3, position: .bottom)
         }
+        else{
+            self.delegate?.sendBackPinCode(pin: self.enteredPin)
+            self.navigationController?.popViewController(animated: false)
+        }
+        
+//        if !hasEntered
+//        {
+//            self.view.makeToast("Enter Pin", duration: 3, position: .bottom)
+//        }
+//        else
+//        {
+//            if self.enteredPin != UserDefaults.standard.getPin(){
+//                self.view.makeToast("Enter Valid Pin", duration: 3, position: .bottom)
+//            }
+//            else{
+//                self.navigationController?.popViewController(animated: true)
+//                //                self.delegate?.isClickedButton()
+//            }
+//        }
+    }
+}
+extension EnterPinVC : ForgotPasscodeDataModelDelegate
+{
+    
+    func didRecieveDataUpdate(data: ForgotPasscodeModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            if let OTPVerificationVC = self.pushVC("OTPVerificationVC",animated:false) as? OTPVerificationVC{
+                OTPVerificationVC.doForgotPincode = true
+            }
+        }
         else
         {
-            if self.enteredPin != UserDefaults.standard.getPin(){
-                self.view.makeToast("Enter Valid Pin", duration: 3, position: .bottom)
-            }
-            else{
-                self.navigationController?.popViewController(animated: true)
-                //                self.delegate?.isClickedButton()
-            }
+            showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError2(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }

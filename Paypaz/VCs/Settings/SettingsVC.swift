@@ -24,11 +24,12 @@ class SettingsVC : CustomViewController {
         if UserDefaults.standard.value(forKey: "isNotification") as? String == "0"
         {
             swt_Notification.setOn(false, animated: false)
-            
+            swt_Notification.thumbTintColor = UIColor.lightGray
         }
         else
         {
             swt_Notification.setOn(true, animated: false)
+            swt_Notification.thumbTintColor = UIColor(named: "GreenColor")
         }
         
         
@@ -41,11 +42,14 @@ class SettingsVC : CustomViewController {
         {
             dataSource.status = "1"
             UserDefaults.standard.setValue("1", forKey: "isNotification")
+            swt_Notification.thumbTintColor = UIColor(named: "GreenColor")
         }
         else
         {
             dataSource.status = "0"
             UserDefaults.standard.setValue("0", forKey: "isNotification")
+            swt_Notification.thumbTintColor = UIColor.lightGray
+            
         }
         dataSource.changeNotificationStatus()
     }
@@ -61,7 +65,9 @@ class SettingsVC : CustomViewController {
         _ = self.pushVC("NotificationsListVC")
     }
     @IBAction func btn_AddBank(_ sender:UIButton) {
-        _ = self.pushVC("AddBankAccountVC")
+        if let vc = self.pushVC("AddBankAccountVC") as? AddBankAccountVC{
+            vc.delegate = self
+        }
     }
     @IBAction func btn_AddCardDetails(_ sender:UIButton) {
         _ = self.pushVC("PaymentCardsVC")
@@ -87,6 +93,11 @@ class SettingsVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
+extension SettingsVC : PopupDelegate{
+    func isClickedButton() {
+        self.view.makeToast("Your bank detail updated successfully")
+    }
+}
 extension SettingsVC : NotificationModelDelegate
 {
     func didRecieveDataUpdate(data: ResendOTPModel)
@@ -94,7 +105,7 @@ extension SettingsVC : NotificationModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            view.makeToast(data.message ?? "")
+            //view.makeToast(data.message ?? "")
         }
         else
         {

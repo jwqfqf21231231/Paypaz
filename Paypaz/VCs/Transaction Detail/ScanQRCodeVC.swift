@@ -10,9 +10,15 @@ import UIKit
 
 class ScanQRCodeVC: CustomViewController {
     
+    @IBOutlet weak var userPic : UIImageView!
+    @IBOutlet weak var userNameLabel : UILabel!
+    var userName : String?
+    var userImage :UIImage?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        userNameLabel.text = userName ?? ""
+        userPic.image = userImage ?? UIImage(named: "place_holder")
     }
 
     //MARK:- --- Action ----

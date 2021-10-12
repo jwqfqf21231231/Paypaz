@@ -93,6 +93,12 @@ extension EventDetailVC : UICollectionViewDelegate, UICollectionViewDelegateFlow
                 }
             }
         }
+        else{
+            if let vc = self.pushVC("ProductDetailVC") as? ProductDetailVC
+            {
+                vc.productID = self.products[indexPath.row].id ?? ""
+            }
+        }
     }
 }
 extension EventDetailVC : MyPostedEventDataModelDelegate

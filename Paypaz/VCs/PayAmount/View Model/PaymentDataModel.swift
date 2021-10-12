@@ -32,6 +32,7 @@ class PaymentDataModel: NSObject
     var paymentMethod = ""
     var cvv = ""
     var paymentType = ""
+    var pincode = ""
     var products:NSString = ""
 
 
@@ -58,6 +59,7 @@ class PaymentDataModel: NSObject
             "cvv" : cvv,
             "paymentType" : paymentType,
             "addedDate" : currentDate,
+            "pincode" : pincode,
             "products" : products
         ]
         let header : HTTPHeaders = [
