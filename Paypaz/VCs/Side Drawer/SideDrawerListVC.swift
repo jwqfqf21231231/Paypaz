@@ -76,7 +76,11 @@ class SideDrawerListVC : CustomViewController {
     @IBAction func btn_QRCode (_ sender:UIButton)
     {
         self.sideMenuController?.hideLeftView()
-        _ = self.pushToChildVC("ViewProfileVC",animated: false)
+        if let vc = self.pushVC("ScanQRCodeVC") as? ScanQRCodeVC{
+            vc.userName = lbl_ProfileName.text ?? ""
+            vc.userImage = img_ProfilePic.image ?? UIImage(named: "place_holder")
+        }
+        //_ = self.pushToChildVC("ViewProfileVC",animated: false)
     }
     
 }

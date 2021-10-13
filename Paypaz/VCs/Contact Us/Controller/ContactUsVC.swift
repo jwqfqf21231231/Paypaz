@@ -33,6 +33,23 @@ class ContactUsVC : CustomViewController {
     @IBAction func btn_Back(_ sender:UIButton){
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func btn_Email(_ sender: UIButton){
+        let email = "admin@email.com"
+        if let url = URL(string: "mailto:\(email)") {
+          if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+          } else {
+            UIApplication.shared.openURL(url)
+          }
+        }
+        
+    }
+    @IBAction func btn_Call(_ sender: UIButton){
+
+        if let url = NSURL(string: "tel://+1797392372939"), UIApplication.shared.canOpenURL(url as URL) {
+            UIApplication.shared.open(url as URL)
+        }
+    }
     @IBAction func btn_Submit(_ sender:UIButton)
     {
         if txt_Email.isEmptyOrWhitespace(){

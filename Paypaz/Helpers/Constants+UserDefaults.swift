@@ -19,6 +19,19 @@ extension UserDefaults
 //    {
 //        return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
 //    }
+    func setFireBaseToken(value: String)
+    {
+        set(value, forKey: UserDefaultsKeys.fireBase.rawValue)
+    }
+    
+    func getFireBaseToken()-> String
+    {
+        guard string(forKey: UserDefaultsKeys.fireBase.rawValue) != nil  else
+        {
+            return ""
+        }
+        return string(forKey: UserDefaultsKeys.fireBase.rawValue)!
+    }
     func setLoggedIn(value: String)
     {
         set(value, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
@@ -219,5 +232,6 @@ enum UserDefaultsKeys : String
     case distance
     case date
     case day
+    case fireBase
 }
 

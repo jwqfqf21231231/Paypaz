@@ -163,6 +163,8 @@ extension LoginVC : LogInDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            print("==========================================")
+            print("User Token is : \(data.data?.token ?? "")")
             UserDefaults.standard.setLoggedIn(value: data.data?.isLoggedIN ?? "")
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")

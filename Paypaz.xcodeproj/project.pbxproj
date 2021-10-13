@@ -39,6 +39,7 @@
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
 		045C787926F354D1001F0606 /* AddToCartDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C787826F354D1001F0606 /* AddToCartDataModel.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
+		0461D29F27169FF600FFB614 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0461D29E27169FF600FFB614 /* GoogleService-Info.plist */; };
 		0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */; };
 		0485A4CD270180A600DF3AF3 /* GetWalletAmountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */; };
 		0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4FE2701B07200DF3AF3 /* PickerClass.swift */; };
@@ -260,6 +261,8 @@
 		0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPhoneNoVC.swift; sourceTree = "<group>"; };
 		045C787826F354D1001F0606 /* AddToCartDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartDataModel.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
+		0461D29427169F1200FFB614 /* Paypaz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paypaz.entitlements; sourceTree = "<group>"; };
+		0461D29E27169FF600FFB614 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmount.swift; sourceTree = "<group>"; };
 		0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmountDataModel.swift; sourceTree = "<group>"; };
 		0485A4FE2701B07200DF3AF3 /* PickerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerClass.swift; sourceTree = "<group>"; };
@@ -1435,6 +1438,7 @@
 		44C8F29C261F1BD2000F03DB /* Paypaz */ = {
 			isa = PBXGroup;
 			children = (
+				0461D29427169F1200FFB614 /* Paypaz.entitlements */,
 				04C7D73026B3D59800747777 /* JsonFile */,
 				0C7DF801268D65C90049E411 /* API + Connection */,
 				44C8F2D9261F26C1000F03DB /* Font */,
@@ -1444,6 +1448,7 @@
 				44C8F29F261F1BD2000F03DB /* SceneDelegate.swift */,
 				44C8F2CE261F1C98000F03DB /* VCs */,
 				44C8F2A3261F1BD2000F03DB /* Main.storyboard */,
+				0461D29E27169FF600FFB614 /* GoogleService-Info.plist */,
 				44C8F2A6261F1BD4000F03DB /* Assets.xcassets */,
 				44C8F2A8261F1BD4000F03DB /* LaunchScreen.storyboard */,
 				44C8F2AB261F1BD4000F03DB /* Info.plist */,
@@ -1793,6 +1798,7 @@
 				44C8F2AA261F1BD4000F03DB /* LaunchScreen.storyboard in Resources */,
 				04C7D73226B3D59800747777 /* CountryCodes.json in Resources */,
 				44C8F2A7261F1BD4000F03DB /* Assets.xcassets in Resources */,
+				0461D29F27169FF600FFB614 /* GoogleService-Info.plist in Resources */,
 				44C8F2E3261F26DB000F03DB /* Segoe UI Italic.ttf in Resources */,
 				44C8F2A5261F1BD2000F03DB /* Main.storyboard in Resources */,
 			);
@@ -2338,6 +2344,7 @@
 			baseConfigurationReference = FEA3338FFDAF4025901D475D /* Pods-Paypaz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Paypaz/Paypaz.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6N43GY3295;
@@ -2362,6 +2369,7 @@
 			baseConfigurationReference = 799FBE6824922A2A52E8A3C2 /* Pods-Paypaz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Paypaz/Paypaz.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6N43GY3295;

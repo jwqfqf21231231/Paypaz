@@ -23,6 +23,7 @@ class EnterPinVC: UIViewController {
     private let dataSource = PaymentDataModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        passcodeDataSource.delegate2 = self
         otpView.delegate = self
         otpView.otpFieldEntrySecureType = true
         otpView.initializeUI()

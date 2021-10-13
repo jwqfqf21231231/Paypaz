@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol UpdatedSuccessfullyPopup:class{
+    func showPopUp()
+}
 class ChangePasswordVC : CustomViewController {
     private let dataSource = ChangePasswordDataModel()
     @IBOutlet weak var btn_OldPwdEye : UIButton!
@@ -19,7 +21,7 @@ class ChangePasswordVC : CustomViewController {
     @IBOutlet weak var txt_NewPwdTop : NSLayoutConstraint!
     
     var hideOldPassword : Bool?
-    
+    weak var delegate : UpdatedSuccessfullyPopup?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,8 +158,8 @@ extension ChangePasswordVC : ChangePasswordDataModelDelegate
                 }
             }
             else {
+                self.delegate?.showPopUp()
                 self.navigationController?.popViewController(animated: false)
-                view.makeToast(data.message)
             }
         }
         else

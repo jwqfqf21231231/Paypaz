@@ -12,6 +12,8 @@ import IQKeyboardManagerSwift
 import UserNotifications
 import GooglePlaces
 import GoogleMaps
+import Firebase
+import FirebaseMessaging 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -34,11 +36,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ------->>IQKeyboard manager
         IQKeyboardManager.shared.enable            = true
         IQKeyboardManager.shared.enableAutoToolbar = true
+        FirebaseApp.configure()
+        registerForPushNotifications(application: application)
         return true
     }
     
 }
-extension AppDelegate : UNUserNotificationCenterDelegate{
+extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
+    //MARK:- Notifications
+    private func registerForPushNotifications(application:UIApplication) {
+        
+        //application.applicationIconBadgeNumber = 0
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options:[ .alert, .sound]){ (granted, error) in
+            
+            guard granted else {
+                return
+            }
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
+        Messaging.messaging().delegate = self
+    }
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("=================================")
+        print("refreshed token is : \(String(describing: fcmToken))")
+        //UserData.FCMToken = fcmToken ?? ""
+        UserDefaults.standard.setFireBaseToken(value: fcmToken ?? "")
+    }
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("====fail to register notifications=====")
+        print(error.localizedDescription)
+    }
+}
+/*extension AppDelegate : UNUserNotificationCenterDelegate{
     func registerForPushNotifications()
     {
         if #available(iOS 10.0, *)
@@ -117,5 +150,5 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
         }
     }
     
-}
+}*/
 

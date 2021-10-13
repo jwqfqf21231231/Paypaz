@@ -36,7 +36,7 @@ class SignUpDataModel: NSObject
             "email":email ,
             "phoneCode":phoneCode,
             "password":password,
-            "deviceToken":deviceToken,
+            "deviceToken":UserDefaults.standard.getFireBaseToken(),
             "deviceType":"ios",
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude(),

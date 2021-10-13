@@ -486,9 +486,10 @@ class HostEventVC : UIViewController {
 extension HostEventVC: GMSAutocompleteViewControllerDelegate{
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        
+        print("=================================================")
         print("Place name: \(place.name ?? "")")
         print("Place address: \(place.formattedAddress ?? "")")
+        print("Selected Adress Lat and Long values : \(place.coordinate.latitude)----\(place.coordinate.longitude)")
         self.location = place.formattedAddress ?? ""
         self.lbl_ChooseLocation.textColor = UIColor(named: "BlueColor")
         self.lbl_ChooseLocation.text = place.formattedAddress

@@ -39,7 +39,7 @@ class LogInDataModel: NSObject
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude(),
             "deviceType":"ios",
-            "deviceToken":deviceToken
+            "deviceToken":UserDefaults.standard.getFireBaseToken()
         ]
         sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:

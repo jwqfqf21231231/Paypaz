@@ -83,7 +83,9 @@ class SettingsVC : CustomViewController {
         _ = self.pushVC("ContactUsVC")
     }
     @IBAction func btn_ChangePassword(_ sender:UIButton) {
-        _ = self.pushVC("ChangePasswordVC")
+        if let vc = self.pushVC("ChangePasswordVC") as? ChangePasswordVC{
+            vc.delegate = self
+        }
     }
     @IBAction func btn_ChangePhoneNumber(_ sender:UIButton)
     {
@@ -96,6 +98,12 @@ class SettingsVC : CustomViewController {
 extension SettingsVC : PopupDelegate{
     func isClickedButton() {
         self.view.makeToast("Your bank detail updated successfully")
+    }
+}
+extension SettingsVC : UpdatedSuccessfullyPopup
+{
+    func showPopUp(){
+        self.view.makeToast("Password updated successfully")
     }
 }
 extension SettingsVC : NotificationModelDelegate
