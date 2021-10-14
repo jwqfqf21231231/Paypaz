@@ -57,7 +57,7 @@ class AddBankAccountVC : CardViewController {
             view.makeToast("Please enter phone number")
         }
         else if txt_AccountNumber.text?.count ?? 0 < 11{
-            view.makeToast("Please enter card number at least 11 charecters")
+            view.makeToast("Please enter card number at least 11 characters")
         }
         else if !txt_EmailID.isEmailValid(){
             view.makeToast("Please enter valid emailID")

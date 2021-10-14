@@ -11,6 +11,7 @@ import UIKit
 class MyTicketsVC : CustomViewController {
     
     @IBOutlet weak var myTicketsHeaderLabel : UILabel!
+    @IBOutlet weak var noDataFoundView : UIView!
     @IBOutlet weak var tableView_Tickets : UITableView! {
         didSet {
             tableView_Tickets.dataSource = self

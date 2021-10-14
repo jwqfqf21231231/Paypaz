@@ -18,7 +18,7 @@ class SendToBankVC : CustomViewController {
     @IBOutlet weak var view_FromInfo  : UIView!
     @IBOutlet weak var view_Receiving : UIView!
     @IBOutlet weak var view_ConversionAmount : UIView!
-    
+    @IBOutlet weak var descriptionText : RoundTextView!
     private var isLocalContactSelected : Bool?
     
     //MARK:- ---- View Life Cycle ----
@@ -36,6 +36,7 @@ class SendToBankVC : CustomViewController {
         let lightBlue = UIColor(red: 0.44, green: 0.60, blue: 1.00, alpha: 1.00)
         self.view_Local.backgroundColor  = lightBlue
         self.view_Global.backgroundColor = .clear
+        self.descriptionText.text.removeAll()
         
         self.btn_Local.setTitleColor(.white, for: .normal)
         self.btn_Global.setTitleColor(lightBlue, for: .normal)
@@ -50,7 +51,8 @@ class SendToBankVC : CustomViewController {
         let lightBlue = UIColor(red: 0.44, green: 0.60, blue: 1.00, alpha: 1.00)
         self.view_Global.backgroundColor = lightBlue
         self.view_Local.backgroundColor  = .clear
-        
+        self.descriptionText.text.removeAll()
+
         self.btn_Global.setTitleColor(.white, for: .normal)
         self.btn_Local.setTitleColor(lightBlue, for: .normal)
         

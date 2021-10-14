@@ -7,13 +7,16 @@
 //
 
 import UIKit
-
+protocol ContactUsSendStatus : class {
+    func contactUsSendStatus()
+}
 class ContactUsVC : CustomViewController {
     private let dataSource = ContactUsDataModel()
     
     @IBOutlet weak var txt_Email : RoundTextField!
     @IBOutlet weak var txt_Subject : RoundTextField!
     @IBOutlet weak var txt_Message : RoundTextView!
+    weak var delegate : ContactUsSendStatus?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,10 +87,9 @@ extension ContactUsVC : ContactUsDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            view.makeToast(data.message ?? "")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.navigationController?.popViewController(animated: false)
-            }
+            self.delegate?.contactUsSendStatus()
+            self.navigationController?.popViewController(animated: false)
+          
         }
         else
         {

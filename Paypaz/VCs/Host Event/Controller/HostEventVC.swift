@@ -72,7 +72,11 @@ class HostEventVC : UIViewController {
     @IBOutlet weak var txt_EventQuantity : RoundTextField!
     @IBOutlet weak var view_ChooseLocation : UIView!
     @IBOutlet weak var lbl_ChooseLocation : UILabel!
-    @IBOutlet weak var txt_Price : RoundTextField!
+    @IBOutlet weak var txt_Price : RoundTextField!{
+        didSet{
+            txt_Price.delegate = self
+        }
+    }
     @IBOutlet weak var txt_StartDate : RoundTextField!
     @IBOutlet weak var txt_EndDate : RoundTextField!
     @IBOutlet weak var txt_StartTime : RoundTextField!
@@ -342,17 +346,13 @@ class HostEventVC : UIViewController {
         if sender.tag == 0{
             btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
             btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
-        }
-        else{
-            btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
-            btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
-        }
-        if paymentStatus == "0"{
             view_PaymentMethod.isHidden = false
             view_Height.constant = 125.5
             txt_Price.isHidden = false
         }
         else{
+            btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
             view_PaymentMethod.isHidden = true
             view_Height.constant = 0
             txt_Price.isHidden = true
@@ -444,10 +444,6 @@ class HostEventVC : UIViewController {
         {
             self.view.makeToast("Enter Price")
         }
-        else if paymentStatus == "0" && (txt_Price.text! as NSString).integerValue == 0
-        {
-            self.view.makeToast("Please make the event free..")
-        }
         else if(txt_EventQuantity.isEmptyOrWhitespace())
         {
             self.view.makeToast("Enter Event Quantity")
@@ -515,6 +511,28 @@ extension HostEventVC: GMSAutocompleteViewControllerDelegate{
     
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
+extension HostEventVC : UITextFieldDelegate
+{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let amount = (textField.text! as NSString).integerValue
+        if amount == 0{
+            self.paymentStatus = "2"
+            btn_Free.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Paid.setImage(UIImage(named: "white_circle"), for: .normal)
+            view_PaymentMethod.isHidden = true
+            view_Height.constant = 0
+            txt_Price.isHidden = true
+        }
+        else{
+            self.paymentStatus = "0"
+            btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
+            btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
+            view_PaymentMethod.isHidden = false
+            view_Height.constant = 125.5
+            txt_Price.isHidden = false
+        }
     }
 }
 extension HostEventVC : HostEventDataModelDelegate

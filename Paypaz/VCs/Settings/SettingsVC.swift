@@ -80,7 +80,9 @@ class SettingsVC : CustomViewController {
         _ = self.pushVC("TermsPoliciesVC")
     }
     @IBAction func btn_ContactUs(_ sender:UIButton) {
-        _ = self.pushVC("ContactUsVC")
+        if let vc = self.pushVC("ContactUsVC") as? ContactUsVC{
+            vc.delegate = self
+        }
     }
     @IBAction func btn_ChangePassword(_ sender:UIButton) {
         if let vc = self.pushVC("ChangePasswordVC") as? ChangePasswordVC{
@@ -95,9 +97,14 @@ class SettingsVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
+extension SettingsVC : ContactUsSendStatus{
+    func contactUsSendStatus(){
+        self.view.makeToast("Mail has been sent")
+    }
+}
 extension SettingsVC : PopupDelegate{
     func isClickedButton() {
-        self.view.makeToast("Your bank detail updated successfully")
+        self.view.makeToast("Bank Account Saved Successfully")
     }
 }
 extension SettingsVC : UpdatedSuccessfullyPopup

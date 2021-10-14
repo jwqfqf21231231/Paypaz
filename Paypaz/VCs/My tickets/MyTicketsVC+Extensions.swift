@@ -48,12 +48,14 @@ extension MyTicketsVC : UserTicketsDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.myTicketsHeaderLabel.isHidden = false
+            self.noDataFoundView.alpha = 0
+//            self.myTicketsHeaderLabel.isHidden = false
             self.tickets = data.data ?? []
         }
         else
         {
-            self.myTicketsHeaderLabel.isHidden = true
+            self.noDataFoundView.alpha = 1
+            //self.myTicketsHeaderLabel.isHidden = true
             //self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
