@@ -50,6 +50,7 @@ class EditProfileVC: CustomViewController {
         }
         
         datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
         txt_DOB.inputView=datePicker
         txt_DOB.inputAccessoryView=createToolBar()
     }

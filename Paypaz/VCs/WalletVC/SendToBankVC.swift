@@ -18,6 +18,10 @@ class SendToBankVC : CustomViewController {
     @IBOutlet weak var view_FromInfo  : UIView!
     @IBOutlet weak var view_Receiving : UIView!
     @IBOutlet weak var view_ConversionAmount : UIView!
+    @IBOutlet weak var accountNumberText : UITextField!
+    @IBOutlet weak var routingNumberText : UITextField!
+    @IBOutlet weak var phoneNumberText : UITextField!
+    @IBOutlet weak var emailIdText : UITextField!
     @IBOutlet weak var descriptionText : RoundTextView!
     private var isLocalContactSelected : Bool?
     
@@ -32,7 +36,7 @@ class SendToBankVC : CustomViewController {
     
     private func selectLocalPayment() {
         self.isLocalContactSelected = true
-        
+        self.view.endEditing(true)
         let lightBlue = UIColor(red: 0.44, green: 0.60, blue: 1.00, alpha: 1.00)
         self.view_Local.backgroundColor  = lightBlue
         self.view_Global.backgroundColor = .clear
@@ -40,6 +44,10 @@ class SendToBankVC : CustomViewController {
         
         self.btn_Local.setTitleColor(.white, for: .normal)
         self.btn_Global.setTitleColor(lightBlue, for: .normal)
+        self.accountNumberText.text?.removeAll()
+        self.routingNumberText.text?.removeAll()
+        self.phoneNumberText.text?.removeAll()
+        self.emailIdText.text?.removeAll()
         
         self.view_FromInfo.isHidden         = true
         self.view_Receiving.isHidden        = true
@@ -47,12 +55,15 @@ class SendToBankVC : CustomViewController {
     }
     private func selectGlobalPayment() {
         self.isLocalContactSelected = false
-        
+        self.view.endEditing(true)
         let lightBlue = UIColor(red: 0.44, green: 0.60, blue: 1.00, alpha: 1.00)
         self.view_Global.backgroundColor = lightBlue
         self.view_Local.backgroundColor  = .clear
         self.descriptionText.text.removeAll()
-
+        self.accountNumberText.text?.removeAll()
+        self.routingNumberText.text?.removeAll()
+        self.phoneNumberText.text?.removeAll()
+        self.emailIdText.text?.removeAll()
         self.btn_Global.setTitleColor(.white, for: .normal)
         self.btn_Local.setTitleColor(lightBlue, for: .normal)
         

@@ -13344,16 +13344,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52O-Bp-ovF">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKa-w8-EQo">
-                                        <rect key="frame" x="158.5" y="49" width="97.5" height="28"/>
+                                        <rect key="frame" x="158" y="49" width="98.5" height="24.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="21"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fys-0i-aEP">
-                                        <rect key="frame" x="0.0" y="38" width="49.5" height="50"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Fys-0i-aEP" secondAttribute="height" multiplier="1:1" id="G5k-mJ-STp"/>
                                         </constraints>
@@ -13372,24 +13372,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Events Created By Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y39-sr-hrR">
-                                <rect key="frame" x="20.5" y="113" width="373" height="21.5"/>
+                                <rect key="frame" x="20.5" y="111" width="373" height="19"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.22745098039215686" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xne-Kd-ZNS">
-                                <rect key="frame" x="20.5" y="154.5" width="373" height="702.5"/>
+                                <rect key="frame" x="20.5" y="150" width="373" height="707"/>
                                 <color key="backgroundColor" name="LightBluish"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyEventsCell" id="H7f-Qa-MuI" customClass="MyEventsCell" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="373" height="152.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="373" height="147.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H7f-Qa-MuI" id="2QW-bq-485">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="152.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="147.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="com-hv-eet" customClass="DesignableView" customModule="Paypaz" customModuleProvider="target">
-                                                    <rect key="frame" x="2" y="8" width="370" height="136.5"/>
+                                                    <rect key="frame" x="2" y="8" width="370" height="131.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_img" translatesAutoresizingMaskIntoConstraints="NO" id="07G-qO-pL7" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
                                                             <rect key="frame" x="15" y="15" width="92.5" height="92.5"/>
@@ -13403,20 +13403,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name Event NEvent" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNv-xQ-O8n">
-                                                            <rect key="frame" x="115.5" y="15" width="211" height="21.5"/>
+                                                            <rect key="frame" x="115.5" y="15" width="211" height="19"/>
                                                             <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                             <color key="textColor" name="BlueColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cd6-OY-3KN">
-                                                            <rect key="frame" x="331.5" y="9" width="33.5" height="33.5"/>
+                                                            <rect key="frame" x="331.5" y="8" width="33.5" height="33"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="cd6-OY-3KN" secondAttribute="height" multiplier="1:1" id="Une-p0-C16"/>
                                                             </constraints>
                                                             <state key="normal" image="dots"/>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5o-nj-1ZQ" userLabel="Date View">
-                                                            <rect key="frame" x="115.5" y="41.5" width="249.5" height="21.5"/>
+                                                            <rect key="frame" x="115.5" y="39" width="249.5" height="21.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date_range" translatesAutoresizingMaskIntoConstraints="NO" id="LB5-sD-fgS">
                                                                     <rect key="frame" x="0.0" y="1.5" width="18.5" height="18.5"/>
@@ -13443,17 +13443,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Py-DE-oDc" userLabel="Address View">
-                                                            <rect key="frame" x="115.5" y="68" width="249.5" height="21.5"/>
+                                                            <rect key="frame" x="115.5" y="65.5" width="249.5" height="19"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="FkH-qO-t9Y">
-                                                                    <rect key="frame" x="0.0" y="1.5" width="18.5" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.5" width="18.5" height="18.5"/>
                                                                     <color key="tintColor" name="GreenColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="FkH-qO-t9Y" secondAttribute="height" multiplier="1:1" id="ssC-w1-ETg"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110 the embers ,san 110 the  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENU-eY-YwM">
-                                                                    <rect key="frame" x="23.5" y="0.0" width="223" height="21.5"/>
+                                                                    <rect key="frame" x="23.5" y="0.0" width="223" height="19"/>
                                                                     <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -13470,7 +13470,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nf2-sv-JDW">
-                                                            <rect key="frame" x="266" y="97" width="94" height="32"/>
+                                                            <rect key="frame" x="264" y="92" width="96" height="32"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="3w7-oJ-E0k"/>
                                                             </constraints>
@@ -17112,9 +17112,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                     </view>
                     <navigationItem key="navigationItem" id="zuS-KH-BJq"/>
                     <connections>
+                        <outlet property="accountNumberText" destination="VHR-71-7eW" id="mMD-j9-kPi"/>
                         <outlet property="btn_Global" destination="Gff-DL-HhK" id="CWL-vJ-DqW"/>
                         <outlet property="btn_Local" destination="pG1-3h-vfP" id="Ozb-Pr-8zq"/>
                         <outlet property="descriptionText" destination="8E7-ad-2iG" id="ZRO-hy-jE8"/>
+                        <outlet property="emailIdText" destination="ChU-BV-Y2B" id="QN6-EB-itt"/>
+                        <outlet property="phoneNumberText" destination="Rsl-E4-G3e" id="Fig-wU-tlP"/>
+                        <outlet property="routingNumberText" destination="GL5-Ft-hXY" id="FYj-n6-z85"/>
                         <outlet property="view_ConversionAmount" destination="3ah-C8-4Ta" id="aV1-5Q-jDK"/>
                         <outlet property="view_FromInfo" destination="sBn-r2-9nm" id="sOO-m6-bc8"/>
                         <outlet property="view_Global" destination="iuq-tP-rEx" id="8Wt-S2-8hf"/>
@@ -21473,7 +21477,7 @@ More</string>
             <size key="intrinsicContentSize" width="19.5" height="22"/>
         </designable>
         <designable name="NH1-5U-oa2">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="NOs-4c-gl4">
             <size key="intrinsicContentSize" width="22.5" height="22"/>
@@ -21632,7 +21636,7 @@ More</string>
             <size key="intrinsicContentSize" width="94" height="34"/>
         </designable>
         <designable name="fni-qw-y8N">
-            <size key="intrinsicContentSize" width="206" height="45"/>
+            <size key="intrinsicContentSize" width="191" height="45"/>
         </designable>
         <designable name="fqL-ze-DgO">
             <size key="intrinsicContentSize" width="70" height="30"/>
@@ -21698,7 +21702,7 @@ More</string>
             <size key="intrinsicContentSize" width="64.5" height="22"/>
         </designable>
         <designable name="lEn-Jk-wmE">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="lIm-I0-aCN">
             <size key="intrinsicContentSize" width="39" height="36"/>
@@ -21740,7 +21744,7 @@ More</string>
             <size key="intrinsicContentSize" width="-1" height="39"/>
         </designable>
         <designable name="pCV-3h-4O3">
-            <size key="intrinsicContentSize" width="286" height="45"/>
+            <size key="intrinsicContentSize" width="271" height="45"/>
         </designable>
         <designable name="pHE-zz-F9b">
             <size key="intrinsicContentSize" width="10.5" height="22"/>
@@ -21764,7 +21768,7 @@ More</string>
             <size key="intrinsicContentSize" width="71.5" height="34"/>
         </designable>
         <designable name="rEl-lx-yo8">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="reS-x1-M2l">
             <size key="intrinsicContentSize" width="65" height="36"/>
@@ -21797,7 +21801,7 @@ More</string>
             <size key="intrinsicContentSize" width="71" height="23"/>
         </designable>
         <designable name="uz7-tX-hai">
-            <size key="intrinsicContentSize" width="187.5" height="60.5"/>
+            <size key="intrinsicContentSize" width="177.5" height="60.5"/>
         </designable>
         <designable name="v2o-WO-Jt1">
             <size key="intrinsicContentSize" width="94" height="34"/>
@@ -21809,7 +21813,7 @@ More</string>
             <size key="intrinsicContentSize" width="58.5" height="22"/>
         </designable>
         <designable name="vV3-Pq-FaL">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="vl7-J0-1aE">
             <size key="intrinsicContentSize" width="58" height="42"/>
@@ -21821,7 +21825,7 @@ More</string>
             <size key="intrinsicContentSize" width="124" height="33"/>
         </designable>
         <designable name="xUg-cf-Afi">
-            <size key="intrinsicContentSize" width="191" height="45"/>
+            <size key="intrinsicContentSize" width="176" height="45"/>
         </designable>
         <designable name="xqX-hJ-dOc">
             <size key="intrinsicContentSize" width="77" height="31"/>
