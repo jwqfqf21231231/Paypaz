@@ -14542,7 +14542,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GfA-u6-sm2" customClass="RoundView" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="105" y="88.5" width="204" height="88"/>
+                                        <rect key="frame" x="94.5" y="88.5" width="225" height="88"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_a" translatesAutoresizingMaskIntoConstraints="NO" id="5tv-Jf-VuY" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="15" width="58" height="58"/>
@@ -14555,14 +14555,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+1 9323848308" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yn-4J-nTc">
-                                                <rect key="frame" x="86" y="44" width="98" height="16.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91 8309762337" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yn-4J-nTc">
+                                                <rect key="frame" x="86" y="44" width="106" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="James Joy " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60T-Lm-rVW">
-                                                <rect key="frame" x="86" y="10" width="98" height="32"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venkata Ajay Sai" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60T-Lm-rVW">
+                                                <rect key="frame" x="86" y="10" width="119" height="32"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -14984,6 +14984,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                     </view>
                     <navigationItem key="navigationItem" id="gJD-Y5-fiA"/>
                     <connections>
+                        <outlet property="userImage" destination="5tv-Jf-VuY" id="K6w-Xh-vEO"/>
+                        <outlet property="userNameLabel" destination="60T-Lm-rVW" id="UiK-UV-2Yc"/>
+                        <outlet property="userNoLabel" destination="0Yn-4J-nTc" id="lfe-e6-XLR"/>
                         <outlet property="view_ConversionAmount" destination="St5-gM-7Kc" id="udL-XT-Icv"/>
                         <outlet property="view_FromInfo" destination="ckz-ss-1h6" id="Wq7-Cx-TQB"/>
                         <outlet property="view_Receiving" destination="QhM-q4-cCp" id="7DL-Gg-7Gf"/>
@@ -19291,6 +19294,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                     <navigationItem key="navigationItem" id="79U-l9-YiM"/>
                     <connections>
                         <outlet property="tableView_Contacts" destination="7k4-FM-jIo" id="xKS-Li-CTK"/>
+                        <outlet property="txt_Search" destination="h8J-0c-aBO" id="xVy-ro-eh6"/>
                         <outlet property="view_ContactsList" destination="te3-Ra-MoS" id="wGa-hT-gNQ"/>
                     </connections>
                 </viewController>

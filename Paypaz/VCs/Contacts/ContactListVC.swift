@@ -12,6 +12,11 @@ import libPhoneNumber_iOS
 protocol ContactSelectedDelegate : class {
     func isSelectedContact(for request:Bool)
 }
+enum PaymentOption
+{
+    case Request
+    case Pay
+}
 class ContactListVC : CustomViewController {
     
     @IBOutlet weak var tableView_Contacts : UITableView! {
@@ -20,16 +25,20 @@ class ContactListVC : CustomViewController {
             tableView_Contacts.delegate   = self
         }
     }
+    @IBOutlet weak var txt_Search : UITextField!
+
 //    @IBOutlet weak var btn_Local   : UIButton!
 //    @IBOutlet weak var btn_Global  : UIButton!
 //    @IBOutlet weak var view_Local  : UIView!
 //    @IBOutlet weak var view_Global : UIView!
     @IBOutlet weak var view_ContactsList : UIView!
     
+    var paymentOption : PaymentOption?
     var img = UIImage()
     var isLocalContactSelected : Bool?
     var isRequestingMoney      : Bool?
     var contactDetails = [ContactInfo]()
+    var filteredContactDetails = [ContactInfo]()
     weak var delegate : ContactSelectedDelegate?
     
     //MARK:- --- View Life Cycle ----
@@ -37,9 +46,26 @@ class ContactListVC : CustomViewController {
         super.viewDidLoad()
         fetchContacts()
         self.view_ContactsList.alpha = 0.0
+        self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
+
       //  self.selectLocalPayment()
     }
-    
+    @objc func searchEventAsPerText(_ textField:UITextField)
+    {
+        self.filteredContactDetails.removeAll()
+        if textField.text?.count != 0 {
+            for contactData in self.contactDetails {
+                let isMatchingEventName : NSString = ((contactData.firstName ?? "") + " " + (contactData.lastName ?? "")) as NSString
+                let range = isMatchingEventName.lowercased.range(of: textField.text!, options: NSString.CompareOptions.caseInsensitive, range: nil, locale: nil)
+                if range != nil {
+                    filteredContactDetails.append(contactData)
+                }
+            }
+        } else {
+            self.filteredContactDetails = self.contactDetails
+        }
+        self.tableView_Contacts.reloadData()
+    }
  /*   private func selectLocalPayment() {
         self.isLocalContactSelected = true
         let lightBlue = UIColor(red: 0.44, green: 0.60, blue: 1.00, alpha: 1.00)
@@ -101,6 +127,7 @@ class ContactListVC : CustomViewController {
                     let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
                     let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img, isInvited: false)
                     self.contactDetails.append(contactDetail)
+                    self.filteredContactDetails.append(contactDetail)
                 }
             })
         })

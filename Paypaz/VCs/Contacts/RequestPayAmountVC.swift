@@ -16,6 +16,9 @@ class RequestPayAmountVC : CustomViewController {
     
     //MARK:- ---
     @IBOutlet weak var view_userInfo  : RoundView!
+    @IBOutlet weak var userNameLabel  : UILabel!
+    @IBOutlet weak var userNoLabel    : UILabel!
+    @IBOutlet weak var userImage      : UIImageView!
     @IBOutlet weak var view_FromInfo  : UIView!
     @IBOutlet weak var view_Receiving : UIView!
     @IBOutlet weak var view_ConversionAmount : UIView!
@@ -25,7 +28,7 @@ class RequestPayAmountVC : CustomViewController {
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view_userInfo.alpha = 0.0
+        //self.view_userInfo.alpha = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +57,7 @@ class RequestPayAmountVC : CustomViewController {
     @IBAction func btn_Request(_ sender:RoundButton){
         if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
             let local = (self.selectedPaymentType == PaymentType.local)
+            contacts.paymentOption = .Request
             contacts.isLocalContactSelected = local
             contacts.isRequestingMoney = true
             contacts.delegate = self
@@ -64,6 +68,7 @@ class RequestPayAmountVC : CustomViewController {
     @IBAction func btn_Pay(_ sender:RoundButton){
         if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
             let local = (self.selectedPaymentType == PaymentType.local)
+            contacts.paymentOption = .Pay
             contacts.isLocalContactSelected = local
             contacts.isRequestingMoney = false
             contacts.delegate = self

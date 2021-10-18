@@ -21,9 +21,10 @@ class QRCodeScannerVC : CustomViewController {
         self.qrScannerView.delegate = self
         
         DispatchQueue.main.asyncAfter(deadline: .now()+2.0) { [weak self] in
-           if let req_payAmountVC = self?.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
-                req_payAmountVC.selectedPaymentType = .local
-            }
+            self?.navigationController?.popViewController(animated: false)
+//           if let req_payAmountVC = self?.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
+//                req_payAmountVC.selectedPaymentType = .local
+//            }
         }
         
     }

@@ -146,6 +146,10 @@ class SuccessPopupVC : CustomViewController {
                 self.dismiss(animated: false) {[weak self] in
                     self?.delegate?.isClickedButton()
                 }
+            case .PaymentRequestSent:
+                self.dismiss(animated: false) {[weak self] in
+                    self?.delegate?.isClickedButton()
+                }
             default: self.dismiss(animated: false) {[weak self] in
                 self?.delegate?.isClickedButton()
             }
