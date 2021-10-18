@@ -29,7 +29,8 @@ class EditProfileVC: CustomViewController {
     @IBOutlet weak var txt_City      : RoundTextField!
     @IBOutlet weak var txt_State     : RoundTextField!
     @IBOutlet weak var txtView_Address : RoundTextView!
-    
+    let MINIMUM_AGE: Date = Calendar.current.date(byAdding: .year, value: -5, to: Date())!;
+
     func createToolBar()->UIToolbar
     {
         //tool bar
@@ -71,14 +72,31 @@ class EditProfileVC: CustomViewController {
         placePicker.delegate = self
         self.present(placePicker, animated: true, completion: nil)
     }
+    func validateAge(birthDate: Date) -> Bool {
+        var isValid: Bool = true;
+        
+        if birthDate > MINIMUM_AGE  {
+            isValid = false;
+        }
+        
+        return isValid;
+    }
     @objc func donePressed()
     {
-        let dateFormatter=DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        self.txt_DOB.text=dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
+        
+        let isValidAge = validateAge(birthDate: datePicker.date);
+        
+        if isValidAge {
+            let dateFormatter=DateFormatter()
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .none
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            self.txt_DOB.text=dateFormatter.string(from: datePicker.date)
+        } else {
+            self.view.makeToast("Your age must be greater than 5 years old")
+            self.txt_DOB.text?.removeAll()
+        }
     }
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {

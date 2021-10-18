@@ -59,6 +59,7 @@ extension ViewProfileVC : MyEventsListDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            self.noDataFoundView.alpha = 0
             self.events = data.data ?? []
             DispatchQueue.main.async {
                 self.tableViewEvents.reloadData()
@@ -66,6 +67,7 @@ extension ViewProfileVC : MyEventsListDataModelDelegate
         }
         else
         {
+            self.noDataFoundView.alpha = 1
             if data.message == "Data not found" {
                 self.events = []
                 self.tableViewEvents.reloadData()

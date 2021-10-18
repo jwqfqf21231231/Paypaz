@@ -19,7 +19,7 @@ class ViewProfileVC : CustomViewController {
     @IBOutlet weak var lbl_Address : UILabel!
     @IBOutlet weak var lbl_DOB : UILabel!
     @IBOutlet weak var lbl_PhoneNo : UILabel!
-    //MARK:- ----
+    @IBOutlet weak var noDataFoundView : UIView!
     @IBOutlet weak var tableViewEvents : UITableView! {
         didSet {
             self.tableViewEvents.dataSource = self

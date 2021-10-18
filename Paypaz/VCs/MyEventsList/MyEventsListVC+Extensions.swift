@@ -181,6 +181,7 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            noDataFoundView.alpha = 0
             if currentPage-1 != 0{
                 self.newEventItems = data.data ?? []
                 self.events.append(contentsOf: self.newEventItems)
@@ -194,6 +195,7 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         }
         else
         {
+            noDataFoundView.alpha = 1
             if data.message == "Data not found" && currentPage-1 >= 1{
                 print("No data at page No : \(currentPage-1)")
                 currentPage = currentPage-1

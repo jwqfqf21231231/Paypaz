@@ -16,6 +16,7 @@ class MyEventsListVC : CustomViewController {
     var currentPage = 1
     let dataSource = MyEventsListDataModel()
     let contactsDataSource = MyPostedEventDataModel()
+    @IBOutlet weak var noDataFoundView : UIView! 
     @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
             tableView_Events.dataSource = self
