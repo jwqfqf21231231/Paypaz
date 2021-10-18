@@ -38,8 +38,13 @@ class EditProfileVC: CustomViewController {
         toolBar.sizeToFit()
         //bar button item
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        toolBar.setItems([doneBtn], animated: true)
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancel))
+        toolBar.setItems([cancel,flexible,doneBtn], animated: true)
         return toolBar
+    }
+    @objc func tapCancel() {
+        self.view.endEditing(true)
     }
     func createDatePicker()
     {
@@ -94,7 +99,7 @@ class EditProfileVC: CustomViewController {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             self.txt_DOB.text=dateFormatter.string(from: datePicker.date)
         } else {
-            self.view.makeToast("Your age must be greater than 5 years old")
+            self.view.makeToast("User age must be greater than 5 years.")
             self.txt_DOB.text?.removeAll()
         }
     }

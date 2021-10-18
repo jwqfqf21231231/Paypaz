@@ -39,7 +39,7 @@ class CreateProfileVC  : CustomViewController {
         let doneBtn=UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancel))
-        toolBar.setItems([doneBtn,flexible,cancel], animated: false)
+        toolBar.setItems([cancel,flexible,doneBtn], animated: false)
         return toolBar
     }
     
@@ -81,7 +81,8 @@ class CreateProfileVC  : CustomViewController {
             self.txt_DOB.text=dateFormatter.string(from: datePicker.date)
         }
         else {
-            self.view.makeToast("Your age must be greater than 5 years old")
+            self.view.makeToast("User age must be greater than 5 years.")
+            self.txt_DOB.text?.removeAll()
         }
     }
     
