@@ -85,7 +85,7 @@ class InviteMembersVC: CustomViewController {
             var results = [CNContact]()
             let keys = [CNContactGivenNameKey,CNContactFamilyNameKey,CNContactMiddleNameKey,CNContactEmailAddressesKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey,CNContactUrlAddressesKey,CNContactPostalAddressesKey] as [CNKeyDescriptor]
             let fetchRequest = CNContactFetchRequest(keysToFetch: keys)
-            fetchRequest.sortOrder = CNContactSortOrder.userDefault//.userDefault
+            fetchRequest.sortOrder = CNContactSortOrder.userDefault
             let store = CNContactStore()
             store.requestAccess(for: .contacts, completionHandler: {(grant,error) in
                 if grant{

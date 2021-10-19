@@ -43,6 +43,10 @@
 		0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */; };
 		0485A4CD270180A600DF3AF3 /* GetWalletAmountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */; };
 		0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4FE2701B07200DF3AF3 /* PickerClass.swift */; };
+		0485EF8B271EE35A00DF78C8 /* UserRequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485EF8A271EE35A00DF78C8 /* UserRequestsVC.swift */; };
+		0485EF94271EE38B00DF78C8 /* UserRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485EF93271EE38B00DF78C8 /* UserRequestModel.swift */; };
+		0485EF9A271EE43D00DF78C8 /* UserRequestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485EF99271EE43D00DF78C8 /* UserRequestDataModel.swift */; };
+		0485EFAB271EEDBB00DF78C8 /* VerifyContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485EFAA271EEDBB00DF78C8 /* VerifyContactModel.swift */; };
 		048F8AE326D62FC10072F5E1 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F8AE226D62FC10072F5E1 /* ContactCell.swift */; };
 		04B2C027269DA56400140052 /* UpdateProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2C026269DA56400140052 /* UpdateProductModel.swift */; };
 		04B3FBAB26CF94040004A6F3 /* InviteMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */; };
@@ -266,6 +270,10 @@
 		0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmount.swift; sourceTree = "<group>"; };
 		0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmountDataModel.swift; sourceTree = "<group>"; };
 		0485A4FE2701B07200DF3AF3 /* PickerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerClass.swift; sourceTree = "<group>"; };
+		0485EF8A271EE35A00DF78C8 /* UserRequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestsVC.swift; sourceTree = "<group>"; };
+		0485EF93271EE38B00DF78C8 /* UserRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestModel.swift; sourceTree = "<group>"; };
+		0485EF99271EE43D00DF78C8 /* UserRequestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestDataModel.swift; sourceTree = "<group>"; };
+		0485EFAA271EEDBB00DF78C8 /* VerifyContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyContactModel.swift; sourceTree = "<group>"; };
 		048F8AE226D62FC10072F5E1 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		04B2C026269DA56400140052 /* UpdateProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductModel.swift; sourceTree = "<group>"; };
 		04B3FBAA26CF94040004A6F3 /* InviteMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberDataModel.swift; sourceTree = "<group>"; };
@@ -633,6 +641,32 @@
 			isa = PBXGroup;
 			children = (
 				0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0485EF89271EE31800DF78C8 /* Payment Request */ = {
+			isa = PBXGroup;
+			children = (
+				0485EF92271EE36B00DF78C8 /* Model */,
+				0485EF98271EE3FD00DF78C8 /* ViewModel */,
+				0485EF8A271EE35A00DF78C8 /* UserRequestsVC.swift */,
+			);
+			path = "Payment Request";
+			sourceTree = "<group>";
+		};
+		0485EF92271EE36B00DF78C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0485EF93271EE38B00DF78C8 /* UserRequestModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0485EF98271EE3FD00DF78C8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0485EF99271EE43D00DF78C8 /* UserRequestDataModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1505,6 +1539,7 @@
 				44F76665263A9015007F78CB /* Buy Event */,
 				44F7666C263A94BC007F78CB /* ProductsList */,
 				44E5592A2632EC0400193305 /* Contacts */,
+				0485EF89271EE31800DF78C8 /* Payment Request */,
 				445C77A22637E51400AD4DF3 /* Favourite List */,
 				445C77B02638152F00AD4DF3 /* EventReportVC.swift */,
 				445C77A72637F5EE00AD4DF3 /* InvitesList */,
@@ -1624,6 +1659,7 @@
 				44E5592D2632ED4200193305 /* ContactListVC+Extensions.swift */,
 				44857F4C26397C1D006402CA /* RequestPayAmountVC.swift */,
 				445873032654D21200DEF59C /* PaymentTypeVC.swift */,
+				0485EFAA271EEDBB00DF78C8 /* VerifyContactModel.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -2023,6 +2059,8 @@
 				445873042654D21200DEF59C /* PaymentTypeVC.swift in Sources */,
 				44F7667A263AC4CA007F78CB /* AddBankDetailsVC.swift in Sources */,
 				04B5E28B26B0345100333E94 /* NotificationDataModel.swift in Sources */,
+				0485EF94271EE38B00DF78C8 /* UserRequestModel.swift in Sources */,
+				0485EF9A271EE43D00DF78C8 /* UserRequestDataModel.swift in Sources */,
 				0424ED88270AC80700349C0A /* TicketsCell.swift in Sources */,
 				0CAAF3B6268B4AFE00C51C9F /* Constants+UserDefaults.swift in Sources */,
 				44509ED826316152000B19F3 /* NotificationListV+Extensions.swift in Sources */,
@@ -2051,6 +2089,7 @@
 				44F7666E263A9507007F78CB /* ProductListVC.swift in Sources */,
 				44C8F2D4261F1E15000F03DB /* Constants.swift in Sources */,
 				0C5B97FF268DE09000CBAC41 /* ImagePickerController.swift in Sources */,
+				0485EFAB271EEDBB00DF78C8 /* VerifyContactModel.swift in Sources */,
 				44F76667263A902A007F78CB /* BuyEventVC.swift in Sources */,
 				0C8EC60F269715DA00D51F60 /* AllProductsCell.swift in Sources */,
 				0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */,
@@ -2129,6 +2168,7 @@
 				44509EE826318200000B19F3 /* AddProductVC.swift in Sources */,
 				44E559252632C81F00193305 /* AddToCartVC+Extensions.swift in Sources */,
 				0C2234192693F12B0014B06A /* ChooseEventModel.swift in Sources */,
+				0485EF8B271EE35A00DF78C8 /* UserRequestsVC.swift in Sources */,
 				0C9F29D2268AE17800CE6178 /* SignUpDataModel.swift in Sources */,
 				44DBD00A263011BF00255F9A /* EventDetailVC+Extensions.swift in Sources */,
 				0425EBD8270EF88500096867 /* TransactionsCell.swift in Sources */,

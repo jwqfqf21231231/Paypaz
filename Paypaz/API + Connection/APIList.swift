@@ -89,6 +89,10 @@ enum urlString:String
     case GETWALLETAMOUNT = "user/wallet"
     case TRANSACTIONHISTORY = "user/transactions"
     
+    case REQUESTUSERFORPAYMENT = "user/requests"
+    case VERIFYCONTACT = "user/phone"
+    case REQUESTFORPAYMENT = "user/payment/request"
+    
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"
     case UPLOADEDEVENTIMAGE = "uploads/events/"

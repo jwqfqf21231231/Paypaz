@@ -40,10 +40,12 @@ class ContactListVC : CustomViewController {
     var contactDetails = [ContactInfo]()
     var filteredContactDetails = [ContactInfo]()
     weak var delegate : ContactSelectedDelegate?
+    let dataSource = VerifyContactDataModel()
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.delegate = self
         fetchContacts()
         self.view_ContactsList.alpha = 0.0
         self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
