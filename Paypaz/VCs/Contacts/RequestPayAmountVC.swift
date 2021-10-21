@@ -23,17 +23,34 @@ class RequestPayAmountVC : CustomViewController {
     @IBOutlet weak var view_Receiving : UIView!
     @IBOutlet weak var view_ConversionAmount : UIView!
     
+    @IBOutlet weak var requestButton : UIButton!
+    @IBOutlet weak var paythruCardButton : UIButton!
+    @IBOutlet weak var paythruWalletButton : UIButton!
+    
+    private let payNowDataSource = PayNowDataModel()
+    var paypazUser : Bool?
+    var receiverID : String?
+    var requestID : String?
+    var userDetails : [String:String]?
     var selectedPaymentType : PaymentType?
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        payNowDataSource.delegate = self
         //self.view_userInfo.alpha = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if paypazUser ?? false{
+            paythruCardButton.isHidden = false
+            paythruWalletButton.isHidden = false
+        }
+        else{
+            paythruCardButton.isHidden = true
+            paythruWalletButton.isHidden = true
+        }
         if let type = self.selectedPaymentType {
             if type == .local {
                 self.view_FromInfo.isHidden         = true
@@ -54,27 +71,43 @@ class RequestPayAmountVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func btn_Request(_ sender:RoundButton){
-        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
-            let local = (self.selectedPaymentType == PaymentType.local)
-            contacts.paymentOption = .Request
-            contacts.isLocalContactSelected = local
-            contacts.isRequestingMoney = true
-            contacts.delegate = self
+    @IBAction func requestButton(_ sender:UIButton){
+        if sender.tag == 0{
         }
+        else if sender.tag == 1{
+            if let vc = self.presentPopUpVC("AddMoneyPopupVC", animated: false) as? AddMoneyPopupVC{
+                vc.successDelegate = self
+                vc.payAmountToUser = true
+            }
+        }
+        else{
+            if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                vc.delegate = self
+            }
+        }
+        //        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
+        //            let local = (self.selectedPaymentType == PaymentType.local)
+        //            contacts.paymentOption = .Request
+        //            contacts.isLocalContactSelected = local
+        //            contacts.isRequestingMoney = true
+        //            contacts.delegate = self
+        //        }
         
     }
     
-    @IBAction func btn_Pay(_ sender:RoundButton){
-        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
-            let local = (self.selectedPaymentType == PaymentType.local)
-            contacts.paymentOption = .Pay
-            contacts.isLocalContactSelected = local
-            contacts.isRequestingMoney = false
-            contacts.delegate = self
-        }
+    @IBAction func paythruCardButton(_ sender:UIButton){
+        /*if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
+         let local = (self.selectedPaymentType == PaymentType.local)
+         contacts.paymentOption = .Pay
+         contacts.isLocalContactSelected = local
+         contacts.isRequestingMoney = false
+         contacts.delegate = self
+         }*/
+        
         
     }
+    
+    
     
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         for vc in self.navigationController?.viewControllers ?? [] {
@@ -86,6 +119,53 @@ class RequestPayAmountVC : CustomViewController {
     }
 }
 //MARK:- ---- Extension ----
+extension RequestPayAmountVC : SendBackPinCodeDelegate{
+    func sendBackPinCode(pin: String) {
+        payNowDataSource.paymentMethod = "2"
+        payNowDataSource.pincode = pin
+        if self.requestID != nil{
+            payNowDataSource.receiverID = receiverID ?? ""
+            payNowDataSource.requestID = requestID ?? ""
+        }
+        else{
+            payNowDataSource.phoneNumber = ""
+        }
+    }
+}
+extension RequestPayAmountVC : PayNowDelegate
+{
+    
+    func didRecieveDataUpdate(data: ResendOTPModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            
+        }
+        else
+        {
+            showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension RequestPayAmountVC : BuyEventThruCardDelegate{
+    func buyEventThruCard(cvv: String, cardName: String, cardNumber: String, cardID: String) {
+        print()
+    }
+}
 extension RequestPayAmountVC : PopupDelegate {
     func isClickedButton() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in

@@ -92,6 +92,7 @@ enum urlString:String
     case REQUESTUSERFORPAYMENT = "user/requests"
     case VERIFYCONTACT = "user/phone"
     case REQUESTFORPAYMENT = "user/payment/request"
+    case PAYNOW = "user/request/paynow"
     
     case USERIMAGE = "uploads/users/"
     case EVENTIMAGE = "uploads/types/"

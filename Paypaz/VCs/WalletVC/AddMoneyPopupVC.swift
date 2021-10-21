@@ -52,6 +52,7 @@ class AddMoneyPopupVC  : UIViewController {
     let paymentDataSource = PaymentDataModel()
     var buyTicket : Bool?
     var totalAmount : Int?
+    var payAmountToUser : Bool?
     //    @IBOutlet weak var btn_BankAcc     : RoundButton!
     //    @IBOutlet weak var btn_DebitCredit : RoundButton!
     
@@ -106,6 +107,10 @@ class AddMoneyPopupVC  : UIViewController {
                     self.successDelegate?.buyEventThruCard(cvv: txt_CVV.text ?? "", cardName: self.cardName, cardNumber: self.cardNumber, cardID: self.cardID)
                     self.dismiss(animated: false, completion: nil)
                 }
+            }
+            else if payAmountToUser ?? false{
+                //self.successDelegate?.buyEventThruCard(cvv: <#T##String#>, cardName: <#T##String#>, cardNumber: <#T##String#>, cardID: <#T##String#>)
+                self.dismiss(animated: false, completion: nil)
             }
             else{
                 if maxLength != txt_CVV.text?.count{

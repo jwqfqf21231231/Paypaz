@@ -42,11 +42,13 @@ extension ContactListVC : UITableViewDelegate {
 //        self.navigationController?.popViewController(animated: true)
 //        self.delegate?.isSelectedContact(for: self.isRequestingMoney ?? false)
         self.view.endEditing(true)
+        self.contactName = (filteredContactDetails[indexPath.row].firstName ?? "") + " " + (filteredContactDetails[indexPath.row].lastName ?? "")
         guard let phoneUtil = NBPhoneNumberUtil.sharedInstance() else {
             return
         }
         do {
         let numberProto: NBPhoneNumber = try phoneUtil.parse(filteredContactDetails[indexPath.row].phoneNumber ?? "", defaultRegion: "IN")
+        
         let phoneCode = numberProto.countryCode!
         let phoneNumber = numberProto.nationalNumber!
             Connection.svprogressHudShow(view: self)
@@ -67,21 +69,31 @@ extension ContactListVC : VerifyContactDelegate{
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let paymentOption = self.paymentOption{
-                switch paymentOption {
-                case .Request:
-                    if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                        popup.delegate = self
-                        popup.selectedPopupType = .PaymentRequestSent
-                    }
-                default:
-                    _ = self.pushVC("EnterPinVC")
-                }
+            if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
+                vc.userDetails = ["userPic":data.data?.userProfile ?? "","userName":((data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")), "userNumber":data.data?.phoneCode ?? ""]
+                vc.selectedPaymentType = .local
+                vc.paypazUser = true
             }
+//            if let paymentOption = self.paymentOption{
+//                switch paymentOption {
+//                case .Request:
+//                    if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+//                        popup.delegate = self
+//                        popup.selectedPopupType = .PaymentRequestSent
+//                    }
+//                default:
+//                    _ = self.pushVC("EnterPinVC")
+//                }
+//            }
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
+                vc.userDetails = ["userPic":"","userName":self.contactName ?? ""]
+                vc.selectedPaymentType = .local
+                vc.paypazUser = false
+            }
+            //self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

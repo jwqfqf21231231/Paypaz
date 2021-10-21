@@ -7,16 +7,20 @@
 //
 
 import UIKit
-
+import SDWebImage
 class UserRequestsVC: UIViewController {
     
     @IBOutlet weak var userRequestTableView : UITableView!
-    private let dataSource = UserRequestDataModel()
-    var userRequest = [UserRequests](){
+    {
         didSet{
+            userRequestTableView.delegate = self
+            userRequestTableView.dataSource = self
             userRequestTableView.separatorStyle = .none
         }
     }
+    var userID : String?
+    private let dataSource = UserRequestDataModel()
+    var userRequest = [UserRequests]()
     var newUserRequest = [UserRequests]()
     var currentPage = 1
     override func viewDidLoad() {
@@ -24,6 +28,7 @@ class UserRequestsVC: UIViewController {
         dataSource.delegate = self
         dataSource.pageNo = "0"
         dataSource.getPaymentRequests()
+        userID = UserDefaults.standard.getUserID()
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
@@ -99,10 +104,39 @@ extension UserRequestsVC : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserRequestsCell", for: indexPath) as? UserRequestsCell else {return UserRequestsCell()}
-        cell.nameLabel.text = userRequest[indexPath.row].name ?? ""
+        
         cell.numberLabel.text = "+" + (userRequest[indexPath.row].phoneCode ?? "") + " " + (userRequest[indexPath.row].phoneNumber ?? "")
-        cell.
-        cell.amountLabel.text = userRequest[indexPath.row].amount ?? ""
+        cell.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        let url =  APIList().getUrlString(url: .USERIMAGE)
+        cell.userImage.sd_setImage(with: URL(string: url+(userRequest[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
+        cell.amountLabel.text = "$\(((userRequest[indexPath.row].amount ?? "") as NSString?)?.integerValue ?? 0)"
+        
+        if userRequest[indexPath.row].status == "0"{
+            if userRequest[indexPath.row].senderID == userID {
+                cell.nameLabel.text = (userRequest[indexPath.row].firstName ?? "") + " " + (userRequest[indexPath.row].lastName ?? "")
+                cell.payAmountButton.setTitle("Money Request Sent", for: .normal)
+                cell.isUserInteractionEnabled = false
+            }
+            else{
+                cell.nameLabel.text = userRequest[indexPath.row].name ?? ""
+                cell.payAmountButton.setTitle("Pay Money", for: .normal)
+                cell.isUserInteractionEnabled = true
+            }
+            cell.payAmountButton.setImage(nil, for: .normal)
+        }
+        else{
+            cell.nameLabel.text = (userRequest[indexPath.row].firstName ?? "") + " " + (userRequest[indexPath.row].lastName ?? "")
+            cell.payAmountButton.setTitle("Money Sent", for: .normal)
+            cell.payAmountButton.setImage(UIImage(named: "blue_ticks"), for: .normal)
+            cell.isUserInteractionEnabled = false
+        }
+        cell.payAmountButton.tag = ((userRequest[indexPath.row].id ?? "") as? NSString)?.integerValue ?? 0
+        cell.payAmountButton.addTarget(self, action: #selector(payAction(_:)), for: .touchUpInside)
         return cell
+    }
+    @objc func payAction(_ sender : UIButton){
+        if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
+            print("")
+        }
     }
 }
