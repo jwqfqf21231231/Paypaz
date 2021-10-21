@@ -33,9 +33,9 @@ class SideDrawerListVC : CustomViewController {
         dataSource.delegate = self
         dataSource1.delegate = self
         
-        self.arr_Menu = [Constants.title_Home, Constants.title_Wallet, Constants.title_MyTickets, Constants.title_Settings, Constants.title_MyEvents, Constants.title_Favourites , Constants.title_Invites, Constants.title_EventReport, Constants.title_Logout]
+        self.arr_Menu = [Constants.title_Home, Constants.title_Wallet, Constants.title_MyTickets,Constants.title_PayRequests, Constants.title_Settings, Constants.title_MyEvents, Constants.title_Favourites , Constants.title_Invites, Constants.title_EventReport, Constants.title_Logout]
         
-        self.arr_imgs = ["home", "wallet", "ticketsicon", "settings", "event", "heart-o", "add-group", "event_report", "logout"]
+        self.arr_imgs = ["home", "wallet", "ticketsicon", "pay_request", "settings", "event", "heart-o", "add-group", "event_report", "logout"]
         
         self.addTapGestureToView()
         self.getUserDetails()

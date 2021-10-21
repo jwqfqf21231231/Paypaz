@@ -35,16 +35,18 @@ extension SideDrawerListVC : UITableViewDelegate {
         case 2:
             _ = self.pushToChildVC("MyTicketsVC",animated: false)
         case 3:
-            _ = self.pushToChildVC("SettingsVC",animated: false)
+            _ = self.pushToChildVC("UserRequestsVC",animated: false)
         case 4:
-            _ = self.pushToChildVC("MyEventsListVC",animated: false)
+            _ = self.pushToChildVC("SettingsVC",animated: false)
         case 5:
-            _ = self.pushToChildVC("FavouritesEventsListVC",animated: false)
+            _ = self.pushToChildVC("MyEventsListVC",animated: false)
         case 6:
-            _ = self.pushToChildVC("InvitesListVC",animated: false)
+            _ = self.pushToChildVC("FavouritesEventsListVC",animated: false)
         case 7:
-            _ = self.pushToChildVC("EventReportsHistoryVC",animated: false)
+            _ = self.pushToChildVC("InvitesListVC",animated: false)
         case 8:
+            _ = self.pushToChildVC("EventReportsHistoryVC",animated: false)
+        case 9:
             if let vc = self.presentPopUpVC("LogOutVC", animated: false) as? LogOutVC{
                 vc.delegate = self
             }

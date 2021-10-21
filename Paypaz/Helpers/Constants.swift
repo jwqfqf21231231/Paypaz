@@ -15,6 +15,7 @@ struct Constants {
     static let title_Home        = "Home"
     static let title_Wallet      = "Wallet"
     static let title_MyTickets   = "My Tickets"
+    static let title_PayRequests = "Pay Requests"
     static let title_Settings    = "Settings"
     static let title_MyEvents    = "My Events"
     static let title_Favourites  = "Favourites"

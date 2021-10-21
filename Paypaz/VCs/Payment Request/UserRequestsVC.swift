@@ -14,7 +14,7 @@ class UserRequestsVC: UIViewController {
     private let dataSource = UserRequestDataModel()
     var userRequest = [UserRequests](){
         didSet{
-            userRequestTableView.reloadData()
+            userRequestTableView.separatorStyle = .none
         }
     }
     var newUserRequest = [UserRequests]()
@@ -36,6 +36,9 @@ class UserRequestsVC: UIViewController {
             }
         }
     }
+    @IBAction func btn_back(_ sender:UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 extension UserRequestsVC : UserRequestDelegate{
     func didRecieveDataUpdate(data: UserRequestModel)
@@ -50,7 +53,7 @@ extension UserRequestsVC : UserRequestDelegate{
             else{
                 self.userRequest = data.data ?? []
             }
-            
+            userRequestTableView.reloadData()
         }
         else
         {
@@ -65,6 +68,7 @@ extension UserRequestsVC : UserRequestDelegate{
             else{
                 self.view.makeToast(data.message ?? "", duration: 3, position: .center)
             }
+            userRequestTableView.reloadData()
         }
     }
     
@@ -90,11 +94,15 @@ extension UserRequestsVC : UITableViewDelegate{
 extension UserRequestsVC : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return userRequest.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsCell", for: indexPath) as? TransactionsCell else {return TransactionsCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserRequestsCell", for: indexPath) as? UserRequestsCell else {return UserRequestsCell()}
+        cell.nameLabel.text = userRequest[indexPath.row].name ?? ""
+        cell.numberLabel.text = "+" + (userRequest[indexPath.row].phoneCode ?? "") + " " + (userRequest[indexPath.row].phoneNumber ?? "")
+        cell.
+        cell.amountLabel.text = userRequest[indexPath.row].amount ?? ""
         return cell
     }
 }
