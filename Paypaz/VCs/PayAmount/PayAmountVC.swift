@@ -269,8 +269,9 @@ extension PayAmountVC : SendBackPinCodeDelegate{
 extension PayAmountVC : PopupDelegate {
     func isClickedButton() {
         for vc in self.navigationController!.viewControllers as Array {
+            let msg = ["Message":"Payment successful"]
             if vc.isKind(of:HomeVC.self) {
-                NotificationCenter.default.post(name: NSNotification.Name("ShowPaymentSuccessPopUp"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
                 self.navigationController!.popToViewController(vc, animated: true)
                 break
             }
@@ -318,9 +319,10 @@ extension PayAmountVC : PaymentDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            let msg = ["Message":data.message ?? ""]
             for vc in self.navigationController!.viewControllers as Array {
                 if vc.isKind(of:HomeVC.self) {
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowPaymentSuccessPopUp"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
                     self.navigationController!.popToViewController(vc, animated: true)
                     break
                 }

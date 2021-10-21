@@ -49,11 +49,11 @@ extension ContactListVC : UITableViewDelegate {
         do {
         let numberProto: NBPhoneNumber = try phoneUtil.parse(filteredContactDetails[indexPath.row].phoneNumber ?? "", defaultRegion: "IN")
         
-        let phoneCode = numberProto.countryCode!
-        let phoneNumber = numberProto.nationalNumber!
+        phoneCode = numberProto.countryCode!
+        phoneNumber = numberProto.nationalNumber!
             Connection.svprogressHudShow(view: self)
-            dataSource.phoneNumber = "\(phoneNumber)"
-            dataSource.phoneCode = "\(phoneCode)"
+            dataSource.phoneNumber = "\(phoneNumber ?? 0)"
+            dataSource.phoneCode = "\(phoneCode ?? 0)"
             dataSource.verifyContact()
         }
         catch let error as NSError {
@@ -70,7 +70,8 @@ extension ContactListVC : VerifyContactDelegate{
         if data.success == 1
         {
             if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
-                vc.userDetails = ["userPic":data.data?.userProfile ?? "","userName":((data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")), "userNumber":data.data?.phoneCode ?? ""]
+                vc.userDetails = ["userPic":data.data?.userProfile ?? "","userName":((data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")), "phoneCode":data.data?.phoneCode ?? "", "phoneNumber":data.data?.phoneNumber ?? ""]
+                vc.receiverID = data.data?.id ?? ""
                 vc.selectedPaymentType = .local
                 vc.paypazUser = true
             }
@@ -89,7 +90,7 @@ extension ContactListVC : VerifyContactDelegate{
         else
         {
             if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
-                vc.userDetails = ["userPic":"","userName":self.contactName ?? ""]
+                vc.userDetails = ["userName":self.contactName ?? "","phoneCode":"\(phoneCode ?? 0)","phoneNumber":"\(phoneNumber ?? 0)"]
                 vc.selectedPaymentType = .local
                 vc.paypazUser = false
             }

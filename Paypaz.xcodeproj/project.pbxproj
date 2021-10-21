@@ -738,11 +738,11 @@
 				44F7666A263A90E0007F78CB /* BuyEventTblCell.swift */,
 				0C8EC60E269715DA00D51F60 /* AllProductsCell.swift */,
 				0428359C26B009BF008FA98A /* FavouriteCell.swift */,
-				04F4164326E78F80009919A1 /* NotificationCell.swift */,
 				04F24D7F270453ED001C3843 /* CardCell.swift */,
 				0424ED87270AC80700349C0A /* TicketsCell.swift */,
 				0425EBD7270EF88500096867 /* TransactionsCell.swift */,
 				0425406C27213125001D22B7 /* UserRequestsCell.swift */,
+				04F4164326E78F80009919A1 /* NotificationCell.swift */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";

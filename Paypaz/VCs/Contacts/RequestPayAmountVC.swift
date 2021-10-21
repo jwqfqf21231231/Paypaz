@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 enum PaymentType {
     case local
     case global
@@ -22,12 +22,15 @@ class RequestPayAmountVC : CustomViewController {
     @IBOutlet weak var view_FromInfo  : UIView!
     @IBOutlet weak var view_Receiving : UIView!
     @IBOutlet weak var view_ConversionAmount : UIView!
+    @IBOutlet weak var descriptionTextView : UITextView!
+    @IBOutlet weak var amountTxt : UITextField!
     
     @IBOutlet weak var requestButton : UIButton!
     @IBOutlet weak var paythruCardButton : UIButton!
     @IBOutlet weak var paythruWalletButton : UIButton!
     
     private let payNowDataSource = PayNowDataModel()
+    private let payRequestDataSource = VerifyContactDataModel()
     var paypazUser : Bool?
     var receiverID : String?
     var requestID : String?
@@ -38,16 +41,25 @@ class RequestPayAmountVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         payNowDataSource.delegate = self
+        payRequestDataSource.requestPaymentDelegate = self
         //self.view_userInfo.alpha = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if paypazUser ?? false{
+            self.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            let url =  APIList().getUrlString(url: .USERIMAGE)
+            self.userImage.sd_setImage(with: URL(string: url+(userDetails?["userPic"] ?? "")), placeholderImage: UIImage(named: "place_holder"))
+            self.userNameLabel.text = userDetails?["userName"]
+            self.userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
             paythruCardButton.isHidden = false
             paythruWalletButton.isHidden = false
         }
         else{
+            userImage.image = UIImage(named: "place_holder")
+            userNameLabel.text = userDetails?["userName"]
+            userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
             paythruCardButton.isHidden = true
             paythruWalletButton.isHidden = true
         }
@@ -72,19 +84,43 @@ class RequestPayAmountVC : CustomViewController {
     }
     
     @IBAction func requestButton(_ sender:UIButton){
-        if sender.tag == 0{
+        if amountTxt.isEmptyOrWhitespace(){
+            self.view.makeToast("Please enter amount")
         }
-        else if sender.tag == 1{
-            if let vc = self.presentPopUpVC("AddMoneyPopupVC", animated: false) as? AddMoneyPopupVC{
-                vc.successDelegate = self
-                vc.payAmountToUser = true
-            }
+        else if descriptionTextView.isEmptyOrWhitespace(){
+            self.view.makeToast("Please enter description")
+        }
+        else if (((amountTxt.text ?? "") as? NSString)?.integerValue ?? 0) < 20{
+            self.view.makeToast("please send an amount of minimum 20$")
         }
         else{
-            if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
-                vc.delegate = self
+            if sender.tag == 0{
+                if paypazUser ?? false{
+                    payRequestDataSource.receiverID = receiverID ?? ""
+                }
+                else{
+                    payRequestDataSource.receiverID = "0"
+                    payRequestDataSource.name = userDetails?["userName"] ?? ""
+                    payRequestDataSource.phoneNumber = userDetails?["phoneNumber"] ?? ""
+                    payRequestDataSource.phoneCode = userDetails?["phoneCode"] ?? ""
+                }
+                payRequestDataSource.amount = amountTxt.text ?? ""
+                payRequestDataSource.dataDescription = descriptionTextView.text ?? ""
+                payRequestDataSource.requestPayment()
+            }
+            else if sender.tag == 1{
+                if let vc = self.presentPopUpVC("AddMoneyPopupVC", animated: false) as? AddMoneyPopupVC{
+                    vc.successDelegate = self
+                    vc.payAmountToUser = true
+                }
+            }
+            else{
+                if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                    vc.delegate = self
+                }
             }
         }
+       
         //        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
         //            let local = (self.selectedPaymentType == PaymentType.local)
         //            contacts.paymentOption = .Request
@@ -123,16 +159,84 @@ extension RequestPayAmountVC : SendBackPinCodeDelegate{
     func sendBackPinCode(pin: String) {
         payNowDataSource.paymentMethod = "2"
         payNowDataSource.pincode = pin
+        payNowDataSource.dataDescription = descriptionTextView.text ?? ""
+        payNowDataSource.amount = amountTxt.text ?? ""
+        if self.requestID != nil{
+            
+            payNowDataSource.receiverID = receiverID ?? ""
+            payNowDataSource.requestID = requestID ?? ""
+        }
+        else{
+            payNowDataSource.requestID = "0"
+            payNowDataSource.receiverID = "0"
+            payNowDataSource.phoneNumber = userDetails?["phoneNumber"] ?? ""
+            payNowDataSource.phoneCode = userDetails?["phoneCode"] ?? ""
+            payNowDataSource.name = userDetails?["userName"] ?? ""
+        }
+        payNowDataSource.payNow()
+    }
+}
+
+extension RequestPayAmountVC : BuyEventThruCardDelegate{
+    func buyEventThruCard(cvv: String, cardName: String, cardNumber: String, cardID: String) {
+        payNowDataSource.paymentMethod = "1"
+        payNowDataSource.cardID = cardID
+        payNowDataSource.cvv = cvv
+        payNowDataSource.dataDescription = descriptionTextView.text ?? ""
+        payNowDataSource.amount = amountTxt.text ?? ""
         if self.requestID != nil{
             payNowDataSource.receiverID = receiverID ?? ""
             payNowDataSource.requestID = requestID ?? ""
         }
         else{
-            payNowDataSource.phoneNumber = ""
+            payNowDataSource.requestID = "0"
+            payNowDataSource.receiverID = "0"
+            payNowDataSource.phoneNumber = userDetails?["phoneNumber"] ?? ""
+            payNowDataSource.phoneCode = userDetails?["phoneCode"] ?? ""
+            payNowDataSource.name = userDetails?["userName"] ?? ""
+        }
+        payNowDataSource.payNow()
+    }
+}
+
+extension RequestPayAmountVC : PayNowDelegate
+{
+    
+    func didRecieveDataUpdate1(data: ResendOTPModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            let msg = ["Message": data.message ?? ""]
+            for vc in self.navigationController?.viewControllers ?? [] {
+                if let home = vc as? HomeVC {
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
+                    self.navigationController?.popToViewController(home, animated: true)
+                    break
+                }
+            }
+        }
+        else
+        {
+            showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError1(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
     }
 }
-extension RequestPayAmountVC : PayNowDelegate
+
+extension RequestPayAmountVC : PaymentRequestDelegate
 {
     
     func didRecieveDataUpdate(data: ResendOTPModel)
@@ -140,7 +244,14 @@ extension RequestPayAmountVC : PayNowDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            
+            let msg = ["Message":data.message ?? ""]
+            for vc in self.navigationController?.viewControllers ?? [] {
+                if let home = vc as? HomeVC {
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
+                    self.navigationController?.popToViewController(home, animated: true)
+                    break
+                }
+            }
         }
         else
         {
@@ -161,11 +272,8 @@ extension RequestPayAmountVC : PayNowDelegate
         }
     }
 }
-extension RequestPayAmountVC : BuyEventThruCardDelegate{
-    func buyEventThruCard(cvv: String, cardName: String, cardNumber: String, cardID: String) {
-        print()
-    }
-}
+
+
 extension RequestPayAmountVC : PopupDelegate {
     func isClickedButton() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in

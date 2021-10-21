@@ -56,19 +56,7 @@ public struct CreditCardValidator {
     
     /// Validate credit card number
     public var isValid: Bool {
-        let val = string
-            .reversed()
-            .compactMap({ Int(String($0)) })
-            .enumerated()
-            .reduce(Calculation(odd: 0, even: 0), { value, iterator in
-                let odd = iterator.offset % 2 != 0 ? value.odd + (iterator.element / 5 + (2 * iterator.element) % 10) : value.odd
-                let even = iterator.offset % 2 == 0 ? value.even + iterator.element : value.even
-                return .init(
-                    odd:odd,
-                    even:even
-                )
-            })
-        return string.count >= 9 && val.result()
+        string.count >= 9 && isValid(for: string)
     }
     
     /// Validate card number string for type
@@ -78,6 +66,32 @@ public struct CreditCardValidator {
     /// - Returns: bool value
     public func isValid(for type: CreditCardType) -> Bool {
         isValid && self.type == type
+    }
+    
+    /// Validate string for credit card type
+    /// - Parameters:
+    ///   - string: card number string
+    /// - Returns: bool value
+    private func isValid(for string: String) -> Bool {
+        string
+            .reversed()
+            .compactMap({ Int(String($0)) })
+            .enumerated()
+            .reduce(Calculation(odd: 0, even: 0), { value, iterator in
+                return .init(
+                    odd: odd(value: value, iterator: iterator),
+                    even: even(value: value, iterator: iterator)
+                )
+            })
+            .result()
+    }
+    
+    private func odd(value: Calculation, iterator: EnumeratedSequence<[Int]>.Element) -> Int {
+        iterator.offset % 2 != 0 ? value.odd + (iterator.element / 5 + (2 * iterator.element) % 10) : value.odd
+    }
+
+    private func even(value: Calculation, iterator: EnumeratedSequence<[Int]>.Element) -> Int {
+        iterator.offset % 2 == 0 ? value.even + iterator.element : value.even
     }
     
 }

@@ -33,7 +33,8 @@ class ContactListVC : CustomViewController {
 //    @IBOutlet weak var view_Global : UIView!
     @IBOutlet weak var view_ContactsList : UIView!
     var contactName : String?
-    
+    var phoneNumber : NSNumber?
+    var phoneCode : NSNumber?
     var paymentOption : PaymentOption?
     var img = UIImage()
     var isLocalContactSelected : Bool?

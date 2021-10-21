@@ -11,8 +11,8 @@ import Foundation
 import Alamofire
 
 protocol PayNowDelegate:class {
-    func didRecieveDataUpdate(data:ResendOTPModel)
-    func didFailDataUpdateWithError(error:Error)
+    func didRecieveDataUpdate1(data:ResendOTPModel)
+    func didFailDataUpdateWithError1(error:Error)
     
 }
 class PayNowDataModel: NSObject
@@ -62,11 +62,11 @@ class PayNowDataModel: NSObject
                 do
                 {
                     let response = try JSONDecoder().decode(ResendOTPModel.self, from: result!)
-                    self.delegate?.didRecieveDataUpdate(data: response)
+                    self.delegate?.didRecieveDataUpdate1(data: response)
                 }
                 catch let error as NSError
                 {
-                    self.delegate?.didFailDataUpdateWithError(error: error)
+                    self.delegate?.didFailDataUpdateWithError1(error: error)
                 }
             }
             else
@@ -78,7 +78,7 @@ class PayNowDataModel: NSObject
                                    failure:
                                     {
             (error) in
-            self.delegate?.didFailDataUpdateWithError(error: error)
+            self.delegate?.didFailDataUpdateWithError1(error: error)
             
         })
     }

@@ -32,7 +32,7 @@ import UIKit
 
 extension LGSideMenuController {
 
-    // MARK: - UIGestureRecognizerDelegate
+    // MARK: - UIGestureRecognizerDelegate -
 
     open func gestureRecognizer(_ gesture: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard !self.isAnimating,
@@ -72,7 +72,7 @@ extension LGSideMenuController {
         return false
     }
 
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         // 1. We need to hande swipeGestureArea == .full
         // 2. For some reason UINavigationController interactivePopGestureRecognizer behaviour is unpredictable,
         // sometimes it is failing and sometimes it is not. Better we will have it with higher priority but predictable.
@@ -84,12 +84,12 @@ extension LGSideMenuController {
         return true
     }
 
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         // We need to hande swipeGestureArea == .full
         return otherGestureRecognizer == self.panGestureForLeftView || otherGestureRecognizer == self.panGestureForRightView
     }
 
-    // MARK: - UIGestureRecognizer Targets
+    // MARK: - UIGestureRecognizer Targets -
 
     @objc
     open func handleTapGesture(gesture: UITapGestureRecognizer) {
@@ -237,7 +237,7 @@ extension LGSideMenuController {
         }
     }
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     private func isLocationInLeftSwipeableRect(_ location: CGPoint) -> Bool {
         guard let rootContainerView = self.rootContainerView,

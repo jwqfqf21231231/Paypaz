@@ -14,12 +14,13 @@ class HomeVC : CustomViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showPopupForPaymentSuccess(notification:)), name: NSNotification.Name("ShowPaymentSuccessPopUp"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPopupForPaymentSuccess(notification:)), name: NSNotification.Name("ShowPopUp"), object: nil)
     }
     
     @objc func showPopupForPaymentSuccess(notification: Notification)
     {
-        self.view.makeToast("Payment successful")
+        let message = notification.userInfo?["Message"] as? String ?? ""
+        self.view.makeToast(message)
     }
     
     //MARK:- --- Action ----
