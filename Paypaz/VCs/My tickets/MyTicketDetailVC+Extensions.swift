@@ -59,7 +59,6 @@ extension MyTicketDetailVC : TicketDetailsDelegate
             let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd-MMM-yyyy")
             let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
             self.endDateLabel.text = endDate + " At " + endTime
-            self.ticketProducts = data.data?.products ?? []
             self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             url =  APIList().getUrlString(url: .USERIMAGE)
             self.hostImage.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "ticket_img"))
@@ -74,6 +73,8 @@ extension MyTicketDetailVC : TicketDetailsDelegate
                 self.paymentMethodImage.image = UIImage(named:"paypaz_green")
             }
             self.paymentMethodName.text = data.data?.paymentMethod ?? ""
+            self.ticketProducts = data.data?.products ?? []
+
         }
         else
         {

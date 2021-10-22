@@ -26,13 +26,22 @@ class MyTicketDetailVC : CustomViewController {
     @IBOutlet weak var hostName : UILabel!
     @IBOutlet weak var paymentMethodImage : UIImageView!
     @IBOutlet weak var paymentMethodName : UILabel!
+    @IBOutlet weak var hideProductsView : UIView!
+    @IBOutlet weak var productsViewHight : NSLayoutConstraint!
     
     private let userTicketsDataSource = UserTicketsDataModel()
     
     var orderID = ""
     var ticketProducts:[TicketProducts]?{
         didSet{
-            self.collectionViewProducts.reloadData()
+            if ticketProducts?.count == 0{
+                self.productsViewHight.constant = 0
+            }
+            else{
+                self.productsViewHight.constant = 122
+                self.collectionViewProducts.reloadData()
+            }
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -55,7 +64,5 @@ class MyTicketDetailVC : CustomViewController {
     @IBAction func btn_Share(_ sender:UIButton){
         postshareLink(profile_URL: "The text that i want to share")
     }
-    @IBAction func btn_ViewAll(_ sender:UIButton){
-        
-    }
+    
 }

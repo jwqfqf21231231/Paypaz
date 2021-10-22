@@ -27,6 +27,7 @@ class WelcomeVC : CustomViewController {
             let store = CNContactStore()
             store.requestAccess(for: .contacts, completionHandler: {(grant,error) in
                 if grant{
+
                     do {
                         try store.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
                             results.append(contact)

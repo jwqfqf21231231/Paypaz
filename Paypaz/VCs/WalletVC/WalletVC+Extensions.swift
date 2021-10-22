@@ -19,7 +19,7 @@ extension WalletVC : UITableViewDataSource {
         
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsCell") as? TransactionsCell else { return TransactionsCell() }
         let url =  APIList().getUrlString(url: .USERIMAGE)
-        cell.userImage.sd_setImage(with: URL(string: url+(transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
+        cell.userImage.sd_setImage(with: URL(string: url+(transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.descriptionLabel.text = transactions?[indexPath.row].name ?? ""
         cell.userNameLabel.text = (transactions?[indexPath.row].firstName ?? "") + " " + (transactions?[indexPath.row].lastName ?? "")
         if transactions?[indexPath.row].isCredited == "0"{
@@ -80,6 +80,7 @@ extension WalletVC : TransactionHistoryDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            transactionsView.alpha = 0
             if currentPage-1 != 0{
                 self.newTransactions = data.data ?? []
                 self.transactions?.append(contentsOf: self.newTransactions)
@@ -87,7 +88,8 @@ extension WalletVC : TransactionHistoryDelegate
             else{
                 self.transactions = data.data ?? []
             }
-            
+            tableViewTransactions.reloadData()
+
         }
         else
         {
@@ -97,8 +99,10 @@ extension WalletVC : TransactionHistoryDelegate
             }
             else if data.message == "Data not found" && currentPage-1 == 0{
                 self.transactions = []
-                
+                transactionsView.alpha = 1
             }
+            tableViewTransactions.reloadData()
+
         }
     }
     

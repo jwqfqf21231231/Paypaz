@@ -20,17 +20,7 @@ class WalletVC : CustomViewController {
     @IBOutlet weak var transactionsView : UIView!
     @IBOutlet weak var lbl_TotalBalance : UILabel!
     private let dataSource = GetWalletAmountDataModel()
-    var transactions : [Transactions]?{
-        didSet{
-            if transactions?.count == 0{
-                transactionsView.alpha = 1
-            }
-            else{
-                transactionsView.alpha = 0
-            }
-            tableViewTransactions.reloadData()
-        }
-    }
+    var transactions : [Transactions]?
     var newTransactions = [Transactions]()
     var currentPage = 1
     //MARK:- ---- View Life Cycle ----

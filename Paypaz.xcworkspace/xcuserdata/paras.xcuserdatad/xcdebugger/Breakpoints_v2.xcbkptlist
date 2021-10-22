@@ -7,32 +7,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1A0CEC75-3B71-4A45-95AF-82CD5CE3FC26"
+            uuid = "CE199CA6-18F3-4E46-9FB6-1C9B987848E3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/Login signup process/Passcode/Passcode VC/View Model/PasscodeOTPDataModel.swift"
+            filePath = "Paypaz/VCs/Contacts/ContactListVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "validatePasscode()"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "btn_GivePermission(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E6355991-0953-4C5E-BEB8-E5E244CAD700"
+            uuid = "B790D055-E0A6-46B5-A90C-5861CFED6317"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/Login signup process/Passcode/Passcode VC/View Model/PasscodeOTPDataModel.swift"
+            filePath = "Paypaz/VCs/Contacts/ContactListVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "validatePasscode()"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "fetchContacts(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A4BB6955-0FDB-483B-A66F-F8C7FE007496"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Paypaz/VCs/Host Event/Controller/InviteMembersVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "btn_InvitedMember(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "06A380F2-EA67-49CC-B905-A0AB23B08628"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Paypaz/VCs/My tickets/MyTicketDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "ticketProducts"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D1994EE-C5B4-4CF4-9F0B-86328E94D5EC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Paypaz/VCs/My tickets/MyTicketDetailVC+Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "didRecieveDataUpdate(data:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

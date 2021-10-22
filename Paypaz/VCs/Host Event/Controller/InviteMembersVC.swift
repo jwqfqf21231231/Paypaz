@@ -21,6 +21,7 @@ class InviteMembersVC: CustomViewController {
     var isInviteMemberStatus = "0"
     var eventID = ""
     var isEdit : Bool? = false
+    var permissionGranted : Bool?
     var invitedContacts = [InvitedContacts]()
     var contactDict = [String:String]()
     var contactArray = [[String:String]]()
@@ -39,8 +40,10 @@ class InviteMembersVC: CustomViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fetchContacts()
         dataSource.delegate = self
+        if isInviteMemberStatus == "1"{
+            fetchContacts()
+        }
         self.isPublic.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
         self.isInviteMember.addTarget(self, action: #selector(onSwitchValueChange(swtch:)), for: .valueChanged)
     }
@@ -89,6 +92,7 @@ class InviteMembersVC: CustomViewController {
             let store = CNContactStore()
             store.requestAccess(for: .contacts, completionHandler: {(grant,error) in
                 if grant{
+                    self.permissionGranted = true
                     do {
                         try store.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
                             results.append(contact)
@@ -100,16 +104,39 @@ class InviteMembersVC: CustomViewController {
                     completion(results)
                     
                 }else{
+                    self.permissionGranted = false
                     print("Error \(error?.localizedDescription ?? "")")
                 }
-                if self.isEdit ?? false{
-                    self.dataSource1.delegate3 = self
-                    self.getInvitees()
+                if self.permissionGranted ?? false{
+                    if self.isEdit ?? false{
+                        self.dataSource1.delegate3 = self
+                        self.getInvitees()
+                    }
+                    else{
+                        self.isInviteMemberStatus = "1"
+                        self.isInviteMember.setOn(true, animated: false)
+                        self.tableView_Members.reloadData()
+                    }
+                }
+                else{
+                    let permissionAlert = UIAlertController(title: "Contacts Access", message: "Requires contacts access to take advantage of this feature. Please provide contacts access from settings", preferredStyle: .alert)
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+                    let settingAction = UIAlertAction(title: "Settings", style: .default) { (action) in
+                        guard let appSettingURl = URL(string: UIApplication.openSettingsURLString) else { return }
+                        if UIApplication.shared.canOpenURL(appSettingURl) {
+                            UIApplication.shared.open(appSettingURl, options: [:], completionHandler: nil)
+                        }
+                    }
+                    permissionAlert.addAction(cancelAction)
+                    permissionAlert.addAction(settingAction)
+                    self.present(permissionAlert, animated: true, completion: nil)
                 }
             })
         }
         
     }
+
     func fetchContacts()
     {
         fetchContacts(completion: {contacts in
@@ -134,8 +161,8 @@ class InviteMembersVC: CustomViewController {
     }
     @objc func onSwitchValueChange(swtch:UISwitch)
     {
-        switch swtch.tag{
-        case 0:
+//        switch swtch.tag{
+//        case 0:
             if(swtch.isOn)
             {
                 self.isPublicStatus = "1"
@@ -144,17 +171,18 @@ class InviteMembersVC: CustomViewController {
             {
                 self.isPublicStatus = "0"
             }
-        default:
-            if(swtch.isOn)
-            {
-                self.isInviteMemberStatus = "1"
-            }
-            else
-            {
-                self.isInviteMemberStatus = "0"
-            }
-            self.tableView_Members.reloadData()
-        }
+//        default:
+//            if(swtch.isOn)
+//            {
+//                fetchContacts()
+//                self.isInviteMemberStatus = "1"
+//            }
+//            else
+//            {
+//                self.isInviteMemberStatus = "0"
+//            }
+//            self.tableView_Members.reloadData()
+//        }
     }
     @IBAction func btn_Back(_ sender:UIButton){
         if isEdit ?? false{
@@ -167,6 +195,15 @@ class InviteMembersVC: CustomViewController {
                     break
                 }
             }
+        }
+    }
+    @IBAction func btn_InvitedMember(_ sender:UIButton){
+        if isInviteMemberStatus == "0"{
+            fetchContacts()
+        }
+        else{
+            isInviteMemberStatus = "0"
+            isInviteMember.setOn(false, animated: false)
         }
     }
     @IBAction func btn_Done(_ sender:UIButton)

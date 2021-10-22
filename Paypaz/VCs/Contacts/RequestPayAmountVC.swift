@@ -131,7 +131,7 @@ class RequestPayAmountVC : CustomViewController {
             }
             else{
                 if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
-                    vc.delegate = self
+                     vc.delegate = self
                 }
             }
         }
@@ -233,7 +233,7 @@ extension RequestPayAmountVC : PayNowDelegate
             let msg = ["Message": data.message ?? ""]
             for vc in self.navigationController?.viewControllers ?? [] {
                 if let home = vc as? HomeVC {
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
                     self.navigationController?.popToViewController(home, animated: true)
                     break
                 }
@@ -270,7 +270,7 @@ extension RequestPayAmountVC : PaymentRequestDelegate
             let msg = ["Message":data.message ?? ""]
             for vc in self.navigationController?.viewControllers ?? [] {
                 if let home = vc as? HomeVC {
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
                     self.navigationController?.popToViewController(home, animated: true)
                     break
                 }

@@ -271,7 +271,7 @@ extension PayAmountVC : PopupDelegate {
         for vc in self.navigationController!.viewControllers as Array {
             let msg = ["Message":"Payment successful"]
             if vc.isKind(of:HomeVC.self) {
-                NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
+                NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
                 self.navigationController!.popToViewController(vc, animated: true)
                 break
             }
@@ -322,7 +322,7 @@ extension PayAmountVC : PaymentDelegate
             let msg = ["Message":data.message ?? ""]
             for vc in self.navigationController!.viewControllers as Array {
                 if vc.isKind(of:HomeVC.self) {
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: msg)
+                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
                     self.navigationController!.popToViewController(vc, animated: true)
                     break
                 }
