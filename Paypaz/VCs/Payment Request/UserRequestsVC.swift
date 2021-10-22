@@ -25,6 +25,7 @@ class UserRequestsVC: UIViewController {
     var currentPage = 1
     override func viewDidLoad() {
         super.viewDidLoad()
+        Connection.svprogressHudShow(view: self)
         dataSource.delegate = self
         dataSource.pageNo = "0"
         dataSource.getPaymentRequests()
@@ -110,28 +111,35 @@ extension UserRequestsVC : UITableViewDataSource{
         let url =  APIList().getUrlString(url: .USERIMAGE)
         cell.userImage.sd_setImage(with: URL(string: url+(userRequest[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.amountLabel.text = "$\(((userRequest[indexPath.row].amount ?? "") as NSString?)?.integerValue ?? 0)"
+        cell.nameLabel.text = (userRequest[indexPath.row].firstName ?? "") + " " + (userRequest[indexPath.row].lastName ?? "")
         
         if userRequest[indexPath.row].status == "0"{
             if userRequest[indexPath.row].senderID == userID {
-                cell.nameLabel.text = (userRequest[indexPath.row].firstName ?? "") + " " + (userRequest[indexPath.row].lastName ?? "")
                 cell.payAmountButton.setTitle("Money Request Sent", for: .normal)
-                cell.isUserInteractionEnabled = false
+                cell.payAmountButton.backgroundColor = UIColor(red )
+                cell.isUserInteractionEnabled = true
             }
             else{
-                cell.nameLabel.text = userRequest[indexPath.row].name ?? ""
                 cell.payAmountButton.setTitle("Pay Money", for: .normal)
-                cell.isUserInteractionEnabled = true
+                cell.payAmountButton.backgroundColor = .blue
+                cell.isUserInteractionEnabled = false
             }
             cell.payAmountButton.setImage(nil, for: .normal)
         }
         else{
-            cell.nameLabel.text = (userRequest[indexPath.row].firstName ?? "") + " " + (userRequest[indexPath.row].lastName ?? "")
-            cell.payAmountButton.setTitle("Money Sent", for: .normal)
-            cell.payAmountButton.setImage(UIImage(named: "blue_ticks"), for: .normal)
+            if userRequest[indexPath.row].senderID == userID {
+                cell.payAmountButton.setTitle("Money Received", for: .normal)
+            }
+            else{
+                cell.payAmountButton.setTitle("Money Sent", for: .normal)
+            }
+            cell.payAmountButton.backgroundColor = UIColor(named:"GreenColor")
+            cell.payAmountButton.setImage(UIImage(named:"tick_white"), for: .normal)
             cell.isUserInteractionEnabled = false
         }
-        cell.payAmountButton.tag = ((userRequest[indexPath.row].id ?? "") as? NSString)?.integerValue ?? 0
+        cell.payAmountButton.tag = ((userRequest[indexPath.row].id ?? "") as NSString).integerValue
         cell.payAmountButton.addTarget(self, action: #selector(payAction(_:)), for: .touchUpInside)
+        
         return cell
     }
     @objc func payAction(_ sender : UIButton){

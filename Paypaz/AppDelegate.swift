@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         print(path)
+        let userID = UserDefaults.standard.getUserID()
+        print("UserID is : ------- \(userID)")
         if #available(iOS 13.0, *) {
             window = UIWindow(frame: UIScreen.main.bounds)
             self.window?.overrideUserInterfaceStyle = .light

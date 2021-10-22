@@ -49,7 +49,7 @@ class ContactListVC : CustomViewController {
         super.viewDidLoad()
         dataSource.delegate = self
         fetchContacts()
-        self.view_ContactsList.alpha = 0.0
+        self.view_ContactsList.alpha = 1
         self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
 
       //  self.selectLocalPayment()

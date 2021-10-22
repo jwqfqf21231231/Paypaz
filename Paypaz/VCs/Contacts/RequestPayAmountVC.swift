@@ -25,9 +25,30 @@ class RequestPayAmountVC : CustomViewController {
     @IBOutlet weak var descriptionTextView : UITextView!
     @IBOutlet weak var amountTxt : UITextField!
     
-    @IBOutlet weak var requestButton : UIButton!
-    @IBOutlet weak var paythruCardButton : UIButton!
-    @IBOutlet weak var paythruWalletButton : UIButton!
+    @IBOutlet weak var requestView: UIView!{
+        didSet{
+            let tapGesture = CustomTapGestureRecognizer(target: self,
+                                                        action: #selector(tapSelector(sender:)))
+            tapGesture.viewIndex = requestView.tag
+            requestView.addGestureRecognizer(tapGesture)
+        }
+    }
+    @IBOutlet weak var paythruCardView : UIView!{
+        didSet{
+            let tapGesture = CustomTapGestureRecognizer(target: self,
+                                                        action: #selector(tapSelector(sender:)))
+            tapGesture.viewIndex = paythruCardView.tag
+            paythruCardView.addGestureRecognizer(tapGesture)
+        }
+    }
+    @IBOutlet weak var paythruWalletView : UIView!{
+        didSet{
+            let tapGesture = CustomTapGestureRecognizer(target: self,
+                                                        action: #selector(tapSelector(sender:)))
+            tapGesture.viewIndex = paythruWalletView.tag
+            paythruWalletView.addGestureRecognizer(tapGesture)
+        }
+    }
     
     private let payNowDataSource = PayNowDataModel()
     private let payRequestDataSource = VerifyContactDataModel()
@@ -53,15 +74,15 @@ class RequestPayAmountVC : CustomViewController {
             self.userImage.sd_setImage(with: URL(string: url+(userDetails?["userPic"] ?? "")), placeholderImage: UIImage(named: "place_holder"))
             self.userNameLabel.text = userDetails?["userName"]
             self.userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
-            paythruCardButton.isHidden = false
-            paythruWalletButton.isHidden = false
+            paythruCardView.isHidden = false
+            paythruWalletView.isHidden = false
         }
         else{
             userImage.image = UIImage(named: "place_holder")
             userNameLabel.text = userDetails?["userName"]
             userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
-            paythruCardButton.isHidden = true
-            paythruWalletButton.isHidden = true
+            paythruCardView.isHidden = true
+            paythruWalletView.isHidden = true
         }
         if let type = self.selectedPaymentType {
             if type == .local {
@@ -77,24 +98,18 @@ class RequestPayAmountVC : CustomViewController {
             }
         }
     }
-    
-    // MARK: - --- Action ----
-    @IBAction func btn_back(_ sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func requestButton(_ sender:UIButton){
+    @objc func tapSelector(sender: CustomTapGestureRecognizer) {
         if amountTxt.isEmptyOrWhitespace(){
             self.view.makeToast("Please enter amount")
         }
-        else if descriptionTextView.isEmptyOrWhitespace(){
-            self.view.makeToast("Please enter description")
-        }
-        else if (((amountTxt.text ?? "") as? NSString)?.integerValue ?? 0) < 20{
+//        else if descriptionTextView.isEmptyOrWhitespace(){
+//            self.view.makeToast("Please enter description")
+//        }
+        else if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
             self.view.makeToast("please send an amount of minimum 20$")
         }
         else{
-            if sender.tag == 0{
+            if sender.viewIndex == 0{
                 if paypazUser ?? false{
                     payRequestDataSource.receiverID = receiverID ?? ""
                 }
@@ -108,7 +123,7 @@ class RequestPayAmountVC : CustomViewController {
                 payRequestDataSource.dataDescription = descriptionTextView.text ?? ""
                 payRequestDataSource.requestPayment()
             }
-            else if sender.tag == 1{
+            else if sender.viewIndex == 1{
                 if let vc = self.presentPopUpVC("AddMoneyPopupVC", animated: false) as? AddMoneyPopupVC{
                     vc.successDelegate = self
                     vc.payAmountToUser = true
@@ -120,6 +135,14 @@ class RequestPayAmountVC : CustomViewController {
                 }
             }
         }
+    }
+    // MARK: - --- Action ----
+    @IBAction func btn_back(_ sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func requestButton(_ sender:UIButton){
+       
        
         //        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
         //            let local = (self.selectedPaymentType == PaymentType.local)

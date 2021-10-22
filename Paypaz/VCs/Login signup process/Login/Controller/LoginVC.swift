@@ -170,6 +170,7 @@ extension LoginVC : LogInDataModelDelegate
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")
             UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
+            UserDefaults.standard.setUserID(value: data.data?.id ?? "")
             UserDefaults.standard.setValue(data.data?.isNotification, forKey: "isNotification")
             UserDefaults.standard.setValue(data.data?.isPasscode, forKey: "isPasscode")
             UserDefaults.standard.setValue(data.data?.isPin, forKey: "isPin")
