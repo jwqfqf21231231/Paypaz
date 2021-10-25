@@ -32,18 +32,7 @@ class MyTicketDetailVC : CustomViewController {
     private let userTicketsDataSource = UserTicketsDataModel()
     
     var orderID = ""
-    var ticketProducts:[TicketProducts]?{
-        didSet{
-            if ticketProducts?.count == 0{
-                self.productsViewHight.constant = 0
-            }
-            else{
-                self.productsViewHight.constant = 122
-                self.collectionViewProducts.reloadData()
-            }
-            self.view.layoutIfNeeded()
-        }
-    }
+    var ticketProducts:[TicketProducts]?
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {

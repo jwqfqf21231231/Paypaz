@@ -24,7 +24,9 @@ class MyTicketsVC : CustomViewController {
             tableView_Tickets.reloadData()
         }
     }
-    
+    var newTickets : [Tickets]?
+    var currentPage = 1
+
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
@@ -36,6 +38,17 @@ class MyTicketsVC : CustomViewController {
         // Do any additional setup after loading the view.
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.tickets?.count{
+                Connection.svprogressHudShow(view: self)
+                userTicketsDataSource.pageNo = "\(currentPage)"
+                currentPage = currentPage + 1
+                userTicketsDataSource.getUserTickets()
+            }
+        }
+    }
     
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {

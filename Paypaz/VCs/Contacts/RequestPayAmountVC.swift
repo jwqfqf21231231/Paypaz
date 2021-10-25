@@ -12,9 +12,8 @@ enum PaymentType {
     case local
     case global
 }
-class RequestPayAmountVC : CustomViewController {
+class RequestPayAmountVC : UIViewController {
     
-    //MARK:- ---
     @IBOutlet weak var view_userInfo  : RoundView!
     @IBOutlet weak var userNameLabel  : UILabel!
     @IBOutlet weak var userNoLabel    : UILabel!
@@ -23,7 +22,7 @@ class RequestPayAmountVC : CustomViewController {
     @IBOutlet weak var view_Receiving : UIView!
     @IBOutlet weak var view_ConversionAmount : UIView!
     @IBOutlet weak var descriptionTextView : UITextView!
-    @IBOutlet weak var amountTxt : UITextField!
+    @IBOutlet weak var amountTxt : RoundTextField!
     
     @IBOutlet weak var requestView: UIView!{
         didSet{
@@ -53,14 +52,17 @@ class RequestPayAmountVC : CustomViewController {
     private let payNowDataSource = PayNowDataModel()
     private let payRequestDataSource = VerifyContactDataModel()
     var paypazUser : Bool?
+    var payFromRequest : Bool?
     var receiverID : String?
     var requestID : String?
     var userDetails : [String:String]?
+    var amount : String?
     var selectedPaymentType : PaymentType?
     
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        amountTxt.delegate = self
         payNowDataSource.delegate = self
         payRequestDataSource.requestPaymentDelegate = self
         //self.view_userInfo.alpha = 0.0
@@ -74,8 +76,23 @@ class RequestPayAmountVC : CustomViewController {
             self.userImage.sd_setImage(with: URL(string: url+(userDetails?["userPic"] ?? "")), placeholderImage: UIImage(named: "place_holder"))
             self.userNameLabel.text = userDetails?["userName"]
             self.userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
+            if payFromRequest ?? false{
+                amountTxt.text = amount ?? ""
+                amountTxt.isUserInteractionEnabled = false
+                requestView.isHidden = true
+            }
+            else{
+                amountTxt.isUserInteractionEnabled = true
+                requestView.isHidden = false
+            }
             paythruCardView.isHidden = false
             paythruWalletView.isHidden = false
+        }
+        else if payFromRequest ?? false{
+            self.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            let url =  APIList().getUrlString(url: .USERIMAGE)
+            self.userImage.sd_setImage(with: URL(string: url+(userDetails?["userPic"] ?? "")), placeholderImage: UIImage(named: "place_holder"))
+            self.userNameLabel.text = userDetails?["userName"]
         }
         else{
             userImage.image = UIImage(named: "place_holder")
@@ -102,9 +119,9 @@ class RequestPayAmountVC : CustomViewController {
         if amountTxt.isEmptyOrWhitespace(){
             self.view.makeToast("Please enter amount")
         }
-//        else if descriptionTextView.isEmptyOrWhitespace(){
-//            self.view.makeToast("Please enter description")
-//        }
+        //        else if descriptionTextView.isEmptyOrWhitespace(){
+        //            self.view.makeToast("Please enter description")
+        //        }
         else if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
             self.view.makeToast("please send an amount of minimum 20$")
         }
@@ -124,14 +141,17 @@ class RequestPayAmountVC : CustomViewController {
                 payRequestDataSource.requestPayment()
             }
             else if sender.viewIndex == 1{
-                if let vc = self.presentPopUpVC("AddMoneyPopupVC", animated: false) as? AddMoneyPopupVC{
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddMoneyPopupVC") as? AddMoneyPopupVC{
                     vc.successDelegate = self
-                    vc.payAmountToUser = true
+                    vc.buyTicket = true
+                    vc.totalAmount = Float(amountTxt.text ?? "")//((amountTxt.text ?? "") as NSString).integerValue
+                    vc.modalPresentationStyle = .overCurrentContext
+                    self.present(vc, animated: false, completion: nil)
                 }
             }
             else{
                 if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
-                     vc.delegate = self
+                    vc.delegate = self
                 }
             }
         }
@@ -142,8 +162,8 @@ class RequestPayAmountVC : CustomViewController {
     }
     
     @IBAction func requestButton(_ sender:UIButton){
-       
-       
+        
+        
         //        if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
         //            let local = (self.selectedPaymentType == PaymentType.local)
         //            contacts.paymentOption = .Request
@@ -230,14 +250,15 @@ extension RequestPayAmountVC : PayNowDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            
             let msg = ["Message": data.message ?? ""]
-            for vc in self.navigationController?.viewControllers ?? [] {
-                if let home = vc as? HomeVC {
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
-                    self.navigationController?.popToViewController(home, animated: true)
-                    break
-                }
-            }
+             for vc in self.navigationController?.viewControllers ?? [] {
+             if let home = vc as? HomeVC {
+             NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
+             self.navigationController?.popToViewController(home, animated: true)
+             break
+             }
+             }
         }
         else
         {
@@ -267,14 +288,25 @@ extension RequestPayAmountVC : PaymentRequestDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            let msg = ["Message":data.message ?? ""]
-            for vc in self.navigationController?.viewControllers ?? [] {
-                if let home = vc as? HomeVC {
-                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
-                    self.navigationController?.popToViewController(home, animated: true)
-                    break
-                }
+            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+                popup.selectedPopupType = .PaymentRequestSent
+                let txt = "$\(amountTxt.text ?? "") to \(userNameLabel.text ?? "") \(userNoLabel.text ?? "")"
+                let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: txt)
+                attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: txt)
+                attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "$\(amountTxt.text ?? "")")
+                attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: userNameLabel.text ?? "")
+                attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: userNoLabel.text ?? "")
+                popup.delegate = self
+                popup.attrText = attributedString
             }
+            //            let msg = ["Message":data.message ?? ""]
+            //            for vc in self.navigationController?.viewControllers ?? [] {
+            //                if let home = vc as? HomeVC {
+            //                    NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
+            //                    self.navigationController?.popToViewController(home, animated: true)
+            //                    break
+            //                }
+            //            }
         }
         else
         {
@@ -298,16 +330,24 @@ extension RequestPayAmountVC : PaymentRequestDelegate
 
 
 extension RequestPayAmountVC : PopupDelegate {
+    
     func isClickedButton() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            if let popup = self?.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-                //  popup.delegate = self
-                popup.selectedPopupType = .PayMoneyToContacts
+//        let msg = ["Message":data.message ?? ""]
+        for vc in self.navigationController?.viewControllers ?? [] {
+            if let home = vc as? HomeVC {
+//                NotificationCenter.default.post(name: NSNotification.Name("ShowPopUp"), object: nil, userInfo: msg)
+                self.navigationController?.popToViewController(home, animated: true)
+                break
             }
         }
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+         if let popup = self?.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+         //  popup.delegate = self
+         popup.selectedPopupType = .PayMoneyToContacts
+         }*/
     }
-    
 }
+
 
 extension RequestPayAmountVC : ContactSelectedDelegate {
     
@@ -325,4 +365,42 @@ extension RequestPayAmountVC : ContactSelectedDelegate {
             _ = self.pushVC("EnterPinVC")
         }
     }
+}
+extension RequestPayAmountVC : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+          if string.isEmpty { return true }
+
+          let currentText = textField.text ?? ""
+          let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+          return replacementText.isValidDouble(maxDecimalPlaces: 2)
+        }
+    }
+extension String {
+  func isValidDouble(maxDecimalPlaces: Int) -> Bool {
+    // Use NumberFormatter to check if we can turn the string into a number
+    // and to get the locale specific decimal separator.
+    let formatter = NumberFormatter()
+    formatter.allowsFloats = true // Default is true, be explicit anyways
+    let decimalSeparator = formatter.decimalSeparator ?? "."  // Gets the locale specific decimal separator. If for some reason there is none we assume "." is used as separator.
+
+    // Check if we can create a valid number. (The formatter creates a NSNumber, but
+    // every NSNumber is a valid double, so we're good!)
+    if formatter.number(from: self) != nil {
+      // Split our string at the decimal separator
+      let split = self.components(separatedBy: decimalSeparator)
+
+      // Depending on whether there was a decimalSeparator we may have one
+      // or two parts now. If it is two then the second part is the one after
+      // the separator, aka the digits we care about.
+      // If there was no separator then the user hasn't entered a decimal
+      // number yet and we treat the string as empty, succeeding the check
+      let digits = split.count == 2 ? split.last ?? "" : ""
+
+      // Finally check if we're <= the allowed digits
+      return digits.count <= maxDecimalPlaces    // TODO: Swift 4.0 replace with digits.count, YAY!
+    }
+
+    return false // couldn't turn string into a valid number
+  }
 }

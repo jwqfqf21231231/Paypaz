@@ -37,6 +37,8 @@ class MyPostedEventDetailsVC : CustomViewController {
     @IBOutlet weak var view_InviteeHeight : NSLayoutConstraint!
     @IBOutlet weak var img_UserPic : UIImageView!
     @IBOutlet weak var lbl_UserName : UILabel!
+    @IBOutlet weak var lbl_RegisteredCount : UILabel!
+    @IBOutlet weak var lbl_BuyCount : UILabel!
     @IBOutlet weak var collectionView_Products : UICollectionView!{
         didSet {
             collectionView_Products.dataSource = self
@@ -90,7 +92,10 @@ class MyPostedEventDetailsVC : CustomViewController {
         updateEventDelegate?.updateEventData(data: eventDetails, eventID: eventID, deleted: false)
     }
     @IBAction func btn_QR(_ sender:UIButton){
-        let _ = self.pushVC("ScanQRCodeVC") as? ScanQRCodeVC
+        if let vc = self.pushVC("ScanQRCodeVC") as? ScanQRCodeVC{
+            vc.userName = lbl_UserName.text ?? ""
+            vc.userImage = img_UserPic.image ?? UIImage(named: "place_holder")
+        }
     }
     @IBAction func btn_Ok(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)

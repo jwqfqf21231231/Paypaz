@@ -162,7 +162,7 @@ class AddToCartVC : CustomViewController {
             }
             if let vc = self.pushVC("PayAmountVC") as? PayAmountVC{
                 vc.cartInfo = self.updatedCartInfo
-                vc.totalPrice = self.totalPrice
+                vc.totalPrice = Float(self.totalPrice)
             }
         }
     }

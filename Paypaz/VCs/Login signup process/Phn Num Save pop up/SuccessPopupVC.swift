@@ -41,6 +41,7 @@ class SuccessPopupVC : CustomViewController {
     @IBOutlet weak var imgIcon     : UIImageView!
     
     var inviteID = ""
+    var attrText:NSAttributedString?
     private let dataSource = IsAcceptEventInviteDataModel()
     
     // MARK:- ---- View Life Cycle ----
@@ -86,7 +87,8 @@ class SuccessPopupVC : CustomViewController {
             case .PaymentRequestSent:
                 self.lbl_Title.text   = "Payment Request Sent"
                 //self.lbl_message.text = "$ 840 to john deo Mobile no. +1 9323848308"
-                self.setAttributed(for: "$ 840 to John Deo Mobile no. +1 9323848308")
+//                self.setAttributed(for: "$ 840 to John Deo Mobile no. +1 9323848308")
+                self.lbl_message.attributedText = attrText
                 self.imgIcon.image    = UIImage(named: "receive_icons")
                 
             case .PayMoneyToContacts:

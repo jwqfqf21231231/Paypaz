@@ -32,7 +32,11 @@ class AddMoneyPopupVC  : UIViewController {
         }
     }
     @IBOutlet weak var tableViewHeight : NSLayoutConstraint!
-    @IBOutlet weak var txt_AmountToAdd : UITextField!
+    @IBOutlet weak var txt_AmountToAdd : UITextField!{
+        didSet{
+            txt_AmountToAdd.delegate = self
+        }
+    }
     @IBOutlet weak var mainViewHeight : NSLayoutConstraint!
     @IBOutlet weak var submitButton : UIButton!
     @IBOutlet weak var txt_CVV : UITextField!{
@@ -51,8 +55,7 @@ class AddMoneyPopupVC  : UIViewController {
     public let dataSource = CreateCardDataModel()
     let paymentDataSource = PaymentDataModel()
     var buyTicket : Bool?
-    var totalAmount : Int?
-    var payAmountToUser : Bool?
+    var totalAmount : Float?
     //    @IBOutlet weak var btn_BankAcc     : RoundButton!
     //    @IBOutlet weak var btn_DebitCredit : RoundButton!
     
@@ -107,10 +110,6 @@ class AddMoneyPopupVC  : UIViewController {
                     self.successDelegate?.buyEventThruCard(cvv: txt_CVV.text ?? "", cardName: self.cardName, cardNumber: self.cardNumber, cardID: self.cardID)
                     self.dismiss(animated: false, completion: nil)
                 }
-            }
-            else if payAmountToUser ?? false{
-                //self.successDelegate?.buyEventThruCard(cvv: <#T##String#>, cardName: <#T##String#>, cardNumber: <#T##String#>, cardID: <#T##String#>)
-                self.dismiss(animated: false, completion: nil)
             }
             else{
                 if maxLength != txt_CVV.text?.count{
@@ -212,6 +211,9 @@ extension AddMoneyPopupVC : UITextFieldDelegate{
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == txt_AmountToAdd{
+            
+        }
         let enteredCharString = "\(textField.text ?? "")\(string )"
         let currentString: NSString = textField.text! as NSString
         let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
@@ -223,7 +225,15 @@ extension AddMoneyPopupVC : UITextFieldDelegate{
                 return newString.length <= maxLength
             }
         }
-        return true
+        else{
+            if string.isEmpty { return true }
+
+            let currentText = textField.text ?? ""
+            let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            return replacementText.isValidDouble(maxDecimalPlaces: 2)
+        }
+//        return true
     }
 }
 

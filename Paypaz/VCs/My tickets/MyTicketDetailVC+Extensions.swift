@@ -21,7 +21,7 @@ extension MyTicketDetailVC : UICollectionViewDataSource {
         let url =  APIList().getUrlString(url: .UPLOADEDPRODUCTIMAGE)
         cell.img_ProductPic.sd_setImage(with: URL(string: url+(ticketProducts?[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "ticket_img"))
         cell.lbl_ProductName.text = ticketProducts?[indexPath.row].name ?? ""
-        cell.lbl_ProductPrice.text = ticketProducts?[indexPath.row].productPrice ?? ""
+        cell.lbl_ProductPrice.text = "$\(Float(ticketProducts?[indexPath.row].productPrice ?? "")?.clean ?? "")"
         cell.lbl_ProductQuantity.text = ticketProducts?[indexPath.row].productQty ?? ""
         return cell
     }
@@ -51,12 +51,12 @@ extension MyTicketDetailVC : TicketDetailsDelegate
             self.eventNameLabel.text = data.data?.name ?? ""
             self.categoryButton.setTitle("\(data.data?.typeName ?? "")", for: .normal)
             self.eventDescriptionLabel.text = data.data?.dataDescription ?? ""
-            let price = ((data.data?.grandTotal!) as NSString?)?.integerValue
-            self.ticketPriceLabel.text = "$\(price ?? 0)"
+            let price = (Float(data.data?.grandTotal ?? "")?.clean) ?? ""
+            self.ticketPriceLabel.text =  "$\(price)"
             self.orderNumberLabel.text = data.data?.orderNumber ?? ""
             var eDate = data.data?.endDate ?? ""
             eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
-            let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd-MMM-yyyy")
+            let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
             let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
             self.endDateLabel.text = endDate + " At " + endTime
             self.hostImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -74,7 +74,17 @@ extension MyTicketDetailVC : TicketDetailsDelegate
             }
             self.paymentMethodName.text = data.data?.paymentMethod ?? ""
             self.ticketProducts = data.data?.products ?? []
-
+            DispatchQueue.main.async {
+                self.collectionViewProducts.reloadData()
+            }
+            if ticketProducts?.count == 0{
+                self.hideProductsView.isHidden = true
+                self.productsViewHight.constant = 0
+            }
+            else{
+                self.hideProductsView.isHidden = false
+                self.productsViewHight.constant = 134
+            }
         }
         else
         {

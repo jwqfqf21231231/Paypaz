@@ -41,7 +41,7 @@ class PayAmountVC : CustomViewController {
     private let userProfileDataSource = LogInDataModel()
     private let dataSource = PaymentDataModel()
     var userDetails = [String:String]()
-    var totalPrice : Int?
+    var totalPrice : Float?
     var cartInfo : UpdatedCartInfo?
     var cvv = ""
     var cardID = ""

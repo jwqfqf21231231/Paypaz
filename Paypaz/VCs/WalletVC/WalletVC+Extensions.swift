@@ -22,23 +22,26 @@ extension WalletVC : UITableViewDataSource {
         cell.userImage.sd_setImage(with: URL(string: url+(transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.descriptionLabel.text = transactions?[indexPath.row].name ?? ""
         cell.userNameLabel.text = (transactions?[indexPath.row].firstName ?? "") + " " + (transactions?[indexPath.row].lastName ?? "")
-        if transactions?[indexPath.row].isCredited == "0"{
-            cell.amountLabel.text = "+ $\(transactions?[indexPath.row].amount ?? "")"
-            cell.amountLabel.textColor = UIColor(named: "GreenColor")
-            cell.creditLabel.text = "Credit"
-            cell.creditLabel.textColor = UIColor(named: "GreenColor")
-        }
-        else{
-            cell.amountLabel.text = "- $\(transactions?[indexPath.row].amount ?? "")"
-            cell.amountLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
-            cell.creditLabel.text = "Debit"
-            cell.creditLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
+        DispatchQueue.main.async {
+            if self.transactions?[indexPath.row].isCredited == "0"{
+                cell.amountLabel.text = "+ $\(Float(self.transactions?[indexPath.row].amount ?? "")?.clean ?? "")"
+                cell.amountLabel.textColor = UIColor(named: "GreenColor")
+                cell.creditLabel.text = "Credit"
+                cell.creditLabel.textColor = UIColor(named: "GreenColor")
+            }
+            else{
+                cell.amountLabel.text = "- $\(Float(self.transactions?[indexPath.row].amount ?? "")?.clean ?? "")"
+                cell.amountLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
+                cell.creditLabel.text = "Debit"
+                cell.creditLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
+            }
         }
         return cell
     }
 }
 
-//MARK:-
+//MARK:- Extensions
+
 extension WalletVC : UITableViewDelegate {
     /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      _ = self.pushVC("TransactionDetailVC")

@@ -133,6 +133,8 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
                 self.lbl_EventLocation.text = data.data?.location
                 self.isPublicStatus = data.data?.ispublic ?? ""
                 self.isInviteMemberStatus = data.data?.isinviteMember ?? ""
+                self.lbl_RegisteredCount.text = data.data?.registered ?? ""
+                self.lbl_BuyCount.text = data.data?.buy ?? ""
             }
         }
         else
@@ -182,7 +184,7 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
         }
         else{
             self.view_Product.isHidden = false
-            self.view_ProductHeight.constant = 115.5
+            self.view_ProductHeight.constant = 129
         }
     }
     

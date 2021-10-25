@@ -55,32 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "06A380F2-EA67-49CC-B905-A0AB23B08628"
+            uuid = "68E8E08F-4E16-4DB3-BA04-E9B322539456"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/My tickets/MyTicketDetailVC.swift"
+            filePath = "Paypaz/VCs/WalletVC/WalletVC+Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "ticketProducts"
-            landmarkType = "24">
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4D1994EE-C5B4-4CF4-9F0B-86328E94D5EC"
+            uuid = "B733FEAA-A850-4CD5-96D0-E622A4F34A52"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/My tickets/MyTicketDetailVC+Extensions.swift"
+            filePath = "Paypaz/VCs/WalletVC/AddMoneyPopupVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "didRecieveDataUpdate(data:)"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

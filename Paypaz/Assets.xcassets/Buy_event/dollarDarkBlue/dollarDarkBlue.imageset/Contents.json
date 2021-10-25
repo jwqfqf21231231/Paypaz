@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "tick_new.png",
+      "filename" : "dollarDarkBlue.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tick_new@2x.png",
+      "filename" : "dollarDarkBlue@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tick_new@3x.png",
+      "filename" : "dollarDarkBlue@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

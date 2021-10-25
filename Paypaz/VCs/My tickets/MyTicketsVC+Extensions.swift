@@ -16,17 +16,15 @@ extension MyTicketsVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TicketsCell")  as? TicketsCell
         else { return TicketsCell() }
-        //        let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
-        //        cell.img_Ticket.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        //        cell.img_Ticket.sd_setImage(with: URL(string: url+(tickets?[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "ticket_img"))
+
         cell.lbl_EventName.text = tickets?[indexPath.row].name ?? ""
         cell.lbl_Description.text = tickets?[indexPath.row].datumDescription ?? ""
         cell.lbl_OrderNumber.text = tickets?[indexPath.row].orderNumber ?? ""
         var eDate = tickets?[indexPath.row].endDate ?? ""
         eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
-        let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd-MMM-yyyy")
+        let endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
         let endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
-        cell.lbl_EndDate.text = endDate + " " + endTime
+        cell.lbl_EndDate.text = endDate + " At " + endTime
         
         return cell
     }
@@ -49,14 +47,28 @@ extension MyTicketsVC : UserTicketsDelegate
         if data.success == 1
         {
             self.noDataFoundView.alpha = 0
-//            self.myTicketsHeaderLabel.isHidden = false
-            self.tickets = data.data ?? []
+            if currentPage-1 != 0{
+                self.newTickets = data.data ?? []
+                self.tickets?.append(contentsOf: self.newTickets ?? [])
+            }
+            else{
+                self.tickets = data.data ?? []
+            }
         }
         else
         {
             self.noDataFoundView.alpha = 1
-            //self.myTicketsHeaderLabel.isHidden = true
-            //self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.message == "Data not found" && currentPage-1 >= 1{
+                print("No data at page No : \(currentPage-1)")
+                currentPage = currentPage-1
+            }
+            else if data.message == "Data not found" && currentPage-1 == 0{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                self.tickets = []
+            }
+            else{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+            }
         }
     }
     
