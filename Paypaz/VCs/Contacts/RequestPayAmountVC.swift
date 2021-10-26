@@ -80,6 +80,7 @@ class RequestPayAmountVC : UIViewController {
                 amountTxt.text = amount ?? ""
                 amountTxt.isUserInteractionEnabled = false
                 requestView.isHidden = true
+                
             }
             else{
                 amountTxt.isUserInteractionEnabled = true
@@ -89,10 +90,12 @@ class RequestPayAmountVC : UIViewController {
             paythruWalletView.isHidden = false
         }
         else if payFromRequest ?? false{
+            self.requestView.isHidden = true
             self.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             let url =  APIList().getUrlString(url: .USERIMAGE)
             self.userImage.sd_setImage(with: URL(string: url+(userDetails?["userPic"] ?? "")), placeholderImage: UIImage(named: "place_holder"))
             self.userNameLabel.text = userDetails?["userName"]
+            self.userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
         }
         else{
             userImage.image = UIImage(named: "place_holder")

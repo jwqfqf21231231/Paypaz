@@ -113,6 +113,7 @@ extension UserRequestsVC : UITableViewDataSource{
             //cell.amountLabel.text = "$\(((userRequest[indexPath.row].amount ?? "") as NSString?)?.integerValue ?? 0)"
         cell.amountLabel.text = "$\(Float(userRequest[indexPath.row].amount ?? "")?.clean ?? "")"
         DispatchQueue.main.async {
+            
             if self.userRequest[indexPath.row].status == "0"{
                 if self.userRequest[indexPath.row].senderID == self.userID {
                     if self.userRequest[indexPath.row].receiverID == "0"{
@@ -129,30 +130,27 @@ extension UserRequestsVC : UITableViewDataSource{
                     cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
                     cell.payAmountButton.setTitle("Pay Money", for: .normal)
                     cell.payAmountButton.backgroundColor = .blue
-                    cell.isUserInteractionEnabled = false
+                    cell.isUserInteractionEnabled = true
                 }
                 cell.payAmountButton.setImage(nil, for: .normal)
             }
             else{
 
                 if self.userRequest[indexPath.row].senderID == self.userID {
-                    cell.nameLabel.text = (self.userRequest[indexPath.row].name ?? "")
-
-                    cell.payAmountButton.setTitle("Money Sent", for: .normal)
+                    cell.payAmountButton.setTitle("Money Received", for: .normal)
                 }
                 else{
-                    cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
-
-                    cell.payAmountButton.setTitle("Money Received", for: .normal)
+                    cell.payAmountButton.setTitle("Money Sent", for: .normal)
                 }
                 cell.payAmountButton.backgroundColor = UIColor(named:"GreenColor")
                 cell.payAmountButton.setImage(UIImage(named:"tick_white"), for: .normal)
                 cell.isUserInteractionEnabled = false
+                cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
             }
         }
         
         
-        cell.payAmountButton.tag = ((userRequest[indexPath.row].id ?? "") as NSString).integerValue
+        cell.payAmountButton.tag = indexPath.row
         cell.payAmountButton.addTarget(self, action: #selector(payAction(_:)), for: .touchUpInside)
         
         return cell
@@ -165,6 +163,8 @@ extension UserRequestsVC : UITableViewDataSource{
             vc.requestID = userRequest[sender.tag].id ?? ""
             vc.amount = userRequest[sender.tag].amount ?? ""
             vc.payFromRequest = true
+            vc.paypazUser = true
+            vc.selectedPaymentType = .local
         }
     }
 }
