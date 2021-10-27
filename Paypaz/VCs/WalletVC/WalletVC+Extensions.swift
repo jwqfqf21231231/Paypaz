@@ -18,7 +18,7 @@ extension WalletVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsCell") as? TransactionsCell else { return TransactionsCell() }
-        let url =  APIList().getUrlString(url: .USERIMAGE)
+        /*let url =  APIList().getUrlString(url: .USERIMAGE)
         cell.userImage.sd_setImage(with: URL(string: url+(transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
         cell.userNameLabel.text = (transactions?[indexPath.row].firstName ?? "") + " " + (transactions?[indexPath.row].lastName ?? "")
         DispatchQueue.main.async {
@@ -29,12 +29,11 @@ extension WalletVC : UITableViewDataSource {
                     }
                     else if self.transactions?[indexPath.row].requestID != "0"{
                         if self.transactions?[indexPath.row].type == "1"{
-                            
+                            cell.descriptionLabel.text = "\(self.transactions?[indexPath.row].firstName ?? "") Sent Money To You"
                         }
                         else{
-                            
+                            cell.descriptionLabel.text = "\(self.transactions?[indexPath.row].firstName ?? "") Sent Money To Your Money Request"
                         }
-                        cell.descriptionLabel.text = "\(self.transactions?[indexPath.row].firstName ?? "") Purchased Tickets For Your Event \(self.transactions?[indexPath.row].name ?? "")"
                     }
                 }
                 else if self.transactions?[indexPath.row].status == "1"{
@@ -51,16 +50,15 @@ extension WalletVC : UITableViewDataSource {
             else{
                 if self.transactions?[indexPath.row].status == "3"{
                     if self.transactions?[indexPath.row].orderID != "0"{
-                        
+                        cell.descriptionLabel.text = "You Bought Event \(self.transactions?[indexPath.row].name ?? "") Tickets"
                     }
                     else if self.transactions?[indexPath.row].requestID != "0"{
                         if self.transactions?[indexPath.row].type == "1"{
                             cell.descriptionLabel.text = "You Transferred Money To \(self.transactions?[indexPath.row].firstName ?? "")"
                         }
                         else{
-                            
+                            cell.descriptionLabel.text = "You Sent Money To \(self.transactions?[indexPath.row].firstName ?? "") Money Request"
                         }
-                        cell.descriptionLabel.text = "You Transferred Money To \(self.transactions?[indexPath.row].firstName ?? "")"
                     }
                     
                 }
@@ -69,7 +67,7 @@ extension WalletVC : UITableViewDataSource {
                 cell.creditLabel.text = "Debit"
                 cell.creditLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
             }
-        }
+        }*/
         return cell
     }
 }
