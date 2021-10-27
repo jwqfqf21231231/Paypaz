@@ -115,12 +115,12 @@ class SuccessPopupVC : CustomViewController {
     
     private func setAttributed(for txt:String) {
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: txt)
-        attributedString.setColor(color: UIColor.darkGray.withAlphaComponent(0.6), forText: txt)
+        /*attributedString.setColor(color: UIColor.darkGray.withAlphaComponent(0.6), forText: txt)
         attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "$ 840")
         attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "event name")
         attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "John Deo")
         attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "bank account 03213543467567")
-        attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "Mobile no. +1 9323848308")
+        attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "Mobile no. +1 9323848308")*/
         
         //  let attrs = [NSAttributedString.Key.font : UIFont(name: "seguisb", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15)]//]
         //let boldString = NSMutableAttributedString(string: " Mad Anthony Mud Run ", attributes:attrs)

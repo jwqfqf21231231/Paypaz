@@ -103,11 +103,11 @@ class AddCardDetailsVC : CardViewController {
     }
     private func setNotificationText(){
         let attributedString1: NSMutableAttributedString = NSMutableAttributedString(string: "Add")
-        attributedString1.setColor(color: UIColor(red: 0/255, green: 58/255, blue: 96/255, alpha: 1), forText: "Add")
+        attributedString1.setColor(color: UIColor(red: 0/255, green: 58/255, blue: 96/255, alpha: 1), forText: "Add", fontSize : 16)
         let attributedString2: NSMutableAttributedString = NSMutableAttributedString(string: " $\(amountToAdd)")
-        attributedString2.setColor(color: UIColor(named: "GreenColor") ?? .green, forText: " $\(amountToAdd)")
+        attributedString2.setColor(color: UIColor(named: "GreenColor") ?? .green, forText: " $\(amountToAdd)", fontSize : 16)
         let attributedString3: NSMutableAttributedString = NSMutableAttributedString(string: " Money from Credit/Debit Card")
-        attributedString3.setColor(color: UIColor(red: 0/255, green: 58/255, blue: 96/255, alpha: 1), forText: "Money from Credit/Debit Card")
+        attributedString3.setColor(color: UIColor(red: 0/255, green: 58/255, blue: 96/255, alpha: 1), forText: "Money from Credit/Debit Card", fontSize: 16)
         attributedString1.append(attributedString2)
         attributedString1.append(attributedString3)
         lbl_notification.attributedText = attributedString1

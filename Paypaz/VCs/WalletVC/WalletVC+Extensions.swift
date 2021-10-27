@@ -18,21 +18,31 @@ extension WalletVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionsCell") as? TransactionsCell else { return TransactionsCell() }
-        /*let url =  APIList().getUrlString(url: .USERIMAGE)
-        cell.userImage.sd_setImage(with: URL(string: url+(transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
-        cell.userNameLabel.text = (transactions?[indexPath.row].firstName ?? "") + " " + (transactions?[indexPath.row].lastName ?? "")
         DispatchQueue.main.async {
+            let url =  APIList().getUrlString(url: .USERIMAGE)
+            cell.userImage.sd_setImage(with: URL(string: url+(self.transactions?[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
+            cell.userNameLabel.text = (self.transactions?[indexPath.row].firstName ?? "") + " " + (self.transactions?[indexPath.row].lastName ?? "")
             if self.transactions?[indexPath.row].isCredited == "0"{
                 if self.transactions?[indexPath.row].status == "0"{
                     if self.transactions?[indexPath.row].orderID != "0"{
-                        cell.descriptionLabel.text = "\(self.transactions?[indexPath.row].firstName ?? "") Purchased Tickets For Your Event \(self.transactions?[indexPath.row].name ?? "")"
+                        let info = "\"\(self.transactions?[indexPath.row].firstName ?? "")\" Purchased Tickets For Your Event \"\(self.transactions?[indexPath.row].name ?? "")\""
+                        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: info)
+                        attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].firstName ?? "")\"", fontSize : 13)
+                        attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].name ?? "")\"", fontSize : 13)
+                        cell.descriptionLabel.attributedText = attributedString
                     }
                     else if self.transactions?[indexPath.row].requestID != "0"{
                         if self.transactions?[indexPath.row].type == "1"{
-                            cell.descriptionLabel.text = "\(self.transactions?[indexPath.row].firstName ?? "") Sent Money To You"
+                            let info = "\"\(self.transactions?[indexPath.row].firstName ?? "")\" Sent Money To You"
+                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: info)
+                            attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].firstName ?? "")\"", fontSize : 13)
+                            cell.descriptionLabel.attributedText = attributedString
                         }
                         else{
-                            cell.descriptionLabel.text = "\(self.transactions?[indexPath.row].firstName ?? "") Sent Money To Your Money Request"
+                            let info = "\"\(self.transactions?[indexPath.row].firstName ?? "")\" Sent Money To Your Money Request"
+                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: info)
+                            attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].firstName ?? "")\"", fontSize : 13)
+                            cell.descriptionLabel.attributedText = attributedString
                         }
                     }
                 }
@@ -42,6 +52,7 @@ extension WalletVC : UITableViewDataSource {
                 else if self.transactions?[indexPath.row].status == "2"{
                     
                 }
+                
                 cell.amountLabel.text = "+ $\(Float(self.transactions?[indexPath.row].amount ?? "")?.clean ?? "")"
                 cell.amountLabel.textColor = UIColor(named: "GreenColor")
                 cell.creditLabel.text = "Credit"
@@ -50,36 +61,42 @@ extension WalletVC : UITableViewDataSource {
             else{
                 if self.transactions?[indexPath.row].status == "3"{
                     if self.transactions?[indexPath.row].orderID != "0"{
-                        cell.descriptionLabel.text = "You Bought Event \(self.transactions?[indexPath.row].name ?? "") Tickets"
+                        let info = "You Bought Event \"\(self.transactions?[indexPath.row].name ?? "")\" Tickets"
+                        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: info)
+                        attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].name ?? "")\"", fontSize : 13)
+                        cell.descriptionLabel.attributedText = attributedString
                     }
                     else if self.transactions?[indexPath.row].requestID != "0"{
                         if self.transactions?[indexPath.row].type == "1"{
-                            cell.descriptionLabel.text = "You Transferred Money To \(self.transactions?[indexPath.row].firstName ?? "")"
+                            let info = "You Transferred Money To \"\(self.transactions?[indexPath.row].firstName ?? "")\""
+                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: info)
+                            attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].firstName ?? "")\"", fontSize : 13)
+                            cell.descriptionLabel.attributedText = attributedString
                         }
                         else{
-                            cell.descriptionLabel.text = "You Sent Money To \(self.transactions?[indexPath.row].firstName ?? "") Money Request"
+                            let info = "You Sent Money To \"\(self.transactions?[indexPath.row].firstName ?? "")\" Money Request"
+                            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: info)
+                            attributedString.setBoldColor(color: UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1), forText: "\"\(self.transactions?[indexPath.row].firstName ?? "")\"", fontSize : 13)
+                            cell.descriptionLabel.attributedText = attributedString
                         }
                     }
-                    
                 }
                 cell.amountLabel.text = "- $\(Float(self.transactions?[indexPath.row].amount ?? "")?.clean ?? "")"
                 cell.amountLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
                 cell.creditLabel.text = "Debit"
                 cell.creditLabel.textColor = UIColor(red: 239/255, green: 67/255, blue: 67/255, alpha: 1)
             }
-        }*/
+        }
         return cell
     }
 }
 
-//MARK:- Extensions
-
 extension WalletVC : UITableViewDelegate {
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     _ = self.pushVC("TransactionDetailVC")
-     }
-     */
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }
+
 extension WalletVC : GetWalletAmountDelegate
 {
     func didRecieveDataUpdate(data: GetWalletAmount)
@@ -123,12 +140,11 @@ extension WalletVC : TransactionHistoryDelegate
             else{
                 self.transactions = data.data ?? []
             }
-            tableViewTransactions.reloadData()
-
+            tableViewTransactions.reloadArticleData{}
+            
         }
         else
         {
-            
             if data.message == "Data not found" && currentPage-1 >= 1{
                 print("No data at page No : \(currentPage-1)")
                 currentPage = currentPage-1
@@ -138,7 +154,6 @@ extension WalletVC : TransactionHistoryDelegate
                 transactionsView.alpha = 1
             }
             tableViewTransactions.reloadData()
-
         }
     }
     

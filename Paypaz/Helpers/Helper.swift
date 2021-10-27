@@ -158,12 +158,19 @@ extension UIViewController
 
 extension NSMutableAttributedString
 {
-    func setColor(color: UIColor, forText stringValue: String) {
-        let attrs = [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: 16.0) ?? UIFont.boldSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor : color]
+    func setColor(color: UIColor, forText stringValue: String, fontSize : CGFloat) {
+        let attrs = [NSAttributedString.Key.font : UIFont(name: "Segoe UI", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize), NSAttributedString.Key.foregroundColor : color]
         let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
         //  self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
         self.addAttributes(attrs, range: range)
     }
+    func setBoldColor(color: UIColor, forText stringValue: String, fontSize : CGFloat) {
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: fontSize), NSAttributedString.Key.foregroundColor : color]
+        let range: NSRange = self.mutableString.range(of: stringValue, options: .caseInsensitive)
+        //  self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        self.addAttributes(attrs, range: range)
+    }
+
 }
 
 extension Float {

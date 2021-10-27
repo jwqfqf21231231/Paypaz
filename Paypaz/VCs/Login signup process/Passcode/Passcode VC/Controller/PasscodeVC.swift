@@ -83,6 +83,7 @@ extension PasscodeVC : PasscodeDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
+            UserDefaults.standard.setUserID(value: data.data?.id ?? "")
             _ = self.pushVC("SideDrawerBaseVC")
         }
         else

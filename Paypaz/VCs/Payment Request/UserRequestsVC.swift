@@ -25,11 +25,21 @@ class UserRequestsVC: UIViewController {
     var currentPage = 1
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getRequests()
+        userID = UserDefaults.standard.getUserID()
+        NotificationCenter.default.addObserver(self, selector: #selector(showPopupForPaymentSuccess(notification:)), name: NSNotification.Name("ShowPopUp"), object: nil)
+    }
+    func getRequests(){
         Connection.svprogressHudShow(view: self)
         dataSource.delegate = self
         dataSource.pageNo = "0"
         dataSource.getPaymentRequests()
-        userID = UserDefaults.standard.getUserID()
+    }
+    @objc func showPopupForPaymentSuccess(notification: Notification)
+    {
+        self.getRequests()
+        let message = notification.userInfo?["Message"] as? String ?? ""
+        self.view.makeToast(message)
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
@@ -110,45 +120,82 @@ extension UserRequestsVC : UITableViewDataSource{
         cell.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         let url =  APIList().getUrlString(url: .USERIMAGE)
         cell.userImage.sd_setImage(with: URL(string: url+(userRequest[indexPath.row].userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
-            //cell.amountLabel.text = "$\(((userRequest[indexPath.row].amount ?? "") as NSString?)?.integerValue ?? 0)"
         cell.amountLabel.text = "$\(Float(userRequest[indexPath.row].amount ?? "")?.clean ?? "")"
         DispatchQueue.main.async {
-            
-            if self.userRequest[indexPath.row].status == "0"{
-                if self.userRequest[indexPath.row].senderID == self.userID {
+            if self.userRequest[indexPath.row].senderID == self.userID{
+                if self.userRequest[indexPath.row].status == "0"{
                     if self.userRequest[indexPath.row].receiverID == "0"{
                         cell.nameLabel.text = (self.userRequest[indexPath.row].name ?? "")
+                        
                     }
                     else{
                         cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
                     }
                     cell.payAmountButton.setTitle("Money Request Sent", for: .normal)
                     cell.payAmountButton.backgroundColor = UIColor(red: 21/255, green: 198/255, blue: 177/255, alpha: 1)
-                    cell.isUserInteractionEnabled = false
+                    cell.payAmountButton.setImage(nil, for: .normal)
+                    
                 }
                 else{
+                    cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
+                    
+                    cell.payAmountButton.setTitle("Money Received", for: .normal)
+                    cell.payAmountButton.backgroundColor = UIColor(named:"GreenColor")
+                    cell.payAmountButton.setImage(UIImage(named:"tick_white"), for: .normal)
+                }
+                cell.isUserInteractionEnabled = false
+            }
+            else{
+                if self.userRequest[indexPath.row].status == "0"{
                     cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
                     cell.payAmountButton.setTitle("Pay Money", for: .normal)
                     cell.payAmountButton.backgroundColor = .blue
                     cell.isUserInteractionEnabled = true
-                }
-                cell.payAmountButton.setImage(nil, for: .normal)
-            }
-            else{
-
-                if self.userRequest[indexPath.row].senderID == self.userID {
-                    cell.payAmountButton.setTitle("Money Received", for: .normal)
+                    cell.payAmountButton.setImage(nil, for: .normal)
+                    
                 }
                 else{
                     cell.payAmountButton.setTitle("Money Sent", for: .normal)
+                    cell.payAmountButton.backgroundColor = UIColor(named:"GreenColor")
+                    cell.payAmountButton.setImage(UIImage(named:"tick_white"), for: .normal)
+                    cell.isUserInteractionEnabled = false
+                    cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
                 }
-                cell.payAmountButton.backgroundColor = UIColor(named:"GreenColor")
-                cell.payAmountButton.setImage(UIImage(named:"tick_white"), for: .normal)
-                cell.isUserInteractionEnabled = false
-                cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
             }
+            /*if self.userRequest[indexPath.row].status == "0"{
+             if self.userRequest[indexPath.row].senderID == self.userID {
+             if self.userRequest[indexPath.row].receiverID == "0"{
+             cell.nameLabel.text = (self.userRequest[indexPath.row].name ?? "")
+             }
+             else{
+             cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
+             }
+             cell.payAmountButton.setTitle("Money Request Sent", for: .normal)
+             cell.payAmountButton.backgroundColor = UIColor(red: 21/255, green: 198/255, blue: 177/255, alpha: 1)
+             cell.isUserInteractionEnabled = false
+             }
+             else{
+             cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
+             cell.payAmountButton.setTitle("Pay Money", for: .normal)
+             cell.payAmountButton.backgroundColor = .blue
+             cell.isUserInteractionEnabled = true
+             }
+             cell.payAmountButton.setImage(nil, for: .normal)
+             }
+             else{
+             
+             if self.userRequest[indexPath.row].senderID == self.userID {
+             cell.payAmountButton.setTitle("Money Received", for: .normal)
+             }
+             else{
+             cell.payAmountButton.setTitle("Money Sent", for: .normal)
+             }
+             cell.payAmountButton.backgroundColor = UIColor(named:"GreenColor")
+             cell.payAmountButton.setImage(UIImage(named:"tick_white"), for: .normal)
+             cell.isUserInteractionEnabled = false
+             cell.nameLabel.text = (self.userRequest[indexPath.row].firstName ?? "") + " " + (self.userRequest[indexPath.row].lastName ?? "")
+             }*/
         }
-        
         
         cell.payAmountButton.tag = indexPath.row
         cell.payAmountButton.addTarget(self, action: #selector(payAction(_:)), for: .touchUpInside)
