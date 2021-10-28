@@ -13,7 +13,6 @@ class WalletVC : CustomViewController {
     @IBOutlet weak var tableViewTransactions : UITableView! {
         didSet {
             self.tableViewTransactions.dataSource = self
-            self.tableViewTransactions.delegate   = self
         }
     }
     
@@ -26,9 +25,9 @@ class WalletVC : CustomViewController {
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        transactionsView.alpha = 1
         dataSource.getWalletAmountDelegate = self
         dataSource.transactionHistoryDelegate = self
+        transactionsView.alpha = 1
         loadWalletAmount()
         loadTransactionDetails()
     }
@@ -46,7 +45,6 @@ class WalletVC : CustomViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_PayRequest(_ sender:UIButton) {
-        // _ = self.pushToVC("ContactListVC")
         _ = self.pushVC("PaymentTypeVC")
     }
     @IBAction func btn_AddMoney(_ sender:UIButton) {
@@ -61,10 +59,6 @@ class WalletVC : CustomViewController {
                 vc.delegate = self
             }
         }
-        
-        //        if let popupVC = self.presentPopUpVC("AddMoneyPopupVC", animated: true) as? AddMoneyPopupVC {
-        //            popupVC.delegate = self
-        //        }
     }
     
     @IBAction func btn_SendToBank(_ sender:UIButton) {
@@ -94,17 +88,6 @@ extension WalletVC : PopUpScreenDelegate{
     }
 }
 extension WalletVC : AddMoneyPopupDelegate {
-    /*func isSelectedType(bank: Bool,amount:String) {
-     if bank {
-     if let vc = self.pushVC("AddBankDetailsVC") as? AddBankDetailsVC{
-     vc.amountToAdd = amount
-     }
-     } else {
-     if let vc = self.pushVC("AddCardDetailsVC") as? AddCardDetailsVC{
-     vc.amountToAdd = amount
-     }
-     }
-     }*/
     func loadWallet() {
         self.currentPage = 1
         self.loadWalletAmount()

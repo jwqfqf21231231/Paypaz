@@ -104,8 +104,6 @@ class HostEventVC : UIViewController {
             dataSource2.delegate = self
             dataSource2.eventID = self.eventID
             dataSource2.getEvent()
-            
-            
         }
         self.txt_StartDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
         self.txt_EndDate.addTarget(self, action: #selector(callDatePicker(field:)), for: .editingDidBegin)
@@ -534,6 +532,17 @@ extension HostEventVC : UITextFieldDelegate
             txt_Price.isHidden = false
         }
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == txt_Price{
+            if string.isEmpty { return true }
+            
+            let currentText = textField.text ?? ""
+            let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return replacementText.isValidDouble(maxDecimalPlaces: 2)
+        }
+        return true
+    }
 }
 extension HostEventVC : HostEventDataModelDelegate
 {
@@ -638,7 +647,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 else{
                     self.btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
                     self.btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
-                    self.txt_Price.text = "\(((data.data?.price)! as NSString).integerValue)"
+                    self.txt_Price.text = Float(data.data?.price ?? "")?.clean
                     self.paymentType = data.data?.paymentType ?? " "
                 }
                 

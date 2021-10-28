@@ -119,7 +119,7 @@ extension AddEventProductsVC : UITableViewDataSource,UITableViewDelegate {
         }
         cell.lbl_ProductName.text = productArr[indexPath.row]["name"] as? String
         cell.lbl_Description.text = productArr[indexPath.row]["description"] as? String
-        cell.lbl_Price.text = productArr[indexPath.row]["isPaid"] as! String == "0" ? "Free" : "$\((productArr[indexPath.row]["price"] as! NSString).integerValue)"
+        cell.lbl_Price.text = productArr[indexPath.row]["isPaid"] as! String == "0" ? "Free" : "$\(Float(productArr[indexPath.row]["price"] as! String)?.clean ?? "")"
         cell.btn_Delete.tag = indexPath.row
         if isEdit ?? false{
             cell.btn_Edit.isHidden = false

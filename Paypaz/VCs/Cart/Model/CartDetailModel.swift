@@ -31,7 +31,7 @@ struct Product: Codable {
     let id, orderID, eventID, productID: String?
     let productPrice, productQty, productQtyPrice, status: String?
     let createdDate, updatedDate, name, image: String?
-    var updatedProductPrice :Int?
+    var updatedProductPrice :Float?
 }
 
 struct UpdatedCartInfo{

@@ -122,7 +122,7 @@ extension EventDetailVC : MyPostedEventDataModelDelegate
                     self.lbl_Price.text = "Free"
                 }
                 else{
-                    self.lbl_Price.text = "$\(((data.data?.price!)! as NSString).integerValue)"
+                    self.lbl_Price.text = "$\(Float(data.data?.price ?? "")?.clean ?? "")"
                 }
                 self.lbl_Description.text = data.data?.dataDescription
                 self.lbl_HostName.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")

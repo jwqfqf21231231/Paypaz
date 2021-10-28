@@ -18,7 +18,6 @@ class AddMoneyPopupVC  : UIViewController {
     weak var delegate : AddMoneyPopupDelegate?
     weak var successDelegate : BuyEventThruCardDelegate?
     var cartInfo : UpdatedCartInfo?
-    //var selectedType  : AddMoneyType?
     var maxLength = 3
     var cardID = ""
     var cardNumber = ""
@@ -211,9 +210,7 @@ extension AddMoneyPopupVC : UITextFieldDelegate{
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == txt_AmountToAdd{
-            
-        }
+        
         let enteredCharString = "\(textField.text ?? "")\(string )"
         let currentString: NSString = textField.text! as NSString
         let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
@@ -233,7 +230,6 @@ extension AddMoneyPopupVC : UITextFieldDelegate{
 
             return replacementText.isValidDouble(maxDecimalPlaces: 2)
         }
-//        return true
     }
 }
 

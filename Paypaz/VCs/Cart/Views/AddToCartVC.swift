@@ -28,10 +28,10 @@ class AddToCartVC : CustomViewController {
     }
     var cartItemProducts = [Product]()
     let dataSource = MyPostedEventDataModel()
-    var eventPrice = 0
-    var productPrice = 0
-    var totalPrice = 0
-    var eventOriginalPrice : Int?
+    var eventPrice:Float = 0.0
+    var productPrice:Float = 0.0
+    var totalPrice:Float = 0.0
+    var eventOriginalPrice : Float?
     var productDict = [String:String]()
     var productsArray = [[String:String]]()
     @IBOutlet weak var img_EventPic : UIImageView!
@@ -99,7 +99,7 @@ class AddToCartVC : CustomViewController {
             for i in 0..<products.count{
                 productPrice += products[i].updatedProductPrice
             }
-            self.lbl_ProductPrice.text = "$\(productPrice)"
+            self.lbl_ProductPrice.text = "$\(productPrice.clean)"
             calculateTotalPrice()
         }
         else{
@@ -107,21 +107,16 @@ class AddToCartVC : CustomViewController {
             for i in 0..<cartItemProducts.count{
                 productPrice += cartItemProducts[i].updatedProductPrice ?? 0
             }
-            self.lbl_ProductPrice.text = "$\(productPrice)"
+            self.lbl_ProductPrice.text = "$\(productPrice.clean)"
             calculateTotalPrice()
         }
     }
     func calculateTotalPrice(){
         self.totalPrice = (eventPrice+productPrice)
-        lbl_TotalPrice.text = "$\(eventPrice+productPrice)"
+        lbl_TotalPrice.text = "$\(totalPrice.clean)"
         self.updatedCartInfo?.subTotal = "\(Double(self.totalPrice))"
         self.updatedCartInfo?.grandTotal = "\(Double(self.totalPrice))"
     }
-    /* override func viewDidLayoutSubviews() {
-     super.viewDidLayoutSubviews()
-     
-     self.tableView_Height.constant = CGFloat(self.products.count * 135)
-     }*/
     
     func getEvent()
     {
@@ -198,7 +193,7 @@ class AddToCartVC : CustomViewController {
         }
     }
     @IBAction func btn_IncreaseEvent(_ sender:UIButton){
-        var count = (lbl_EventCount.text! as NSString).integerValue
+        var count = Float(lbl_EventCount.text ?? "") ?? 0.0
         if sender.tag == 0{
             if count > 0{
                 count = count-1
@@ -207,10 +202,10 @@ class AddToCartVC : CustomViewController {
         else{
             count = count+1
         }
-        lbl_EventCount.text = "\(count)"
+        lbl_EventCount.text = "\(Int(count))"
         eventPrice = (eventOriginalPrice ?? 0) * count
-        lbl_EventPrice.text = "$\(eventPrice)"
-        self.updatedCartInfo?.eventQty = "\(count)"
+        lbl_EventPrice.text = "$\(eventPrice.clean)"
+        self.updatedCartInfo?.eventQty = "\(Int(count))"
         self.updatedCartInfo?.eventPrice = "\(Double(eventPrice))"
         self.calculateTotalPrice()
     }

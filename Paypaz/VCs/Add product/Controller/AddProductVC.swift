@@ -13,7 +13,7 @@ protocol AddProductDelegate : class {
     func isAddedProduct(data:MyProducts?,productId :String)
 }
 typealias DataCallback = ([String:Any]) -> Void
-class AddProductVC : CustomViewController {
+class AddProductVC : UIViewController {
     var callback : DataCallback?
     //var createdProductData : ((_ productImage:UIImage,_ price:String,_ name:String,_ description:String) -> Void)?
     var isEdit : Bool?
@@ -30,7 +30,11 @@ class AddProductVC : CustomViewController {
     @IBOutlet weak var lbl_Title : UILabel!
     @IBOutlet weak var img_ProductPic : UIImageView!
     @IBOutlet weak var txt_ProductName : RoundTextField!
-    @IBOutlet weak var txt_ProductPrice : RoundTextField!
+    @IBOutlet weak var txt_ProductPrice : RoundTextField!{
+        didSet{
+            txt_ProductPrice.delegate = self
+        }
+    }
     @IBOutlet weak var txt_ProductQuantity : RoundTextField!
     @IBOutlet weak var txt_Description : RoundTextView!
     @IBOutlet weak var btn_Free : UIButton!
@@ -180,7 +184,7 @@ extension AddProductVC : ProductDetailsDataModelDelegate
             else{
                 btn_Free.setImage(UIImage(named: "white_circle"), for: .normal)
                 btn_Paid.setImage(UIImage(named: "blue_tick"), for: .normal)
-                self.txt_ProductPrice.text = "\(((data.data?.price)! as NSString).integerValue)"
+                self.txt_ProductPrice.text = "\(Float(data.data?.price ?? "")?.clean ?? "")"
                 self.txt_ProductPrice.isHidden = false
             }
             self.paymentStatus = data.data?.isPaid ?? ""
@@ -216,7 +220,7 @@ extension AddProductVC : AddProductDataModelDelegate
         if data.success == 1
         {
             guard let callback = self.callback else { return }
-            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":txt_ProductPrice.text!,"productDescription":txt_Description.text!,"productID":data.data?.id ?? "","isPaid":data.data?.isPaid ?? ""])
+            callback(["productImage":img_ProductPic.image!,"productName":txt_ProductName.text!,"productPrice":Float(txt_ProductPrice.text!)?.clean ?? "","productDescription":txt_Description.text!,"productID":data.data?.id ?? "","isPaid":data.data?.isPaid ?? ""])
             self.dismiss(animated: false)
         }
         else
@@ -267,5 +271,19 @@ extension AddProductVC : EditProductDataModelDelegate
         {
             self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
         }
+    }
+}
+
+extension AddProductVC : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == txt_ProductPrice{
+            if string.isEmpty { return true }
+            
+            let currentText = textField.text ?? ""
+            let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            
+            return replacementText.isValidDouble(maxDecimalPlaces: 2)
+        }
+        return true
     }
 }

@@ -147,7 +147,7 @@ class RequestPayAmountVC : UIViewController {
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddMoneyPopupVC") as? AddMoneyPopupVC{
                     vc.successDelegate = self
                     vc.buyTicket = true
-                    vc.totalAmount = Float(amountTxt.text ?? "")//((amountTxt.text ?? "") as NSString).integerValue
+                    vc.totalAmount = Float(amountTxt.text ?? "")
                     vc.modalPresentationStyle = .overCurrentContext
                     self.present(vc, animated: false, completion: nil)
                 }

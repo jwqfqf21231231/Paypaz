@@ -70,8 +70,8 @@ extension BuyEventVC : UITableViewDataSource {
         cell.img_event.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].image ?? "")), placeholderImage: UIImage(named: "event_img"))
         cell.txt_eventName.text = filteredEventData[indexPath.row].name
         cell.txt_personName.text = (filteredEventData[indexPath.row].firstName ?? "")+" "+(filteredEventData[indexPath.row].lastName ?? "")
-        let price = (filteredEventData[indexPath.row].price! as NSString).integerValue
-        if price < 1{
+        let price = Float(filteredEventData[indexPath.row].price ?? "")?.clean ?? ""
+        if price == "0"{
             cell.txt_eventPrice.text = "Free"
         }
         else{
