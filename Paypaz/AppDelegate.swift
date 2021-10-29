@@ -72,6 +72,28 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
         print("====fail to register notifications=====")
         print(error.localizedDescription)
     }
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                        didReceive response: UNNotificationResponse,
+                                        withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+//        if let messageID = userInfo[gcmMessageIDKey] {
+//            print("Message ID: \(messageID)")
+//        }
+
+        // Print full message.
+        print(userInfo)
+        
+//        let storyBoard: UIStoryboard = UIStoryboard(name: "yourStoryboardName", bundle: nil)
+//        let presentViewController = storyBoard.instantiateViewController(withIdentifier: "yourViewControllerStoryboardID") as! YourViewController
+            
+//        presentViewController.yourDict = userInfo //pass userInfo data to viewController
+//        self.window?.rootViewController = presentViewController
+//        presentViewController.present(presentViewController, animated: true, completion: nil)
+
+        completionHandler()
+    }
+    
 }
 /*extension AppDelegate : UNUserNotificationCenterDelegate{
     func registerForPushNotifications()

@@ -26,18 +26,20 @@ class ProductDetailVC : CustomViewController {
         super.viewDidLoad()
         dataSource.delegate = self
         getProductDetails()
-        // Do any additional setup after loading the view.
     }
+    
     private func getProductDetails()
     {
         Connection.svprogressHudShow(view: self)
         dataSource.productID = self.productID
         dataSource.getProductDetails()
     }
+    
     //MARK:- --- Action ---
     @IBAction func btn_back (_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func btn_Share(_ sender:UIButton){
         postshareLink(profile_URL: "The text that i want to share")
     }
@@ -63,7 +65,7 @@ extension ProductDetailVC : ProductDetailsDataModelDelegate
                 self.lbl_ProductPrice.text = "Price : Free"
             }
             else{
-                self.lbl_ProductPrice.text = "Price : $\(((data.data?.price!)! as NSString).integerValue)"
+                self.lbl_ProductPrice.text = "Price : $\(Float(data.data?.price ?? "")?.clean ?? "")"
             }
             self.lbl_ProductQuantity.text = data.data?.quantity ?? ""
         }

@@ -4971,13 +4971,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Products from &quot;Event&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3n-Iv-jbU">
-                                <rect key="frame" x="20.5" y="113" width="373" height="24"/>
-                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="18"/>
+                                <rect key="frame" x="20.5" y="113" width="373" height="21.5"/>
+                                <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.22745098039215686" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PqK-N6-YnV">
-                                <rect key="frame" x="20.5" y="157" width="373" height="705"/>
+                                <rect key="frame" x="20.5" y="154.5" width="373" height="707.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AllProductsCell" rowHeight="138.5" id="aGC-Fg-nzG" customClass="AllProductsCell" customModule="Paypaz" customModuleProvider="target">
@@ -5717,7 +5717,7 @@
                                 <rect key="frame" x="20.5" y="166.5" width="373" height="573"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fk6-wm-rVH" userLabel="Content View" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="1015.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="934.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EbC-4Q-r1T" userLabel="Spacer View1">
                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="50"/>
@@ -5727,14 +5727,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38X-xd-WIU" userLabel="Spacer View2">
-                                                <rect key="frame" x="0.0" y="965.5" width="373" height="50"/>
+                                                <rect key="frame" x="0.0" y="884.5" width="373" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="999" constant="50" id="Ckc-eI-H23"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvV-i8-VkK">
-                                                <rect key="frame" x="0.0" y="0.0" width="373" height="1015.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="373" height="934.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2s7-C4-zm1" userLabel="Line View1">
                                                         <rect key="frame" x="0.0" y="501.5" width="373" height="1"/>
@@ -5815,7 +5815,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="06a-ag-K44">
-                                                        <rect key="frame" x="19" y="191.5" width="335" height="804"/>
+                                                        <rect key="frame" x="19" y="191.5" width="335" height="723"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qta-Lc-11F" userLabel="QR code View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="233"/>
@@ -5970,8 +5970,8 @@
                                                                     <action selector="btn_PayByPaypaz:" destination="Dcq-VM-bcv" eventType="touchUpInside" id="k6q-A6-kWT"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fni-qw-y8N" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="667" width="335" height="56"/>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fni-qw-y8N" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="654.5" width="335" height="56"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="fni-qw-y8N" secondAttribute="height" multiplier="6:1" id="eFf-kA-yfr"/>
                                                                 </constraints>
@@ -5999,7 +5999,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCV-3h-4O3" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="748" width="335" height="56"/>
+                                                                <rect key="frame" x="0.0" y="667" width="335" height="56"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="pCV-3h-4O3" secondAttribute="height" multiplier="6:1" id="0xM-a7-BJo"/>
                                                                 </constraints>
@@ -10003,7 +10003,7 @@ More</string>
                                 <rect key="frame" x="20" y="275.5" width="374" height="586.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qs-UH-vVz" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="434.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="394.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpa-hT-LMo">
                                                 <rect key="frame" x="15" y="20" width="111.5" height="23"/>
@@ -10012,22 +10012,22 @@ More</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWZ-k3-iEI">
-                                                <rect key="frame" x="15" y="58" width="102" height="21.5"/>
+                                                <rect key="frame" x="15" y="48" width="102" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" name="BlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sen-kK-TPl">
-                                                <rect key="frame" x="15" y="94.5" width="93.5" height="23"/>
+                                                <rect key="frame" x="15" y="84.5" width="93.5" height="23"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EqP-JK-StD" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                <rect key="frame" x="275.5" y="59.5" width="90.5" height="40"/>
+                                                <rect key="frame" x="265.5" y="50.5" width="100.5" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Price : $56" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWc-LV-Ogz">
-                                                        <rect key="frame" x="10" y="10" width="70.5" height="20"/>
+                                                        <rect key="frame" x="15" y="9" width="70.5" height="20"/>
                                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="15"/>
                                                         <color key="textColor" red="0.98431372549999996" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -10035,10 +10035,10 @@ More</string>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.99215686274509807" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="WWc-LV-Ogz" secondAttribute="bottom" constant="10" id="2Yp-BX-df0"/>
-                                                    <constraint firstAttribute="trailing" secondItem="WWc-LV-Ogz" secondAttribute="trailing" constant="10" id="bdV-Es-dTt"/>
-                                                    <constraint firstItem="WWc-LV-Ogz" firstAttribute="top" secondItem="EqP-JK-StD" secondAttribute="top" constant="10" id="oOE-m7-Sya"/>
-                                                    <constraint firstItem="WWc-LV-Ogz" firstAttribute="leading" secondItem="EqP-JK-StD" secondAttribute="leading" constant="10" id="vzs-Dr-Ubi"/>
+                                                    <constraint firstAttribute="bottom" secondItem="WWc-LV-Ogz" secondAttribute="bottom" constant="9" id="2Yp-BX-df0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="WWc-LV-Ogz" secondAttribute="trailing" constant="15" id="bdV-Es-dTt"/>
+                                                    <constraint firstItem="WWc-LV-Ogz" firstAttribute="top" secondItem="EqP-JK-StD" secondAttribute="top" constant="9" id="oOE-m7-Sya"/>
+                                                    <constraint firstItem="WWc-LV-Ogz" firstAttribute="leading" secondItem="EqP-JK-StD" secondAttribute="leading" constant="15" id="vzs-Dr-Ubi"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -10047,31 +10047,31 @@ More</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Of The Event" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lch-Io-sKZ">
-                                                <rect key="frame" x="15" y="132.5" width="336.5" height="21.5"/>
+                                                <rect key="frame" x="15" y="112.5" width="336.5" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" name="BlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AJ-wE-y7H">
-                                                <rect key="frame" x="15" y="169" width="132.5" height="23"/>
+                                                <rect key="frame" x="15" y="149" width="132.5" height="23"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.22745098039215686" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cpg-Fg-eFe">
-                                                <rect key="frame" x="15" y="207" width="9" height="21.5"/>
+                                                <rect key="frame" x="15" y="177" width="9" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" name="BlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGu-5n-iPY">
-                                                <rect key="frame" x="18.5" y="243.5" width="337" height="23"/>
+                                                <rect key="frame" x="18.5" y="213.5" width="337" height="23"/>
                                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwh-3w-6qj">
-                                                <rect key="frame" x="18.5" y="281.5" width="337" height="128"/>
+                                                <rect key="frame" x="18.5" y="241.5" width="337" height="128"/>
                                                 <string key="text">Duis eget dui et turpis vestibulum sodales. Praesent sed gravida augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis erat lacus, feugiat eget sem sit amet, euismod commodo neque. Maecenas euismod dictum... </string>
                                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
                                                 <color key="textColor" name="BlueColor"/>
@@ -10083,7 +10083,7 @@ More</string>
                                             <constraint firstItem="7AJ-wE-y7H" firstAttribute="top" secondItem="Lch-Io-sKZ" secondAttribute="bottom" constant="15" id="2Cb-mu-ytf"/>
                                             <constraint firstItem="sen-kK-TPl" firstAttribute="leading" secondItem="AWZ-k3-iEI" secondAttribute="leading" id="5at-K8-FpB"/>
                                             <constraint firstItem="CGu-5n-iPY" firstAttribute="centerX" secondItem="2Qs-UH-vVz" secondAttribute="centerX" id="8eo-eJ-lzV"/>
-                                            <constraint firstItem="AWZ-k3-iEI" firstAttribute="top" secondItem="rpa-hT-LMo" secondAttribute="bottom" constant="15" id="EWb-k1-eDl"/>
+                                            <constraint firstItem="AWZ-k3-iEI" firstAttribute="top" secondItem="rpa-hT-LMo" secondAttribute="bottom" constant="5" id="EWb-k1-eDl"/>
                                             <constraint firstItem="CGu-5n-iPY" firstAttribute="width" secondItem="2Qs-UH-vVz" secondAttribute="width" multiplier="0.9" id="HG5-0o-EGR"/>
                                             <constraint firstItem="Wwh-3w-6qj" firstAttribute="width" secondItem="CGu-5n-iPY" secondAttribute="width" id="JWu-mS-nhA"/>
                                             <constraint firstItem="Cpg-Fg-eFe" firstAttribute="leading" secondItem="7AJ-wE-y7H" secondAttribute="leading" id="Leb-eF-eEn"/>
@@ -10094,11 +10094,11 @@ More</string>
                                             <constraint firstAttribute="bottom" secondItem="Wwh-3w-6qj" secondAttribute="bottom" constant="25" id="RBa-Yw-xQQ"/>
                                             <constraint firstItem="rpa-hT-LMo" firstAttribute="top" secondItem="2Qs-UH-vVz" secondAttribute="top" constant="20" id="VbD-x6-vb7"/>
                                             <constraint firstItem="rpa-hT-LMo" firstAttribute="leading" secondItem="2Qs-UH-vVz" secondAttribute="leading" constant="15" id="YkP-Nq-7hQ"/>
-                                            <constraint firstItem="Cpg-Fg-eFe" firstAttribute="top" secondItem="7AJ-wE-y7H" secondAttribute="bottom" constant="15" id="YpG-nw-vM2"/>
+                                            <constraint firstItem="Cpg-Fg-eFe" firstAttribute="top" secondItem="7AJ-wE-y7H" secondAttribute="bottom" constant="5" id="YpG-nw-vM2"/>
                                             <constraint firstItem="EqP-JK-StD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AWZ-k3-iEI" secondAttribute="trailing" constant="8" id="anp-Ca-v9u"/>
                                             <constraint firstItem="AWZ-k3-iEI" firstAttribute="leading" secondItem="rpa-hT-LMo" secondAttribute="leading" id="daW-ME-iEt"/>
-                                            <constraint firstItem="Lch-Io-sKZ" firstAttribute="top" secondItem="sen-kK-TPl" secondAttribute="bottom" constant="15" id="fXu-nz-BSg"/>
-                                            <constraint firstItem="Wwh-3w-6qj" firstAttribute="top" secondItem="CGu-5n-iPY" secondAttribute="bottom" constant="15" id="kwG-zY-0xI"/>
+                                            <constraint firstItem="Lch-Io-sKZ" firstAttribute="top" secondItem="sen-kK-TPl" secondAttribute="bottom" constant="5" id="fXu-nz-BSg"/>
+                                            <constraint firstItem="Wwh-3w-6qj" firstAttribute="top" secondItem="CGu-5n-iPY" secondAttribute="bottom" constant="5" id="kwG-zY-0xI"/>
                                             <constraint firstItem="7AJ-wE-y7H" firstAttribute="leading" secondItem="Lch-Io-sKZ" secondAttribute="leading" id="nMb-bv-ZFj"/>
                                             <constraint firstItem="EqP-JK-StD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sen-kK-TPl" secondAttribute="trailing" constant="8" id="oO5-Gm-nqx"/>
                                             <constraint firstItem="Lch-Io-sKZ" firstAttribute="width" secondItem="Wwh-3w-6qj" secondAttribute="width" id="r4X-z4-kv5"/>
@@ -12097,7 +12097,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeA-Rj-X4d">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="319.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="325.5"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sa3-GQ-8j1">
                                         <rect key="frame" x="0.0" y="36.5" width="49.5" height="49.5"/>
@@ -12118,24 +12118,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="15"/>
+                                                <real key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jenney Taylor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2t-Ig-O31">
-                                        <rect key="frame" x="83" y="236" width="248" height="24"/>
+                                        <rect key="frame" x="83" y="245" width="248" height="24"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="18"/>
                                         <color key="textColor" name="BlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOB: 03-jan-1994" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdx-Uq-zpr">
-                                        <rect key="frame" x="83" y="262" width="248" height="19"/>
+                                        <rect key="frame" x="83" y="269" width="248" height="19"/>
                                         <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
-                                        <color key="textColor" name="BlueColor"/>
+                                        <color key="textColor" red="0.0" green="0.32156862745098036" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mohali, India" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNO-aq-o0C">
-                                        <rect key="frame" x="83" y="283" width="248" height="21.5"/>
+                                        <rect key="frame" x="83" y="289" width="248" height="21.5"/>
                                         <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                         <color key="textColor" name="GreenColor"/>
                                         <nil key="highlightedColor"/>
@@ -12146,9 +12146,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                     <constraint firstItem="sdx-Uq-zpr" firstAttribute="centerX" secondItem="e2t-Ig-O31" secondAttribute="centerX" id="0p5-KL-7MN"/>
                                     <constraint firstItem="sdx-Uq-zpr" firstAttribute="width" secondItem="e2t-Ig-O31" secondAttribute="width" id="58v-dG-jXo"/>
                                     <constraint firstItem="lNO-aq-o0C" firstAttribute="centerX" secondItem="sdx-Uq-zpr" secondAttribute="centerX" id="7JH-AK-4ub"/>
-                                    <constraint firstItem="lNO-aq-o0C" firstAttribute="top" secondItem="sdx-Uq-zpr" secondAttribute="bottom" constant="2" id="Ezd-dP-iAx"/>
+                                    <constraint firstItem="lNO-aq-o0C" firstAttribute="top" secondItem="sdx-Uq-zpr" secondAttribute="bottom" constant="1" id="Ezd-dP-iAx"/>
                                     <constraint firstItem="lNO-aq-o0C" firstAttribute="width" secondItem="sdx-Uq-zpr" secondAttribute="width" id="H5N-l9-heQ"/>
-                                    <constraint firstItem="sdx-Uq-zpr" firstAttribute="top" secondItem="e2t-Ig-O31" secondAttribute="bottom" constant="2" id="HH3-qT-6ST"/>
+                                    <constraint firstItem="sdx-Uq-zpr" firstAttribute="top" secondItem="e2t-Ig-O31" secondAttribute="bottom" id="HH3-qT-6ST"/>
                                     <constraint firstItem="e2t-Ig-O31" firstAttribute="width" secondItem="WeA-Rj-X4d" secondAttribute="width" multiplier="0.6" id="Uzv-lF-9jc"/>
                                     <constraint firstItem="S0e-RG-Apu" firstAttribute="top" secondItem="sa3-GQ-8j1" secondAttribute="bottom" id="cfL-59-JZ0"/>
                                     <constraint firstItem="sa3-GQ-8j1" firstAttribute="width" secondItem="WeA-Rj-X4d" secondAttribute="width" multiplier="0.12" id="fkF-6c-SSZ"/>
@@ -12156,18 +12156,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                     <constraint firstItem="S0e-RG-Apu" firstAttribute="width" secondItem="WeA-Rj-X4d" secondAttribute="width" multiplier="0.35" id="jh2-K9-7WI"/>
                                     <constraint firstItem="sa3-GQ-8j1" firstAttribute="leading" secondItem="WeA-Rj-X4d" secondAttribute="leading" id="oMK-Xk-1j5"/>
                                     <constraint firstItem="S0e-RG-Apu" firstAttribute="centerX" secondItem="WeA-Rj-X4d" secondAttribute="centerX" id="uy4-ue-cSY"/>
-                                    <constraint firstItem="e2t-Ig-O31" firstAttribute="top" secondItem="S0e-RG-Apu" secondAttribute="bottom" constant="5" id="vCp-jg-Pox"/>
+                                    <constraint firstItem="e2t-Ig-O31" firstAttribute="top" secondItem="S0e-RG-Apu" secondAttribute="bottom" constant="14" id="vCp-jg-Pox"/>
                                     <constraint firstAttribute="bottom" secondItem="lNO-aq-o0C" secondAttribute="bottom" constant="15" id="vD1-ix-nZF"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View All posted Events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZq-Uw-d0I">
-                                <rect key="frame" x="20.5" y="334.5" width="373" height="24"/>
+                                <rect key="frame" x="20.5" y="340.5" width="373" height="24"/>
                                 <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cG-J6-GZd">
-                                <rect key="frame" x="318.5" y="327" width="75" height="39"/>
+                                <rect key="frame" x="318.5" y="333" width="75" height="39"/>
                                 <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="14"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="0.0" maxY="10"/>
                                 <state key="normal" title="View All &gt;">
@@ -12175,7 +12175,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-FV-w2u">
-                                <rect key="frame" x="20.5" y="368.5" width="373" height="503.5"/>
+                                <rect key="frame" x="20.5" y="374.5" width="373" height="497.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyEventsCell" id="csY-TG-5Rq" customClass="MyEventsCell" customModule="Paypaz" customModuleProvider="target">
@@ -12411,7 +12411,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
+                                                <real key="value" value="20"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
@@ -12602,18 +12602,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="8"/>
+                                                                    <real key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAB-YY-5o8">
-                                                            <rect key="frame" x="118" y="12" width="190.5" height="19"/>
-                                                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
+                                                            <rect key="frame" x="118" y="12" width="190.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                                             <color key="textColor" red="0.0" green="0.2274509804" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXM-cG-JoE" customClass="RoundButton" customModule="Paypaz" customModuleProvider="target">
-                                                            <rect key="frame" x="313.5" y="6" width="31.5" height="31.5"/>
+                                                            <rect key="frame" x="313.5" y="7" width="31.5" height="31.5"/>
                                                             <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="MXM-cG-JoE" secondAttribute="height" multiplier="1:1" id="17G-NQ-wpR"/>
@@ -12626,7 +12626,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </userDefinedRuntimeAttributes>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ybt-Wa-HTU" userLabel="Date">
-                                                            <rect key="frame" x="118" y="36" width="227" height="19"/>
+                                                            <rect key="frame" x="118" y="38.5" width="227" height="19"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="23-Jun-2020" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bS5-66-0Q2">
                                                                     <rect key="frame" x="22.5" y="0.0" width="204.5" height="19"/>
@@ -12653,7 +12653,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7a-hQ-GHC" userLabel="Location">
-                                                            <rect key="frame" x="118" y="60" width="227" height="19"/>
+                                                            <rect key="frame" x="118" y="62.5" width="227" height="19"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110 the embers ,san Francisco" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMx-CE-jAJ">
                                                                     <rect key="frame" x="22.5" y="0.0" width="204.5" height="19"/>
@@ -12741,7 +12741,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evf-RD-Zwq">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evf-RD-Zwq">
                                 <rect key="frame" x="0.0" y="302" width="414" height="560"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPR-I6-R1d">
@@ -13396,17 +13396,17 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                 <color key="backgroundColor" name="LightBluish"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyEventsCell" id="H7f-Qa-MuI" customClass="MyEventsCell" customModule="Paypaz" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="373" height="152.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="373" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H7f-Qa-MuI" id="2QW-bq-485">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="152.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="com-hv-eet" customClass="DesignableView" customModule="Paypaz" customModuleProvider="target">
-                                                    <rect key="frame" x="2" y="8" width="370" height="136.5"/>
+                                                    <rect key="frame" x="2" y="8" width="370" height="134"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ticket_img" translatesAutoresizingMaskIntoConstraints="NO" id="07G-qO-pL7" customClass="RoundImage" customModule="Paypaz" customModuleProvider="target">
-                                                            <rect key="frame" x="15" y="15" width="92.5" height="92.5"/>
+                                                            <rect key="frame" x="15" y="15" width="103.5" height="103.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="07G-qO-pL7" secondAttribute="height" multiplier="1:1" id="qcB-ys-d03"/>
                                                             </constraints>
@@ -13417,8 +13417,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name Event NEvent" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNv-xQ-O8n">
-                                                            <rect key="frame" x="115.5" y="15" width="211" height="21.5"/>
-                                                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                            <rect key="frame" x="126.5" y="15" width="200" height="21.5"/>
+                                                            <fontDescription key="fontDescription" name="SegoeUI-Semibold" family="Segoe UI" pointSize="16"/>
                                                             <color key="textColor" name="BlueColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -13430,7 +13430,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             <state key="normal" image="dots"/>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5o-nj-1ZQ" userLabel="Date View">
-                                                            <rect key="frame" x="115.5" y="41.5" width="249.5" height="21.5"/>
+                                                            <rect key="frame" x="126.5" y="41.5" width="238.5" height="21.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date_range" translatesAutoresizingMaskIntoConstraints="NO" id="LB5-sD-fgS">
                                                                     <rect key="frame" x="0.0" y="1.5" width="18.5" height="18.5"/>
@@ -13439,8 +13439,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="23-Jun-2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koh-CL-E4M">
-                                                                    <rect key="frame" x="23.5" y="0.0" width="226" height="21.5"/>
-                                                                    <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                                    <rect key="frame" x="23.5" y="0.0" width="215" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -13457,18 +13457,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Py-DE-oDc" userLabel="Address View">
-                                                            <rect key="frame" x="115.5" y="68" width="249.5" height="21.5"/>
+                                                            <rect key="frame" x="126.5" y="68" width="238.5" height="19"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="FkH-qO-t9Y">
-                                                                    <rect key="frame" x="0.0" y="1.5" width="18.5" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.5" width="18.5" height="18.5"/>
                                                                     <color key="tintColor" name="GreenColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="FkH-qO-t9Y" secondAttribute="height" multiplier="1:1" id="ssC-w1-ETg"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110 the embers ,san 110 the  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENU-eY-YwM">
-                                                                    <rect key="frame" x="23.5" y="0.0" width="223" height="21.5"/>
-                                                                    <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="16"/>
+                                                                    <rect key="frame" x="23.5" y="0.0" width="212" height="19"/>
+                                                                    <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="14"/>
                                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -13484,11 +13484,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nf2-sv-JDW">
-                                                            <rect key="frame" x="266" y="97" width="94" height="32"/>
+                                                            <rect key="frame" x="278" y="94.5" width="82" height="32"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="3w7-oJ-E0k"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" name="SegoeUI" family="Segoe UI" pointSize="13"/>
                                                             <state key="normal" title="People Invited">
                                                                 <color key="titleColor" name="BlueColor"/>
                                                             </state>
@@ -13496,7 +13496,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="07G-qO-pL7" firstAttribute="width" secondItem="com-hv-eet" secondAttribute="width" multiplier="0.25" id="7lC-Dj-XbX"/>
+                                                        <constraint firstItem="07G-qO-pL7" firstAttribute="width" secondItem="com-hv-eet" secondAttribute="width" multiplier="0.28" id="7lC-Dj-XbX"/>
                                                         <constraint firstItem="FkH-qO-t9Y" firstAttribute="width" secondItem="com-hv-eet" secondAttribute="width" multiplier="0.05" id="8Wo-Hm-eIb"/>
                                                         <constraint firstItem="4Py-DE-oDc" firstAttribute="centerX" secondItem="K5o-nj-1ZQ" secondAttribute="centerX" id="8nM-HP-DkH"/>
                                                         <constraint firstItem="07G-qO-pL7" firstAttribute="top" secondItem="com-hv-eet" secondAttribute="top" constant="15" id="AfQ-jY-jrc"/>
@@ -21930,7 +21930,7 @@ More</string>
             <size key="intrinsicContentSize" width="19.5" height="22"/>
         </designable>
         <designable name="NH1-5U-oa2">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="NOs-4c-gl4">
             <size key="intrinsicContentSize" width="22.5" height="22"/>
@@ -22149,7 +22149,7 @@ More</string>
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="fni-qw-y8N">
-            <size key="intrinsicContentSize" width="206" height="45"/>
+            <size key="intrinsicContentSize" width="191" height="45"/>
         </designable>
         <designable name="fqL-ze-DgO">
             <size key="intrinsicContentSize" width="70" height="30"/>
@@ -22236,7 +22236,7 @@ More</string>
             <size key="intrinsicContentSize" width="-1" height="37.5"/>
         </designable>
         <designable name="lEn-Jk-wmE">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="lIm-I0-aCN">
             <size key="intrinsicContentSize" width="39" height="36"/>
@@ -22296,7 +22296,7 @@ More</string>
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="pCV-3h-4O3">
-            <size key="intrinsicContentSize" width="286" height="45"/>
+            <size key="intrinsicContentSize" width="271" height="45"/>
         </designable>
         <designable name="pHE-zz-F9b">
             <size key="intrinsicContentSize" width="10.5" height="22"/>
@@ -22323,7 +22323,7 @@ More</string>
             <size key="intrinsicContentSize" width="77.5" height="34"/>
         </designable>
         <designable name="rEl-lx-yo8">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="reS-x1-M2l">
             <size key="intrinsicContentSize" width="65" height="36"/>
@@ -22362,7 +22362,7 @@ More</string>
             <size key="intrinsicContentSize" width="91" height="23"/>
         </designable>
         <designable name="uz7-tX-hai">
-            <size key="intrinsicContentSize" width="177.5" height="50.5"/>
+            <size key="intrinsicContentSize" width="167.5" height="50.5"/>
         </designable>
         <designable name="v2o-WO-Jt1">
             <size key="intrinsicContentSize" width="94" height="34"/>
@@ -22374,7 +22374,7 @@ More</string>
             <size key="intrinsicContentSize" width="58.5" height="22"/>
         </designable>
         <designable name="vV3-Pq-FaL">
-            <size key="intrinsicContentSize" width="51" height="21"/>
+            <size key="intrinsicContentSize" width="59" height="21"/>
         </designable>
         <designable name="vl7-J0-1aE">
             <size key="intrinsicContentSize" width="58" height="42"/>
@@ -22392,7 +22392,7 @@ More</string>
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="xUg-cf-Afi">
-            <size key="intrinsicContentSize" width="191" height="45"/>
+            <size key="intrinsicContentSize" width="176" height="45"/>
         </designable>
         <designable name="xqX-hJ-dOc">
             <size key="intrinsicContentSize" width="77" height="31"/>

@@ -31,9 +31,9 @@ class PaymentTypeVC: CustomViewController {
 //        if let req_payAmountVC = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
 //            req_payAmountVC.selectedPaymentType = .global
 //        }
-           if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
-                contacts.isLocalContactSelected = false
-            }
+//           if let contacts = self.pushVC("ContactListVC") as? ContactListVC {
+//                contacts.isLocalContactSelected = false
+//            }
     }
     
     @IBAction func btn_Back(_ sender:UIButton) {

@@ -68,7 +68,7 @@ class AddMoneyPopupVC  : UIViewController {
         getCardsList()
         if buyTicket ?? false{
             self.txt_AmountToAdd.isUserInteractionEnabled = false
-            self.txt_AmountToAdd.text = "\(totalAmount ?? 0)"
+            self.txt_AmountToAdd.text = "\((totalAmount ?? 0)?.clean ?? "")"
             self.submitButton.setTitle("Continue", for: .normal)
         }
     }

@@ -31,7 +31,7 @@ class QRCodeScannerVC : CustomViewController {
     }
     //MARK:-
     @IBAction func btn_back(_ sender:UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @IBAction func btn_flashButon_Clicked() {
@@ -59,6 +59,7 @@ extension QRCodeScannerVC : VerifyContactDelegate{
                 vc.userDetails = ["userPic":data.data?.userProfile ?? "","userName":((data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")), "phoneCode":data.data?.phoneCode ?? "", "phoneNumber":data.data?.phoneNumber ?? ""]
                 vc.receiverID = data.data?.id ?? ""
                 vc.selectedPaymentType = .local
+                vc.scanQRCode = true
                 vc.paypazUser = true
             }
         }

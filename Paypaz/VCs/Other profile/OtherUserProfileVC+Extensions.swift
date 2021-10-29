@@ -54,7 +54,9 @@ extension OtherUserProfileVC : LogInDataModelDelegate
                 let url =  APIList().getUrlString(url: .USERIMAGE)
                 self.img_OtherUserPic.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
                 self.lbl_Country.text = data.data?.state
-                self.lbl_DOB.text = "DOB: \(data.data?.dob ?? "")"
+                let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "DOB: \(data.data?.dob ?? "")")
+                attributedString.setBoldColor(color: UIColor(red: 0/255, green: 82/255, blue: 136/255, alpha: 1), forText: "DOB:", fontSize: 14)
+                self.lbl_DOB.attributedText = attributedString
                 self.lbl_UserName.text = (data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")
             }
         }

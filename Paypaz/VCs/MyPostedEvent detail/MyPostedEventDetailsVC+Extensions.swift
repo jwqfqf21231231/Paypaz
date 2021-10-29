@@ -55,7 +55,7 @@ extension MyPostedEventDetailsVC : UICollectionViewDataSource {
                 cell.lbl_ProductPrice.text = "Free"
             }
             else{
-                cell.lbl_ProductPrice.text = "$\(((products[indexPath.row].price!) as NSString).integerValue)"
+                cell.lbl_ProductPrice.text = "$\(Float(products[indexPath.row].price ?? "")?.clean ?? "")"
             }
             return cell
         }

@@ -55,8 +55,7 @@ class PayAmountVC : CustomViewController {
         self.view_line2.isHidden  = true
         self.view_QRCode.isHidden = true
         dataSource.delegate = self
-        
-        self.totalAmountLabel.text = "$\(totalPrice ?? 0)"
+        self.totalAmountLabel.text = "$\((totalPrice ?? 0)?.clean ?? "")"
         getUserProfile()
     }
     private func updateUI(with type : PayType) {
@@ -70,7 +69,7 @@ class PayAmountVC : CustomViewController {
             self.view_line2.isHidden          = false
             self.btn_Submit.isHidden          = false
             self.btn_PayByPaypaz.isHidden     = true
-            self.btn_PayByQR.isHidden         = true
+            //self.btn_PayByQR.isHidden         = true
             self.btn_PayByBank.isHidden       = true
             
             if type == .BankAcc {
@@ -94,7 +93,7 @@ class PayAmountVC : CustomViewController {
             self.view_line2.isHidden  = true
             self.view_QRCode.isHidden = true
             self.btn_PayByPaypaz.isHidden = false
-            self.btn_PayByQR.isHidden = false
+            //self.btn_PayByQR.isHidden = false
             self.btn_PayByBank.isHidden = false
         }
     }

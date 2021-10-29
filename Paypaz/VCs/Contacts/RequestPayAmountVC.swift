@@ -58,17 +58,13 @@ class RequestPayAmountVC : UIViewController {
     var userDetails : [String:String]?
     var amount : String?
     var selectedPaymentType : PaymentType?
-    var userToken : String?
+    var scanQRCode : Bool?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
         amountTxt.delegate = self
         payNowDataSource.delegate = self
         payRequestDataSource.requestPaymentDelegate = self
-        if userToken != nil{
-            
-        }
-        //self.view_userInfo.alpha = 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,7 +160,17 @@ class RequestPayAmountVC : UIViewController {
     }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton){
-        self.navigationController?.popViewController(animated: true)
+        if scanQRCode == true{
+            for vc in self.navigationController?.viewControllers ?? [] {
+                if let contactlistVC = vc as? ContactListVC {
+                    self.navigationController?.popToViewController(contactlistVC, animated: true)
+                    break
+                }
+            }
+        }
+        else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func requestButton(_ sender:UIButton){
