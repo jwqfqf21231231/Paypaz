@@ -28,19 +28,7 @@ extension ContactListVC : UITableViewDataSource {
 extension ContactListVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //        if self.isLocalContactSelected ?? true {
-        //            if let req_payAmountVC = self.pushToVC("RequestPayAmountVC") as? RequestPayAmountVC {
-        //                req_payAmountVC.selectedPaymentType = .local
-        //            }
-        //        } else {
-        //            if let req_payAmountVC = self.pushToVC("RequestPayAmountVC") as? RequestPayAmountVC {
-        //                req_payAmountVC.selectedPaymentType = .global
-        //            }
-        //        }
-        
-//        self.navigationController?.popViewController(animated: true)
-//        self.delegate?.isSelectedContact(for: self.isRequestingMoney ?? false)
+   
         self.view.endEditing(true)
         self.contactName = (filteredContactDetails[indexPath.row].firstName ?? "") + " " + (filteredContactDetails[indexPath.row].lastName ?? "")
         guard let phoneUtil = NBPhoneNumberUtil.sharedInstance() else {
@@ -75,17 +63,6 @@ extension ContactListVC : VerifyContactDelegate{
                 vc.selectedPaymentType = .local
                 vc.paypazUser = true
             }
-//            if let paymentOption = self.paymentOption{
-//                switch paymentOption {
-//                case .Request:
-//                    if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-//                        popup.delegate = self
-//                        popup.selectedPopupType = .PaymentRequestSent
-//                    }
-//                default:
-//                    _ = self.pushVC("EnterPinVC")
-//                }
-//            }
         }
         else
         {
@@ -94,7 +71,6 @@ extension ContactListVC : VerifyContactDelegate{
                 vc.selectedPaymentType = .local
                 vc.paypazUser = false
             }
-            //self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
         }
     }
     

@@ -25,14 +25,14 @@ struct UserDetails: Codable {
     let deviceToken, deviceType, deviceID, status: String?
     let createdDate, updatedDate, countryCode, phoneCode: String?
     let isNotification, isVerify, isProfile, isPasscode: String?
-    let isPin, isVerifyCard, isLoggedIN, token: String?
+    let isPin, isVerifyCard, isLoggedIN, token, qrCode: String?
     
     enum CodingKeys: String, CodingKey {
         case id, firstName, lastName, emailORphone, email, phoneNumber, password, userProfile, otp, passcode
         case dob = "DOB"
         case address, latitude, longitude, city, state, deviceToken, deviceType
         case deviceID = "deviceId"
-        case status, createdDate, updatedDate, countryCode, phoneCode, isNotification, isVerify, isProfile, isPasscode, isPin, isVerifyCard, isLoggedIN, token
+        case status, createdDate, updatedDate, countryCode, phoneCode, isNotification, isVerify, isProfile, isPasscode, isPin, isVerifyCard, isLoggedIN, token, qrCode
     }
 }
 struct CityCodable:Codable {

@@ -45,6 +45,19 @@ extension UserDefaults
         }
         return string(forKey: UserDefaultsKeys.isLoggedIn.rawValue)!
     }
+    func setQRCode(value: String)
+    {
+        set(value, forKey: UserDefaultsKeys.QRCode.rawValue)
+    }
+    
+    func getQRCode()-> String
+    {
+        guard string(forKey: UserDefaultsKeys.QRCode.rawValue) != nil  else
+        {
+            return ""
+        }
+        return string(forKey: UserDefaultsKeys.QRCode.rawValue)!
+    }
     func setRegisterToken(value:String)
     {
         set(value, forKey: UserDefaultsKeys.registerToken.rawValue)
@@ -218,6 +231,7 @@ enum UserDefaultsKeys : String
 {
     case userID
     case isLoggedIn
+    case QRCode
     case registerToken
     case loginToken
     case latitude

@@ -30,11 +30,13 @@ class VerifyContactDataModel: NSObject
     var name = ""
     var amount = ""
     var dataDescription = ""
+    var userToken = ""
     
     func verifyContact()
     {
         let url =  APIList().getUrlString(url: .VERIFYCONTACT)
         let parameter : Parameters = [
+            "userToken" : userToken,
             "phoneNumber" : phoneNumber,
             "phoneCode" : phoneCode
         ]

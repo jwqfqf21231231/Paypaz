@@ -13,19 +13,20 @@ class QRCodeScannerVC : CustomViewController {
 
     //MARK:-
     @IBOutlet weak var qrScannerView : QRScannerView!
-    
+    let verifyQRCodeDataSource = VerifyContactDataModel()
+
     //MARK:-
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        self.verifyQRCodeDataSource.delegate = self
         self.qrScannerView.delegate = self
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+2.0) { [weak self] in
-            self?.navigationController?.popViewController(animated: false)
+//        DispatchQueue.main.asyncAfter(deadline: .now()+2.0) { [weak self] in
+//            self?.navigationController?.popViewController(animated: false)
 //           if let req_payAmountVC = self?.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
 //                req_payAmountVC.selectedPaymentType = .local
 //            }
-        }
+        //}
         
     }
     //MARK:-
@@ -48,7 +49,38 @@ class QRCodeScannerVC : CustomViewController {
     }
     
 }
-
+extension QRCodeScannerVC : VerifyContactDelegate{
+    func didRecieveDataUpdate(data: LogInModel)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
+                vc.userDetails = ["userPic":data.data?.userProfile ?? "","userName":((data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")), "phoneCode":data.data?.phoneCode ?? "", "phoneNumber":data.data?.phoneNumber ?? ""]
+                vc.receiverID = data.data?.id ?? ""
+                vc.selectedPaymentType = .local
+                vc.paypazUser = true
+            }
+        }
+        else
+        {
+        
+        }
+    }
+    
+    func didFailDataUpdateWithError(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
 extension QRCodeScannerVC : QRScannerViewDelegate {
     func qrScanningDidFail() {
         print("faillllllll")
@@ -56,16 +88,15 @@ extension QRCodeScannerVC : QRScannerViewDelegate {
     }
     
     func qrScanningSucceededWithCode(_ str: String?) {
-     
+        verifyQRCodeDataSource.userToken = str ?? ""
+        verifyQRCodeDataSource.verifyContact()
+        }
 //        if let scannedVC = self.pushToVC("ScannedBatteryDetailVC") as? ScannedBatteryDetailVC {
 //            scannedVC.selectedMachineCode = str
 //        }
-    }
     
     func qrScanningDidStop() {
         print("stoppped")
       //  self.showAlert(withMsg: "Stopped", withOKbtn: false)
     }
-    
-    
 }

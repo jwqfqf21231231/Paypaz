@@ -7,11 +7,12 @@
 //
 
 import UIKit
-
+import SDWebImage
 class ScanQRCodeVC: CustomViewController {
     
     @IBOutlet weak var userPic : UIImageView!
     @IBOutlet weak var userNameLabel : UILabel!
+    @IBOutlet weak var qrCodeImg : UIImageView!
     var userName : String?
     var userImage :UIImage?
     //MARK:- --- View Life Cycle ----
@@ -19,6 +20,9 @@ class ScanQRCodeVC: CustomViewController {
         super.viewDidLoad()
         userNameLabel.text = userName ?? ""
         userPic.image = userImage ?? UIImage(named: "place_holder")
+        self.qrCodeImg.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        let url =  APIList().getUrlString(url: .QRCODE)
+        self.qrCodeImg.sd_setImage(with: URL(string: url+(UserDefaults.standard.getQRCode())), placeholderImage: UIImage(named: "qr_codes"))
     }
 
     //MARK:- --- Action ----

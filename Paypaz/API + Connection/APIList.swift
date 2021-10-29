@@ -98,6 +98,7 @@ enum urlString:String
     case EVENTIMAGE = "uploads/types/"
     case UPLOADEDEVENTIMAGE = "uploads/events/"
     case UPLOADEDPRODUCTIMAGE = "uploads/products/"
+    case QRCODE = "uploads/qrcode/"
     
     case LOGOUT = "user/logout"
 }

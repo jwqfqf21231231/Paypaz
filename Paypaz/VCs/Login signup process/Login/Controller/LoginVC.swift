@@ -167,6 +167,7 @@ extension LoginVC : LogInDataModelDelegate
             print("User Token is : \(data.data?.token ?? "")")
             UserDefaults.standard.setLoggedIn(value: data.data?.isLoggedIN ?? "")
             UserDefaults.standard.setRegisterToken(value: (data.data?.token ?? ""))
+            UserDefaults.standard.setQRCode(value: data.data?.qrCode ?? "")
             UserDefaults.standard.setPasscode(value: data.data?.passcode ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")
             UserDefaults.standard.setPhoneNo(value: data.data?.phoneNumber ?? "")
