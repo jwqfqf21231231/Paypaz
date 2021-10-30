@@ -21,6 +21,10 @@ class BuyEventVC : UIViewController {
     var filteredEventData = [MyEvent]()
     var newFilteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
+    var Items = [CartInfo]()
+
+    private let GetCartItemsDataSource = AddToCartDataModel()
+    
     @IBOutlet weak var txt_Search : UITextField!
     
     
@@ -37,6 +41,7 @@ class BuyEventVC : UIViewController {
             collectionViewCalendar.delegate   = self
         }
     }
+    @IBOutlet weak var cartCountLabel : UILabel!
     var arrCalendarDays : [String]?
     var arrCalendarUTCDays : [String]?
     //MARK:- --- View Life Cycle ----
@@ -44,12 +49,17 @@ class BuyEventVC : UIViewController {
         super.viewDidLoad()
         self.txt_Search.addTarget(self, action: #selector(searchEventAsPerText(_:)), for: .editingChanged)
         dataSource.delegate2 = self
+        getCartItems()
         let arr = self.arrayOfDates()
         let UTCArr = self.DatesToSend()
         self.arrCalendarDays = arr as? [String] ?? []
         self.arrCalendarUTCDays = UTCArr as? [String] ?? []
         self.collectionViewCalendar.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .left)
         getEvents()
+    }
+    func getCartItems(){
+        GetCartItemsDataSource.cartItemsDelegate = self
+        GetCartItemsDataSource.getCartItems()
     }
     @objc func searchEventAsPerText(_ textField:UITextField)
     {
@@ -174,6 +184,9 @@ class BuyEventVC : UIViewController {
             vc.delegate = self
         }
     }
+    @IBAction func btn_CartItems(_ sender:UIButton){
+        _ = self.pushVC("MyCartVC")
+    }
 }
 extension BuyEventVC : FilterData{
     func filterData(distance: String, date: String) {
@@ -265,6 +278,34 @@ extension BuyEventVC : FilteredEventDataModelDelegate
     
     func didFailDataUpdateWithError2(error: Error)
     {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
+    }
+}
+extension BuyEventVC : GetCartItemsDataModelDelegate{
+    func didRecieveDataUpdate(data: CartItemsModel) {
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            self.Items = data.data ?? []
+            self.cartCountLabel.alpha = 1
+            self.cartCountLabel.text = "\(self.Items.count)"
+        }
+        else
+        {
+            self.cartCountLabel.alpha = 0
+            //view.makeToast(data.message ?? "")
+        }
+    }
+    
+    func didFailDataUpdateWithError5(error: Error) {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {

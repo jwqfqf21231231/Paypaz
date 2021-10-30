@@ -16,7 +16,7 @@ protocol AddToCartDataModelDelegate:class {
 }
 protocol GetCartItemsDataModelDelegate:class {
     func didRecieveDataUpdate(data:CartItemsModel)
-    func didFailDataUpdateWithError2(error:Error)
+    func didFailDataUpdateWithError5(error:Error)
 }
 protocol GetCartDetailsDataModelDelegate:class {
     func didRecieveDataUpdate(data:CartDetailsModel)
@@ -123,7 +123,7 @@ class AddToCartDataModel: NSObject
                                             }
                                             catch let error as NSError
                                             {
-                                                self.cartItemsDelegate?.didFailDataUpdateWithError2(error: error)
+                                                self.cartItemsDelegate?.didFailDataUpdateWithError5(error: error)
                                             }
                                         }
                                         else
@@ -134,7 +134,7 @@ class AddToCartDataModel: NSObject
                                   failure:
                                     {
                                         (error) in
-                                        self.cartItemsDelegate?.didFailDataUpdateWithError2(error: error)
+                                        self.cartItemsDelegate?.didFailDataUpdateWithError5(error: error)
                                     })
     }
     

@@ -52,7 +52,7 @@ extension MyCartVC : GetCartItemsDataModelDelegate{
         }
     }
     
-    func didFailDataUpdateWithError2(error: Error) {
+    func didFailDataUpdateWithError5(error: Error) {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"
         {

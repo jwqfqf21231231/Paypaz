@@ -10,52 +10,56 @@ import UIKit
 import AVKit
 
 class QRCodeScannerVC : CustomViewController {
-
-    //MARK:-
+    
     @IBOutlet weak var qrScannerView : QRScannerView!
     let verifyQRCodeDataSource = VerifyContactDataModel()
-
-    //MARK:-
-    override func viewDidLoad() {
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         self.verifyQRCodeDataSource.delegate = self
         self.qrScannerView.delegate = self
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now()+2.0) { [weak self] in
-//            self?.navigationController?.popViewController(animated: false)
-//           if let req_payAmountVC = self?.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
-//                req_payAmountVC.selectedPaymentType = .local
-//            }
+
+        //        DispatchQueue.main.asyncAfter(deadline: .now()+2.0) { [weak self] in
+        //            self?.navigationController?.popViewController(animated: false)
+        //           if let req_payAmountVC = self?.pushVC("RequestPayAmountVC") as? RequestPayAmountVC {
+        //                req_payAmountVC.selectedPaymentType = .local
+        //            }
         //}
         
     }
-    //MARK:-
+    
     @IBAction func btn_back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: false)
     }
     
     @IBAction func btn_flashButon_Clicked() {
-        if let device = AVCaptureDevice.default(for: AVMediaType.video), device.hasTorch {
-        do {
-            try device.lockForConfiguration()
-            let torchOn = !device.isTorchActive
-            try device.setTorchModeOn(level: 1.0)
-            device.torchMode = torchOn ? .on : .off
-            device.unlockForConfiguration()
-        } catch {
-            self.showAlert(withMsg: "Error", withOKbtn: false)
+        if let device = AVCaptureDevice.default(for: AVMediaType.video), device.hasTorch
+        {
+            do
+            {
+                try device.lockForConfiguration()
+                let torchOn = !device.isTorchActive
+                try device.setTorchModeOn(level: 1.0)
+                device.torchMode = torchOn ? .on : .off
+                device.unlockForConfiguration()
+            }
+            catch
+            {
+                self.showAlert(withMsg: "Error", withOKbtn: false)
+            }
         }
     }
-    }
-    
 }
+
 extension QRCodeScannerVC : VerifyContactDelegate{
     func didRecieveDataUpdate(data: LogInModel)
     {
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
+            if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC
+            {
                 vc.userDetails = ["userPic":data.data?.userProfile ?? "","userName":((data.data?.firstName ?? "") + " " + (data.data?.lastName ?? "")), "phoneCode":data.data?.phoneCode ?? "", "phoneNumber":data.data?.phoneNumber ?? ""]
                 vc.receiverID = data.data?.id ?? ""
                 vc.selectedPaymentType = .local
@@ -65,7 +69,7 @@ extension QRCodeScannerVC : VerifyContactDelegate{
         }
         else
         {
-        
+            
         }
     }
     
@@ -88,16 +92,18 @@ extension QRCodeScannerVC : QRScannerViewDelegate {
         self.showAlert(withMsg: "Error", withOKbtn: false)
     }
     
-    func qrScanningSucceededWithCode(_ str: String?) {
+    func qrScanningSucceededWithCode(_ str: String?)
+    {
         verifyQRCodeDataSource.userToken = str ?? ""
         verifyQRCodeDataSource.verifyContact()
-        }
-//        if let scannedVC = self.pushToVC("ScannedBatteryDetailVC") as? ScannedBatteryDetailVC {
-//            scannedVC.selectedMachineCode = str
-//        }
+    }
+    
+    // if let scannedVC = self.pushToVC("ScannedBatteryDetailVC") as? ScannedBatteryDetailVC {
+    //     scannedVC.selectedMachineCode = str
+    // }
     
     func qrScanningDidStop() {
         print("stoppped")
-      //  self.showAlert(withMsg: "Stopped", withOKbtn: false)
+        //  self.showAlert(withMsg: "Stopped", withOKbtn: false)
     }
 }

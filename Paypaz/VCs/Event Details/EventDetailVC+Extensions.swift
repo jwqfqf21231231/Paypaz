@@ -11,8 +11,8 @@ import SDWebImage
 extension EventDetailVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 10 {
-            if self.contacts.count > 4{
-                return 5
+            if self.contacts.count > 5{
+                return 6
             }
             else{
                 return contacts.count
@@ -27,11 +27,15 @@ extension EventDetailVC : UICollectionViewDataSource {
         
         if collectionView.tag == 10
         {
-            if indexPath.row == 4 {
+            if indexPath.row == 5 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MorePeopleCell", for: indexPath) as? MorePeopleCell
                 else { return MorePeopleCell() }
-                let num = contacts.count - 4
-                cell.lbl_Count.text = "+\(num)\n More"
+                let num = contacts.count - 5
+                let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "+\(num) \nMore")
+                attributedString.setColor(color: .white, forText: "More", fontSize: 9)
+                cell.lbl_Count.numberOfLines = 0
+                cell.lbl_Count.lineBreakMode = .byWordWrapping
+                cell.lbl_Count.attributedText = attributedString
                 return cell
             }
             else {
@@ -84,11 +88,11 @@ extension EventDetailVC : UICollectionViewDelegate, UICollectionViewDelegateFlow
         
         if collectionView.tag == 10
         {
-            if indexPath.row == 4
+            if indexPath.row == 5
             {
                 if let vc = self.presentPopUpVC("InvitedPeopleVC", animated: false) as? InvitedPeopleVC{
                     var contacts = self.contacts
-                    contacts.removeFirst(4)
+                    contacts.removeFirst(5)
                     vc.contacts = contacts
                 }
             }
@@ -189,7 +193,7 @@ extension EventDetailVC : MyPostedProductsDataModelDelegate
         }
         else{
             self.view_Product.isHidden = false
-            self.view_ProductHeight.constant = 115
+            self.view_ProductHeight.constant = 129
         }
     }
     
@@ -229,7 +233,7 @@ extension EventDetailVC : MyPostedContactsDataModelDelegate
         }
         else{
             view_Invitee.isHidden = false
-            view_InviteeHeight.constant = 102
+            view_InviteeHeight.constant = 113
         }
     }
     

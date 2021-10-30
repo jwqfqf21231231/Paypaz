@@ -151,21 +151,29 @@ extension BuyEventVC : UITableViewDataSource {
 }
 extension BuyEventVC : AddedSuccessfullyPopUp{
     func addedToCart() {
+        self.getCartItems()
         self.view.makeToast("Event Added To Cart", duration: 1, position: .bottom)
     }
 }
+
 extension BuyEventVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let vc = self.pushVC("EventDetailVC") as? EventDetailVC{
+            vc.successDelegate = self
             vc.eventID = filteredEventData[indexPath.row].id ?? ""
             vc.isFavourite = filteredEventData[indexPath.row].isFavourited ?? ""
         }
     }
 }
 
-
+extension BuyEventVC : AddedToCartSuccessDelegate{
+    func addedToCartSuccess()
+    {
+        self.getCartItems()
+    }
+}
 extension BuyEventVC : PopupDelegate {
     
     func isClickedButton() {

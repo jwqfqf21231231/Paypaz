@@ -19,6 +19,19 @@ extension UserDefaults
 //    {
 //        return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
 //    }
+    func setCartCountToken(value: String)
+    {
+        set(value, forKey: UserDefaultsKeys.cartCount.rawValue)
+    }
+    
+    func getCartCountToken()-> String
+    {
+        guard string(forKey: UserDefaultsKeys.cartCount.rawValue) != nil  else
+        {
+            return ""
+        }
+        return string(forKey: UserDefaultsKeys.cartCount.rawValue)!
+    }
     func setFireBaseToken(value: String)
     {
         set(value, forKey: UserDefaultsKeys.fireBase.rawValue)
@@ -247,5 +260,6 @@ enum UserDefaultsKeys : String
     case date
     case day
     case fireBase
+    case cartCount
 }
 

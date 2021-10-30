@@ -43,6 +43,7 @@ class EventVC : CustomViewController {
     }
     
     @IBAction func btn_Back(_ sender:UIButton) {
+        self.delegate?.isClickedButton()
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btn_P_Logo(_ sender:UIButton) {

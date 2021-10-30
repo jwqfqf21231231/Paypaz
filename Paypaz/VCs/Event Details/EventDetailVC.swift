@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+protocol AddedToCartSuccessDelegate : class {
+    func addedToCartSuccess()
+}
 class EventDetailVC : CustomViewController {
     
     var eventID = ""
@@ -44,7 +46,7 @@ class EventDetailVC : CustomViewController {
         }
     }
     weak var delegate : PopupDelegate?
-    
+    weak var successDelegate:AddedToCartSuccessDelegate?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +81,7 @@ class EventDetailVC : CustomViewController {
     }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {
+        self.successDelegate?.addedToCartSuccess()
         self.navigationController?.popViewController(animated: true)
     }
     
