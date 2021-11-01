@@ -11,7 +11,13 @@ import UIKit
 class HomeVC : CustomViewController {
     
     //MARK:- --- View Life Cycle ----
-    @IBOutlet weak var cartCountLabel : UILabel!
+    @IBOutlet weak var cartCountLabel : UILabel!{
+        didSet{
+            cartCountLabel.layer.cornerRadius = cartCountLabel.frame.height/2
+            cartCountLabel.layer.masksToBounds = true
+        }
+    }
+  
     private let GetCartItemsDataSource = AddToCartDataModel()
     var Items = [CartInfo]()
 

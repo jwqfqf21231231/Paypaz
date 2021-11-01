@@ -124,9 +124,6 @@ class RequestPayAmountVC : UIViewController {
         //        else if descriptionTextView.isEmptyOrWhitespace(){
         //            self.view.makeToast("Please enter description")
         //        }
-        else if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
-            self.view.makeToast("please send an amount of minimum 20$")
-        }
         else{
             if sender.viewIndex == 0{
                 if paypazUser ?? false{
@@ -140,20 +137,31 @@ class RequestPayAmountVC : UIViewController {
                 }
                 payRequestDataSource.amount = amountTxt.text ?? ""
                 payRequestDataSource.dataDescription = descriptionTextView.text ?? ""
+                Connection.svprogressHudShow(view: self)
                 payRequestDataSource.requestPayment()
             }
             else if sender.viewIndex == 1{
-                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddMoneyPopupVC") as? AddMoneyPopupVC{
-                    vc.successDelegate = self
-                    vc.buyTicket = true
-                    vc.totalAmount = Float(amountTxt.text ?? "")
-                    vc.modalPresentationStyle = .overCurrentContext
-                    self.present(vc, animated: false, completion: nil)
+                if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
+                    self.view.makeToast("please send an amount of minimum 20$")
+                }
+                else{
+                    if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddMoneyPopupVC") as? AddMoneyPopupVC{
+                        vc.successDelegate = self
+                        vc.buyTicket = true
+                        vc.totalAmount = Float(amountTxt.text ?? "")
+                        vc.modalPresentationStyle = .overCurrentContext
+                        self.present(vc, animated: false, completion: nil)
+                    }
                 }
             }
             else{
-                if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
-                    vc.delegate = self
+                if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
+                    self.view.makeToast("please send an amount of minimum 20$")
+                }
+                else{
+                    if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                        vc.delegate = self
+                    }
                 }
             }
         }
@@ -228,6 +236,7 @@ extension RequestPayAmountVC : SendBackPinCodeDelegate{
             payNowDataSource.phoneCode = userDetails?["phoneCode"] ?? ""
             payNowDataSource.name = userDetails?["userName"] ?? ""
         }
+        Connection.svprogressHudShow(view: self)
         payNowDataSource.payNow()
     }
 }
@@ -250,6 +259,7 @@ extension RequestPayAmountVC : BuyEventThruCardDelegate{
             payNowDataSource.phoneCode = userDetails?["phoneCode"] ?? ""
             payNowDataSource.name = userDetails?["userName"] ?? ""
         }
+        Connection.svprogressHudShow(view: self)
         payNowDataSource.payNow()
     }
 }
@@ -316,10 +326,10 @@ extension RequestPayAmountVC : PaymentRequestDelegate
                 popup.selectedPopupType = .PaymentRequestSent
                 let txt = "$\(amountTxt.text ?? "") to \(userNameLabel.text ?? "") \(userNoLabel.text ?? "")"
                 let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: txt)
-                attributedString.setBoldColor(color: UIColor(named: "BlueColor") ?? .blue, forText: txt, fontSize : 14)
+                attributedString.setColor(color: UIColor(named: "BlueColor") ?? .blue, forText: txt, fontSize : 14)
                 attributedString.setBoldColor(color: UIColor(named: "BlueColor") ?? .blue, forText: "$\(amountTxt.text ?? "")", fontSize : 14)
                 attributedString.setBoldColor(color: UIColor(named: "BlueColor") ?? .blue, forText: userNameLabel.text ?? "", fontSize : 14)
-                attributedString.setBoldColor(color: UIColor(named: "BlueColor") ?? .blue, forText: userNoLabel.text ?? "", fontSize : 14)
+                
                 popup.delegate = self
                 popup.attrText = attributedString
             }

@@ -8,12 +8,14 @@
 
 import UIKit
 import AVKit
-
+protocol InvalidQRCodeDelegate : class{
+    func invalidQRCode()
+}
 class QRCodeScannerVC : CustomViewController {
     
     @IBOutlet weak var qrScannerView : QRScannerView!
     let verifyQRCodeDataSource = VerifyContactDataModel()
-    
+    weak var delegate : InvalidQRCodeDelegate?
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -69,7 +71,8 @@ extension QRCodeScannerVC : VerifyContactDelegate{
         }
         else
         {
-            
+            self.delegate?.invalidQRCode()
+            self.navigationController?.popViewController(animated: false)
         }
     }
     

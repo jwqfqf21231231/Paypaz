@@ -41,7 +41,12 @@ class BuyEventVC : UIViewController {
             collectionViewCalendar.delegate   = self
         }
     }
-    @IBOutlet weak var cartCountLabel : UILabel!
+    @IBOutlet weak var cartCountLabel : UILabel!{
+        didSet{
+            cartCountLabel.layer.cornerRadius = cartCountLabel.frame.height/2
+            cartCountLabel.layer.masksToBounds = true
+        }
+    }
     var arrCalendarDays : [String]?
     var arrCalendarUTCDays : [String]?
     //MARK:- --- View Life Cycle ----

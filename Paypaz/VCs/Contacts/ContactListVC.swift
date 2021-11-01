@@ -151,7 +151,9 @@ class ContactListVC : CustomViewController {
      self.selectGlobalPayment()
      }*/
     @IBAction func btn_Scanner(_ sender:UIButton) {
-        _ = self.pushVC("QRCodeScannerVC")
+        if let vc = self.pushVC("QRCodeScannerVC") as? QRCodeScannerVC{
+            vc.delegate = self
+        }
     }
     @IBAction func btn_GivePermission(_ sender:UIButton) {
         if permissionGranted ?? false{
@@ -173,4 +175,9 @@ class ContactListVC : CustomViewController {
         }
     }
     
+}
+extension ContactListVC : InvalidQRCodeDelegate{
+    func invalidQRCode(){
+        self.view.makeToast("Please scan the valid QRCode")
+    }
 }
