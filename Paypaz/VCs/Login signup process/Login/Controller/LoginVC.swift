@@ -178,8 +178,29 @@ extension LoginVC : LogInDataModelDelegate
             UserDefaults.standard.setValue(data.data?.isProfile, forKey: "isProfile")
             UserDefaults.standard.setValue(data.data?.isVerify, forKey: "isVerify")
             UserDefaults.standard.setValue(data.data?.isVerifyCard, forKey: "isVerifyCard")
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeVC") as! PasscodeVC
-            self.navigationController?.pushViewController(viewController, animated: false)
+            
+            if data.data?.isVerify != "1"{
+                _ = self.pushVC("OTPVerificationVC")
+            }
+            else if data.data?.isProfile != "1"{
+                _ = self.pushVC("CreateProfileVC")
+            }
+            else if data.data?.isPasscode != "1"{
+                _ = self.pushVC("CreatePasscodeVC")
+            }
+            else if data.data?.isPin != "1"{
+                if let vc = self.pushVC("CreatePinVC") as? CreatePinVC
+                {
+                    vc.isCreatingPin = true
+                }
+            }
+//            else if data.data?.isVerifyCard != "1"{
+//                
+//            }
+            else{
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "PasscodeVC") as! PasscodeVC
+                self.navigationController?.pushViewController(viewController, animated: false)
+            }
         }
         else
         {

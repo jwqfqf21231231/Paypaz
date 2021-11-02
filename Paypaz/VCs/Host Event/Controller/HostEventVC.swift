@@ -468,6 +468,11 @@ class HostEventVC : UIViewController {
         {
             self.view.makeToast("Enter End Time")
         }
+        else if (compareDate(date1: Date(), date2: sTime, DateorTime: 1) == true)
+        {
+            self.view.makeToast("Please select valid start time")
+        }
+
         else if(compareDate(date1: sDate , date2: eDate , DateorTime: 0) == true)
         {
             self.view.makeToast("Please select valid end date")
@@ -507,12 +512,13 @@ class HostEventVC : UIViewController {
             {
             case .orderedDescending:
                 return true
-                
             default:
                 order = NSCalendar.current.compare(date1, to: date2, toGranularity: .minute)
                 switch order
                 {
                 case .orderedDescending:
+                    return true
+                case .orderedSame :
                     return true
                 default : return false
                 }
