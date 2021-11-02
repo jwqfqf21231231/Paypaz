@@ -96,7 +96,7 @@ extension WalletVC : GetWalletAmountDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            self.lbl_TotalBalance.text = "$ \(data.data?.amount ?? "")"
+            self.lbl_TotalBalance.text = "$ \(Float(data.data?.amount ?? "")?.clean ?? "")"
         }
         else
         {

@@ -34,6 +34,7 @@ class HomeVC : CustomViewController {
         self.view.makeToast(message)
     }
     func getCartItems(){
+        Connection.svprogressHudShow(view: self)
         GetCartItemsDataSource.cartItemsDelegate = self
         GetCartItemsDataSource.getCartItems()
     }
