@@ -24,20 +24,12 @@ class ForgotPasswordDataModel: NSObject
     func requestForPassword()
     {
         let url =  APIList().getUrlString(url: .FORGOTPASSWORD)
-        if phoneCode != ""
-        {
-            parameter = [
-                "emailORphone":email,
-                "phoneCode":phoneCode
-            ]
-        }
-        else
-        {
-            parameter = [
-            "emailORphone":email
-            ]
-        }
-      
+        
+        parameter = [
+            "emailORphone":email,
+            "phoneCode":phoneCode
+        ]
+        
         sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:
                                     {
@@ -46,10 +38,10 @@ class ForgotPasswordDataModel: NSObject
                                         if result != nil
                                         {
                                             do
-                                            {
-                                                let response = try JSONDecoder().decode(SignUpModel.self, from: result!)
-                                                self.delegate?.didRecieveDataUpdate(data: response)
-                                            }
+            {
+                let response = try JSONDecoder().decode(SignUpModel.self, from: result!)
+                self.delegate?.didRecieveDataUpdate(data: response)
+            }
                                             catch let error as NSError
                                             {
                                                 self.delegate?.didFailDataUpdateWithError(error: error)

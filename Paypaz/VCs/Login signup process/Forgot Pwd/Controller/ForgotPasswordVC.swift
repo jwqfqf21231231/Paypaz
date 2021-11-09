@@ -97,7 +97,7 @@ class ForgotPasswordVC : UIViewController {
             else
             {
                 dataSource.email = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
-                dataSource.phoneCode = UserDefaults.standard.getPhoneCode()
+                dataSource.phoneCode = apiDailCode//UserDefaults.standard.getPhoneCode()
             }
             dataSource.requestForPassword()
         }

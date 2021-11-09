@@ -76,7 +76,7 @@ class RequestPayAmountVC : UIViewController {
             self.userNameLabel.text = userDetails?["userName"]
             self.userNoLabel.text = "+\(userDetails?["phoneCode"] ?? "") \(userDetails?["phoneNumber"] ?? "")"
             if payFromRequest ?? false{
-                amountTxt.text = amount ?? ""
+                amountTxt.text = Float(amount ?? "")?.clean ?? ""
                 amountTxt.isUserInteractionEnabled = false
                 requestView.isHidden = true
                 

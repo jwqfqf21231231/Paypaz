@@ -69,7 +69,8 @@ extension UserRequestsVC : UserRequestDelegate{
             else{
                 self.userRequest = data.data ?? []
             }
-            userRequestTableView.reloadData()
+            self.userRequestTableView.reloadArticleData{}
+//            userRequestTableView.reloadData()
         }
         else
         {
@@ -84,7 +85,8 @@ extension UserRequestsVC : UserRequestDelegate{
             else{
                 self.view.makeToast(data.message ?? "", duration: 3, position: .center)
             }
-            userRequestTableView.reloadData()
+            self.userRequestTableView.reloadArticleData{}
+//            userRequestTableView.reloadData()
         }
     }
     

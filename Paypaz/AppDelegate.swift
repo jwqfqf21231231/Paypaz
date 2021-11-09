@@ -90,7 +90,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
 //        presentViewController.yourDict = userInfo //pass userInfo data to viewController
 //        self.window?.rootViewController = presentViewController
 //        presentViewController.present(presentViewController, animated: true, completion: nil)
-
+        if userInfo["gcm.notification.type"] as! String == "paynow"
+        {
+            let rootViewController = self.window!.rootViewController
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let walletVC = mainStoryboard.instantiateViewController(withIdentifier: "WalletVC") as! WalletVC
+            rootViewController?.navigationController?.popToViewController(walletVC, animated: true)
+        }
         completionHandler()
     }
     

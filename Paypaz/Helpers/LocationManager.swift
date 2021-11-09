@@ -10,6 +10,8 @@ import Foundation
 import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate  {
+    private var timer: Timer?
+    var valueNew:Bool?
     
     static let shared = LocationManager()
     
@@ -22,10 +24,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
     func getUserLocation(_ completion:@escaping (_ lat:CLLocationDegrees?, _ long:CLLocationDegrees?)->()){
         
         self.gotLocationOfUser = completion
+        timer?.invalidate()
+        timer = nil
+        timer = Timer.scheduledTimer(timeInterval:10.0, target: self, selector: #selector(updateLocation), userInfo: nil, repeats: true)
         self.location_manager = CLLocationManager()
         self.location_manager?.requestWhenInUseAuthorization()
         self.location_manager?.delegate = self
         self.location_manager?.startUpdatingLocation()
+    }
+    
+    private override init() {}
+    
+    deinit {
+        timer?.invalidate()
+        timer = nil
     }
     
     func stopLocationUpdate(){
@@ -38,12 +50,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
     
     //MARK:- --- Delegate ----
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("...getting location....")
         if let location = locations.first?.coordinate{
             lastLocation = location
             self.gotLocationOfUser?(location.latitude,location.longitude)
         }else{
             self.gotLocationOfUser?(nil,nil)
         }
+        self.location_manager?.stopUpdatingLocation()
+        
     }
     
     internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -59,6 +74,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
             print("authorized WhenInUse")
         case .denied:
             print("denied")
+            timer?.invalidate()
+            timer = nil
         case .notDetermined:
             print("notDetermined")
         case .restricted:
@@ -67,6 +84,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate  {
             print("invalid")
         }
         self.gotLocationOfUser?(nil,nil)
+    }
+}
+
+extension LocationManager {
+    @objc func updateLocation() {
+        getUserLocation { (lat,long) in
+            if lat != nil{
+                
+            }
+        }
     }
 }
 

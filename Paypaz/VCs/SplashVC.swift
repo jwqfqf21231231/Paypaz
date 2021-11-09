@@ -62,8 +62,7 @@ class SplashVC : CustomViewController {
     // MARK:- Getting Current Location
     private func getLocation()
     {
-        let instance = LocationManager.shared
-        instance.getUserLocation { (lat, long) in
+        LocationManager.shared.getUserLocation { (lat, long) in
             if lat != nil && long != nil{
                 DispatchQueue.main.async {
                     UserDefaults.standard.setLatitude(value: "\(lat ?? 0.0)")
