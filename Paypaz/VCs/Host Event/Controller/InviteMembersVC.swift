@@ -67,15 +67,19 @@ class InviteMembersVC: CustomViewController {
     {
         if isPublicStatus == "0"{
             isPublic.setOn(false, animated: false)
+            isPublic.thumbTintColor = UIColor.lightGray
         }
         else{
             isPublic.setOn(true, animated: false)
+            isPublic.thumbTintColor = UIColor(named: "GreenColor")
         }
         if isInviteMemberStatus == "0"{
             isInviteMember.setOn(false, animated: false)
+            isInviteMember.thumbTintColor = UIColor.lightGray
         }
         else{
             isInviteMember.setOn(true, animated: false)
+            isInviteMember.thumbTintColor = UIColor(named: "GreenColor")
             isInviteMember.isUserInteractionEnabled = false
             Connection.svprogressHudShow(view: self)
             dataSource1.eventID = self.eventID
@@ -115,6 +119,7 @@ class InviteMembersVC: CustomViewController {
                     else{
                         self.isInviteMemberStatus = "1"
                         self.isInviteMember.setOn(true, animated: false)
+                        self.isInviteMember.thumbTintColor = UIColor(named: "GreenColor")
                         self.tableView_Members.reloadData()
                     }
                 }
@@ -155,6 +160,7 @@ class InviteMembersVC: CustomViewController {
                     let phoneNumber = "\($0.phoneNumbers.first?.value.stringValue ?? "nil")"
                     let contactDetail = ContactInfo(firstName: $0.givenName, lastName: $0.familyName, phoneNumber:phoneNumber, profilePic:self.img, isInvited: false)
                     self.contactDetails.append(contactDetail)
+                    self.tableView_Members.reloadData()
                 }
             })
         })
@@ -166,10 +172,12 @@ class InviteMembersVC: CustomViewController {
             if(swtch.isOn)
             {
                 self.isPublicStatus = "1"
+                swtch.thumbTintColor = UIColor(named: "GreenColor")
             }
             else
             {
                 self.isPublicStatus = "0"
+                swtch.thumbTintColor = UIColor.lightGray
             }
 //        default:
 //            if(swtch.isOn)
@@ -199,11 +207,16 @@ class InviteMembersVC: CustomViewController {
     }
     @IBAction func btn_InvitedMember(_ sender:UIButton){
         if isInviteMemberStatus == "0"{
+            isInviteMemberStatus = "1"
+            isInviteMember.thumbTintColor = UIColor(named: "GreenColor")
             fetchContacts()
         }
         else{
             isInviteMemberStatus = "0"
+            self.contactDetails.removeAll()
+            self.tableView_Members.reloadData()
             isInviteMember.setOn(false, animated: false)
+            isInviteMember.thumbTintColor = UIColor.lightGray
         }
     }
     @IBAction func btn_Done(_ sender:UIButton)

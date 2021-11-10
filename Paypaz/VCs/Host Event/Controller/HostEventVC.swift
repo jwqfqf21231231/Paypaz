@@ -38,6 +38,7 @@ class HostEventVC : UIViewController {
     var sTime = Date()
     var eDate = Date()
     var eTime = Date()
+    var minSTime = Date()
     var paymentType : String?{
         didSet{
             if paymentType == "0"
@@ -157,12 +158,6 @@ class HostEventVC : UIViewController {
             self.txt_StartDate.text = dateString
             self.txt_StartDate.textColor = UIColor(named: "BlueColor")
             self.sDate = picker.date
-//            self.startTime = ""
-//            self.endDate = ""
-//            self.endTime = ""
-//            self.txt_EndDate.text?.removeAll()
-//            self.txt_StartTime.text?.removeAll()
-//            self.txt_EndTime.text?.removeAll()
             self.view.endEditing(true)
             
         case 20:
@@ -173,8 +168,6 @@ class HostEventVC : UIViewController {
             self.endDate = dateString
             self.txt_EndDate.text = dateString
             self.eDate = picker.date
-//            self.endTime = ""
-//            self.txt_EndTime.text?.removeAll()
             self.view.endEditing(true)
             
         case 30:
@@ -184,11 +177,10 @@ class HostEventVC : UIViewController {
             let dateString = dateFormatter.string(from:picker.date)
             self.startTime = dateString
             self.txt_StartTime.text = dateString
-            self.sTime = picker.date
-//            if startDate == endDate{
-//                self.endTime = ""
-//                self.txt_EndTime.text?.removeAll()
-//            }
+            let sD = startDate + " " + startTime
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
+            self.sTime = dateFormatter.date(from: sD) ?? Date()
+            self.minSTime = picker.date
             self.view.endEditing(true)
             
         case 40:
@@ -198,7 +190,9 @@ class HostEventVC : UIViewController {
             let dateString = dateFormatter.string(from:picker.date)
             self.endTime = dateString
             self.txt_EndTime.text = dateString
-            self.eTime = picker.date
+            let eD = endDate + " " + endTime
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
+            self.eTime = dateFormatter.date(from: eD) ?? Date()
             self.view.endEditing(true)
         default:
             return
@@ -320,7 +314,7 @@ class HostEventVC : UIViewController {
                 picker.datePickerMode = .time
                 if txt_StartDate.text == txt_EndDate.text
                 {
-                    picker.minimumDate = sTime
+                    picker.minimumDate = minSTime
                 }
                 txt_EndTime.inputView = picker
                 txt_EndTime.inputAccessoryView = createToolBar()
@@ -506,23 +500,30 @@ class HostEventVC : UIViewController {
             }
         }
         else{
-            var order = NSCalendar.current.compare(date1, to: date2, toGranularity: .hour)
-            
-            switch order
-            {
-            case .orderedDescending:
-                return true
-            default:
-                order = NSCalendar.current.compare(date1, to: date2, toGranularity: .minute)
+            var order = NSCalendar.current.compare(date1, to: date2, toGranularity: .day)
+            switch order {
+            case .orderedSame:
+                order = NSCalendar.current.compare(date1, to: date2, toGranularity: .hour)
+                
                 switch order
                 {
                 case .orderedDescending:
                     return true
-                case .orderedSame :
-                    return true
-                default : return false
+                default:
+                    order = NSCalendar.current.compare(date1, to: date2, toGranularity: .minute)
+                    switch order
+                    {
+                    case .orderedDescending:
+                        return true
+                    case .orderedSame :
+                        return true
+                    default : return false
+                    }
                 }
+            default:
+                return false
             }
+            
         }
         
     }
@@ -658,7 +659,7 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 var eDate = data.data?.endDate ?? ""
                 eDate = eDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm a")
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
                 self.sDate = dateFormatter.date(from: sDate) ?? Date()
                 self.eDate = dateFormatter.date(from: eDate) ?? Date()
                 
@@ -666,19 +667,13 @@ extension HostEventVC : MyPostedEventDataModelDelegate
                 self.endDate = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "yyyy-MM-dd")
                 self.startTime = self.getFormattedDate(strDate: sDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
                 self.endTime = self.getFormattedDate(strDate: eDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
-                dateFormatter.dateFormat = "hh:mm a"
-                self.sTime = dateFormatter.date(from: self.startTime) ?? Date()
-                self.eTime = dateFormatter.date(from: self.endTime) ?? Date()
+                self.sTime = self.sDate
+                self.eTime = self.eDate
                 self.txt_StartDate.text = self.startDate
                 self.txt_EndDate.text = self.endDate
                 self.txt_StartTime.text = self.startTime
                 self.txt_EndTime.text = self.endTime
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                self.sDate = dateFormatter.date(from: self.startDate)!
-                self.eDate = dateFormatter.date(from: self.endDate)!
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-//                self.sTime = dateFormatter.date(from: data.data?.startDate ?? "")!
+                self.minSTime = self.sTime
                 
                 
                 self.lbl_ChooseLocation.text = data.data?.location

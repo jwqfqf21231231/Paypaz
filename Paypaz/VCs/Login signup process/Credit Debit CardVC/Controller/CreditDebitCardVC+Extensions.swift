@@ -248,7 +248,7 @@ extension CreditDebitCardVC : UITextFieldDelegate{
                         txt_cardNumber.text! = ""
                         let a = "Card is not valid"
                         self.showAlert(withMsg: a, withOKbtn: true)
-                        
+                        self.view.endEditing(true)
                     }
                 }
                 btn_cardNumber.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)

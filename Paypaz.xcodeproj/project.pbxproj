@@ -40,7 +40,6 @@
 		0453C12B26C2AF3E00F9B72D /* EditPhoneNoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453C12A26C2AF3E00F9B72D /* EditPhoneNoVC.swift */; };
 		045C787926F354D1001F0606 /* AddToCartDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C787826F354D1001F0606 /* AddToCartDataModel.swift */; };
 		045E463E26A59EB4003A71FD /* DeleteEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */; };
-		0461D29F27169FF600FFB614 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0461D29E27169FF600FFB614 /* GoogleService-Info.plist */; };
 		0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */; };
 		0485A4CD270180A600DF3AF3 /* GetWalletAmountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */; };
 		0485A4FF2701B07300DF3AF3 /* PickerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0485A4FE2701B07200DF3AF3 /* PickerClass.swift */; };
@@ -214,6 +213,7 @@
 		44F7667A263AC4CA007F78CB /* AddBankDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F76679263AC4CA007F78CB /* AddBankDetailsVC.swift */; };
 		6A0BF26627294E730035BC37 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BF26527294E730035BC37 /* UITableViewExtension.swift */; };
 		6A8475CA27217760009E68EE /* PayNowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8475C927217760009E68EE /* PayNowDataModel.swift */; };
+		6F05FFF8273BFD9E0048AF11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F05FFF7273BFD9E0048AF11 /* GoogleService-Info.plist */; };
 		A50F0BC43664C4D0325EBC4C /* Pods_Paypaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64926787840882CB11A46A4D /* Pods_Paypaz.framework */; };
 		F90A197394CB3972AA9A7C27 /* Pods_PaypazTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */; };
 /* End PBXBuildFile section */
@@ -270,7 +270,6 @@
 		045C787826F354D1001F0606 /* AddToCartDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartDataModel.swift; sourceTree = "<group>"; };
 		045E463D26A59EB4003A71FD /* DeleteEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventDataModel.swift; sourceTree = "<group>"; };
 		0461D29427169F1200FFB614 /* Paypaz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paypaz.entitlements; sourceTree = "<group>"; };
-		0461D29E27169FF600FFB614 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0485A4C627017F8D00DF3AF3 /* GetWalletAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmount.swift; sourceTree = "<group>"; };
 		0485A4CC270180A600DF3AF3 /* GetWalletAmountDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWalletAmountDataModel.swift; sourceTree = "<group>"; };
 		0485A4FE2701B07200DF3AF3 /* PickerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerClass.swift; sourceTree = "<group>"; };
@@ -453,6 +452,7 @@
 		6A0BF26527294E730035BC37 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		6A8475C927217760009E68EE /* PayNowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayNowDataModel.swift; sourceTree = "<group>"; };
 		6BF24CEF0750E0B070A2878B /* Pods-Paypaz-PaypazUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paypaz-PaypazUITests.debug.xcconfig"; path = "Target Support Files/Pods-Paypaz-PaypazUITests/Pods-Paypaz-PaypazUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F05FFF7273BFD9E0048AF11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		799FBE6824922A2A52E8A3C2 /* Pods-Paypaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paypaz.release.xcconfig"; path = "Target Support Files/Pods-Paypaz/Pods-Paypaz.release.xcconfig"; sourceTree = "<group>"; };
 		F2C9DADC1B2EFF4F5BFC49F3 /* Pods-PaypazTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaypazTests.release.xcconfig"; path = "Target Support Files/Pods-PaypazTests/Pods-PaypazTests.release.xcconfig"; sourceTree = "<group>"; };
 		F484B9A30702340FC773B76E /* Pods-PaypazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaypazTests.debug.xcconfig"; path = "Target Support Files/Pods-PaypazTests/Pods-PaypazTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1490,7 +1490,7 @@
 				44C8F29F261F1BD2000F03DB /* SceneDelegate.swift */,
 				44C8F2CE261F1C98000F03DB /* VCs */,
 				44C8F2A3261F1BD2000F03DB /* Main.storyboard */,
-				0461D29E27169FF600FFB614 /* GoogleService-Info.plist */,
+				6F05FFF7273BFD9E0048AF11 /* GoogleService-Info.plist */,
 				44C8F2A6261F1BD4000F03DB /* Assets.xcassets */,
 				44C8F2A8261F1BD4000F03DB /* LaunchScreen.storyboard */,
 				44C8F2AB261F1BD4000F03DB /* Info.plist */,
@@ -1843,7 +1843,7 @@
 				44C8F2AA261F1BD4000F03DB /* LaunchScreen.storyboard in Resources */,
 				04C7D73226B3D59800747777 /* CountryCodes.json in Resources */,
 				44C8F2A7261F1BD4000F03DB /* Assets.xcassets in Resources */,
-				0461D29F27169FF600FFB614 /* GoogleService-Info.plist in Resources */,
+				6F05FFF8273BFD9E0048AF11 /* GoogleService-Info.plist in Resources */,
 				44C8F2E3261F26DB000F03DB /* Segoe UI Italic.ttf in Resources */,
 				44C8F2A5261F1BD2000F03DB /* Main.storyboard in Resources */,
 			);
@@ -2399,7 +2399,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paypaz/Paypaz.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6N43GY3295;
+				DEVELOPMENT_TEAM = S6KXDQ3765;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Paypaz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2407,7 +2407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = demoapp1.com;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.b-In-touch.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2431,7 +2431,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = demoapp1.com;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.b-In-touch.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

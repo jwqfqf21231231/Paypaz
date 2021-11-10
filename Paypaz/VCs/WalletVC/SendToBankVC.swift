@@ -23,17 +23,28 @@ class SendToBankVC : CustomViewController {
     @IBOutlet weak var phoneNumberText : UITextField!
     @IBOutlet weak var emailIdText : UITextField!
     @IBOutlet weak var descriptionText : RoundTextView!
+    @IBOutlet weak var selectBankButton : UIButton!
     private var isLocalContactSelected : Bool?
+    private let dataSource = CreateCardDataModel()
+    var banks = [String]()
+    var bankID_Names = [String:String]()
+    var selected:String?
+    var isLocalClicked = false
+    var isGlobalClicked = false
     
     //MARK:- ---- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataSource.delegate1 = self
         self.selectLocalPayment()
-        
+        getBankInfo()
     }
     
-    
+    private func getBankInfo()
+    {
+        Connection.svprogressHudShow(view: self)
+        dataSource.getBanks()
+    }
     private func selectLocalPayment() {
         self.isLocalContactSelected = true
         self.view.endEditing(true)
@@ -52,6 +63,11 @@ class SendToBankVC : CustomViewController {
         self.view_FromInfo.isHidden         = true
         self.view_Receiving.isHidden        = true
         self.view_ConversionAmount.isHidden = true
+        
+        if isLocalClicked == false{
+            selectBankButton.setTitle("Select Bank", for: .normal)
+            selectBankButton.setTitleColor(UIColor.black, for: .normal)
+        }
     }
     private func selectGlobalPayment() {
         self.isLocalContactSelected = false
@@ -70,6 +86,10 @@ class SendToBankVC : CustomViewController {
         self.view_FromInfo.isHidden         = false
         self.view_Receiving.isHidden        = false
         self.view_ConversionAmount.isHidden = false
+        if isGlobalClicked == false{
+            selectBankButton.setTitle("Select Bank", for: .normal)
+            selectBankButton.setTitleColor(UIColor.black, for: .normal)
+        }
     }
     @IBAction func btn_LocalPayment(_ sender:UIButton) {
         self.selectLocalPayment()
@@ -90,19 +110,83 @@ class SendToBankVC : CustomViewController {
             }
         }
     }
-    @IBAction func btn_Send(_ sender:UIButton) {
-        if self.isLocalContactSelected ?? false {
-            if let popupVC = self.presentPopUpVC("MoneyAddedSuccessPopupVC", animated: true) as? MoneyAddedSuccessPopupVC {
-               // popupVC.delegate = self
-                popupVC.selectedMoneyType = .MoneySentSuccess
-            }
-        } else {
-            if let passcodeVC = self.pushVC("PasscodeVC") as? PasscodeVC {
-                passcodeVC.delegate = self
-                passcodeVC.isNavigatedFromPaymentVC = true
+    
+    @IBAction func btn_SelectBank(_ sender:UIButton)
+    {
+        if self.isLocalContactSelected ?? false{
+            
+            sender.addDropDown(forDataSource: banks) { [weak self](item) in
+                self?.selected = self?.bankID_Names[item]
+                self?.isLocalClicked = true
+                sender.setTitleColor(UIColor(named: "Blue Color"), for: .normal)
+                sender.setTitle(item, for: .normal)
             }
         }
+        else{
+            
+            sender.addDropDown(forDataSource: banks) { [weak self](item) in
+                self?.selected = self?.bankID_Names[item]
+                self?.isGlobalClicked = true
+                sender.setTitleColor(UIColor(named: "Blue Color"), for: .normal)
+                sender.setTitle(item, for: .normal)
+            }
+        }
+    }
+    
+    @IBAction func btn_Send(_ sender:UIButton) {
+        if self.isLocalContactSelected ?? false {
+            if validateFields() == true{
+                self.view.makeToast("Functionality not implemented yet")
+                /* if let popupVC = self.presentPopUpVC("MoneyAddedSuccessPopupVC", animated: true) as? MoneyAddedSuccessPopupVC {
+                 // popupVC.delegate = self
+                 popupVC.selectedMoneyType = .MoneySentSuccess
+                 }*/
+            }
+        }
+        else {
+            if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                vc.delegate = self
+            }
+            /*if let passcodeVC = self.pushVC("PasscodeVC") as? PasscodeVC {
+                passcodeVC.delegate = self
+                passcodeVC.isNavigatedFromPaymentVC = true
+            }*/
+        }
         
+    }
+    func validateFields() -> Bool{
+        view.endEditing(true)
+        if !isLocalClicked
+        {
+            self.view.makeToast("Please select bank")
+        }
+        else if accountNumberText.isEmptyOrWhitespace(){
+            self.view.makeToast("Please enter bank account number.")
+        }
+        else if routingNumberText.isEmptyOrWhitespace(){
+            self.view.makeToast("Please enter bank routing number.")
+        }
+        else if phoneNumberText.isEmptyOrWhitespace(){
+            self.view.makeToast("Please enter mobile number.")
+        }
+        else if emailIdText.isEmptyOrWhitespace(){
+            self.view.makeToast("Please enter email id.")
+        }
+        else if accountNumberText.text?.count ?? 0 < 11{
+            view.makeToast("Please enter card number at least 11 characters")
+        }
+        else if !emailIdText.isEmailValid(){
+            view.makeToast("Please enter valid emailID")
+        }
+        else{
+            return true
+        }
+        return false
+    }
+}
+extension SendToBankVC : SendBackPinCodeDelegate{
+    func sendBackPinCode(pin : String){
+        self.view.makeToast("Functionality not implemented")
     }
 }
 extension SendToBankVC : PopupDelegate {
@@ -111,12 +195,46 @@ extension SendToBankVC : PopupDelegate {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
                 if let popupVC = self?.presentPopUpVC("MoneyAddedSuccessPopupVC", animated: true) as? MoneyAddedSuccessPopupVC {
-                   // popupVC.delegate = self
+                    // popupVC.delegate = self
                     popupVC.selectedMoneyType = .MoneySentSuccess
                 }
             }
         }
         
         
+    }
+}
+extension SendToBankVC : BankInfoDataModelDelegate
+{
+    func didRecieveDataUpdate(data: BankInfoModel)
+    {
+        print("BankInfoModelData = ",data)
+        Connection.svprogressHudDismiss(view: self)
+        if data.success == 1
+        {
+            let banks = data.data ?? []
+            for i in 0..<banks.count
+            {
+                self.banks.append(banks[i].bankName ?? "")
+                self.bankID_Names[banks[i].bankName ?? ""] = banks[i].id ?? ""
+            }
+        }
+        else
+        {
+            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+        }
+    }
+    
+    func didFailDataUpdateWithError1(error: Error)
+    {
+        Connection.svprogressHudDismiss(view: self)
+        if error.localizedDescription == "Check Internet Connection"
+        {
+            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+        }
+        else
+        {
+            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+        }
     }
 }

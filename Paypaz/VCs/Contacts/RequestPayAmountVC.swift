@@ -124,6 +124,9 @@ class RequestPayAmountVC : UIViewController {
         //        else if descriptionTextView.isEmptyOrWhitespace(){
         //            self.view.makeToast("Please enter description")
         //        }
+        else if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
+            self.view.makeToast("please enter an amount of minimum 20$")
+        }
         else{
             if sender.viewIndex == 0{
                 if paypazUser ?? false{
@@ -141,10 +144,7 @@ class RequestPayAmountVC : UIViewController {
                 payRequestDataSource.requestPayment()
             }
             else if sender.viewIndex == 1{
-                if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
-                    self.view.makeToast("please send an amount of minimum 20$")
-                }
-                else{
+               
                     if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddMoneyPopupVC") as? AddMoneyPopupVC{
                         vc.successDelegate = self
                         vc.buyTicket = true
@@ -152,17 +152,12 @@ class RequestPayAmountVC : UIViewController {
                         vc.modalPresentationStyle = .overCurrentContext
                         self.present(vc, animated: false, completion: nil)
                     }
-                }
             }
             else{
-                if (((amountTxt.text ?? "") as NSString).integerValue) < 20{
-                    self.view.makeToast("please send an amount of minimum 20$")
-                }
-                else{
+                
                     if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
                         vc.delegate = self
                     }
-                }
             }
         }
     }
