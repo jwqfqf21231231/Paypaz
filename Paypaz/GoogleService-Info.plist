@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>528649712568-22ejb5jhojk74g9suicnkii029chvru5.apps.googleusercontent.com</string>
+	<string>415775731939-n8pjrglote1dfvkmal8lnoqk1nnvr93v.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.528649712568-22ejb5jhojk74g9suicnkii029chvru5</string>
+	<string>com.googleusercontent.apps.415775731939-n8pjrglote1dfvkmal8lnoqk1nnvr93v</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>528649712568-h297g4bvl5gjg0t9c2khgc07fvbg6rsm.apps.googleusercontent.com</string>
+	<string>415775731939-kk95443uhejgd7sjb9j1v2d668f83ngb.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBAAJTZJt_D0Sth30oOvinr3cqfCXDVbqQ</string>
+	<string>AIzaSyBQre0JzEdpcRv4Zz9XNQJsxhtYUeJpGv4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>528649712568</string>
+	<string>415775731939</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.b-In-touch.app</string>
+	<string>demoapp1.com</string>
 	<key>PROJECT_ID</key>
-	<string>b-in-touch-314418</string>
+	<string>paypaz-8e54b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>b-in-touch-314418.appspot.com</string>
+	<string>paypaz-8e54b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:528649712568:ios:30d41acdcb1af7612a954d</string>
+	<string>1:415775731939:ios:02247d209618636d8e95d6</string>
 </dict>
 </plist>

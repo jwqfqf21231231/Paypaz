@@ -46,6 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
     //MARK:- Notifications
+    
+    // When ever you receive any push notification this method will be called automatically
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("--------------------------------------------------------------------")
+        print(userInfo)
+        application.applicationIconBadgeNumber += 1
+        completionHandler(.newData)
+    }
     private func registerForPushNotifications(application:UIApplication) {
         
         //application.applicationIconBadgeNumber = 0
@@ -72,113 +80,102 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
         print("====fail to register notifications=====")
         print(error.localizedDescription)
     }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                        didReceive response: UNNotificationResponse,
-                                        withCompletionHandler completionHandler: @escaping () -> Void) {
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
-//        if let messageID = userInfo[gcmMessageIDKey] {
-//            print("Message ID: \(messageID)")
-//        }
-
-        // Print full message.
         print(userInfo)
         
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "yourStoryboardName", bundle: nil)
-//        let presentViewController = storyBoard.instantiateViewController(withIdentifier: "yourViewControllerStoryboardID") as! YourViewController
-            
-//        presentViewController.yourDict = userInfo //pass userInfo data to viewController
-//        self.window?.rootViewController = presentViewController
-//        presentViewController.present(presentViewController, animated: true, completion: nil)
-        if userInfo["gcm.notification.type"] as! String == "paynow"
-        {
-            let rootViewController = self.window!.rootViewController
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let walletVC = mainStoryboard.instantiateViewController(withIdentifier: "WalletVC") as! WalletVC
-            rootViewController?.navigationController?.popToViewController(walletVC, animated: true)
-        }
+        /* if userInfo["gcm.notification.type"] as! String == "paynow"
+         {
+         let rootViewController = self.window!.rootViewController
+         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+         let walletVC = mainStoryboard.instantiateViewController(withIdentifier: "WalletVC") as! WalletVC
+         rootViewController?.navigationController?.popToViewController(walletVC, animated: true)
+         }*/
         completionHandler()
     }
     
 }
 /*extension AppDelegate : UNUserNotificationCenterDelegate{
-    func registerForPushNotifications()
-    {
-        if #available(iOS 10.0, *)
-        {
-            
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
-                [weak self] (granted, error) in
-                print("Permission granted: \(granted)")
-                
-                guard granted else {
-                    UserDefaults.standard.set("", forKey: "DeviceToken")
-                    return
-                }
-                
-                self?.getNotificationSettings()
-            }
-        } else {
-            let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
-            UIApplication.shared.registerForRemoteNotifications()
-        }
-    }
-    
-    @available(iOS 10.0, *)
-    func getNotificationSettings() {
-        
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-            
-            guard settings.authorizationStatus == .authorized else { return }
-            DispatchQueue.main.async {
-                UIApplication.shared.registerForRemoteNotifications()
-            }
-        }
-    }
-    
-    // APNs device token
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
-        // let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-        let deviceTokenString = deviceToken.reduce("") { $0 + String(format: "%02X", $1) }
-        print("*****************")
-        print("APNs device token: \(deviceTokenString.description)")
-        UserDefaults.standard.set(deviceTokenString, forKey: "DeviceToken")
-    }
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        print("*****************")
-    }
-    
-    
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("*****************")
-        print("Failed to register: \(error)")
-    }
-    
-    func showPermissionAlert(){
-        let alert = UIAlertController(title: "WARNING", message: "Please enable access to Notifications in the Settings app.", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) {[weak self] (alertAction) in
-            self?.gotoAppSettings()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alert.addAction(settingsAction)
-        alert.addAction(cancelAction)
-        DispatchQueue.main.async {
-            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    private func gotoAppSettings() {
-        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else{
-            return
-        }
-        if UIApplication.shared.canOpenURL(settingsUrl) {
-            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                print("Settings opened: \(success)") // Prints true
-            })
-        }
-    }
-    
-}*/
+ func registerForPushNotifications()
+ {
+ if #available(iOS 10.0, *)
+ {
+ 
+ UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+ [weak self] (granted, error) in
+ print("Permission granted: \(granted)")
+ 
+ guard granted else {
+ UserDefaults.standard.set("", forKey: "DeviceToken")
+ return
+ }
+ 
+ self?.getNotificationSettings()
+ }
+ } else {
+ let settings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
+ UIApplication.shared.registerUserNotificationSettings(settings)
+ UIApplication.shared.registerForRemoteNotifications()
+ }
+ }
+ 
+ @available(iOS 10.0, *)
+ func getNotificationSettings() {
+ 
+ UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+ 
+ guard settings.authorizationStatus == .authorized else { return }
+ DispatchQueue.main.async {
+ UIApplication.shared.registerForRemoteNotifications()
+ }
+ }
+ }
+ 
+ // APNs device token
+ func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+ // let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
+ let deviceTokenString = deviceToken.reduce("") { $0 + String(format: "%02X", $1) }
+ print("*****************")
+ print("APNs device token: \(deviceTokenString.description)")
+ UserDefaults.standard.set(deviceTokenString, forKey: "DeviceToken")
+ }
+ func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+ print("*****************")
+ }
+ 
+ 
+ 
+ func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+ print("*****************")
+ print("Failed to register: \(error)")
+ }
+ 
+ func showPermissionAlert(){
+ let alert = UIAlertController(title: "WARNING", message: "Please enable access to Notifications in the Settings app.", preferredStyle: .alert)
+ let settingsAction = UIAlertAction(title: "Settings", style: .default) {[weak self] (alertAction) in
+ self?.gotoAppSettings()
+ }
+ let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+ alert.addAction(settingsAction)
+ alert.addAction(cancelAction)
+ DispatchQueue.main.async {
+ self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+ }
+ }
+ 
+ private func gotoAppSettings() {
+ guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else{
+ return
+ }
+ if UIApplication.shared.canOpenURL(settingsUrl) {
+ UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+ print("Settings opened: \(success)") // Prints true
+ })
+ }
+ }
+ 
+ }*/
 

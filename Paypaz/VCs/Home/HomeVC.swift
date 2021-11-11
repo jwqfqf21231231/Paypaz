@@ -20,10 +20,18 @@ class HomeVC : CustomViewController {
   
     private let GetCartItemsDataSource = AddToCartDataModel()
     var Items = [CartInfo]()
-
+    @IBOutlet weak var redIcon : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         getCartItems()
+        let applicationBadgeNumber = UIApplication.shared.applicationIconBadgeNumber
+        print("Application Badge Number : \(applicationBadgeNumber)")
+        if applicationBadgeNumber > 0 {
+            redIcon.alpha = 1
+        }
+        else{
+            redIcon.alpha = 0
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(showPopupForPaymentSuccess(notification:)), name: NSNotification.Name("ShowPopUp"), object: nil)
     }
     
@@ -47,6 +55,8 @@ class HomeVC : CustomViewController {
         _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
+        redIcon.alpha = 0
+        _ = UIApplication.shared.applicationIconBadgeNumber = 0
         _ = self.pushVC("NotificationsListVC")
     }
     

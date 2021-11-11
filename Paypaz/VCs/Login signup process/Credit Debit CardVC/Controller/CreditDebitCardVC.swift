@@ -50,6 +50,7 @@ class CreditDebitCardVC : CardViewController {
         self.hideKeyboardWhenTappedArround()
         if strictlyPrimary ?? false{
             self.primarySwitch.setOn(true, animated: false)
+            self.primarySwitch.thumbTintColor = UIColor(named: "GreenColor")
             self.primarySwitch.isUserInteractionEnabled = false
             self.isPrimaryOrNot = "1"
         }
@@ -67,7 +68,15 @@ class CreditDebitCardVC : CardViewController {
         // Do any additional setup after loading the view.
     }
     @objc func isPrimaryOrNot(_ sender:UISwitch){
-        sender.isOn == true ? (isPrimaryOrNot = "1") : (isPrimaryOrNot = "0")
+        if sender.isOn == true{
+            isPrimaryOrNot = "1"
+            sender.thumbTintColor = UIColor(named: "GreenColor")
+        }
+        else{
+            isPrimaryOrNot = "0"
+            sender.thumbTintColor = UIColor.lightGray
+        }
+//        sender.isOn == true ? (isPrimaryOrNot = "1") : (isPrimaryOrNot = "0")
     }
     func showDatePicker(){
         //Formate Date
