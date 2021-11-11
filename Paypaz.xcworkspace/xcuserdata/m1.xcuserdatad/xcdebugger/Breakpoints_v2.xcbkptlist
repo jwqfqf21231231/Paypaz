@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1637E7A2-E002-4D37-900E-C42D636E30B8"
+            uuid = "8D51C668-41BD-4FB9-B353-2727A5139A3C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/Host Event/Controller/InviteMembersVC.swift"
+            filePath = "Paypaz/VCs/Login signup process/Credit Debit CardVC/Controller/CreditDebitCardVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "btn_InvitedMember(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6AF8D054-4D38-45D4-864D-3A1770F63ADD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/Host Event/Controller/InviteMembersVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "fetchContacts()"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "btn_back(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

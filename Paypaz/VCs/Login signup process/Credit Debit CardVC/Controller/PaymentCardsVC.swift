@@ -44,6 +44,7 @@ class PaymentCardsVC: UIViewController {
                 vc.strictlyPrimary = true
             }
             vc.fromSettings = true
+            vc.existingCards = existingCards
             vc.addNewCardDelegate = self
         }
     }

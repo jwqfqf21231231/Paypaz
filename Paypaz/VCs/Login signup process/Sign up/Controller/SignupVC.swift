@@ -207,6 +207,7 @@ extension SignupVC : SignUpDataModelDelegate
         {
             print("==========================================")
             print("User Token is : \(data.data?.token ?? "")")
+            UserDefaults.standard.setLoggedIn(value: data.data?.isLoggedIN ?? "")
             UserDefaults.standard.setUserID(value: data.data?.id ?? "")
             UserDefaults.standard.setRegisterToken(value: data.data?.token ?? "")
             UserDefaults.standard.setEmail(value: data.data?.email ?? "")

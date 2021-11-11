@@ -85,6 +85,7 @@ extension HomeVC : GetCartItemsDataModelDelegate{
             self.Items = data.data ?? []
             self.cartCountLabel.alpha = 1
             self.cartCountLabel.text = "\(self.Items.count)"
+            UserDefaults.standard.setValue(self.Items.count, forKey: "CartCount")
         }
         else
         {

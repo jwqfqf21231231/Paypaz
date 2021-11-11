@@ -54,6 +54,20 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
         application.applicationIconBadgeNumber += 1
         completionHandler(.newData)
     }
+    // When app is open then willPresent will call
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("----------UNUserNotificationCenter, willPresent notification--------------")
+        completionHandler([.alert, .sound, .badge])
+    }
+    func applicationDidEnterForeground(_ application: UIApplication) {
+        if application.applicationIconBadgeNumber > 0{
+            UserDefaults.standard.setNotification_Dot(value: true)
+        }
+        else{
+            UserDefaults.standard.setNotification_Dot(value: false)
+        }
+        application.applicationIconBadgeNumber = 0
+    }
     private func registerForPushNotifications(application:UIApplication) {
         
         //application.applicationIconBadgeNumber = 0

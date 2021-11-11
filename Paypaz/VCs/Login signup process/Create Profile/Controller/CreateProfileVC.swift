@@ -214,7 +214,7 @@ extension CreateProfileVC : CreateProfileDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            UserDefaults.standard.set(data.data?.isProfile, forKey: "isProfile")
+            UserDefaults.standard.set(data.data?.isProfile ?? "", forKey: "isProfile")
             _ = self.pushVC("CreatePasscodeVC",animated: false)
         }
         else

@@ -12,9 +12,28 @@ class SettingsVC : CustomViewController {
     
     private let dataSource = NotificationDataModel()
     @IBOutlet weak var swt_Notification : UISwitch!
+    @IBOutlet weak var notificationIcon : UIButton!
+    @IBOutlet weak var cartCountLabel : UILabel!{
+        didSet{
+            cartCountLabel.layer.cornerRadius = cartCountLabel.frame.height/2
+            cartCountLabel.layer.masksToBounds = true
+        }
+    }
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        if UserDefaults.standard.getNotification_Dot() == true{
+            notificationIcon.setImage(UIImage(named: "bell_green"), for: .normal)
+        }
+        else{
+            notificationIcon.setImage(UIImage(named: "bell_white"), for: .normal)
+        }
+        if UserDefaults.standard.object(forKey: "CartCount") != nil{
+            cartCountLabel.text = "\(String(describing: (UserDefaults.standard.object(forKey: "CartCount") as! Int)))"
+        }
+        else{
+            cartCountLabel.alpha = 0
+        }
         setNotificationStatus()
         swt_Notification.addTarget(self, action: #selector(notificationChange(_:)), for: .valueChanged)
     }
@@ -57,6 +76,7 @@ class SettingsVC : CustomViewController {
     //MARK:- --- Action ----
     @IBAction func btn_Back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
+        
     }
     @IBAction func btn_Cart(_ sender:UIButton) {
         _ = self.pushVC("MyCartVC")

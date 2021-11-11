@@ -10,15 +10,15 @@ import Foundation
 
 extension UserDefaults
 {
-//    func setLoggedIn(value: Bool)
-//    {
-//        set(value, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-//    }
-//
-//    func isLoggedIn()-> Bool
-//    {
-//        return bool(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-//    }
+    func setNotification_Dot(value: Bool)
+    {
+        set(value, forKey: UserDefaultsKeys.notification_Dot.rawValue)
+    }
+
+    func getNotification_Dot()-> Bool
+    {
+        return bool(forKey: UserDefaultsKeys.notification_Dot.rawValue)
+    }
     func setCartCountToken(value: String)
     {
         set(value, forKey: UserDefaultsKeys.cartCount.rawValue)
@@ -261,5 +261,6 @@ enum UserDefaultsKeys : String
     case day
     case fireBase
     case cartCount
+    case notification_Dot
 }
 

@@ -144,7 +144,13 @@ class RequestPayAmountVC : UIViewController {
                 payRequestDataSource.requestPayment()
             }
             else if sender.viewIndex == 1{
-               
+                if UserDefaults.standard.value(forKey: "isVerifyCard") as! String != "1"{
+                    if let popupVC = self.presentPopUpVC("DeleteEventPopupVC", animated: false) as? DeleteEventPopupVC{
+                        popupVC.selectedPopupType = .AddCard
+                        popupVC.popUpScreenDelegate = self
+                    }
+                }
+                else{
                     if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddMoneyPopupVC") as? AddMoneyPopupVC{
                         vc.successDelegate = self
                         vc.buyTicket = true
@@ -152,6 +158,11 @@ class RequestPayAmountVC : UIViewController {
                         vc.modalPresentationStyle = .overCurrentContext
                         self.present(vc, animated: false, completion: nil)
                     }
+                    
+                    
+                }
+                
+                    
             }
             else{
                 
@@ -213,6 +224,14 @@ class RequestPayAmountVC : UIViewController {
     }
 }
 //MARK:- ---- Extension ----
+extension RequestPayAmountVC : PopUpScreenDelegate{
+    func popUpScreen() {
+        if let vc = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC{
+            vc.strictlyPrimary = true
+            vc.fromSettings = true
+        }
+    }
+}
 extension RequestPayAmountVC : SendBackPinCodeDelegate{
     func sendBackPinCode(pin: String) {
         payNowDataSource.paymentMethod = "2"

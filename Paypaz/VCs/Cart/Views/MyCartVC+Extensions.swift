@@ -48,7 +48,7 @@ extension MyCartVC : GetCartItemsDataModelDelegate{
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            self.view.makeToast(data.message ?? "", duration: 3.0, position: .center)
         }
     }
     

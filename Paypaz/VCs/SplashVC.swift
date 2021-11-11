@@ -15,48 +15,44 @@ class SplashVC : CustomViewController {
         super.viewDidLoad()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
-            if UserDefaults.standard.getLoggedIn() == "1"
+
+            if UserDefaults.standard.getLoggedIn() == "1" && UserDefaults.standard.value(forKey: "isVerify") as? String == "1" && UserDefaults.standard.value(forKey: "isPasscode") as? String == "1" && UserDefaults.standard.value(forKey: "isPin") as? String == "1" /*&& UserDefaults.standard.value(forKey: "isVerifyCard") as? String == "1"*/
             {
-                if UserDefaults.standard.value(forKey: "isVerify") as? String == "1" && UserDefaults.standard.value(forKey: "isPasscode") as? String == "1" && UserDefaults.standard.value(forKey: "isPin") as? String == "1" /*&& UserDefaults.standard.value(forKey: "isVerifyCard") as? String == "1"*/
-                {
-                    _ = self?.pushVC("PasscodeVC")
-                }
-                else
-                {
-                    if UserDefaults.standard.value(forKey: "isVerify") as? String != "1"
-                    {
-                        _ = self?.pushVC("OTPVerificationVC")
-                    }
-                    else if UserDefaults.standard.value(forKey: "isProfile") as? String != "1"
-                    {
-                        _ = self?.pushVC("CreateProfileVC")
-                    }
-                    else if UserDefaults.standard.value(forKey: "isPasscode") as? String != "1"
-                    {
-                        _ = self?.pushVC("CreatePasscodeVC")
-                    }
-                    else if UserDefaults.standard.value(forKey: "isPin") as? String != "1"
-                    {
-                        if let vc = self?.pushVC("CreatePinVC") as? CreatePinVC
-                        {
-                            vc.isCreatingPin = true
-                        }
-                    }
-                    /*else if UserDefaults.standard.value(forKey: "isVerifyCard") as? String != "1"
-                     {
-                     if let vc = self?.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
-                     {
-                     vc.fromPin = true
-                     }
-                     }*/
-                }
+                _ = self?.pushVC("PasscodeVC")
             }
             else
             {
-                self?.getLocation()
-                _ = self?.pushVC("WelcomeVC")
+                if UserDefaults.standard.getLoggedIn() != "1"{
+                    self?.getLocation()
+                    _ = self?.pushVC("WelcomeVC")
+                }
+                else if UserDefaults.standard.value(forKey: "isVerify") as? String != "1"
+                {
+                    _ = self?.pushVC("OTPVerificationVC")
+                }
+                else if UserDefaults.standard.value(forKey: "isProfile") as? String != "1"
+                {
+                    _ = self?.pushVC("CreateProfileVC")
+                }
+                else if UserDefaults.standard.value(forKey: "isPasscode") as? String != "1"
+                {
+                    _ = self?.pushVC("CreatePasscodeVC")
+                }
+                else if UserDefaults.standard.value(forKey: "isPin") as? String != "1"
+                {
+                    if let vc = self?.pushVC("CreatePinVC") as? CreatePinVC
+                    {
+                        vc.isCreatingPin = true
+                    }
+                }
+                /*else if UserDefaults.standard.value(forKey: "isVerifyCard") as? String != "1"
+                 {
+                 if let vc = self?.pushVC("CreditDebitCardVC") as? CreditDebitCardVC
+                 {
+                 vc.fromPin = true
+                 }
+                 }*/
             }
-            
         }
     }
     // MARK:- Getting Current Location

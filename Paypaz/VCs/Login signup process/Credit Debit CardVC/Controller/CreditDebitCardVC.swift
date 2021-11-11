@@ -26,6 +26,7 @@ class CreditDebitCardVC : CardViewController {
     var maxLength = 3
     var strictlyPrimary : Bool?
     var madePrimary : Bool?
+    var existingCards : [CardsList]?
     //Date Picker
     //var picker = MonthYearPickerView()
     let datePicker = ShortDatePickerView()
@@ -181,7 +182,11 @@ class CreditDebitCardVC : CardViewController {
     @IBAction func btn_back(_ sender:UIButton) {
         if fromPin
         {
-            self.showAlert(withMsg: "You have already entered Pin", withOKbtn: true)
+            for vc in self.navigationController?.viewControllers ?? [] {
+                if let loginVC = vc as? LoginVC {
+                    self.navigationController?.popToViewController(loginVC, animated: true)
+                }
+            }
         }
         else
         {
@@ -196,7 +201,6 @@ class CreditDebitCardVC : CardViewController {
         {
             if validateFields() == true
             {
-                Connection.svprogressHudShow(view: self)
                 dataSource.cardNumber = txt_cardNumber.text ?? ""
                 dataSource.expDate = txt_expDate.text ?? ""
                 dataSource.cardHolderName = txt_cardHolderName.text ?? ""
@@ -204,11 +208,24 @@ class CreditDebitCardVC : CardViewController {
                 dataSource.status = isPrimaryOrNot
                 dataSource.cardName = cardName
                 if cardID != ""{
+                    Connection.svprogressHudShow(view: self)
                     dataSource.cardID = self.cardID
                     dataSource.updateCard()
                 }
                 else{
-                    dataSource.createCard()
+                    if (existingCards?.firstIndex (where: {(abc) -> Bool in
+                        abc.cardNumber == txt_cardNumber.text ?? ""
+                    })) != nil{
+                        self.showAlert(withMsg: "This card is already added. Please try to add new card", withOKbtn: true)
+                        self.txt_cardNumber.text?.removeAll()
+                        self.txt_expDate.text?.removeAll()
+                        self.txt_cardHolderName.text?.removeAll()
+                        self.txt_cvv.text?.removeAll()
+                    }
+                    else{
+                        Connection.svprogressHudShow(view: self)
+                        dataSource.createCard()
+                    }
                 }
             }
         }
