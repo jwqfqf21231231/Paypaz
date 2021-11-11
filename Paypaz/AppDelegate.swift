@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window : UIWindow?
     var isNetworkConnected : Bool?
-    
+    var notificationsFetched :(() -> ())?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -57,6 +57,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
     // When app is open then willPresent will call
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("----------UNUserNotificationCenter, willPresent notification--------------")
+        notificationsFetched?()
         completionHandler([.alert, .sound, .badge])
     }
     func applicationDidEnterForeground(_ application: UIApplication) {

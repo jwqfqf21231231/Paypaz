@@ -34,8 +34,17 @@ class SettingsVC : CustomViewController {
         else{
             cartCountLabel.alpha = 0
         }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.notificationsFetched = {
+            self.notificationIcon.setImage(UIImage(named: "bell_green"), for: .normal)
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(removeDotFromNotification(notification:)), name: NSNotification.Name("RemoveDotInSettingsVC"), object: nil)
         setNotificationStatus()
         swt_Notification.addTarget(self, action: #selector(notificationChange(_:)), for: .valueChanged)
+    }
+    @objc func removeDotFromNotification(notification: Notification)
+    {
+        notificationIcon.setImage(UIImage(named: "bell_white"), for: .normal)
     }
     private func setNotificationStatus()
     {
@@ -82,6 +91,9 @@ class SettingsVC : CustomViewController {
         _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
+        UserDefaults.standard.setNotification_Dot(value: false)
+        notificationIcon.setImage(UIImage(named: "bell_white"), for: .normal)
+        NotificationCenter.default.post(name: NSNotification.Name("RemoveDotInHomeVC"), object: nil, userInfo: nil)
         _ = self.pushVC("NotificationsListVC")
     }
     @IBAction func btn_AddBank(_ sender:UIButton) {

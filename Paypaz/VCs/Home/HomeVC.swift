@@ -17,24 +17,30 @@ class HomeVC : CustomViewController {
             cartCountLabel.layer.masksToBounds = true
         }
     }
-  
+    @IBOutlet weak var notificationIcon : UIButton!
     private let GetCartItemsDataSource = AddToCartDataModel()
     var Items = [CartInfo]()
-    @IBOutlet weak var redIcon : UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         getCartItems()
-        let applicationBadgeNumber = UIApplication.shared.applicationIconBadgeNumber
-        print("Application Badge Number : \(applicationBadgeNumber)")
-        if applicationBadgeNumber > 0 {
-            redIcon.alpha = 1
+   
+        if UserDefaults.standard.getNotification_Dot() == true{
+            notificationIcon.setImage(UIImage(named: "notification_red_with_dot"), for: .normal)
         }
         else{
-            redIcon.alpha = 0
+            notificationIcon.setImage(UIImage(named: "notification_red"), for: .normal)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(showPopupForPaymentSuccess(notification:)), name: NSNotification.Name("ShowPopUp"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeDotFromNotification(notification:)), name: NSNotification.Name("RemoveDotInHomeVC"), object: nil)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.notificationsFetched = {
+            self.notificationIcon.setImage(UIImage(named: "notification_red_with_dot"), for: .normal)
+        }
     }
-    
+    @objc func removeDotFromNotification(notification: Notification)
+    {
+        notificationIcon.setImage(UIImage(named: "notification_red"), for: .normal)
+    }
     @objc func showPopupForPaymentSuccess(notification: Notification)
     {
         getCartItems()
@@ -55,8 +61,9 @@ class HomeVC : CustomViewController {
         _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
-        redIcon.alpha = 0
-        _ = UIApplication.shared.applicationIconBadgeNumber = 0
+        UserDefaults.standard.setNotification_Dot(value: false)
+        notificationIcon.setImage(UIImage(named: "notification_red"), for: .normal)
+        NotificationCenter.default.post(name: NSNotification.Name("RemoveDotInSettingsVC"), object: nil, userInfo: nil)
         _ = self.pushVC("NotificationsListVC")
     }
     

@@ -17863,7 +17863,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHW-aY-aMU" userLabel="Notification Button">
                                         <rect key="frame" x="374" y="48" width="30" height="30"/>
-                                        <state key="normal" image="notification1"/>
+                                        <state key="normal" image="notification_red"/>
                                         <connections>
                                             <action selector="btn_Notification:" destination="Ynk-7a-JfF" eventType="touchUpInside" id="BTr-d7-URR"/>
                                         </connections>
@@ -17900,13 +17900,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                             <action selector="btn_PaypazSecureMoney:" destination="Ynk-7a-JfF" eventType="touchUpInside" id="v0K-p7-Id6"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_dot" translatesAutoresizingMaskIntoConstraints="NO" id="nIR-Nv-gjb">
-                                        <rect key="frame" x="395.5" y="49.5" width="5" height="5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="79b-GA-HdC"/>
-                                            <constraint firstAttribute="width" constant="5" id="Zeb-wV-714"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -17917,7 +17910,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                     <constraint firstItem="Wmk-nG-tSu" firstAttribute="width" secondItem="ehE-5q-2Hk" secondAttribute="width" multiplier="0.98" id="RLb-Ms-Qeo"/>
                                     <constraint firstItem="hHW-aY-aMU" firstAttribute="height" secondItem="ACI-TJ-khx" secondAttribute="height" multiplier="0.6" id="S9B-Wi-5sX"/>
                                     <constraint firstItem="S8E-ms-VIr" firstAttribute="height" secondItem="hHW-aY-aMU" secondAttribute="height" id="XCN-eS-OEm"/>
-                                    <constraint firstItem="nIR-Nv-gjb" firstAttribute="centerX" secondItem="hHW-aY-aMU" secondAttribute="trailing" constant="-6" id="b7C-m0-uh3"/>
                                     <constraint firstItem="zzL-SV-Z1o" firstAttribute="centerY" secondItem="S8E-ms-VIr" secondAttribute="top" id="d47-UT-sZB"/>
                                     <constraint firstItem="S8E-ms-VIr" firstAttribute="width" secondItem="hHW-aY-aMU" secondAttribute="width" id="kI6-21-wza"/>
                                     <constraint firstItem="hHW-aY-aMU" firstAttribute="centerY" secondItem="ACI-TJ-khx" secondAttribute="centerY" id="q6G-eh-SeR"/>
@@ -17925,7 +17917,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                                     <constraint firstItem="zzL-SV-Z1o" firstAttribute="centerX" secondItem="S8E-ms-VIr" secondAttribute="trailing" id="sGa-8I-0e7"/>
                                     <constraint firstItem="S8E-ms-VIr" firstAttribute="centerY" secondItem="hHW-aY-aMU" secondAttribute="centerY" id="teR-9x-FjJ"/>
                                     <constraint firstItem="hHW-aY-aMU" firstAttribute="leading" secondItem="S8E-ms-VIr" secondAttribute="trailing" constant="10" id="v1V-2A-VBI"/>
-                                    <constraint firstItem="nIR-Nv-gjb" firstAttribute="centerY" secondItem="hHW-aY-aMU" secondAttribute="top" constant="4" id="w8R-HB-KFx"/>
                                     <constraint firstItem="hHW-aY-aMU" firstAttribute="width" secondItem="ACI-TJ-khx" secondAttribute="width" multiplier="0.6" id="wNI-l5-ZwQ"/>
                                     <constraint firstItem="ACI-TJ-khx" firstAttribute="leading" secondItem="ehE-5q-2Hk" secondAttribute="leading" id="y1Q-UI-avh"/>
                                 </constraints>
@@ -18113,7 +18104,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui vitae odi
                     <navigationItem key="navigationItem" id="xkD-0g-lOu"/>
                     <connections>
                         <outlet property="cartCountLabel" destination="zzL-SV-Z1o" id="nta-ZW-Jqd"/>
-                        <outlet property="redIcon" destination="nIR-Nv-gjb" id="9K8-ea-Jgv"/>
+                        <outlet property="notificationIcon" destination="hHW-aY-aMU" id="Glt-Iq-TDu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUK-an-MmE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -31787,7 +31778,7 @@ TRcABE0fAARNIgAETScABE0vAAAAAAAABAEAAAAAAAAAZwAAAAAAAAAAAAAAAAAETTI
         <image name="material_date" width="14.5" height="16"/>
         <image name="metro_qrcode" width="11.5" height="11.5"/>
         <image name="notification" width="16" height="19"/>
-        <image name="notification1" width="21" height="24.5"/>
+        <image name="notification_red" width="20.5" height="24.5"/>
         <image name="otp_ticks" width="86" height="86"/>
         <image name="otp_verify" width="168" height="168"/>
         <image name="p" width="142" height="142"/>
@@ -31810,7 +31801,6 @@ TRcABE0fAARNIgAETScABE0vAAAAAAAABAEAAAAAAAAAZwAAAAAAAAAAAAAAAAAETTI
         <image name="qr-code_green" width="30.5" height="30.5"/>
         <image name="qr_codes" width="217" height="217"/>
         <image name="red" width="51" height="42"/>
-        <image name="red_dot" width="4" height="4"/>
         <image name="request_green" width="24" height="24"/>
         <image name="right_arrow" width="23" height="15.5"/>
         <image name="salary_tick" width="67.5" height="70"/>
