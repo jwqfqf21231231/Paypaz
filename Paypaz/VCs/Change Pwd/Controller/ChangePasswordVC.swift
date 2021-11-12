@@ -133,8 +133,8 @@ class ChangePasswordVC : CustomViewController {
             else
             {
                 Connection.svprogressHudShow(view: self)
-                dataSource.oldPassword = txt_OldPwd.text!
-                dataSource.newPassword = txt_NewPassword.text!
+                dataSource.oldPassword = txt_OldPwd.text?.trim() ?? ""
+                dataSource.newPassword = txt_NewPassword.text?.trim() ?? ""
                 dataSource.requestPasswordChange()
             }
         }

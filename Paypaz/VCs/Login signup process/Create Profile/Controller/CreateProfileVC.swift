@@ -125,12 +125,12 @@ class CreateProfileVC  : CustomViewController {
         if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
-            dataSource.firstName = txt_firstName.text!
-            dataSource.lastName = txt_lastName.text!
-            dataSource.city = txt_City.text!
-            dataSource.address = txtView_Address.text!
-            dataSource.dateOfBirth = txt_DOB.text!
-            dataSource.state = txt_State.text!
+            dataSource.firstName = txt_firstName.text?.trim() ?? ""
+            dataSource.lastName = txt_lastName.text?.trim() ?? ""
+            dataSource.city = txt_City.text?.trim() ?? ""
+            dataSource.address = txtView_Address.text.trim() 
+            dataSource.dateOfBirth = txt_DOB.text?.trim() ?? ""
+            dataSource.state = txt_State.text?.trim() ?? ""
             dataSource.profilePic = img_Profile.image!
             dataSource.isUpdate = "1"
             dataSource.uploadProImg()
@@ -141,26 +141,32 @@ class CreateProfileVC  : CustomViewController {
     {
         if picSelected == false
         {
-            self.showAlert(withMsg: "Please add your image", withOKbtn: true)
+            self.view.makeToast("Please add your image")
         }
         else if txt_firstName.isEmptyOrWhitespace(){
-            self.showAlert(withMsg: "Please enter your first name", withOKbtn: true)
+            self.view.makeToast("Please enter your first name")
         }
         else if txt_lastName.isEmptyOrWhitespace(){
-            self.showAlert(withMsg: "Please enter Last Name", withOKbtn: true)
+            self.view.makeToast("Please enter your Last Name")
+        }
+        else if txt_firstName.textCount() > 16{
+            self.view.makeToast("Your First Name should be of 16 characters only")
+        }
+        else if txt_lastName.textCount() > 16{
+            self.view.makeToast("Your Last Name should be of 16 characters only")
         }
         else if txt_DOB.isEmptyOrWhitespace(){
-            self.showAlert(withMsg: "Please enter DateOfBirth", withOKbtn: true)
+            self.view.makeToast("Please enter DateOfBirth")
         }
         else if txt_City.isEmptyOrWhitespace(){
-            self.showAlert(withMsg: "Please enter City", withOKbtn: true)
+            self.view.makeToast("Please enter City")
         }
         else if txt_State.isEmptyOrWhitespace(){
-            self.showAlert(withMsg: "Please enter State", withOKbtn: true)
+            self.view.makeToast("Please enter State")
         }
         else if txtView_Address.isEmptyOrWhitespace()
         {
-            self.showAlert(withMsg: "Please enter Address", withOKbtn: true)
+            self.view.makeToast("Please enter Address")
         }
         else
         {

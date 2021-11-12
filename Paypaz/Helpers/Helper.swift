@@ -217,6 +217,9 @@ extension UITextField
         }
         return (self.text!.trimmingCharacters(in: .whitespacesAndNewlines) == "")
     }
+    func textCount() -> Int{
+        return self.text!.trim().count
+    }
     func isEmailValid() -> Bool
     {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

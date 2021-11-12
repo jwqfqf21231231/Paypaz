@@ -60,15 +60,18 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
         notificationsFetched?()
         completionHandler([.alert, .sound, .badge])
     }
-    func applicationDidEnterForeground(_ application: UIApplication) {
-        if application.applicationIconBadgeNumber > 0{
-            UserDefaults.standard.setNotification_Dot(value: true)
-        }
-        else{
-            UserDefaults.standard.setNotification_Dot(value: false)
-        }
-        application.applicationIconBadgeNumber = 0
-    }
+//    func applicationWillEnterForeground(_ application: UIApplication) {
+//        print("")
+//    }
+//    func applicationDidEnterForeground(_ application: UIApplication) {
+//        if application.applicationIconBadgeNumber > 0{
+//            UserDefaults.standard.setNotification_Dot(value: true)
+//            application.applicationIconBadgeNumber = 0
+//        }
+//        else{
+//            UserDefaults.standard.setNotification_Dot(value: false)
+//        }
+//    }
     private func registerForPushNotifications(application:UIApplication) {
         
         //application.applicationIconBadgeNumber = 0

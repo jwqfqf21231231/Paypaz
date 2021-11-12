@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8D51C668-41BD-4FB9-B353-2727A5139A3C"
+            uuid = "59D32625-6144-4145-A44E-C6F72F209E13"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Paypaz/VCs/Login signup process/Credit Debit CardVC/Controller/CreditDebitCardVC.swift"
+            filePath = "Paypaz/VCs/Edit Profile/EditProfileVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "btn_back(_:)"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "btn_Save(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

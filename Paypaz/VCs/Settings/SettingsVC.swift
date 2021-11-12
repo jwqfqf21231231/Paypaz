@@ -19,10 +19,12 @@ class SettingsVC : CustomViewController {
             cartCountLabel.layer.masksToBounds = true
         }
     }
+    let application = UIApplication.shared
+
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.getNotification_Dot() == true{
+        if application.applicationIconBadgeNumber > 0{
             notificationIcon.setImage(UIImage(named: "bell_green"), for: .normal)
         }
         else{
@@ -36,16 +38,24 @@ class SettingsVC : CustomViewController {
         }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.notificationsFetched = {
+            self.application.applicationIconBadgeNumber += 1
             self.notificationIcon.setImage(UIImage(named: "bell_green"), for: .normal)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(removeDotFromNotification(notification:)), name: NSNotification.Name("RemoveDotInSettingsVC"), object: nil)
         setNotificationStatus()
         swt_Notification.addTarget(self, action: #selector(notificationChange(_:)), for: .valueChanged)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        if application.applicationIconBadgeNumber > 0{
+            notificationIcon.setImage(UIImage(named: "bell_green"), for: .normal)
+        }
+    }
+    
     @objc func removeDotFromNotification(notification: Notification)
     {
         notificationIcon.setImage(UIImage(named: "bell_white"), for: .normal)
     }
+    
     private func setNotificationStatus()
     {
         
@@ -59,9 +69,8 @@ class SettingsVC : CustomViewController {
             swt_Notification.setOn(true, animated: false)
             swt_Notification.thumbTintColor = UIColor(named: "GreenColor")
         }
-        
-        
     }
+    
     @objc func notificationChange(_ sender : UISwitch)
     {
         dataSource.delegate = self
@@ -85,22 +94,25 @@ class SettingsVC : CustomViewController {
     //MARK:- --- Action ----
     @IBAction func btn_Back(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
-        
     }
+    
     @IBAction func btn_Cart(_ sender:UIButton) {
         _ = self.pushVC("MyCartVC")
     }
+    
     @IBAction func btn_Notification(_ sender:UIButton) {
-        UserDefaults.standard.setNotification_Dot(value: false)
+        UIApplication.shared.applicationIconBadgeNumber = 0
         notificationIcon.setImage(UIImage(named: "bell_white"), for: .normal)
         NotificationCenter.default.post(name: NSNotification.Name("RemoveDotInHomeVC"), object: nil, userInfo: nil)
         _ = self.pushVC("NotificationsListVC")
     }
+    
     @IBAction func btn_AddBank(_ sender:UIButton) {
         if let vc = self.pushVC("AddBankAccountVC") as? AddBankAccountVC{
             vc.delegate = self
         }
     }
+    
     @IBAction func btn_AddCardDetails(_ sender:UIButton) {
         _ = self.pushVC("PaymentCardsVC")
 //        if let cardVC = self.pushVC("CreditDebitCardVC") as? CreditDebitCardVC {
@@ -108,23 +120,28 @@ class SettingsVC : CustomViewController {
 //            cardVC.isAddingNewCard = false
 //        }
     }
+    
     @IBAction func btn_TermsPolicies(_ sender:UIButton) {
         _ = self.pushVC("TermsPoliciesVC")
     }
+    
     @IBAction func btn_ContactUs(_ sender:UIButton) {
         if let vc = self.pushVC("ContactUsVC") as? ContactUsVC{
             vc.delegate = self
         }
     }
+    
     @IBAction func btn_ChangePassword(_ sender:UIButton) {
         if let vc = self.pushVC("ChangePasswordVC") as? ChangePasswordVC{
             vc.delegate = self
         }
     }
+    
     @IBAction func btn_ChangePhoneNumber(_ sender:UIButton)
     {
         _ = self.pushVC("EditPhoneNoVC")
     }
+    
     @IBAction func btn_P_Logo(_ sender:UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -152,7 +169,7 @@ extension SettingsVC : NotificationModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            //view.makeToast(data.message ?? "")
+            view.makeToast(data.message ?? "")
         }
         else
         {

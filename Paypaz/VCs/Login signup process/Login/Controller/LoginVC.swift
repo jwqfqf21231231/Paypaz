@@ -126,9 +126,9 @@ class LoginVC : UIViewController {
             }
             else
             {
-                dataSource.email = txt_email.text ?? ""
+                dataSource.email = txt_email.text?.trim() ?? ""
             }
-            dataSource.password = txt_Password.text ?? ""
+            dataSource.password = txt_Password.text?.trim() ?? ""
             dataSource.requestLogIn()
         }
     }

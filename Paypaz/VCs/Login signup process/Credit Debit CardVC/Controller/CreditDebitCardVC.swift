@@ -203,7 +203,7 @@ class CreditDebitCardVC : CardViewController {
             {
                 dataSource.cardNumber = txt_cardNumber.text ?? ""
                 dataSource.expDate = txt_expDate.text ?? ""
-                dataSource.cardHolderName = txt_cardHolderName.text ?? ""
+                dataSource.cardHolderName = txt_cardHolderName.text?.trim() ?? ""
                 dataSource.cvv = txt_cvv.text ?? ""
                 dataSource.status = isPrimaryOrNot
                 dataSource.cardName = cardName

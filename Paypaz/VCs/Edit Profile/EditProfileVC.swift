@@ -30,7 +30,7 @@ class EditProfileVC: CustomViewController {
     @IBOutlet weak var txt_State     : RoundTextField!
     @IBOutlet weak var txtView_Address : RoundTextView!
     let MINIMUM_AGE: Date = Calendar.current.date(byAdding: .year, value: -5, to: Date())!;
-
+    
     func createToolBar()->UIToolbar
     {
         //tool bar
@@ -57,8 +57,8 @@ class EditProfileVC: CustomViewController {
         
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
-        txt_DOB.inputView=datePicker
-        txt_DOB.inputAccessoryView=createToolBar()
+        txt_DOB.inputView = datePicker
+        txt_DOB.inputAccessoryView = createToolBar()
     }
     @IBAction func btn_ChooseLocation(_ sender:UIButton)
     {
@@ -132,14 +132,20 @@ class EditProfileVC: CustomViewController {
     @IBAction func btn_Save(_ sender:UIButton) {
         
         if txt_firstName.isEmptyOrWhitespace(){
-            view.makeToast("Please enter your first name")
+            view.makeToast("Please enter your First Name")
         }
         else if txt_lastName.isEmptyOrWhitespace(){
-            view.makeToast("Please enter last Name")
+            view.makeToast("Please enter your Last Name")
+        }
+        else if txt_firstName.textCount() > 16{
+            self.view.makeToast("Your First Name should be of 16 characters only")
+        }
+        else if txt_lastName.textCount() > 16{
+            self.view.makeToast("Your Last Name should be of 16 characters only")
         }
         else if txt_email.isEmptyOrWhitespace()
         {
-            view.makeToast("Please enter email")
+            view.makeToast("Please enter your email")
         }
         else if txt_DOB.isEmptyOrWhitespace(){
             view.makeToast("Please enter date of birth")
@@ -157,13 +163,13 @@ class EditProfileVC: CustomViewController {
         else
         {
             Connection.svprogressHudShow(view: self)
-            dataSource.firstName = txt_firstName.text ?? ""
-            dataSource.lastName = txt_lastName.text ?? ""
-            dataSource.email = txt_email.text ?? ""
-            dataSource.city = txt_City.text ?? ""
-            dataSource.address = txtView_Address.text ?? ""
-            dataSource.dateOfBirth = txt_DOB.text ?? ""
-            dataSource.state = txt_State.text ?? ""
+            dataSource.firstName = txt_firstName.text?.trim() ?? ""
+            dataSource.lastName = txt_lastName.text?.trim() ?? ""
+            dataSource.email = txt_email.text?.trim() ?? ""
+            dataSource.city = txt_City.text?.trim() ?? ""
+            dataSource.address = txtView_Address.text.trim() 
+            dataSource.dateOfBirth = txt_DOB.text?.trim() ?? ""
+            dataSource.state = txt_State.text?.trim() ?? ""
             dataSource.profilePic = img_Profile.image
             dataSource.isUpdate = "0"
             dataSource.uploadProImg()
@@ -263,7 +269,7 @@ extension EditProfileVC : CreateProfileDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            _ = self.pushVC("SideDrawerBaseVC",animated: false)
+            self.navigationController?.popViewController(animated: false)
         }
         else
         {

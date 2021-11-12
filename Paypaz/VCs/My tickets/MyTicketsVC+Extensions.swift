@@ -57,17 +57,16 @@ extension MyTicketsVC : UserTicketsDelegate
         }
         else
         {
-            self.noDataFoundView.alpha = 1
             if data.message == "Data not found" && currentPage-1 >= 1{
                 print("No data at page No : \(currentPage-1)")
                 currentPage = currentPage-1
             }
             else if data.message == "Data not found" && currentPage-1 == 0{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                self.noDataFoundView.alpha = 1
                 self.tickets = []
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                self.noDataFoundView.alpha = 1
             }
         }
     }

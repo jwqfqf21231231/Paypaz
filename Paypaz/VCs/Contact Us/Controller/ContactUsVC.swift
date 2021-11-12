@@ -73,9 +73,9 @@ class ContactUsVC : CustomViewController {
         else
         {
             Connection.svprogressHudShow(view: self)
-            dataSource.email = txt_Email.text ?? ""
-            dataSource.subject = txt_Subject.text ?? ""
-            dataSource.message = txt_Message.text
+            dataSource.email = txt_Email.text?.trim() ?? ""
+            dataSource.subject = txt_Subject.text?.trim() ?? ""
+            dataSource.message = txt_Message.text.trim()
             dataSource.contactAdmin()
         }
     }

@@ -143,8 +143,8 @@ class SignupVC : UIViewController {
             Connection.svprogressHudShow(view: self)
             dataSource.phoneCode = self.apiDailCode
             dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
-            dataSource.email = txt_email.text ?? ""
-            dataSource.password = txt_Password.text ?? ""
+            dataSource.email = txt_email.text?.trim() ?? ""
+            dataSource.password = txt_Password.text?.trim() ?? ""
             dataSource.requestSignUp()
         }
         

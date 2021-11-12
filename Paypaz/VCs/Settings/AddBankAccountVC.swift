@@ -56,8 +56,8 @@ class AddBankAccountVC : CardViewController {
         else if txt_PhoneNo.isEmptyOrWhitespace(){
             view.makeToast("Please enter phone number")
         }
-        else if txt_AccountNumber.text?.count ?? 0 < 11{
-            view.makeToast("Please enter card number at least 11 characters")
+        else if txt_AccountNumber.textCount() < 16{
+            view.makeToast("Please enter card number at least 16 characters")
         }
         else if !txt_EmailID.isEmailValid(){
             view.makeToast("Please enter valid emailID")
@@ -90,8 +90,8 @@ class AddBankAccountVC : CardViewController {
             dataSource.bankID = selected ?? ""
             dataSource.routingNumber = txt_RoutingNumber.text ?? ""
             dataSource.accountNumber = txt_AccountNumber.text ?? ""
-            dataSource.email = txt_EmailID.text ?? ""
-            dataSource.phone = txt_PhoneNo.text ?? ""
+            dataSource.email = txt_EmailID.text?.trim() ?? ""
+            dataSource.phone = txt_PhoneNo.text?.trim() ?? ""
             dataSource.addBankAccount()
         }
     }

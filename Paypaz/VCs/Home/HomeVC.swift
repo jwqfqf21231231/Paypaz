@@ -20,11 +20,13 @@ class HomeVC : CustomViewController {
     @IBOutlet weak var notificationIcon : UIButton!
     private let GetCartItemsDataSource = AddToCartDataModel()
     var Items = [CartInfo]()
+    let application = UIApplication.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getCartItems()
    
-        if UserDefaults.standard.getNotification_Dot() == true{
+        if application.applicationIconBadgeNumber > 0{
             notificationIcon.setImage(UIImage(named: "notification_red_with_dot"), for: .normal)
         }
         else{
@@ -35,6 +37,11 @@ class HomeVC : CustomViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.notificationsFetched = {
             self.notificationIcon.setImage(UIImage(named: "notification_red_with_dot"), for: .normal)
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if application.applicationIconBadgeNumber > 0{
+            notificationIcon.setImage(UIImage(named: "notification_red_with_dot"), for: .normal)
         }
     }
     @objc func removeDotFromNotification(notification: Notification)
@@ -61,7 +68,7 @@ class HomeVC : CustomViewController {
         _ = self.pushVC("MyCartVC")
     }
     @IBAction func btn_Notification(_ sender:UIButton) {
-        UserDefaults.standard.setNotification_Dot(value: false)
+        UIApplication.shared.applicationIconBadgeNumber = 0
         notificationIcon.setImage(UIImage(named: "notification_red"), for: .normal)
         NotificationCenter.default.post(name: NSNotification.Name("RemoveDotInSettingsVC"), object: nil, userInfo: nil)
         _ = self.pushVC("NotificationsListVC")

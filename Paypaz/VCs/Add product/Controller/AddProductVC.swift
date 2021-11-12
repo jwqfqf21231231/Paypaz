@@ -140,9 +140,9 @@ class AddProductVC : UIViewController {
         {
             Connection.svprogressHudShow(view: self)
             dataSource.productPic = img_ProductPic.image
-            dataSource.productName = txt_ProductName.text ?? ""
+            dataSource.productName = txt_ProductName.text?.trim() ?? ""
             dataSource.productQuantity = txt_ProductQuantity.text ?? ""
-            dataSource.productDescription = txt_Description.text ?? ""
+            dataSource.productDescription = txt_Description.text.trim() 
             if paymentStatus == "0"{
                 dataSource.isPaid = "0"
             }

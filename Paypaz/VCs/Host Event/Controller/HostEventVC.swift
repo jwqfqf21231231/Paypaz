@@ -390,8 +390,8 @@ class HostEventVC : UIViewController {
             eD = eD.localToUTC(incomingFormat: "yyyy-MM-dd hh:mm a", outGoingFormat: "yyyy-MM-dd HH:mm:ss")
             
             dataSource.typeId = selectedEventId ?? ""
-            dataSource.name = txt_EventName.text ?? ""
-            dataSource.eventDescription = txt_Description.text ?? ""
+            dataSource.name = txt_EventName.text?.trim() ?? ""
+            dataSource.eventDescription = txt_Description.text.trim()
             dataSource.location = self.location ?? ""
             dataSource.startDate = sD
             dataSource.endDate = eD
@@ -573,6 +573,7 @@ extension HostEventVC : UITextFieldDelegate
             view_PaymentMethod.isHidden = true
             view_Height.constant = 0
             txt_Price.isHidden = true
+            txt_Price.text?.removeAll()
         }
         else{
             self.paymentStatus = "0"
