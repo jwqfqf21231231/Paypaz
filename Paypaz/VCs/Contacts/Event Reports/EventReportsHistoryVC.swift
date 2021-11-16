@@ -10,17 +10,37 @@ import UIKit
 
 class EventReportsHistoryVC : CustomViewController {
     
-    @IBOutlet weak var tableView_Contacts : UITableView! {
+    @IBOutlet weak var tableView_Events : UITableView! {
         didSet {
-            tableView_Contacts.dataSource = self
-            tableView_Contacts.delegate   = self
+            tableView_Events.dataSource = self
+            tableView_Events.delegate   = self
         }
     }
-   
+    @IBOutlet weak var noDataFoundView : UIView!
+
+    let dataSource = MyEventsListDataModel()
+    var events = [MyEvent]()
+    var newEventItems = [MyEvent]()
+    var currentPage = 1
+
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
+        Connection.svprogressHudShow(view: self)
+        dataSource.delegate = self
+        dataSource.pageNo = "0"
+        dataSource.getMyEvents()
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+            if currentPage*10 == self.events.count{
+                Connection.svprogressHudShow(view: self)
+                dataSource.pageNo = "\(currentPage)"
+                currentPage = currentPage + 1
+                dataSource.getMyEvents()
+            }
+        }
     }
     // MARK: - --- Action ----
     @IBAction func btn_back(_ sender:UIButton) {

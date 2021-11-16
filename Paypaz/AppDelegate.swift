@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window = UIWindow(frame: UIScreen.main.bounds)
             self.window?.overrideUserInterfaceStyle = .light
         }
+        
         // Setting The google api key
         GMSPlacesClient.provideAPIKey("AIzaSyA5S2wr0I-x6Yp3HibMdjcAdIlZ9Gz0Cw0")
         GMSServices.provideAPIKey("AIzaSyD-X6F-HVtLHmYXeFNWz2z0Fi6ICqrW6_4")
@@ -60,6 +61,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
         notificationsFetched?()
         completionHandler([.alert, .sound, .badge])
     }
+    
 //    func applicationWillEnterForeground(_ application: UIApplication) {
 //        print("")
 //    }
@@ -72,6 +74,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
 //            UserDefaults.standard.setNotification_Dot(value: false)
 //        }
 //    }
+    
     private func registerForPushNotifications(application:UIApplication) {
         
         //application.applicationIconBadgeNumber = 0
@@ -91,7 +94,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("=================================")
         print("refreshed token is : \(String(describing: fcmToken))")
-        //UserData.FCMToken = fcmToken ?? ""
         UserDefaults.standard.setFireBaseToken(value: fcmToken ?? "")
     }
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -101,7 +103,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate, MessagingDelegate{
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+                                withCompletionHandler completionHandler: @escaping () -> Void)
+    {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
         

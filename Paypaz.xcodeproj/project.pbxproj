@@ -214,6 +214,11 @@
 		6A0BF26627294E730035BC37 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BF26527294E730035BC37 /* UITableViewExtension.swift */; };
 		6A8475CA27217760009E68EE /* PayNowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8475C927217760009E68EE /* PayNowDataModel.swift */; };
 		6F269341273CEE0E00BE9F25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F269340273CEE0E00BE9F25 /* GoogleService-Info.plist */; };
+		6FE8E32F27438C5D0068B04C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE8E32E27438C5D0068B04C /* NetworkExtension.framework */; };
+		6FE8E33427438DCE0068B04C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE8E33327438DCE0068B04C /* WebKit.framework */; };
+		6FE8E339274395540068B04C /* Terms&PoliciesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8E338274395540068B04C /* Terms&PoliciesDataModel.swift */; };
+		6FE8E33E274399B70068B04C /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8E33D274399B70068B04C /* ProgressBarView.swift */; };
+		6FE8E3442743B3690068B04C /* EventReportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8E3432743B3690068B04C /* EventReportDataModel.swift */; };
 		A50F0BC43664C4D0325EBC4C /* Pods_Paypaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64926787840882CB11A46A4D /* Pods_Paypaz.framework */; };
 		F90A197394CB3972AA9A7C27 /* Pods_PaypazTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */; };
 /* End PBXBuildFile section */
@@ -453,6 +458,11 @@
 		6A8475C927217760009E68EE /* PayNowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayNowDataModel.swift; sourceTree = "<group>"; };
 		6BF24CEF0750E0B070A2878B /* Pods-Paypaz-PaypazUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paypaz-PaypazUITests.debug.xcconfig"; path = "Target Support Files/Pods-Paypaz-PaypazUITests/Pods-Paypaz-PaypazUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6F269340273CEE0E00BE9F25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6FE8E32E27438C5D0068B04C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		6FE8E33327438DCE0068B04C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		6FE8E338274395540068B04C /* Terms&PoliciesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Terms&PoliciesDataModel.swift"; sourceTree = "<group>"; };
+		6FE8E33D274399B70068B04C /* ProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		6FE8E3432743B3690068B04C /* EventReportDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventReportDataModel.swift; sourceTree = "<group>"; };
 		799FBE6824922A2A52E8A3C2 /* Pods-Paypaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paypaz.release.xcconfig"; path = "Target Support Files/Pods-Paypaz/Pods-Paypaz.release.xcconfig"; sourceTree = "<group>"; };
 		F2C9DADC1B2EFF4F5BFC49F3 /* Pods-PaypazTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaypazTests.release.xcconfig"; path = "Target Support Files/Pods-PaypazTests/Pods-PaypazTests.release.xcconfig"; sourceTree = "<group>"; };
 		F484B9A30702340FC773B76E /* Pods-PaypazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaypazTests.debug.xcconfig"; path = "Target Support Files/Pods-PaypazTests/Pods-PaypazTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -466,6 +476,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50F0BC43664C4D0325EBC4C /* Pods_Paypaz.framework in Frameworks */,
+				6FE8E32F27438C5D0068B04C /* NetworkExtension.framework in Frameworks */,
+				6FE8E33427438DCE0068B04C /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +695,7 @@
 			children = (
 				04B5E28A26B0345100333E94 /* NotificationDataModel.swift */,
 				0447C90B26C39EAD0030FB7F /* EditPhoneNoDataModel.swift */,
+				6FE8E338274395540068B04C /* Terms&PoliciesDataModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -1519,6 +1532,7 @@
 		44C8F2CD261F1C09000F03DB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6FE8E33D274399B70068B04C /* ProgressBarView.swift */,
 				0485A4FE2701B07200DF3AF3 /* PickerClass.swift */,
 				043CC9CF26EA0FF300118EA8 /* DateExtension.swift */,
 				040A4F5526D8A124009C0581 /* CornerViewSide.swift */,
@@ -1542,6 +1556,7 @@
 				44C8F2CF261F1CA9000F03DB /* SplashVC.swift */,
 				44C8F2D5261F1ECF000F03DB /* WelcomeVC.swift */,
 				44E559282632E8EA00193305 /* QRCodeScannerVC.swift */,
+				6FE8E3422743B3430068B04C /* EventReport */,
 				445433E9262DA89200443AE1 /* Cells */,
 				445433DE262D68A700443AE1 /* Login signup process */,
 				44F76665263A9015007F78CB /* Buy Event */,
@@ -1549,7 +1564,6 @@
 				44E5592A2632EC0400193305 /* Contacts */,
 				0485EF89271EE31800DF78C8 /* Payment Request */,
 				445C77A22637E51400AD4DF3 /* Favourite List */,
-				445C77B02638152F00AD4DF3 /* EventReportVC.swift */,
 				445C77A72637F5EE00AD4DF3 /* InvitesList */,
 				445C77992637CD3A00AD4DF3 /* MyEventsList */,
 				44E559212632C80000193305 /* Cart */,
@@ -1714,9 +1728,20 @@
 			path = ProductsList;
 			sourceTree = "<group>";
 		};
+		6FE8E3422743B3430068B04C /* EventReport */ = {
+			isa = PBXGroup;
+			children = (
+				6FE8E3432743B3690068B04C /* EventReportDataModel.swift */,
+				445C77B02638152F00AD4DF3 /* EventReportVC.swift */,
+			);
+			path = EventReport;
+			sourceTree = "<group>";
+		};
 		DBC30865E086A4E6645C3473 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FE8E33327438DCE0068B04C /* WebKit.framework */,
+				6FE8E32E27438C5D0068B04C /* NetworkExtension.framework */,
 				64926787840882CB11A46A4D /* Pods_Paypaz.framework */,
 				FA7ABF97171B380D58D78520 /* Pods_Paypaz_PaypazUITests.framework */,
 				076CF7F9C65476006AABEC09 /* Pods_PaypazTests.framework */,
@@ -2038,6 +2063,7 @@
 				0C388B19268F4962008AED6F /* HostEventModel.swift in Sources */,
 				445433D1262D5DF700443AE1 /* SuccessPopupVC.swift in Sources */,
 				0CB39D1F268B3F950002E585 /* CreateProfileDataModel.swift in Sources */,
+				6FE8E33E274399B70068B04C /* ProgressBarView.swift in Sources */,
 				44F76672263AB645007F78CB /* FilterVC.swift in Sources */,
 				445433E1262D68D200443AE1 /* HomeVC.swift in Sources */,
 				445433D7262D603C00443AE1 /* PasscodeVC.swift in Sources */,
@@ -2105,10 +2131,12 @@
 				0C00BFDF268EE11C00BC3267 /* UserDetailsModel.swift in Sources */,
 				44E559272632E80C00193305 /* QRScannerView.swift in Sources */,
 				0485A4C727017F8D00DF3AF3 /* GetWalletAmount.swift in Sources */,
+				6FE8E339274395540068B04C /* Terms&PoliciesDataModel.swift in Sources */,
 				0CECCDEB269328CC00611D62 /* ProductCell.swift in Sources */,
 				445433D4262D600200443AE1 /* CreateProfileVC.swift in Sources */,
 				44F76676263ABF64007F78CB /* AddCardDetailsVC.swift in Sources */,
 				44C8F2E6261F2847000F03DB /* LoginVC.swift in Sources */,
+				6FE8E3442743B3690068B04C /* EventReportDataModel.swift in Sources */,
 				04F24D80270453ED001C3843 /* CardCell.swift in Sources */,
 				04D66CC326AED1E5003E976E /* BuyEventDataModel.swift in Sources */,
 				44F76670263A9538007F78CB /* ProductListVC+Extensions.swift in Sources */,

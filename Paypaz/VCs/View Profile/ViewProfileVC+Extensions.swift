@@ -104,7 +104,7 @@ extension ViewProfileVC : UserDetailsDataModelDelegate
             DispatchQueue.main.async {
                 let url =  APIList().getUrlString(url: .USERIMAGE)
                 self.img_ProfilePic.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                self.img_ProfilePic.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
+                self.img_ProfilePic.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "place_holder"))
                 let fullName = (data.data?.firstName ?? "")+" "+(data.data?.lastName ?? "")
                 self.lbl_ProfileName.text = fullName
                 self.lbl_DOB.text = data.data?.dob

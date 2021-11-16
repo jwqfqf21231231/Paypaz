@@ -138,10 +138,10 @@ class EditProfileVC: CustomViewController {
             view.makeToast("Please enter your Last Name")
         }
         else if txt_firstName.textCount() > 16{
-            self.view.makeToast("Your First Name should be of 16 characters only")
+            self.view.makeToast("Your First Name should not exceed 16 characters")
         }
         else if txt_lastName.textCount() > 16{
-            self.view.makeToast("Your Last Name should be of 16 characters only")
+            self.view.makeToast("Your Last Name should not exceed 16 characters")
         }
         else if txt_email.isEmptyOrWhitespace()
         {
@@ -240,7 +240,6 @@ extension EditProfileVC : UserDetailsDataModelDelegate
                 self.img_Profile.sd_setImage(with: URL(string: url+(data.data?.userProfile ?? "")), placeholderImage: UIImage(named: "profile_c"))
                 self.txtView_Address.text = data.data?.address
             }
-            
         }
         else
         {

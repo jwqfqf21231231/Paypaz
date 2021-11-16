@@ -55,6 +55,7 @@ enum urlString:String
     case ADDFAV = "user/event/favourite/add"
     case LISTFAVOURITE = "user/favourite/list"
     case FILTEREVENT = "home/event/filter"
+    case EventReport = "home/event/report"
     
     case ADDPRODUCT = "user/product/add"
     case MYPRODUCTS = "user/event/products"
@@ -88,6 +89,8 @@ enum urlString:String
     case ADDAMOUNTINWALLET = "user/wallet/add"
     case GETWALLETAMOUNT = "user/wallet"
     case TRANSACTIONHISTORY = "user/transactions"
+    
+    case TermsPolicies = "home/page"
     
     case REQUESTUSERFORPAYMENT = "user/requests"
     case VERIFYCONTACT = "user/phone"

@@ -62,12 +62,18 @@ extension AddToCartVC : UITableViewDataSource {
             let indexpath = IndexPath.init(row: sender.tag, section: 0)
             if let cell = tableView_Products.cellForRow(at: indexpath) as? ProductTableCell{
                 var count = Float(cell.lbl_ProductCount.text ?? "") ?? 0.0
-                count = count + 1
-                cell.lbl_ProductCount.text = "\(Int(count))"
-                productPrice = productPrice * count
-                products[sender.tag].updatedProductPrice = productPrice
-                calculateTotalProductPrice()
-                productCollection(productData: products[sender.tag], count: Int(count))
+                let maxItmesCount = Float(products[sender.tag].quantity ?? "") ?? 0.0
+                if count < maxItmesCount{
+                    count = count + 1
+                    cell.lbl_ProductCount.text = "\(Int(count))"
+                    productPrice = productPrice * count
+                    products[sender.tag].updatedProductPrice = productPrice
+                    calculateTotalProductPrice()
+                    productCollection(productData: products[sender.tag], count: Int(count))
+                }
+                else{
+                    return
+                }
             }
         }
         else{
@@ -75,12 +81,18 @@ extension AddToCartVC : UITableViewDataSource {
             let indexpath = IndexPath.init(row: sender.tag, section: 0)
             if let cell = tableView_Products.cellForRow(at: indexpath) as? ProductTableCell{
                 var count = Float(cell.lbl_ProductCount.text ?? "") ?? 0.0
-                count = count + 1
-                cell.lbl_ProductCount.text = "\(Int(count))"
-                productPrice = productPrice * count
-                cartItemProducts[sender.tag].updatedProductPrice = productPrice
-                calculateTotalProductPrice()
-                productCollectionToBuyCart(productData: cartItemProducts[sender.tag], count: count)
+                let maxItmesCount = Float(cartItemProducts[sender.tag].quantity ?? "") ?? 0.0
+                if count < maxItmesCount{
+                    count = count + 1
+                    cell.lbl_ProductCount.text = "\(Int(count))"
+                    productPrice = productPrice * count
+                    cartItemProducts[sender.tag].updatedProductPrice = productPrice
+                    calculateTotalProductPrice()
+                    productCollectionToBuyCart(productData: cartItemProducts[sender.tag], count: count)
+                }
+                else{
+                    return
+                }
             }
         }
         
@@ -91,8 +103,7 @@ extension AddToCartVC : UITableViewDataSource {
             let indexpath = IndexPath.init(row: sender.tag, section: 0)
             if let cell = tableView_Products.cellForRow(at: indexpath) as? ProductTableCell{
                 var count = Float(cell.lbl_ProductCount.text ?? "") ?? 0.0
-                let maxItmesCount = Float(products[sender.tag].quantity ?? "") ?? 0.0
-                if count > 0 && count < maxItmesCount{
+                if count > 0{
                     count = count - 1
                     cell.lbl_ProductCount.text = "\(Int(count))"
                     productPrice = productPrice * count
@@ -381,7 +392,7 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
             let icon1 = UpdatedCartInfo(eventID: data.data?.eventID ?? "", eventUserID: data.data?.eventUserID ?? "", eventQty: data.data?.eventQty ?? "", eventPrice: data.data?.eventPrice ?? "", productsPrice: data.data?.productsPrice ?? "", subTotal: data.data?.subTotal ?? "", discount:  data.data?.discount ?? "", tax: data.data?.tax ?? "", grandTotal: data.data?.grandTotal ?? "", cartID: data.data?.id ?? "", paymentType: data.data?.paymentType ?? "", buyDirectly: true, products:[])
             self.updatedCartInfo = icon1
             
-            
+            self.cartEventOriginalQty = data.data?.quantity ?? ""
             let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
             let imageString = (data.data?.image) ?? ""
             self.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray

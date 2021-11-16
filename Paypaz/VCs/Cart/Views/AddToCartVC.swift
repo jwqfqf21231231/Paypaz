@@ -59,6 +59,7 @@ class AddToCartVC : CustomViewController {
     private let addToCartDataSource = AddToCartDataModel()
     weak var successDelegate:AddedSuccessfullyPopUp?
     var updatedCartInfo : UpdatedCartInfo?
+    var cartEventOriginalQty:String?
     //MARK:- --- View Life Cycle ----
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +83,6 @@ class AddToCartVC : CustomViewController {
             addToCartDataSource.cartID = self.cartID
             addToCartDataSource.getCartDetails()
         }
-        
     }
     
     func setDelegates(){
@@ -147,7 +147,7 @@ class AddToCartVC : CustomViewController {
                 let jsonData = try! JSONSerialization.data(withJSONObject:productsArray)
                 let decoder = JSONDecoder()
                 do {
-                    let people = try decoder.decode([ProductList].self, from: jsonData)
+                    let people = try decoder.decode([ProductList].self, from: jsonData) 
                     updatedCartInfo?.products = people
                     self.updatedCartInfo?.productsPrice = "\(Double(productPrice))"
                     print(people)
@@ -194,13 +194,38 @@ class AddToCartVC : CustomViewController {
     }
     @IBAction func btn_IncreaseEvent(_ sender:UIButton){
         var count = Float(lbl_EventCount.text ?? "") ?? 0.0
-        if sender.tag == 0{
-            if count > 0{
-                count = count-1
+        if addToCart ?? false{
+            if sender.tag == 0{
+                if count > 0 {
+                    count = count-1
+                }
+            }
+            else{
+                let maxItmesCount = Float(eventDetails?.quantity ?? "") ?? 0.0
+                if count < maxItmesCount{
+                    count = count+1
+                }
+                else{
+                    return
+                }
             }
         }
         else{
-            count = count+1
+            if sender.tag == 0{
+                
+                if count > 0{
+                    count = count-1
+                }
+            }
+            else{
+                let maxItmesCount = Float(cartEventOriginalQty ?? "") ?? 0.0
+                if count < maxItmesCount{
+                    count = count+1
+                }
+                else{
+                    return
+                }
+            }
         }
         lbl_EventCount.text = "\(Int(count))"
         eventPrice = (eventOriginalPrice ?? 0) * count

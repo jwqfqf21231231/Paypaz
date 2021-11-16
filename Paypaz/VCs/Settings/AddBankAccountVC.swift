@@ -170,4 +170,3 @@ extension AddBankAccountVC : PopupDelegate {
         self.navigationController?.popViewController(animated: false)
     }
 }
-
