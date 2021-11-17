@@ -32,14 +32,15 @@ class EventReportVC : CustomViewController {
         self.eventNameLabel.text = eventInfo?["eventName"]
         dataSource.delegate = self
         dataSource.eventID = eventInfo?["eventID"] ?? ""
+        Connection.svprogressHudShow(view: self)
         dataSource.getEventReport()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.view_TotalSale.progress   = 0.7
-        self.view_EventSold.progress   = 0.6
-        self.view_ProductSold.progress = 0.5
+        self.view_TotalSale.progress   = 0.0
+        self.view_EventSold.progress   = 0.0
+        self.view_ProductSold.progress = 0.0
     }
     
     // MARK: - --- Action ----
