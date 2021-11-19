@@ -207,8 +207,15 @@ extension Float {
     var clean: String {
        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
+   
 }
-
+extension Float {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Float {
+        let divisor = powf(10.0, Float(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
 extension UITextField
 {
     func isEmptyOrWhitespace() -> Bool {

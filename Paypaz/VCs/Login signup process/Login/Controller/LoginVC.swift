@@ -129,6 +129,7 @@ class LoginVC : UIViewController {
                 dataSource.email = txt_email.text?.trim() ?? ""
             }
             dataSource.password = txt_Password.text?.trim() ?? ""
+            dataSource.deviceID = UIDevice.current.identifierForVendor?.uuidString ?? ""
             dataSource.requestLogIn()
         }
     }

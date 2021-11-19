@@ -58,12 +58,12 @@ extension EventReportVC : EventReportDelegate
         {
             DispatchQueue.main.async {
                 self.totalSaleLabel.text = "$\(Float(data.data?.totalSale ?? "0")?.clean ?? "0")"
-                self.totalRegisteredLabel.text = data.data?.totalTicketEvent ?? "0"
-                self.totalProductsLabel.text = data.data?.totalProducts ?? "0"
+                self.totalRegisteredLabel.text = data.data?.totalEventTicketSold ?? "0"
+                self.totalProductsLabel.text = data.data?.totalProductQtySold ?? "0"
                 let a = Float((Int(data.data?.totalEventTicketSold ?? "") ?? 0) + (Int(data.data?.totalProductQtySold ?? "") ?? 0))
                 let b = Float((Int(data.data?.totalQtyProducts ?? "") ?? 0) + (Int(data.data?.totalTicketEvent ?? "") ?? 0))
                 if b != 0{
-                    self.totalSalePercent.text = "\(Int((a/b)*100))%"
+                    self.totalSalePercent.text = "\(((a/b)*100).rounded(toPlaces: 2).clean)%"
                     self.view_TotalSale.progress = CGFloat(a/b)
                 }
                 else{
@@ -74,7 +74,7 @@ extension EventReportVC : EventReportDelegate
                 let c = Float(data.data?.totalEventTicketSold ?? "") ?? 0.0
                 let d = Float(data.data?.totalTicketEvent ?? "") ?? 0.0
                 if d != 0{
-                    self.totalEventPercent.text = "\(Int((c/d) * 100))%"
+                    self.totalEventPercent.text = "\(((c/d) * 100).rounded(toPlaces: 2).clean)%"
                     self.view_EventSold.progress = CGFloat(c/d)
                 }
                 else{
@@ -85,7 +85,7 @@ extension EventReportVC : EventReportDelegate
                 let e = Float(data.data?.totalProductQtySold ?? "") ?? 0.0
                 let f = Float(data.data?.totalQtyProducts ?? "") ?? 0.0
                 if f != 0{
-                    self.totalProductPercent.text = "\(Int((e/f) * 100))%"
+                    self.totalProductPercent.text = "\(((e/f) * 100).rounded(toPlaces: 2).clean)%"
                     self.view_ProductSold.progress = CGFloat(e/f)
                 }
                 else{

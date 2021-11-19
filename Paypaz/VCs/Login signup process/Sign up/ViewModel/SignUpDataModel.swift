@@ -22,15 +22,11 @@ class SignUpDataModel: NSObject
     var email = ""
     var password = ""
     var phoneNumber = ""
+    var deviceId = ""
     func requestSignUp()
     {
         let url =  APIList().getUrlString(url: .SIGNUP)
-        var deviceToken = String()
-        if UserDefaults.standard.value(forKey: "DeviceToken") != nil{
-            deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as! String
-        }else{
-            deviceToken = ""
-        }
+       
         let parameter : Parameters = [
             "phoneNumber":phoneNumber,
             "email":email ,
@@ -40,7 +36,8 @@ class SignUpDataModel: NSObject
             "deviceType":"ios",
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude(),
-            "countryCode":UserDefaults.standard.getCountryCode()
+            "countryCode":UserDefaults.standard.getCountryCode(),
+            "deviceId": deviceId
         ]
         sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:

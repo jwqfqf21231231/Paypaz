@@ -137,7 +137,8 @@ class SignupVC : UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
-    @IBAction func btn_Signup(_ sender:UIButton) {
+    @IBAction func btn_Signup(_ sender:UIButton)
+    {
         if validateFields() == true
         {
             Connection.svprogressHudShow(view: self)
@@ -145,6 +146,7 @@ class SignupVC : UIViewController {
             dataSource.phoneNumber = txt_PhoneNo.text?.removingWhitespaceAndNewlines() ?? ""
             dataSource.email = txt_email.text?.trim() ?? ""
             dataSource.password = txt_Password.text?.trim() ?? ""
+            dataSource.deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
             dataSource.requestSignUp()
         }
         

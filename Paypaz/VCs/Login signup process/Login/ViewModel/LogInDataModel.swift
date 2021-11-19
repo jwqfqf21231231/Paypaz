@@ -22,16 +22,12 @@ class LogInDataModel: NSObject
     var email = ""
     var password = ""
     var userID = ""
+    var deviceID = ""
     func requestLogIn()
     {
         
         let url =  APIList().getUrlString(url: .LOGIN)
-        var deviceToken = String()
-        if UserDefaults.standard.value(forKey: "DeviceToken") != nil{
-            deviceToken = UserDefaults.standard.value(forKey: "DeviceToken") as! String
-        }else{
-            deviceToken = ""
-        }
+    
         let parameter : Parameters = [
             "emailORphone":email ,
             "password":password,
@@ -39,7 +35,8 @@ class LogInDataModel: NSObject
             "latitude":UserDefaults.standard.getLatitude(),
             "longitude":UserDefaults.standard.getLongitude(),
             "deviceType":"ios",
-            "deviceToken":UserDefaults.standard.getFireBaseToken()
+            "deviceToken":UserDefaults.standard.getFireBaseToken(),
+            "deviceId": deviceID
         ]
         sharedInstance.requestPOST(url, params: parameter, headers: nil,
                                    success:
