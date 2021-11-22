@@ -276,11 +276,11 @@ extension AddCardDetailsVC : UITextFieldDelegate{
                 
                 btn_cardNumber.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
             }
-//            else if textField == txt_ExpDate{
-//                picker.onDateSelected = { (month: Int, year: Int) in
-//                    self.txt_ExpDate.text = "\(String(format: "%02d", month))/\(String(year))" }
-//                field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
-//            }
+            //            else if textField == txt_ExpDate{
+            //                picker.onDateSelected = { (month: Int, year: Int) in
+            //                    self.txt_ExpDate.text = "\(String(format: "%02d", month))/\(String(year))" }
+            //                field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
+            //            }
             else
             {
                 field.border_Color = UIColor(red: 238/255, green: 243/255, blue: 255/255, alpha: 1)
@@ -302,7 +302,14 @@ extension AddCardDetailsVC : AddMoneyInWalletDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

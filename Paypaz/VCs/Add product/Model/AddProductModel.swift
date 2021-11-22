@@ -12,6 +12,7 @@ import Foundation
 struct AddProductModel: Codable {
     let data: MyProducts?
     let success: Int?
+    let isAuthorized: Int?
     let message: String?
 }
 

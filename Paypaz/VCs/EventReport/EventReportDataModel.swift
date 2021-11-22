@@ -12,7 +12,7 @@ import Alamofire
 // MARK: - EventReport
 struct EventReportModel: Codable {
     let data: EventReport?
-    let success: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

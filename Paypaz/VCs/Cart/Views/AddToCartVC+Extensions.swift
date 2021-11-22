@@ -122,7 +122,7 @@ extension AddToCartVC : UITableViewDataSource {
                     count = count - 1
                     cell.lbl_ProductCount.text = "\(Int(count))"
                     productPrice = productPrice * count
-                
+                    
                     cartItemProducts[sender.tag].updatedProductPrice = productPrice
                     calculateTotalProductPrice()
                 }
@@ -235,7 +235,14 @@ extension AddToCartVC : CartCheckOutDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -291,7 +298,14 @@ extension AddToCartVC : MyPostedEventDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -321,10 +335,17 @@ extension AddToCartVC : MyPostedProductsDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found"{
-                self.products.removeAll()
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
             }
-            print(data.message ?? "")
+            else{
+                if data.message == "Data not found"{
+                    self.products.removeAll()
+                }
+                print(data.message ?? "")
+            }
         }
         if self.products.count == 0
         {
@@ -365,7 +386,14 @@ extension AddToCartVC : AddToCartDataModelDelegate
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                view.makeToast(data.message ?? "")
+            }
         }
     }
     func didFailDataUpdateWithError1(error: Error)
@@ -449,7 +477,14 @@ extension AddToCartVC : GetCartDetailsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

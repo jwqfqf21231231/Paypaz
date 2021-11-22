@@ -108,12 +108,19 @@ extension AddBankAccountVC : AddBankAccountDataModelDelegate
             self.delegate?.isClickedButton()
             self.navigationController?.popViewController(animated: false)
             /*if let popup = self.presentPopUpVC("BankSavedSuccessPopupVC", animated: false) as? BankSavedSuccessPopupVC {
-                popup.delegate = self
-            }*/
+             popup.delegate = self
+             }*/
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -147,7 +154,14 @@ extension AddBankAccountVC : BankInfoDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

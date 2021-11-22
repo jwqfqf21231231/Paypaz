@@ -74,18 +74,30 @@ extension UserRequestsVC : UserRequestDelegate{
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.userRequest = []
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.userRequest = []
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                }
+                self.userRequestTableView.reloadArticleData{}
             }
-            self.userRequestTableView.reloadArticleData{}
 //            userRequestTableView.reloadData()
         }
     }

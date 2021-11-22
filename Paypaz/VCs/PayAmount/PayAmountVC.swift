@@ -189,19 +189,19 @@ class PayAmountVC : CustomViewController {
         }
         
         
-//        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-//            popup.delegate  = self
-//            if let type = self.selectedPayType {
-//                if type == .paypaz {
-//                    popup.selectedPopupType = .PayMoneyToContacts
-//                } else if type == .QRCode {
-//                    popup.selectedPopupType = .PayMoneyToContacts
-//                } else {
-//                    popup.selectedPopupType = .EventAmountPaid
-//                }
-//            }
-//
-//        }
+        //        if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+        //            popup.delegate  = self
+        //            if let type = self.selectedPayType {
+        //                if type == .paypaz {
+        //                    popup.selectedPopupType = .PayMoneyToContacts
+        //                } else if type == .QRCode {
+        //                    popup.selectedPopupType = .PayMoneyToContacts
+        //                } else {
+        //                    popup.selectedPopupType = .EventAmountPaid
+        //                }
+        //            }
+        //
+        //        }
     }
     
     /*@IBAction func btn_PayByPaypaz(_ sender:UIButton) {
@@ -326,25 +326,31 @@ extension PayAmountVC : PaymentDelegate
                     break
                 }
             }
-//            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
-//
-//                popup.delegate  = self
-//                if let type = self.selectedPayType {
-//                    if type == .paypaz {
-//                        popup.selectedPopupType = .PayMoneyToContacts
-//                    } else if type == .QRCode {
-//                        popup.selectedPopupType = .PayMoneyToContacts
-//                    } else {
-//                        popup.selectedPopupType = .EventAmountPaid
-//                    }
-//                }
-//
-//            }
+            //            if let popup = self.presentPopUpVC("SuccessPopupVC", animated: false) as? SuccessPopupVC {
+            //
+            //                popup.delegate  = self
+            //                if let type = self.selectedPayType {
+            //                    if type == .paypaz {
+            //                        popup.selectedPopupType = .PayMoneyToContacts
+            //                    } else if type == .QRCode {
+            //                        popup.selectedPopupType = .PayMoneyToContacts
+            //                    } else {
+            //                        popup.selectedPopupType = .EventAmountPaid
+            //                    }
+            //                }
+            //
+            //            }
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
             self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-            //view.makeToast(data.message ?? "")
+            }
         }
     }
     
@@ -380,7 +386,14 @@ extension PayAmountVC : LogInDataModelDelegate
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                view.makeToast(data.message ?? "")
+            }
         }
     }
     

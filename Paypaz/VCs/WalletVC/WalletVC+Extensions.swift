@@ -100,7 +100,14 @@ extension WalletVC : GetWalletAmountDelegate
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                view.makeToast(data.message ?? "")
+            }
         }
     }
     
@@ -136,15 +143,22 @@ extension WalletVC : TransactionHistoryDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.transactions = []
-                transactionsView.alpha = 1
+            else{
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.transactions = []
+                    transactionsView.alpha = 1
+                }
+                self.tableViewTransactions.reloadArticleData{}
             }
-            self.tableViewTransactions.reloadArticleData{}
         }
     }
     

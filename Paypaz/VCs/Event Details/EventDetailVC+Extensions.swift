@@ -148,7 +148,14 @@ extension EventDetailVC : MyPostedEventDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -181,6 +188,11 @@ extension EventDetailVC : MyPostedProductsDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
             if data.message == "Data not found"{
                 self.products.removeAll()
             }
@@ -225,7 +237,14 @@ extension EventDetailVC : MyPostedContactsDataModelDelegate
         }
         else
         {
-            print(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                print(data.message ?? "")
+            }
         }
         if self.contacts.count == 0{
             view_Invitee.isHidden = true

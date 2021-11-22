@@ -13,6 +13,7 @@ import Alamofire
 struct TermsPoliciesModel: Codable {
     let data: Content?
     let success: Int?
+    let isAuthorized: Int?
     let message: String?
 }
 

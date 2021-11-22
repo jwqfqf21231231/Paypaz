@@ -22,7 +22,7 @@ class BuyEventVC : UIViewController {
     var newFilteredEventData = [MyEvent]()
     let dataSource = BuyEventDataModel()
     var Items = [CartInfo]()
-
+    
     private let GetCartItemsDataSource = AddToCartDataModel()
     
     @IBOutlet weak var txt_Search : UITextField!
@@ -220,8 +220,19 @@ extension BuyEventVC : FavEventDataModelDelegate
         }
         else
         {
-            self.view.makeToast(data.message, duration: 3, position: .bottom)
-            // self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.view.makeToast(data.message, duration: 3, position: .bottom)
+            }
         }
     }
     
@@ -262,21 +273,32 @@ extension BuyEventVC : FilteredEventDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.eventData = []
-                self.filteredEventData = []
-                DispatchQueue.main.async {
-                    self.tableView_Events.reloadData()
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.eventData = []
+                    self.filteredEventData = []
+                    DispatchQueue.main.async {
+                        self.tableView_Events.reloadData()
+                    }
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                }
             }
         }
     }
@@ -305,8 +327,19 @@ extension BuyEventVC : GetCartItemsDataModelDelegate{
         }
         else
         {
-            self.cartCountLabel.alpha = 0
-            //view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.cartCountLabel.alpha = 0
+            }
         }
     }
     

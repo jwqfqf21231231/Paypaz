@@ -59,7 +59,19 @@ extension CreditDebitCardVC : CardDetailsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -88,7 +100,19 @@ extension CreditDebitCardVC : UpdateCardDetailDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -125,7 +149,19 @@ extension CreditDebitCardVC : CreateCardDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

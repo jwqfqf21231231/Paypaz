@@ -11,7 +11,7 @@ import Foundation
 // MARK: - MyPostedContactsModel
 struct MyPostedContactsModel: Codable {
     let data: [InvitedContacts]?
-    let success: Int?
+    let success,isAuthorized: Int?
     let message: String?
 }
 

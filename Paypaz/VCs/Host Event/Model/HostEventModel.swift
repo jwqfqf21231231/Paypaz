@@ -12,5 +12,6 @@ import Foundation
 struct HostEventModel: Codable {
     let data: MyEvent?
     let success: Int?
+    let isAuthorized:Int?
     let message: String?
 }

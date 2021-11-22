@@ -27,18 +27,18 @@ extension NotificationsListVC : UITableViewDataSource {
         let sendDate = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "dd MMM yyyy")
         let sendTime = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd hh:mm a", expectedFromat: "hh:mm a")
         cell.lbl_Date.text = sendDate + " At " + sendTime
-//        let dateformatter = DateFormatter()
-//        dateformatter.dateFormat = "yyyy-MM-dd"
-//        let presentDate = dateformatter.string(from: Date())
-//        if createdDate == presentDate{
-//            createdDate = createdDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm:ss")
-//            createdDate = self.getFormattedDate(strDate: createdDate , currentFomat: "yyyy-MM-dd hh:mm:ss", expectedFromat: "hh:mm a")
-//            cell.lbl_Date.text = createdDate
-//        }
-//        else{
-//            createdDate = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd", expectedFromat: "d MMMM yyyy")
-//            cell.lbl_Date.text = createdDate
-//        }
+        //        let dateformatter = DateFormatter()
+        //        dateformatter.dateFormat = "yyyy-MM-dd"
+        //        let presentDate = dateformatter.string(from: Date())
+        //        if createdDate == presentDate{
+        //            createdDate = createdDate.UTCToLocal(incomingFormat: "yyyy-MM-dd HH:mm:ss", outGoingFormat: "yyyy-MM-dd hh:mm:ss")
+        //            createdDate = self.getFormattedDate(strDate: createdDate , currentFomat: "yyyy-MM-dd hh:mm:ss", expectedFromat: "hh:mm a")
+        //            cell.lbl_Date.text = createdDate
+        //        }
+        //        else{
+        //            createdDate = self.getFormattedDate(strDate: createdDate, currentFomat: "yyyy-MM-dd", expectedFromat: "d MMMM yyyy")
+        //            cell.lbl_Date.text = createdDate
+        //        }
         return cell
     }
 }
@@ -70,20 +70,27 @@ extension NotificationsListVC : NotificationListDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
-            }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.notifications = []
-                DispatchQueue.main.async {
-                    self.tableViewNotifications.reloadData()
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
                 }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.notifications = []
+                    DispatchQueue.main.async {
+                        self.tableViewNotifications.reloadData()
+                    }
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
         }
     }
@@ -114,7 +121,14 @@ extension NotificationsListVC : DeleteNotificationsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

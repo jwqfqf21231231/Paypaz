@@ -22,7 +22,7 @@ class DeleteEventPopupVC : CustomViewController {
     weak var updateProductDelegate : DeleteProductDelegate?
     var selectedPopupType : PopupType?
     var popUpScreenDelegate : PopUpScreenDelegate?
-
+    
     var eventID = ""
     var productID = ""
     var indexNo : Int?
@@ -49,10 +49,10 @@ class DeleteEventPopupVC : CustomViewController {
             switch type {
             
             case .AddCard:
-               imgIcon.image = UIImage(named: "Credit card-rafiki")
-               lbl_Title.text = "No credit/debit cards are available?"
+                imgIcon.image = UIImage(named: "Credit card-rafiki")
+                lbl_Title.text = "No credit/debit cards are available?"
                 lbl_Title.textColor = UIColor(named: "BlueColor")
-               lbl_Description.text = "You have not added any credit/debit card for transactions.\n Do you want to add atleast one credit/debit card for transactions?"
+                lbl_Description.text = "You have not added any credit/debit card for transactions.\n Do you want to add atleast one credit/debit card for transactions?"
             case .DeleteEvent:
                 imgIcon.image = UIImage(named: "delete_event")
                 lbl_Title.text = "Delete Event"
@@ -114,7 +114,19 @@ extension DeleteEventPopupVC : DeleteProductDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -146,7 +158,19 @@ extension DeleteEventPopupVC : DeleteEventDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.messages ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

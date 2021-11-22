@@ -39,7 +39,7 @@ extension FavouritesEventsListVC : UITableViewDataSource {
             self.showAlert(withMsg: "No Invitees", withOKbtn: true)
         }
         else{
-
+            
             Connection.svprogressHudShow(view: self)
             contactsDataSource.eventID = self.favEvents[sender.tag].id ?? ""
             contactsDataSource.getContacts()
@@ -54,7 +54,7 @@ extension FavouritesEventsListVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = self.pushVC("EventDetailVC") as? EventDetailVC
         {
@@ -118,21 +118,34 @@ extension FavouritesEventsListVC : FavouritesListDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.favEvents = []
-                DispatchQueue.main.async {
-                    self.tableView_Events.reloadData()
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.favEvents = []
+                    DispatchQueue.main.async {
+                        self.tableView_Events.reloadData()
+                    }
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
+          
         }
     }
     

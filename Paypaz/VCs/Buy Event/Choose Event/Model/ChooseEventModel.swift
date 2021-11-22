@@ -12,6 +12,8 @@ import Foundation
 struct ChooseEventModel: Codable {
     let data: [Events]?
     let success: Int?
+    let isAuthorized:Int?
+    let isSuspended:Int?
     let message: String?
 }
 

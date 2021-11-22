@@ -21,9 +21,12 @@ class ChooseEventDataModel: NSObject
     func getEventTypes()
     {
         let url =  APIList().getUrlString(url: .EVENTTYPES)
+        let header : HTTPHeaders = [
+            "Authorization" : "Bearer \(UserDefaults.standard.getRegisterToken())"
+        ]
         sharedInstance.requestGET(url,
                                   params: nil,
-                                  headers: nil,
+                                  headers: header,
                                   success:
                                     {
                                         (JSON) in

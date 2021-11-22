@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: - LogInModel
 struct LogInModel: Codable {
-    let success: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
     let data: UserDetails?
 }

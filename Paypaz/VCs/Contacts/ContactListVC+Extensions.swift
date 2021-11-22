@@ -28,17 +28,17 @@ extension ContactListVC : UITableViewDataSource {
 extension ContactListVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-   
+        
         self.view.endEditing(true)
         self.contactName = (filteredContactDetails[indexPath.row].firstName ?? "") + " " + (filteredContactDetails[indexPath.row].lastName ?? "")
         guard let phoneUtil = NBPhoneNumberUtil.sharedInstance() else {
             return
         }
         do {
-        let numberProto: NBPhoneNumber = try phoneUtil.parse(filteredContactDetails[indexPath.row].phoneNumber ?? "", defaultRegion: "IN")
-        
-        phoneCode = numberProto.countryCode!
-        phoneNumber = numberProto.nationalNumber!
+            let numberProto: NBPhoneNumber = try phoneUtil.parse(filteredContactDetails[indexPath.row].phoneNumber ?? "", defaultRegion: "IN")
+            
+            phoneCode = numberProto.countryCode!
+            phoneNumber = numberProto.nationalNumber!
             Connection.svprogressHudShow(view: self)
             dataSource.phoneNumber = "\(phoneNumber ?? 0)"
             dataSource.phoneCode = "\(phoneCode ?? 0)"
@@ -48,7 +48,7 @@ extension ContactListVC : UITableViewDelegate {
             print(error.localizedDescription)
         }
         
-       
+        
     }
 }
 extension ContactListVC : VerifyContactDelegate{
@@ -66,10 +66,22 @@ extension ContactListVC : VerifyContactDelegate{
         }
         else
         {
-            if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
-                vc.userDetails = ["userName":self.contactName ?? "","phoneCode":"\(phoneCode ?? 0)","phoneNumber":"\(phoneNumber ?? 0)"]
-                vc.selectedPaymentType = .local
-                vc.paypazUser = false
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                if let vc = self.pushVC("RequestPayAmountVC") as? RequestPayAmountVC{
+                    vc.userDetails = ["userName":self.contactName ?? "","phoneCode":"\(phoneCode ?? 0)","phoneNumber":"\(phoneNumber ?? 0)"]
+                    vc.selectedPaymentType = .local
+                    vc.paypazUser = false
+                }
             }
         }
     }

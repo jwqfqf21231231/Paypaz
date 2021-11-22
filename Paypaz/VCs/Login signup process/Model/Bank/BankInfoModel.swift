@@ -12,6 +12,8 @@ import Foundation
 struct BankInfoModel: Codable {
     let data: [Bank]?
     let success: Int?
+    let isAuthorized : Int?
+    let isSuspended : Int?
     let message: String?
 }
 

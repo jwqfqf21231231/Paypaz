@@ -9,7 +9,11 @@
 import UIKit
 import CoreLocation
 import libPhoneNumber_iOS
-
+enum statusType
+{
+    case authorized
+    case suspended
+}
 class LoginVC : UIViewController {
     
     private let dataSource = LogInDataModel()
@@ -26,6 +30,7 @@ class LoginVC : UIViewController {
     var userAccepted : Bool?
     var placeHolderText = ""
     
+    var statusType : statusType?
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
     private lazy var phoneUtil: NBPhoneNumberUtil = NBPhoneNumberUtil()
@@ -37,6 +42,15 @@ class LoginVC : UIViewController {
         hideKeyboardWhenTappedArround()
         self.setDelegate()
         updatePlaceholder(country_code)
+        switch statusType {
+        case .authorized:
+            self.view.makeToast("Your Paypaz account is login on another device. Please re-login your account to use Paypaz features.")
+        case .suspended:
+            self.view.makeToast("Your Paypaz account is Suspended.")
+        case .none:
+            return
+        }
+       
     }
     private func setDelegate(){
         self.txt_PhoneNo.delegate = self
@@ -206,7 +220,6 @@ extension LoginVC : LogInDataModelDelegate
         else
         {
             self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-            //view.makeToast(data.message ?? "")
         }
     }
     

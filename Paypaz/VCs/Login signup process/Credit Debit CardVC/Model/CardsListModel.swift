@@ -11,7 +11,7 @@ import Foundation
 // MARK: - CardsListModel
 struct CardsListModel: Codable {
     let data: [CardsList]?
-    let success: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

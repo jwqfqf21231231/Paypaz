@@ -11,7 +11,7 @@ import Foundation
 // MARK: - InvitesListModel
 struct InvitesListModel: Codable {
     let data: [InvitesList]?
-    let success: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

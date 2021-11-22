@@ -67,6 +67,11 @@ extension ViewProfileVC : MyEventsListDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
             self.noDataFoundView.alpha = 1
             if data.message == "Data not found" {
                 self.events = []
@@ -114,7 +119,14 @@ extension ViewProfileVC : UserDetailsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

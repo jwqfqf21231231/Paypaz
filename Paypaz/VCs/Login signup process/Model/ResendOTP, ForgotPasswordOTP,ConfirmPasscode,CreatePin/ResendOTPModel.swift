@@ -10,12 +10,14 @@ import Foundation
 
 // MARK: - ResendOTPModel
 struct ResendOTPModel: Codable {
-    let success: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message, otp, data: String?
 }
 
 
 struct Basic_Model:Codable {
     let success:Int?
+    let isAuthorized:Int?
+    let isSuspended:Int?
     let message:String?
 }

@@ -62,7 +62,14 @@ extension OtherUserProfileVC : LogInDataModelDelegate
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                view.makeToast(data.message ?? "")
+            }
         }
     }
     
@@ -93,6 +100,11 @@ extension OtherUserProfileVC : MyEventsListDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
             if data.message == "Data not found" {
                 self.events = []
                 self.tableView_Events.reloadData()

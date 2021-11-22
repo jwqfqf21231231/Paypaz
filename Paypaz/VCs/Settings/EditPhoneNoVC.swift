@@ -20,7 +20,7 @@ class EditPhoneNoVC: UIViewController {
     var phoneNo = ""
     var placeHolderText = ""
     var apiDailCode = "91"
-
+    
     private let dataSource = EditPhoneNoDataModel()
     private var nbPhoneNumber: NBPhoneNumber?
     private var formatter: NBAsYouTypeFormatter?
@@ -176,7 +176,14 @@ extension EditPhoneNoVC : EditPhoneNoDataModelDelegate
         }
         else
         {
-            self.view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.view.makeToast(data.message ?? "")
+            }
         }
     }
     

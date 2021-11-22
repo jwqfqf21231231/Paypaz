@@ -143,36 +143,36 @@ class AddMoneyPopupVC  : UIViewController {
      }*/
 }
 /*extension AddMoneyPopupVC : PaymentDelegate
-{
-    func didRecieveDataUpdate1(data: Basic_Model)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if data.success == 1
-        {
-            self.dismiss(animated: false) {
-                self.successDelegate?.buyEventThruCard(cvv: txt_CVV.te, cardName: <#T##String#>, cardNumber: <#T##String#>)
-            }
-        }
-        else
-        {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
-            //view.makeToast(data.message ?? "")
-        }
-    }
-    
-    func didFailDataUpdateWithError(error: Error)
-    {
-        Connection.svprogressHudDismiss(view: self)
-        if error.localizedDescription == "Check Internet Connection"
-        {
-            self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
-        }
-        else
-        {
-            self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
-        }
-    }
-}*/
+ {
+ func didRecieveDataUpdate1(data: Basic_Model)
+ {
+ Connection.svprogressHudDismiss(view: self)
+ if data.success == 1
+ {
+ self.dismiss(animated: false) {
+ self.successDelegate?.buyEventThruCard(cvv: txt_CVV.te, cardName: <#T##String#>, cardNumber: <#T##String#>)
+ }
+ }
+ else
+ {
+ self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+ //view.makeToast(data.message ?? "")
+ }
+ }
+ 
+ func didFailDataUpdateWithError(error: Error)
+ {
+ Connection.svprogressHudDismiss(view: self)
+ if error.localizedDescription == "Check Internet Connection"
+ {
+ self.showAlert(withMsg: "Please Check Your Internet Connection", withOKbtn: true)
+ }
+ else
+ {
+ self.showAlert(withMsg: error.localizedDescription, withOKbtn: true)
+ }
+ }
+ }*/
 
 extension AddMoneyPopupVC : AddMoneyInWalletDelegate
 {
@@ -186,7 +186,14 @@ extension AddMoneyPopupVC : AddMoneyInWalletDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -224,10 +231,10 @@ extension AddMoneyPopupVC : UITextFieldDelegate{
         }
         else{
             if string.isEmpty { return true }
-
+            
             let currentText = textField.text ?? ""
             let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
-
+            
             return replacementText.isValidDouble(maxDecimalPlaces: 2)
         }
     }
@@ -244,7 +251,14 @@ extension AddMoneyPopupVC : GetCardsListDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
             self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -294,7 +308,7 @@ extension AddMoneyPopupVC : UITableViewDataSource,UITableViewDelegate {
         }
         cell.cardNumberLabel.text = cardNumber
         cell.carHolderNameLabel.text = existingCards[indexPath.row].cardHolderName
-
+        
         let tapGesture = CustomTapGestureRecognizer(target: self,
                                                     action: #selector(tapSelector(sender:)))
         tapGesture.viewIndex = indexPath.row

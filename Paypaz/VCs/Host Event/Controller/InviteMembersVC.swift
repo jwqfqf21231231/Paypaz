@@ -28,7 +28,7 @@ class InviteMembersVC: CustomViewController {
     private let dataSource = InviteMemberDataModel()
     private let dataSource1 = MyPostedEventDataModel()
     weak var editInviteMemberDelegate : EditInviteMemberDelegate?
-
+    
     @IBOutlet weak var isPublic : UISwitch!
     @IBOutlet weak var isInviteMember : UISwitch!
     @IBOutlet weak var tableView_Members        : UITableView!{
@@ -56,12 +56,12 @@ class InviteMembersVC: CustomViewController {
             }
         }
         tableView_Members.reloadData()
-//        var filteredContacts = [ContactInfo]()
-//        for m in contactDetails where invitedContacts.contains(where: { $0.phoneNumber == m.phoneNumber?.removingWhitespaceAndNewlines()}) {
-//            m.isInvited = true
-//        }
-//        contactDetails = filteredContacts
-//        tableView_Members.reloadData()
+        //        var filteredContacts = [ContactInfo]()
+        //        for m in contactDetails where invitedContacts.contains(where: { $0.phoneNumber == m.phoneNumber?.removingWhitespaceAndNewlines()}) {
+        //            m.isInvited = true
+        //        }
+        //        contactDetails = filteredContacts
+        //        tableView_Members.reloadData()
     }
     private func getInvitees()
     {
@@ -141,7 +141,7 @@ class InviteMembersVC: CustomViewController {
         }
         
     }
-
+    
     func fetchContacts()
     {
         fetchContacts(completion: {contacts in
@@ -167,30 +167,30 @@ class InviteMembersVC: CustomViewController {
     }
     @objc func onSwitchValueChange(swtch:UISwitch)
     {
-//        switch swtch.tag{
-//        case 0:
-            if(swtch.isOn)
-            {
-                self.isPublicStatus = "1"
-                swtch.thumbTintColor = UIColor(named: "GreenColor")
-            }
-            else
-            {
-                self.isPublicStatus = "0"
-                swtch.thumbTintColor = UIColor.lightGray
-            }
-//        default:
-//            if(swtch.isOn)
-//            {
-//                fetchContacts()
-//                self.isInviteMemberStatus = "1"
-//            }
-//            else
-//            {
-//                self.isInviteMemberStatus = "0"
-//            }
-//            self.tableView_Members.reloadData()
-//        }
+        //        switch swtch.tag{
+        //        case 0:
+        if(swtch.isOn)
+        {
+            self.isPublicStatus = "1"
+            swtch.thumbTintColor = UIColor(named: "GreenColor")
+        }
+        else
+        {
+            self.isPublicStatus = "0"
+            swtch.thumbTintColor = UIColor.lightGray
+        }
+        //        default:
+        //            if(swtch.isOn)
+        //            {
+        //                fetchContacts()
+        //                self.isInviteMemberStatus = "1"
+        //            }
+        //            else
+        //            {
+        //                self.isInviteMemberStatus = "0"
+        //            }
+        //            self.tableView_Members.reloadData()
+        //        }
     }
     @IBAction func btn_Back(_ sender:UIButton){
         if isEdit ?? false{
@@ -260,7 +260,14 @@ extension InviteMembersVC : MyPostedContactsDataModelDelegate
         }
         else
         {
-            print(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                print(data.message ?? "")
+            }
         }
     }
     func didFailDataUpdateWithError3(error: Error)
@@ -301,7 +308,14 @@ extension InviteMembersVC : InviteMemberDataModelDelegate
         }
         else
         {
-            view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                view.makeToast(data.message ?? "")
+            }
         }
     }
     

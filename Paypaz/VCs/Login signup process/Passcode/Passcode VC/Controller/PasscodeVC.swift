@@ -88,7 +88,19 @@ extension PasscodeVC : PasscodeDataModelDelegate
         }
         else
         {
-            view.makeToast(data.message)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                view.makeToast(data.message)
+            }
         }
     }
     
@@ -136,3 +148,4 @@ extension PasscodeVC : ForgotPasscodeDataModelDelegate
         }
     }
 }
+

@@ -102,7 +102,14 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -134,16 +141,25 @@ extension SideDrawerListVC : LogOutDataModelDelegate
         if data.success == 1
         {
             UserDefaults.standard.setLoggedIn(value: "0")
-            _ = self.pushVC("LoginVC",animated:false)
+            if let vc = self.pushVC("LoginVC",animated:false) as? LoginVC{
+                vc.unauthorized = true
+            }
             Helper.clearUserDataAndSignOut()
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
-    func didFailDataUpdateWithError2(error: Error)
+    func didFailDataUpdateWithError3(error: Error)
     {
         Connection.svprogressHudDismiss(view: self)
         if error.localizedDescription == "Check Internet Connection"

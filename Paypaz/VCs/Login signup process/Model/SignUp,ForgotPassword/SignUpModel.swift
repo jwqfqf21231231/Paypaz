@@ -10,8 +10,7 @@ import Foundation
 
 // MARK: - SignUpModel
 struct SignUpModel: Codable {
-    let success: Int?
-    let messages: String?
+    let success,isAuthorized,isSuspended: Int?
     let message:String?
     let data: DataClass?
 }

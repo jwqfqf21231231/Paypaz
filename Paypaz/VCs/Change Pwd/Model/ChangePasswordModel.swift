@@ -11,5 +11,6 @@ import Foundation
 // MARK: - ChangePasswordModel
 struct ChangePasswordModel: Codable {
     let success: Int?
+    let isAuthorized: Int?
     let message: String?
 }

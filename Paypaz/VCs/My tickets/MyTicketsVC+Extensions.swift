@@ -16,7 +16,7 @@ extension MyTicketsVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TicketsCell")  as? TicketsCell
         else { return TicketsCell() }
-
+        
         cell.lbl_EventName.text = tickets?[indexPath.row].name ?? ""
         cell.lbl_Description.text = tickets?[indexPath.row].datumDescription ?? ""
         cell.lbl_OrderNumber.text = tickets?[indexPath.row].orderNumber ?? ""
@@ -57,16 +57,23 @@ extension MyTicketsVC : UserTicketsDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
-            }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.noDataFoundView.alpha = 1
-                self.tickets = []
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
             }
             else{
-                self.noDataFoundView.alpha = 1
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.noDataFoundView.alpha = 1
+                    self.tickets = []
+                }
+                else{
+                    self.noDataFoundView.alpha = 1
+                }
             }
         }
     }

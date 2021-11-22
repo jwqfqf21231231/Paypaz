@@ -75,7 +75,7 @@ extension InvitesListVC : AcceptOrRejectInviteDelegate {
             }
         }
     }
-        //self.navigationController?.popViewController(animated: true)
+    //self.navigationController?.popViewController(animated: true)
 }
 extension InvitesListVC : InvitesListDataModelDelegate
 {
@@ -97,20 +97,32 @@ extension InvitesListVC : InvitesListDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.invitesList = []
-                DispatchQueue.main.async {
-                    self.tableView_Invites.reloadData()
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.invitesList = []
+                    DispatchQueue.main.async {
+                        self.tableView_Invites.reloadData()
+                    }
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
         }
     }

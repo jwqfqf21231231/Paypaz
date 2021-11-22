@@ -11,7 +11,7 @@ import Foundation
 // MARK: - MyPostedProductsModel
 class MyPostedProductsModel: Codable {
     let data: [MyProducts]?
-    let success: Int?
+    let success,isAuthorized: Int?
     let message: String?
 }
 

@@ -103,8 +103,14 @@ extension HomeVC : GetCartItemsDataModelDelegate{
         }
         else
         {
-            self.cartCountLabel.alpha = 0
-            //view.makeToast(data.message ?? "")
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.cartCountLabel.alpha = 0
+            }
         }
     }
     

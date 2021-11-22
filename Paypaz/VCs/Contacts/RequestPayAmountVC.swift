@@ -162,13 +162,13 @@ class RequestPayAmountVC : UIViewController {
                     
                 }
                 
-                    
+                
             }
             else{
                 
-                    if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
-                        vc.delegate = self
-                    }
+                if let vc = self.pushVC("EnterPinVC") as? EnterPinVC{
+                    vc.delegate = self
+                }
             }
         }
     }
@@ -310,7 +310,19 @@ extension RequestPayAmountVC : PayNowDelegate
         }
         else
         {
-            showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -358,7 +370,19 @@ extension RequestPayAmountVC : PaymentRequestDelegate
         }
         else
         {
-            showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

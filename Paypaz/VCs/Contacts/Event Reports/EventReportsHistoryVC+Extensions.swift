@@ -17,7 +17,7 @@ extension EventReportsHistoryVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyEventsCell")  as? MyEventsCell
-            else { return MyEventsCell() }
+        else { return MyEventsCell() }
         let url =  APIList().getUrlString(url: .UPLOADEDEVENTIMAGE)
         let imageString = (events[indexPath.row].image ?? "").trimmingCharacters(in: .whitespaces)
         cell.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -38,7 +38,7 @@ extension EventReportsHistoryVC : UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         if let vc = self.pushVC("EventReportVC") as? EventReportVC{
             let eventInfo = ["eventName" : events[indexPath.row].name ?? "","eventID" : events[indexPath.row].id ?? ""]
             vc.eventInfo = eventInfo
@@ -67,21 +67,33 @@ extension EventReportsHistoryVC : MyEventsListDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                noDataFoundView.alpha = 1
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.events = []
-                DispatchQueue.main.async {
-                    self.tableView_Events.reloadData()
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    noDataFoundView.alpha = 1
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.events = []
+                    DispatchQueue.main.async {
+                        self.tableView_Events.reloadData()
+                    }
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
         }
     }

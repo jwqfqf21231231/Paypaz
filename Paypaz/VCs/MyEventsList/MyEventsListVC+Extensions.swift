@@ -195,21 +195,33 @@ extension MyEventsListVC : MyEventsListDataModelDelegate
         }
         else
         {
-            if data.message == "Data not found" && currentPage-1 >= 1{
-                print("No data at page No : \(currentPage-1)")
-                currentPage = currentPage-1
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
             }
-            else if data.message == "Data not found" && currentPage-1 == 0{
-                noDataFoundView.alpha = 1
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.events = []
-                DispatchQueue.main.async {
-                    self.tableView_Events.reloadData()
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" && currentPage-1 >= 1{
+                    print("No data at page No : \(currentPage-1)")
+                    currentPage = currentPage-1
+                }
+                else if data.message == "Data not found" && currentPage-1 == 0{
+                    noDataFoundView.alpha = 1
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.events = []
+                    DispatchQueue.main.async {
+                        self.tableView_Events.reloadData()
+                    }
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
         }
     }
@@ -243,6 +255,16 @@ extension MyEventsListVC : MyPostedContactsDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = .suspended
+                }
+            }
             print(data.message ?? "")
         }
     }

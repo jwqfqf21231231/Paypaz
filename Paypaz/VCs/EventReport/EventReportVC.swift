@@ -97,7 +97,20 @@ extension EventReportVC : EventReportDelegate
         }
         else
         {
-            self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+            if data.isAuthorized == 0{
+                
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+            }
         }
     }
     

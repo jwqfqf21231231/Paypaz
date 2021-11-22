@@ -48,7 +48,7 @@ extension ChooseEventTypeVC:UICollectionViewDataSource
         let url =  APIList().getUrlString(url: .EVENTIMAGE)
         cell.img_EventPic.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.img_EventPic.sd_setImage(with: URL(string: url+(filteredEventData[indexPath.row].icon ?? "")), placeholderImage: UIImage(named: "sports_fitness"))
-      
+        
         cell.lbl_EventName.text = filteredEventData[indexPath.row].name ?? ""
         return cell
     }
@@ -71,7 +71,19 @@ extension ChooseEventTypeVC : ChooseEventDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

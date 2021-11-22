@@ -11,7 +11,7 @@ import Foundation
 // MARK: - UserRequestModel
 struct UserRequestModel: Codable {
     let data: [UserRequests]?
-    let success: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

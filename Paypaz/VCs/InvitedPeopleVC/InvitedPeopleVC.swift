@@ -85,7 +85,14 @@ extension InvitedPeopleVC : MyPostedContactsDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
             print(data.message ?? "")
+            }
         }
     }
     

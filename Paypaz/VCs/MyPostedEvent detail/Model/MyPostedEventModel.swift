@@ -11,7 +11,7 @@ import Foundation
 // MARK: - MyPostedEventModel
 struct MyPostedEventModel: Codable {
     let data: MyEvent?
-    let success: Int?
+    let success,isAuthorized: Int?
     let message: String?
 }
 

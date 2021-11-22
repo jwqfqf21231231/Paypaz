@@ -466,7 +466,7 @@ class HostEventVC : UIViewController {
         {
             self.view.makeToast("Please select valid start time")
         }
-
+        
         else if(compareDate(date1: sDate , date2: eDate , DateorTime: 0) == true)
         {
             self.view.makeToast("Please select valid end date")
@@ -623,7 +623,14 @@ extension HostEventVC : HostEventDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
@@ -708,7 +715,14 @@ extension HostEventVC : MyPostedEventDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

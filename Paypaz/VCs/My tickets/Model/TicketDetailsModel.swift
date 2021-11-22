@@ -13,6 +13,7 @@ import Foundation
 struct TicketDetailsModel: Codable {
     let data: TicketDetails?
     let success: Int?
+    let isAuthorized: Int?
     let message: String?
 }
 

@@ -36,7 +36,7 @@ class ChangePasswordVC : CustomViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       
+        
         if self.hideOldPassword ?? false {
             self.lbl_title.text = "Reset Password"
             txt_oldPwdHeight.constant = 0
@@ -45,10 +45,10 @@ class ChangePasswordVC : CustomViewController {
         self.txt_OldPwd.isHidden = self.hideOldPassword ?? false
         self.btn_OldPwdEye.isHidden = self.hideOldPassword ?? false
     }
-
+    
     //MARK:- --- Action ----
     @IBAction func btn_Back(_ sender:UIButton) {
-       self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     @IBAction func btn_Eye(_ sender:UIButton)
@@ -138,7 +138,7 @@ class ChangePasswordVC : CustomViewController {
                 dataSource.requestPasswordChange()
             }
         }
-    
+        
     }
 }
 extension ChangePasswordVC : ChangePasswordDataModelDelegate
@@ -164,7 +164,14 @@ extension ChangePasswordVC : ChangePasswordDataModelDelegate
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

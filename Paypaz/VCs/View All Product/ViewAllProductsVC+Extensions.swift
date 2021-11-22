@@ -67,6 +67,11 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
             if data.message == "Data not found"{
                 view.makeToast(data.message ?? "", duration: 3, position: .center)
                 self.lbl_EventName.text?.removeAll()

@@ -10,6 +10,6 @@ import Foundation
 
 // MARK: - SuccessModel
 struct SuccessModel: Codable {
-    let success: Int?
+    let success,isAuthorized: Int?
     let message: String?
 }

@@ -173,7 +173,14 @@ extension SettingsVC : NotificationModelDelegate
         }
         else
         {
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
             self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     

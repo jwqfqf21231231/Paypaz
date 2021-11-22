@@ -206,7 +206,14 @@ extension AddEventProductsVC : MyPostedProductsDataModelDelegate
         }
         else
         {
-            self.view.makeToast(data.message ?? "", duration: 1, position: .center)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.view.makeToast(data.message ?? "", duration: 1, position: .center)
+            }
         }
     }
     
@@ -231,12 +238,18 @@ extension AddEventProductsVC : DeleteProductDataModelDelegate
         Connection.svprogressHudDismiss(view: self)
         if data.success == 1
         {
-            
             tableView_Products.reloadData()
         }
         else
         {
-            self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            if data.isAuthorized == 0{
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.unauthorized = true
+                }
+            }
+            else{
+                self.showAlert(withMsg: data.message ?? "", withOKbtn: true)
+            }
         }
     }
     
