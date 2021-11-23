@@ -13,6 +13,7 @@ struct GetWalletAmount: Codable {
     let data: WalletAmount?
     let success: Int?
     let isAuthorized: Int?
+    let isSuspended: Int?
     let message: String?
 }
 

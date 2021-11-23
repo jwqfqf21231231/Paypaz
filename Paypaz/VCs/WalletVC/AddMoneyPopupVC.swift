@@ -187,8 +187,17 @@ extension AddMoneyPopupVC : AddMoneyInWalletDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
@@ -252,8 +261,17 @@ extension AddMoneyPopupVC : GetCardsListDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{

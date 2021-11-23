@@ -13,6 +13,7 @@ struct UserDetailsModel: Codable {
     let success: Int?
     let message: String?
     let isAuthorized : Int?
+    let isSuspended : Int?
     let data: DataClass5?
 }
 

@@ -13,5 +13,6 @@ struct HostEventModel: Codable {
     let data: MyEvent?
     let success: Int?
     let isAuthorized:Int?
+    let isSuspended:Int?
     let message: String?
 }

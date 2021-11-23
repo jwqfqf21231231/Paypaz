@@ -68,21 +68,33 @@ extension ViewAllProductsVC : MyPostedProductsDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
                 }
             }
-            if data.message == "Data not found"{
-                view.makeToast(data.message ?? "", duration: 3, position: .center)
-                self.lbl_EventName.text?.removeAll()
-                self.products = []
-                DispatchQueue.main.async {
-                    self.tableView_Products.reloadData()
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
-                view.makeToast(data.message ?? "", duration: 3, position: .center)
+                if data.message == "Data not found"{
+                    view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    self.lbl_EventName.text?.removeAll()
+                    self.products = []
+                    DispatchQueue.main.async {
+                        self.tableView_Products.reloadData()
+                    }
+                }
+                else{
+                    view.makeToast(data.message ?? "", duration: 3, position: .center)
+                }
             }
+           
         }
     }
     

@@ -11,7 +11,7 @@ import Foundation
 // MARK: - CartDetail
 struct CartDetailsModel: Codable {
     let data: CartInfo?
-    let success,isAuthorized: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

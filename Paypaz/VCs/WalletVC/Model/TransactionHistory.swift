@@ -26,7 +26,7 @@ import Foundation
 // MARK: - Welcome
 struct TransactionHistoryModel: Codable {
     let data: [Transactions]?
-    let success,isAuthorized: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

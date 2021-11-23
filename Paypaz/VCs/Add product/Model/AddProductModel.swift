@@ -13,6 +13,7 @@ struct AddProductModel: Codable {
     let data: MyProducts?
     let success: Int?
     let isAuthorized: Int?
+    let isSuspended: Int?
     let message: String?
 }
 

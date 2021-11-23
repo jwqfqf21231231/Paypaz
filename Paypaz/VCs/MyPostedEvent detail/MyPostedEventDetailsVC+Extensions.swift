@@ -140,8 +140,17 @@ extension MyPostedEventDetailsVC : MyPostedEventDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else  if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
@@ -180,14 +189,26 @@ extension MyPostedEventDetailsVC : MyPostedProductsDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
                 }
             }
-            if data.message == "Data not found"{
-                self.products.removeAll()
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
             }
-            print(data.message ?? "")
+            else{
+                if data.message == "Data not found"{
+                    self.products.removeAll()
+                }
+                print(data.message ?? "")
+            }
+           
         }
         if self.products.count == 0
         {
@@ -233,8 +254,17 @@ extension MyPostedEventDetailsVC : MyPostedContactsDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{

@@ -11,7 +11,7 @@ import Foundation
 // MARK: - UserTicketsModel
 struct UserTicketsModel: Codable {
     let data: [Tickets]?
-    let success,isAuthorized: Int?
+    let success,isAuthorized,isSuspended: Int?
     let message: String?
 }
 

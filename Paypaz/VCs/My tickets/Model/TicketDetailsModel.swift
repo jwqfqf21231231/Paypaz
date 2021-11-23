@@ -14,6 +14,7 @@ struct TicketDetailsModel: Codable {
     let data: TicketDetails?
     let success: Int?
     let isAuthorized: Int?
+    let isSuspended: Int?
     let message: String?
 }
 

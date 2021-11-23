@@ -114,8 +114,17 @@ extension AddBankAccountVC : AddBankAccountDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else  if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
@@ -155,8 +164,17 @@ extension AddBankAccountVC : BankInfoDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{

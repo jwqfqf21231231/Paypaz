@@ -311,11 +311,15 @@ extension RequestPayAmountVC : PayNowDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
                     vc.statusType = .authorized
                 }
             }
             else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
                     vc.statusType = .suspended
                 }
@@ -371,11 +375,15 @@ extension RequestPayAmountVC : PaymentRequestDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
                     vc.statusType = .authorized
                 }
             }
             else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
                     vc.statusType = .suspended
                 }

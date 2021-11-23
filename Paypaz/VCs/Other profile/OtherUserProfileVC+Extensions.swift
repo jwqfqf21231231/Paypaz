@@ -63,8 +63,17 @@ extension OtherUserProfileVC : LogInDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
@@ -101,18 +110,30 @@ extension OtherUserProfileVC : MyEventsListDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
                 }
             }
-            if data.message == "Data not found" {
-                self.events = []
-                self.tableView_Events.reloadData()
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                if data.message == "Data not found" {
+                    self.events = []
+                    self.tableView_Events.reloadData()
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
+           
         }
     }
     

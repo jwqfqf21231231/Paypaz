@@ -68,19 +68,31 @@ extension ViewProfileVC : MyEventsListDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
                 }
             }
-            self.noDataFoundView.alpha = 1
-            if data.message == "Data not found" {
-                self.events = []
-                self.tableViewEvents.reloadData()
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
+                }
             }
             else{
-                self.view.makeToast(data.message ?? "", duration: 3, position: .center)
-                
+                self.noDataFoundView.alpha = 1
+                if data.message == "Data not found" {
+                    self.events = []
+                    self.tableViewEvents.reloadData()
+                }
+                else{
+                    self.view.makeToast(data.message ?? "", duration: 3, position: .center)
+                    
+                }
             }
+           
         }
     }
     
@@ -120,8 +132,17 @@ extension ViewProfileVC : UserDetailsDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{

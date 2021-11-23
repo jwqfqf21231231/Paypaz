@@ -103,8 +103,17 @@ extension SideDrawerListVC : UserDetailsDataModelDelegate
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{
@@ -141,16 +150,23 @@ extension SideDrawerListVC : LogOutDataModelDelegate
         if data.success == 1
         {
             UserDefaults.standard.setLoggedIn(value: "0")
-            if let vc = self.pushVC("LoginVC",animated:false) as? LoginVC{
-                vc.unauthorized = true
-            }
+            _ = self.pushVC("LoginVC",animated:false) 
             Helper.clearUserDataAndSignOut()
         }
         else
         {
             if data.isAuthorized == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
                 if let vc = self.pushVC("LoginVC") as? LoginVC{
-                    vc.unauthorized = true
+                    vc.statusType = .authorized
+                }
+            }
+            else if data.isSuspended == 0{
+                UserDefaults.standard.setLoggedIn(value: "0")
+
+                if let vc = self.pushVC("LoginVC") as? LoginVC{
+                    vc.statusType = .suspended
                 }
             }
             else{

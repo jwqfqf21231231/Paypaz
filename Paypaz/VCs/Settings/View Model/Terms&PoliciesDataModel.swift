@@ -14,6 +14,7 @@ struct TermsPoliciesModel: Codable {
     let data: Content?
     let success: Int?
     let isAuthorized: Int?
+    let isSuspended: Int?
     let message: String?
 }
 
